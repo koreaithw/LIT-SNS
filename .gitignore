@@ -199,6 +199,3 @@ README.html
 *.iml
 .idea
 .exercism
-
-### My ingnore ###
-pom.xml
