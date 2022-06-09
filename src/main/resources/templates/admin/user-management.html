@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>회원 관리</title>
+    <link
+      rel="stylesheet"
+      href="/src/main/resources/static/assets/css/admin/user-management.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/src/main/resources/static/assets/css/admin/side-bar.css"
+    />
+  </head>
+  <body>
+    <!--<header></header>-->
+    <div class="main">
+      <div class="wrapper">
+        <div class="inner">
+          <section class="sec1 flex">
+            <div class="side-bar"></div>
+            <div class="content">
+              <div class="inner__content">
+                <div>
+                  <h1>회원 관리</h1>
+                </div>
+                <!-- search-wrapper 시작 -->
+                <div class="search-wrapper border__gray">
+                  <!-- search-form -->
+                  <form accept="" id="search-form" name="search-form">
+                    <table class="search-table border__gray">
+                      <tbody>
+                        <tr>
+                          <th class="background__gray">검색어</th>
+                          <td class="flex">
+                            <div>
+                              <select name="type" id="search-select">
+                                <option value="userEmail">이메일</option>
+                                <option value="userName">이름</option>
+                                <option value="userNickName">닉네임</option>
+                              </select>
+                            </div>
+                            <div>
+                              <input id="search-input" type="text" />
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="background__gray">카카오 연동</th>
+                          <td class="flex">
+                            <label>
+                              <input
+                                type="radio"
+                                name="kakao"
+                                value="all"
+                                checked
+                              />
+                              <span>전체</span>
+                            </label>
+                            <label>
+                              <input type="radio" name="kakao" value="1" />
+                              <span>인증</span>
+                            </label>
+                            <label>
+                              <input type="radio" name="kakao" value="0" />
+                              <span>비인증</span>
+                            </label>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="background__gray">상태</th>
+                          <td class="flex">
+                            <label>
+                              <input
+                                type="radio"
+                                name="status"
+                                value="all"
+                                checked
+                              />
+                              <span>전체</span>
+                            </label>
+                            <label>
+                              <input type="radio" name="status" value="1" />
+                              <span> 회원</span>
+                            </label>
+                            <label>
+                              <input type="radio" name="status" value="0" />
+                              <span>탈퇴</span>
+                            </label>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="button-wrapper">
+                      <button class="search-button btn background__red">
+                        검색
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+                <!--------------------- list-wrapper 시작 ----------------->
+                <div class="list-wrapper border__gray">
+                  <div>
+                    <div class="list-info">
+                      <div>회원 목록</div>
+                      <div>
+                        <div>
+                          <!-- db조회 결과 숫자로 넣기 -->
+                          [총 회원수 <span>0</span>명] 검색결과 <span>0</span>건
+                        </div>
+                        <div class="button-box">
+                          <button type="button">
+                            <img
+                              src="/src/main/resources/static/images/admin/x-icon.png"
+                              alt=""
+                            />
+                            삭제
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="list-box border__gray">
+                      <!-- list-form -->
+                      <form action="" name="list-form">
+                        <table class="list-table">
+                          <tbody>
+                            <tr>
+                              <th>
+                                <input type="checkbox" />
+                              </th>
+                              <th>이름</th>
+                              <th>이메일</th>
+                              <th>닉네임</th>
+                              <th>카카오</th>
+                              <th>상태</th>
+                            </tr>
+                            <!-- 리스트 불러와서 반복문으로 페이지당 10개씩 -->
+                            <!-- 아래는 예시 -->
+                            <tr>
+                              <td class="list-checkbox">
+                                <input type="checkbox" value="" />
+                                <!-- checkbox의 value속성에 user number를 꽂거나-->
+                                <!-- hidden 사용할듯? -->
+                              </td>
+                              <td class="user-name">예시 이름</td>
+                              <td class="user-email">예시 이메일</td>
+                              <td class="user-nickname">예시 닉네임</td>
+                              <td class="user-kakao">예시 카카오 id값</td>
+                              <td class="user-status">예시 상태</td>
+                            </tr>
+
+                            <!-- 예시 끝 -->
+                          </tbody>
+                        </table>
+                      </form>
+                    </div>
+                    <!-- 리스트의 페이징 처리 -->
+                    <div class="paging-wrapper">
+                      <div class="paging-block">
+                        <!-- <li>&lt;</li> -->
+                        <li>1</li>
+                        <!-- <li>&gt;</li> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/src/main/resources/static/assets/js/user-management.js"></script>
+  <script></script>
+</html>
