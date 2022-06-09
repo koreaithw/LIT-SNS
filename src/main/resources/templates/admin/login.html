@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>관리자 로그인</title>
+  </head>
+  <link
+    rel="stylesheet"
+    href="/src/main/resources/static/assets/css/admin/login.css"
+  />
+  <body>
+    <div class="main">
+      <div class="wrapper">
+        <div class="inner">
+          <!-- <header></header>-->
+          <section class="sec1 flex__center">
+            <div class="side-bar"></div>
+            <div class="content flex__center">
+              <div class="logo-box">
+                <div class="logo">
+                  <img
+                    src="/src/main/resources/static/images/admin/logo.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="form-wrapper">
+                <form action="" class="login-form">
+                  <div class="id-wrapper">
+                    <input
+                      type="text"
+                      id="id"
+                      name="userEmail"
+                      placeholder="아이디"
+                    />
+                  </div>
+                  <div class="pw-wrapper">
+                    <input
+                      type="password"
+                      id="pw"
+                      name="userPassword"
+                      placeholder="비밀번호"
+                    />
+                  </div>
+                  <div class="button-wrapper flex">
+                    <button
+                      type="submit"
+                      class="btn background__red-none wh-100"
+                    >
+                      로그인
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/static/assets/js/login.js"></script>
+</html>
