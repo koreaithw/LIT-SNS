@@ -1,6 +1,7 @@
 @charset "UTF-8";
-@import url("/src/main/resources/static/assets/css/default/default.css");
-@import url("/src/main/resources/static/assets/css/default/variables.css");
+@import url("default/default.css");
+@import url("default/variables.css");
+
 .main,
 .wrapper,
 .inner {
