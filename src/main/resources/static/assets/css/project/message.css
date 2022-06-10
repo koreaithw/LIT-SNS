@@ -1,0 +1,139 @@
+.mainWrap{
+    padding: 20px 0;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+section{
+    width: 935px;
+    padding: 0 20px;
+    margin: auto;
+    transition: 1s ease;
+}
+
+.sec1{
+    width: ;
+}
+
+.dmWrap{
+    height: 100vh;
+    border: 1px solid #e5e5e5;
+    
+    display: flex;
+}
+.dmWrap > div{
+    border: 1px solid #e5e5e5;
+    height: 100%;
+}
+.dmWrap > div:nth-child(1){
+    width: 350px;
+}
+.dmWrap > div:nth-child(2){
+    flex: 1 1 auto;
+}
+
+.link{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding: 0 20px;
+    width: 100%;
+}
+.link>a{
+    position: absolute;
+    content: "";
+    display: block;
+    background: url("../../../images/project/icon/premium-icon-heart-2589175.png");
+    width: 32px;
+    height: 32px;
+    right: 10px;
+
+}
+.link > p {
+    display: flex;
+    position: relative;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+.link > p::after {
+    display: block;
+    height: 28px;
+    content: "\02C5";
+    padding: 0 10px;
+    font-size: 2rem;
+}
+
+.dmList{
+    border-top: 1px solid #e5e5e5;
+    padding: 5px;
+}
+.dmList> figure{
+    background: #efefef;
+    display: flex;
+    padding: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.dmImg{
+    width: 56px;
+    height: 56px;
+    margin-right: 10px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.dmData{
+    
+}
+.dmData >p:nth-child(1){
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* coxld sodyd */
+.dmData >p:nth-child(2){}
+
+
+/* 컨탠츠 리스트 */
+.contentTop{
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 0 20px;
+    width: 100%;
+}
+.contentTop > div{
+    
+}
+.contentTop > div:nth-child(1){
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.contentTop > div:nth-child(2){
+    font-weight: 600;
+}
+.contentTop > a{
+    position: absolute;
+    content: "";
+    display: block;
+    background: url("../../../images/project/icon/premium-icon-heart-2589175.png");
+    width: 32px;
+    height: 32px;
+    right: 10px;
+}
+.content{
+    border-top: 1px solid #e5e5e5;
+}
+
+

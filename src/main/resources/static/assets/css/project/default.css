@@ -42,11 +42,11 @@ html {
 }
 /* 이벤트 색 */
 .bg02{
-    color: rgb(255, 69, 67);
+  background: rgb(255, 69, 67);
 }
 /* 비활성화 */
 .bg03{
-  color: rgba(255, 69, 67, 0.3);
+  background: rgba(255, 69, 67, 0.3);
 }
 
 /* 폰트색 */
