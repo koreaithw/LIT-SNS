@@ -9,66 +9,72 @@
     <link rel="stylesheet" href="/src/main/resources/static/assets/css/login.css">
 </head>
 
-<body>
-
-    <main class="main" role="main">
-        <article class="artic">
-            <div class="board">
-                <div class="possion">
-                    <div class="logo">
-                        <div aria-disabled="false" role="button" tabindex="0" style="cursor: pointer;">
-                            <img alt="lit" class="logoImage" src="" srcset=""></div>
-                    </div>
-                    <div class="mid">
-                        <form class="loginFormStyel" id="loginForm" method="post">
-                            <div class="underLoginForm">
-                                <div class="firstDiv">
-                                    <div class="lainDiv"><label class="labelText">
-                                        <span class="spanText">전화번호, 사용자 이름 또는 이메일</span>
-                                        <input aria-label="전화번호, 사용자 이름 또는 이메일" aria-required="true"
-                                                autocapitalize="off" autocorrect="off" maxlength="75" name="username"
-                                                type="text" class="inputstyle" value=""></label>
-                                        <div class="divFornot"></div>
-                                    </div>
+<body style="background-color: #fafafa;">
+    <div style="width: 100%;height: 100%;">
+        <div style="width: 100%;height: 100%;">
+            <main class="main" role="main">
+                <div class="artic">
+                    <div class="board">
+                        <div class="possion">
+                            <div class="logo">
+                                <div aria-disabled="false" role="button" tabindex="0" style="cursor: pointer;">
+                                    <img alt="lit" class="logoImage"
+                                        src="/src/main/resources/static/images/Lit-logo.jpg">
                                 </div>
-                                <div class="firstDiv">
-                                    <div class="lainDiv"><label class="labelText"><span class="spanText">비밀번호</span>
-                                        <input aria-label="비밀번호" aria-required="true" autocapitalize="off"
-                                                autocorrect="off" name="password" type="password"
-                                                class="inputstyle" value=""></label>
-                                        <div class="divFornot"></div>
-                                    </div>
-                                </div>
-                                <div class="divButtom">
-                                    <button class="buttonforjoin jonbuttoncolor" disabled="" type="submit">로그인</button>
-                                </div>
-                                <div class="underKakao">
-                                    <div class="inline"></div>
-                                    <div class="inlineText">또는</div>
-                                    <div class="inline"></div>
-                                </div>
-                                <div
-                                    class="">
-                                    <button class="" type="button"><span
-                                            class=""></span><span class="">카카오톡으로
-                                            로그인</span></button>
-                                </div>
-                            </div><a class="" href="" tabindex="0">비밀번호를 잊으셨나요?</a>
-                        </form>
+                            </div>
+                            <div class="mid">
+                                <form class="loginFormStyel" id="loginForm" method="post">
+                                    <div class="underLoginForm">
+                                        <div class="firstDiv">
+                                            <div class="lainDiv"><label class="labelText">
+                                                    <span class="spanText">전화번호, 사용자 이름 또는 이메일</span>
+                                                    <input aria-label="전화번호, 사용자 이름 또는 이메일" aria-required="true"
+                                                        autocapitalize="off" autocorrect="off" maxlength="75"
+                                                        name="username" type="text" class="inputstyle" value=""></label>
+                                                <div class="divFornot"></div>
+                                            </div>
+                                        </div>
+                                        <div class="firstDiv">
+                                            <div class="lainDiv"><label class="labelText"><span
+                                                        class="spanText">비밀번호</span>
+                                                    <input aria-label="비밀번호" aria-required="true" autocapitalize="off"
+                                                        autocorrect="off" name="password" type="password"
+                                                        class="inputstyle" value=""></label>
+                                                <div class="divFornot"></div>
+                                            </div>
+                                        </div>
+                                        <div class="divButtom">
+                                            <button class="buttonforjoin jonbuttoncolor" disabled=""
+                                                type="submit">로그인</button>
+                                        </div>
+                                        <div class="underKakao">
+                                            <div class="inline"></div>
+                                            <div class="inlineText">또는</div>
+                                            <div class="inline"></div>
+                                        </div>
+                                        <div class="loginForKakao">
+                                            <button class="kakaoLoginButton" type="button">
+                                                <span class="kakaoLogo"><img
+                                                        src="/src/main/resources/static/images/kakaoIcon.png"></span>
+                                                <span class="kakaoText">카카오톡으로 로그인</span></button>
+                                        </div>
+                                    </div><a class="forgetPW" href="/src/main/resources/templates/login/forgetPW.html" tabindex="0">비밀번호를 잊으셨나요?</a>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="possionJoin">
+                            <div class="underjoinBoard">
+                                <p class="pText">계정이 없으신가요? <a data-testid="sign-up-link"
+                                        href="/src/main/resources/templates/login/join.html" tabindex="0">
+                                        <span class="forJoin">가입하기</span></a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="">
-                    <div class="">
-                        <p class="">계정이 없으신가요? <a data-testid="sign-up-link" href="/src/main/resources/templates/login/join.html"
-                                tabindex="0"><span
-                                    class="">가입하기</span></a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </main>
-
+            </main>
+        </div>
+    </div>
 </body>
 
 </html>

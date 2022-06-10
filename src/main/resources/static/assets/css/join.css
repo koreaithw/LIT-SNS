@@ -45,8 +45,8 @@
 }
 
 .logo {
-    margin-top: 36px;
-    margin-bottom: 12px;
+    margin-top: 16px;
+    margin-bottom: 19px;
     -webkit-box-flex: 0;
     flex: 0 0 auto;
     -webkit-box-pack: start;
@@ -139,8 +139,8 @@
 }
 
 .kakaoButtomText {
+    background-image: url(/src/main/resources/static/images/kakaoIcon.png);
     background-repeat: no-repeat;
-    background-position: -414px -259px;
     height: 16px;
     width: 16px;
     display: inline-block;
