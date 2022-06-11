@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>인증글 관리</title>
+    <link
+      rel="stylesheet"
+      href="/src/main/resources/static/assets/css/admin/report-management.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/src/main/resources/static/assets/css/admin/side-bar.css"
+    />
+    <!-- date picker css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+      integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="/src/main/resources/static/assets/css/admin/date-picker.css"
+    />
+    <!-- date picker css -->
+  </head>
+  <body>
+    <!--<header></header>-->
+    <div class="main">
+      <div class="wrapper">
+        <div class="inner">
+          <section class="sec1 flex">
+            <div class="side-bar"></div>
+            <div class="content">
+              <div class="inner__content">
+                <div>
+                  <h1>신고 관리</h1>
+                </div>
+                <!-- search-wrapper 시작 -->
+                <div class="search-wrapper border__gray">
+                  <!-- search-form -->
+                  <form accept="" id="search-form" name="search-form">
+                    <table class="search-table border__gray">
+                      <tbody>
+                        <tr>
+                          <th class="background__gray">기간</th>
+                          <td class="flex col__period">
+                            <div>
+                              <!-- 기간 버튼 백엔드 작업 시 href 속성 값 사용 -->
+                              <!-- 선택된 버튼은  a-btn__selected 클래스가 추가됨-->
+                              <ul class="flex">
+                                <li>
+                                  <div class="period-button-wrap">
+                                    <a class="a-btn" href="all"
+                                      ><span>전체</span></a
+                                    >
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="period-button-wrap">
+                                    <a class="a-btn" href="0"
+                                      ><span>오늘</span></a
+                                    >
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="period-button-wrap">
+                                    <a class="a-btn" href="3"
+                                      ><span>3일</span></a
+                                    >
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="period-button-wrap">
+                                    <a class="a-btn" href="7"
+                                      ><span>7일</span></a
+                                    >
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="period-button-wrap">
+                                    <a class="a-btn" href="30"
+                                      ><span>1개월</span></a
+                                    >
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <!-- 기간 달력 input -->
+                            <div class="calendar-wrap flex">
+                              <div>
+                                <input
+                                  type="text"
+                                  class="datepicker"
+                                  name="start-date"
+                                  readonly
+                                />
+                              </div>
+                              <div class="calendar-icon-wrap">
+                                <img
+                                  src="/src/main/resources/static/images/admin/calendar.png"
+                                />
+                              </div>
+                              <div><span>~</span></div>
+                              <div>
+                                <input
+                                  type="text"
+                                  class="datepicker"
+                                  name="end-date"
+                                  readonly
+                                />
+                              </div>
+                              <div class="calendar-icon-wrap">
+                                <img
+                                  src="/src/main/resources/static/images/admin/calendar.png"
+                                />
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="background__gray">게시판 선택</th>
+                          <td class="flex">
+                            <div>
+                              <!-- 임시 name, value -->
+                              <select name="boardType" id="board-select">
+                                <option value="boardAll">전체목록</option>
+                                <option value="boardLife">생활</option>
+                                <option value="boardExercise">운동</option>
+                                <!-- 카테고리 설정 -->
+                              </select>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th class="background__gray">인증글 찾기</th>
+                          <td class="flex">
+                            <div>
+                              <select name="type" id="search-select">
+                                <option value="userName">작성자</option>
+                                <option value="projectNumber">글 번호</option>
+                                <option value="userNumber">회원 번호</option>
+                              </select>
+                            </div>
+                            <div>
+                              <!-- name 설정하여 사용 -->
+                              <input id="search-input" type="text" name="" />
+                            </div>
+                          </td>
+                        </tr>
+                        <!-- value 값 원하는 걸로 수정하여 사용 -->
+                        <tr>
+                          <th class="background__gray">게시글 상태</th>
+                          <td class="flex">
+                            <label>
+                              <input
+                                type="radio"
+                                name="boardStatus"
+                                value="all"
+                                checked
+                              />
+                              <span>전체</span>
+                            </label>
+                            <label>
+                              <input
+                                type="radio"
+                                name="boardStatus"
+                                value="1"
+                              />
+                              <span>진행중</span>
+                            </label>
+                            <label>
+                              <input
+                                type="radio"
+                                name="boardStatus"
+                                value="0"
+                              />
+                              <span>완료</span>
+                            </label>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="button-wrapper">
+                      <button
+                        type="submit"
+                        class="search-button btn background__red"
+                      >
+                        검색
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+                <!--------------------- list-wrapper 시작 ----------------->
+                <div class="list-wrapper border__gray">
+                  <div>
+                    <div class="list-info">
+                      <div>신고 목록</div>
+                      <div>
+                        <div>
+                          <!-- db조회 결과 숫자로 넣기 -->
+                          [오늘 신고된 글 <span>0</span>건] 검색결과
+                          <span>0</span>건
+                        </div>
+                        <div class="flex">
+                          <div class="button-box">
+                            <button type="button" class="cancel">
+                              신고 취소
+                            </button>
+                          </div>
+                          <div class="button-box">
+                            <button type="button">
+                              <img
+                                src="/src/main/resources/static/images/admin/x-icon.png"
+                                alt=""
+                              />
+                              삭제
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="list-box border__gray">
+                      <!-- list-form -->
+                      <form action="" name="list-form">
+                        <table class="list-table">
+                          <tbody>
+                            <tr>
+                              <th>
+                                <input type="checkbox" />
+                              </th>
+                              <th>글 번호</th>
+                              <th>작성자</th>
+                              <th>작성일</th>
+                              <th>인증글 <br />보기</th>
+                              <th>신고한 회원</th>
+                              <th>신고 사유</th>
+                              <th>신고 일자</th>
+                            </tr>
+                            <!-- 리스트 불러와서 반복문으로 페이지당 10개씩 -->
+                            <!-- 아래는 예시 -->
+                            <tr>
+                              <td class="list-checkbox">
+                                <input type="checkbox" value="" />
+                                <!-- checkbox의 value속성에 user number를 꽂거나-->
+                                <!-- hidden 사용할듯? -->
+                              </td>
+                              <td class="review-number">1</td>
+                              <td class="user-email">qwer@naver.com</td>
+
+                              <td class="project-register-date">
+                                2022-06-10<br />22:44:17
+                              </td>
+                              <td class="project-view">
+                                <!-- 미리보기 경로 -->
+                                <div><a class="a-btn" href="">보기</a></div>
+                              </td>
+                              <td class="project-preview-cnt">aaa@naver.com</td>
+                              <td>주제와 상관없는 내용</td>
+                              <td class="project-register-date">
+                                2022-06-11<br />12:44:00
+                              </td>
+                            </tr>
+
+                            <!-- 예시 끝 -->
+                          </tbody>
+                        </table>
+                      </form>
+                    </div>
+                    <!-- 리스트의 페이징 처리 -->
+                    <div class="paging-wrapper">
+                      <div class="paging-block">
+                        <ul>
+                          <!-- <li>&lt;</li> -->
+                          <li>1</li>
+                          <!-- <li>&gt;</li> -->
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/src/main/resources/static/assets/js/admin/report-management.js"></script>
+  <!-- date picker script -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+    integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+
+  <script>
+    $.datepicker.setDefaults({
+      dateFormat: "yy-mm-dd",
+      prevText: "이전 달",
+      nextText: "다음 달",
+      monthNames: [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월",
+      ],
+      monthNamesShort: [
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월",
+      ],
+      dayNames: ["일", "월", "화", "수", "목", "금", "토"],
+      dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
+      dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+      showMonthAfterYear: true,
+      yearSuffix: "년",
+    });
+  </script>
+  <!-- date picker script -->
+</html>
