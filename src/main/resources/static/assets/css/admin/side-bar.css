@@ -2,7 +2,6 @@
 @import url("default/default.css");
 @import url("default/variables.css");
 
-
 .side-bar__page {
   background-color: var(--background-black);
   width: 300px;
@@ -43,4 +42,41 @@
 .menu-box__select {
   border-right: 4px solid var(--red);
   background-color: #2c2c2c;
+}
+
+/* 메뉴 화살표 css */
+.icon__side-bar__arrow {
+  margin-left: 80px;
+}
+
+.icon__arrow {
+  height: 15px;
+  transition: all ease 0.3s;
+}
+
+.arrow-rotate {
+  transform: rotate(-180deg);
+}
+
+/* 서브 메뉴 */
+.sub-menu {
+  margin-left: 70px;
+}
+.sub-menu-box__project {
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+  transform-origin: 100% 0%;
+  transform: scaleY(0);
+  height: 0;
+}
+div.sub-menu__show {
+  visibility: visible;
+  opacity: 1;
+  height: 100px;
+  transform: scaleY(1);
+}
+
+.transition-remove {
+  transition: none !important;
 }

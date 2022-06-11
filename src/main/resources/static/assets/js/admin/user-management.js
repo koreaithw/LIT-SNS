@@ -5,5 +5,6 @@ $(document).ready(function () {
 });
 
 window.onload = function () {
+  sideAni(3); //사이드바 애니메이션 side-bar.js
   $(".menu-box").eq(0).addClass("menu-box__select");
 };

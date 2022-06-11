@@ -3,7 +3,8 @@ $(document).ready(function () {
 });
 
 window.onload = function () {
-  $(".menu-box").eq(1).addClass("menu-box__select");
+  sideAni(0); //사이드바 애니메이션 side-bar.js
+  $(".menu-box").eq(3).addClass("menu-box__select");
 };
 
 //기간 버튼
