@@ -21,7 +21,6 @@ function subPage(idx) {
   const $subMenuBox = $(".sub-menu-box__project");
 
   if (idx !== undefined) {
-    console.log("in");
     $img.eq(idx).addClass("transition-remove arrow-rotate");
     $subMenuBox.eq(idx).addClass("transition-remove sub-menu__show");
   }

@@ -11,18 +11,15 @@ window.onload = function () {
 $(".check-all").change(function () {
   $allBox = $(this).is(":checked");
   $otherBox = $(".list-checkbox > input[type='checkbox']");
-  console.log($otherBox);
   if ($allBox) {
     $otherBox.prop("checked", true);
   } else {
-    console.log("in");
     $otherBox.prop("checked", false);
   }
 });
 
 $(".list-checkbox > input[type='checkbox']").change(function () {
   if (!$(this).is(":checked")) {
-    console.log("change list-checkbox");
     $(".check-all").prop("checked", false);
   }
 });
@@ -50,6 +47,5 @@ $(function () {
 
 $(".calendar-icon-wrap").on("click", function () {
   $input = $(this).prev("div").find("input");
-  console.log($input);
   $input.trigger("focus");
 });

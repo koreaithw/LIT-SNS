@@ -9,3 +9,84 @@ function checkAlert(msg) {
     console.log("실패");
   }
 }
+
+//date-picker 설정 ====================================
+window.addEventListener("load", function () {
+  if ($.datepicker === undefined) {
+    return;
+  }
+  $.datepicker.setDefaults({
+    dateFormat: "yy-mm-dd",
+    prevText: "이전 달",
+    nextText: "다음 달",
+    monthNames: [
+      "1월",
+      "2월",
+      "3월",
+      "4월",
+      "5월",
+      "6월",
+      "7월",
+      "8월",
+      "9월",
+      "10월",
+      "11월",
+      "12월",
+    ],
+    monthNamesShort: [
+      "1월",
+      "2월",
+      "3월",
+      "4월",
+      "5월",
+      "6월",
+      "7월",
+      "8월",
+      "9월",
+      "10월",
+      "11월",
+      "12월",
+    ],
+    dayNames: ["일", "월", "화", "수", "목", "금", "토"],
+    dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
+    dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+    showMonthAfterYear: true,
+    yearSuffix: "년",
+  });
+});
+
+//chart 설정======================================
+function makechart(domId, myData) {
+  let chartArea = document.getElementById(domId).getContext("2d");
+  // 차트생성
+  let mychart = new Chart(chartArea, {
+    type: "line", //string
+
+    // data : Object
+    data: {
+      // x축 ar[]
+      labels: myData.labels,
+
+      //datasets : ar[{dataset1, ds2, ds3...}]
+      datasets: [
+        {
+          label: myData.label, //string
+          data: myData.data,
+          lineTension: 0.3,
+          backgroundColor: "rgba(255, 69, 67, 0.4)", //string
+          bordercolor: "rgba(53,53,53,1)", //string
+          borderWidth: 1,
+          fill: true,
+        },
+      ],
+    },
+    options: {
+      responsive: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
