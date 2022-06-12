@@ -74,7 +74,7 @@ function makechart(domId, myData) {
           label: myData.label, //string
           data: myData.data,
           lineTension: 0.3,
-          backgroundColor: "rgba(255, 69, 67, 0.4)", //string
+          backgroundColor: "rgba(255, 69, 67, 0.3)", //string
           bordercolor: "rgba(53,53,53,1)", //string
           borderWidth: 1,
           fill: true,

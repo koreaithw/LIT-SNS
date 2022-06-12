@@ -58,3 +58,20 @@ $(".delete-btn").on("click", function () {
   checkAlert("정말로 삭제하시겠습니까?");
 });
 // ========================================================
+//기간 버튼
+$(".a-btn").on("click", function (e) {
+  e.preventDefault();
+  $(".period-button-wrap > .a-btn").removeClass("a-btn__selected");
+  $(this).addClass("a-btn__selected");
+});
+
+//date picker
+$(function () {
+  $(".datepicker").datepicker();
+});
+
+$(".calendar-icon-wrap").on("click", function () {
+  $input = $(this).prev("div").find("input");
+  console.log($input);
+  $input.trigger("focus");
+});
