@@ -7,12 +7,44 @@ window.onload = function () {
   $(".menu-box").eq(2).addClass("menu-box__select");
 };
 
+// 체크박스 이벤트 ==========================================
+$(".check-all").change(function () {
+  $allBox = $(this).is(":checked");
+  $otherBox = $(".list-checkbox > input[type='checkbox']");
+  console.log($otherBox);
+  if ($allBox) {
+    $otherBox.prop("checked", true);
+  } else {
+    console.log("in");
+    $otherBox.prop("checked", false);
+  }
+});
+
+$(".list-checkbox > input[type='checkbox']").change(function () {
+  if (!$(this).is(":checked")) {
+    console.log("change list-checkbox");
+    $(".check-all").prop("checked", false);
+  }
+});
+
 //기간 버튼
 $(".a-btn").on("click", function (e) {
   e.preventDefault();
   $(".period-button-wrap > .a-btn").removeClass("a-btn__selected");
   $(this).addClass("a-btn__selected");
 });
+
+// 버튼 이벤트 ==========================================
+//checkAlert() 는 admin-common.js 에 정의됨
+//매개변수에 실행시킬 함수 콜백함수로 넘겨서 사용하기 -> checkAlert("msg", function(){......})
+$(".approval-btn").on("click", function () {
+  checkAlert("해당 프로젝트를 승인하시겠습니까?");
+});
+
+$(".delete-btn").on("click", function () {
+  checkAlert("정말로 삭제하시겠습니까?");
+});
+// ========================================================
 
 //date picker
 $(function () {

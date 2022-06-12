@@ -179,7 +179,7 @@ label {
   width: 13px;
 }
 
-.button-box > button.cancel {
+.button-box > button.cancel-btn {
   width: 100px;
   margin-right: 10px;
 }

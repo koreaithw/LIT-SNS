@@ -179,7 +179,7 @@ label {
   width: 13px;
 }
 
-.button-box > button.approval {
+.button-box > button.approval-btn {
   width: 100px;
   margin-right: 10px;
 }
