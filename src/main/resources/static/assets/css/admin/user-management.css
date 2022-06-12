@@ -40,9 +40,11 @@ table {
   color: var(--side-black);
 }
 
+.search-table tr {
+  border: 1px solid var(--border-gray);
+}
 .search-table th {
   width: 120px;
-  height: 49px;
   text-align: left;
   padding-left: 10px;
   border: 1px solid var(--border-gray);
@@ -50,9 +52,10 @@ table {
 
 .search-table td {
   height: 49px;
+  width: 30vw;
   align-items: center;
   padding-left: 10px;
-  border: 1px solid var(--border-gray);
+  line-height: 30px;
 }
 
 #search-select {

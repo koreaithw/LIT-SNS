@@ -118,26 +118,8 @@
                               </div>
                             </div>
                           </td>
-                          
-                        </tr>
-                        <tr>
-                          <th class="background__gray">검색어</th>
-                          <td class="flex">
-                            <div>
-                              <select name="type" id="search-select">
-                                <option value="userEmail">이메일</option>
-                                <option value="userName">이름</option>
-                                <option value="userNickName">닉네임</option>
-                                <option value="userNumber">회원번호</option>
-                              </select>
-                            </div>
-                            <div>
-                              <input id="search-input" type="text" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th class="background__gray">카카오 연동</th>
+                          <!--  -->
+                          <th scope="row" class="background__gray">카카오 연동</th>
                           <td class="flex">
                             <label>
                               <input
@@ -157,9 +139,24 @@
                               <span>비인증</span>
                             </label>
                           </td>
+                          <!--  -->
                         </tr>
                         <tr>
-                          <th class="background__gray">상태</th>
+                          <th scope="row" class="background__gray">검색어</th>
+                          <td class="flex">
+                            <div>
+                              <select name="type" id="search-select">
+                                <option value="userEmail">이메일</option>
+                                <option value="userName">이름</option>
+                                <option value="userNickName">닉네임</option>
+                                <option value="userNumber">회원번호</option>
+                              </select>
+                            </div>
+                            <div>
+                              <input id="search-input" type="text" />
+                            </div>
+                          </td>
+                          <th scope="row" class="background__gray">상태</th>
                           <td class="flex">
                             <label>
                               <input
@@ -180,6 +177,8 @@
                             </label>
                           </td>
                         </tr>
+                      
+                        
                       </tbody>
                     </table>
                     <div class="button-wrapper">
