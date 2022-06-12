@@ -30,9 +30,13 @@ li {
   list-style: none;
 }
 
+.sec1 {
+  height: 100%;
+  justify-content: center;
+}
 /* ================================== */
 
-/* ===== radio box ===== */
+/* ================= radio box ================= */
 input[type="radio"] {
   appearance: none;
   -webkit-appearance: none;
@@ -50,7 +54,7 @@ input[type="radio"]:checked {
   background-size: 20px 20px;
 }
 
-/* ===== check box ===== */
+/* ================= check box ================= */
 input[type="checkbox"] {
   -webkit-appearance: none;
   width: 20px;
@@ -65,7 +69,7 @@ input[type="checkbox"]:checked {
   background: url("/src/main/resources/static/images/admin/bg_checkbox_checked.png");
 }
 
-/* ===== a태그 버튼으로 사용 =====*/
+/* ================= a태그 버튼으로 사용 =================*/
 /* div>.abtn */
 .a-btn {
   display: block;
@@ -93,7 +97,7 @@ input[type="checkbox"]:checked {
   border-color: var(--red);
 }
 
-/* ================================== */
+/* =================자주 사용하는 속성 만들어두고 필요할때 사용================= */
 
 .flex {
   display: flex;
@@ -105,9 +109,21 @@ input[type="checkbox"]:checked {
   align-items: center;
 }
 
-.sec1 {
+.wh-100 {
+  width: 100%;
   height: 100%;
-  justify-content: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.list-wrapper_min-h {
+  min-height: 540px;
+}
+
+.border__gray {
+  border: 1px solid var(--border-gray);
 }
 
 .background__red {
@@ -120,6 +136,7 @@ input[type="checkbox"]:checked {
   background-color: var(--background-gray);
 }
 
+/* btn은 위의 색상과 함께 사용 */
 .btn {
   border: none;
   border-radius: 3px;
@@ -128,20 +145,7 @@ input[type="checkbox"]:checked {
   cursor: pointer;
 }
 
-.wh-100 {
-  width: 100%;
-  height: 100%;
-}
-
-.w-100 {
-  width: 100%;
-}
-
-.border__gray {
-  border: 1px solid var(--border-gray);
-}
-
-/* 사이드바 */
+/* ====== 사이드바 사용 관련 ====== */
 .wrapper {
   padding-left: 300px;
 }

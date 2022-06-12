@@ -7,7 +7,7 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>프로젝트 관리</title>
+    <title>승인된 프로젝트 관리</title>
     <link
       rel="stylesheet"
       href="/src/main/resources/static/assets/css/admin/approved-project-management.css"
@@ -40,7 +40,7 @@
             <div class="content">
               <div class="inner__content">
                 <div>
-                  <h1>프로젝트 관리</h1>
+                  <h1>승인된 프로젝트 관리</h1>
                 </div>
                 <!-- search-wrapper 시작 -->
                 <div class="search-wrapper border__gray">
@@ -54,7 +54,15 @@
                             <div>
                               <!-- 기간 버튼 백엔드 작업 시 href 속성 값 사용 -->
                               <!-- 선택된 버튼은  a-btn__selected 클래스가 추가됨-->
+
                               <ul class="flex">
+                                <li>
+                                  <div class="period-button-wrap">
+                                    <a class="a-btn a-btn__selected" href=""
+                                      ><span>전체</span></a
+                                    >
+                                  </div>
+                                </li>
                                 <li>
                                   <div class="period-button-wrap">
                                     <a class="a-btn" href="0"
@@ -118,14 +126,19 @@
                           </td>
                         </tr>
                         <tr>
-                          <th class="background__gray">게시판 선택</th>
+                          <th class="background__gray">카테고리 선택</th>
                           <td class="flex">
                             <div>
                               <!-- 임시 name, value -->
-                              <select name="boardType" id="board-select">
-                                <option value="boardAll">전체목록</option>
-                                <option value="boardLife">생활</option>
-                                <option value="boardExercise">운동</option>
+                              <select name="categoryType" id="category-select">
+                                <option value="categoryAll">전체목록</option>
+                                <option value="categoryLife">생활</option>
+                                <option value="categoryExercise">운동</option>
+                                <option value="categoryHobby">취미</option>
+                                <option value="categoryArt">예술</option>
+                                <option value="categoryHeart">정서</option>
+                                <option value="categoryEating">식습관</option>
+                                <option value="categoryStudy">공부</option>
                                 <!-- 카테고리 설정 -->
                               </select>
                             </div>

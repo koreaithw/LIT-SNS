@@ -1,5 +1,6 @@
+// .arrow-ani를 a태그에 추가하면 애니메이션 발동
+// 매개변수로는 몇 번째 화살표 메뉴인지를 받는다
 function sideAni(idx) {
-  // .arrow-ani를 a태그에 추가하면 애니메이션 발동
   subPage(idx);
 
   $(".arrow-ani").on("click", function (e) {
