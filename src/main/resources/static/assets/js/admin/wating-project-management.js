@@ -5,6 +5,24 @@ $(document).ready(function () {
 window.onload = function () {
   sideAni(0); //사이드바 애니메이션 side-bar.js
   $(".menu-box").eq(2).addClass("menu-box__select");
+
+  // ====== 차트 ======
+  //makechart 메소드는 admin-common.js에 정의되어 있음
+
+  //makechart("domId", myData)
+  //domId는 그래프를 꽂을 요소의 id (설정완료)
+  //myData는 객체이며 필요 프로퍼티는 label, labels, data (아래는 예시, 설정필요)
+
+  //DB에서 가져온 값을 넘겨줘야함 각 프로퍼티별 타입은 아래와 같음
+  //label : String, labels : Array, data : Array
+  //label은 그래프 상단의 라벨
+  //labels는 x축 데이터
+  //data는 그래프에 그려질 값
+  makechart("chart__project", {
+    label: "최근 작성된 프로젝트",
+    labels: ["06.07", "06.08", "06.09", "06.10", "06.11", "06.12", "06.13"],
+    data: [0, 4, 7, 17, 22, 14, 20],
+  });
 };
 
 // 체크박스 이벤트 ==========================================

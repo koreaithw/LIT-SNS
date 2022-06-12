@@ -42,134 +42,147 @@
                 <div>
                   <h1>대기중인 프로젝트 관리</h1>
                 </div>
-                <!-- search-wrapper 시작 -->
-                <div class="search-wrapper border__gray">
-                  <!-- search-form -->
-                  <form accept="" id="search-form" name="search-form">
-                    <table class="search-table border__gray">
-                      <tbody>
-                        <tr>
-                          <th class="background__gray">기간</th>
-                          <td class="flex col__period">
-                            <div>
-                              <!-- 기간 버튼 백엔드 작업 시 href 속성 값 사용 -->
-                              <!-- 선택된 버튼은  a-btn__selected 클래스가 추가됨-->
-                              <ul class="flex">
-                                <li>
-                                  <div class="period-button-wrap">
-                                    <a class="a-btn a-btn__selected" href=""
-                                      ><span>전체</span></a
-                                    >
-                                  </div>
-                                </li>
-                                <li>
-                                  <div class="period-button-wrap">
-                                    <a class="a-btn" href="0"
-                                      ><span>오늘</span></a
-                                    >
-                                  </div>
-                                </li>
-                                <li>
-                                  <div class="period-button-wrap">
-                                    <a class="a-btn" href="3"
-                                      ><span>3일</span></a
-                                    >
-                                  </div>
-                                </li>
-                                <li>
-                                  <div class="period-button-wrap">
-                                    <a class="a-btn" href="7"
-                                      ><span>7일</span></a
-                                    >
-                                  </div>
-                                </li>
-                                <li>
-                                  <div class="period-button-wrap">
-                                    <a class="a-btn" href="30"
-                                      ><span>1개월</span></a
-                                    >
-                                  </div>
-                                </li>
-                              </ul>
-                            </div>
-                            <!-- 기간 달력 input -->
-                            <div class="calendar-wrap flex">
+                <div class="flex">
+                  <!-- search-wrapper 시작 -->
+                  <div class="search-wrapper border__gray">
+                    <!-- search-form -->
+                    <form accept="" id="search-form" name="search-form">
+                      <table class="search-table border__gray">
+                        <tbody>
+                          <tr>
+                            <th class="background__gray">기간</th>
+                            <td class="flex col__period">
                               <div>
-                                <input
-                                  type="text"
-                                  class="datepicker"
-                                  name="start-date"
-                                  readonly
-                                />
+                                <!-- 기간 버튼 백엔드 작업 시 href 속성 값 사용 -->
+                                <!-- 선택된 버튼은  a-btn__selected 클래스가 추가됨-->
+                                <ul class="flex">
+                                  <li>
+                                    <div class="period-button-wrap">
+                                      <a class="a-btn a-btn__selected" href=""
+                                        ><span>전체</span></a
+                                      >
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="period-button-wrap">
+                                      <a class="a-btn" href="0"
+                                        ><span>오늘</span></a
+                                      >
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="period-button-wrap">
+                                      <a class="a-btn" href="3"
+                                        ><span>3일</span></a
+                                      >
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="period-button-wrap">
+                                      <a class="a-btn" href="7"
+                                        ><span>7일</span></a
+                                      >
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="period-button-wrap">
+                                      <a class="a-btn" href="30"
+                                        ><span>1개월</span></a
+                                      >
+                                    </div>
+                                  </li>
+                                </ul>
                               </div>
-                              <div class="calendar-icon-wrap">
-                                <img
-                                  src="/src/main/resources/static/images/admin/calendar.png"
-                                />
+                              <!-- 기간 달력 input -->
+                              <div class="calendar-wrap flex">
+                                <div>
+                                  <input
+                                    type="text"
+                                    class="datepicker"
+                                    name="start-date"
+                                    readonly
+                                  />
+                                </div>
+                                <div class="calendar-icon-wrap">
+                                  <img
+                                    src="/src/main/resources/static/images/admin/calendar.png"
+                                  />
+                                </div>
+                                <div><span>~</span></div>
+                                <div>
+                                  <input
+                                    type="text"
+                                    class="datepicker"
+                                    name="end-date"
+                                    readonly
+                                  />
+                                </div>
+                                <div class="calendar-icon-wrap">
+                                  <img
+                                    src="/src/main/resources/static/images/admin/calendar.png"
+                                  />
+                                </div>
                               </div>
-                              <div><span>~</span></div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="background__gray">카테고리 선택</th>
+                            <td class="flex">
                               <div>
-                                <input
-                                  type="text"
-                                  class="datepicker"
-                                  name="end-date"
-                                  readonly
-                                />
+                                <!-- 임시 name, value -->
+                                <select
+                                  name="categoryType"
+                                  id="category-select"
+                                >
+                                  <option value="categoryAll">전체목록</option>
+                                  <option value="categoryLife">생활</option>
+                                  <option value="categoryExercise">운동</option>
+                                  <option value="categoryHobby">취미</option>
+                                  <option value="categoryArt">예술</option>
+                                  <option value="categoryHeart">정서</option>
+                                  <option value="categoryEating">식습관</option>
+                                  <option value="categoryStudy">공부</option>
+                                  <!-- 카테고리 설정 -->
+                                </select>
                               </div>
-                              <div class="calendar-icon-wrap">
-                                <img
-                                  src="/src/main/resources/static/images/admin/calendar.png"
-                                />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th class="background__gray">프로젝트 찾기</th>
+                            <td class="flex">
+                              <div>
+                                <select name="type" id="search-select">
+                                  <option value="userName">작성자</option>
+                                  <option value="projectNumber">글 번호</option>
+                                  <option value="userNumber">회원 번호</option>
+                                </select>
                               </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th class="background__gray">카테고리 선택</th>
-                          <td class="flex">
-                            <div>
-                              <!-- 임시 name, value -->
-                              <select name="categoryType" id="category-select">
-                                <option value="categoryAll">전체목록</option>
-                                <option value="categoryLife">생활</option>
-                                <option value="categoryExercise">운동</option>
-                                <option value="categoryHobby">취미</option>
-                                <option value="categoryArt">예술</option>
-                                <option value="categoryHeart">정서</option>
-                                <option value="categoryEating">식습관</option>
-                                <option value="categoryStudy">공부</option>
-                                <!-- 카테고리 설정 -->
-                              </select>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th class="background__gray">프로젝트 찾기</th>
-                          <td class="flex">
-                            <div>
-                              <select name="type" id="search-select">
-                                <option value="userName">작성자</option>
-                                <option value="projectNumber">글 번호</option>
-                                <option value="userNumber">회원 번호</option>
-                              </select>
-                            </div>
-                            <div>
-                              <!-- name 설정하여 사용 -->
-                              <input id="search-input" type="text" name="" />
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div class="button-wrapper">
-                      <button
-                        type="button"
-                        class="search-button btn background__red"
-                      >
-                        검색
-                      </button>
+                              <div>
+                                <!-- name 설정하여 사용 -->
+                                <input id="search-input" type="text" name="" />
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="button-wrapper">
+                        <button
+                          type="button"
+                          class="search-button btn background__red"
+                        >
+                          검색
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="chart-wrapper">
+                    <div class="chart-box">
+                      <canvas
+                        id="chart__project"
+                        style="width: 29vw; height: 26vh"
+                      ></canvas>
                     </div>
-                  </form>
+                  </div>
                 </div>
 
                 <!--------------------- list-wrapper 시작 ----------------->
@@ -283,5 +296,6 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   ></script>
-  <!-- date picker script -->
+  <!-- chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
 </html>

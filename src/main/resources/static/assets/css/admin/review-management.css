@@ -244,3 +244,15 @@ input[name="end-date"] {
   width: 46px;
   height: 28px;
 }
+/* ======================== */
+/* chart */
+.chart-wrapper {
+  display: flex;
+  margin-top: 40px;
+  justify-content: center;
+}
+.chart-box {
+  max-width: 700px;
+  overflow: visible;
+  margin: 0 100px;
+}

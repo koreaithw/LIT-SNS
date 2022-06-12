@@ -56,6 +56,7 @@ window.addEventListener("load", function () {
 });
 
 //chart 설정======================================
+//요소ID와 객체하나 받으면 차트 꽂히도록 함수 정의
 function makechart(domId, myData) {
   let chartArea = document.getElementById(domId).getContext("2d");
   // 차트생성
