@@ -160,7 +160,7 @@ label {
 
 .button-box button {
   height: 30px;
-  width: 70px;
+  width: 85px;
   padding: 0 10px 0 25px;
   color: #1c1c1c;
   font-size: 13px;
@@ -180,9 +180,14 @@ label {
 }
 
 .button-box > button.cancel {
-  padding: 0 10px;
-  width: 80px;
+  width: 100px;
   margin-right: 10px;
+}
+
+.button-box > button.cancel img {
+  width: 15px;
+  top: 4px;
+  left: 10px;
 }
 
 .list-box {

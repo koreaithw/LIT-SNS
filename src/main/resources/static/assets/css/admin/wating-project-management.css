@@ -179,9 +179,8 @@ label {
   width: 13px;
 }
 
-.button-box > button.cancel {
-  padding: 0 10px;
-  width: 80px;
+.button-box > button.approval {
+  width: 100px;
   margin-right: 10px;
 }
 
