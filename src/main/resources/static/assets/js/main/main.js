@@ -50,6 +50,14 @@ function start() {
 start();
 
 
+$(document).ready(function(){
+
+        $("#header").load("/src/main/resources/templates/header.html")
+        $("#footer").load("/src/main/resources/templates/footer.html")
+})
+
+
+
 
     // ####################################################
     // lit up(인증글 페이지 이동) 클릭 이벤트 Ajax 사용하세요
