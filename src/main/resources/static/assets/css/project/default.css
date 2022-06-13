@@ -75,6 +75,10 @@ html {
   padding: 0 20px;
 }
 
+a{
+  text-decoration: none;
+}
+
 /* 탑 풋 CSS*/
 /*header*/
 /*=================================================*/
