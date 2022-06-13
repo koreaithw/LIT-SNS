@@ -11,8 +11,8 @@ const loginBtn = function () {
         $loginBtn.className = 'buttonforjoin jonbuttoncolor';
     }
 }
-$idValue.addEventListener('keyup', loginBtn)
-$passwordValue.addEventListener('keyup', loginBtn)
+$idValue.addEventListener('keyup', loginBtn);
+$passwordValue.addEventListener('keyup', loginBtn);
 
 
 var form = document.joinForm;

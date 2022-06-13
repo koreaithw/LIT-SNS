@@ -297,9 +297,16 @@
     border-radius: 4px;
     opacity: 1;
     opacity: .3;
-    background-color: #de00f6;
+    background-color: #f069fe;
     pointer-events: none;
 }
+
+.formEvent {
+    border-radius: 4px;
+    opacity: 1;
+    background-color: #f069fe;
+}
+
 
 .forLogin {
     -webkit-box-align: center;

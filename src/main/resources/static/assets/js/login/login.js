@@ -1,5 +1,5 @@
 const $loginBtn = document.querySelector('#login_btn')
-const $idValue = document.querySelector('#idVal')
+const $idValue = document.querySelector('#email')
 const $passwordValue = document.querySelector('#pwVal')
 const loginBtn = function () {
     if($idValue.value.indexOf('@') > 0 && $passwordValue.value.length >= 6){
