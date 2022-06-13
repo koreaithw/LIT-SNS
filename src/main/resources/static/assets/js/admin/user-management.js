@@ -21,12 +21,6 @@ window.onload = function () {
   //labels는 x축 데이터
   //data는 그래프에 그려질 값
 
-  makechart("chart__today", {
-    label: "최근 접속한 회원",
-    labels: ["06.07", "06.08", "06.09", "06.10", "06.11", "06.12", "06.13"],
-    data: [0, 4, 55, 30, 100, 56, 88],
-  });
-
   makechart("chart__recent", {
     label: "최근 가입한 회원",
     labels: ["06.07", "06.08", "06.09", "06.10", "06.11", "06.12", "06.13"],
@@ -63,6 +57,41 @@ $(".a-btn").on("click", function (e) {
   e.preventDefault();
   $(".period-button-wrap > .a-btn").removeClass("a-btn__selected");
   $(this).addClass("a-btn__selected");
+
+  //기간 버튼 클릭시 input에 자동 삽입
+  let $startInput = $("input[name='start-date']");
+  let $endInput = $("input[name='end-date']");
+  let val = $(this).attr("href");
+
+  //전체 버튼 선택시 공백으로 바꾸기
+  if (val == "") {
+    $startInput.val("");
+    $endInput.val("");
+    return;
+  }
+
+  let todayObj = new Date();
+  let dateResult = new Date(
+    todayObj.getTime() + 1000 * 60 * 60 * 24 * parseInt(val)
+  );
+  let year = dateResult.getFullYear();
+  let month = dateResult.getMonth() + 1;
+  let date = dateResult.getDate();
+
+  let resultDateAr = [
+    year,
+    (month < 10 ? "0" : "") + month,
+    (date < 10 ? "0" : "") + date,
+  ];
+
+  $startInput.val(
+    [
+      todayObj.getFullYear(),
+      (todayObj.getMonth() + 1 < 10 ? "0" : "") + (todayObj.getMonth() + 1),
+      (todayObj.getDate() < 10 ? "0" : "") + todayObj.getDate(),
+    ].join("-")
+  );
+  $endInput.val(resultDateAr.join("-"));
 });
 
 //date picker

@@ -42,16 +42,10 @@
                 <div>
                   <h1>회원 관리</h1>
                 </div>
-                <div class="chart-wrapper">
-                  <div class="chart-box">
-                    <canvas id="chart__today" style="width: 25vw"></canvas>
-                  </div>
-                  <div class="chart-box">
-                    <canvas id="chart__recent" style="width: 25vw"></canvas>
-                  </div>
-                </div>
+                <div class="flex">
                 <!-- search-wrapper 시작 -->
                 <div class="search-wrapper border__gray">
+
                   <!-- search-form -->
                   <form action="" id="search-form" name="search-form">
                     <table class="search-table border__gray">
@@ -132,6 +126,28 @@
                             </div>
                           </td>
                           <!--  -->
+                          
+                          <!--  -->
+                        </tr>
+                        <tr>
+                          <th scope="row" class="background__gray">검색어</th>
+                          <td class="flex">
+                            <div>
+                              <select name="type" id="search-select">
+                                <option value="userEmail">이메일</option>
+                                <option value="userName">이름</option>
+                                <option value="userNickName">닉네임</option>
+                                <option value="userNumber">회원번호</option>
+                              </select>
+                            </div>
+                            <div>
+                              <input id="search-input" type="text" />
+                            </div>
+                          </td>
+                          
+                        </tr>
+                      <!-- 카카오 -->
+                        <tr>
                           <th scope="row" class="background__gray">카카오 연동</th>
                           <td class="flex">
                             <label>
@@ -152,23 +168,9 @@
                               <span>비인증</span>
                             </label>
                           </td>
-                          <!--  -->
                         </tr>
+                      <!-- 상태 -->
                         <tr>
-                          <th scope="row" class="background__gray">검색어</th>
-                          <td class="flex">
-                            <div>
-                              <select name="type" id="search-select">
-                                <option value="userEmail">이메일</option>
-                                <option value="userName">이름</option>
-                                <option value="userNickName">닉네임</option>
-                                <option value="userNumber">회원번호</option>
-                              </select>
-                            </div>
-                            <div>
-                              <input id="search-input" type="text" />
-                            </div>
-                          </td>
                           <th scope="row" class="background__gray">상태</th>
                           <td class="flex">
                             <label>
@@ -190,8 +192,6 @@
                             </label>
                           </td>
                         </tr>
-                      
-                        
                       </tbody>
                     </table>
                     <div class="button-wrapper">
@@ -204,6 +204,14 @@
                     </div>
                   </form>
                 </div>
+                <div class="chart-wrapper">
+                  
+                  <div class="chart-box">
+                    <canvas id="chart__recent" style="width: 29vw; height: 34vh"></canvas>
+                  </div>
+                </div>
+                </div>
+                
 
                 <!--------------------- list-wrapper 시작 ----------------->
                 <div class="list-wrapper border__gray list-wrapper_min-h">
