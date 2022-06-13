@@ -10,63 +10,140 @@ section{
 .sec4{
     padding: 60px 0 ;
 }
-form[name="projectForm"] > div {
+form[name="projectForm"]{
+    height: 100%;
+}
+form[name="projectForm"] > div{
     border: 1px solid #e5e5e5;
     height: 80vh;
+    min-height: 600px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     border-radius: 30px;
     overflow: hidden;
 }
-
 
 .topmenu{
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #e5e5e5;
     padding: 10px 20px;
 }
-.topmenu > div:nth-child(1){
+.topmenu > div{
     display: none;
 }
 .topmenu > div:nth-child(2){
+    display: block;
     text-align: center;
     flex-grow: 1;
+    font-weight: 600;
 }
-.topmenu > div:nth-child(3){
+.topmenu > div.on{
+    display: block;
+}
+
+.formData{
+    flex-grow: 1;
+    display: flex;
+    overflow: hidden;
+}
+.formData > div{
+    width: 30%;
+}
+.formData > .imgData{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.imgData>div {
+    margin: 10px 0;
+}
+.imgData>div:nth-child(2) {
+    font-size: 1.5rem;
+}
+.imgData label[for="btnImage"] {
+    display: block;
+    width: 135px;
+    padding: 5px;
+    background: #fa6462;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+input[id="btnImage"] {
     display: none;
 }
-
-.imgData{
+div.imgView {
     height: 100%;
-}
-
-
-
-.inputList{
+    background-size:cover ;
     flex-grow: 1;
-    border: 1px solid #666666;
 }
-
-
-
-.sec4 > form > div:nth-child(2){
-
+.imgView {
+    display: none;
 }
-
-.inputList{
+.formData > .projectData {
+    border-left: 1px solid #e5e5e5;
+    overflow: auto;
+    padding: 10px 0;
+    display: none;
+}
+.projectData > div{
+    margin: 10px 0;
+    padding: 5px 10px;
+}
+.projectData > div:nth-child(1){
     display: flex;
-    flex-grow: 1;
+}
+div.miniPoto{
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+div.miniPoto > img{
+    width: 100%;
     height: 100%;
+    object-fit: cover;
 }
-.inputList > div{
-    flex-grow: 1;
-    border: 1px solid #666666;
-    height: 100%;
+
+div.titel{
+    border-top: 1px solid #e5e5e5;
 }
-.inputList > div{
-    
+div.titel > a{
+    list-style: none;
 }
-.sec4 > form > div:nth-child(1){}
-.sec4 > form > div:nth-child(2){}
+
+label.togle{
+    display: block;
+    width: 100%;
+    border-top: 1px solid #e5e5e5;
+    margin-top: 10px;
+}
+label.togle + div{
+    display: none;
+}
+label.togle + div>input{
+    width: 100%;
+    border-style: none;
+    outline: none;
+}
+label.togle + div>input:focus{
+    border-style: none;
+    outline: none;
+}
+label.togle + div>textarea{
+    resize: none;
+    width: 100%;
+    border-style: none;
+    outline: none;
+    min-height: 100px;
+}
