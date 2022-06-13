@@ -283,14 +283,13 @@ label[for="btnImage"] > img{
 .selecBox{
   display: flex;
   flex-wrap: wrap;
-
+  justify-content: space-between;
 }
 .selecBox>div{
   width: 50%;
   margin-bottom: 10px;
 }
 .selecBox>div:nth-child(2n) label{
-  float: right;
 }
 
 input[type="radio"]{

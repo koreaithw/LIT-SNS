@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로젝트 생성</title>
+
+    <link rel="stylesheet" href="../../static/assets/css/project/default.css">
+    <link rel="stylesheet" href="../../static/assets/css/project/project.css">
+</head>
+<style>
+</style>
+
+<body>
+    <header>헤더</header>
+
+    <main>
+        <div class="mainWrap">
+            <section class="sec3">
+                <form action="" name="projectForm" enctype="multipart/form-data">
+                    <div class="imgData">
+                        <label for="btnImage">
+                            <img src="" alt="" id="preview">
+                            <span>
+                                <div></div>
+                                <div></div>
+                            </span>
+                        </label>
+                        <p>선택</p>
+                        <!--name 추가-->
+                        <input type="file" id="btnImage" name="">
+                    </div>
+
+                    <div class="dataWrite">
+                        <div>
+                            <span class="titel">제목</span>
+                        </div>
+
+                        <!--name 추가-->
+                        <div>
+                            <input type="text" name="titel">
+                        </div>
+                    </div>
+                    <div class="dataWrite">
+                        <div>
+                            <span class="titel">첼린지소개</span>
+                        </div>
+                        <div class="textStyle1">
+                            <textarea></textarea>
+                        </div>
+                    </div>
+                    <div class="dataWrite">
+                        <div>
+                            <span class="titel">인증방법</span>
+                        </div>
+                        <div class="textStyle2">
+                            <textarea></textarea>
+                        </div>
+                    </div>
+
+
+
+                    <div class="dataWrite">
+                        <div>
+                            <span class="titel">시작일</span>
+                        </div>
+                        <div class="selecBox">
+                            <div>
+                                <input type="radio" id="btnStart1" name="startDay" value="6/6">
+                                <label for="btnStart1">6/6</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="btnStart2" name="startDay" value="6/6">
+                                <label for="btnStart2">6/13</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="btnStart3" name="startDay" value="6/6">
+                                <label for="btnStart3">6/20</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="btnStart4" name="startDay" value="6/6">
+                                <label for="btnStart4">6/27</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dataWrite">
+                        <div>
+                            <span class="titel">기간</span>
+                        </div>
+                        <div class="selecBox">
+                            <div>
+                                <input type="radio" id="btnPeriod1" name="Period" value="6/6">
+                                <label for="btnPeriod1">1주</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="btnPeriod2" name="Period" value="6/6">
+                                <label for="btnPeriod2">2주</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="btnPeriod3" name="Period" value="6/6">
+                                <label for="btnPeriod3">3주</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="btnPeriod4" name="Period" value="6/6">
+                                <label for="btnPeriod4">4주</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="submitSection">
+                        <input type="button" value="완료" onclick="submitEvent()">
+                    </div>
+
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer>풋터</footer>
+
+</body>
+<script src="../../static/assets/js/jquery-3.6.0.min.js"></script>
+<script>
+    // 이미지 미리보기
+    $("#btnImage").on("change", function (event) {
+        let $bgImage = $('label[for="btnImage"]>span');
+        let file = event.target.files[0];
+        let reader = new FileReader();
+        $bgImage.hide();
+
+        reader.onload = function (e) {
+            $("#preview").show().attr("src", e.target.result);
+        }
+        reader.readAsDataURL(file);
+    });
+
+    function submitEvent() {
+        let form = $(projectForm);
+        console.log(form.find('input[name="titel"]').val());
+    }
+
+
+
+
+
+    $('label[for="btnImage"]').on("drop", function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+        dragOver(e);
+        console.log("이미지 올ㄹ리");
+
+        e.dataTransfer = e.originalEvent.dataTransfer;
+        let files = e.target.files || e.dataTransfer.files;
+        if (files.length > 1) {
+            alert('이미지는 하나만 올릴 수 있습니다.');
+            return;
+        }
+        // 타입이 이미지 이면
+        if (files[0].type.match(/image.*/)) {
+            $(e.target).css({
+                "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+                "outline": "none",
+                "background-size": "100% 100%"
+            });
+        } else {
+            alert('이미지가 아닙니다.');
+            return;
+        }
+    });
+</script>
+
+</html>
