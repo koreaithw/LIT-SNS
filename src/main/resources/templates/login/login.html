@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/login/login.css">
+</head>
+
+<body style="background-color: #fafafa;">
+    <div style="width: 100%;height: 100%;">
+        <div style="width: 100%;height: 100%;">
+            <main class="main" role="main">
+                <div class="artic">
+                    <div class="board">
+                        <div class="possion">
+                            <div class="logo">
+                                <div aria-disabled="false" role="button" tabindex="0" style="cursor: pointer;">
+                                    <img alt="lit" class="logoImage" src="/src/main/resources/static/images/admin/logo.png">
+                                </div>
+                            </div>
+                            <div class="mid">
+                                <form class="loginFormStyel" id="loginForm" method="post">
+                                    <div class="underLoginForm">
+                                        <div class="firstDiv">
+                                            <div class="lainDiv"><label class="labelText">
+                                                    <span class="spanText">전화번호, 사용자 이름 또는 이메일</span>
+                                                    <input aria-label="전화번호, 사용자 이름 또는 이메일" aria-required="true"
+                                                        autocapitalize="off" autocorrect="off" maxlength="75"
+                                                        name="username" type="text" class="inputstyle" value=""></label>
+                                                <div class="divFornot"></div>
+                                            </div>
+                                        </div>
+                                        <div class="firstDiv">
+                                            <div class="lainDiv"><label class="labelText"><span
+                                                        class="spanText">비밀번호</span>
+                                                    <input aria-label="" aria-required="true" autocapitalize="off"
+                                                        autocorrect="off" name="password" type="password"
+                                                        class="inputstyle" value=""></label>
+                                                <div class="divFornot"></div>
+                                            </div>
+                                        </div>
+                                        <div class="divButtom">
+                                            <button class="buttonforjoin jonbuttoncolor" disabled=""
+                                                type="submit">로그인</button>
+                                        </div>
+                                        <div class="underKakao">
+                                            <div class="inline"></div>
+                                            <div class="inlineText">또는</div>
+                                            <div class="inline"></div>
+                                        </div>
+                                        <div class="loginForKakao">
+                                            <button class="kakaoLoginButton" type="button">
+                                                <span class="kakaoLogo"><img
+                                                        src="/src/main/resources/static/images/admin/kakaoIcon.png"></span>
+                                                <span class="kakaoText">카카오톡으로 로그인</span></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="possionJoin">
+                            <div class="underjoinBoard">
+                                <p class="pText">계정이 없으신가요? <a data-testid="sign-up-link"
+                                        href="/src/main/resources/templates/login/join.html" tabindex="0" style="text-decoration: none;">
+                                        <span class="forJoin">가입하기</span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
