@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mypage</title>
+
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/mypage/mypage.css">
+
+</head>
+
+<body>
+
+<main class="mypageMain" style="margin-top:60px;">
+    <div class="mainInner">
+        <header class="mypageHeader">
+            <div class="profile1">
+                <div class="profile2">
+                    <div class="profile3">
+                        <button class="profileButton">
+                            <img class="profileImg" src="/src/main/resources/static/images/mypage/jennie.jpg">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <section class="mypageSection">
+                <div class="sectionH2">
+                    <h2>jennierubyjane
+                    </h2>
+                    <!-- <div class="medalImg" onclick="medalModal()" id="medalImg"></div> -->
+                    <img class="medalImg" src="/src/main/resources/static/images/mypage/medal.png" onclick="medalModal()" id="medalImg">
+                    <div class="editProfile">
+                        <div class="editProfileInner"><a class="profileA">프로필 편집</a></div>
+                    </div>
+                </div>
+                <ul class="mypageUl">
+                    <li class="mypageLi">
+                        <div class="divInfo">게시물
+                            <div class="spanInfo">854</div>
+                        </div>
+                    </li>
+                    <li class="mypageLi">
+                        <div class="divInfo" style="cursor:pointer" onclick="followerModal()">팔로워
+                            <div class="spanInfo">67.2M</div>
+                        </div>
+                    </li>
+                    <li class="mypageLi">
+                        <div class="divInfo" onclick="followeringModal()">팔로우
+                            <div class="spanInfo">1</div>
+                        </div>
+                    </li>
+                </ul>
+                <div>
+                        <span><strong>J</strong><br>
+                            @lesyeuxdenini<br>youtu.be/erYPvNbc_mc</span>
+                    <br>
+                </div>
+            </section>
+        </header>
+        <div class="litChange">
+            <div style="display:flex">
+                <a class="lits1">
+                    <div><img class="litSvg" src="/src/main/resources/static/images/mypage/menu2.png">
+                        <span class="litSpan">Lit up</span>
+                    </div>
+                </a>
+            </div>
+            <div style="display:flex">
+                <a class="lits2">
+                    <div><img class="litSvg" src="/src/main/resources/static/images/mypage/fire.png">
+                        <span class="litSpan">Lits</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="photoContent" style="display: flex">
+            <article class="articleClass">
+                <div style="flex-wrap:wrap">
+                    <div class="content1">
+                        <div class="content2" style="display:flex">
+                            <div class="content3"><a class="aContent" href="">
+                                <div class="content4">
+                                    <div class="content5"><img alt="" class="contentImage" src="/src/main/resources/static/images/mypage/jennie3.jpg">
+                                    </div>
+                                    <div class="content6"></div>
+                                </div>
+                            </a></div>
+                            <div class="content2_1"><a class="content2_a" href="">
+                                <div class="content2_2">
+                                    <div class="content2_3"><img alt="" class="contentImage2" src="/src/main/resources/static/images/mypage/jennie3.jpg">
+                                    </div>
+                                    <div class="content2_4"></div>
+                                </div>
+                            </a></div>
+                            <div class="content3_1"><a class="content3_a" href="">
+                                <div class="content3_2">
+                                    <div class="content3_3"><img alt="" class="contentImage3" src="/src/main/resources/static/images/mypage/jennie3.jpg">
+                                    </div>
+                                    <div class="content3_4"></div>
+                                </div>
+                            </a></div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</main>
+
+<!-- 팔로워 -->
+<div class="follower">
+    <div class="followerModalWrapper">
+        <div class="followerModal">
+            <div class="followerHeader">
+                <div>
+                    <strong>팔로워</strong>
+                </div>
+                <div>
+                    <button class="followerCancel" onclick="followerModalClose()">
+                        X
+                    </button>
+                </div>
+            </div>
+            <div class="followerTwo">
+                <ul class="followerTwoUl">
+                    <div class="followerTwoWrapper">
+                        <li class="followerTwoLi">
+                            <div class="follower1">
+                                <div class="follower2">
+                                    <div class="follower3">
+                                        <div class="follower4" aria-disabled="true" role="button" tabindex="-1">
+                                            <canvas class="followerCanvass" height="50" width="50"
+                                                    style="position: absolute; top: -5px; left: -5px; width: 40px; height: 40px;"></canvas>
+                                            <a class="followerAa" href="" role="link" tabindex="0"
+                                               style="width: 30px; height: 30px;">
+                                                <img alt="" class="followerImgg"
+                                                     crossorigin="anonymous" draggable="false" src="/src/main/resources/static/images/mypage/jennie2.jpg">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="follower5">
+                                        <div class="follower6">
+                                                <span class="followerSpann">
+                                                    <a style=" text-decoration-line: none;"
+                                                       href="" role="link" tabindex="0">
+                                                        <span class="follower7">xldms.dl</span>
+                                                    </a>
+                                                </span>
+                                            <div class="follower8">이지은</div>
+                                        </div>
+                                    </div>
+                                    <div class="follower9">
+                                        <button class="followerBtnn" type="button">삭제</button>
+                                    </div>
+                                </div>
+                        </li>
+                    </div>
+                </ul>
+                <div class="_aanq"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 팔로우 -->
+<div class="followering">
+    <div class="followerModalWrapper">
+        <div class="followerModal">
+            <div class="followerHeader">
+                <div>
+                    <strong>팔로잉</strong>
+                </div>
+                <div>
+                    <button class="followerCancel" onclick="followeringModalClose()">
+                        X
+                    </button>
+                </div>
+            </div>
+            <div class="followerTwo">
+                <ul class="followerTwoUl">
+                    <div class="followerTwoWrapper">
+                        <li class="followerTwoLi">
+                            <div class="follower1">
+                                <div class="follower2">
+                                    <div class="follower3">
+                                        <div class="follower4" aria-disabled="true" role="button" tabindex="-1">
+                                            <canvas class="followerCanvass" height="50" width="50"
+                                                    style="position: absolute; top: -5px; left: -5px; width: 40px; height: 40px;"></canvas>
+                                            <a class="followerAa" href="" role="link" tabindex="0"
+                                               style="width: 30px; height: 30px;">
+                                                <img alt="" class="followerImgg"
+                                                     crossorigin="anonymous" draggable="false" src="/src/main/resources/static/images/mypage/jennie2.jpg">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="follower5">
+                                        <div class="follower6">
+                                                <span class="followerSpann">
+                                                    <a style=" text-decoration-line: none;"
+                                                       href="" role="link" tabindex="0">
+                                                        <span class="follower7">xldms.dl</span>
+                                                    </a>
+                                                </span>
+                                            <div class="follower8">이지은</div>
+                                        </div>
+                                    </div>
+                                    <div class="follower9">
+                                        <button class="followingBtnn" type="button" style="display: block;" onclick="changeFollow()">팔로잉</button>
+                                        <button class="followBtnn" type="button" style="display: none;" onclick="changeFollow()">팔로우</button>
+                                    </div>
+                                </div>
+                        </li>
+                    </div>
+                </ul>
+                <div class="_aanq"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 메달 -->
+<div class="medal">
+    <div class="followerModalWrapper">
+        <div class="medalModal">
+            <div class="followerHeader">
+                <div>
+                    <strong style="color: white;">메달 인벤토리</strong>
+                </div>
+                <div>
+                    <button class="followerCancel" onclick="medalModalClose()" style="color: white;">
+                        X
+                    </button>
+                    <div style="padding: 10px 10px; margin-top: 30px;">
+                        <img alt="" class="medalImgg"  onclick="representMedal(this)" src="/src/main/resources/static/images/mypage/medal (1).png" id="medal1">
+                        <img alt="" class="medalImgg" onclick="representMedal(this)" src="/src/main/resources/static/images/mypage/medal (2).png" id="medal2">
+                        <img alt="" class="medalImgg" onclick="representMedal(this)" src="/src/main/resources/static/images/mypage/medal (3).png" id="medal3">
+                        <img alt="" class="medalImgg" onclick="representMedal(this)" src="/src/main/resources/static/images/mypage/medal.png" id="medal4">
+                        <img alt="" class="medalImgg" onclick="representMedal(this)" src="/src/main/resources/static/images/mypage/gold-medal.png" id="medal5">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="/src/main/resources/static/assets/js/mypage/mypage.js"></script>
+
+</html>
