@@ -14,13 +14,14 @@ form[name="projectForm"] > div {
     border: 1px solid #e5e5e5;
     height: 80vh;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     border-radius: 30px;
     overflow: hidden;
 }
 
 
 .topmenu{
+    width: 100%;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #e5e5e5;
