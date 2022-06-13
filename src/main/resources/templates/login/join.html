@@ -22,7 +22,7 @@
                                     <img alt="lit" class="logoImage" src="/src/main/resources/static/images/admin/logo.png"></div>
                             </div>
                             <div class="mid">
-                                <form class="joinFor" method="post">
+                                <form class="joinFor" method="post" onclick="join" action="/src/main/resources/templates/login/join.html">
                                     <h2 class="joinForText">친구들의 사진과 동영상을 보려면 가입하세요.</h2>
                                     <div class="kakaoMargin">
                                         <button class="kakaoButton y3zKF L3NKy" type="button">
@@ -35,35 +35,28 @@
                                     </div>
                                     <div class="firstDiv">
                                         <div class="lainDiv">
-                                            <label class="labelText"><span class="spanText">휴대폰 번호 또는 이메일 주소</span>
-                                                <input aria-label="휴대폰 번호 또는 이메일 주소" aria-required="true"
-                                                    autocapitalize="off" autocomplete="tel" autocorrect="off"
-                                                    name="emailOrPhone" type="text" class="inputstyle" value=""></label>
+                                            <label class="labelText">
+                                                <input placeholder="이메일 주소를 입력하세요" name="id" type="text" class="inputstyle" id="idval"></label>
                                             <div class="divFornot"></div>
                                         </div>
                                     </div>
                                     <div class="firstDiv">
-                                        <div class="lainDiv"><label class="labelText"><span class="spanText">성명</span>
-                                                <input aria-label="성명" aria-required="false" autocapitalize="sentences"
-                                                    autocorrect="off" name="fullName" type="text" class="inputstyle"
-                                                    value=""></label>
+                                        <div class="lainDiv">
+                                            <label class="labelText">
+                                                <input aria-label="성명" name="fullName" type="text" class="inputstyle" id="userName"></label>
                                             <div class="divFornot"></div>
                                         </div>
                                     </div>
                                     <div class="firstDiv">
-                                        <div class="lainDiv"><label class="labelText"><span class="spanText">사용자
-                                                    이름</span>
-                                                <input aria-label="사용자 이름" aria-required="true" autocapitalize="off"
-                                                    autocorrect="off" maxlength="30" name="username" type="text"
-                                                    class="inputstyle" value=""></label>
+                                        <div class="lainDiv">
+                                            <label class="labelText">
+                                                <input aria-label="사용자 이름" maxlength="30" name="username" type="text" class="inputstyle" id="nickName"></label>
                                             <div class="divFornot"></div>
                                         </div>
                                     </div>
                                     <div class="firstDiv">
-                                        <div class="lainDiv"><label class="labelText"><span class="spanText">비밀번호</span>
-                                                <input aria-label="비밀번호" aria-required="true" autocapitalize="off"
-                                                    autocomplete="new-password" autocorrect="off" name="password"
-                                                    type="password" class="inputstyle" value=""></label>
+                                        <div class="lainDiv"><label class="labelText">
+                                                <input aria-label="비밀번호"  name="password" type="password" class="inputstyle" id="pwVal"></label>
                                             <div class="divFornot"></div>
                                         </div>
                                     </div>
@@ -85,5 +78,5 @@
         </div>
     </div>
 </body>
-
+<script src="/src/main/resources/static/assets/js/login/join.js"></script>
 </html>

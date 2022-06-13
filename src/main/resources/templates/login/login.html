@@ -26,24 +26,20 @@
                                     <div class="underLoginForm">
                                         <div class="firstDiv">
                                             <div class="lainDiv"><label class="labelText">
-                                                    <span class="spanText">전화번호, 사용자 이름 또는 이메일</span>
-                                                    <input aria-label="전화번호, 사용자 이름 또는 이메일" aria-required="true"
-                                                        autocapitalize="off" autocorrect="off" maxlength="75"
-                                                        name="username" type="text" class="inputstyle" value=""></label>
+                                                    <input placeholder="이메일을 입력하세요" maxlength="75" id="idVal"
+                                                        name="username" type="text" class="inputstyle"></label>
                                                 <div class="divFornot"></div>
                                             </div>
                                         </div>
                                         <div class="firstDiv">
-                                            <div class="lainDiv"><label class="labelText"><span
-                                                        class="spanText">비밀번호</span>
-                                                    <input aria-label="" aria-required="true" autocapitalize="off"
-                                                        autocorrect="off" name="password" type="password"
-                                                        class="inputstyle" value=""></label>
+                                            <div class="lainDiv"><label class="labelText">
+                                                    <input placeholder="비밀번호" name="password" type="password" id="pwVal"
+                                                        class="inputstyle"></label>
                                                 <div class="divFornot"></div>
                                             </div>
                                         </div>
                                         <div class="divButtom">
-                                            <button class="buttonforjoin jonbuttoncolor" disabled=""
+                                            <button class="buttonforjoin jonbuttoncolor" id="login_btn"
                                                 type="submit">로그인</button>
                                         </div>
                                         <div class="underKakao">
@@ -75,5 +71,5 @@
         </div>
     </div>
 </body>
-
+<script src="/src/main/resources/static/assets/js/login/login.js"></script>
 </html>

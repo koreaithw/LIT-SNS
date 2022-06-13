@@ -131,12 +131,6 @@
     position: relative;
 }
 
-@media (min-width: 736px){
-    .cneKx {
-        top: 2px;
-    }
-}
-
 .kakaoButtomText {
     background-image: url(/src/main/resources/static/images/kakaoIcon.png);
     background-repeat: no-repeat;
@@ -231,7 +225,6 @@
 }
 
 .inputstyle {
-    font-size: 16px;
     background: #fafafa;
     border: 0;
     -webkit-box-flex: 1;

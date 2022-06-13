@@ -127,25 +127,7 @@
     position: relative;
 }
 
-.spanText{
-    color: #8e8e8e;
-    font-size: 12px;
-    height: 36px;
-    left: 8px;
-    line-height: 36px;
-    overflow: hidden;
-    pointer-events: none;
-    position: absolute;
-    right: 0;
-    text-overflow: ellipsis;
-    transform-origin: left;
-    transition: transform ease-out .1s,-webkit-transform ease-out .1s;
-    user-select: none;
-    white-space: nowrap;
-}
-
 .inputstyle {
-    font-size: 16px;
     background: #fafafa;
     border: 0;
     -webkit-box-flex: 1;
@@ -206,12 +188,18 @@
     user-select: none;
     width: auto;
 }
+
 .jonbuttoncolor {
     border-radius: 4px;
-    opacity: 1;
     opacity: .3;
     background-color: #de00f6;
     pointer-events: none;
+}
+
+.formEvent {
+    border-radius: 4px;
+    opacity: 1;
+    background-color: #de00f6;
 }
 
 .underKakao {
