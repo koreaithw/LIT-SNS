@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원정보수정</title>
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/changeinfo/editInfo.css">
+
+</head>
+
+<body>
+
+
+    <main class="main" role="main">
+        <div class="mainWrapper">
+            <ul class="mainUl">
+                <li class="mainLi"><a class="mainA" href="/src/main/resources/templates/changeinfo/editInfo.html" tabindex="0">프로필 편집</a></li>
+                <li class="mainLi"><a class="mainA" href="/src/main/resources/templates/changeinfo/changePw.html" tabindex="0">비밀번호
+                        변경</a>
+                </li>
+                <li class="mainLi"><a class="mainA" href="/src/main/resources/templates/changeinfo/withdraw.html" tabindex="0">회원 탈퇴</a></li>
+
+            </ul>
+            <article class="info1Article">
+                <div class="info1ArticleDiv1">
+                    <div class="info1ArticleDiv2">
+                        <div class="info1ArticleDiv3">
+                            <button class="info1ArticleBtn " title="프로필 사진 바꾸기">
+                            <img alt="프로필 사진 바꾸기" class="info1ArticleImg"
+                                    src="/src/main/resources/static/images/changeinfo/jenny2.jpg" id="proFileImg"></button>
+                            <div class="info1ArticleDiv4">
+                                <form enctype="multipart/form-data" method="POST" role="presentation"><input
+                                        accept="image/jpeg,image/png" class="info1ArticleInput1" type="file"></form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="infoDiv2_1">
+                        <h1 class="infoDiv2H1 " title="xldms.dl">xldms.dl</h1>
+                        <button class="infoDiv2_2"
+                            type="button" onclick="changeProfileModal()">프로필 사진 바꾸기</button>
+                        <div class="infoDiv2_3">
+                            <form enctype="multipart/form-data" method="POST" role="presentation"><input
+                                    accept="image/jpeg,image/png" class="infoDivInput2" type="file"></form>
+                        </div>
+                    </div>
+                </div>
+                <form class="infoDiv3_0" method="POST">
+                    <div class="infoDiv3" style="display: flex; ">
+                        <aside class="infoAside"><label for="infoLabel1" class="nameLabel">이름</label></aside>
+                        <div class="infoDiv3_2">
+                            <div class="infoDiv3_3" style="width: 100%; max-width: 355px;"><input aria-required="false"
+                                    id="pepName" placeholder="이름" type="text" class="infoInput3" value="이지은">
+                                <div class="infoDiv3_4" style="width: 100%; max-width: 355px;">
+                                    <div class="infoDiv3_5">
+                                        <div class="infoDiv3_6">사람들이
+                                            이름, 별명 또는 비즈니스 이름 등 회원님의 알려진 이름을 사용하여 회원님의 계정을 찾을 수 있도록 도와주세요.</div>
+                                    </div>
+                                    <div class="infoDiv3_7">이름은 14일 안에
+                                        두 번만 변경할 수 있습니다.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="infoDiv4" style="display: flex;">
+                        <aside class="infoDiv4_2"><label for="pepUsername">사용자 이름</label></aside>
+                        <div class="infoDiv4_3">
+                            <div class="infoDiv4_4" style="width: 100%; max-width: 355px;"><input aria-required="true"
+                                    id="pepUsername" placeholder="사용자 이름" type="text" class="infoDiv4_5"
+                                    value="xldms.dl">
+                                <div class="infoDiv4_6" style="width: 100%; max-width: 355px;">
+                                    <div class="infoDiv4_7">
+                                        <div class="infoDiv4_8">대부분의 경우
+                                            이후 14일 동안 사용자 이름을 다시 xldms.dl(으)로 변경할 수 있습니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="infoDiv6" style="display: flex;">
+                        <aside class="infoDiv6_2"><label for="pepBio" class="infoDiv6_3">소개</label></aside>
+                        <div class="infoDiv6_4"><textarea class="infoDiv6_5" id="pepBio"></textarea></div>
+                    </div>
+
+                    <div class="infoDiv7" style="display: flex;">
+                        <aside class="infoDiv7_2"><label></label></aside>
+                        <div class="infoDiv7_3">
+                            <div class="infoDiv7_4" style="width: 100%; max-width: 355px;">
+                                <div class="infoDiv7_5">
+                                    <h2 class="infoDiv7_6">개인정보</h2>
+                                </div>
+                                <div class="infoDiv7_7">비즈니스나 반려동물 등에
+                                    사용된 계정인 경우에도 회원님의 개인정보를 입력하세요.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="infoDiv5" style="display: flex;">
+                        <aside class="infoDiv5_2"><label for="pepWebsite">이메일</label></aside>
+                        <div class="infoDiv5_3">
+                            <div class="infoDiv5_4" style="width: 100%; max-width: 355px;"><input aria-required="false"
+                                    id="pepWebsite" placeholder="123@gmail.com" type="text" class="infoDiv5_5" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="infoDiv5" style="display: flex;">
+                        <aside class="infoDiv5_2"><label for="pepWebsite">전화번호</label></aside>
+                        <div class="infoDiv5_3">
+                            <div class="infoDiv5_4" style="width: 100%; max-width: 355px;"><input aria-required="false"
+                                    id="pepWebsite" placeholder="+82 10-1234-5678" type="text" class="infoDiv5_5"
+                                    value=""></div>
+                        </div>
+                    </div>
+
+                    <div class="submitBtnDivvvv" style="display:flex">
+                        <aside class="submitBtnDivvv"><label></label></aside>
+                        <div class="submitBtnDivv">
+                            <div class="submitBtnDiv"><button class="submitBtn" disabled="" type="button">제출</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </article>
+        </div>
+    </main>
+
+
+    <!-- 프로필 사진 바꾸기 -->
+    <div class="changeProfile0" id="changeProfile">
+        <div class="changeProfile1" role="presentation" >
+            <div class="changeProfile2" role="dialog">
+                <div class="changeProfile3">
+                    <div class="changeProfile4" data-testid="EditProfilePicMenu-testID">
+                        <div class="changeProfile5">
+                            <h3 class="changeProfile6">프로필 사진 바꾸기</h3>
+                        </div>
+                        <div class="changeProfile7">
+                            <button class="aww changeProfile8" tabindex="0" onclick="uploadProfile()">사진 업로드</button>
+                            <button class="aww changeProfile9" tabindex="0" onclick="changeProfileDelete()">현재 사진 삭제</button>
+                                <button class="aww changeProfile10" tabindex="0" onclick="changeProfileModalClose()">취소</button>
+                            <form enctype="multipart/form-data" method="POST" role="presentation">
+                                <input
+                                    accept="image/jpeg,image/png" class="changeProfileInput" type="file" id="ModalFileInput"></form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="/src/main/resources/static/assets/js/changeinfo/editInfo.js"></script>
+
+</html>
