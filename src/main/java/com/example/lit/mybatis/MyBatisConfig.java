@@ -24,6 +24,7 @@ public class MyBatisConfig {
     @Bean //@Configuration 또는 @Component가 작성된 클래스의 메소드에 사용할 수 있다.
           //메소드의 리턴 객체를 스프링 컨테이너에 등록시켜준다.
           //객체명은 메소드의 이름으로 자동 설정이 되고, 직접 설정 시 @Bean(name="객체명")으로 사용한다.
+
     @ConfigurationProperties(prefix = "spring.datasource.hikari")
     public HikariConfig hikariConfig(){ return new HikariConfig(); }
 
