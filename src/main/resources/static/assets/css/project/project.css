@@ -178,7 +178,7 @@ aside.modalWindow{
   padding: 0 10px;
 }
 
-label[for="btnImage"] > span::before{
+label[for="btnImage"] > span > div:nth-child(1){
   position: absolute;
   transform: translate(-50%, -50%);
   top: 50%;
@@ -339,14 +339,7 @@ input[type="radio"]:checked +label::before{
 }
 
 
-
-
-
-
-
-
-
-
+/* ======================================= */
 
 
 

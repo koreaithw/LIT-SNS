@@ -39,10 +39,12 @@ html {
 /* 대표색 */
 .bg01{ 
     background: rgb(250, 100, 98);
+    background: #fa6462;
 }
 /* 이벤트 색 */
 .bg02{
   background: rgb(255, 69, 67);
+  background: #ff4543;
 }
 /* 비활성화 */
 .bg03{

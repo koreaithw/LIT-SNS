@@ -1,0 +1,71 @@
+main{
+}
+section{
+    width: 935px;
+    padding: 0 20px;
+    margin: auto;
+    /* transition: 1s ease; */
+    /* border: 1px solid #666666; */
+  }
+.sec4{
+    padding: 60px 0 ;
+}
+form[name="projectForm"] > div {
+    border: 1px solid #e5e5e5;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+
+.topmenu{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px 20px;
+}
+.topmenu > div:nth-child(1){
+    display: none;
+}
+.topmenu > div:nth-child(2){
+    text-align: center;
+    flex-grow: 1;
+}
+.topmenu > div:nth-child(3){
+    display: none;
+}
+
+.imgData{
+    height: 100%;
+}
+
+
+
+.inputList{
+    flex-grow: 1;
+    border: 1px solid #666666;
+}
+
+
+
+.sec4 > form > div:nth-child(2){
+
+}
+
+.inputList{
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+}
+.inputList > div{
+    flex-grow: 1;
+    border: 1px solid #666666;
+    height: 100%;
+}
+.inputList > div{
+    
+}
+.sec4 > form > div:nth-child(1){}
+.sec4 > form > div:nth-child(2){}

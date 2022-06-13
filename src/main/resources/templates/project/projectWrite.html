@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../../static/assets/css/project/default.css">
     <link rel="stylesheet" href="../../static/assets/css/project/project.css">
 </head>
+<style>
+</style>
 
 <body>
     <header>헤더</header>
@@ -21,7 +23,10 @@
                     <div class="imgData">
                         <label for="btnImage">
                             <img src="" alt="" id="preview">
-                            <span></span>
+                            <span>
+                                <div></div>
+                                <div></div>
+                            </span>
                         </label>
                         <p>선택</p>
                         <!--name 추가-->
@@ -135,6 +140,35 @@
         let form = $(projectForm);
         console.log(form.find('input[name="titel"]').val());
     }
+
+
+
+
+
+    $('label[for="btnImage"]').on("drop", function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+        dragOver(e);
+        console.log("이미지 올ㄹ리");
+
+        e.dataTransfer = e.originalEvent.dataTransfer;
+        let files = e.target.files || e.dataTransfer.files;
+        if (files.length > 1) {
+            alert('이미지는 하나만 올릴 수 있습니다.');
+            return;
+        }
+        // 타입이 이미지 이면
+        if (files[0].type.match(/image.*/)) {
+            $(e.target).css({
+                "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+                "outline": "none",
+                "background-size": "100% 100%"
+            });
+        } else {
+            alert('이미지가 아닙니다.');
+            return;
+        }
+    });
 </script>
 
 </html>
