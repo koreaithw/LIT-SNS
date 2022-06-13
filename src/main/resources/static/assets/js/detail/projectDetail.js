@@ -1,6 +1,5 @@
 let modal = document.querySelector('.detailModalBackground');
-let modalContent = document.querySelector('.detailModalContent');
-let modalOnButton = document.querySelector('.modalOnButton');
+let projectDetailButton = document.querySelector('.projectDetailButton');
 let profileImage = document.querySelectorAll('.detailProfileImage');
 let profileModal = document.querySelector(".profileModal");
 let detailContentLikeButton = document.querySelector(".detailContentLikeButton");
@@ -20,16 +19,14 @@ commentInputArea.addEventListener("input", function(e){
 //프로젝트 모달 창 켜는 버튼
 function projectDetailModalShow(){
     modal.style.display = 'block';
-    modalContent.style.display = 'block';
-    modalOnButton.style.display = 'none';
+    projectDetailButton.style.display = 'none';
 }
 
 //프로젝트 모달 창 숨기는 버튼,
 //이미지 슬라이드와 버튼의 active 클래스를 다시 초기화해줌
 function projectDetailModalHide(){
     modal.style.display = 'none';
-    modalContent.style.display = 'none';
-    modalOnButton.style.display = 'block';
+    projectDetailButton.style.display = 'block';
 
     $('.innerImageWrapper ul li:first-child').addClass('active');
     $('.innerImageWrapper ul li:first-child').siblings('.active').removeClass('active');
@@ -69,7 +66,7 @@ profileImage.forEach(function(item){
         profileModal.style.display='none';
     });
 
-})
+});
 
 //버튼형 슬라이더
 //이미지 아래 버튼 클릭했을 때 해당하는 이미지로 넘겨주는 기능

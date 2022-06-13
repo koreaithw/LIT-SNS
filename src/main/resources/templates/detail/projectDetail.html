@@ -6,14 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="/Lit/src/main/resources/static/assets/css/detail/projectDetail.css">
-    <link rel="stylesheet" type="text/css" href="/Lit/src/main/resources/static/assets/css/detail/report.css">
+    <link rel="stylesheet" href="../../static/assets/css/detail/projectDetail.css">
+    <link rel="stylesheet" href="../../static/assets/css/detail/report.css">
 </head>
 
 <body>
 
 <div class="detailModalBackground">
-    <button class="modalCloseButton" onclick="projectDetailModalHide()">x</button>
+    <button class="modalCloseButton" onclick="projectDetailModalHide()">
+        <svg aria-label="닫기" class="fg7vo5n6 lrzqjn8y" color="#ffffff" fill="#ffffff" height="18" role="img" viewBox="0 0 48 48" width="18"><title>닫기</title><path clip-rule="evenodd" d="M41.8 9.8L27.5 24l14.2 14.2c.6.6.6 1.5 0 2.1l-1.4 1.4c-.6.6-1.5.6-2.1 0L24 27.5 9.8 41.8c-.6.6-1.5.6-2.1 0l-1.4-1.4c-.6-.6-.6-1.5 0-2.1L20.5 24 6.2 9.8c-.6-.6-.6-1.5 0-2.1l1.4-1.4c.6-.6 1.5-.6 2.1 0L24 20.5 38.3 6.2c.6-.6 1.5-.6 2.1 0l1.4 1.4c.6.6.6 1.6 0 2.2z" fill-rule="evenodd"></path></svg>
+    </button>
     <div class="detailModalContentContainer">
         <div class="detailModalContent">
             <div class="detailContentInnerWrapepr">
@@ -41,6 +43,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="detailContentInner">
                     <div class="detailContent">
 
@@ -151,6 +154,30 @@
                                 <div class="example">
                                     댓글 예시
                                 </div>
+                                <div class="example">
+                                    댓글 예시
+                                </div>
+                                <div class="example">
+                                    댓글 예시
+                                </div>
+                                <div class="example">
+                                    댓글 예시
+                                </div>
+                                <div class="example">
+                                    댓글 예시
+                                </div>
+                                <div class="example">
+                                    댓글 예시
+                                </div>
+                                <div class="example">
+                                    댓글 예시
+                                </div>
+                                <div class="example">
+                                    댓글 예시
+                                </div>
+                                <div class="example">
+                                    댓글 예시
+                                </div>
                             </div>
                         </div>
 
@@ -233,14 +260,16 @@
                 </div>
             </div>
         </div>
-
     </div>
+    <div class="closeArea" onclick="projectDetailModalHide()"></div>
 </div>
 
 <div class="reportBackground">
     <div class="reportModalContainer">
         <div class="reportModal">
-            <button class="reportModalCloseButton" onclick="reportModalClose()"><strong>x</strong></button>
+            <button class="reportModalCloseButton" onclick="reportModalClose()">
+                <svg aria-label="닫기" class="fg7vo5n6 lrzqjn8y" color="black" fill="black" height="18" role="img" viewBox="0 0 48 48" width="18"><title>닫기</title><path clip-rule="evenodd" d="M41.8 9.8L27.5 24l14.2 14.2c.6.6.6 1.5 0 2.1l-1.4 1.4c-.6.6-1.5.6-2.1 0L24 27.5 9.8 41.8c-.6.6-1.5.6-2.1 0l-1.4-1.4c-.6-.6-.6-1.5 0-2.1L20.5 24 6.2 9.8c-.6-.6-.6-1.5 0-2.1l1.4-1.4c.6-.6 1.5-.6 2.1 0L24 20.5 38.3 6.2c.6-.6 1.5-.6 2.1 0l1.4 1.4c.6.6.6 1.6 0 2.2z" fill-rule="evenodd"></path></svg>
+            </button>
             <div class="reportModalHead"><strong>신고</strong></div>
             <div class="reportButtons">
                 <div class="reportReason"><strong>이 게시물을 신고하는 이유</strong></div>
@@ -259,11 +288,12 @@
     </div>
 </div>
 
-<button class="modalOnButton" onclick="projectDetailModalShow()">모달✌️</button>
+<button class="projectDetailButton" onclick="projectDetailModalShow()">모달✌️</button>
+
 
 </body>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script defer src="/Lit/src/main/resources/static/assets/js/detail/projectDetail.js"></script>
-<script defer src="/Lit/src/main/resources/static/assets/js/detail/report.js"></script>
+<script defer src="../../static/assets/js/detail/projectDetail.js"></script>
+<script defer src="../../static/assets/js/detail/report.js"></script>
 
 </html>
