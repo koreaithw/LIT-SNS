@@ -17,20 +17,23 @@
     <main>
         <div class="mainWrap">
             <section class="sec3">
-                <form action="" name="projectForm">
+                <form action="" name="projectForm" enctype="multipart/form-data">
                     <div class="imgData">
                         <label for="btnImage">
                             <img src="" alt="" id="preview">
                             <span></span>
                         </label>
                         <p>선택</p>
-                        <input type="file" id="btnImage">
+                        <!--name 추가-->
+                        <input type="file" id="btnImage" name="">
                     </div>
 
                     <div class="dataWrite">
                         <div>
                             <span class="titel">제목</span>
                         </div>
+
+                        <!--name 추가-->
                         <div>
                             <input type="text" name="titel">
                         </div>

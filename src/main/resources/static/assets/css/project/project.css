@@ -2,7 +2,7 @@ section{
   width: 935px;
   padding: 0 20px;
   margin: auto;
-  transition: 1s ease;
+  /* transition: 1s ease; */
   /* border: 1px solid #666666; */
 }
 
@@ -89,7 +89,7 @@ label.btn:hover{
   width: 100%;
   column-count: 4;
   column-gap: 5px;
-  transition: 1s ease;
+  /* transition: 1s ease; */
 }
 
 .sec2 > div > figure {
@@ -105,7 +105,7 @@ figure >a {
 }
 figure img:hover{
   transform: scale(1.1);
-  transition: 0.5s ease;
+  /* transition: 0.5s ease; */
 }
 /* 모달창==================================== */
 aside.modalWindow{
