@@ -12,10 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class AdminController {
     //private final 의존성 주입으로 초기화할 객체
+
+    @GetMapping("/login")
+    public String login(){
+        log.info("***************************");
+        log.info("AdminController : login");
+        log.info("***************************");
+        return "/admin/login";
+    }
+
     @GetMapping("/userManagement")
     public String userManagement(){
         log.info("***************************");
-        log.info("/userManagement");
+        log.info("AdminController : userManagement");
         log.info("***************************");
         return "/admin/user-management";
     }
@@ -23,7 +32,7 @@ public class AdminController {
     @GetMapping("/approvedProjectManagement")
     public String approvedProjectManagement(){
         log.info("***************************");
-        log.info("/approvedProjectManagement");
+        log.info("AdminController : approvedProjectManagement");
         log.info("***************************");
         return "/admin/approved-project-management";
     }
@@ -31,7 +40,7 @@ public class AdminController {
     @GetMapping("/reportManagement")
     public String  reportManagement(){
         log.info("***************************");
-        log.info("/reportManagement");
+        log.info("AdminController : reportManagement");
         log.info("***************************");
         return "/admin/report-management";
     }
@@ -39,7 +48,7 @@ public class AdminController {
     @GetMapping("/waitingProjectManagement")
     public String waitingProjectManagement(){
         log.info("***************************");
-        log.info("/waitingProjectManagement");
+        log.info("AdminController : waitingProjectManagement");
         log.info("***************************");
         return "/admin/waiting-project-management";
     }
@@ -47,8 +56,10 @@ public class AdminController {
     @GetMapping("/reviewManagement")
     public String reviewManagement(){
         log.info("***************************");
-        log.info("/reviewManagement");
+        log.info("AdminController : reviewManagement");
         log.info("***************************");
-        return "/admin/report-management";
+        return "/admin/review-management";
     }
+
+
 }
