@@ -25,7 +25,7 @@
                     <div>
                         <div class="topmenu">
                             <div class="">
-                                <a href="">이전 버튼</a>
+                                <a href="javascript:uploadClose()">닫기</a>
                             </div>
                             <div>새 게시물</div>
                             <div class="">
@@ -66,7 +66,7 @@
                             <div class="imgView">
                             </div>
 
-                            <div class="projectData">
+                            <div class="projectData on">
                                 <div>
                                     <div class="miniPoto"><img src="../../static/images/project/domImg/indi01.webp"
                                             alt=""></div>
@@ -105,12 +105,14 @@
                                     </div>
                                 </div>
                                 <label class="togle">첼린지소개</label>
-                                <div>
+                                <div class="textareaBox">
                                     <textarea name="" placeholder="소개 입력..."></textarea>
+                                    <p><span></span>/ 400</p>
                                 </div>
                                 <label class="togle">인증방법</label>
-                                <div>
+                                <div class="textareaBox">
                                     <textarea name="" placeholder="인증 입력..."></textarea>
+                                    <p><span></span>/ 400</p>
                                 </div>
                                 <label class="togle">시작일</label>
                                 <div>
@@ -251,6 +253,27 @@
             $(this).next().css({ "display": "none" });
         } else {
             $(this).next().css({ "display": "block" });
+        }
+    });
+
+    function uploadClose() {
+        if (confirm("게시물을 삭제하시겠어요?\n지금 나가면 수정 내용이 저장되지 않습니다. ") == true) {    //확인
+            location.reload();
+        } else {   //취소
+            return false;
+        }
+    }
+
+    //인증글 작성 textarea 글 길이 검사
+    $('.textareaBox > textarea').on('input', function () {
+        let cnt = $(this).val().length;
+        if (cnt > 400) {
+            $('.certificationContentButtons > div > div:first-child').css("display", "block");
+            $(this).val($(this).val().substring(0, 400));
+            $('.textareaBox > p > span').text(400);
+        } else {
+            $('.certificationContentButtons > div > div:first-child').css("display", "none");
+            $('.textareaBox > p > span').text(cnt);
         }
     });
 

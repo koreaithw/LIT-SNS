@@ -95,9 +95,15 @@ div.imgView {
     padding: 10px 0;
     display: none;
 }
-.projectData > div{
+/* ===================================== */
+.formData > .projectData.on {
+    display: block;
+}
+/* ===================================== */
+.projectData > div,
+.projectData > label{
     margin: 10px 0;
-    padding: 5px 10px;
+    padding: 5px 17px;
 }
 .projectData > div:nth-child(1){
     display: flex;
@@ -146,4 +152,9 @@ label.togle + div>textarea{
     border-style: none;
     outline: none;
     min-height: 100px;
+}
+
+.textareaBox > p{
+    font-size: 10px;
+    color: #e5e5e5;
 }
