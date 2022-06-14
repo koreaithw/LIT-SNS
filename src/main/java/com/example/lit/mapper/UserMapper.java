@@ -11,16 +11,17 @@ public interface UserMapper {
     //로그인
     public boolean login(String id, String pw);
 
-    //로그아웃
-
     //회원탈퇴
-    public void withdraw(UserVO userVO);
+    public void delete(UserVO userVO);
 
     //내 정보 가져오기
+    public UserVO getUser(Long userNum);
 
     //내 정보 수정
+    public void update(UserVO userVO);
 
     //비밀번호 변경
+
 
     //프로필 사진 수정
 
