@@ -1,15 +1,13 @@
 
-const pw = $('#_withdrawlPassword');
-const pwBtn = $('#btnNoOff');
 
-pw.keyup(function(){
-    
-    if(pw.val() == "1111"){
-        pwBtn.attr('class', 'buttonOn');
+
+$("._withdrawlPassword").keyup(function(){
+    if($("._withdrawlPassword").val()){
+        $("._withdrawl_button").attr("disabled",false)
     }
 
-    if(!pw.val()){
-        pwBtn.attr('class', 'buttonStyle');
+    if(!$("._withdrawlPassword").val()){
+        $("._withdrawl_button").attr("disabled",true)
     }
 
 })
