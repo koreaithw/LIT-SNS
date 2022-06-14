@@ -36,12 +36,4 @@ public class ProjectController {
         log.info("******************************");
         return "/project/projectWrite";
     }
-
-    @GetMapping("/projectWrite_1")
-    public String projectWrite_1(){
-        log.info("******************************");
-        log.info("ProjectController : projectWrite_1");
-        log.info("******************************");
-        return "/project/projectWrite_1";
-    }
 }

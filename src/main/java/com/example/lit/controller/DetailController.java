@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DetailController {
     //의존성 주입 객체 생성하기
 
-    @RequestMapping("projectDetail")
+    @RequestMapping("/projectDetail")
     public String projectDetail(){
         log.info("******************************");
         log.info("DetailController : projectDetail");
