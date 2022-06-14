@@ -155,6 +155,6 @@ label.togle + div>textarea{
 }
 
 .textareaBox > p{
-    font-size: 10px;
-    color: #e5e5e5;
+    font-size: .8rem;
+    color: #cccccc;
 }
