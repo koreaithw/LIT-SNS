@@ -1,6 +1,6 @@
-$(document).ready(function () {
-  $(".side-bar").load("../../templates/admin/side-bar.html");
-});
+// $(document).ready(function () {
+//   $(".side-bar").load("/templates/admin/side-bar.html");
+// });
 
 window.onload = function () {
   sideAni(); //사이드바 애니메이션 side-bar.js
