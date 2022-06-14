@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class ReviewFileVO {
-    private String reviewFileUuid;
-    private String reviewFileUploadPath;
-    private String reviewFileName;
-    private String reviewFileImage;
+    private String uuid;
+    private String uploadPath;
+    private String name;
+    private String image;
     private Long reviewNumber;
     
 }

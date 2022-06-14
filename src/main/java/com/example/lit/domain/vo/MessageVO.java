@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class MessageVO {
     private Long sendUserNumber;
     private Long receiveUserNumber;
-    private String messageRoom;
-    private String messageContent;
+    private String room;
+    private String content;
     private String messageDate;
 }

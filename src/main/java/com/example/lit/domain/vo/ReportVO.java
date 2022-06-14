@@ -9,5 +9,5 @@ public class ReportVO {
     private Long reportNumber;
     private Long userNumber;
     private Long reviewNumber;
-    private String reportReason;
+    private String reason;
 }
