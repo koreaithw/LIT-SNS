@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $(".side-bar").load("/src/main/resources/templates/admin/side-bar.html");
+  $(".side-bar").load("../../templates/admin/side-bar.html");
 });
 
 window.onload = function () {
