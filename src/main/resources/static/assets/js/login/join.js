@@ -81,6 +81,7 @@ onPwBtn.on('click', function () {
 });
 
 function checkPw() {
+   // 비밀번호를 보이기로 할시 한국어 쓰기가 가능하기 떄문에 유효성 검사로 막아줌
    let hangleCheck = /[ㄱ-ㅎ | ㅏ-ㅣ |가-힣]/
    if(!hangleCheck.test(passwordValue.val()) && passwordValue.val().length >= 6){
       $('#pwCk').css("display", "grid");
