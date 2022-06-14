@@ -6,11 +6,11 @@ $(function(){
 
         // 비밀번호 변경 버튼 활성화/비활성화
         if($('#cppCheckPassword').val() && $('#cppNewPassword').val() && $('#cppOldPassword').val()){
-            $('#subBtn').attr("disabled", false);
+            $('#subBtn').attr("class", "buttonOn");
         }
-
+        
         if(!$('#cppCheckPassword').val() && $('#cppNewPassword').val() && $('#cppOldPassword').val()){
-            $('#subBtn').attr("disabled", true);
+            $('#subBtn').attr("class", "buttonStyle");
         }
 
     });
@@ -19,10 +19,10 @@ $(function(){
     $('#cppCheckPassword').keyup(function(){
         if($('#cppNewPassword').val() != $('#cppCheckPassword').val()){
             $ ('._checkArea3').html('비밀번호가 일치하지 않습니다.');
-            $('._checkArea3').attr('color', 'red');
+            $('._checkArea3').css('color', 'red');
         } else{
             $('._checkArea3').html('비밀번호가 일치합니다.');
-            $('._checkArea3').attr('color', 'black');
+            $('._checkArea3').css('color', 'black');
         }
     });
 
@@ -34,10 +34,10 @@ $(function(){
             
             if($('#cppNewPassword').val() != $('#cppCheckPassword').val()){
                 $('._checkArea3').html('비밀번호가 일치하지 않습니다.');
-                $('._checkArea3').attr('color', 'red');
+                $('._checkArea3').css('color', 'red');
             } else{
                 $('._checkArea3').html('비밀번호가 일치합니다.');
-                $('._checkArea3').attr('color', 'black');
+                $('._checkArea3').css('color', 'black');
             }
             
         }
