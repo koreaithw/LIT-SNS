@@ -8,5 +8,5 @@ import org.springframework.stereotype.Component;
 public class AchievementVO {
     private Long achievementNumber; 
     private Long userNumber;
-    private String achievementMedal;
+    private String medal;
 }

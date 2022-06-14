@@ -8,14 +8,13 @@ import org.springframework.stereotype.Component;
 @Data
 public class ProjectVO {
     private Long projectNumber;
-    private String projectTitle;
-    private String projectCategory;
-    private String projectContent;
-    private String projectAuthentication;
-    private String projectStartDate;
-    private String projectEndDate;
-    private String projectPhoto;
-    private Long projectStatus;
+    private String title;
+    private String category;
+    private String content;
+    private String authentication;
+    private String startDate;
+    private String endDate;
+    private Long status;
 
     private ProjectFileVO projectFileList;
 

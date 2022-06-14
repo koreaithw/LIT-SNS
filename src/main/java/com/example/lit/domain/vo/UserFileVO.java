@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class UserFileVO {
-    private String userFileUuid;
-    private String userFileUploadPath;
-    private String userFileName;
-    private String userFileImage;
+    private String uuid;
+    private String uploadPath;
+    private String name;
+    private String image;
     private Long userNumber;
 }

@@ -9,7 +9,7 @@ public class ReplyVO {
     private Long replyNumber;
     private Long reviewNumber;
     private Long userNumber;
-    private String replyContent;
-    private String replyRegisterDate;
+    private String content;
+    private String registerDate;
 
 }

@@ -11,8 +11,8 @@ public class ReviewVO {
     private Long reviewNumber;
     private Long userNumber;
     private Long projectNumber;
-    private String reviewContent;
-    private String reviewRegisterDate;
+    private String content;
+    private String registerDate;
 
     private List<ReviewFileVO> reviewFileList;
 }

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 public class ParticipationVO {
     private Long projectNumber;
     private Long userNumber;
-    private Long participationStatus;
-    private String participationRegisterDate;
+    private Long status;
+    private String registerDate;
 }
