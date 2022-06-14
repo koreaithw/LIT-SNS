@@ -1,5 +1,5 @@
 .main {
-    background-color: #fafafa;
+    background-color: #EFEFEF;
     -webkit-box-flex: 1;
     flex-grow: 1;
     -webkit-box-ordinal-group: 5;
@@ -38,7 +38,7 @@
     -webkit-box-align: center;
     align-items: center;
     background-color: #fff;
-    border: 1px solid #dbdbdb;
+    border: 1px solid rgb(219, 219, 219);
     border-radius: 1px;
     margin: 0 0 10px;
     padding: 10px 0;
@@ -191,15 +191,13 @@
 
 .jonbuttoncolor {
     border-radius: 4px;
-    opacity: .3;
-    background-color: #de00f6;
+    background-color: rgba(255, 69, 67, 0.3);
     pointer-events: none;
 }
 
 .formEvent {
     border-radius: 4px;
-    opacity: 1;
-    background-color: #f069fe;
+    background-color: rgb(250, 100, 98);
 }
 
 .underKakao {

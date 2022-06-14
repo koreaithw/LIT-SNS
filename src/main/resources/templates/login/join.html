@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="/src/main/resources/static/assets/css/login/join.css">
 </head>
 
-<body background="background-color: #fafafa;">
-
+<body style="background-color: #efefef;">
     <div style="width: 100%;height: 100%;">
         <div style="width: 100%;height: 100%;">
             <main class="main" role="main">
@@ -24,8 +23,7 @@
                                 </div>
                             </div>
                             <div class="mid">
-                                <form class="joinFor" method="post" onclick="join"
-                                    action="/src/main/resources/templates/login/join.html">
+                                <form class="joinFor" method="post" id="joinForm">
                                     <h2 class="joinForText">친구들의 사진과 동영상을 보려면 가입하세요.</h2>
                                     <div class="kakaoMargin">
                                         <button class="kakaoButton y3zKF L3NKy" type="button">
@@ -41,6 +39,9 @@
                                             <label class="labelText">
                                                 <input placeholder="이메일 주소를 입력하세요" name="id" type="text"
                                                     class="inputstyle" id="email"></label>
+                                            <div class="checkIconMargin">
+                                                <span class="iconCheck" id="emailCk"></span>
+                                            </div>
                                             <div class="divFornot"></div>
                                         </div>
                                     </div>
@@ -49,6 +50,9 @@
                                             <label class="labelText">
                                                 <input placeholder="성명" name="fullName" type="text" class="inputstyle"
                                                     id="userName"></label>
+                                            <div class="checkIconMargin">
+                                                <span class="iconCheck" id="uNameCk"></span>
+                                            </div>
                                             <div class="divFornot"></div>
                                         </div>
                                     </div>
@@ -57,6 +61,9 @@
                                             <label class="labelText">
                                                 <input placeholder="사용자 이름" maxlength="30" name="userName" type="text"
                                                     class="inputstyle" id="nickName"></label>
+                                            <div class="checkIconMargin">
+                                                <span class="iconCheck" id="nNameCk"></span>
+                                            </div>
                                             <div class="divFornot"></div>
                                         </div>
                                     </div>
@@ -64,6 +71,12 @@
                                         <div class="lainDiv"><label class="labelText">
                                                 <input placeholder="비밀번호" name="password" type="password"
                                                     class="inputstyle" id="pwVal"></label>
+                                            <div class="checkIconMargin">
+                                                <span class="iconCheck" id="pwCk"></span>
+                                                <div class="inInput">
+                                                    <button class="onBtn" type="button"></button>
+                                                </div>
+                                            </div>
                                             <div class="divFornot"></div>
                                         </div>
                                     </div>
@@ -87,22 +100,7 @@
         </div>
     </div>
 </body>
-<!-- <script src="/src/main/resources/static/assets/js/login/join.js"></script> -->
-<script>
-    const $loginBtn = document.querySelector('#login_btn')
-    const $idValue = document.querySelector('#email')
-    const $passwordValue = document.querySelector('#pwVal')
-    const $userName = document.querySelector('#userName')
-    const $nickName = document.querySelector('#nickName')
-
-    const loginBtn = function () {
-        if ($idValue.value.indexOf('@') > 0 && $passwordValue.value.length >= 6 && $userName.value.length >= 3 && $nickName.value.length >= 1) {
-            $loginBtn.className = 'buttonforjoin formEvent';
-        } else {
-            $loginBtn.className = 'buttonforjoin jonbuttoncolor';
-        }
-    }
-    $passwordValue.addEventListener('keyup', loginBtn);
-</script>
+<script src="/src/main/resources/static/assets/js/jquery-3.6.0.min.js"></script>
+<script src="/src/main/resources/static/assets/js/login/join.js"></script>
 
 </html>
