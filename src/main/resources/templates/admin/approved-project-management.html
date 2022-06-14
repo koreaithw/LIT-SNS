@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -10,11 +10,11 @@
     <title>승인된 프로젝트 관리</title>
     <link
       rel="stylesheet"
-      href="/src/main/resources/static/assets/css/admin/approved-project-management.css"
+      href="/assets/css/admin/approved-project-management.css"
     />
     <link
       rel="stylesheet"
-      href="/src/main/resources/static/assets/css/admin/side-bar.css"
+      href="/assets/css/admin/side-bar.css"
     />
     <!-- date picker css -->
     <link
@@ -26,7 +26,7 @@
     />
     <link
       rel="stylesheet"
-      href="/src/main/resources/static/assets/css/admin/date-picker.css"
+      href="/static/assets/css/admin/date-picker.css"
     />
     <!-- date picker css -->
   </head>
@@ -36,7 +36,7 @@
       <div class="wrapper">
         <div class="inner">
           <section class="sec1 flex">
-            <div class="side-bar"></div>
+            <div th:insert="~{/admin/side-bar :: side-bar}" class="side-bar"></div>
             <div class="content">
               <div class="inner__content">
                 <div>
@@ -105,7 +105,7 @@
                               </div>
                               <div class="calendar-icon-wrap">
                                 <img
-                                  src="/src/main/resources/static/images/admin/calendar.png"
+                                  src="/images/admin/calendar.png"
                                 />
                               </div>
                               <div><span>~</span></div>
@@ -119,7 +119,7 @@
                               </div>
                               <div class="calendar-icon-wrap">
                                 <img
-                                  src="/src/main/resources/static/images/admin/calendar.png"
+                                  src="/images/admin/calendar.png"
                                 />
                               </div>
                             </div>
@@ -248,7 +248,7 @@
                         <div class="button-box">
                           <button type="button" class="delete-btn">
                             <img
-                              src="/src/main/resources/static/images/admin/x-icon.png"
+                              src="/images/admin/x-icon.png"
                               alt=""
                             />
                             삭제
@@ -325,9 +325,9 @@
     </div>
   </body>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="/src/main/resources/static/assets/js/admin/approved-project-management.js"></script>
-  <script src="/src/main/resources/static/assets/js/admin/side-bar.js"></script>
-  <script src="/src/main/resources/static/assets/js/admin/admin-common.js"></script>
+  <script src="/assets/js/admin/approved-project-management.js"></script>
+  <script src="/assets/js/admin/side-bar.js"></script>
+  <script src="/assets/js/admin/admin-common.js"></script>
 
   <!-- date picker script -->
   <script
