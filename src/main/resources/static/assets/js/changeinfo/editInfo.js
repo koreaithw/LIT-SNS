@@ -15,7 +15,7 @@ function changeProfileModalClose(){
 
 // 현재 사진 삭제 버튼 클릭시
 function changeProfileDelete(){
-    document.getElementById('proFileImg').src = "/src/main/resources/static/images/changeinfo/basicProfile.png";
+    document.getElementById('proFileImg').src = "../../static/images/changeinfo/basicProfile.png";
     changeProfile.style.display='none';
     alert("프로필 사진이 삭제되었습니다.");
 }
