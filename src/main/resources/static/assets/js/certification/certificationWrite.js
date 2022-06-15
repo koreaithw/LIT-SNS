@@ -87,24 +87,10 @@ function certificationWriteModalHide() {
     });
 
 
-<<<<<<< HEAD
-    $detailProjectContent.css("width", "0");
-    $certificationWriteModal.css("width", "35%");
-    $whiteBackground.css("display", "block");
-    $certificationNextButton.css("display", "none");
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
-    $certificationHeaderLabel.text('사진 업로드');
-    $certificationContent.css("display", "none");
-    $detailProjectContent.css("display", "none");
-    $certificationNextNextButton.css("display", "none");
-    $certificationBackButton.css("display", "none");
-    $certificationBackBackButton.css("display", "none");
-    $certificationCompleteButton.css("display", "none");
 
 }
 
 
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 //프로젝트 선택 시 이미지 위에 마우스오버 효과
 $.each($detailProjects, function () {
     $(this).mouseover(function () {
@@ -133,11 +119,6 @@ function twinkle() {
     });
 }
 
-<<<<<<< HEAD
-//사진 업로드 후 다음 버튼 누를때 모달창 크기 늘이기
-$certificationNextButton.on("click", function () {
-    twinkle();
-=======
 //사진 미리보기 중 뒤로가기 눌렀을 때
 //미리보기, 파일 비워주고 화면전환
 $certificationFirstButton.on("click", function () {
@@ -169,17 +150,10 @@ $certificationFirstButton.on("click", function () {
 $certificationNextButton.on("click", function () {
     twinkle();
 
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     $certificationWriteModal.css("width", "54%");
     $detailProjectContent.css("width", "74%");
     $detailProjectContent.css("display", "block");
     $whiteBackground.css("display", "none");
-<<<<<<< HEAD
-    $certificationHeaderLabel.text('프로젝트 선택');
-    $certificationNextButton.css("display", "none");
-    $certificationNextNextButton.css("display", "block");
-    $certificationBackButton.css("display", "block");
-=======
     $certificationHeaderLabel.text('챌린지 선택');
     $certificationNextButton.css("display", "none");
     $certificationNextNextButton.css("display", "block");
@@ -189,24 +163,15 @@ $certificationNextButton.on("click", function () {
     $previewButton.find('button').css("backgroundColor", '#373737');
     $('.btnIcon').attr("fill", "white");
     $previewButton.val('0');
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 });
 
 //다음 버튼 두 번 눌렀을 때
 $certificationNextNextButton.on("click", function () {
-<<<<<<< HEAD
-    if(!$detailProjects.hasClass("on")){
-        $projectAlert.css("display","block");
-        $projectAlert.animate({"opacity": 1}, 400, function(){
-            $projectAlert.animate({"opacity" : 0}, 600, function(){
-                $projectAlert.css('display','none');
-=======
     if (!$detailProjects.hasClass("on")) {
         $projectAlert.css("display", "block");
         $projectAlert.animate({ "opacity": 1 }, 400, function () {
             $projectAlert.animate({ "opacity": 0 }, 600, function () {
                 $projectAlert.css('display', 'none');
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
             })
         })
         return;
