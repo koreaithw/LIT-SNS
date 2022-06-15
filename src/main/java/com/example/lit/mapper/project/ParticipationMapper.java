@@ -1,7 +1,6 @@
 package com.example.lit.mapper.project;
 
-import com.example.lit.domain.vo.ParticipationVO;
-import com.example.lit.domain.vo.ProjectVO;
+import com.example.lit.domain.vo.project.ParticipationVO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

@@ -1,7 +1,6 @@
 package com.example.lit.mapper.user;
 
-import com.example.lit.domain.vo.FollowVO;
-import com.example.lit.domain.vo.LikeVO;
+import com.example.lit.domain.vo.user.FollowVO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
