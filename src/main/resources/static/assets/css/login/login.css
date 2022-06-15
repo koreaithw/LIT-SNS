@@ -277,7 +277,7 @@
     background-position: -414px -259px;
     height: 16px;
     width: 16px;
-    background-image: url(/src/main/resources/static/images/kakaoIcon.png);
+    background-image: url(/images/kakaoIcon.png);
 }
 
 .kakaoText {

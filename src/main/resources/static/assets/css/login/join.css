@@ -132,7 +132,7 @@
 }
 
 .kakaoButtomText {
-    background-image: url(/src/main/resources/static/images/admin/kakaoIcon.png);
+    background-image: url(/images/admin/kakaoIcon.png);
     background-repeat: no-repeat;
     height: 16px;
     width: 16px;
@@ -400,14 +400,14 @@
     margin-left: 8px;
     height: 22px;
     width: 22px;
-    background-image: url(/src/main/resources/static/images/login/checkIcon.png);
+    background-image: url(/images/login/checkIcon.png);
 }
 
 .iconX {
     margin-left: 8px;
     height: 22px;
     width: 22px;
-    background-image: url(/src/main/resources/static/images/login/xIcon.png);
+    background-image: url(/images/login/xIcon.png);
 }
 
 div{
