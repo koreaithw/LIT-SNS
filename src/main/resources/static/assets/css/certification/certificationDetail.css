@@ -2,15 +2,9 @@
 body{
     margin: 0;
     padding: 0;
-<<<<<<< HEAD:src/main/resources/static/assets/css/detail/projectDetail.css
-<<<<<<< HEAD
-=======
     background-image: url('monkey.jpg');
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     background-repeat: no-repeat;
     background-size : cover;
-=======
->>>>>>> 2348eb4a9caa8ead31fa5886cb7dc004c76f3a68:src/main/resources/static/assets/css/certification/certificationDetail.css
     height : 100vh;
     width : 100%;
 }
@@ -536,12 +530,9 @@ body{
     border-radius: 10px;
     padding: 5px;
     box-shadow: 3px 3px 3px rgba(219,219,219,0.7);
-<<<<<<< HEAD
-    border-color: rgb(219,219,219)
-=======
     border-color: rgb(219,219,219);
     z-index: 2;
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+
 }
 
 .detailContentProfileModalIntro{
@@ -565,9 +556,7 @@ body{
     position: absolute;
     top: 0;
     left: 0;
-<<<<<<< HEAD
     cursor: pointer;
-=======
 }
 
 .reportCloseArea{
@@ -576,5 +565,4 @@ body{
     position: absolute;
     top: 0;
     left: 0;
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 }
