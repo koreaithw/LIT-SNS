@@ -53,7 +53,7 @@ $('#ModalFileInput').on("change", function(e){
 
 function checkNick(){
     if(nickNameCk.val() == 'aa'){
-        $ ('._checkArea1').html('사용이 불가능한 이름입니다.');
+        $ ('._checkArea1').html('사용이 불가능한 사용자 이름입니다.');
         $('._checkArea1').css('color', 'red');
         return false;
     } else if(nickNameCk.val().length <= 0){
@@ -77,7 +77,7 @@ function buttonOn(){
 }
 
 $('#subBtn').on("click", function(){
-    alert("프로필이 수정 되었습니다.")
+    alert("프로필이 저장되었습니다.")
 });
 
 userName.keyup(buttonOn);

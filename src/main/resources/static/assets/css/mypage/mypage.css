@@ -527,7 +527,7 @@ ul {
   justify-content: center;
   position: relative;
   padding: 15px 0px;
-  border-bottom: 1px solidrgb(219, 219, 219);
+  border-bottom: 1px solid rgb(219, 219, 219);
   flex-direction: row;
   width: 100%;
   text-align: center;
@@ -926,6 +926,11 @@ ul {
 .btn__x > img {
   width: 18px;
 }
+
+.fbtn__x > img {
+  width: 15px;
+}
+
 .medal-selected_info {
   margin-top: 10px;
 }
