@@ -22,25 +22,25 @@ public class ProjectController {
     }
 
     @GetMapping("/info")
-    public String projectInfo(){
+    public String info(){
         log.info("******************************");
-        log.info("ProjectController : projectInfo");
+        log.info("ProjectController : info");
         log.info("******************************");
         return "/project/projectInfo";
     }
 
     @GetMapping("/write")
-    public String projectWrite(){
+    public String write(){
         log.info("******************************");
-        log.info("ProjectController : projectWrite");
+        log.info("ProjectController : write");
         log.info("******************************");
         return "/project/projectWrite";
     }
 
     @RequestMapping("/detail")
-    public String projectDetail(){
+    public String detail(){
         log.info("******************************");
-        log.info("DetailController : projectDetail");
+        log.info("DetailController : detail");
         log.info("******************************");
         return "/detail/projectDetail";
     }
