@@ -482,14 +482,21 @@ body{
 .innerImagePageButtons{
     text-align:center;
     position:relative;
+    bottom: 12.5%;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .innerImagePageButtons > div {
     width:15px;
     height:15px;
+    gap: 5px;
     background-color:rgba(255,255,255,.5);
     border-radius:50%;
-    display:inline-block;
     cursor:pointer;
     border: 1px solid rgb(219,219,219);
 }
