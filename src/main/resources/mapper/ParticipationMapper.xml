@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.project.ParticipationMapper">
+    <insert id="insert">
+        INSERT INTO TBL_PARTICIPATION
+        (PROJECT_NUMBER, USER_NUMBER)
+        VALUES(#{projectNumber}, #{userNumber})
+    </insert>
 
+    <update id="update">
+        UPDATE TBL_PARTICIPATION
+        SET STATUS = #{result}
+        WHERE PROJECT_NUMBER = #{projectNumber} AND USER_NUMBER = #{userNumber}
+    </update>
 </mapper>

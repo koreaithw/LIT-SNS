@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface AchievementMapper {
     //메달 추가
-    public void insert(FollowVO followVO);
+    public void insert(AchievementVO achievementVO);
     //메달 전체 해금 유무 (?)
     public List<AchievementVO> getList(Long userNumber);
     //메달 하나 보기

@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.review.ReviewMapper">
+<!--    동적 쿼리 쓸것-->
+    <select id="getList" resultType="reviewVO">
+
+    </select>
+
+    <insert id="insert">
+        <selectKey keyProperty="reviewNumber" resultType="long" order="BEFORE">
+            SELECT SEQ_REVIEW.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_REVIEW
+        (REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT)
+        VALUES(#{reviewNumber}, #{userNumber}, #{projectNumber}, #{content})
+    </insert>
+
+    <select id="get" resultType="reviewVO">
+        SELECT US.NICKNAME , US.CONTENT ,RV.CONTENT ,RV.CONTENT
+        FROM TBL_REVIEW RV, TBL_USER US
+        WHERE RV.USER_NUMBER = US.USER_NUMBER
+        AND RV.REVIEW_NUMBER = #{reviewNumber};
+    </select>
+
+    <delete id="delete">
+        DELETE FROM TBL_REVIEW WHERE REVIEW_NUMBER = #{reviewNumber}
+    </delete>
+
+    <update id="update">
+        UPDATE TBL_REVIEW
+        SET CONTENT = #{content}, REGISTER_DATE = SYSDATE
+        WHERE REVIEW_NUMBER = #{reviewNumber}
+    </update>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(REVIEW_NUMBER) FROM TBL_REVIEW
+    </select>
+
+    <select id="resultCount" resultType="_int">
+        SELECT COUNT(RV.REVIEW_NUMBER)
+        FROM TBL_REVIEW RV, TBL_USER US, TBL_PROJECT PJ
+        WHERE RV.USER_NUMBER = US.USER_NUMBER
+        AND RV.PROJECT_NUMBER = PJ.PROJECT_NUMBER ;
+    </select>
 
 </mapper>

@@ -5,10 +5,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface FollowMapper {
-    // 팔로우
+    // 팔로잉
     public void insert(FollowVO followVO);
-    // 팔로우 취소
+    // 팔로잉 취소
     public void delete(FollowVO followVO);
-    // 팔로우 카운트
-    public int count(FollowVO followVO);
+    // 팔로잉 카운트 (내가 한 사람)
+    public int followingCount(FollowVO followVO);
+    // 팔로워 카운트 (다른 사람)
+    public int followerCount(FollowVO followVO);
 }
