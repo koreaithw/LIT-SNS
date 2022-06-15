@@ -204,3 +204,11 @@ INSERT INTO TBL_REPORT
 (REPORT_NUMBER, USER_NUMBER, REVIEW_NUMBER, REASON)
 VALUES(0, 0, 0, '');
 
+SELECT US.NICKNAME, RP.CONTENT , RP.RGISTER_DATE FROM
+     (
+       SELECT /*+ INDEX_DESC(TBL_REPLY SYS_C007522) */ ROWNUM RN, US.NICKNAME, RP.CONTENT , RP.RGISTER_DATE 
+                FROM TBL_REPLY RP, TBL_USER US, TBL_REVIEW RV
+                WHERE REVIEW_NUMBER = #{reviewNumber} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+     )
+WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}
+
