@@ -87,7 +87,6 @@ function certificationWriteModalHide() {
     });
 
 
-
 }
 
 
@@ -187,12 +186,8 @@ $certificationNextNextButton.on("click", function () {
     $certificationBackBackButton.css("display", "block");
 })
 
-<<<<<<< HEAD
-//이전 화살표 누를 때 모달창 크기 줄이기, 버튼 없애기
-=======
 //프로젝트 선택에서 이전 화살표 누를 때
 //모달창 크기 줄이기, 버튼 변경
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 $certificationBackButton.on("click", function () {
     twinkle();
 
@@ -203,10 +198,7 @@ $certificationBackButton.on("click", function () {
     $certificationNextButton.css("display", "block");
     $certificationNextNextButton.css("display", "none");
     $certificationBackButton.css("display", "none");
-<<<<<<< HEAD
-=======
     $certificationFirstButton.css("display", "block");
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 });
 
 //인증글 작성에서 이전 화살표 누를 시 모달창 안 내용 변경
