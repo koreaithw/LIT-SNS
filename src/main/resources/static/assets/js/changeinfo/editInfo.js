@@ -3,7 +3,6 @@ let changeProfile = document.querySelector('#changeProfile');
 let proFileImg = document.querySelector('#proFileImg');
 const nickNameCk = $('#pepUsername');
 const userName = $('#pepName');
-const phonNum = $('#phoneNum');
 const userContent = $('#pepBio');
 const eamil = $('#email');
 
@@ -69,11 +68,6 @@ function checkNick(){
 function buttonOn(){
     
     var chNick = checkNick();
-    console.log(userName.val());
-    console.log(userContent.val());
-    console.log(phonNum.val());
-    console.log(nickNameCk.val());
-    console.log(eamil.val());
     
     if(chNick && userName.val().length > 0 && nickNameCk.val().length > 0){
         $('#subBtn').attr("class", "submitBtnOn");
@@ -90,4 +84,3 @@ userName.keyup(buttonOn);
 nickNameCk.keyup(buttonOn);
 userContent.keyup(buttonOn);
 eamil.keyup(buttonOn);
-phonNum.keyup(buttonOn);

@@ -529,7 +529,7 @@
     flex-direction: row;
     -webkit-box-pack: start;
     justify-content: flex-start;
-    margin-bottom: 16px;
+    margin-bottom: -12px;
 }
 
 .infoDiv6_2{
@@ -712,7 +712,7 @@
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
-    margin-top: 16px;
+    margin-top: 12px;
     margin-left: 70px;
 }
 

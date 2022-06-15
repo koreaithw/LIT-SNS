@@ -61,8 +61,8 @@ window.onload =function () {
 };
 $(document).ready(function(){
 
-    $("#header").load("/src/main/resources/templates/header.html")
-    $("#footer").load("/src/main/resources/templates/footer.html")
+    $("#header").load("/src/resources/templates/header.html");
+    $("#footer").load("/src /resources/templates/footer.html");
 })
 
     // ####################################################
