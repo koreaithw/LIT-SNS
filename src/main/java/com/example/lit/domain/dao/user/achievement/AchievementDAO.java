@@ -18,6 +18,6 @@ public class AchievementDAO {
     //메달 전체 해금 유무 (?)
     public List<AchievementVO> getList(Long userNumber){ return achievementMapper.getList(userNumber); }
     //메달 하나 보기
-    public AchievementVO read(Long userNumber){ return achievementMapper.select(userNumber); }
+    public AchievementVO read(Long userNumber){ return achievementMapper.get(userNumber); }
 
 }
