@@ -100,9 +100,34 @@ $(".a-btn").on("click", function (e) {
 });
 
 //date picker
+// $(function () {
+//   $(".datepicker").datepicker({
+//
+//   });
+// });
+
 $(function () {
-  $(".datepicker").datepicker();
+  let $startDate = $("input[name=start-date]");
+  let $endDate = $("input[name=end-date]");
+
+  $(".datepicker").datepicker({
+    showAnim: "slide",
+    dateFormat:'yy-mm-dd'
+  })
+
+  $endDate.datepicker('option', 'minDate', $startDate.val());
+  $startDate.datepicker("option", "onClose", function (selectedDate){
+    $endDate.datepicker( "option", "minDate", selectedDate );
+  });
+
+  $endDate.datepicker();
+  $endDate.datepicker("option", "minDate", $startDate.val());
+  $endDate.datepicker("option", "onClose", function (selectedDate){
+    $startDate.datepicker( "option", "maxDate", selectedDate );
+  });
+
 });
+
 
 $(".calendar-icon-wrap").on("click", function () {
   $input = $(this).prev("div").find("input");

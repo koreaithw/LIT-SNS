@@ -4,6 +4,11 @@
     flex-grow: 1;
     -webkit-box-ordinal-group: 5;
     order: 4;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50vh;
+    left: 50%;
+    width: 100%;
 }
 
 .underMain{
@@ -229,7 +234,7 @@
 
 .inputstyle {
     font-size: 12px;
-    padding: 14px 0 2px 8px!important;
+    padding: 2px 0 2px 10px!important;
     font-size: 16px;
     background: #fafafa;
     border: 0;
@@ -413,4 +418,16 @@
 div{
     display: flex;
     flex-direction: column;
+}
+
+#passwordOn{
+    position: relative;
+    top: 70%;
+    right: -56%;
+    width: 100px;
+}
+
+#passwordOn > button{
+    width: 100px;
+    text-align: right;
 }
