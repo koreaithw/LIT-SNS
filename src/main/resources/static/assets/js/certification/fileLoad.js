@@ -6,11 +6,17 @@ let $certificationImageInner = $('.certificationImageInner');
 let $certificationImageWrapper = $('.certificationImageWrapper');
 let $innerImagePageButtons = $('.innerImagePageButtons');
 let $previewButton = $('.previewButton');
+let $deleteBackground = $('.deleteBackground');
+let $deleteImageBackground = $('.deleteImageBackground');
 
 let fileType = /(.*?)\.(jpg|jpeg|png)$/;
 
 let uploadFiles = [];
 
+//삭제 모달창 취소버튼
+function deleteModalHide() {
+    $deleteBackground.css("display", "none");
+}
 
 //파일 직접 올릴 때 실행되는 함수
 $('.fileClickInput').on('change', function (e) {
@@ -94,6 +100,7 @@ $fileUploadArea.on("dragenter", function (e) {  //드래그 요소가 들어왔�
     $certificationNextButton.css("display", "block");
 });
 
+//사진 삭제용 미리보기 버튼
 $previewButton.on('click', 'button', function () {
     if ($previewButton.val() != 1) {
         $fileUploadPreview.css("display", "-webkit-box");
@@ -143,17 +150,57 @@ function preview(file, idx) {
 
 // 작은 미리보기 창에서 x버튼 누를 때
 $fileUploadPreview.on("click", ".close", function (e) {
-    let $target = $(e.target);
-    let idx = $target.attr('data-idx');
 
-    console.log(uploadFiles);
-    uploadFiles[idx].upload = 'disable';  //삭제된 항목은 업로드하지 않기 위해 플래그 생성
-    $target.parent().remove();  //프리뷰 삭제
-    $certificationImageInner.children('#' + idx).remove();
-    $certificationImageInner.children().eq(0).addClass("active");
-    $innerImagePageButtons.children('#' + idx).remove();
-    $innerImagePageButtons.children().eq(0).addClass("active");
+    if ($certificationImageInner.children().length == 1) {
+        $deleteImageBackground.css("display", "block");
+
+        $('.deleteImageModalButton').on("click", function () {
+            if ($(this).val() == 'y') {
+                twinkle();
+                $BackButton.css("display", "none");
+                $certificationFirstButton.css("display", "none");
+                $certificationNextButton.css("display", "none");
+                $fileUploadAreaWrapper.css("display", "block");
+                $certificationImageWrapper.css("display", "none");
+                $previewButton.css("display", "none");
+                $('.certificationImageInner').empty();
+                $('.innerImagePageButtons').empty();
+                $fileUploadPreview.empty();
+                $('#fileClickInput').val("");
+                uploadFiles = [];
+                $deleteImageBackground.css("display", "none");
+            } else {
+                $deleteImageBackground.css("display", "none");
+                return;
+            }
+        });
+    } else {
+        let $target = $(e.target);
+        let idx = $target.attr('data-idx');
+
+        uploadFiles[idx].upload = 'disable';  //삭제된 항목은 업로드하지 않기 위해 플래그 생성
+        $target.parent().remove();  //프리뷰 삭제
+        $certificationImageInner.children('#' + idx).remove();
+        $certificationImageInner.children().eq(0).addClass("active");
+        $innerImagePageButtons.children('#' + idx).remove();
+        $innerImagePageButtons.children().eq(0).addClass("active");
+    }
+
 });
+
+
+// 작은 미리보기 창 가로 스크롤
+$(".fileUploadPreview").on('mousewheel', function (e) {
+    var wheelDelta = e.originalEvent.wheelDelta;
+    if (wheelDelta > 0) {
+        console.log("up");
+        $(this).scrollLeft(-wheelDelta + $(this).scrollLeft());
+    } else {
+        console.log("down");
+        $(this).scrollLeft(-wheelDelta + $(this).scrollLeft());
+    }
+});
+
 
 
 // 제출 시에 사용
