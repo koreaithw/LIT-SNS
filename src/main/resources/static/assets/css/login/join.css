@@ -1,5 +1,5 @@
 .main {
-    background-color: #fafafa;
+    background-color: #efefef;
     -webkit-box-flex: 1;
     flex-grow: 1;
     -webkit-box-ordinal-group: 5;
@@ -38,7 +38,7 @@
     -webkit-box-align: center;
     align-items: center;
     background-color: rgba(var(--d87,255,255,255),1);
-    border: 1px solid rgba(var(--b6a,219,219,219),1);
+    border: 1px solid rgb(219, 219, 219);
     border-radius: 1px;
     margin: 0 0 10px;
     padding: 10px 0;
@@ -131,14 +131,8 @@
     position: relative;
 }
 
-@media (min-width: 736px){
-    .cneKx {
-        top: 2px;
-    }
-}
-
 .kakaoButtomText {
-    background-image: url(/src/main/resources/static/images/kakaoIcon.png);
+    background-image: url(/src/main/resources/static/images/admin/kakaoIcon.png);
     background-repeat: no-repeat;
     height: 16px;
     width: 16px;
@@ -211,6 +205,9 @@
     min-width: 0;
     padding: 0;
     position: relative;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
 }
 
 .spanText{
@@ -231,17 +228,20 @@
 }
 
 .inputstyle {
+    font-size: 12px;
+    padding: 14px 0 2px 8px!important;
     font-size: 16px;
     background: #fafafa;
     border: 0;
     -webkit-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
     flex: 1 0 auto;
     margin: 0;
     outline: 0;
     overflow: hidden;
     padding: 9px 0 7px 8px;
     text-overflow: ellipsis;
-    -webkit-appearance: none;
 }
 
 .divFornot {
@@ -302,11 +302,15 @@
 }
 .jonbuttoncolor {
     border-radius: 4px;
-    opacity: 1;
-    opacity: .3;
-    background-color: #de00f6;
+    background-color: rgba(255, 69, 67, 0.3);
     pointer-events: none;
 }
+
+.formEvent {
+    border-radius: 4px;
+    background-color: rgb(250, 100, 98);
+}
+
 
 .forLogin {
     -webkit-box-align: center;
@@ -323,6 +327,87 @@
     font-size: 14px;
     margin: 15px;
     text-align: center;
+}
+
+.checkIconMargin {
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.inInput {
+    margin-left: 8px;
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    align-content: stretch;
+    display: flex;
+}
+
+/*inline-block*/
+.onBtn {
+    display: none;
+    padding: 0;
+    position: relative;
+    color: #262626;
+    appearance: none;
+    background: 0 0;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: 550;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: inherit;
+    user-select: none;
+    width: auto;
+}
+
+/*inline-bloc*/
+.hiddenBtn {
+    display: none;
+    padding: 0;
+    position: relative;
+    color: #262626;
+    appearance: none;
+    background: 0 0;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: 550;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: inherit;
+    user-select: none;
+    width: auto;
+}
+
+
+.iconCheck {
+    display: none;
+    margin-left: 8px;
+    height: 22px;
+    width: 22px;
+    background-image: url(/src/main/resources/static/images/login/checkIcon.png);
+}
+
+.iconX {
+    margin-left: 8px;
+    height: 22px;
+    width: 22px;
+    background-image: url(/src/main/resources/static/images/login/xIcon.png);
 }
 
 div{

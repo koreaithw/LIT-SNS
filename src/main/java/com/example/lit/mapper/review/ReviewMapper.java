@@ -1,7 +1,7 @@
 package com.example.lit.mapper.review;
 
 import com.example.lit.domain.vo.Criteria;
-import com.example.lit.domain.vo.ReviewVO;
+import com.example.lit.domain.vo.review.ReviewVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -12,7 +12,7 @@
 
 </head>
 
-<body>
+<body style="background-color: rgba(250,250,250);">
 <main class="mypageMain">
     <div class="mainInner">
         <header class="mypageHeader">
@@ -33,7 +33,7 @@
                     <!-- <img class="medalImg" src="/src/main/resources/static/images/mypage/medal.png" onclick="medalModal()" id="medalImg"> -->
                     <img class="medalImg" src="/images/mypage/medal.png" id="medalImg">
                     <div class="editProfile">
-                        <div class="editProfileInner"><a class="profileA">프로필 편집</a></div>
+                        <div class="editProfileInner"><a class="profileA" >프로필 편집</a></div>
                     </div>
                 </div>
                 <ul class="mypageUl">
@@ -61,16 +61,16 @@
             </section>
         </header>
         <div class="litChange">
-            <div style="display:flex">
-                <a class="lits1">
-                    <div><img class="litSvg" src="/images/mypage/menu2.png">
+            <div>
+                <a class="lits1On" id="lits1">
+                    <div><img class="litSvg" id="lit1Img" src="/images/mypage/menu.png">
                         <span class="litSpan">Lit up</span>
                     </div>
                 </a>
             </div>
-            <div style="display:flex">
-                <a class="lits2">
-                    <div><img class="litSvg" src="/images/mypage/fire.png">
+            <div>
+                <a class="lits2Off" id="lits2">
+                    <div><img class="litSvg" id="lit2Img" src="/images/mypage/fire.png">
                         <span class="litSpan">Lits</span>
                     </div>
                 </a>

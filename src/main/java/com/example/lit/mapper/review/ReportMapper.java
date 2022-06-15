@@ -1,6 +1,6 @@
 package com.example.lit.mapper.review;
 
-import com.example.lit.domain.vo.ReportVO;
+import com.example.lit.domain.vo.review.ReportVO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
