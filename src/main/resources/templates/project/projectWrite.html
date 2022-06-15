@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -9,8 +9,8 @@
 
     <link rel="stylesheet" href="/assets/css/project/default.css">
     <link rel="stylesheet" href="/assets/css/project/projectWrite.css">
+
     <link rel="stylesheet" href="/assets/css/project/project.css">
-    <style>
 
 </head>
 
@@ -20,7 +20,7 @@
     <main>
         <div class="mainWrap">
             <section class="sec4">
-                <form action="" name="projectForm" enctype="multipart/form-data" id="projectForm    ">
+                <form action="" name="projectForm" enctype="multipart/form-data" id="projectForm">
                     <div>
                         <div class="topmenu">
                             <div class="">
@@ -67,8 +67,7 @@
 
                             <div class="projectData on">
                                 <div>
-                                    <div class="miniPoto"><img src="/images/project/domImg/indi01.webp"
-                                            alt=""></div>
+                                    <div class="miniPoto"><img src="/images/project/domImg/indi01.webp" alt=""></div>
                                     <div>아이디</div>
                                 </div>
                                 <!-- <details>
@@ -77,9 +76,9 @@
                                 </details> -->
 
 
-                                <label class="togle">재목</label>
+                                <label class="togle">제목</label>
                                 <div>
-                                    <input type="text" name="projectTitle" placeholder="내용입력..." value="1">
+                                    <input type="text" name="projectTitle" placeholder="내용입력...">
                                 </div>
 
                                 <label class="togle">카테고리</label>
@@ -113,7 +112,7 @@
                                             <label for="btnCate6">식습관</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnCate7" name="projectCategory" value="공부    ">
+                                            <input type="radio" id="btnCate7" name="projectCategory" value="공부">
                                             <label for="btnCate7">공부</label>
                                         </div>
 
@@ -131,7 +130,7 @@
                                 </div>
                                 <label class="togle">시작일</label>
                                 <div>
-                                    <div class="selecBox">
+                                    <div class="selecBox startDate">
                                         <div>
                                             <input type="radio" id="btnStart1" name="projectStrar" value="6/6">
                                             <label for="btnStart1">6/6</label>
@@ -141,11 +140,11 @@
                                             <label for="btnStart2">6/13</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnStart3" name="projectStrar" value="6/6">
+                                            <input type="radio" id="btnStart3" name="projectStrar" value="">
                                             <label for="btnStart3">6/20</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnStart4" name="projectStrar" value="6/6">
+                                            <input type="radio" id="btnStart4" name="projectStrar" value="">
                                             <label for="btnStart4">6/27</label>
                                         </div>
                                     </div>
@@ -153,23 +152,24 @@
 
                                 <label class="togle">기간</label>
                                 <div>
-                                    <div class="selecBox">
+                                    <div class="selecBox periodDate">
                                         <div>
-                                            <input type="radio" id="btnPeriod1" name="projectEnd" value="6/6">
+                                            <input type="radio" id="btnPeriod1" name="projectEnd" value="1">
                                             <label for="btnPeriod1">1주</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnPeriod2" name="projectEnd" value="6/6">
+                                            <input type="radio" id="btnPeriod2" name="projectEnd" value="2">
                                             <label for="btnPeriod2">2주</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnPeriod3" name="projectEnd" value="6/6">
+                                            <input type="radio" id="btnPeriod3" name="projectEnd" value="3">
                                             <label for="btnPeriod3">3주</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnPeriod4" name="projectEnd" value="6/6">
+                                            <input type="radio" id="btnPeriod4" name="projectEnd" value="4">
                                             <label for="btnPeriod4">4주</label>
                                         </div>
+                                        <input type="hidden" name="endDate">
                                     </div>
                                 </div>
 
@@ -183,19 +183,25 @@
         </div>
     </main>
 
+
     <footer></footer>
 
+
 </body>
+<!-- <script src="/src/main/resources/static/assets/js/jquery-3.6.0.min.js"></script> -->
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
 <script>
 
+    // 이미지 담을 태그 
+
+    // 이미지 드롭 js
     $('.imgData')
         .on("dragover", dragOver)
         .on("dragleave", dragOver);
 
-
     $('.imgData').on("drop", function (e) {
         e.preventDefault();
+
         dragOver(e);
 
         e.dataTransfer = e.originalEvent.dataTransfer;
@@ -214,14 +220,28 @@
         // $("#btnImage") 
         // 인풋에 데이터 추가 하기 
     });
-
-    // 이미지 미리보기
     $("#btnImage").on("change", function (event) {
         let file = event.target.files[0];
         let reader = new FileReader();
 
         imgEvent(file);
     });
+    //  파일 직접 입력
+    $("input[type='file']").on("change", function (e) {
+        let formData = new FormData();
+        let inputFile = $("input[name='uploadFiles']");
+        let files = inputFile[0].files;
+
+        for (let i = 0; i < files.length; i++) {
+            if (!checkExtension(files[i].name, files[i].size)) { return; }
+            formData.append("uploadFiles", files[i]);
+        }
+        const dataTransfer = new DataTransfer();
+        arFile.forEach(file => dataTransfer.items.add(file));
+        $(this)[0].files = dataTransfer.files;
+
+    });
+    //=========================================================================
 
     function submitEvent() {
         let form = $(projectForm);
@@ -236,6 +256,7 @@
         $(".topmenu > div").eq(0).show();
         $(".topmenu > div").eq(2).show();
     }
+
     function formEvent() {
         $(".projectData").show();
 
@@ -290,23 +311,109 @@
         }
     });
 
+    // submit 
     function submitEvent() {
         const form = $(projectForm);
-        let projectTitle = $("input[name='projectTitle']").val();
-        let projectCategory = $("input[name='projectCategory']:checked").val();
-        let projectContent = $("textarea[name='projectContent']").val();
-        let projectAuth = $("textarea[name='projectAuth']").val();
-        let projectStrar = $("input[name='projectStrar']:checked").val();
-        let projectEnd = $("input[name='projectEnd']:checked").val();
+        let projectTitle = $("input[name='projectTitle']");
+        let projectCategory = $("input[name='projectCategory']:checked");
+        let projectContent = $("textarea[name='projectContent']");
+        let projectAuth = $("textarea[name='projectAuth']");
+        let projectStrar = $("input[name='projectStrar']:checked");
+        let projectEnd = $("input[name='projectEnd']:checked");
 
-        console.log(projectTitle);
-        console.log(projectCategory);
-        console.log(projectContent);
-        console.log(projectAuth);
-        console.log(projectStrar);
-        console.log(projectEnd);
 
+        // 제목 입력
+        if (projectTitle.val() == "") {
+            alert("제목을 입력하세요");
+            projectTitle.focus();
+            return false;
+        }
+        // 카테고리
+        if (projectCategory.length < 1) {
+            alert("카테고리를 선택하세요");
+            return false;
+        }
+        // 프로젝트 내용
+        if (projectContent.val() == "") {
+            alert("첼린지소개를 입력하세요");
+            projectContent.focus();
+            return false;
+        }
+        // 프로젝트 인증입력
+        if (projectAuth.val() == "") {
+            alert("인증방법을 입력하세요");
+            return false;
+        }
+        // 시작일 선택
+        if (projectStrar.length < 1) {
+            alert("시작일을 선택하세요");
+            projectContent.focus();
+            return false;
+        }
+        // 기간을 선택
+        if (projectEnd.length < 1) {
+            alert("기간을 선택하세요");
+            return false;
+        }
+
+        alert("성공");
+        // 유효성 이후 submit
+        // form.submit();
     }
+
+
+    $().ready(function dateInputSet() {
+
+        let date = new Date();
+        const startTags = $("input[name='projectStrar']"); // start 데이터를 넣어줄 곳
+        const endTags = $("input[name='projectEnd']"); // end 데이터 넣어줄 곳
+        const dateVals = [6, 0, 1, 2, 3, 4, 5]; //요일별 더할 날짜
+
+        // Start 월요일 날짜 계산
+        let standDate = date.getDate() - dateVals[date.getDay()];
+        date.setDate(standDate);
+
+        let calcDate;  // 넣어줄 데이터
+        // 선택 태그 val 뿌리기
+        for (let i = 0; i < startTags.length; i++) {
+            date.setDate(date.getDate() + 7);
+            // console.log("======================");
+            // console.log("일 : " + date.getDate());
+            // console.log("월 : " + (date.getMonth() + 1));
+            calcDate = (date.getMonth() + 1) + "/" + date.getDate();
+            startTags.eq(i).next().text(calcDate);
+            calcDate = date.getFullYear() + "/" + calcDate;
+            startTags.eq(i).attr("value", calcDate);
+        }
+
+        // 기간 선택 js
+        startTags.on("change", function () {
+            let calcDate;
+            let dateArr = $(this).val().split("/");
+            let endDate = parseInt(dateArr[2]);
+            date.setMonth(parseInt(dateArr[1]) - 1);
+            date.setDate(endDate);
+
+            date.setDate(date.getDate());
+            console.log("년도" + date.getFullYear());
+            console.log("월" + (date.getMonth() + 1));
+            console.log("일" + date.getDate());
+
+            for (let i = 0; i < endTags.length; i++) {
+                date.setDate(date.getDate() + 7);
+                calcDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+                endTags.eq(i).attr("value", calcDate);
+            }
+        });
+
+        $("input[name='projectEnd']").on("click", function () {
+            const dateInputCk = $("input[name='projectStrar']:checked"); // 기간 값
+            if (dateInputCk.length < 1) {
+                alert("시작일을 먼저 선택하세요");
+                return false;
+            }
+        });
+    });
 
 
 

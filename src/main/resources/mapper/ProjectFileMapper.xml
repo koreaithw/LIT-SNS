@@ -13,7 +13,7 @@
     <select id="getImg" resultType="projectFileVO">
         SELECT UUID, UPLOAD_PATH, NAME, IMAGE, PROJECT_NUMBER
         FROM TBL_PROJECT_FILE
-        WHERE USER_NUMBER = #{projectNumber}
+        WHERE PROJECT_NUMBER = #{projectNumber}
     </select>
 
     <select id="getOldFiles" resultType="projectFileVO">

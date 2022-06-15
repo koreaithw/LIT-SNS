@@ -321,6 +321,10 @@ input[id="btnImage"] {
 div.imgView {
   height: 100%;
   background-size: cover;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
   flex-grow: 1;
 }
 

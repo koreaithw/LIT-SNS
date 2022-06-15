@@ -20,4 +20,6 @@ public interface ReviewMapper {
     public int update(ReviewVO reviewVO);
     //    리뷰 전체 개수
     public int getTotal();
+    //    성공, 실패용 인증 수 카운트
+    public int resultCount();
 }

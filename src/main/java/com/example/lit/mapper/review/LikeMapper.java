@@ -5,8 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface LikeMapper {
-    // 신고하기
+    // 좋아요
     public void insert(LikeVO likeVO);
-    // 신고 취소(작성자)
+    // 좋아요(취소)
     public void delete(LikeVO likeVO);
 }
