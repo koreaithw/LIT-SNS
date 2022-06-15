@@ -8,7 +8,7 @@ let commentInputArea = document.querySelector(".detailContentFooterCommentInputA
 let commentButton = document.querySelector(".commentButton");
 
 //textarea 내용이 없을 경우 게시 버튼 비활성화
-commentInputArea.addEventListener("input", function(e){
+commentInputArea.addEventListener("input", function (e) {
     if (commentInputArea.value == '') {
         commentButton.disabled = true;
     } else {
@@ -50,27 +50,29 @@ detailContentLikeCancel.addEventListener("click", function (e) {
 //프로필 이미지에 마우스 버튼 올릴 때
 //작은 추가 프로필 정보 모달창 1초 뒤에 생성
 //마우스를 떼면 사라짐
-profileImage.forEach(function(item){
-    console.log(profileModal);
-    profileImage.forEach(function (item) {
-        item.addEventListener("mouseover", function (e) {
-            setTimeoutConst = setTimeout(function () {
-                profileModal.style.display = 'block';
-                profileModal.style.top = e.clientY - 5 + "px";
-    }, function(){
+
+console.log(profileModal);
+profileImage.forEach(function (item) {
+    item.addEventListener("mouseover", function (e) {
+        setTimeoutConst = setTimeout(function () {
+            profileModal.style.display = 'block';
+            profileModal.style.top = e.clientY - 5 + "px";
+            profileModal.style.left = e.clientX - 5 + "px";
+        }, 1000)
+    }, function () {
         clearTimeout(setTimeoutConst);
     });
 
-    item.addEventListener("mouseout", function(e){
+    item.addEventListener("mouseout", function (e) {
         clearTimeout(setTimeoutConst);
-        profileModal.style.display='none';
+        profileModal.style.display = 'none';
     });
 
 });
 
 //버튼형 슬라이더
 //이미지 아래 버튼 클릭했을 때 해당하는 이미지로 넘겨주는 기능
-$('.innerImageWrapper > .innerImagePageButtons > div').click(function(){
+$('.innerImageWrapper > .innerImagePageButtons > div').click(function () {
     let $this = $(this);
     let index = $this.index();
     $this.addClass('active');
@@ -86,7 +88,7 @@ $('.innerImageWrapper > .innerImagePageButtons > div').click(function(){
 
 //좌/우 슬라이더
 //이미지 양 옆 버튼 클릭했을 때 다음/이전 이미지로 넘겨주는 기능
-$('.innerImageWrapper > .innerImageSideButtons > div').click(function(){
+$('.innerImageWrapper > .innerImageSideButtons > div').click(function () {
     let $this = $(this);
     let $slider = $this.closest('.innerImageWrapper');
     let index = $this.index();
@@ -101,8 +103,8 @@ $('.innerImageWrapper > .innerImageSideButtons > div').click(function(){
         $post = $current.next();
     };
 
-    if ( $post.length == 0 ){
-        if ( isLeft ){
+    if ($post.length == 0) {
+        if (isLeft) {
             $post = $slider.find(' > .innerImagePageButtons > div:last-child');
         }
         else {
