@@ -1,18 +1,18 @@
-/* div{
-    border: 1px solid black;
-} */
+
 body{
     margin: 0;
     padding: 0;
+<<<<<<< HEAD:src/main/resources/static/assets/css/detail/projectDetail.css
 <<<<<<< HEAD
 =======
     background-image: url('monkey.jpg');
 >>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     background-repeat: no-repeat;
     background-size : cover;
+=======
+>>>>>>> 2348eb4a9caa8ead31fa5886cb7dc004c76f3a68:src/main/resources/static/assets/css/certification/certificationDetail.css
     height : 100vh;
     width : 100%;
-    overflow: hidden;
 }
 
 .detailModalBackground{
@@ -27,7 +27,6 @@ body{
 }
 
 .detailModalContentContainer{
-    position: relative;
     min-height: 100%;
 }
 
@@ -35,10 +34,11 @@ body{
     background-color:  white;
     width: 74%;
     position: absolute;
-    top: 50%;
+    top: 50vh;
     left: 50%;
     transform: translate(-50%,-50%);
     min-height: 94%;
+    max-height: 680px;
     border-radius: 5px;
     z-index: 1;
 }
@@ -225,15 +225,15 @@ body{
     justify-content: center;
 }
 
-.detailContentProflieName,
-.detailContentProflieModalId{
+.detailContentProfileName,
+.detailContentProfileModalId{
     font-weight: bold;
 }
 
-.detailContentProflieIntro,
+.detailContentProfileIntro,
 .detailContentRegisterDate,
-.detailContentProflieModalName,
-.detailContentProflieModalIntro,
+.detailContentProfileModalName,
+.detailContentProfileModalIntro,
 .detailContentLike,
 .detailContentCommentIn,
 .detailContentCommentLook{
@@ -266,7 +266,7 @@ body{
     padding-right: 5px;
 }
 
-.detailContentProflieImage{
+.detailContentProfileImage{
     width: 40px;
     height: 40px;
     display: flex;
@@ -544,7 +544,7 @@ body{
 >>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 }
 
-.detailContentProflieModalIntro{
+.detailContentProfileModalIntro{
     margin-top: 10px;
 }
 
