@@ -4,6 +4,10 @@
 body{
     margin: 0;
     padding: 0;
+<<<<<<< HEAD
+=======
+    background-image: url('monkey.jpg');
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     background-repeat: no-repeat;
     background-size : cover;
     height : 100vh;
@@ -532,7 +536,12 @@ body{
     border-radius: 10px;
     padding: 5px;
     box-shadow: 3px 3px 3px rgba(219,219,219,0.7);
+<<<<<<< HEAD
     border-color: rgb(219,219,219)
+=======
+    border-color: rgb(219,219,219);
+    z-index: 2;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 }
 
 .detailContentProflieModalIntro{
@@ -556,5 +565,16 @@ body{
     position: absolute;
     top: 0;
     left: 0;
+<<<<<<< HEAD
     cursor: pointer;
+=======
+}
+
+.reportCloseArea{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 }

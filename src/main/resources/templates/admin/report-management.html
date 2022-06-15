@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -10,11 +10,11 @@
     <title>인증글 관리</title>
     <link
       rel="stylesheet"
-      href="/src/main/resources/static/assets/css/admin/report-management.css"
+      href="/assets/css/admin/report-management.css"
     />
     <link
       rel="stylesheet"
-      href="/src/main/resources/static/assets/css/admin/side-bar.css"
+      href="/assets/css/admin/side-bar.css"
     />
     <!-- date picker css -->
     <link
@@ -26,7 +26,7 @@
     />
     <link
       rel="stylesheet"
-      href="/src/main/resources/static/assets/css/admin/date-picker.css"
+      href="/assets/css/admin/date-picker.css"
     />
     <!-- date picker css -->
   </head>
@@ -36,7 +36,7 @@
       <div class="wrapper">
         <div class="inner">
           <section class="sec1 flex">
-            <div class="side-bar"></div>
+            <div th:insert="~{/admin/side-bar :: side-bar}" class="side-bar"></div>
             <div class="content">
               <div class="inner__content">
                 <div>
@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="calendar-icon-wrap">
                                   <img
-                                    src="/src/main/resources/static/images/admin/calendar.png"
+                                    src="/images/admin/calendar.png"
                                   />
                                 </div>
                                 <div><span>~</span></div>
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="calendar-icon-wrap">
                                   <img
-                                    src="/src/main/resources/static/images/admin/calendar.png"
+                                    src="/images/admin/calendar.png"
                                   />
                                 </div>
                               </div>
@@ -200,7 +200,7 @@
                           <div class="button-box">
                             <button type="button" class="cancel-btn">
                               <img
-                                src="/src/main/resources/static/images/admin/back.png"
+                                src="/images/admin/back.png"
                                 alt=""
                               />
                               신고 취소
@@ -209,7 +209,7 @@
                           <div class="button-box">
                             <button type="button" class="delete-btn">
                               <img
-                                src="/src/main/resources/static/images/admin/x-icon.png"
+                                src="/images/admin/x-icon.png"
                                 alt=""
                               />
                               글 삭제
@@ -252,7 +252,9 @@
                               </td>
                               <td class="project-view">
                                 <!-- 미리보기 경로 -->
-                                <div><a class="a-btn not-selected" href="">보기</a></div>
+                                <div>
+                                  <a class="a-btn not-selected" href="">보기</a>
+                                </div>
                               </td>
                               <td class="project-preview-cnt">aaa@naver.com</td>
                               <td>주제와 상관없는 내용</td>
@@ -286,9 +288,9 @@
     </div>
   </body>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="/src/main/resources/static/assets/js/admin/report-management.js"></script>
-  <script src="/src/main/resources/static/assets/js/admin/side-bar.js"></script>
-  <script src="/src/main/resources/static/assets/js/admin/admin-common.js"></script>
+  <script src="/assets/js/admin/report-management.js"></script>
+  <script src="/assets/js/admin/side-bar.js"></script>
+  <script src="/assets/js/admin/admin-common.js"></script>
   <!-- date picker script -->
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"

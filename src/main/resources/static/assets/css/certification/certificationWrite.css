@@ -9,7 +9,10 @@ body{
     background-size : cover;
     height : 100vh;
     width : 100%;
+<<<<<<< HEAD
     overflow: hidden;
+=======
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 }
 
 .closeArea {
@@ -55,9 +58,15 @@ body{
     background-color:  white;
     width: 35%;
     position: absolute;
+<<<<<<< HEAD
     top: 50%;
     left: 50%;
     height: 70.7vh;
+=======
+    top: 50vh;
+    left: 50%;
+    height: 66.7vh;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     border-radius: 17px;
     transform:translate(-50%,-50%);
     transition:width ease-out 0.4s 0s;
@@ -83,7 +92,10 @@ body{
 }
 
 .certificationHeader{
+<<<<<<< HEAD
     justify-content: space-between;
+=======
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     padding-right: 15px;
     padding-left: 15px;
     padding-top: 10px;
@@ -91,6 +103,15 @@ body{
     border-bottom: 1px solid rgb(219,219,219);
 }
 
+<<<<<<< HEAD
+=======
+.certificationHeaderLabel{
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 .certificationImageWrapper{
     width: 100%;
     height: 65.5vh;
@@ -128,14 +149,22 @@ body{
     opacity: 1;
 }
 
+<<<<<<< HEAD
 .certificationImage{
+=======
+.certificationImageInner > li > img{
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     object-fit: cover;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
+<<<<<<< HEAD
     height: 64.5vh;
+=======
+    height: 100%;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 
 }
 
@@ -177,7 +206,11 @@ body{
 }
 
 .certificationUserId{
+<<<<<<< HEAD
     margin-left: 12px;
+=======
+    margin-left: 16px;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 }
 
 .certificationContentArea{
@@ -211,20 +244,37 @@ body{
     margin: 0;
     width: 100%;
     cursor:pointer;
+<<<<<<< HEAD
     color: #0095f6;
+=======
+    color: rgb(250, 100, 98);
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     font-weight: bold;
     font-size: 14px;
     border:none;
     background-color: transparent;
 }
 
+<<<<<<< HEAD
 .certificationBackButton > button{
+=======
+.certificationBackButton{
+    width: 24px;
+    height: 24px;
+}
+
+.certificationBackButton > button {
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     background-color: transparent;
     border: none;
     margin: 0;
     padding: 0;
     display: flex;
     cursor: pointer;
+<<<<<<< HEAD
+=======
+    align-items: center;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 }
 
 .certificationContentButtons{
@@ -340,7 +390,11 @@ body{
 
 .certificationWriteWarningInner > div:first-child{
     font-size: 12px;
+<<<<<<< HEAD
     color: red;
+=======
+    color: rgb(250, 100, 98);
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     opacity: 0.8;
     margin: 15px 0px 15px 10px;
     font-weight:700;
@@ -474,17 +528,33 @@ body{
 .innerImagePageButtons{
     text-align:center;
     position:relative;
+<<<<<<< HEAD
     bottom:8%;
     width: 20%;
     left: 37%
+=======
+    bottom: 12.5%;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 }
 
 .innerImagePageButtons > div {
     width:15px;
     height:15px;
+<<<<<<< HEAD
     background-color:rgba(255,255,255,.5);
     border-radius:50%;
     display:inline-block;
+=======
+    gap: 5px;
+    background-color:rgba(255,255,255,.5);
+    border-radius:50%;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     cursor:pointer;
     border: 1px solid rgb(219,219,219);
 }
