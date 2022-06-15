@@ -19,4 +19,13 @@ public class CertificationWriteController {
         log.info("******************************");
         return "/certification/certificationWrite";
     }
+
+
+    @RequestMapping("/detail")
+    public String detail(){
+        log.info("******************************");
+        log.info("DetailController : detail");
+        log.info("******************************");
+        return "/certification/certificationDetail";
+    }
 }

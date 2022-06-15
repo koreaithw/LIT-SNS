@@ -37,11 +37,4 @@ public class ProjectController {
         return "/project/projectWrite";
     }
 
-    @RequestMapping("/detail")
-    public String detail(){
-        log.info("******************************");
-        log.info("DetailController : detail");
-        log.info("******************************");
-        return "/detail/projectDetail";
-    }
 }
