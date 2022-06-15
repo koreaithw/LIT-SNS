@@ -223,6 +223,16 @@ body{
 }
 
 .certificationBackButton > button {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.certificationContentButtons{
     justify-content: flex-end;
 }
 
@@ -335,7 +345,7 @@ body{
 
 .certificationWriteWarningInner > div:first-child{
     font-size: 12px;
-    color: red;
+    color: rgb(250, 100, 98);
     opacity: 0.8;
     margin: 15px 0px 15px 10px;
     font-weight:700;
@@ -472,9 +482,6 @@ body{
 .innerImagePageButtons{
     text-align:center;
     position:relative;
-    bottom:8%;
-    width: 20%;
-    left: 37%
 }
 
 .innerImagePageButtons > div {
