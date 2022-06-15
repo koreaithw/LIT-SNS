@@ -187,11 +187,11 @@
 <script src="../../static/assets/js/jquery-3.6.0.min.js"></script>
 <script>
 
+
+    // 이미지 드롭 js
     $('.imgData')
         .on("dragover", dragOver)
         .on("dragleave", dragOver);
-
-
     $('.imgData').on("drop", function (e) {
         e.preventDefault();
         dragOver(e);
@@ -212,8 +212,6 @@
         // $("#btnImage") 
         // 인풋에 데이터 추가 하기 
     });
-
-    // 이미지 미리보기
     $("#btnImage").on("change", function (event) {
         let file = event.target.files[0];
         let reader = new FileReader();
@@ -234,6 +232,7 @@
         $(".topmenu > div").eq(0).show();
         $(".topmenu > div").eq(2).show();
     }
+
     function formEvent() {
         $(".projectData").show();
 
@@ -303,6 +302,11 @@
         console.log(projectAuth);
         console.log(projectStrar);
         console.log(projectEnd);
+
+
+
+        // 유효성 이후 서브밑
+        form.submit();
 
     }
 
