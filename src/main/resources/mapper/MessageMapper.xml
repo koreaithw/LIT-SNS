@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.user.MessageMapper">
+    <insert id="insert">
+        INSERT INTO TBL_MESSAGE
+        (SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM, CONTENT)
+        VALUES(#{sendUserNumber}, #{receiveUserNumber}, SEQ_MESSAGE.NEXTVAL, #{content})
+    </insert>
 
+    <select id="getList" resultType="messageVO">
+        SELECT SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM, CONTENT, MESSAGE_DATE
+        FROM TBL_MESSAGE
+        WHERE ROOM =#{room}
+    </select>
 </mapper>
