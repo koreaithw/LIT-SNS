@@ -75,6 +75,11 @@ public class UserServiceImple implements UserService{
     }
 
     @Override
+    public UserFileVO getImg(Long userNumber) {
+        return null;
+    }
+
+    @Override
     public List<UserFileVO> getOldFiles() {
         return null;
     }
@@ -87,6 +92,16 @@ public class UserServiceImple implements UserService{
     @Override
     public void removeFollow(FollowVO followVO) {
 
+    }
+
+    @Override
+    public int followingCount(FollowVO followVO) {
+        return 0;
+    }
+
+    @Override
+    public int followerCount(FollowVO followVO) {
+        return 0;
     }
 
     @Override

@@ -25,4 +25,6 @@ public class ReviewDAO {
     public boolean modify(ReviewVO reviewVO){ return reviewMapper.update(reviewVO) != 0; }
     //    리뷰 전체 개수
     public int getTotal(){ return reviewMapper.getTotal(); }
+    //    성공, 실패용 인증 수 카운트
+    public int resultCount(){ return reviewMapper.resultCount(); }
 }

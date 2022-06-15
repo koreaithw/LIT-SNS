@@ -10,6 +10,7 @@ import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.mapper.project.ProjectFileMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,12 +23,21 @@ public class LitServiceImple implements LitService{
 
     @Override
     public List<ProjectVO> getList(Criteria criteria) {
-        return null;
+        return projectDAO.getList(criteria);
     }
 
     @Override
+    //트랜잭션으로 묶어서 처리
+    @Transactional(rollbackFor = Exception.class)
     public void register(ProjectVO projectVO, ProjectFileVO projectFileVO) {
+        //프로젝트 생성
+        projectDAO.register(projectVO);
 
+        //프로젝트 이미지 처리(1장)
+        if(projectVO.getProjectFile() != null){
+            projectVO.getProjectFile().setProjectNumber(projectVO.getProjectNumber());
+            projectFileDAO.register(projectFileVO);
+        }
     }
 
     @Override
@@ -51,12 +61,22 @@ public class LitServiceImple implements LitService{
     }
 
     @Override
+    public void modify(ParticipationVO participationVO, Long result) {
+
+    }
+
+    @Override
     public void removeImg(Long projectNumber) {
 
     }
 
     @Override
     public List<ProjectFileVO> getOldFiles() {
+        return null;
+    }
+
+    @Override
+    public ProjectFileVO getImg(Long projectNumber) {
         return null;
     }
 }

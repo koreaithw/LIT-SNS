@@ -15,6 +15,8 @@ public class ProjectFileDAO {
     public void register(ProjectFileVO projectFileVO){ projectFileMapper.insert(projectFileVO); }
     // 프로젝트 이미지 삭제
     public void remove(Long projectNumber){ projectFileMapper.delete(projectNumber); }
+    // 사진 리스트
+    public ProjectFileVO getImg(Long projectNumber){ return projectFileMapper.getImg(projectNumber); }
     // DB에 없는 이미지 삭제
     public List<ProjectFileVO> getOldFiles(){ return projectFileMapper.getOldFiles(); }
 }

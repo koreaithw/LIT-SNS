@@ -93,6 +93,11 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
+    public int resultCount() {
+        return 0;
+    }
+
+    @Override
     public void registerImg(ReviewFileVO reviewFileVO) {
 
     }

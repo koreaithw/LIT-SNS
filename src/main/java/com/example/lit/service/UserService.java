@@ -32,6 +32,8 @@ public interface UserService {
     public void removeImg(Long userNumber);
     //유저 파일 수정
     public void modifyImg(UserFileVO userFileVO);
+    // 사진
+    public UserFileVO getImg(Long userNumber);
     // DB에 없는 이미지 삭제
     public List<UserFileVO> getOldFiles();
 
@@ -40,6 +42,10 @@ public interface UserService {
     public void follow(FollowVO followVO);
     // 팔로우 취소
     public void removeFollow(FollowVO followVO);
+    // 팔로잉 카운트 (내가 한 사람)
+    public int followingCount(FollowVO followVO);
+    // 팔로워 카운트 (다른 사람)
+    public int followerCount(FollowVO followVO);
 
 
     //메세지 룸 생성

@@ -22,6 +22,8 @@ public interface LitService {
 
     // 참여하기
     public void join(ParticipationVO participationVO);
+    // 성공하기, 실패하기 상태변경 review에서 프로젝트 별 review 수 카운트 result로 초기화
+    public void modify(ParticipationVO participationVO, Long result);
 
 
     // 프로젝트 이미지 넣기(따로 필요하면 사용)
@@ -30,4 +32,6 @@ public interface LitService {
     public void removeImg(Long projectNumber);
     // DB에 없는 이미지 삭제
     public List<ProjectFileVO> getOldFiles();
+    // 사진 리스트
+    public ProjectFileVO getImg(Long projectNumber);
 }
