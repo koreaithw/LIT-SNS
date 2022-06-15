@@ -209,11 +209,7 @@ $certificationBackBackButton.on("click", function () {
     $detailProjectContent.css("display", "block");
     $certificationNextNextButton.css("display", "block");
     $certificationCompleteButton.css("display", "none");
-<<<<<<< HEAD
-    $certificationHeaderLabel.text('프로젝트 선택');
-=======
     $certificationHeaderLabel.text('챌린지 선택');
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     $certificationBackButton.css("display", "block");
     $certificationBackBackButton.css("display", "none");
 });
@@ -248,16 +244,6 @@ warningDownButton.addEventListener("click", function () {
 });
 
 //인증글 작성 textarea 글 길이 검사
-<<<<<<< HEAD
-$('.certificationContentArea > textarea').on('input',function(){
-    let cnt = $(this).val().length
-    if(cnt > 400){
-        $('.certificationContentButtons > div > div:first-child').css("display","block");
-        $(this).val($(this).val().substring(0,400));
-        $('.certificationContentButtons > div > div > button > span').text(400);
-    }else{
-        $('.certificationContentButtons > div > div:first-child').css("display","none");
-=======
 $('.certificationContentArea > textarea').on('input', function () {
     let cnt = $(this).val().length
     if (cnt > 400) {
@@ -266,18 +252,13 @@ $('.certificationContentArea > textarea').on('input', function () {
         $('.certificationContentButtons > div > div > button > span').text(400);
     } else {
         $('.certificationContentButtons > div > div:first-child').css("display", "none");
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
         $('.certificationContentButtons > div > div > button > span').text(cnt);
     }
 });
 
 //버튼형 슬라이더
 //이미지 아래 버튼 클릭했을 때 해당하는 이미지로 넘겨주는 기능
-<<<<<<< HEAD
-$('.certificationImages > .innerImagePageButtons > div').click(function(){
-=======
 $('.certificationImages > .innerImagePageButtons').on('click', 'div', function () {
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     let $this = $(this);
     let index = $this.index();
     $this.addClass('active');
@@ -289,8 +270,4 @@ $('.certificationImages > .innerImagePageButtons').on('click', 'div', function (
 
     $current.removeClass('active');
     $post.addClass('active');
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
