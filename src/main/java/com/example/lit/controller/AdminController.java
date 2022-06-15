@@ -21,42 +21,42 @@ public class AdminController {
         return "/admin/login";
     }
 
-    @GetMapping("/userManagement")
-    public String userManagement(){
+    @GetMapping("/user")
+    public String user(){
         log.info("***************************");
-        log.info("AdminController : userManagement");
+        log.info("AdminController : user");
         log.info("***************************");
         return "/admin/user-management";
     }
 
-    @GetMapping("/approvedProjectManagement")
-    public String approvedProjectManagement(){
+    @GetMapping("/approvedProject")
+    public String approvedProject(){
         log.info("***************************");
-        log.info("AdminController : approvedProjectManagement");
+        log.info("AdminController : approvedProject");
         log.info("***************************");
         return "/admin/approved-project-management";
     }
 
-    @GetMapping("/reportManagement")
-    public String  reportManagement(){
+    @GetMapping("/report")
+    public String  report(){
         log.info("***************************");
-        log.info("AdminController : reportManagement");
+        log.info("AdminController : report");
         log.info("***************************");
         return "/admin/report-management";
     }
 
-    @GetMapping("/waitingProjectManagement")
-    public String waitingProjectManagement(){
+    @GetMapping("/waitingProject")
+    public String waitingProject(){
         log.info("***************************");
-        log.info("AdminController : waitingProjectManagement");
+        log.info("AdminController : waitingProject");
         log.info("***************************");
         return "/admin/waiting-project-management";
     }
 
-    @GetMapping("/reviewManagement")
+    @GetMapping("/review")
     public String reviewManagement(){
         log.info("***************************");
-        log.info("AdminController : reviewManagement");
+        log.info("AdminController : review");
         log.info("***************************");
         return "/admin/review-management";
     }

@@ -21,19 +21,20 @@ public class ProjectController {
         return "/project/message";
     }
 
-    @GetMapping("/projectInfo")
-    public String projectInfo(){
+    @GetMapping("/info")
+    public String info(){
         log.info("******************************");
-        log.info("ProjectController : projectInfo");
+        log.info("ProjectController : info");
         log.info("******************************");
         return "/project/projectInfo";
     }
 
-    @GetMapping("/projectWrite")
-    public String projectWrite(){
+    @GetMapping("/write")
+    public String write(){
         log.info("******************************");
-        log.info("ProjectController : projectWrite");
+        log.info("ProjectController : write");
         log.info("******************************");
         return "/project/projectWrite";
     }
+
 }

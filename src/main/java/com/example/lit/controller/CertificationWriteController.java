@@ -9,14 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/certification/*")
 @RequiredArgsConstructor
 @Controller
-public class CertificationWrite {
+public class CertificationWriteController {
     //의존성 주입 객체 생성
 
-    @RequestMapping("/certificationWrite")
-    public String certtificationWrite(){
+    @RequestMapping("/write")
+    public String write(){
         log.info("******************************");
-        log.info("CertificationWrite : certtificationWrite");
+        log.info("CertificationWrite : write");
         log.info("******************************");
         return "/certification/certificationWrite";
+    }
+
+
+    @RequestMapping("/detail")
+    public String detail(){
+        log.info("******************************");
+        log.info("DetailController : detail");
+        log.info("******************************");
+        return "/certification/certificationDetail";
     }
 }
