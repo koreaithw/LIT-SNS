@@ -14,7 +14,7 @@ public interface ProjectMapper {
     public void insert(ProjectVO projectVO);
     //    프로젝트 상세보기
     public ProjectVO get(Long projectNumber);
-    //    프로젝트 삭제 ( 관리자
+    //    프로젝트 삭제 ( 관리자)
     public int delete(Long projectNumber);
     //    프로젝트 전체 개수
     public int getTotal();
