@@ -253,6 +253,12 @@ body{
     margin-right: 5px;
 }
 
+.detailContentCommentDelete{
+    font-size: 13px;
+    color: rgb(250,100,98);
+    cursor: pointer;
+}
+
 .detailContentProfileImageWrapper{
     display: flex;
     align-items: center;
@@ -346,6 +352,7 @@ body{
 
 .detailContentWriteFeedBottom{
     display: flex;
+    justify-content: space-between;
 }
 
 .example{
