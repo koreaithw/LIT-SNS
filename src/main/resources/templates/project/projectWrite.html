@@ -7,10 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>프로젝트 생성</title>
 
-    <!-- <link rel="stylesheet" href="/assets/css/project/default.css">
-    <link rel="stylesheet" href="/assets/css/project/projectWrite.css"> -->
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/project/default.css">
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/project/projectWrite.css">
+    <link rel="stylesheet" href="/assets/css/project/default.css">
+    <link rel="stylesheet" href="/assets/css/project/projectWrite.css">
+    <link rel="stylesheet" href="/assets/css/default.css">
+
+    <!--vsCode 경로-->
+    <!-- <link rel="stylesheet" href="/src/main/resources/static/assets/css/project/default.css">
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/project/projectWrite.css"> -->
 
 </head>
 
@@ -183,230 +186,15 @@
         </div>
     </main>
 
-
     <footer></footer>
 
-
 </body>
-<script src="/src/main/resources/static/assets/js/jquery-3.6.0.min.js"></script>
-<!-- <script src="/assets/js/jquery-3.6.0.min.js"></script> -->
+<!-- <script src="/src/main/resources/static/assets/js/jquery-3.6.0.min.js"></script>
+<script src="/src/main/resources/static/assets/js/project/projectWrite.js"></script> -->
+<script src="/assets/js/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/project/projectWrite.js"></script>
 <script>
-    // 파일 담을 변수
-    let fileType = /(.*?)\.(jpg|jpeg|png)$/;
-    let uploadFiles = [];
-    // ======================================================================
-    // 이미지 드롭 js
-    $('.imgData')
-        .on("dragover", function (e) {              // 이미지 오버
-            e.stopPropagation();
-            e.preventDefault();
-            let $logo = $(".uploadLoge");
-            $logo.attr("color", "#ff4543")
-            $(e.target).css({
-                "background-color": "#f2f2f2"
-            });
-        }).on("dragleave", function (e) {           // 이미지 아웃
-            e.stopPropagation();
-            e.preventDefault();
-            let $logo = $(".uploadLoge");
-            $logo.attr("color", "#262626")
-            $(e.target).css({
-                "background-color": "#ffffff"
-            });
-        }).on("drop", function (e) {                // 이미지 드랍
-            e.stopPropagation();
-            e.preventDefault();
-            let $logo = $(".uploadLoge");
-            $logo.attr("color", "#ff4543")
-            $(e.target).css({
-                "background-color": "#f2f2f2"
-            });
 
-            // 파일 객체화
-            let file = e.originalEvent.dataTransfer.files[0];
-            // 파일 유효성
-            if (!file.name.match(fileType)) {
-                alert("파일업로드 실패");
-                return;
-            }
-            // 이미지 미리보기
-            imgEvent(file);
-
-            // 이미지 저장할 데이터 담기....
-            uploadFiles.push(file);
-        });
-    // 파일 input 업로드
-    $("#btnImage").on("change", function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-        // 파일 객체화
-        let file = e.target.files[0];
-        // 파일 유효성
-        if (!$(this).val().match(fileType)) {
-            alert("파일업로드 실패");
-            return;
-        }
-        // 이미지 미리보기
-        imgEvent(file);
-        // 이미지 저장할 데이터 담기....
-        uploadFiles.push(file);
-    });
-
-    // 이미지 미리보기 화면에 출력
-    function imgEvent(file) {
-        $(".imgData").hide();
-        $(".imgView").show().css({
-            "background-image": "url(" + window.URL.createObjectURL(file) + ")"
-        });
-        $(".topmenu > div").eq(0).show();
-        $(".topmenu > div").eq(2).show();
-    }
-
-    //=========================================================================
-
-    function submitEvent() {
-        let form = $(projectForm);
-        console.log(form.find('input[name="titel"]').val());
-    }
-
-    // 업로드 페이지 추가 이벤트
-    function formEvent() {
-        $(".projectData").show();
-        $(".topmenu > div").eq(2).hide();
-        $(".topmenu > div").eq(3).show();
-    }
-
-    // 아코디언 메뉴 이벤트
-    $("label.togle").click(function () {
-        if ($(this).next().is(":visible")) {
-            $(this).next().css({ "display": "none" });
-        } else {
-            $(this).next().css({ "display": "block" });
-        }
-    });
-    // 업로드 닫기 이벤트
-    function uploadClose() {
-        if (confirm("게시물을 삭제하시겠어요?\n지금 나가면 수정 내용이 저장되지 않습니다. ") == true) {    //확인
-            location.reload(); // 화면 초기화
-        } else {   //취소
-            return false;
-        }
-    }
-
-    //인증글 작성 textarea 글 길이 검사
-    $('.textareaBox > textarea').on('input', function () {
-        let cnt = $(this).val().length;
-        if (cnt > 400) {
-            $(this).val($(this).val().substring(0, 400));
-            $(this).next().find("span").text(400).parent("p").css({ "color": "red" });
-        } else {
-            $(this).next().find("span").text(cnt);
-        }
-    });
-
-    // submit 유효성 감사
-    function submitEvent() {
-        const form = $(projectForm);
-        let projectTitle = $("input[name='projectTitle']");
-        let projectCategory = $("input[name='projectCategory']:checked");
-        let projectContent = $("textarea[name='projectContent']");
-        let projectAuth = $("textarea[name='projectAuth']");
-        let projectStrar = $("input[name='projectStrar']:checked");
-        let projectEnd = $("input[name='projectEnd']:checked");
-
-
-        // 제목 입력
-        if (projectTitle.val() == "") {
-            alert("제목을 입력하세요");
-            projectTitle.focus();
-            return false;
-        }
-        // 카테고리
-        if (projectCategory.length < 1) {
-            alert("카테고리를 선택하세요");
-            return false;
-        }
-        // 프로젝트 내용
-        if (projectContent.val() == "") {
-            alert("첼린지소개를 입력하세요");
-            projectContent.focus();
-            return false;
-        }
-        // 프로젝트 인증입력
-        if (projectAuth.val() == "") {
-            alert("인증방법을 입력하세요");
-            return false;
-        }
-        // 시작일 선택
-        if (projectStrar.length < 1) {
-            alert("시작일을 선택하세요");
-            projectContent.focus();
-            return false;
-        }
-        // 기간을 선택
-        if (projectEnd.length < 1) {
-            alert("기간을 선택하세요");
-            return false;
-        }
-
-        alert("성공");
-        // 유효성 이후 submit
-        // form.submit();
-    }
-
-    // 스타트 / 마지막 날짜 계산기
-    $().ready(function dateInputSet() {
-
-        let date = new Date();
-        const startTags = $("input[name='projectStrar']"); // start 데이터를 넣어줄 곳
-        const endTags = $("input[name='projectEnd']"); // end 데이터 넣어줄 곳
-        const dateVals = [6, 0, 1, 2, 3, 4, 5]; //요일별 더할 날짜
-
-        // Start 월요일 날짜 계산
-        let standDate = date.getDate() - dateVals[date.getDay()];
-        date.setDate(standDate);
-
-        let calcDate;  // 넣어줄 데이터
-        // 선택 태그 val 뿌리기
-        for (let i = 0; i < startTags.length; i++) {
-            date.setDate(date.getDate() + 7);
-            // console.log("======================");
-            // console.log("일 : " + date.getDate());
-            // console.log("월 : " + (date.getMonth() + 1));
-            calcDate = (date.getMonth() + 1) + "/" + date.getDate();
-            startTags.eq(i).next().text(calcDate);
-            calcDate = date.getFullYear() + "/" + calcDate;
-            startTags.eq(i).attr("value", calcDate);
-        }
-
-        // 기간 선택 js
-        startTags.on("change", function () {
-            let calcDate;
-            let dateArr = $(this).val().split("/");
-            let endDate = parseInt(dateArr[2]);
-            date.setMonth(parseInt(dateArr[1]) - 1);
-            date.setDate(endDate);
-
-            date.setDate(date.getDate());
-            console.log("년도" + date.getFullYear());
-            console.log("월" + (date.getMonth() + 1));
-            console.log("일" + date.getDate());
-
-            for (let i = 0; i < endTags.length; i++) {
-                date.setDate(date.getDate() + 7);
-                calcDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
-                endTags.eq(i).attr("value", calcDate);
-            }
-        });
-
-        $("input[name='projectEnd']").on("click", function () {
-            const dateInputCk = $("input[name='projectStrar']:checked"); // 기간 값
-            if (dateInputCk.length < 1) {
-                alert("시작일을 먼저 선택하세요");
-                return false;
-            }
-        });
-    });
 </script>
 
 </html>
