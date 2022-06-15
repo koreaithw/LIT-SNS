@@ -341,11 +341,11 @@ div.imgView {
 
 /* ===================================== */
 .formData>.projectData.on {
-  display: block;
+  /* display: block; */
 }
 
 .topmenu>div {
-  display: block;
+  /* display: block; */
 }
 
 /* ===================================== */
