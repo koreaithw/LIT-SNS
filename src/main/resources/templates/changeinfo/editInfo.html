@@ -11,16 +11,14 @@
 </head>
 
 <body style="background-color: rgba(250,250,250);">
-
-
     <main class="main" role="main">
         <div class="mainWrapper">
             <ul class="mainUl">
-                <li class="mainLi"><a class="mainA" href="editInfo.html" tabindex="0">프로필 편집</a></li>
-                <li class="mainLi"><a class="mainA" href="changePw.html" tabindex="0">비밀번호
-                    변경</a>
+                <li class="mainLi"><a class="mainA" href="/src/main/resources/templates/changeinfo/editInfo.html" tabindex="0">프로필 편집</a></li>
+                <li class="mainLi"><a class="mainA" href="/src/main/resources/templates/changeinfo/changePw.html" tabindex="0">비밀번호
+                        변경</a>
                 </li>
-                <li class="mainLi"><a class="mainA" href="withdraw.html" tabindex="0">회원 탈퇴</a></li>
+                <li class="mainLi"><a class="mainA" href="/src/main/resources/templates/changeinfo/withdraw.html" tabindex="0">회원 탈퇴</a></li>
 
             </ul>
             <article class="info1Article">
@@ -29,7 +27,7 @@
                         <div class="info1ArticleDiv3">
                             <button class="info1ArticleBtn " title="프로필 사진 바꾸기">
                             <img alt="프로필 사진 바꾸기" class="info1ArticleImg"
-                                    src="/images/changeinfo/jenny2.jpg" id="proFileImg"></button>
+                                    src="/src/main/resources/static/images/changeinfo/jenny2.jpg" id="proFileImg"></button>
                             <div class="info1ArticleDiv4">
                                 <form enctype="multipart/form-data" method="POST" role="presentation"><input
                                         accept="image/jpeg,image/png" class="info1ArticleInput1" type="file"></form>
@@ -118,7 +116,7 @@
                     <div class="submitBtnDivvvv" style="display:flex">
                         <aside class="submitBtnDivvv"><label></label></aside>
                         <div class="submitBtnDivv">
-                            <div class="submitBtnDiv"><button class="submitBtn" disabled="" type="button">제출</button>
+                            <div class="submitBtnDiv"><button class="submitBtn" type="button">제출</button>
                             </div>
                         </div>
                     </div>
@@ -153,6 +151,6 @@
 
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="/assets/js/changeinfo/editInfo.js"></script>
+<script src="/src/main/resources/static/assets/js/changeinfo/editInfo.js"></script>
 
 </html>
