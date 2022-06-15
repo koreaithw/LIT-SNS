@@ -46,30 +46,17 @@ function certificationWriteModalHide() {
     $('.certificationImages div div:first-child').addClass("active");
     $('.certificationImages div div:first-child').siblings('.active').removeClass('active');
     $('.certificationContentArea > textarea').val('');
-<<<<<<< HEAD
-
-    $.each($detailProjects, function(){
-        $(this).removeClass("on");
-    });
-
-    $detailProjectContent.css("width", "0");
-    $certificationWriteModal.css("width", "35%");
-    $whiteBackground.css("display", "block");
-    $certificationNextButton.css("display", "block");
-=======
     $('.certificationImageInner').empty();
     $('.innerImagePageButtons').empty();
     $fileUploadPreview.empty();
     $('#fileClickInput').val("");
     $('body').css("overflow","auto");
-=======
     $deleteBackground.css("display", "block");
 
     $('.deleteModalButton').on("click",function(){
         if($(this).val() == 'y'){
             certificationWriteBackground.style.display = 'none';
             certificationWriteButton.style.display = 'block';
->>>>>>> 2348eb4a9caa8ead31fa5886cb7dc004c76f3a68
 
             $('.certificationImages ul li:first-child').addClass('active');
             $('.certificationImages ul li:first-child').siblings('.active').removeClass('active');
