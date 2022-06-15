@@ -21,7 +21,7 @@ public class AdminController {
         return "/admin/login";
     }
 
-    @GetMapping("/userManagement")
+    @GetMapping("/user")
     public String userManagement(){
         log.info("***************************");
         log.info("AdminController : userManagement");
@@ -29,7 +29,7 @@ public class AdminController {
         return "/admin/user-management";
     }
 
-    @GetMapping("/approvedProjectManagement")
+    @GetMapping("/approvedProject")
     public String approvedProjectManagement(){
         log.info("***************************");
         log.info("AdminController : approvedProjectManagement");
@@ -37,7 +37,7 @@ public class AdminController {
         return "/admin/approved-project-management";
     }
 
-    @GetMapping("/reportManagement")
+    @GetMapping("/report")
     public String  reportManagement(){
         log.info("***************************");
         log.info("AdminController : reportManagement");
@@ -45,7 +45,7 @@ public class AdminController {
         return "/admin/report-management";
     }
 
-    @GetMapping("/waitingProjectManagement")
+    @GetMapping("/waitingProject")
     public String waitingProjectManagement(){
         log.info("***************************");
         log.info("AdminController : waitingProjectManagement");
@@ -53,7 +53,7 @@ public class AdminController {
         return "/admin/waiting-project-management";
     }
 
-    @GetMapping("/reviewManagement")
+    @GetMapping("/review")
     public String reviewManagement(){
         log.info("***************************");
         log.info("AdminController : reviewManagement");

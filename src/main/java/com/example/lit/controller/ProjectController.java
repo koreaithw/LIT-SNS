@@ -21,7 +21,7 @@ public class ProjectController {
         return "/project/message";
     }
 
-    @GetMapping("/projectInfo")
+    @GetMapping("/info")
     public String projectInfo(){
         log.info("******************************");
         log.info("ProjectController : projectInfo");
@@ -29,11 +29,19 @@ public class ProjectController {
         return "/project/projectInfo";
     }
 
-    @GetMapping("/projectWrite")
+    @GetMapping("/write")
     public String projectWrite(){
         log.info("******************************");
         log.info("ProjectController : projectWrite");
         log.info("******************************");
         return "/project/projectWrite";
+    }
+
+    @RequestMapping("/detail")
+    public String projectDetail(){
+        log.info("******************************");
+        log.info("DetailController : projectDetail");
+        log.info("******************************");
+        return "/detail/projectDetail";
     }
 }
