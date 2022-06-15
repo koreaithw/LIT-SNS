@@ -7,7 +7,6 @@ const lit1 = $('#lits1');
 const lit2 = $('#lits2');
 let $contents = $(".content2 > div");
 
-
 // 게시글 마우스 오버 이벤트
 $.each($contents, function(i, item){
   $(this).mouseover(function(){
