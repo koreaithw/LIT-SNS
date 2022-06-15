@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class ParticipationDAO {
-    ParticipationMapper participationMapper;
+    private final ParticipationMapper participationMapper;
     // 참여하기
-    public void insert(ParticipationVO participationVO){ participationMapper.insert(participationVO); }
+    public void register(ParticipationVO participationVO){ participationMapper.insert(participationVO); }
 }

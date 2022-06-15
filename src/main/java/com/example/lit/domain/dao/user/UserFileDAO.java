@@ -10,7 +10,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Repository
 public class UserFileDAO {
-    UserFileMapper userFileMapper;
+    private final UserFileMapper userFileMapper;
 
     //유저 파일 업로드
     public void register(UserFileVO userFileVO){ userFileMapper.insert(userFileVO); }

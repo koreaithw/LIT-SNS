@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class ReportDAO {
-    ReportMapper reportMapper;
+    private final ReportMapper reportMapper;
 
     // 신고하기
     public void register(ReportVO reportVO){ reportMapper.insert(reportVO);}

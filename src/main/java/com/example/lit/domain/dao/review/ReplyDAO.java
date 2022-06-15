@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ReplyDAO {
-    ReplyMapper replyMapper;
+    private final ReplyMapper replyMapper;
 
     //댓글 추가
     public void register(ReplyVO replyVO){ replyMapper.insert(replyVO);}
