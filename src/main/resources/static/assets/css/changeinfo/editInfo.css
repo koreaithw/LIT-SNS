@@ -333,16 +333,11 @@
 .infoInput3{
     -webkit-appearance: none;
     background: 0 0;
-    border: 1px solid #dbdbdb;
     border: 1px solid rgba(219,219,219);
     border-radius: 3px;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    color: #262626;
     color: rgba(38,38,38);
     -webkit-box-flex: 0;
-    -webkit-flex: 0 1 355px;
-    -ms-flex: 0 1 355px;
     flex: 0 1 355px;
     font-size: 16px;
     height: 32px;
@@ -576,20 +571,15 @@
 
 .infoDiv6_5{
     background: 0 0;
-    border: 1px solid #dbdbdb;
     border: 1px solid rgba(219,219,219);
     border-radius: 3px;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    color: #262626;
     color: rgba(38,38,38);
     -webkit-box-flex: 0;
-    -webkit-flex: 0 1 355px;
-    -ms-flex: 0 1 355px;
     flex: 0 1 355px;
     font-size: 16px;
+    width: 355px;
     height: 77px;
-    padding: 6px 89px;
     resize: none;
 }
 
@@ -869,4 +859,11 @@
 
 .changeProfileInput{
     display: none!important;
+}
+
+._checkArea1 {
+    font-size: 13px;
+    margin-top: 3px;
+    margin-bottom: -10px;
+    display: flex;
 }

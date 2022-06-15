@@ -1,6 +1,11 @@
 
 let changeProfile = document.querySelector('#changeProfile');
 let proFileImg = document.querySelector('#proFileImg');
+const nickNameCk = $('#pepUsername');
+const userName = $('#pepName');
+const phonNum = $('#phoneNum');
+const userContent = $('#pepBio');
+const eamil = $('#email');
 
 // 프로필 사진 바꾸기 모달 띄우기
 function changeProfileModal(){
@@ -47,15 +52,42 @@ $('#ModalFileInput').on("change", function(e){
 
 })
 
-$("._withdrawlPassword").keyup(function(){
-    if($("._withdrawlPassword").val()){
-        $("._withdrawl_button").attr("disabled",false)
+function checkNick(){
+    if(nickNameCk.val() == 'aa'){
+        $ ('._checkArea1').html('사용이 불가능한 이름입니다.');
+        $('._checkArea1').css('color', 'red');
+        return false;
+    } else if(nickNameCk.val().length <= 0){
+        return false;
+    } else{
+        $ ('._checkArea1').html('');
+        return true;
     }
+}
 
-    if(!$("._withdrawlPassword").val()){
-        $("._withdrawl_button").attr("disabled",true)
+//버튼 활성화/비활성화
+function buttonOn(){
+    
+    var chNick = checkNick();
+    console.log(userName.val());
+    console.log(userContent.val());
+    console.log(phonNum.val());
+    console.log(nickNameCk.val());
+    console.log(eamil.val());
+    
+    if(chNick && userName.val().length > 0 && nickNameCk.val().length > 0){
+        $('#subBtn').attr("class", "submitBtnOn");
+    } else{
+        $('#subBtn').attr("class", "submitBtn");
     }
+}
 
-})
+$('#subBtn').on("click", function(){
+    alert("프로필이 수정 되었습니다.")
+});
 
-
+userName.keyup(buttonOn);
+nickNameCk.keyup(buttonOn);
+userContent.keyup(buttonOn);
+eamil.keyup(buttonOn);
+phonNum.keyup(buttonOn);

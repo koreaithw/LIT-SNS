@@ -181,9 +181,17 @@ label{
     margin-top: 22px;
 }
 
-._checkArea3 {
-    margin-left: 260px;
+._checkArea1{
+    margin-left: 310px;
     margin-top: -11px;
+    margin-bottom: 9px;
+    font-size: 13px;
+}
+
+._checkArea3 {
+    margin-left: 310px;
+    margin-top: -11px;
+    font-size: 13px;
 }
 
 .sxIVS {
@@ -216,7 +224,7 @@ label{
 }
 
 ._5Q0UX {
-    margin-top: 16px;
+    margin-top: 10px;
 }
 
 .buttonStyle{
