@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ReviewDAO {
-    ReviewMapper reviewMapper;
+    private final ReviewMapper reviewMapper;
 
     //    리뷰 목록 가져오기
     public List<ReviewVO> getList(Criteria criteria){ return reviewMapper.getList(criteria); }
@@ -25,4 +25,6 @@ public class ReviewDAO {
     public boolean modify(ReviewVO reviewVO){ return reviewMapper.update(reviewVO) != 0; }
     //    리뷰 전체 개수
     public int getTotal(){ return reviewMapper.getTotal(); }
+    //    성공, 실패용 인증 수 카운트
+    public int resultCount(){ return reviewMapper.resultCount(); }
 }
