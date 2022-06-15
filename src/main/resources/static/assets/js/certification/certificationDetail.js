@@ -95,8 +95,8 @@ $('.innerImageWrapper > .innerImageSideButtons > div').click(function () {
     let isLeft = index == 0;
     let $current = $slider.find(' > .innerImagePageButtons > div.active');
     let $post;
-
-    if ( isLeft ){
+    
+    if (isLeft) {
         $post = $current.prev();
     }
     else {

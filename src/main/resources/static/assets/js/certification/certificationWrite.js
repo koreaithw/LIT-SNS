@@ -7,14 +7,10 @@ let projectInfoDropDown = document.querySelector('.projectInfoDropDown');
 let warningDropDown = document.querySelector('.warningDropDown');
 let certificationWriteButton = document.querySelector('.certificationWriteButton');
 
-<<<<<<< HEAD
-
-=======
 let $BackButton = $('.certificationBackButton');
 let $NextButton = $('.certificationNextButton');
 
 let $certificationFirstButton = $('.certificationBackButton > button.firstButton');
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
 let $certificationBackButton = $('.certificationBackButton > button.backButton');
 let $certificationBackBackButton = $('.certificationBackButton > button.backBackButton');
 let $certificationNextButton = $('.certificationNextButton > button.nextButton');
@@ -33,30 +29,15 @@ let $deleteModalButton = $('.deleteModalButton');
 let $deleteImageModalButton = $('.deleteImageModalButton');
 
 //프로젝트 모달 창 켜는 버튼
-<<<<<<< HEAD
-function certificationWriteModalShow(){
-    certificationWriteBackground.style.display = 'block';
-    certificationWriteButton.style.display = 'none';
-=======
 function certificationWriteModalShow() {
     certificationWriteBackground.style.display = 'block';
     certificationWriteButton.style.display = 'none';
-<<<<<<< HEAD
-    $('body').css("overflow","hidden");
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
-=======
     $('body').css("overflow", "hidden");
->>>>>>> 2348eb4a9caa8ead31fa5886cb7dc004c76f3a68
 }
 
 //프로젝트 모달 창 숨기는 버튼,
 //이미지 슬라이드와 버튼의 active 클래스를 다시 초기화해줌
-<<<<<<< HEAD
-function certificationWriteModalHide(){
-=======
 function certificationWriteModalHide() {
-<<<<<<< HEAD
->>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
     certificationWriteBackground.style.display = 'none';
     certificationWriteButton.style.display = 'block';
 
