@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CertificationWrite {
     //의존성 주입 객체 생성
 
-    @RequestMapping("/certificationWrite")
+    @RequestMapping("/write")
     public String certtificationWrite(){
         log.info("******************************");
         log.info("CertificationWrite : certtificationWrite");
