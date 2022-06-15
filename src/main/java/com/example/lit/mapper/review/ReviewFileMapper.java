@@ -14,7 +14,7 @@ public interface ReviewFileMapper {
     // 사진 수정
     public void update(ReviewFileVO reviewFileVO);
     // 사진 리스트
-    public List<ReviewFileVO> findByReviewNumber(Long reviewNumber);
+    public List<ReviewFileVO> getImgs(Long reviewNumber);
     // DB에 없는 이미지 삭제
     public List<ReviewFileVO> getOldFiles();
 }

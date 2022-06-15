@@ -3,7 +3,7 @@
 <mapper namespace="com.example.lit.mapper.user.UserMapper">
     <insert id="insert">
         INSERT INTO TBL_USER
-        (USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, )
+        (USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD )
         VALUES(SEQ_USER.NEXTVAL, #{email}, #{name}, #{nickname}, #{password})
     </insert>
 
@@ -18,20 +18,20 @@
 
     <select id="getUser" resultType="userVO">
         SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT FROM TBL_USER
-        WHERE EMAIL = #{email} AND PASSWORD = #{password}
+        WHERE USER_NUMBER = #{userNumber}
     </select>
 
     <update id="update">
         UPDATE TBL_USER
-        SET NAME = #{NAME}, NICKNAME = #{NICKNAME},
-            CONTENT = #{CONTENT}, EMAIL = EMAIL
+        SET NAME = #{name}, NICKNAME = #{nickname},
+            CONTENT = #{content}, EMAIL = #{email}
         WHERE USER_NUMBER = #{userNumber}
     </update>
 
     <update id="updatePw">
         UPDATE TBL_USER
-        SET PASSWORD = #{password}
-        WHERE PASSWORD = #{password}
+        SET PASSWORD = #{newPassword}
+        WHERE PASSWORD = #{userVO.password} AND USER_NUMBER = #{userVO.userNumber}
     </update>
 
     <update id="updateMedal">
