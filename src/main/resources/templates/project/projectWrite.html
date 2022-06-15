@@ -12,16 +12,15 @@
     <link rel="stylesheet" href="/assets/css/project/project.css">
     <style>
 
-    </style>
 </head>
 
 <body>
-    <header>헤더</header>
+    <header></header>
 
     <main>
         <div class="mainWrap">
             <section class="sec4">
-                <form action="" name="projectForm" enctype="multipart/form-data">
+                <form action="" name="projectForm" enctype="multipart/form-data" id="projectForm    ">
                     <div>
                         <div class="topmenu">
                             <div class="">
@@ -32,7 +31,7 @@
                                 <a href="javascript:formEvent();">다음</a>
                             </div>
                             <div class="">
-                                <a href="">전송</a>
+                                <a href="javascript:submitEvent();">전송</a>
                             </div>
                         </div>
 
@@ -41,7 +40,7 @@
                             <div class="imgData">
                                 <div>
                                     <svg aria-label="이미지나 동영상과 같은 미디어를 나타내는 아이콘" class="uploadLoge" color="#262626"
-                                        fill="#262626" height="77" role="img" viewBox="0 0 97.6 77.3" width="96">
+                                        fill="" height="77" role="img" viewBox="0 0 97.6 77.3" width="96">
                                         <path
                                             d="M16.3 24h.3c2.8-.2 4.9-2.6 4.8-5.4-.2-2.8-2.6-4.9-5.4-4.8s-4.9 2.6-4.8 5.4c.1 2.7 2.4 4.8 5.1 4.8zm-2.4-7.2c.5-.6 1.3-1 2.1-1h.2c1.7 0 3.1 1.4 3.1 3.1 0 1.7-1.4 3.1-3.1 3.1-1.7 0-3.1-1.4-3.1-3.1 0-.8.3-1.5.8-2.1z"
                                             fill="currentColor"></path>
@@ -80,57 +79,73 @@
 
                                 <label class="togle">재목</label>
                                 <div>
-                                    <input type="text" name="" placeholder="내용입력...">
+                                    <input type="text" name="projectTitle" placeholder="내용입력..." value="1">
                                 </div>
 
                                 <label class="togle">카테고리</label>
                                 <div>
                                     <div class="selecBox">
                                         <div>
-                                            <input type="radio" id="btnCate1" name="category" value="6/6">
-                                            <label for="btnCate1">운동</label>
+                                            <input type="radio" id="btnCate1" name="projectCategory" value="생활">
+                                            <label for="btnCate1">생활</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnCate2" name="category" value="6/6">
-                                            <label for="btnCate2">생활</label>
+                                            <input type="radio" id="btnCate2" name="projectCategory" value="운동">
+                                            <label for="btnCate2">운동</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" id="btnCate3" name="projectCategory" value="취미">
+                                            <label for="btnCate3">취미</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" id="btnCate4" name="projectCategory" value="예술">
+                                            <label for="btnCate4">예술</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" id="btnCate5" name="projectCategory" value="정서">
+                                            <label for="btnCate5">정서</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnCate3" name="category" value="6/6">
-                                            <label for="btnCate3">식습관</label>
+                                            <input type="radio" id="btnCate6" name="projectCategory" value="식습관">
+                                            <label for="btnCate6">식습관</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnCate4" name="category" value="6/6">
-                                            <label for="btnCate4">기타</label>
+                                            <input type="radio" id="btnCate7" name="projectCategory" value="공부    ">
+                                            <label for="btnCate7">공부</label>
                                         </div>
+
                                     </div>
                                 </div>
                                 <label class="togle">첼린지소개</label>
                                 <div class="textareaBox">
-                                    <textarea name="" placeholder="소개 입력..."></textarea>
-                                    <p><span></span>/ 400</p>
+                                    <textarea name="projectContent" placeholder="소개 입력..."></textarea>
+                                    <p><span>0</span> / 400</p>
                                 </div>
                                 <label class="togle">인증방법</label>
                                 <div class="textareaBox">
-                                    <textarea name="" placeholder="인증 입력..."></textarea>
-                                    <p><span></span>/ 400</p>
+                                    <textarea name="projectAuth" placeholder="인증 입력..."></textarea>
+                                    <p><span>0</span> / 400</p>
                                 </div>
                                 <label class="togle">시작일</label>
                                 <div>
                                     <div class="selecBox">
                                         <div>
-                                            <input type="radio" id="btnStart1" name="startDay" value="6/6">
+                                            <input type="radio" id="btnStart1" name="projectStrar" value="6/6">
                                             <label for="btnStart1">6/6</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnStart2" name="startDay" value="6/6">
+                                            <input type="radio" id="btnStart2" name="projectStrar" value="6/6">
                                             <label for="btnStart2">6/13</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnStart3" name="startDay" value="6/6">
+                                            <input type="radio" id="btnStart3" name="projectStrar" value="6/6">
                                             <label for="btnStart3">6/20</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnStart4" name="startDay" value="6/6">
+                                            <input type="radio" id="btnStart4" name="projectStrar" value="6/6">
                                             <label for="btnStart4">6/27</label>
                                         </div>
                                     </div>
@@ -140,19 +155,19 @@
                                 <div>
                                     <div class="selecBox">
                                         <div>
-                                            <input type="radio" id="btnPeriod1" name="Period" value="6/6">
+                                            <input type="radio" id="btnPeriod1" name="projectEnd" value="6/6">
                                             <label for="btnPeriod1">1주</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnPeriod2" name="Period" value="6/6">
+                                            <input type="radio" id="btnPeriod2" name="projectEnd" value="6/6">
                                             <label for="btnPeriod2">2주</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnPeriod3" name="Period" value="6/6">
+                                            <input type="radio" id="btnPeriod3" name="projectEnd" value="6/6">
                                             <label for="btnPeriod3">3주</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnPeriod4" name="Period" value="6/6">
+                                            <input type="radio" id="btnPeriod4" name="projectEnd" value="6/6">
                                             <label for="btnPeriod4">4주</label>
                                         </div>
                                     </div>
@@ -168,7 +183,7 @@
         </div>
     </main>
 
-    <footer>풋터</footer>
+    <footer></footer>
 
 </body>
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
@@ -268,14 +283,30 @@
     $('.textareaBox > textarea').on('input', function () {
         let cnt = $(this).val().length;
         if (cnt > 400) {
-            $('.certificationContentButtons > div > div:first-child').css("display", "block");
             $(this).val($(this).val().substring(0, 400));
-            $('.textareaBox > p > span').text(400);
+            $(this).next().find("span").text(400).parent("p").css({ "color": "red" });
         } else {
-            $('.certificationContentButtons > div > div:first-child').css("display", "none");
-            $('.textareaBox > p > span').text(cnt);
+            $(this).next().find("span").text(cnt);
         }
     });
+
+    function submitEvent() {
+        const form = $(projectForm);
+        let projectTitle = $("input[name='projectTitle']").val();
+        let projectCategory = $("input[name='projectCategory']:checked").val();
+        let projectContent = $("textarea[name='projectContent']").val();
+        let projectAuth = $("textarea[name='projectAuth']").val();
+        let projectStrar = $("input[name='projectStrar']:checked").val();
+        let projectEnd = $("input[name='projectEnd']:checked").val();
+
+        console.log(projectTitle);
+        console.log(projectCategory);
+        console.log(projectContent);
+        console.log(projectAuth);
+        console.log(projectStrar);
+        console.log(projectEnd);
+
+    }
 
 
 
