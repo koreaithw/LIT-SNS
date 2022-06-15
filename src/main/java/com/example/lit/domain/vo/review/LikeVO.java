@@ -1,15 +1,11 @@
-package com.example.lit.domain.vo;
+package com.example.lit.domain.vo.review;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class ReplyVO {
-    private Long replyNumber;
+public class LikeVO {
     private Long reviewNumber;
     private Long userNumber;
-    private String content;
-    private String registerDate;
-
 }
