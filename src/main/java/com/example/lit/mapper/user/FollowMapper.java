@@ -9,4 +9,6 @@ public interface FollowMapper {
     public void insert(FollowVO followVO);
     // 팔로우 취소
     public void delete(FollowVO followVO);
+    // 팔로우 카운트
+    public int count(FollowVO followVO);
 }
