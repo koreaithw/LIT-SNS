@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @RequestMapping("/user/*")
 public class UserController {
-    UserService userService;
+    private final UserService userService;
 
 
 }
