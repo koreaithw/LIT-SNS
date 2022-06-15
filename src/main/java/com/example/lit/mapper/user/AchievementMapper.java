@@ -1,4 +1,4 @@
-package com.example.lit.mapper;
+package com.example.lit.mapper.user;
 
 import org.apache.ibatis.annotations.Mapper;
 

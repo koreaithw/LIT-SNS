@@ -1,5 +1,6 @@
-package com.example.lit.mapper;
+package com.example.lit.mapper.review;
 
+import com.example.lit.domain.vo.ProjectFileVO;
 import com.example.lit.domain.vo.ReviewFileVO;
 import com.example.lit.domain.vo.UserFileVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -8,8 +9,14 @@ import java.util.List;
 
 @Mapper
 public interface ReviewFileMapper {
-    public void insert(ReviewFileVO userFileVO);
+    // 사진 추가
+    public void insert(ReviewFileVO reviewFileVO);
+    // 사진 삭제
     public void delete(Long reviewNumber);
+    // 사진 수정
+    public void update(ReviewFileVO reviewFileVO);
+    // 사진 리스트
     public List<ReviewFileVO> findByReviewNumber(Long reviewNumber);
+    // DB에 없는 이미지 삭제
     public List<ReviewFileVO> getOldFiles();
 }
