@@ -13,11 +13,6 @@ let fileType = /(.*?)\.(jpg|jpeg|png)$/;
 
 let uploadFiles = [];
 
-//삭제 모달창 취소버튼
-function deleteModalHide() {
-    $deleteBackground.css("display", "none");
-}
-
 //파일 직접 올릴 때 실행되는 함수
 $('.fileClickInput').on('change', function (e) {
 
@@ -59,10 +54,8 @@ $fileUploadArea.on("dragenter", function (e) {  //드래그 요소가 들어왔�
     $('.uploadLoge').attr("color", "rgb(250,100,98)");
 
 }).on("dragleave", function (e) {  //드래그 요소가 나갔을때
-    console.log("out");
     $(this).removeClass('drag-over');
     $('.uploadLoge').attr("color", "");
-
 }).on("dragover", function (e) {
     e.stopPropagation();
     e.preventDefault();

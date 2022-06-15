@@ -466,23 +466,15 @@ body{
     margin: 0;
     width: 100%;
     cursor:pointer;
-    color: #0095f6;
-    font-weight: bold;
-    font-size: 14px;
-    border:none;
-    background-color: transparent;
-}
-
-.detailContentFooterCommentButton > button:disabled{
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    cursor:unset;
     color: rgb(250,100,98);
     font-weight: bold;
     font-size: 15px;
     border:none;
     background-color: transparent;
+}
+
+.detailContentFooterCommentButton > button:disabled{
+    color: rgb(250,100,98);
     opacity: 0.5;
 }
 

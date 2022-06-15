@@ -286,3 +286,27 @@ input[name="end-date"] {
   overflow: visible;
   margin: 0 100px;
 }
+
+/* datepicker */
+.ui-datepicker-prev span {
+  background-image: url(http://legacy.australianetwork.com/img/icon_arrow_left_black.png) !important;
+  background-position: 0px 0px !important;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 50%;
+}
+
+.ui-datepicker-next{
+  top: 5px;
+  right: 5px;
+}
+.ui-datepicker-prev{
+  top: 5px;
+  left: 5px;
+}
+
+.ui-datepicker-next span {
+  background-image: url(http://legacy.australianetwork.com/img/icon_arrow_right_black.png) !important;
+  background-position: 0px 0px !important;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 50%;
+}
