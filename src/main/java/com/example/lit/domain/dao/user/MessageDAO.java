@@ -13,7 +13,7 @@ public class MessageDAO {
     MessageMapper messageMapper;
 
     //메세지 룸 생성
-    public void insert(MessageVO messageVO){ messageMapper.insert(messageVO); }
+    public void register(MessageVO messageVO){ messageMapper.insert(messageVO); }
     //메세지 보내기
     public void send(MessageVO messageVO){ messageMapper.send(messageVO); }
     //메세지 리스트 띄우기

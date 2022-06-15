@@ -13,5 +13,5 @@ public class LikeDAO {
     // 신고하기
     public void register(LikeVO likeVO){ likeMapper.insert(likeVO);}
     // 신고 취소(작성자)
-    public void remove(LikeVO likeVO){ likeMapper.insert(likeVO);}
+    public void remove(LikeVO likeVO){ likeMapper.delete(likeVO);}
 }

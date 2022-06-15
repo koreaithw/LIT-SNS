@@ -15,7 +15,7 @@ public class ProjectDAO {
     //    프로젝트 목록 가져오기
     public List<ProjectVO> getList(Criteria criteria){ return projectMapper.getList(criteria); }
     //    프로젝트 등록
-    public void register(ProjectVO projectVO){}
+    public void register(ProjectVO projectVO){ projectMapper.insert(projectVO);}
     //    프로젝트 상세보기
     public ProjectVO read(Long projectNumber){ return projectMapper.get(projectNumber); }
     //    리뷰 삭제

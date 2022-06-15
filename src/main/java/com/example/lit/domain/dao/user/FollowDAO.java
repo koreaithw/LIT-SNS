@@ -11,7 +11,7 @@ public class FollowDAO {
     FollowMapper followMapper;
 
     // 팔로우
-    public void insert(FollowVO followVO){ followMapper.insert(followVO); }
+    public void register(FollowVO followVO){ followMapper.insert(followVO); }
     // 팔로우 취소
-    public void delete(FollowVO followVO){ followMapper.delete(followVO); }
+    public void remove(FollowVO followVO){ followMapper.delete(followVO); }
 }

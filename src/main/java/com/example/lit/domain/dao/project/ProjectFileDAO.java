@@ -12,9 +12,9 @@ import java.util.List;
 public class ProjectFileDAO {
     ProjectFileMapper projectFileMapper;
     // 프로젝트 이미지 넣기
-    public void register(ProjectFileVO projectFileVO){}
+    public void register(ProjectFileVO projectFileVO){ projectFileMapper.insert(projectFileVO); }
     // 프로젝트 이미지 삭제
-    public void remove(Long projectNumber){}
+    public void remove(Long projectNumber){ projectFileMapper.delete(projectNumber); }
     // DB에 없는 이미지 삭제
     public List<ProjectFileVO> getOldFiles(){ return projectFileMapper.getOldFiles(); }
 }
