@@ -38,19 +38,6 @@ function certificationWriteModalShow() {
 //프로젝트 모달 창 숨기는 버튼,
 //이미지 슬라이드와 버튼의 active 클래스를 다시 초기화해줌
 function certificationWriteModalHide() {
-    certificationWriteBackground.style.display = 'none';
-    certificationWriteButton.style.display = 'block';
-
-    $('.certificationImages ul li:first-child').addClass('active');
-    $('.certificationImages ul li:first-child').siblings('.active').removeClass('active');
-    $('.certificationImages div div:first-child').addClass("active");
-    $('.certificationImages div div:first-child').siblings('.active').removeClass('active');
-    $('.certificationContentArea > textarea').val('');
-    $('.certificationImageInner').empty();
-    $('.innerImagePageButtons').empty();
-    $fileUploadPreview.empty();
-    $('#fileClickInput').val("");
-    $('body').css("overflow","auto");
     $deleteBackground.css("display", "block");
 
     $('.deleteModalButton').on("click",function(){
@@ -113,22 +100,7 @@ function certificationWriteModalHide() {
     $certificationBackButton.css("display", "none");
     $certificationBackBackButton.css("display", "none");
     $certificationCompleteButton.css("display", "none");
-<<<<<<< HEAD
 
-}
-
-
-
-=======
-    $certificationImageWrapper.css("display", "none");
-    $fileUploadAreaWrapper.css("display", "block");
-    $certificationFirstButton.css("display","none");
-    $fileUploadPreview.css("display","none");
-    $previewButton.find('button').css("backgroundColor",'#373737');
-    $('.btnIcon').attr("fill","white");
-    $previewButton.val('0');
-=======
->>>>>>> 2348eb4a9caa8ead31fa5886cb7dc004c76f3a68
 }
 
 
