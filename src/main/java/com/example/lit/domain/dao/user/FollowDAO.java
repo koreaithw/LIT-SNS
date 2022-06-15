@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 @Repository
 public class FollowDAO {
-    FollowMapper followMapper;
+    private final FollowMapper followMapper;
 
     // 팔로우
     public void register(FollowVO followVO){ followMapper.insert(followVO); }

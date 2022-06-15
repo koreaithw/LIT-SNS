@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ProjectFileDAO {
-    ProjectFileMapper projectFileMapper;
+    private final ProjectFileMapper projectFileMapper;
     // 프로젝트 이미지 넣기
     public void register(ProjectFileVO projectFileVO){ projectFileMapper.insert(projectFileVO); }
     // 프로젝트 이미지 삭제

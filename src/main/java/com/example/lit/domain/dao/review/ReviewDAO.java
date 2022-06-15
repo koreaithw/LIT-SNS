@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ReviewDAO {
-    ReviewMapper reviewMapper;
+    private final ReviewMapper reviewMapper;
 
     //    리뷰 목록 가져오기
     public List<ReviewVO> getList(Criteria criteria){ return reviewMapper.getList(criteria); }

@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class AchievementDAO {
-    AchievementMapper achievementMapper;
+    private final AchievementMapper achievementMapper;
 
     //메달 추가
     public void register(FollowVO followVO){ achievementMapper.insert(followVO); }
