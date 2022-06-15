@@ -25,56 +25,68 @@ let $certificationHeaderLabel = $('.certificationHeaderLabel > strong');
 let $modalLight = $('.modalLight');
 let $projectAlert = $('.projectAlert');
 let $whiteBackground = $('.whiteBackground');
-
+let $deleteModalButton = $('.deleteModalButton');
+let $deleteImageModalButton = $('.deleteImageModalButton');
 
 //프로젝트 모달 창 켜는 버튼
 function certificationWriteModalShow() {
     certificationWriteBackground.style.display = 'block';
     certificationWriteButton.style.display = 'none';
-    $('body').css("overflow","hidden");
+    $('body').css("overflow", "hidden");
 }
 
 //프로젝트 모달 창 숨기는 버튼,
 //이미지 슬라이드와 버튼의 active 클래스를 다시 초기화해줌
 function certificationWriteModalHide() {
-    certificationWriteBackground.style.display = 'none';
-    certificationWriteButton.style.display = 'block';
+    $deleteBackground.css("display", "block");
 
-    $('.certificationImages ul li:first-child').addClass('active');
-    $('.certificationImages ul li:first-child').siblings('.active').removeClass('active');
-    $('.certificationImages div div:first-child').addClass("active");
-    $('.certificationImages div div:first-child').siblings('.active').removeClass('active');
-    $('.certificationContentArea > textarea').val('');
-    $('.certificationImageInner').empty();
-    $('.innerImagePageButtons').empty();
-    $fileUploadPreview.empty();
-    $('#fileClickInput').val("");
-    $('body').css("overflow","auto");
+    $('.deleteModalButton').on("click",function(){
+        if($(this).val() == 'y'){
+            certificationWriteBackground.style.display = 'none';
+            certificationWriteButton.style.display = 'block';
 
-    $.each($detailProjects, function () {
-        $(this).removeClass("on");
+            $('.certificationImages ul li:first-child').addClass('active');
+            $('.certificationImages ul li:first-child').siblings('.active').removeClass('active');
+            $('.certificationImages div div:first-child').addClass("active");
+            $('.certificationImages div div:first-child').siblings('.active').removeClass('active');
+            $('.certificationContentArea > textarea').val('');
+            $('.certificationImageInner').empty();
+            $('.innerImagePageButtons').empty();
+            $fileUploadPreview.empty();
+            $('#fileClickInput').val("");
+            $('body').css("overflow", "auto");
+
+            $.each($detailProjects, function () {
+                $(this).removeClass("on");
+            });
+
+            uploadFiles = [];
+
+            $detailProjectContent.css("width", "0");
+            $certificationWriteModal.css("width", "35%");
+            $whiteBackground.css("display", "block");
+            $certificationNextButton.css("display", "none");
+            $certificationHeaderLabel.text('사진 업로드');
+            $certificationContent.css("display", "none");
+            $detailProjectContent.css("display", "none");
+            $certificationNextNextButton.css("display", "none");
+            $certificationBackButton.css("display", "none");
+            $certificationBackBackButton.css("display", "none");
+            $certificationCompleteButton.css("display", "none");
+            $certificationImageWrapper.css("display", "none");
+            $fileUploadAreaWrapper.css("display", "block");
+            $certificationFirstButton.css("display", "none");
+            $fileUploadPreview.css("display", "none");
+            $previewButton.find('button').css("backgroundColor", '#373737');
+            $('.btnIcon').attr("fill", "white");
+            $previewButton.val('0');
+            $deleteBackground.css("display", "none");
+        }else{
+            $deleteBackground.css("display", "none");
+        }
     });
 
-    uploadFiles = [];
 
-    $detailProjectContent.css("width", "0");
-    $certificationWriteModal.css("width", "35%");
-    $whiteBackground.css("display", "block");
-    $certificationNextButton.css("display", "none");
-    $certificationHeaderLabel.text('사진 업로드');
-    $certificationContent.css("display", "none");
-    $detailProjectContent.css("display", "none");
-    $certificationNextNextButton.css("display", "none");
-    $certificationBackButton.css("display", "none");
-    $certificationBackBackButton.css("display", "none");
-    $certificationCompleteButton.css("display", "none");
-    $certificationImageWrapper.css("display", "none");
-    $fileUploadAreaWrapper.css("display", "block");
-    $certificationFirstButton.css("display","none");
-    $fileUploadPreview.css("display","none");
-    $previewButton.find('button').css("backgroundColor",'#373737');
-    $('.btnIcon').attr("fill","white");
-    $previewButton.val('0');
 }
 
 
@@ -109,20 +121,29 @@ function twinkle() {
 //사진 미리보기 중 뒤로가기 눌렀을 때
 //미리보기, 파일 비워주고 화면전환
 $certificationFirstButton.on("click", function () {
-    twinkle();
 
-    $BackButton.css("display","none");
-    $certificationFirstButton.css("display","none");
-    $certificationNextButton.css("display","none");
-    $fileUploadAreaWrapper.css("display", "block");
-    $certificationImageWrapper.css("display", "none");
-    $previewButton.css("display", "none");
-    $('.certificationImageInner').empty();
-    $('.innerImagePageButtons').empty();
-    $fileUploadPreview.empty();
-    $('#fileClickInput').val("");
-    uploadFiles = [];
-})
+    $deleteImageBackground.css("display", "block");
+
+    $('.deleteImageModalButton').on("click",function(){
+        if($(this).val() == 'y'){
+            twinkle();
+            $BackButton.css("display", "none");
+            $certificationFirstButton.css("display", "none");
+            $certificationNextButton.css("display", "none");
+            $fileUploadAreaWrapper.css("display", "block");
+            $certificationImageWrapper.css("display", "none");
+            $previewButton.css("display", "none");
+            $('.certificationImageInner').empty();
+            $('.innerImagePageButtons').empty();
+            $fileUploadPreview.empty();
+            $('#fileClickInput').val("");
+            uploadFiles = [];
+            $deleteImageBackground.css("display", "none");
+        }else{
+            $deleteImageBackground.css("display", "none");
+        }
+    });
+});
 
 //사진 업로드 후 다음 버튼 누를때 모달창 크기 늘이기
 $certificationNextButton.on("click", function () {
@@ -137,9 +158,9 @@ $certificationNextButton.on("click", function () {
     $certificationNextNextButton.css("display", "block");
     $certificationBackButton.css("display", "block");
     $certificationFirstButton.css("display", "none");
-    $fileUploadPreview.css("display","none");
-    $previewButton.find('button').css("backgroundColor",'#373737');
-    $('.btnIcon').attr("fill","white");
+    $fileUploadPreview.css("display", "none");
+    $previewButton.find('button').css("backgroundColor", '#373737');
+    $('.btnIcon').attr("fill", "white");
     $previewButton.val('0');
 });
 

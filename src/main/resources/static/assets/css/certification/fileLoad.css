@@ -1,4 +1,4 @@
-.fileUploadAreaWrapper{
+.fileUploadAreaWrapper {
     width: 100%;
     height: 94%;
 }
@@ -9,7 +9,7 @@
     padding: 5px;
 }
 
-.fileUploadIcon{
+.fileUploadIcon {
     display: flex;
     justify-content: center;
     position: relative;
@@ -17,9 +17,10 @@
     bottom: 60%;
     width: 18.5%;
     transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
-.fileUploadLabel{
+.fileUploadLabel {
     display: flex;
     justify-content: center;
     position: relative;
@@ -28,16 +29,18 @@
     left: 50%;
     font-size: 20px;
     transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
-.previewButton{
+.previewButton {
     position: relative;
     left: 92%;
     top: -15%;
     display: none;
+    /* width: 30px; */
 }
 
-.previewButton > button{
+.previewButton>button {
     margin: 0;
     padding: 0;
     width: 30px;
@@ -45,14 +48,14 @@
     border: none;
     border-radius: 50%;
     background-color: #373737;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 2px 4px 5px rgba(0,0,0,0.2);
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.2);
 }
 
-.previewButton > button:hover{
+.previewButton>button:hover {
     opacity: 0.7;
     transition: opacity 0.2s;
 }
@@ -95,9 +98,10 @@
     position: absolute;
     bottom: 6%;
     right: 2.5%;
-    transform: translate(0%,0%);
+    transform: translate(0%, 0%);
     /* display: -webkit-box; */
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
     gap: 16px;
     width: 270px;
     height: 80px;
@@ -105,7 +109,7 @@
     margin-bottom: 16px;
     border-radius: 8px;
     align-items: center;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 2;
     display: none;
 }
@@ -114,36 +118,188 @@
     display: none;
 }
 
-.preview{
+.preview {
     width: 80px;
     height: 80px;
     /* display: flex; */
 }
 
-.preview > img{
+.preview>img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.preview > .close {
+.preview>.close {
     position: absolute;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color:#373737;
+    background-color: #373737;
     opacity: 0.9;
-    cursor:pointer;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1;
 }
 
-.preview > .close > svg{
+.preview>.close>svg {
     pointer-events: none;
 }
 
-.preview > .close:hover {
+.preview>.close:hover {
     opacity: 0.7;
+}
+
+/* delete alert modal */
+
+.deleteBackground {
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.deleteModalContainer {
+    min-height: 100%;
+}
+
+.deleteModal {
+    background-color: white;
+    width: 26%;
+    position: absolute;
+    top: 50vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 28%;
+    max-height: 28%;
+    border-radius: 12px;
+    z-index: 1;
+}
+
+.deleteModalHead{
+    width: 95%;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(219,219,219);
+}
+
+.deleteModalHead > div:first-child{
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0px;
+}
+
+.deleteModalHead > div:last-child{
+    font-size: 14px;
+    margin-bottom: 17px;
+    color: #8E8E8E;
+}
+
+.deleteModalButtons > div > button{
+    width: 100%;
+    height: 50px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(219,219,219);
+    text-align: center;
+}
+
+.deleteModalButtons > div:first-child > button{
+    color:rgb(250, 100, 98);
+    font-weight: bold;
+}
+.deleteModalButtons > div:last-child > button{
+    border-bottom: none;
+    border-radius: 0px 0px 12px 12px;
+}
+
+.deleteModalButtons > div > button:hover{
+    background-color: rgb(219,219,219);
+}
+
+/* deleteImageModal */
+
+.deleteImageBackground {
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.deleteImageModalContainer {
+    min-height: 100%;
+}
+
+.deleteImageModal {
+    background-color: white;
+    width: 26%;
+    position: absolute;
+    top: 50vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 28%;
+    max-height: 28%;
+    border-radius: 12px;
+    z-index: 1;
+}
+
+.deleteImageModalHead{
+    width: 95%;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(219,219,219);
+}
+
+.deleteImageModalHead > div:first-child{
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0px;
+}
+
+.deleteImageModalHead > div:last-child{
+    font-size: 14px;
+    margin-bottom: 17px;
+    color: #8E8E8E;
+}
+
+.deleteImageModalButtons > div > button{
+    width: 100%;
+    height: 50px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(219,219,219);
+    text-align: center;
+}
+
+.deleteImageModalButtons > div:first-child > button{
+    color:rgb(250, 100, 98);
+    font-weight: bold;
+}
+.deleteImageModalButtons > div:last-child > button{
+    border-bottom: none;
+    border-radius: 0px 0px 12px 12px;
+}
+
+.deleteImageModalButtons > div > button:hover{
+    background-color: rgb(219,219,219);
 }

@@ -1,12 +1,7 @@
-/* div{
-    border: 1px solid black;
-} */
 
 body{
     margin: 0;
     padding: 0;
-    background-repeat: no-repeat;
-    background-size : cover;
     height : 100vh;
     width : 100%;
 }
@@ -382,12 +377,14 @@ body{
     height: 64vh;
     transition:width ease-out 0.4s 0s;
     animation-direction: reverse;
-    overflow-y: scroll;
+    overflow: auto;
 }
 
 .detailProjectContent::-webkit-scrollbar {
     display: none;
 }
+
+
 
 .modalLight{
     position:absolute;
@@ -415,28 +412,29 @@ body{
 }
 
 .detailProjectContentList{
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(3, 0fr);
+    grid-gap: 25px 25px;
     padding-top: 10px;
     padding-bottom: 10px;
-    height: 80px;
+    padding-left: 28px;
 }
-
 
 .detailProjectContentList > div {
     width: 80px;
     height: 80px;
-    border: 1px solid rgb(219,219,219);
+    outline: 1px solid rgb(219,219,219);
     position: relative;
     cursor:pointer;
     z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2px;
 }
 
 .detailProjectContentList > div.on {
-    border: 2px solid rgb(250,100,98);
+    outline: 2px solid rgb(250,100,98);
 }
 
 .detailProjectContentList > div > span{
@@ -506,4 +504,3 @@ body{
 .innerImagePageButtons > div.active{
     background-color:rgba(0,0,0,0.5);
 }
-/* 사이드버튼 추가? */
