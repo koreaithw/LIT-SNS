@@ -16,7 +16,7 @@
 .mainUl{
     border-right: 1px solid rgba(219,219,219);
     display: flex;
-    flex-basis: 236px;
+    flex-basis: 220px;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     flex-direction: column;
@@ -24,7 +24,7 @@
     flex-grow: 0;
     flex-shrink: 0;
     -webkit-box-pack: justify;
-    list-style:none;
+    list-style: none;
     justify-content: flex-start;
     padding: 0;
 }
@@ -58,6 +58,7 @@
     flex: 1 1 400px;
     min-width: 50px;
     -webkit-box-flex: 1;
+    margin-left: 10px;
 }
 
 .info1ArticleDiv1{

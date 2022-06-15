@@ -58,7 +58,6 @@ label{
 
 
 ._input_wrapper{
-
     flex-basis: 355px;
     flex-direction: row;
     padding-right: 70px;
@@ -90,7 +89,8 @@ label{
     flex: 1 1 400px;
     min-width: 50px;
     -webkit-box-flex: 1;
-    padding-bottom: 326px
+    padding-bottom: 326px;
+    margin-left: 10px;
 }
 
 ._navbar{
@@ -273,7 +273,7 @@ label{
 .mainUl{
     border-right: 1px solid rgba(219,219,219);
     display: flex;
-    flex-basis: 236px;
+    flex-basis: 220px;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     flex-direction: column;
