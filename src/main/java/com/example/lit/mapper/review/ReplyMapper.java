@@ -1,9 +1,8 @@
 package com.example.lit.mapper.review;
 
 import com.example.lit.domain.vo.Criteria;
-import com.example.lit.domain.vo.ReplyVO;
+import com.example.lit.domain.vo.review.ReplyVO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

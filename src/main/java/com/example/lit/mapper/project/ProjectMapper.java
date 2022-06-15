@@ -1,8 +1,7 @@
 package com.example.lit.mapper.project;
 
 import com.example.lit.domain.vo.Criteria;
-import com.example.lit.domain.vo.ProjectVO;
-import com.example.lit.domain.vo.ReviewVO;
+import com.example.lit.domain.vo.project.ProjectVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
