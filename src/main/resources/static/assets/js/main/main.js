@@ -61,8 +61,8 @@ window.onload =function () {
 };
 $(document).ready(function(){
 
-    $("#header").load("/src/main/resources/templates/header.html")
-    $("#footer").load("/src/main/resources/templates/footer.html")
+    $("#header").load("/src/resources/templates/header.html");
+    $("#footer").load("/src /resources/templates/footer.html");
 })
 
     // ####################################################
@@ -93,3 +93,22 @@ $(document).ready(function(){
 
     // ####################################################
 
+const lit1 = $('#lits1');
+const lit2 = $('#lits2');
+
+// lit Up LITS 버튼 액션
+lit1.on("click", function(){
+    // color: rgb(142, 142, 142); 검은색
+    lit1.attr('class', 'lits1On');
+    $('#lit1Img').attr('src', '/src/main/resources/static/images/mypage/menu.png');
+    lit2.attr('class', 'lits2Off');
+    $('#lit2Img').attr('src', '/src/main/resources/static/images/mypage/fire.png');
+  });
+  
+  lit2.on("click", function(){
+    // color: rgb(142, 142, 142); 검은색
+    lit2.attr('class', 'lits2On');
+    $('#lit2Img').attr('src', '/src/main/resources/static/images/mypage/lists.png');
+    lit1.attr('class', 'lits1Off');
+    $('#lit1Img').attr('src', '/src/main/resources/static/images/mypage/menu2.png');
+  });
