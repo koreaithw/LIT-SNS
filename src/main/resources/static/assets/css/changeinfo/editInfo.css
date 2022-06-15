@@ -725,8 +725,46 @@
 }
 
 .submitBtn{
-    /* background-color: rgba(0,149,246); */
-    opacity: 1;
+    border-radius: 4px;
+    background-color: rgba(255, 69, 67, 0.3);
+    pointer-events: none;
+    color: rgba(var(--eca,255,255,255),1);
+    position: relative;
+    appearance: none;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 5px 9px;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: inherit;
+    user-select: none;
+    width: auto;
+    line-height: 20px;
+}
+    
+.submitBtnOn{
+    border-radius: 4px;
+    background-color: rgb(250, 100, 98);
+    color: rgba(var(--eca,255,255,255),1);
+    position: relative;
+    appearance: none;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 5px 9px;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: inherit;
+    user-select: none;
+    width: auto;
+    line-height: 20px;
 }
 
 .changeProfile0{

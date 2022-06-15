@@ -11,8 +11,7 @@ label{
     color: #262626;
     line-height: 18px;
     margin-top: 6px;
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 34px;
 }
 
 ._label_wrapper{
@@ -24,10 +23,10 @@ label{
     font-size: 16px;
     justify-content: flex-start;
     width: 100%;
-
-    padding-left: 32px;
-    padding-right: 32px;
-    text-align: right;
+    padding-left: 28px;
+    padding-right: 28px;
+    text-align: center;
+    margin-top: 8px;
 }
 
 .cppNewPassword, .cppOldPassword, .cppCheckPassword{
@@ -61,7 +60,7 @@ label{
 
     flex-basis: 355px;
     flex-direction: row;
-    padding-right: 60px;
+    padding-right: 70px;
 }
 
 ._input_wrapper input{
@@ -90,7 +89,7 @@ label{
     flex: 1 1 400px;
     min-width: 50px;
     -webkit-box-flex: 1;
-    padding-bottom: 300px;
+    padding-bottom: 326px
 }
 
 ._navbar{
@@ -178,7 +177,12 @@ label{
     display: flex;
     flex-direction: column;
     margin-bottom: 16px;
-    margin-top: 32px;
+    margin-top: 22px;
+}
+
+._checkArea3 {
+    margin-left: 260px;
+    margin-top: -11px;
 }
 
 .sxIVS {
@@ -214,42 +218,18 @@ label{
     margin-top: 16px;
 }
 
-.y3zKF[disabled]:not(.yWX7d):not(.A086a), a.y3zKF[disabled]:not(.yWX7d):not(.A086a), a.y3zKF[disabled]:not(.yWX7d):not(.A086a):visited {
-    background-color: rgba(0,149,246,.3);
-    background-color: rgba(var(--d69,0,149,246),.3);
-    opacity: 1;
-}
-
-.sqdOP[disabled]:not(.A086a) {
-    opacity: .3;
-}
-
-.y3zKF:not(.yWX7d), a.y3zKF:not(.yWX7d), a.y3zKF:not(.yWX7d):visited {
-    background-color: #0095f6;
-    background-color: rgba(var(--d69,0,149,246),1);
-    border: 1px solid transparent;
-}
-
-.L3NKy, a.L3NKy, a.L3NKy:visited {
+.buttonStyle{
     border-radius: 4px;
-    color: #fff;
+    background-color: rgba(255, 69, 67, 0.3);
+    pointer-events: none;
     color: rgba(var(--eca,255,255,255),1);
     position: relative;
-}
-
-.sqdOP[disabled], a.sqdOP[disabled] {
-    pointer-events: none;
-}
-
-.sqdOP {
     appearance: none;
-    background: 0 0;
     border: 0;
     box-sizing: border-box;
     cursor: pointer;
     display: block;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     padding: 5px 9px;
     text-align: center;
@@ -257,8 +237,30 @@ label{
     text-transform: inherit;
     user-select: none;
     width: auto;
-    line-height: 18px;
+    line-height: 20px;
 }
+    
+.buttonOn{
+    border-radius: 4px;
+    background-color: rgb(250, 100, 98);
+    color: rgba(var(--eca,255,255,255),1);
+    position: relative;
+    appearance: none;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 5px 9px;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: inherit;
+    user-select: none;
+    width: auto;
+    line-height: 20px;
+}
+
 .mainUl{
     border-right: 1px solid rgba(219,219,219);
     display: flex;
