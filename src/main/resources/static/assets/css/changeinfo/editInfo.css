@@ -712,8 +712,7 @@
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
-    margin-top: 12px;
-    margin-left: 70px;
+    margin-bottom: 20px;
 }
 
 .submitBtn{

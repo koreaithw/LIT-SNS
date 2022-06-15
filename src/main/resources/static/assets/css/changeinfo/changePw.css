@@ -213,12 +213,8 @@ label{
 .ada5V {
     flex-basis: 355px;
     flex-direction: row;
-    padding-right: 60px;
-}
-
-.ada5V {
+    padding-right: 39px;
     color: #262626;
-    flex-grow: 1;
     font-size: 16px;
     justify-content: flex-start;
 }
