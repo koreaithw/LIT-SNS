@@ -44,6 +44,7 @@ function checkNickName() {
       $('#nNameCk').css("display", "grid");
       return false;
    } else{
+      $('#nNameCk').attr('class', 'iconCheck');
       $('#nNameCk').css("display", "grid");
       return true;
    }
