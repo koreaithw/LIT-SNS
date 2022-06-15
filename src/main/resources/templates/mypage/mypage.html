@@ -8,20 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>mypage</title>
 
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/mypage/mypage.css">
+    <link rel="stylesheet" href="/assets/css/mypage/mypage.css"/>
 
 </head>
 
 <body>
-
-<main class="mypageMain" style="margin-top:60px;">
+<main class="mypageMain">
     <div class="mainInner">
         <header class="mypageHeader">
             <div class="profile1">
                 <div class="profile2">
                     <div class="profile3">
                         <button class="profileButton">
-                            <img class="profileImg" src="/src/main/resources/static/images/mypage/jennie.jpg">
+                            <img class="profileImg" src="/images/mypage/jennie.jpg">
                         </button>
                     </div>
                 </div>
@@ -31,7 +30,8 @@
                     <h2>jennierubyjane
                     </h2>
                     <!-- <div class="medalImg" onclick="medalModal()" id="medalImg"></div> -->
-                    <img class="medalImg" src="/src/main/resources/static/images/mypage/medal.png" onclick="medalModal()" id="medalImg">
+                    <!-- <img class="medalImg" src="/src/main/resources/static/images/mypage/medal.png" onclick="medalModal()" id="medalImg"> -->
+                    <img class="medalImg" src="/images/mypage/medal.png" id="medalImg">
                     <div class="editProfile">
                         <div class="editProfileInner"><a class="profileA">프로필 편집</a></div>
                     </div>
@@ -63,14 +63,14 @@
         <div class="litChange">
             <div style="display:flex">
                 <a class="lits1">
-                    <div><img class="litSvg" src="/src/main/resources/static/images/mypage/menu2.png">
+                    <div><img class="litSvg" src="/images/mypage/menu2.png">
                         <span class="litSpan">Lit up</span>
                     </div>
                 </a>
             </div>
             <div style="display:flex">
                 <a class="lits2">
-                    <div><img class="litSvg" src="/src/main/resources/static/images/mypage/fire.png">
+                    <div><img class="litSvg" src="/images/mypage/fire.png">
                         <span class="litSpan">Lits</span>
                     </div>
                 </a>
@@ -83,21 +83,21 @@
                         <div class="content2" style="display:flex">
                             <div class="content3"><a class="aContent" href="">
                                 <div class="content4">
-                                    <div class="content5"><img alt="" class="contentImage" src="/src/main/resources/static/images/mypage/jennie3.jpg">
+                                    <div class="content5"><img alt="" class="contentImage" src="/images/mypage/jennie3.jpg">
                                     </div>
                                     <div class="content6"></div>
                                 </div>
                             </a></div>
                             <div class="content2_1"><a class="content2_a" href="">
                                 <div class="content2_2">
-                                    <div class="content2_3"><img alt="" class="contentImage2" src="/src/main/resources/static/images/mypage/jennie3.jpg">
+                                    <div class="content2_3"><img alt="" class="contentImage2" src="/images/mypage/jennie3.jpg">
                                     </div>
                                     <div class="content2_4"></div>
                                 </div>
                             </a></div>
                             <div class="content3_1"><a class="content3_a" href="">
                                 <div class="content3_2">
-                                    <div class="content3_3"><img alt="" class="contentImage3" src="/src/main/resources/static/images/mypage/jennie3.jpg">
+                                    <div class="content3_3"><img alt="" class="contentImage3" src="/images/mypage/jennie3.jpg">
                                     </div>
                                     <div class="content3_4"></div>
                                 </div>
@@ -137,7 +137,7 @@
                                             <a class="followerAa" href="" role="link" tabindex="0"
                                                style="width: 30px; height: 30px;">
                                                 <img alt="" class="followerImgg"
-                                                     crossorigin="anonymous" draggable="false" src="/src/main/resources/static/images/mypage/jennie2.jpg">
+                                                     crossorigin="anonymous" draggable="false" src="/images/mypage/jennie2.jpg">
                                             </a>
                                         </div>
                                     </div>
@@ -192,7 +192,7 @@
                                             <a class="followerAa" href="" role="link" tabindex="0"
                                                style="width: 30px; height: 30px;">
                                                 <img alt="" class="followerImgg"
-                                                     crossorigin="anonymous" draggable="false" src="/src/main/resources/static/images/mypage/jennie2.jpg">
+                                                     crossorigin="anonymous" draggable="false" src="/images/mypage/jennie2.jpg">
                                             </a>
                                         </div>
                                     </div>
@@ -222,6 +222,120 @@
 </div>
 
 <!-- 메달 -->
+    <div class="medal-background">
+      <div class="medal-wrap">
+          <div class="medal-title">
+            <div>
+              <h2>보유 메달</h2>
+            </div>
+            <div class="btn__x">
+              <img
+                src="/images/mypage/close.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="medal-selected">
+            <!-- 대표메달 -->
+            <!-- DB에서 가져와서 꽂는게 맞는거 같은데 프론트 작업에서는 DB구현이 안됐으므로-->
+            <!-- 현재 내 아이디 옆에 있는 메달을 가져와서 띄워줬음 -->
+            <div class="medal-selected_title">
+                <h3>나의 대표 메달</h3>
+                <span>획득한 메달이</span>
+                <span id="medal-selected_number"></span>
+                <span>개 있어요.</span>
+            </div>
+            <div class="medal-selected_medal">
+                <!-- 메달 이미지 js로 넣음 -->
+                <!-- 메달 없으면 자물쇄 넣거나 가입시 기본 메달 줘서 설정하기 -->
+                <img src="" alt="">
+            </div>
+            <div class="medal-selected_info">
+                <h3></h3>
+            </div>
+            <div class="medal-selected_detail">
+                <span></span>
+                <div class="medal-selected_bar">
+                    <div class="bar-rate">
+                    </div>
+                    <div class="rate"></div>
+                </div>
+            </div>
+          </div>
+          <div class="medal-selected_button">
+            <button>나의 대표 메달로 사용하기</button>
+          </div>
+            <div class="medal-content">
+                <!-- 모달창이 mypage안에 존재해서 페이지 이동하면 바로 데이터 가져와야함 -->
+                <!-- 추후에 따로 분리되면 다른 방식으로 가져와야함 -->
+                <!-- 메달 db에서 가져와서 medal-icon-row 1개당 medal-icon-col 3개씩 반복 돌리기 -->
+                <!-- 내가 보유한 메달인지 확인하여 src값 변경하기 -->
+                <!-- 보유하지 않은 메달의 이미지 이름은 반드시 padlock.png 이어야함(mypage.js의 이벤트 확인)-->
+                <!-- 아니면 별도의 값을 주어서 구분하면됨 -->
+                <!-- 아래는 프론트 예시-->
+                <div class="medal-icon-row">
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/medal(1).png" alt="별이 될 거야" data-detail="예술 카테고리 lit up 10회 돌파!" data-bar="10/10">
+                    </div>
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/padlock.png" alt="건강하게" data-detail="운동 카테고리 3회 인증하기!" data-bar="1/3">
+                    </div>
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/padlock.png" alt="코드 테스트" data-detail="테스트 열심히하기!" data-bar="205/500000">
+                    </div>
+                </div>
+
+                <div class="medal-icon-row">
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/padlock.png" alt="">
+                    </div>
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/medal(2).png" alt="무념무상" data-detail="정서 카테고리 lit 달성률 100%로 완료하기!" data-bar="100/100">
+                    </div>
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/medal(3).png" alt="공부가 제일 쉬웠어요" data-detail="공부 카테고리 lit 10회 생성하여 완료하기!" data-bar="10/10">
+                    </div>
+                </div>
+
+                <div class="medal-icon-row">
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/padlock.png" alt="">
+                    </div>
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/medal.png" alt="환영합니다!" data-detail="이용해주셔서 감사합니다!">
+                    </div>
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/padlock.png" alt="">
+                    </div>
+                </div>
+                
+                <div class="medal-icon-row">
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/gold-medal.png" alt="동메달" data-detail="메달 3개 수집하기!" data-bar="3/3">
+                    </div>
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/padlock.png" alt="">
+                    </div>
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/padlock.png" alt="">
+                    </div>
+                </div>
+                <div class="medal-icon-row">
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/padlock.png" alt="">
+                    </div>
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/padlock.png" alt="">
+                    </div>
+                    <div class="medal-icon-col">
+                        <img src="/images/mypage/padlock.png" alt="">
+                    </div>
+                </div>
+                <!-- 예시 종료 -->
+            </div>
+      </div>
+    </div>
+<!-- 
 <div class="medal">
     <div class="followerModalWrapper">
         <div class="medalModal">
@@ -245,10 +359,10 @@
 
         </div>
     </div>
-</div>
+</div> -->
 
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="/src/main/resources/static/assets/js/mypage/mypage.js"></script>
+<script src="/assets/js/mypage/mypage.js"></script>
 
 </html>

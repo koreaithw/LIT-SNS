@@ -1,0 +1,565 @@
+/* div{
+    border: 1px solid black;
+} */
+
+body{
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat;
+    background-size : cover;
+    height : 100vh;
+    width : 100%;
+<<<<<<< HEAD
+    overflow: hidden;
+=======
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+}
+
+.closeArea {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.certificationWriteBackground{
+    margin:0;
+    padding:0;
+    background-color: rgba(0,0,0,0.6);
+    display: none; /*none으로 변경*/
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-size : cover;
+}
+
+.modalCloseButton{
+    position: absolute;
+    right: 10px;
+    top: 1%;
+    width: 2rem;
+    height: 2rem;
+    background-color: transparent;
+    cursor:pointer;
+    border: none;
+    font-size: 1.5em;
+    color: white;
+    z-index: 1;
+}
+
+.certifcationWriteModalContainer{
+    position: relative;
+    min-height: 100%;
+}
+
+.certificationWriteModal{
+    background-color:  white;
+    width: 35%;
+    position: absolute;
+<<<<<<< HEAD
+    top: 50%;
+    left: 50%;
+    height: 70.7vh;
+=======
+    top: 50vh;
+    left: 50%;
+    height: 66.7vh;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+    border-radius: 17px;
+    transform:translate(-50%,-50%);
+    transition:width ease-out 0.4s 0s;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.certificationHeader,
+.certificationContentHeader,
+.certificationContentButtons,
+.certificationInner,
+.certificationContHeaderWrapper,
+.certificationNextButton,
+.certificationContentProfileImage,
+.ceritficationContentProfileImageWrapper,
+.certificationContentFooterButtons,
+.projectInfoDropDownContent{
+    display: flex;
+}
+
+.certificationInner{
+    height: 64.5vh;
+}
+
+.certificationHeader{
+<<<<<<< HEAD
+    justify-content: space-between;
+=======
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(219,219,219);
+}
+
+<<<<<<< HEAD
+=======
+.certificationHeaderLabel{
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+.certificationImageWrapper{
+    width: 100%;
+    height: 65.5vh;
+    max-height: 66vh;
+    background-color: black;
+    border-radius: 0px 0px 0px 15px;
+}
+
+.certificationImages{
+    height: 64.5vh;
+    width: 100%;
+    overflow:hidden;
+}
+
+.certificationImageInner{
+    margin: 0;
+    position: relative;
+    height: 64.5vh;
+}
+
+.certificationImageInner > li{
+    width: 100%;
+    height: 64.5vh;
+    list-style: none;
+    opacity: 0;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    transition: opacity 0.3s;
+}
+
+.certificationImageInner > li.active{
+    opacity: 1;
+}
+
+<<<<<<< HEAD
+.certificationImage{
+=======
+.certificationImageInner > li > img{
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+<<<<<<< HEAD
+    height: 64.5vh;
+=======
+    height: 100%;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+
+}
+
+.certificationContent{
+    width: 43%;
+    min-height: 100%;
+}
+
+.certificationContentHeader{
+    width: 100%;
+    height: 62px;
+}
+
+.certificationContHeaderWrapper{
+    width: 90%;
+    margin: 0px auto;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.ceritficationContentProfileImageWrapper{
+    width: 30px;
+    height: 30px;
+    align-items: center;
+}
+
+.certificationContentProfileImage{
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+.certificationContentProfileImage > img{
+    object-fit: cover;
+    min-height: 100%;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.certificationUserId{
+<<<<<<< HEAD
+    margin-left: 12px;
+=======
+    margin-left: 16px;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+}
+
+.certificationContentArea{
+    overflow-x: hidden;
+    height: 205px;
+    border-bottom: 1px solid rgb(219,219,219);
+    width: 99.5%;
+}
+
+.certificationContentArea > textarea{
+    resize: none;
+    width: 315px;
+    height: 170px !important;
+    border: none;
+    padding: 0px 16px;
+    font-size: 16px;
+    padding-top: 5px;
+    vertical-align: middle;
+}
+
+.certificationContentArea > textarea:focus{
+    outline: none;
+}
+
+.certificationContentArea > textarea::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
+.certificationNextButton > button{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    cursor:pointer;
+<<<<<<< HEAD
+    color: #0095f6;
+=======
+    color: rgb(250, 100, 98);
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+    font-weight: bold;
+    font-size: 14px;
+    border:none;
+    background-color: transparent;
+}
+
+<<<<<<< HEAD
+.certificationBackButton > button{
+=======
+.certificationBackButton{
+    width: 24px;
+    height: 24px;
+}
+
+.certificationBackButton > button {
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    cursor: pointer;
+<<<<<<< HEAD
+=======
+    align-items: center;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+}
+
+.certificationContentButtons{
+    justify-content: flex-end;
+}
+
+.certificationContentButtons > div{
+    margin: 0px 5px;
+    display: flex;
+}
+
+.certificationContentButtons > div > div:first-child{
+    color: rgb(250, 100, 98);
+    font-size: 12px;
+    padding: 6px;
+    margin-right: 94px;
+    max-width: 160px;
+    width: 160px;
+}
+
+.certificationContentButtons > div > div > button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #ABABAB;
+}
+
+.certificationContentButtons > div > div > button:hover{
+    color: rgba(0,0,0);
+}
+
+.certificationContentFooterButtonsWrapper{
+    min-height: 182px;
+    align-items: center;
+}
+
+.certificationContentFooterButtons{
+    width: 100%;
+    justify-content: space-between;
+    min-height:40px;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid rgb(219,219,219);
+}
+
+.certificationContentFooterButtons:first-child{
+    width: 94%;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+}
+
+.certificationContentFooterButtons > span{
+    position: absolute;
+    right: 8px;
+    cursor: pointer;
+}
+
+.projectInfoDropDown{
+    max-height: 100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width:100%;
+    height: 0;
+    transition:height ease-out 0.5s 0s;
+}
+
+.projectInfoDropDown::-webkit-scrollbar {
+    display: none;
+}
+
+.projectInfoDropDownContentWrapper{
+    padding-top: 10px;
+}
+
+.projectInfoDropDownContent{
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.projectInfoDropDownContent > span{
+    font-weight:100;
+    font-size: 13px;
+}
+
+.certificationWriteWarning{
+    min-height: 140px;
+}
+
+.certificationWriteWarningInner{
+    position: relative;
+}
+
+.certificationWriteWarningInner > div > ul > li{
+    list-style: none;
+    font-size: 12px;
+    margin-bottom: 2px;
+    border-bottom: 1px solid rgb(219,219,219);
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #ABABAB;
+}
+.certificationWriteWarningInner > div > ul{
+    padding: 0;
+    margin: 0;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    width: 100%;
+}
+
+.certificationWriteWarningInner > div:first-child{
+    font-size: 12px;
+<<<<<<< HEAD
+    color: red;
+=======
+    color: rgb(250, 100, 98);
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+    opacity: 0.8;
+    margin: 15px 0px 15px 10px;
+    font-weight:700;
+    width: 94%;
+}
+
+.certificationWriteWarningInner > span{
+    cursor:pointer;
+    position: absolute;
+    right: 8px;
+    top: 0px;
+}
+
+.warningDropDown{
+    max-height: 100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width:100%;
+    height: 0px;
+    transition:height ease-out 0.5s 0s;
+}
+
+.warningDropDown::-webkit-scrollbar {
+    display: none;
+}
+
+.detailProjectContent{
+    width: 0;
+    height: 64vh;
+    transition:width ease-out 0.4s 0s;
+    animation-direction: reverse;
+    overflow-y: scroll;
+}
+
+.detailProjectContent::-webkit-scrollbar {
+    display: none;
+}
+
+.modalLight{
+    position:absolute;
+    width: 830px;
+    height: 100%;
+    background-color: white;
+    opacity: 0;
+    z-index: 1;
+    display: none;
+}
+
+.detailProjectContentTitle{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(219,219,219);
+}
+
+.detailProjectContentTitle > div{
+    font-weight:bold;
+    font-size: 20px;
+}
+
+.detailProjectContentList{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 80px;
+}
+
+
+.detailProjectContentList > div {
+    width: 80px;
+    height: 80px;
+    border: 1px solid rgb(219,219,219);
+    position: relative;
+    cursor:pointer;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.detailProjectContentList > div.on {
+    border: 2px solid rgb(250,100,98);
+}
+
+.detailProjectContentList > div > span{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.6);
+    display: none;
+    position: absolute;
+}
+
+.detailProjectContentList > div > img{
+    width: 76px;
+    height: 76px;
+}
+
+.whiteBackground{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: white;
+    z-index: 2;
+    display: none;
+}
+
+.projectAlert{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0,0,0,0.8);
+    display: none;
+    position:absolute;
+    color: white;
+    opacity: 0;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+.innerImagePageButtons{
+    text-align:center;
+    position:relative;
+<<<<<<< HEAD
+    bottom:8%;
+    width: 20%;
+    left: 37%
+=======
+    bottom: 12.5%;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+}
+
+.innerImagePageButtons > div {
+    width:15px;
+    height:15px;
+<<<<<<< HEAD
+    background-color:rgba(255,255,255,.5);
+    border-radius:50%;
+    display:inline-block;
+=======
+    gap: 5px;
+    background-color:rgba(255,255,255,.5);
+    border-radius:50%;
+>>>>>>> a0f4201232026838b0c88660d52bea0f35d9f805
+    cursor:pointer;
+    border: 1px solid rgb(219,219,219);
+}
+
+.innerImagePageButtons > div.active{
+    background-color:rgba(0,0,0,0.5);
+}
+/* 사이드버튼 추가? */
