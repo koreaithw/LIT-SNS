@@ -722,6 +722,7 @@
     -ms-flex-direction: row;
     flex-direction: row;
     margin-top: 16px;
+    margin-left: 70px;
 }
 
 .submitBtn{
