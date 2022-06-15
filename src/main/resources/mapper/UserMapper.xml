@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.user.UserMapper">
+    <insert id="insert">
+        INSERT INTO TBL_USER
+        (USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, )
+        VALUES(SEQ_USER.NEXTVAL, #{email}, #{name}, #{nickname}, #{password})
+    </insert>
+
+    <select id="login" resultType="_int">
+        SELECT COUNT(USER_NUMBER) FROM TBL_USER
+        WHERE EMAIL = #{email} AND PASSWORD = #{password}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM TBL_USER WHERE USER_NUMBER = #{userNumber}
+    </delete>
+
+    <select id="getUser" resultType="userVO">
+        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT FROM TBL_USER
+        WHERE EMAIL = #{email} AND PASSWORD = #{password}
+    </select>
+
+    <update id="update">
+        UPDATE TBL_USER
+        SET NAME = #{NAME}, NICKNAME = #{NICKNAME},
+            CONTENT = #{CONTENT}, EMAIL = EMAIL
+        WHERE USER_NUMBER = #{userNumber}
+    </update>
+
+    <update id="updatePw">
+        UPDATE TBL_USER
+        SET PASSWORD = #{password}
+        WHERE PASSWORD = #{password}
+    </update>
+
+    <update id="updateMedal">
+        UPDATE TBL_USER
+        SET ACHIEVEMENT_NUMBER = #{achievementNumber}
+        WHERE USER_NUMBER = #{userNumber}
+    </update>
+
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.example.lit.mapper.user;
 
-import com.example.lit.domain.vo.UserFileVO;
+import com.example.lit.domain.vo.review.ReviewFileVO;
+import com.example.lit.domain.vo.user.UserFileVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public interface UserFileMapper {
     public void delete(Long userNumber);
     //유저 파일 수정
     public void update(UserFileVO userFileVO);
+    // DB에 없는 이미지 삭제
+    public List<UserFileVO> getOldFiles();
 
 
 }

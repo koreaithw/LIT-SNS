@@ -1,8 +1,6 @@
 package com.example.lit.mapper.review;
 
-import com.example.lit.domain.vo.ProjectFileVO;
-import com.example.lit.domain.vo.ReviewFileVO;
-import com.example.lit.domain.vo.UserFileVO;
+import com.example.lit.domain.vo.review.ReviewFileVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
