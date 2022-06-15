@@ -14,7 +14,7 @@ public class AchievementDAO {
     private final AchievementMapper achievementMapper;
 
     //메달 추가
-    public void register(FollowVO followVO){ achievementMapper.insert(followVO); }
+    public void register(AchievementVO achievementVO){ achievementMapper.insert(achievementVO); }
     //메달 전체 해금 유무 (?)
     public List<AchievementVO> getList(Long userNumber){ return achievementMapper.getList(userNumber); }
     //메달 하나 보기

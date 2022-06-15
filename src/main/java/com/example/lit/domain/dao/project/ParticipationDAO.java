@@ -11,4 +11,5 @@ public class ParticipationDAO {
     private final ParticipationMapper participationMapper;
     // 참여하기
     public void register(ParticipationVO participationVO){ participationMapper.insert(participationVO); }
+    public void modify(ParticipationVO participationVO, Long result){ participationMapper.update(participationVO, result); }
 }

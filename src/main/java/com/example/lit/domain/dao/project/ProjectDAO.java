@@ -20,8 +20,6 @@ public class ProjectDAO {
     public ProjectVO read(Long projectNumber){ return projectMapper.get(projectNumber); }
     //    프로젝트 삭제
     public boolean remove(Long projectNumber){ return projectMapper.delete(projectNumber) != 0; }
-    //    리뷰 수정
-    public boolean modify(ProjectVO projectVO){ return projectMapper.update(projectVO) != 0; }
     //    프로젝트 전체 개수
     public int getTotal(){ return projectMapper.getTotal(); }
 }
