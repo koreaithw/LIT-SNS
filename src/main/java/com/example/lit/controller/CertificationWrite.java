@@ -13,9 +13,9 @@ public class CertificationWrite {
     //의존성 주입 객체 생성
 
     @RequestMapping("/write")
-    public String certtificationWrite(){
+    public String write(){
         log.info("******************************");
-        log.info("CertificationWrite : certtificationWrite");
+        log.info("CertificationWrite : write");
         log.info("******************************");
         return "/certification/certificationWrite";
     }
