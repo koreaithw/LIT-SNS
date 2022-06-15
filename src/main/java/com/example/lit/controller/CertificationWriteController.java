@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/certification/*")
 @RequiredArgsConstructor
 @Controller
-public class CertificationWrite {
+public class CertificationWriteController {
     //의존성 주입 객체 생성
 
     @RequestMapping("/write")
