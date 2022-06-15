@@ -18,18 +18,15 @@ public class MyBatisConfigTests {
     @Autowired
     private DataSource dataSource;
 
-//    @Test
-//    public void datasourceTest(){
-//        try
-//                (
-//                        Connection conn = dataSource.getConnection();
-//                )
-//        {
-//            log.info("---------------------------");
-//            log.info("dataSource connection : " + conn);
-//            log.info("---------------------------");
-//        } catch (Exception e){
-//            log.error(e.getMessage());
-//        }
-//    }
+    @Test
+    public void datasourceTest() {
+        try (
+                Connection conn = dataSource.getConnection();) {
+            log.info("---------------------------");
+            log.info("dataSource connection : " + conn);
+            log.info("---------------------------");
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+    }
 }
