@@ -170,7 +170,19 @@ ul {
   text-transform: uppercase;
 }
 
-.lits1 {
+.lits1On {
+  margin-right: 100px;
+  align-items: center;
+  color: rgb(255 87 87);
+  cursor: pointer;
+  flex-direction: row;
+  height: 52px;
+  justify-content: center;
+  text-transform: uppercase;
+  display: flex;
+}
+
+.lits1Off {
   margin-right: 100px;
   align-items: center;
   color: rgb(142, 142, 142);
@@ -182,10 +194,22 @@ ul {
   display: flex;
 }
 
-.lits2 {
+.lits2Off {
   margin-left: 100px;
   align-items: center;
   color: rgb(142, 142, 142);
+  cursor: pointer;
+  flex-direction: row;
+  height: 52px;
+  justify-content: center;
+  text-transform: uppercase;
+  display: flex;
+}
+
+.lits2On {
+  margin-left: 100px;
+  align-items: center;
+  color: rgb(255 87 87);
   cursor: pointer;
   flex-direction: row;
   height: 52px;
