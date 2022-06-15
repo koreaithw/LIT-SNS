@@ -23,7 +23,7 @@ body{
 
 .detailModalContent{
     background-color:  white;
-    width: 74%;
+    width: 70%;
     position: absolute;
     top: 50vh;
     left: 50%;
@@ -62,7 +62,7 @@ body{
 }
 
 .detailContentInnerImage{
-    width: 57%;
+    width: 80%;
     background-color: black;
 }
 
@@ -75,10 +75,11 @@ body{
 .innerImage{
     object-fit: cover;
     position: absolute;
-    top: 0;
-    left: 1%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 32.5%;
     width: 55%;
-    min-height: 100%;
+    min-height: 99.7%;
 }
 
 .innerImageSlides {
@@ -101,11 +102,12 @@ body{
 }
 
 .innerImagePageButtons{
-    text-align:center;
-    position:absolute;
-    bottom:10px;
+    text-align: center;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    bottom: 10px;
     width: 17.2%;
-    left: 20.1%
+    left: 32.5%;
 }
 
 .innerImagePageButtons > div {
@@ -132,7 +134,7 @@ body{
 }
 
 .innerImageSideButtons > div:last-child{
-    left:37.4%;
+    left:45%;
     right:0;
     width: 20%;
 }
@@ -190,7 +192,8 @@ body{
     align-items: center;
 }
 
-.detailContentProfileButton{
+.detailContentProfileButton,
+.detailContentDeleteButton{
     border: none;
     background: white;
     font-weight: bold;
@@ -278,7 +281,7 @@ body{
 
 .detailContentFeetWrapper{
     position: relative;
-    min-height: 404px;
+    min-height: 635px;
 }
 
 .detailContentFeed{
@@ -300,10 +303,11 @@ body{
 
 .detailContentFooter{
     position:absolute;
-    bottom:0;
+    bottom: 0;
+    right: 0;
     min-height:170px;
     max-height:170px;
-    width: 42.5%;
+    width: 35%;
     z-index: 1;
     background-color: white;
     border-top:1px solid rgb(219,219,219);
@@ -410,7 +414,7 @@ body{
 .detailContentFooterWirtesInner{
     display: flex;
     width: 95%;
-    margin-left: 10px;
+    margin-left: 15px;
     min-height: 30px;
     max-height: 30px;
 }
@@ -423,7 +427,7 @@ body{
 
 .detailContentFooterWirtesInnerDate{
     font-size: 11px;
-    margin-left: 10px;
+    margin-left: 15px;
     width: 95%;
     color:#BEC3C9;
 }
@@ -432,7 +436,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 39px;
+    min-height: 48px;
     width: 100%;
     padding-top: 5px;
 }
@@ -474,9 +478,9 @@ body{
     margin: 0;
     width: 100%;
     cursor:unset;
-    color: #0095f6;
+    color: rgb(250,100,98);
     font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
     border:none;
     background-color: transparent;
     opacity: 0.5;
@@ -491,7 +495,7 @@ body{
     resize: none;
     width: 98%;
     border: none;
-    font-size: 14px;
+    font-size: 15px;
     vertical-align: middle;
 }
 

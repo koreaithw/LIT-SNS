@@ -14,7 +14,7 @@ public interface AchievementMapper {
     //메달 전체 해금 유무 (?)
     public List<AchievementVO> getList(Long userNumber);
     //메달 하나 보기
-    public AchievementVO select(Long userNumber);
+    public AchievementVO get(Long userNumber);
 
 
 }
