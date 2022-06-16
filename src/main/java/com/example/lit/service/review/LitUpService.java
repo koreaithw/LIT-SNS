@@ -1,4 +1,4 @@
-package com.example.lit.service;
+package com.example.lit.service.review;
 
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.review.*;

@@ -1,4 +1,4 @@
-package com.example.lit.service;
+package com.example.lit.service.User;
 
 import com.example.lit.domain.vo.user.FollowVO;
 import com.example.lit.domain.vo.user.MessageVO;
