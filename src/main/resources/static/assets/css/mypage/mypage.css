@@ -21,7 +21,7 @@ body {
   flex-grow: 1;
   margin: 60px auto 30px;
   min-width: 950px;
-  background-color: rgba(var(--d87,255,255,255),1);
+  background-color: rgba(255,255,255,1);
   border: 1px solid rgb(219, 219, 219);
 }
 
@@ -110,13 +110,11 @@ body {
 
 .profileA {
   background-color: transparent;
-  border: 1px solid rgb(219, 219, 219);
+  outline: 1px solid rgb(219, 219, 219);
   color: rgb(38, 38, 38);
   border-radius: 4px;
   position: relative;
   -webkit-appearance: none;
-  background: none;
-  border: none;
   box-sizing: border-box;
   cursor: pointer;
   display: block;
@@ -159,6 +157,11 @@ ul {
   text-align: center;
 }
 
+/* lit up, lits 글자 크기 */
+.litChange > div{
+  font-size: 16px;
+}
+
 .litUp {
   margin-right: 60px;
   align-items: center;
@@ -180,6 +183,7 @@ ul {
   justify-content: center;
   text-transform: uppercase;
   display: flex;
+  border-top: 1px solid rgb(255,87,87);
 }
 
 .lits1Off {
@@ -216,6 +220,7 @@ ul {
   justify-content: center;
   text-transform: uppercase;
   display: flex;
+  border-top: 1px solid rgb(255,87,87);
 }
 
 .litSpan {
@@ -243,7 +248,25 @@ ul {
 
 .content2 {
   margin-bottom: 28px;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.content2 > div > span {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  background-color: rgba(0,0,0,0.6);
+  position: absolute;
+  display: none;
+  color: rgba(255,255,255,0.8);
+  font-weight: bold;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .content3 {
@@ -400,7 +423,7 @@ ul {
 }
 
 .spanInfo {
-  color: rgb(var(--ig-primary-text));
+  color: #000000;
   font-weight: 600;
   margin-left: 10px;
 }
@@ -410,8 +433,8 @@ ul {
   position: relative;
   color: rgb(38, 38, 38);
   fill: rgb(38, 38, 38);
-  height: 12;
-  width: 12;
+  height: 12px;
+  width: 12px;
 }
 
 .litSvg {
@@ -422,30 +445,32 @@ ul {
 
 .medalImg {
   height: 30px;
-  width: 30ox;
+  width: 30px;
   margin-left: 5px;
 }
 
 .follower {
   background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
   position: absolute;
   top: 0%;
-  background: cover;
+  background-size: cover;
   overflow: hidden;
   display: none;
 }
 
 .followering {
   background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
   position: absolute;
   top: 0%;
-  background: cover;
+  background-size: cover;
   overflow: hidden;
   display: none;
 }
@@ -458,7 +483,7 @@ ul {
   padding: 0;
   position: absolute;
   top: 0%;
-  background: cover;
+  background-size: cover;
   overflow: hidden;
   display: none;
 }
@@ -469,7 +494,9 @@ ul {
   background-color: white;
   border-radius: 15px;
   position: absolute;
-  left: 39.5%;
+  left: 50%;
+  top: 50vh;
+  transform: translate(-50%, -50%);
 }
 
 .medalModal {
@@ -478,7 +505,9 @@ ul {
   background-color: rgb(70, 70, 70);
   border-radius: 15px;
   position: absolute;
-  left: 35%;
+  left: 50%;
+  top: 50vh;
+  transform: translate(-50%, -50%);
 }
 
 .followerCancel {
@@ -500,7 +529,7 @@ ul {
   justify-content: center;
   position: relative;
   padding: 15px 0px;
-  border-bottom: 1px solidrgb(219, 219, 219);
+  border-bottom: 1px solid rgb(219, 219, 219);
   flex-direction: row;
   width: 100%;
   text-align: center;
@@ -508,7 +537,7 @@ ul {
 
 .followerModalWrapper {
   /* position: relative;
-    top: 100px; 
+    top: 100px;
     vh -> 화면 기준
     */
   height: 100vh;
@@ -551,8 +580,7 @@ ul {
   flex: none;
   justify-content: center;
   position: relative;
-  margin: 4px;
-  margin-right: 13px;
+  margin: 4px 13px 4px 4px;
 }
 
 .followerImgA {

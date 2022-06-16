@@ -45,7 +45,9 @@ $('.fileClickInput').on('change', function (e) {
     $previewButton.css("display", "block");
     $certificationFirstButton.css("display", "block");
     $certificationNextButton.css("display", "block");
-})
+}).on('dragover',function(){
+    $(this).css("pointerEvents","none");
+});
 
 // 드래그-드랍 구역에
 // 이미지 드래그, 드랍 할 때 실행되는 함수
@@ -63,6 +65,7 @@ $fileUploadArea.on("dragenter", function (e) {  //드래그 요소가 들어왔�
     e.preventDefault();
     $(this).removeClass('drag-over');
     $('.uploadLoge').attr("color", "");
+    $('.fileClickInput').css("pointerEvents","all");
 
     let files = e.originalEvent.dataTransfer.files;
 

@@ -5,6 +5,30 @@ let followingBtnn = document.querySelector(".followingBtnn");
 let followBtnn = document.querySelector(".followBtnn");
 const lit1 = $('#lits1');
 const lit2 = $('#lits2');
+let $contents = $(".content2 > div");
+
+// 게시글 마우스 오버 이벤트
+$.each($contents, function(i, item){
+  $(this).mouseover(function(){
+    $(this).find('span').css('display','flex');
+
+    // 임시 조건, 백엔드 연결 후 조건 수정
+    if(i%3 == 0){
+      $(this).find('span').html('심사 중');
+    }else if(i%3 == 1){
+      $(this).find('span').html('삭제된 챌린지');
+    }else{
+      $(this).find('span').html('진행 중');
+    }
+
+  });
+
+  $(this).mouseout(function(){
+    $(this).find('span').css('display','none');
+  });
+
+})
+
 
 // 팔로워 모달 보이기
 function followerModal() {
