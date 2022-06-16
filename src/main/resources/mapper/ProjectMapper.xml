@@ -2,19 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.project.ProjectMapper">
     <select id="getList" resultType="projectVO">
-        SELECT PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE
-        FROM TBL_PROJECT PJ, TBL_PARTICIPATION PT
-         <choose>
-             <when test="#{category}.equals('popular')">
-                 ORDER BY COUNT(PT.USER_NUMBER)
-             </when>
-             <when test="#{category}.equals('new')">
-                 ORDER BY PJ.START_DATE DESC
-             </when>
-             <otherwise>
-                 WHERE PJ.CATEGORY =#{category} ORDER BY PJ.START_DATE DESC
-             </otherwise>
-         </choose>
+<!--        <![CDATA[-->
+<!--        SELECT RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
+<!--        FROM-->
+<!--        (-->
+<!--                SELECT ROWNUM RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
+<!--                FROM    TBL_PROJECT PJ, TBL_PARTICIPATION PT-->
+<!--        ]]>-->
+<!--                 <choose>-->
+<!--                     <when test="category == 'popular'">-->
+<!--                         <![CDATA[   WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY COUNT(PT.USER_NUMBER)  ]]>-->
+<!--                     </when>-->
+<!--                     <when test="category == 'new'">-->
+<!--                         <![CDATA[  WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
+<!--                     </when>-->
+<!--                     <otherwise>-->
+<!--                         <![CDATA[  WHERE PJ.CATEGORY =#{category} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
+<!--                     </otherwise>-->
+<!--                 </choose>-->
+<!--        <![CDATA[-->
+<!--        )-->
+<!--        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}-->
+<!--        ]]>-->
     </select>
 
     <insert id="insert">
