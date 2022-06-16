@@ -32,4 +32,6 @@ public class LitUpController {
         return "/certification/certificationDetail";
     }
 
+
+
 }

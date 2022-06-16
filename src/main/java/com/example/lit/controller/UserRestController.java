@@ -3,10 +3,7 @@ package com.example.lit.controller;
 import com.example.lit.service.User.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,8 +24,27 @@ public class UserRestController {
         return null;
     }
 
-    @PatchMapping("/changeInfo")
-    public String changeInfo(){
+    //비밀번호 확인
+    @PostMapping("/checkPw")
+    public String checkPw(){
+        return null;
+    }
+
+
+    //============= 팔로잉 ===============
+
+    @GetMapping("/following")
+    public String following(){
+        return null;
+    }
+
+    @GetMapping("/follower")
+    public String follower(){
+        return null;
+    }
+
+    @GetMapping("/follow")
+    public String follow(){
         return null;
     }
 
