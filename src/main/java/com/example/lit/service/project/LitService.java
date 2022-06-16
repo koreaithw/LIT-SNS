@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface LitService {
     //    프로젝트 목록 가져오기
-    public List<ProjectVO> getList(Criteria criteria);
+    public List<ProjectVO> getList(Criteria criteria, String category);
     //    프로젝트 등록 (이미지 포함)
     public void register(ProjectVO projectVO, ProjectFileVO projectFileVO);
     //    프로젝트 상세보기

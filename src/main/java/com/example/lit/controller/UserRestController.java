@@ -19,6 +19,11 @@ public class UserRestController {
     public void changeImg(){
     }
     
+    @PostMapping("/checkNickName")
+    public String checkNickName(){
+        return null;
+    }
+
 
 
 }
