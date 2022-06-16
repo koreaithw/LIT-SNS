@@ -3,7 +3,7 @@
 <mapper namespace="com.example.lit.mapper.user.UserFileMapper">
     <insert id="insert">
         INSERT INTO TBL_USER_FILE (UUID, UPLOAD_PATH, NAME, IMAGE, USER_NUMBER)
-        VALUES (#{uuid}, #{uploadPath}, #{fileName}, #{image}, #{userNumber})
+        VALUES (#{uuid}, #{uploadPath}, #{name}, #{image}, #{userNumber})
     </insert>
 
     <delete id="delete">
