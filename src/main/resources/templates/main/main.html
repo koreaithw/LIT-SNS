@@ -9,10 +9,12 @@
     <title>Lit_MAIN</title>
     <link rel="stylesheet" href="/assets/css/main/main.css"/>
     <link rel="stylesheet" href="/assets/css/default.css"/>
+    <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
 </head>
 
 <body>
-<header></header>
+<header th:insert="~{/header :: header}"></header>
 <main>
     <div class="_main_wrapper">
         <div class="_main_top_wrapper">
@@ -185,7 +187,7 @@
             </div>
         </div>
     </div>
-    <footer></footer>
+    <footer th:insert="~{/footer :: footer}"></footer>
 </main>
 
 

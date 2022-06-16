@@ -4,7 +4,7 @@
     flex-grow: 1;
     -webkit-box-ordinal-group: 5;
     order: 4;
-    position: absolute;
+    position: relative;
     transform: translate(-50%, -50%);
     top: 50vh;
     left: 50%;
