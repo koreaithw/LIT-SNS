@@ -162,6 +162,7 @@ $certificationNextButton.on("click", function () {
     $previewButton.find('button').css("backgroundColor", '#373737');
     $('.btnIcon').attr("fill", "white");
     $previewButton.val('0');
+    $previewButton.css("display", 'none');
 });
 
 //다음 버튼 두 번 눌렀을 때
@@ -199,6 +200,7 @@ $certificationBackButton.on("click", function () {
     $certificationNextNextButton.css("display", "none");
     $certificationBackButton.css("display", "none");
     $certificationFirstButton.css("display", "block");
+    $previewButton.css("display", 'block');
 });
 
 //인증글 작성에서 이전 화살표 누를 시 모달창 안 내용 변경

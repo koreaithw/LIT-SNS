@@ -428,7 +428,6 @@ ul {
 
 .follower {
   background-color: rgba(0, 0, 0, 0.4);
-  height: 150vh;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -441,7 +440,6 @@ ul {
 
 .followering {
   background-color: rgba(0, 0, 0, 0.4);
-  height: 150vh;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -471,7 +469,7 @@ ul {
   background-color: white;
   border-radius: 15px;
   position: absolute;
-  left: 35%;
+  left: 39.5%;
 }
 
 .medalModal {
@@ -902,6 +900,11 @@ ul {
 .btn__x > img {
   width: 18px;
 }
+
+.fbtn__x > img {
+  width: 15px;
+}
+
 .medal-selected_info {
   margin-top: 10px;
 }
