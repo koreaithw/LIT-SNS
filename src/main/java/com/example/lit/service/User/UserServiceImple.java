@@ -1,4 +1,4 @@
-package com.example.lit.service;
+package com.example.lit.service.User;
 
 import com.example.lit.domain.dao.user.FollowDAO;
 import com.example.lit.domain.dao.user.MessageDAO;
@@ -26,7 +26,6 @@ public class UserServiceImple implements UserService{
 
     @Override
     public void register(UserVO userVO) {
-
     }
 
     @Override
