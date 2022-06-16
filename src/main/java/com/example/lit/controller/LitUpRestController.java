@@ -3,7 +3,7 @@ package com.example.lit.controller;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.ReplyVO;
 import com.example.lit.domain.vo.review.ReviewVO;
-import com.example.lit.service.LitUpService;
+import com.example.lit.service.review.LitUpService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/litUp")
+@RequestMapping("/litUp/*")
 public class LitUpRestController {
     private final LitUpService litUpService;
 

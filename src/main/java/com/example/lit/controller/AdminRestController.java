@@ -4,7 +4,7 @@ import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.ReportVO;
 import com.example.lit.domain.vo.review.ReviewVO;
 import com.example.lit.domain.vo.user.UserVO;
-import com.example.lit.service.UserService;
+import com.example.lit.service.User.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

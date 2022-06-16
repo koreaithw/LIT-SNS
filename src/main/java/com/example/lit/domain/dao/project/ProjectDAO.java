@@ -13,7 +13,7 @@ import java.util.List;
 public class ProjectDAO {
     private final ProjectMapper projectMapper;
     //    프로젝트 목록 가져오기
-    public List<ProjectVO> getList(Criteria criteria){ return projectMapper.getList(criteria); }
+    public List<ProjectVO> getList(Criteria criteria, String category){ return projectMapper.getList(criteria, category); }
     //    프로젝트 등록
     public void register(ProjectVO projectVO){ projectMapper.insert(projectVO);}
     //    프로젝트 상세보기

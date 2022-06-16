@@ -1,4 +1,4 @@
-package com.example.lit.service;
+package com.example.lit.service.project;
 
 import com.example.lit.domain.dao.project.ParticipationDAO;
 import com.example.lit.domain.dao.project.ProjectDAO;
@@ -7,7 +7,6 @@ import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.project.ParticipationVO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
-import com.example.lit.mapper.project.ProjectFileMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

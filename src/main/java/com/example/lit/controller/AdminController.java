@@ -1,6 +1,6 @@
 package com.example.lit.controller;
 
-import com.example.lit.service.UserService;
+import com.example.lit.service.User.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
