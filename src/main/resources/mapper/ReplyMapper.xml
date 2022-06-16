@@ -16,8 +16,8 @@
         SELECT US.NICKNAME, RP.CONTENT , RP.RGISTER_DATE FROM
             (
                 SELECT /*+ INDEX_DESC(TBL_REPLY SYS_C007522) */ ROWNUM RN, US.NICKNAME, RP.CONTENT , RP.RGISTER_DATE
-                FROM TBL_REPLY RP, TBL_USER US, TBL_REVIEW
-                WHERE REVIEW_NUMBER = #{reviewNumber} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+                FROM TBL_REPLY RP, TBL_USER US, TBL_REVIEW RV
+                WHERE RV.REVIEW_NUMBER = #{reviewNumber} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
             )
         WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}
         ]]>

@@ -11,9 +11,9 @@ import java.util.List;
 public interface AchievementMapper {
     //메달 추가
     public void insert(AchievementVO achievementVO);
-    //메달 전체 해금 유무 (?)
+    //메달 전체 해금 유무 (?) 이거 조건은 어떻게 같이 표시함?
     public List<AchievementVO> getList(Long userNumber);
-    //메달 하나 보기
+    //메달 하나 보기 이거 조건은 어떻게 같이 표시함?
     public AchievementVO get(Long userNumber);
 
 

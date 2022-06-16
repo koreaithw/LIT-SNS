@@ -3,13 +3,14 @@ package com.example.lit.mapper.project;
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.project.ProjectVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface ProjectMapper {
     //    프로젝트 목록 가져오기
-    public List<ProjectVO> getList(Criteria criteria);
+    public List<ProjectVO> getList(@Param("criteria")Criteria criteria, @Param("category") String category);
     //    프로젝트 등록
     public void insert(ProjectVO projectVO);
     //    프로젝트 상세보기
