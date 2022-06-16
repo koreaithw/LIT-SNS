@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -7,20 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원정보수정</title>
     <link rel="stylesheet" href="/assets/css/changeinfo/editInfo.css">
+    <link rel="stylesheet" href="/assets/css/default.css" />
 
 </head>
+<header></header>
 
 <body style="background-color: rgba(250,250,250);">
     <main class="main" role="main">
         <div class="mainWrapper">
             <ul class="mainUl">
-                <li class="mainLi"><a class="mainA" href="/changeinfo/editInfo"
-                        tabindex="0">프로필 편집</a></li>
-                <li class="mainLi"><a class="mainA" href="/changeinfo/changePw"
-                        tabindex="0">비밀번호 변경</a>
+                <li class="mainLi"><a class="mainA" href="/changeinfo/editInfo" tabindex="0">프로필 편집</a></li>
+                <li class="mainLi"><a class="mainA" href="/changeinfo/changePw" tabindex="0">비밀번호 변경</a>
                 </li>
-                <li class="mainLi"><a class="mainA" href="/changeinfo/withdraw"
-                        tabindex="0">회원 탈퇴</a>
+                <li class="mainLi"><a class="mainA" href="/changeinfo/withdraw" tabindex="0">회원 탈퇴</a>
                 </li>
 
             </ul>
@@ -29,8 +28,8 @@
                     <div class="info1ArticleDiv2">
                         <div class="info1ArticleDiv3">
                             <button class="info1ArticleBtn " title="프로필 사진 바꾸기">
-                            <img alt="프로필 사진 바꾸기" class="info1ArticleImg"
-                                    src="/images/changeinfo/jenny2.jpg" id="proFileImg"></button>
+                                <img alt="프로필 사진 바꾸기" class="info1ArticleImg" src="/images/changeinfo/jenny2.jpg"
+                                    id="proFileImg"></button>
                             <div class="info1ArticleDiv4">
                                 <form enctype="multipart/form-data" method="POST" role="presentation"><input
                                         accept="image/jpeg,image/png" class="info1ArticleInput1" type="file"></form>
@@ -39,8 +38,7 @@
                     </div>
                     <div class="infoDiv2_1">
                         <h1 class="infoDiv2H1 " title="xldms.dl">xldms.dl</h1>
-                        <button class="infoDiv2_2"
-                            type="button" onclick="changeProfileModal()">프로필 사진 바꾸기</button>
+                        <button class="infoDiv2_2" type="button" onclick="changeProfileModal()">프로필 사진 바꾸기</button>
                         <div class="infoDiv2_3">
                             <form enctype="multipart/form-data" method="POST" role="presentation"><input
                                     accept="image/jpeg,image/png" class="infoDivInput2" type="file"></form>
@@ -52,7 +50,8 @@
                         <aside class="infoAside"><label for="infoLabel1" class="nameLabel">이름</label></aside>
                         <div class="infoDiv3_2">
                             <div class="infoDiv3_3" style="width: 100%; max-width: 355px;">
-                                <input aria-required="false" id="pepName" placeholder="이름" type="text" class="infoInput3" value="이지은">
+                                <input aria-required="false" id="pepName" placeholder="이름" type="text"
+                                    class="infoInput3" value="이지은">
                                 <div class="infoDiv3_4" style="width: 100%; max-width: 355px;">
                                     <div class="infoDiv3_5">
                                         <div class="infoDiv3_6">사람들이
@@ -68,9 +67,10 @@
                         <aside class="infoDiv4_2"><label for="pepUsername">사용자 이름</label></aside>
                         <div class="infoDiv4_3">
                             <div class="infoDiv4_4" style="width: 100%; max-width: 355px;">
-                                <input aria-required="true" id="pepUsername" placeholder="사용자 이름" type="text" class="infoDiv4_5" value="xldms.dl">
-                                    <div class="_label_wrapper2"></div>
-                                    <div class="_checkArea1"></div>
+                                <input aria-required="true" id="pepUsername" placeholder="사용자 이름" type="text"
+                                    class="infoDiv4_5" value="xldms.dl">
+                                <div class="_label_wrapper2"></div>
+                                <div class="_checkArea1"></div>
                                 <div class="infoDiv4_6" style="width: 100%; max-width: 355px;">
                                     <div class="infoDiv4_7">
                                         <div class="infoDiv4_8">대부분의 경우
@@ -104,7 +104,8 @@
                         <aside class="infoDiv5_2"><label for="pepWebsite">이메일</label></aside>
                         <div class="infoDiv5_3">
                             <div class="infoDiv5_4" style="width: 100%; max-width: 355px;">
-                                <input aria-required="false" id="email" placeholder="123@gmail.com" type="text" class="infoDiv5_5" value="">
+                                <input aria-required="false" id="email" placeholder="123@gmail.com" type="text"
+                                    class="infoDiv5_5" value="">
                             </div>
                         </div>
                     </div>
@@ -124,7 +125,7 @@
 
     <!-- 프로필 사진 바꾸기 -->
     <div class="changeProfile0" id="changeProfile">
-        <div class="changeProfile1" role="presentation" >
+        <div class="changeProfile1" role="presentation">
             <div class="changeProfile2" role="dialog">
                 <div class="changeProfile3">
                     <div class="changeProfile4" data-testid="EditProfilePicMenu-testID">
@@ -133,11 +134,14 @@
                         </div>
                         <div class="changeProfile7">
                             <button class="aww changeProfile8" tabindex="0" onclick="uploadProfile()">사진 업로드</button>
-                            <button class="aww changeProfile9" tabindex="0" onclick="changeProfileDelete()">현재 사진 삭제</button>
-                                <button class="aww changeProfile10" tabindex="0" onclick="changeProfileModalClose()">취소</button>
+                            <button class="aww changeProfile9" tabindex="0" onclick="changeProfileDelete()">현재 사진
+                                삭제</button>
+                            <button class="aww changeProfile10" tabindex="0"
+                                onclick="changeProfileModalClose()">취소</button>
                             <form enctype="multipart/form-data" method="POST" role="presentation">
-                                <input
-                                    accept="image/jpeg,image/png" class="changeProfileInput" type="file" id="ModalFileInput"></form>
+                                <input accept="image/jpeg,image/png" class="changeProfileInput" type="file"
+                                    id="ModalFileInput">
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -145,6 +149,7 @@
         </div>
     </div>
 
+    <footer></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="/assets/js/changeinfo/editInfo.js"></script>

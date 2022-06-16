@@ -1,219 +1,228 @@
-let $fileUploadArea = $(".fileUploadArea");
-let $fileUploadAreaWrapper = $(".fileUploadAreaWrapper");
-let $fileClickInput = $(".fileClickInput #fileClickInputLabel");
-let $fileUploadPreview = $(".fileUploadPreview");
-let $certificationImageInner = $(".certificationImageInner");
-let $certificationImageWrapper = $(".certificationImageWrapper");
-let $innerImagePageButtons = $(".innerImagePageButtons");
-let $previewButton = $(".previewButton");
-let $deleteBackground = $(".deleteBackground");
-let $deleteImageBackground = $(".deleteImageBackground");
-
+// 파일 담을 변수
 let fileType = /(.*?)\.(jpg|jpeg|png)$/;
-
 let uploadFiles = [];
-
-//삭제 모달창 취소버튼
-function deleteModalHide() {
-  $deleteBackground.css("display", "none");
-}
-
-//파일 직접 올릴 때 실행되는 함수
-$(".fileClickInput").on("change", function (e) {
-  let files = e.target.files;
-  let check = $("#fileClickInput").val();
-
-  //유효성검사
-  if (!check.match(fileType)) {
-    $(".uploadLoge").css("display", "none");
-    $(".uploadError").css("display", "block");
-    $certificationHeaderLabel.text("파일 업로드 실패");
-    $fileClickInput.text("다른 파일 선택");
-    $(".fileUploadLabel").text("지원되지 않는 파일입니다");
-    $("#fileClickInput").val("");
-    uploadFiles = [];
-    return;
-  }
-
-  for (let i = 0; i < files.length; i++) {
-    let file = files[i];
-    let size = uploadFiles.push(file); //업로드 목록에 추가
-    preview(file, size - 1); //미리보기 만들기
-  }
-
-  twinkle();
-  $certificationHeaderLabel.text("사진 업로드");
-  $BackButton.css("display", "block");
-  $fileUploadAreaWrapper.css("display", "none");
-  $certificationImageWrapper.css("display", "block");
-  $previewButton.css("display", "block");
-  $certificationFirstButton.css("display", "block");
-  $certificationNextButton.css("display", "block");
-});
-
-// 드래그-드랍 구역에
-// 이미지 드래그, 드랍 할 때 실행되는 함수
-$fileUploadArea
-  .on("dragenter", function (e) {
-    //드래그 요소가 들어왔을때
-    $(this).addClass("drag-over");
-    $(".uploadLoge").attr("color", "rgb(250,100,98)");
-  })
-  .on("dragleave", function (e) {
-    //드래그 요소가 나갔을때
-    console.log("out");
-    $(this).removeClass("drag-over");
-    $(".uploadLoge").attr("color", "");
-  })
+// ======================================================================
+// 이미지 드롭 js
+$(".imgData")
   .on("dragover", function (e) {
+    // 이미지 오버
     e.stopPropagation();
     e.preventDefault();
+    let $logo = $(".uploadLoge");
+    $logo.attr("color", "#ff4543");
+    $(e.target).css({
+      "background-color": "#f2f2f2",
+    });
+  })
+  .on("dragleave", function (e) {
+    // 이미지 아웃
+    e.stopPropagation();
+    e.preventDefault();
+    let $logo = $(".uploadLoge");
+    $logo.attr("color", "#262626");
+    $(e.target).css({
+      "background-color": "#ffffff",
+    });
   })
   .on("drop", function (e) {
-    //드래그한 항목을 떨어뜨렸을때
+    // 이미지 드랍
+    e.stopPropagation();
     e.preventDefault();
-    $(this).removeClass("drag-over");
-    $(".uploadLoge").attr("color", "");
+    let $logo = $(".uploadLoge");
+    $logo.attr("color", "#ff4543");
+    $(e.target).css({
+      "background-color": "#f2f2f2",
+    });
 
-    let files = e.originalEvent.dataTransfer.files;
-
-    //유효성 검사 및 파일 추가
-    for (let i = 0; i < files.length; i++) {
-      let file = files[i];
-      if (!file.name.match(fileType)) {
-        $(".uploadLoge").css("display", "none");
-        $(".uploadError").css("display", "block");
-        $certificationHeaderLabel.text("파일 업로드 실패");
-        $fileClickInput.text("다른 파일 선택");
-        $(".fileUploadLabel").text("지원되지 않는 파일입니다");
-        $("#fileClickInput").val("");
-        uploadFiles = [];
-        return;
-      }
-      let size = uploadFiles.push(file); //업로드 목록에 추가
-      preview(file, size - 1); //미리보기 만들기
+    // 파일 객체화
+    let file = e.originalEvent.dataTransfer.files[0];
+    // 파일 유효성
+    if (!file.name.match(fileType)) {
+      alert("파일업로드 실패");
+      return;
     }
+    // 이미지 미리보기
+    imgEvent(file);
 
-    twinkle();
+    // 이미지 저장할 데이터 담기....
+    uploadFiles.push(file);
   });
-
-//사진 삭제용 미리보기 버튼
-$previewButton.on("click", "button", function () {
-  if ($previewButton.val() != 1) {
-    $fileUploadPreview.css("display", "-webkit-box");
-    $previewButton.find("button").css("backgroundColor", "white");
-    $(".btnIcon").attr("fill", "black");
-    $previewButton.val("1");
-  } else {
-    $fileUploadPreview.css("display", "none");
-    $previewButton.find("button").css("backgroundColor", "#373737");
-    $(".btnIcon").attr("fill", "white");
-    $previewButton.val("0");
+// 파일 input 업로드
+$("#btnImage").on("change", function (e) {
+  e.stopPropagation();
+  e.preventDefault();
+  // 파일 객체화
+  let file = e.target.files[0];
+  // 파일 유효성
+  if (!$(this).val().match(fileType)) {
+    alert("파일업로드 실패");
+    return;
   }
+  // 이미지 미리보기
+  imgEvent(file);
+  // 이미지 저장할 데이터 담기....
+  uploadFiles.push(file);
 });
 
-//작은 미리보기 창 생성
-//모달 창에도 이미지 리스트 생성
-function preview(file, idx) {
-  let reader = new FileReader();
-  reader.onload = (function (f, idx) {
-    return function (e) {
-      let res;
-      let div;
-      let str = '<div class="preview">';
-      str +=
-        '<div class="close" data-idx="' +
-        idx +
-        '"><svg aria-label="닫기" class="fg7vo5n6 lrzqjn8y" color="#ffffff" fill="#ffffff" height="10" role="img" viewBox="0 0 48 48" width="10"><title>닫기</title><path clip-rule="evenodd" d="M41.8 9.8L27.5 24l14.2 14.2c.6.6.6 1.5 0 2.1l-1.4 1.4c-.6.6-1.5.6-2.1 0L24 27.5 9.8 41.8c-.6.6-1.5.6-2.1 0l-1.4-1.4c-.6-.6-.6-1.5 0-2.1L20.5 24 6.2 9.8c-.6-.6-.6-1.5 0-2.1l1.4-1.4c.6-.6 1.5-.6 2.1 0L24 20.5 38.3 6.2c.6-.6 1.5-.6 2.1 0l1.4 1.4c.6.6.6 1.6 0 2.2z" fill-rule="evenodd"></path></svg></div>';
-      str += '<img src="' + e.target.result + '"/></div>';
-      $fileUploadPreview.append(str);
-
-      if ($certificationImageInner.children().length == 0) {
-        res =
-          '<li class="active" id="' +
-          idx +
-          '"><img src= "' +
-          e.target.result +
-          '"/></li>';
-        div = '<div class="active" id="' + idx + '"></div>';
-        $certificationImageInner.html(res);
-        $innerImagePageButtons.html(div);
-      } else {
-        res = '<li id="' + idx + '"><img src= "' + e.target.result + '"/></li>';
-        div = '<div id="' + idx + '"></div>';
-        $certificationImageInner.append(res.trim());
-        $innerImagePageButtons.append(div.trim());
-      }
-    };
-  })(file, idx);
-  reader.readAsDataURL(file);
+// 이미지 미리보기 화면에 출력
+function imgEvent(file) {
+  $(".imgData").hide();
+  $(".imgView")
+    .show()
+    .css({
+      "background-image": "url(" + window.URL.createObjectURL(file) + ")",
+    });
+  $(".topmenu > div").eq(0).show();
+  $(".topmenu > div").eq(2).show();
 }
 
-// 작은 미리보기 창에서 x버튼 누를 때
-$fileUploadPreview.on("click", ".close", function (e) {
-  if ($certificationImageInner.children().length == 1) {
-    $deleteImageBackground.css("display", "block");
+//=========================================================================
 
-    $(".deleteImageModalButton").on("click", function () {
-      if ($(this).val() == "y") {
-        twinkle();
-        $BackButton.css("display", "none");
-        $certificationFirstButton.css("display", "none");
-        $certificationNextButton.css("display", "none");
-        $fileUploadAreaWrapper.css("display", "block");
-        $certificationImageWrapper.css("display", "none");
-        $previewButton.css("display", "none");
-        $(".certificationImageInner").empty();
-        $(".innerImagePageButtons").empty();
-        $fileUploadPreview.empty();
-        $("#fileClickInput").val("");
-        uploadFiles = [];
-        $deleteImageBackground.css("display", "none");
-      } else {
-        $deleteImageBackground.css("display", "none");
-        return;
-      }
-    });
+function submitEvent() {
+  let form = $(projectForm);
+  console.log(form.find('input[name="titel"]').val());
+}
+
+// 업로드 페이지 추가 이벤트
+function formEvent() {
+  $(".projectData").show();
+  $(".topmenu > div").eq(2).hide();
+  $(".topmenu > div").eq(3).show();
+}
+
+// 아코디언 메뉴 이벤트
+$("label.togle").click(function () {
+  if ($(this).next().is(":visible")) {
+    $(this).next().css({ display: "none" });
   } else {
-    let $target = $(e.target);
-    let idx = $target.attr("data-idx");
+    $(this).next().css({ display: "block" });
+  }
+});
+// 업로드 닫기 이벤트
+function uploadClose() {
+  if (
+    confirm(
+      "게시물을 삭제하시겠어요?\n지금 나가면 수정 내용이 저장되지 않습니다. "
+    ) == true
+  ) {
+    //확인
+    location.reload(); // 화면 초기화
+  } else {
+    //취소
+    return false;
+  }
+}
 
-    uploadFiles[idx].upload = "disable"; //삭제된 항목은 업로드하지 않기 위해 플래그 생성
-    $target.parent().remove(); //프리뷰 삭제
-    $certificationImageInner.children("#" + idx).remove();
-    $certificationImageInner.children().eq(0).addClass("active");
-    $innerImagePageButtons.children("#" + idx).remove();
-    $innerImagePageButtons.children().eq(0).addClass("active");
+//인증글 작성 textarea 글 길이 검사
+$(".textareaBox > textarea").on("input", function () {
+  let cnt = $(this).val().length;
+  if (cnt > 400) {
+    $(this).val($(this).val().substring(0, 400));
+    $(this).next().find("span").text(400).parent("p").css({ color: "red" });
+  } else {
+    $(this).next().find("span").text(cnt);
   }
 });
 
-// 작은 미리보기 창 가로 스크롤
-$(".fileUploadPreview").on("mousewheel", function (e) {
-  var wheelDelta = e.originalEvent.wheelDelta;
-  if (wheelDelta > 0) {
-    console.log("up");
-    $(this).scrollLeft(-wheelDelta + $(this).scrollLeft());
-  } else {
-    console.log("down");
-    $(this).scrollLeft(-wheelDelta + $(this).scrollLeft());
-  }
-});
+// submit 유효성 감사
+function submitEvent() {
+  const form = $(projectForm);
+  let projectTitle = $("input[name='projectTitle']");
+  let projectCategory = $("input[name='projectCategory']:checked");
+  let projectContent = $("textarea[name='projectContent']");
+  let projectAuth = $("textarea[name='projectAuth']");
+  let projectStrar = $("input[name='projectStrar']:checked");
+  let projectEnd = $("input[name='projectEnd']:checked");
 
-// 제출 시에 사용
-// $("#btnSubmit").on("click", function () {
-//     var formData = new FormData();
-//     $.each(uploadFiles, function (i, file) {
-//         if (file.upload != 'disable')  //삭제하지 않은 이미지만 업로드 항목으로 추가
-//             formData.append('upload-file', file, file.name);  //모든 첨부파일은 upload-file 이름으로 전달함
-//     });
-//     $.ajax({
-//         url: '업로드URL',
-//         data: formData,
-//         type: 'post',
-//         contentType: false,
-//         processData: false,
-//         success: function (ret) {
-//             alert("완료");
-//         }
-//     });
-// });
+  // 제목 입력
+  if (projectTitle.val() == "") {
+    alert("제목을 입력하세요");
+    projectTitle.focus();
+    return false;
+  }
+  // 카테고리
+  if (projectCategory.length < 1) {
+    alert("카테고리를 선택하세요");
+    return false;
+  }
+  // 프로젝트 내용
+  if (projectContent.val() == "") {
+    alert("첼린지소개를 입력하세요");
+    projectContent.focus();
+    return false;
+  }
+  // 프로젝트 인증입력
+  if (projectAuth.val() == "") {
+    alert("인증방법을 입력하세요");
+    return false;
+  }
+  // 시작일 선택
+  if (projectStrar.length < 1) {
+    alert("시작일을 선택하세요");
+    projectContent.focus();
+    return false;
+  }
+  // 기간을 선택
+  if (projectEnd.length < 1) {
+    alert("기간을 선택하세요");
+    return false;
+  }
+
+  alert("성공");
+  // 유효성 이후 submit
+  // form.submit();
+}
+
+// 스타트 / 마지막 날짜 계산기
+$().ready(function dateInputSet() {
+  let date = new Date();
+  const startTags = $("input[name='projectStrar']"); // start 데이터를 넣어줄 곳
+  const endTags = $("input[name='projectEnd']"); // end 데이터 넣어줄 곳
+  const dateVals = [6, 0, 1, 2, 3, 4, 5]; //요일별 더할 날짜
+
+  // Start 월요일 날짜 계산
+  let standDate = date.getDate() - dateVals[date.getDay()];
+  date.setDate(standDate);
+
+  let calcDate; // 넣어줄 데이터
+  // 선택 태그 val 뿌리기
+  for (let i = 0; i < startTags.length; i++) {
+    date.setDate(date.getDate() + 7);
+    // console.log("======================");
+    // console.log("일 : " + date.getDate());
+    // console.log("월 : " + (date.getMonth() + 1));
+    calcDate = date.getMonth() + 1 + "/" + date.getDate();
+    startTags.eq(i).next().text(calcDate);
+    calcDate = date.getFullYear() + "/" + calcDate;
+    startTags.eq(i).attr("value", calcDate);
+  }
+
+  // 기간 선택 js
+  startTags.on("change", function () {
+    let calcDate;
+    let dateArr = $(this).val().split("/");
+    let endDate = parseInt(dateArr[2]);
+    date.setMonth(parseInt(dateArr[1]) - 1);
+    date.setDate(endDate);
+
+    date.setDate(date.getDate());
+    console.log("년도" + date.getFullYear());
+    console.log("월" + (date.getMonth() + 1));
+    console.log("일" + date.getDate());
+
+    for (let i = 0; i < endTags.length; i++) {
+      date.setDate(date.getDate() + 7);
+      calcDate =
+        date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+      endTags.eq(i).attr("value", calcDate);
+    }
+  });
+
+  $("input[name='projectEnd']").on("click", function () {
+    const dateInputCk = $("input[name='projectStrar']:checked"); // 기간 값
+    if (dateInputCk.length < 1) {
+      alert("시작일을 먼저 선택하세요");
+      return false;
+    }
+  });
+});
