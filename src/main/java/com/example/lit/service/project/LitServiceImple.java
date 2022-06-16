@@ -21,8 +21,8 @@ public class LitServiceImple implements LitService{
     private final ProjectFileDAO projectFileDAO;
 
     @Override
-    public List<ProjectVO> getList(Criteria criteria) {
-        return projectDAO.getList(criteria);
+    public List<ProjectVO> getList(Criteria criteria, String category) {
+        return projectDAO.getList(criteria, category);
     }
 
     @Override
