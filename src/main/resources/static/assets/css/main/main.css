@@ -13,6 +13,13 @@ main {
 
 }
 
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transform: translate(0%, -100%);
+}
+
 a {
     text-decoration: none;
     color: #000000;
