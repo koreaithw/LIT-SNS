@@ -27,6 +27,15 @@ public class UserDAO {
     public void modifyPw(UserVO userVO, String newPassword){ userMapper.updatePw(userVO, newPassword); }
     // 대표 메달 설정
     public void modifyMedal(UserVO userVO){ userMapper.updateMedal(userVO); }
+
     // 관리자 유저 검색
     public List<UserVO> userSearch(SearchDTO searchDTO){ return userMapper.userSearch(searchDTO);}
+
+    //카카오 로그인/회원가입
+    public void kakaoRegister(UserVO userVO){userMapper.kakaoInsert(userVO);}
+    //이메일 중복체크
+    public int dbEmailCheck(String email){ return userMapper.emailCheck(email);}
+    //닉네임 중복체크
+    public int dbNicknameCheck(String nickname){ return userMapper.nicknameCheck(nickname);}
+
 }

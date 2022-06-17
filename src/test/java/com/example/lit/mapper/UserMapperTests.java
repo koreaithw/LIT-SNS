@@ -28,6 +28,18 @@ public class UserMapperTests {
     }
 
     @Test
+    public void emailCheck(){
+        String email="lje1343@naver.com";
+        log.info("이메일 중복체크: " + userMapper.emailCheck(email));
+    }
+
+    @Test
+    public void nicknameCheck(){
+        String nickname="xldms.dl";
+        log.info("닉네임 중복체크: " + userMapper.nicknameCheck(nickname));
+    }
+
+    @Test
     public void loginTest(){
         String email="test12";
         String password = "1234";

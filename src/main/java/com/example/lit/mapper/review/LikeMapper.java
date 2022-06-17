@@ -9,4 +9,6 @@ public interface LikeMapper {
     public void insert(LikeVO likeVO);
     // 좋아요(취소)
     public void delete(LikeVO likeVO);
+    // 좋아요 갯수 카운트
+    public int getTotal(Long reviewNumber);
 }

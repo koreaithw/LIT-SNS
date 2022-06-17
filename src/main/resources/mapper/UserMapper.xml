@@ -7,6 +7,22 @@
         VALUES(SEQ_USER.NEXTVAL, #{email}, #{name}, #{nickname}, #{password})
     </insert>
 
+    <insert id="kakaoInsert">
+        INSERT INTO TBL_USER
+        (USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD )
+        VALUES(SEQ_USER.NEXTVAL, #{email}, #{name}, #{nickname})
+    </insert>
+
+    <select id="emailCheck" resultType="_int">
+        SELECT COUNT(EMAIL) FROM TBL_USER
+        WHERE EMAIL = #{email}
+    </select>
+
+    <select id="nicknameCheck" resultType="_int">
+        SELECT COUNT(NICKNAME) FROM TBL_USER
+        WHERE NICKNAME = #{nickname}
+    </select>
+
     <select id="login" resultType="_int">
         SELECT COUNT(USER_NUMBER) FROM TBL_USER
         WHERE EMAIL = #{email} AND PASSWORD = #{password}
