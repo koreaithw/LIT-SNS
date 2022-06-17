@@ -5,6 +5,7 @@ import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ParticipationVO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -38,4 +39,6 @@ public interface LitService {
 
     //프로젝트 검색
     public List<ProjectVO> searchProject(SearchDTO searchDTO);
+    //  프로젝트 승인(상태변경)
+    public void changeStatus(Long projectNumber, Long status);
 }

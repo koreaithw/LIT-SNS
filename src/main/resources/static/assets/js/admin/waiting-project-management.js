@@ -27,9 +27,8 @@ window.onload = function () {
 
 // 체크박스 이벤트 ==========================================
 $(".check-all").change(function () {
-  $allBox = $(this).is(":checked");
-  $otherBox = $(".list-checkbox > input[type='checkbox']");
-  console.log($otherBox);
+  let $allBox = $(this).is(":checked");
+  let $otherBox = $(".list-checkbox > input[type='checkbox']");
   if ($allBox) {
     $otherBox.prop("checked", true);
   } else {
@@ -40,7 +39,6 @@ $(".check-all").change(function () {
 
 $(".list-checkbox > input[type='checkbox']").change(function () {
   if (!$(this).is(":checked")) {
-    console.log("change list-checkbox");
     $(".check-all").prop("checked", false);
   }
 });
@@ -90,16 +88,6 @@ $(".a-btn").on("click", function (e) {
   $endInput.val(resultDateAr.join("-"));
 });
 
-// 버튼 이벤트 ==========================================
-//checkAlert() 는 admin-common.js 에 정의됨
-//매개변수에 실행시킬 함수 콜백함수로 넘겨서 사용하기 -> checkAlert("msg", function(){......})
-$(".approval-btn").on("click", function () {
-  checkAlert("해당 프로젝트를 승인하시겠습니까?");
-});
-
-$(".delete-btn").on("click", function () {
-  checkAlert("정말로 삭제하시겠습니까?");
-});
 // ========================================================
 
 //date picker
@@ -108,14 +96,41 @@ $(function () {
 });
 
 $(".calendar-icon-wrap").on("click", function () {
-  $input = $(this).prev("div").find("input");
+  let $input = $(this).prev("div").find("input");
   console.log($input);
   $input.trigger("focus");
 });
 
-
-
 //================================ ajax =========================================
+//가져온 상태 값 수정하기
+function renameStatus(status){
+  let result;
+  switch (status) {
+    case 0:
+      result = "대기중";
+      break;
+    case 1:
+      result = "진행중";
+      break;
+    case 2:
+      result = "완료";
+      break;
+  }
+  return result;
+}
+
+//삭제하기
+let deleteProject = function deleteProject(){
+  let $checked = $(".list-checkbox > input[type='checkbox']:checked");
+  let list = [];
+  $checked.each((i, box) => {
+    list.push(box.value);
+  });
+
+  adminService.deleteProject(list.join("-"), function(){
+    searchProject();
+  })
+}
 
 //검색하기
 function searchProject() {
@@ -126,59 +141,62 @@ function searchProject() {
     endDate: $("input[name='endDate']").val(),
     type: $("select[name='type']").val(),
     keyword: $("input[name='keyword']").val(),
+    category: $("select[name='category']").val(),
   }, function (result) {
     //검색 결과 건수
     $(".searchResult").text(result.length);
-    //
-    // //결과 리스트 처리
-    // result.forEach(function (user, i) {
-    //   let str = "";
-    //
-    //   str +=
-    //   "<tr>\n" +
-    //   "<td class=\"list-checkbox\">" +
-    //   "<input type=\"checkbox\" value=\"\"/>" +
-    //   "<!-- checkbox의 value속성에 user number를 꽂거나-->\n" +
-    //   "<!-- hidden 사용할듯? -->\n" +
-    //   "</td>\n" +
-    //   "<td class=\"project-number\">1</td>" +
-    //   "<td class=\"project-category\">운동</td>" +
-    //   "<td class=\"project-title\">매일 헬스장가기!</td>" +
-    //   "<td class=\"project-contenet\">" +
-    //   "내용내용내용내용....." +
-    //   "</td>" +
-    //   "<td class=\"user-email\">qwer@naver.com</td>" +
-    //   "<td class=\"project-preview\">" +
-    //   "<!-- 미리보기 경로 -->" +
-    //   "<div>" +
-    //   "<a class=\"a-btn not-selected\" href=\"\">보기</a>" +
-    //   "</div>" +
-    //   "</td>" +
-    //   "<td class=\"project-register-date\">" +
-    //   "2022-06-10<br/>22:44:17" +
-    //   "</td>" +
-    //   "</tr>";
-    //   $(".list-table > tbody").append(str);
-    // })
+
+    //결과 리스트 처리
+    result.forEach(function (project, i) {
+      let str = "";
+
+      str +=
+      "<tr>\n" +
+      "<td class=\"list-checkbox\">" +
+      "<input type=\"checkbox\" value=\"" + project.projectNumber + "\"/>" +
+      "</td>\n" +
+      "<td class=\"project-number\">" + project.projectNumber + "</td>" +
+      "<td class=\"project-category\">" + project.category + "</td>" +
+      "<td class=\"project-title\">" + project.title + "</td>" +
+      "<td class=\"project-contenet\">" + project.content + "</td>" +
+      "<td class=\"user-email\">테이블 수정필요</td>" +
+      "<td class=\"project-preview\">" +
+      "<!-- 미리보기 경로 -->" +
+      "<div>" +
+      "<a class=\"a-btn not-selected\" href=\"\">보기</a>" +
+      "</div>" +
+      "</td>" +
+      "<td class=\"project-start-date\">" + project.startDate + "</td>" +
+      "<td class=\"project-end-date\">" + project.endDate + "</td>" +
+      "<td class=\"project-status\">" + renameStatus(project.status) + "</td>" +
+      "</tr>";
+      $(".list-table > tbody").append(str);
+    })
   });
 }
 
-//삭제하기
-// let deleteProjec = function deleteProject(){
-//   let $checked = $(".list-checkbox > input[type='checkbox']:checked");
-//   let list = [];
-//   $checked.each((i, box) => {
-//     list.push(box.value);
-//   });
-//
-//   adminService.deleteUser(list.join("-"), function(){
-//     searchUser();
-//   })
+//승인하기
+let changeStatus = function(){
+  let $checked = $(".list-checkbox > input[type='checkbox']:checked");
+  let list = [];
+  $checked.each((i, box) => {
+    list.push(box.value);
+  });
 
-// }
+  adminService.changeStatus({
+    projectNumber : list.join("-"),
+    status : 1
+  }, function(){
+    searchProject();
+  })
+}
 // 삭제 버튼 이벤트 ==========================================
 //checkAlert() 는 admin-common.js 에 정의됨
 //매개변수에 실행시킬 함수 콜백함수로 넘겨서 사용하기 -> checkAlert("msg", function(){......})
 $(".delete-btn").on("click", function () {
-  checkAlert("정말로 삭제하시겠습니까?", deleteUser);
+  checkAlert("정말로 삭제하시겠습니까?", deleteProject);
+});
+
+$(".approval-btn").on("click", function () {
+  checkAlert("해당 프로젝트를 승인하시겠습니까?", changeStatus);
 });

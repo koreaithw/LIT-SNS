@@ -5,6 +5,7 @@ import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.mapper.project.ProjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +26,8 @@ public class ProjectDAO {
     public int getTotal(){ return projectMapper.getTotal(); }
     //    프로젝트 검색
     public List<ProjectVO> searchProject(SearchDTO searchDTO){ return projectMapper.searchProject(searchDTO); }
+    //  프로젝트 승인(상태변경)
+    public void changeStatus(@Param("projectNumber") Long projectNumber, @Param("status") Long status){
+        projectMapper.changeStatus(projectNumber, status);
+    }
 }

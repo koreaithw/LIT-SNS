@@ -2,6 +2,7 @@ package com.example.lit.mapper;
 
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.mapper.project.ProjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -54,4 +55,14 @@ public class ProjectMapperTests {
     }
 
 
+    @Test
+    public void searchProject(){
+        SearchDTO searchDTO = new SearchDTO();
+        searchDTO.setStartDate("2022-06-01");
+        searchDTO.setEndDate("2022-07-01");
+        searchDTO.setKeyword("");
+        searchDTO.setType("title");
+        searchDTO.setCategory("hoby");
+        projectMapper.searchProject(searchDTO).stream().map(ProjectVO::toString).forEach(log::info);
+    }
 }

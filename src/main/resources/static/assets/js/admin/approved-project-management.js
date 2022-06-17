@@ -9,8 +9,8 @@ window.onload = function () {
 
 // 체크박스 이벤트 ==========================================
 $(".check-all").change(function () {
-  $allBox = $(this).is(":checked");
-  $otherBox = $(".list-checkbox > input[type='checkbox']");
+  let $allBox = $(this).is(":checked");
+  let $otherBox = $(".list-checkbox > input[type='checkbox']");
   if ($allBox) {
     $otherBox.prop("checked", true);
   } else {
