@@ -59,7 +59,7 @@
                   <form action="" id="search-form" name="search-form">
                     <table class="search-table border__gray">
                       <tbody>
-                        <th class="background__gray">기간</th>
+                        <th class="background__gray">가입 기간</th>
                           <td class="flex col__period">
                             <div>
                               <!-- 기간 버튼 백엔드 작업 시 href 속성 값 사용 -->
@@ -109,7 +109,7 @@
                                 <input
                                   type="text"
                                   class="datepicker"
-                                  name="start-date"
+                                  name="startDate"
                                   readonly
                                 />
                               </div>
@@ -123,7 +123,7 @@
                                 <input
                                   type="text"
                                   class="datepicker"
-                                  name="end-date"
+                                  name="endDate"
                                   readonly
                                 />
                               </div>
@@ -143,14 +143,14 @@
                           <td class="flex">
                             <div>
                               <select name="type" id="search-select">
-                                <option value="userEmail">이메일</option>
-                                <option value="userName">이름</option>
-                                <option value="userNickName">닉네임</option>
-                                <option value="userNumber">회원번호</option>
+                                <option value="email">이메일</option>
+                                <option value="name">이름</option>
+                                <option value="nickName">닉네임</option>
+                                <option value="user_Number">회원번호</option>
                               </select>
                             </div>
                             <div>
-                              <input id="search-input" type="text" />
+                              <input id="search-input" type="text" name="keyword"/>
                             </div>
                           </td>
                           
@@ -163,7 +163,7 @@
                               <input
                                 type="radio"
                                 name="kakao"
-                                value="all"
+                                value="0"
                                 checked
                               />
                               <span>전체</span>
@@ -173,40 +173,41 @@
                               <span>인증</span>
                             </label>
                             <label>
-                              <input type="radio" name="kakao" value="0" />
+                              <input type="radio" name="kakao" value="2" />
                               <span>비인증</span>
                             </label>
                           </td>
                         </tr>
                       <!-- 상태 -->
-                        <tr>
-                          <th scope="row" class="background__gray">상태</th>
-                          <td class="flex">
-                            <label>
-                              <input
-                                type="radio"
-                                name="status"
-                                value="all"
-                                checked
-                              />
-                              <span>전체</span>
-                            </label>
-                            <label>
-                              <input type="radio" name="status" value="1" />
-                              <span> 회원</span>
-                            </label>
-                            <label>
-                              <input type="radio" name="status" value="0" />
-                              <span>탈퇴</span>
-                            </label>
-                          </td>
-                        </tr>
+<!--                        <tr>-->
+<!--                          <th scope="row" class="background__gray">상태</th>-->
+<!--                          <td class="flex">-->
+<!--                            <label>-->
+<!--                              <input-->
+<!--                                type="radio"-->
+<!--                                name="status"-->
+<!--                                value="all"-->
+<!--                                checked-->
+<!--                              />-->
+<!--                              <span>전체</span>-->
+<!--                            </label>-->
+<!--                            <label>-->
+<!--                              <input type="radio" name="status" value="1" />-->
+<!--                              <span> 회원</span>-->
+<!--                            </label>-->
+<!--                            <label>-->
+<!--                              <input type="radio" name="status" value="0" />-->
+<!--                              <span>탈퇴</span>-->
+<!--                            </label>-->
+<!--                          </td>-->
+<!--                        </tr>-->
                       </tbody>
                     </table>
                     <div class="button-wrapper">
                       <button
                         type="button"
                         class="search-button btn background__red"
+                        onclick="searchUser();"
                       >
                         검색
                       </button>
@@ -230,7 +231,7 @@
                       <div>
                         <div>
                           <!-- db조회 결과 숫자로 넣기 -->
-                          [총 회원수 <span>0</span>명] 검색결과 <span>0</span>건
+                          [총 회원수 <span class="totalResult">0</span>명] 검색결과 <span class="searchResult">0</span>건
                         </div>
                         <div class="button-box">
                           <button type="button" class="delete-btn">
@@ -249,7 +250,7 @@
                       <form action="" name="list-form">
                         <table class="list-table">
                           <tbody>
-                            <tr>
+                            <tr class="table-head">
                               <th>
                                 <input type="checkbox" class="check-all" />
                               </th>
@@ -257,24 +258,9 @@
                               <th>이메일</th>
                               <th>닉네임</th>
                               <th>카카오</th>
-                              <th>상태</th>
-                            </tr>
-                            <!-- 리스트 불러와서 반복문으로 페이지당 10개씩 -->
-                            <!-- 아래는 예시 -->
-                            <tr>
-                              <td class="list-checkbox">
-                                <input type="checkbox" value="" />
-                                <!-- checkbox의 value속성에 user number를 꽂거나-->
-                                <!-- hidden 사용할듯? -->
-                              </td>
-                              <td class="user-name">예시 이름</td>
-                              <td class="user-email">예시 이메일</td>
-                              <td class="user-nickname">예시 닉네임</td>
-                              <td class="user-kakao">예시 카카오 id값</td>
-                              <td class="user-status">예시 상태</td>
+                              <th>가입일</th>
                             </tr>
 
-                            <!-- 예시 끝 -->
                           </tbody>
                         </table>
                       </form>
@@ -311,4 +297,5 @@
   ></script>
   <!-- chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+<script src="/assets/js/admin/adminAjax.js"></script>
 </html>

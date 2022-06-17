@@ -1,6 +1,7 @@
 package com.example.lit.domain.dao.project;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.mapper.project.ProjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -22,4 +23,6 @@ public class ProjectDAO {
     public boolean remove(Long projectNumber){ return projectMapper.delete(projectNumber) != 0; }
     //    프로젝트 전체 개수
     public int getTotal(){ return projectMapper.getTotal(); }
+    //    프로젝트 검색
+    public List<ProjectVO> searchProject(SearchDTO searchDTO){ return projectMapper.searchProject(searchDTO); }
 }

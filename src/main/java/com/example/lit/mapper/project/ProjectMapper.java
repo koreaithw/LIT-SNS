@@ -1,6 +1,7 @@
 package com.example.lit.mapper.project;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,4 +20,6 @@ public interface ProjectMapper {
     public int delete(Long projectNumber);
     //    프로젝트 전체 개수
     public int getTotal();
+    //    프로젝트 검색
+    public List<ProjectVO> searchProject(SearchDTO searchDTO);
 }

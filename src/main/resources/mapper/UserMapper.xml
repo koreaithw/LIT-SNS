@@ -40,5 +40,34 @@
         WHERE USER_NUMBER = #{userNumber}
     </update>
 
+    <select id="userSearch" resultType="userVO">
+        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, CONTENT, KAKAO, REGISTER_DATE
+        FROM TBL_USER
+        WHERE ${type} LIKE '%'||#{keyword}||'%'
+        <trim prefix="AND">
+            <choose>
+                <when test="kakao == '1'.toString()">
+                    KAKAO IS NOT NULL
+                </when>
+                <when test="kakao == '2'.toString()">
+                    KAKAO IS NULL
+                </when>
+            </choose>
+        </trim>
+        <trim prefix="AND">
+                <if test="startDate != ''">
+                    <![CDATA[
+                    REGISTER_DATE >= #{startDate}
+                    ]]>
+                </if>
+        </trim>
+        <trim prefix="AND">
+                <if test="endDate != ''">
+                    <![CDATA[
+                    REGISTER_DATE <= #{endDate}
+                    ]]>
+                </if>
+        </trim>
+    </select>
 
 </mapper>

@@ -50,4 +50,30 @@
         SELECT COUNT(PROJECT_NUMBER) FROM TBL_PROJECT
     </select>
 
+    <select id="searchProject" resultType="projectVO">
+        SELECT PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, STATUS
+        FROM TBL_PROJECT
+        WHERE ${type} LIKE '%'||#{keyword}||'%'
+        <trim prefix="AND">
+            <if test="category != null">
+                CATEGORY = ${category}
+            </if>
+        </trim>
+        <trim prefix="AND">
+            <if test="startDate != ''">
+                <![CDATA[
+                    START_DATE >= #{startDate}
+                    ]]>
+            </if>
+        </trim>
+        <trim prefix="AND">
+            <if test="endDate != ''">
+                <![CDATA[
+                    END_DATE <= #{endDate}
+                    ]]>
+            </if>
+        </trim>
+        AND STATUS = 0
+    </select>
+
 </mapper>

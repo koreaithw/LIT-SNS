@@ -1,6 +1,7 @@
 package com.example.lit.mapper;
 
 
+import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.mapper.user.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -77,6 +78,20 @@ public class UserMapperTests {
         userMapper.updateMedal(userVO);
     }
 
-
+    @Test
+    public void adminSelect(){
+//        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT, KAKAO, REGISTER_DATE, ACHIEVEMENT_NUMBER
+//        FROM TBL_USER
+//        WHERE EMAIL LIKE '%test%'
+//        AND KAKAO IS NULL
+//        AND REGISTER_DATE > '2022-06-14' AND REGISTER_DATE < '2022-06-16';
+        SearchDTO search = new SearchDTO();
+        search.setStartDate("2022-06-14");
+        search.setEndDate("2022-06-16");
+        search.setKeyword("test");
+        search.setType("email");
+        search.setKakao("2"); // kakao를 0(all), 1(null), 2(not null) 로 받아서 검사하기
+        userMapper.userSearch(search).stream().map(UserVO::toString).forEach(log::info);
+    }
 
 }
