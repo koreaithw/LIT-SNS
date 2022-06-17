@@ -2,8 +2,10 @@ package com.example.lit.controller;
 
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.ReplyVO;
+import com.example.lit.domain.vo.review.ReportVO;
 import com.example.lit.domain.vo.review.ReviewVO;
 import com.example.lit.service.review.LitUpService;
+import com.example.lit.service.review.LitUpServiceImple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -49,12 +51,13 @@ public class LitUpRestController {
 
     //모달창 인증글 상세 신고
     @GetMapping("/report")
-    public String registerReport(){
+    public String registerReport(ReportVO reportVO){
         log.info("***************************");
         log.info("LitUpRestController : registerReport(get)");
         log.info("***************************");
 
-        return null;
+        litUpService.registerReport(reportVO);
+        return "신고 성공";
     }
 
     //모달창 인증글 상세 좋아요 -> 뭘 반환해야 하는가? 성공여부?
