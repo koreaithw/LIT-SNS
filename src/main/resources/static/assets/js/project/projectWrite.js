@@ -170,7 +170,7 @@ function submitEvent() {
 
   alert("성공");
   // 유효성 이후 submit
-  // form.submit();
+  submitFun(form.serializeArray());
 }
 
 // 스타트 / 마지막 날짜 계산기
@@ -191,16 +191,16 @@ $().ready(function dateInputSet() {
     // console.log("======================");
     // console.log("일 : " + date.getDate());
     // console.log("월 : " + (date.getMonth() + 1));
-    calcDate = date.getMonth() + 1 + "/" + date.getDate();
+    calcDate = date.getMonth() + 1 + "-" + date.getDate();
     startTags.eq(i).next().text(calcDate);
-    calcDate = date.getFullYear() + "/" + calcDate;
+    calcDate = date.getFullYear() + "-" + calcDate;
     startTags.eq(i).attr("value", calcDate);
   }
 
   // 기간 선택 js
   startTags.on("change", function () {
     let calcDate;
-    let dateArr = $(this).val().split("/");
+    let dateArr = $(this).val().split("-");
     let endDate = parseInt(dateArr[2]);
     date.setMonth(parseInt(dateArr[1]) - 1);
     date.setDate(endDate);
@@ -213,7 +213,7 @@ $().ready(function dateInputSet() {
     for (let i = 0; i < endTags.length; i++) {
       date.setDate(date.getDate() + 7);
       calcDate =
-        date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+        date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
       endTags.eq(i).attr("value", calcDate);
     }
   });
@@ -226,3 +226,14 @@ $().ready(function dateInputSet() {
     }
   });
 });
+
+function submitFun(getform) {
+
+  let jsond = {};
+
+  for(var i = 0; i < getform.length; i++){
+      jsond[getform[i]['name']] = getform[i]['value'];
+  }
+
+  console.log(jsond);
+}
