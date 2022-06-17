@@ -63,21 +63,21 @@ public class LitUpRestController {
 
     //모달창 인증글 상세 좋아요 -> 좋아요 전체 갯수도 같이 사용되어야 함
     @PostMapping("/like")
-    public String registerLike(@RequestBody LikeVO likeVO){
+    public int registerLike(@RequestBody LikeVO likeVO){
         log.info("***************************");
         log.info("LitUpRestController : registerLike(get)");
         log.info("***************************");
         litUpService.registerLike(likeVO);
-        return "litUpService.getTotal(likeVO.getReviewNumber()) 이렇게 하는건가? 고민할 것";
+        return litUpService.getLikeTotal(likeVO.getReviewNumber()).intValue();
     }
 
     @PostMapping("/removeLike")
-    public String removeLike(@RequestBody LikeVO likeVO){
+    public int removeLike(@RequestBody LikeVO likeVO){
         log.info("***************************");
         log.info("LitUpRestController : registerLike(get)");
         log.info("***************************");
         litUpService.removeLike(likeVO);
-        return "좋아요 해제 성공";
+        return litUpService.getLikeTotal(likeVO.getReviewNumber()).intValue();
     }
 
 //    ================= 인증글 작성 ====================

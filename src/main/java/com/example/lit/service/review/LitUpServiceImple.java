@@ -28,7 +28,7 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
-    public int getLikeTotal(Long reviewNumber) {
+    public Long getLikeTotal(Long reviewNumber) {
         return likeDAO.getTotal(reviewNumber);
     }
 
