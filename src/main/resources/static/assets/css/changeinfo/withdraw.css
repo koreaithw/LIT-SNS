@@ -1,10 +1,24 @@
-
 main{
-    background: rgb(250,250,250);
-    margin-top: 100px;
-
+    background-color: rgb(250,250,250);
+    margin-top: 36px;
 }
 
+body{
+    margin: 0px;
+    overflow: hidden;
+}
+
+header{
+    height: 60px
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transform: translate(0%, -100%);
+    height: 60px
+}
 
 label{
     font-weight: bold;
@@ -31,8 +45,8 @@ label{
 }
 
 ._changepw_main_wrapper{
-    background-color: rgba(255,255,255);
-    border: 1px solid rgba(219,219,219);
+    background-color: rgb(255,255,255);
+    border: 1px solid rgb(219,219,219);
     border-radius: 3px;
     margin: auto;
     max-width: 935px;
@@ -43,8 +57,8 @@ label{
 }
 
 ._changepw_content{
-    background-color: rgba(255,255,255);
-    border: 1px solid rgba(219,219,219);
+    background-color: rgb(255,255,255);
+    border: 1px solid rgb(219,219,219);
     border-radius: 3px;
     margin: 100px auto 0;
     max-width: 935px;
@@ -108,8 +122,7 @@ label{
 }
 
 ._profile_wrapper{
-    background-color: #fafafa;
-    background-color: rgba(var(--b3f,250,250,250),1);
+    background-color: rgba(250,250,250,1);
     border-radius: 50%;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -122,7 +135,6 @@ label{
 
 ._profile_wrapper ::after{
     border: 1px solid rgba(0,0,0,.0975);
-    border: 1px solid rgba(var(--jb7,0,0,0),.0975);
     border-radius: 50%;
     bottom: 0;
     content: '';
@@ -196,7 +208,7 @@ label{
     border-radius: 4px;
     background-color: rgba(255, 69, 67, 0.3);
     pointer-events: none;
-    color: rgba(var(--eca,255,255,255),1);
+    color: rgba(255,255,255,1);
     position: relative;
     appearance: none;
     border: 0;
@@ -217,7 +229,7 @@ label{
 .buttonOn{
     border-radius: 4px;
     background-color: rgb(250, 100, 98);
-    color: rgba(var(--eca,255,255,255),1);
+    color: rgba(255,255,255,1);
     position: relative;
     appearance: none;
     border: 0;
@@ -236,7 +248,7 @@ label{
 }
 
 .mainUl{
-    border-right: 1px solid rgba(219,219,219);
+    border-right: 1px solid rgb(219,219,219);
     display: flex;
     flex-basis: 220px;
     -webkit-box-orient: vertical;
@@ -262,9 +274,9 @@ label{
 }
 
 .mainA{
-    color: rgba(38,38,38);
+    color: rgb(38,38,38);
     text-decoration: none;
-    border-left-color: rgba(38,38,38);
+    border-left-color: rgb(38,38,38);
     font-weight: 600;
     border-left: 2px solid transparent;
     display: block;

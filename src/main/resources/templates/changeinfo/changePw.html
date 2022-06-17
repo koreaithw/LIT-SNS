@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -8,10 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lit_MAIN</title>
     <link rel="stylesheet" href="/assets/css/changeinfo/changePw.css" />
+    <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
+    <link rel="stylesheet" href="/assets/css/default.css" />
     <!-- 경로 잡아야함 -->
 </head>
 
 <body style="background-color: rgb(250,250,250);">
+<header th:insert="~{/header :: header}"></header>
 
     <main>
         <div class="_changepw_main_wrapper">
@@ -87,7 +91,7 @@
             </div>
         </div>
     </main>
-
+    <footer th:insert="~{/footer :: footer}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="/assets/js/changeinfo/changePw.js"></script>
