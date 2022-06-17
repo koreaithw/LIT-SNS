@@ -14,15 +14,15 @@
 
 <!--    ###################### 닉네임 이슈로 resultType 변경 또는 TBL_REPLY에 nickname 추가 검토 ############# -->
     <select id="getList" resultType="replyVO">
-        <![CDATA[
-        SELECT CONTENT , RGISTER_DATE FROM
-            (
-                SELECT /*+ INDEX(TBL_REPLY SYS_C007522) */ CONTENT , RGISTER_DATE, ROWNUM RN
-                FROM TBL_REPLY
-                WHERE REVIEW_NUMBER = #{reviewNumber} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
-            )
-        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}
-        ]]>
+<!--        <![CDATA[-->
+<!--        SELECT CONTENT , RGISTER_DATE FROM-->
+<!--            (-->
+<!--                SELECT /*+ INDEX(TBL_REPLY SYS_C007522) */ CONTENT , RGISTER_DATE, ROWNUM RN-->
+<!--                FROM TBL_REPLY-->
+<!--                WHERE REVIEW_NUMBER = #{reviewNumber} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}-->
+<!--            )-->
+<!--        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}-->
+<!--        ]]>-->
     </select>
 <!--    ###################### 닉네임 이슈로 resultType 변경 또는 TBL_REPLY에 nickname 추가 검토 ############# -->
 
