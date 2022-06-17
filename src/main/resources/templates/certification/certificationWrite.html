@@ -15,6 +15,7 @@
 <body>
 
 <div class="certificationWriteBackground">
+    <form action="">
     <button class="modalCloseButton" onclick="certificationWriteModalHide()">
         <svg aria-label="닫기" class="fg7vo5n6 lrzqjn8y" color="#ffffff" fill="#ffffff" height="18" role="img"
              viewBox="0 0 48 48" width="18">
@@ -93,7 +94,7 @@
                     <div class="fileUploadLabel">사진을 여기에 끌어다 놓으세요</div>
                     <div class="fileClickInput">
                         <label id="fileClickInputLabel" for="fileClickInput">컴퓨터에서 선택</label>
-                        <input id="fileClickInput" accept="image/*" type="file" required="true" multiple="true"
+                        <input id="fileClickInput" accept="image/jpg, image/jpeg, image/png" type="file" required="true" multiple="true"
                                hidden="true">
                     </div>
                 </div>
@@ -263,6 +264,7 @@
         </div>
     </div>
     <div class="closeArea" onclick="certificationWriteModalHide()"></div>
+    </form>
 </div>
 
 <div class="deleteBackground">
@@ -270,7 +272,7 @@
         <div class="deleteModal">
             <div class="deleteModalHead">
                 <div>게시물을 삭제하시겠어요?</div>
-                <div>지금 나가면 수정 내용이 저장되지 않습니다</div>
+                <div>지금 나가면 작성 내용이 저장되지 않습니다</div>
             </div>
             <div class="deleteModalContent">
                 <div class="deleteModalButtons">
