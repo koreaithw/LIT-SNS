@@ -24,6 +24,13 @@ public interface UserService {
     public void modifyPw(UserVO userVO, String newPassword);
     // 대표 메달 설정
     public void modifyMedal(UserVO userVO);
+    //카카오 로그인/회원가입
+    public void kakaoRegister(UserVO userVO);
+    //이메일 중복체크
+    public boolean dbEmailCheck(String email);
+    //닉네임 중복체크
+    public boolean dbNicknameCheck(String nickname);
+
 
 
     //유저 파일 업로드
