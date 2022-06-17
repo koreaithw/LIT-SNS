@@ -30,13 +30,13 @@ public class LitUpRestController {
     }
 
     //모달창 인증글 상세 댓글 작성 -> 전달 방식 다시 생각하기
-    @GetMapping("/reply")
-    public List<ReplyVO> registerReply(){
+    @PostMapping("/reply")
+    public String registerReply(@RequestBody ReplyVO replyVO){
         log.info("***************************");
         log.info("LitUpRestController : registerReply(get)");
         log.info("***************************");
-
-        return null;
+        litUpService.registerReply(replyVO);
+        return "댓글 생성 완료";
     }
 
     //모달창 인증글 상세 댓글 삭제
@@ -50,8 +50,8 @@ public class LitUpRestController {
     }
 
     //모달창 인증글 상세 신고
-    @GetMapping("/report")
-    public String registerReport(ReportVO reportVO){
+    @PostMapping("/report")
+    public String registerReport(@RequestBody ReportVO reportVO){
         log.info("***************************");
         log.info("LitUpRestController : registerReport(get)");
         log.info("***************************");

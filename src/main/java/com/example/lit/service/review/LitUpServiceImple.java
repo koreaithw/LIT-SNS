@@ -29,7 +29,7 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public void registerReply(ReplyVO replyVO) {
-
+        replyDAO.register(replyVO);
     }
 
     @Override
