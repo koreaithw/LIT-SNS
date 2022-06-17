@@ -54,7 +54,7 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public void registerReport(ReportVO reportVO) {
-
+        reportDAO.register(reportVO);
     }
 
     @Override

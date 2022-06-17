@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.project.ProjectMapper">
+    <!--    ###############################동적 쿼리 쓸것-->
     <select id="getList" resultType="projectVO">
 <!--        <![CDATA[-->
 <!--        SELECT RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
@@ -25,6 +26,7 @@
 <!--        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}-->
 <!--        ]]>-->
     </select>
+    <!--    ###############################동적 쿼리 쓸것-->
 
     <insert id="insert">
         <selectKey keyProperty="projectNumber" resultType="long" order="BEFORE">

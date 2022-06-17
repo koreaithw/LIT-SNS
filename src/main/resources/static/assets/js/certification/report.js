@@ -10,3 +10,24 @@ function reportModalShow(){
 function reportModalClose(){
     reportModalBackground.style.display = 'none';
 }
+
+
+
+$("#reportButtons button").on("clcik",function (report, callback, error) {
+    $.ajax({
+        url: "/litUp/report",
+        type: "get",
+        data: JSON.stringify(report),
+        contentType: "application/json",
+        success: function(result){
+            if(callback){
+                callback(result);
+            }
+        },
+        error: function(xhr, status, er){
+            if(error){
+                error(xhr, status, er);
+            }
+        }
+    });
+})
