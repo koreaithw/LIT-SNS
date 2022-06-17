@@ -3,7 +3,7 @@
 <mapper namespace="com.example.lit.mapper.project.ProjectFileMapper">
     <insert id="insert">
         INSERT INTO TBL_PROJECT_FILE (UUID, UPLOAD_PATH, NAME, IMAGE, PROJECT_NUMBER)
-        VALUES (#{uuid}, #{uploadPath}, #{fileName}, #{image}, #{projectNumber})
+        VALUES (#{uuid}, #{uploadPath}, #{name}, #{image}, #{projectNumber})
     </insert>
 
     <delete id="delete">
