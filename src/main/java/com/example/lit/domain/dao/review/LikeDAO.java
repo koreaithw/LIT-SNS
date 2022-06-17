@@ -14,4 +14,6 @@ public class LikeDAO {
     public void register(LikeVO likeVO){ likeMapper.insert(likeVO);}
     // 좋아요 취소
     public void remove(LikeVO likeVO){ likeMapper.delete(likeVO);}
+    // 좋아요 갯수
+    public int getTotal(Long reviewNumber){ return likeMapper.getTotal(reviewNumber);}
 }

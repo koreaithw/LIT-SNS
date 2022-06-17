@@ -39,12 +39,50 @@ let reportService = (function () {
                     error(xhr,status,er)
                 }
             }
+        })
+    }
 
+    function addLike(like, callback, error) {
+        $.ajax({
+            url:"/litUp/like",
+            type:"post",
+            data:JSON.stringify(like),
+            contentType: "application/json",
+            success:function (result) {
+                if(callback){
+                    callback(result)
+                }
+            },
+            error: function (xhr, status, er) {
+                if (error){
+                    error(xhr,status,er)
+                }
+            }
         })
 
     }
 
-    return{addReport:addReport, addReply:addReply};
+    function removeLike(like, callback, error) {
+        $.ajax({
+            url:"/litUp/removeLike",
+            type:"post",
+            data:JSON.stringify(like),
+            contentType: "application/json",
+            success:function (result) {
+                if(callback){
+                    callback(result)
+                }
+            },
+            error: function (xhr, status, er) {
+                if (error){
+                    error(xhr,status,er)
+                }
+            }
+        })
+
+    }
+
+    return{addReport:addReport, addReply:addReply, addLike:addLike, removeLike:removeLike};
 })();
 
 

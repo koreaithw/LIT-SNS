@@ -294,6 +294,23 @@
         );
     })
 
+    // 좋아요
+    $(".detailContentLikeButton").on("click",function () {
+        reportService.addLike({ reviewNumber: 1, userNumber: 1},
+            function(result){
+                alert(result);},
+            function(a, b, c){console.log(a, b, c)})
+    })
+
+    // 좋아요 해제
+    $(".detailContentLikeCancel").on("click",function () {
+        reportService.removeLike({ userNumber: 1, reviewNumber: 1 },
+            function(result){
+                alert(result);},
+            function(a, b, c){console.log(a, b, c)})
+    })
+
+
 </script>
 </html>
 
