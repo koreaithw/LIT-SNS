@@ -112,3 +112,62 @@ $(".calendar-icon-wrap").on("click", function () {
   console.log($input);
   $input.trigger("focus");
 });
+
+
+
+//================================ ajax =========================================
+
+//검색하기
+function searchProject() {
+  $(".list-table tr:not(.table-head)").html("");
+
+  adminService.searchProject({
+    startDate: $("input[name='startDate']").val(),
+    endDate: $("input[name='endDate']").val(),
+    type: $("select[name='type']").val(),
+    keyword: $("input[name='keyword']").val(),
+    kakao: $("input[name='kakao']:checked").val()
+  }, function (result) {
+    //검색 결과 건수
+    $(".searchResult").text(result.length);
+
+    //결과 리스트 처리
+    result.forEach(function (user, i) {
+      let str = "";
+      str += " <tr>\n" +
+          "<td class=\"list-checkbox\">\n" +
+          "<input type=\"checkbox\" value=\"" + user.userNumber + "\" />\n" +
+          " <!-- checkbox의 value속성에 user number를 꽂거나-->\n" +
+          " <!-- hidden 사용할듯? -->\n" +
+          "</td>\n" +
+          "<td class=\"user-name\">" + user.name + "</td>\n" +
+          "<td class=\"user-email\">" + user.email + "</td>\n" +
+          "<td class=\"user-nickname\">" + user.nickname + "</td>\n" +
+          "<td class=\"user-kakao\">" + (user.kakao ? user.kakao : "")  + "</td>\n" +
+          "<td class=\"user-status\">" + user.registerDate + "</td>\n" +
+          "</tr>"
+      $(".list-table > tbody").append(str);
+    })
+  });
+}
+
+//삭제하기
+let deleteUser = function deleteUser(){
+  let $checked = $(".list-checkbox > input[type='checkbox']:checked");
+  let list = [];
+  $checked.each((i, box) => {
+    list.push(box.value);
+  });
+
+  adminService.deleteUser(list.join("-"), function(){
+    searchUser();
+    console.log("aaaaaaaaaaaaaaaaaaaaa");
+  })
+
+}
+// 삭제 버튼 이벤트 ==========================================
+//checkAlert() 는 admin-common.js 에 정의됨
+//매개변수에 실행시킬 함수 콜백함수로 넘겨서 사용하기 -> checkAlert("msg", function(){......})
+$(".delete-btn").on("click", function () {
+  checkAlert("정말로 삭제하시겠습니까?", deleteUser);
+});
