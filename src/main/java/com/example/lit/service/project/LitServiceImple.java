@@ -47,6 +47,7 @@ public class LitServiceImple implements LitService{
 
     @Override
     public boolean remove(Long projectNumber) {
+        projectDAO.remove(projectNumber);
         return false;
     }
 
@@ -84,5 +85,10 @@ public class LitServiceImple implements LitService{
     @Override
     public List<ProjectVO> searchProject(SearchDTO searchDTO) {
         return projectDAO.searchProject(searchDTO);
+    }
+
+    @Override
+    public void changeStatus(Long projectNumber, Long status) {
+        projectDAO.changeStatus(projectNumber, status);
     }
 }

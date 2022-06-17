@@ -111,20 +111,23 @@ public class AdminRestController {
         log.info("AdminRestController : searchWaitingProject(post)");
         log.info("***************************");
 
-        log.info(searchDTO.getType());
+//        log.info(searchDTO.toString());
+//        litService.searchProject(searchDTO).stream().forEach(ProjectVO::toString);
 
 
-        return null;
+
+        return litService.searchProject(searchDTO);
     }
 
     //대기중인 프로젝트 삭제
     @DeleteMapping("/waitingProject/{pno}")
-    public List<ProjectVO> deleteWaitingProject(){
+    public void deleteWaitingProject(@PathVariable("pno") String list){
         log.info("***************************");
         log.info("AdminRestController : deleteWaitingProject(delete)");
         log.info("***************************");
 
-        return null;
+        //삭제
+        Arrays.stream(list.split("-")).map(Long::valueOf).forEach(i -> litService.remove(i));
     }
 
     //대기중인 프로젝트 미리보기
@@ -135,6 +138,15 @@ public class AdminRestController {
         log.info("***************************");
 
         return null;
+    }
+    //대기중인 프로젝트 승인(상태 변경)
+    @GetMapping("/waitingProject/{pno}/{status}")
+    public void changeStatus(@PathVariable("pno")String pno, @PathVariable("status")Long status){
+        log.info("***************************");
+        log.info("AdminRestController : changeStatus(get)");
+        log.info("***************************");
+
+        Arrays.stream(pno.split("-")).forEach(p -> litService.changeStatus(Long.valueOf(p), status));
     }
 
     //인증글 검색

@@ -49,11 +49,60 @@ let adminService = (function(){
             contentType: "application/json",
             dataType: "json",
             success : function (result) {
-                console.log(result);
+                if(callback){
+                    callback(result);
+                }
+            },
+            error : function (xhr, status, er) {
+                if(error){
+                    error(er);
+                }
             }
         })
 
     }
 
-    return {searchUser:searchUser, deleteUser:deleteUser, searchProject:searchProject};
+    function deleteProject(list, callback, error){
+        $.ajax({
+            url: "/admin/waitingProject/" + list,
+            type : "delete",
+            success: function () {
+                if(callback){
+                    console.log("삭제 완료")
+                    callback();
+                }
+            },
+            error: function(xhr, status, er){
+                if(error){
+                    error(er);
+                }
+            }
+        })
+    }
+
+    function changeStatus(info, callback, error) {
+        $.ajax({
+            url : "/admin/waitingProject/" + info.projectNumber + "/" + info.status,
+            type : "get",
+            success: function () {
+                if(callback){
+                    callback();
+                }
+            },
+            error: function(xhr, status, er){
+                if(error){
+                    error(er);
+                }
+            }
+        })
+
+    }
+
+    return {
+        searchUser:searchUser,
+        deleteUser:deleteUser,
+        searchProject:searchProject,
+        deleteProject:deleteProject,
+        changeStatus:changeStatus
+    };
 })();

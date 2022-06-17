@@ -22,4 +22,6 @@ public interface ProjectMapper {
     public int getTotal();
     //    프로젝트 검색
     public List<ProjectVO> searchProject(SearchDTO searchDTO);
+    //  프로젝트 승인(상태변경)
+    public void changeStatus(@Param("projectNumber") Long projectNumber, @Param("status") Long status);
 }

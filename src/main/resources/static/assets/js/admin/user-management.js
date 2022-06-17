@@ -35,8 +35,8 @@ window.onload = function () {
 
 // 체크박스 이벤트 ==========================================
 $(".check-all").change(function () {
-    $allBox = $(this).is(":checked");
-    $otherBox = $(".list-checkbox > input[type='checkbox']");
+    let $allBox = $(this).is(":checked");
+    let $otherBox = $(".list-checkbox > input[type='checkbox']");
     if ($allBox) {
         $otherBox.prop("checked", true);
     } else {
@@ -88,7 +88,7 @@ $(".a-btn").on("click", function (e) {
         [
             todayObj.getFullYear(),
             (todayObj.getMonth() + 1 < 10 ? "0" : "") + (todayObj.getMonth() + 1),
-            (todayObj.getDate()+1 < 10 ? "0" : "") + todayObj.getDate(), //DB조회시 + 1을 해야 오늘의 24 전까지도 포함됨
+            (todayObj.getDate() + 1 < 10 ? "0" : "") + todayObj.getDate(), //DB조회시 + 1을 해야 오늘의 24 전까지도 포함됨
         ].join("-")
     );
     $startInput.val(resultDateAr.join("-"));
@@ -124,8 +124,7 @@ $(function () {
 
 
 $(".calendar-icon-wrap").on("click", function () {
-    $input = $(this).prev("div").find("input");
-    console.log($input);
+    let $input = $(this).prev("div").find("input");
     $input.trigger("focus");
 });
 
@@ -149,17 +148,15 @@ function searchUser() {
         //결과 리스트 처리
         result.forEach(function (user, i) {
             let str = "";
-            str += " <tr>\n" +
-                "<td class=\"list-checkbox\">\n" +
-                "<input type=\"checkbox\" value=\"" + user.userNumber + "\" />\n" +
-                " <!-- checkbox의 value속성에 user number를 꽂거나-->\n" +
-                " <!-- hidden 사용할듯? -->\n" +
+            str += " <tr>" +
+                "<td class=\"list-checkbox\">" +
+                "<input type=\"checkbox\" value=\"" + user.userNumber + "\" />" +
                 "</td>\n" +
-                "<td class=\"user-name\">" + user.name + "</td>\n" +
-                "<td class=\"user-email\">" + user.email + "</td>\n" +
-                "<td class=\"user-nickname\">" + user.nickname + "</td>\n" +
-                "<td class=\"user-kakao\">" + (user.kakao ? user.kakao : "")  + "</td>\n" +
-                "<td class=\"user-status\">" + user.registerDate + "</td>\n" +
+                "<td class=\"user-name\">" + user.name + "</td>" +
+                "<td class=\"user-email\">" + user.email + "</td>" +
+                "<td class=\"user-nickname\">" + user.nickname + "</td>" +
+                "<td class=\"user-kakao\">" + (user.kakao ? user.kakao : "")  + "</td>" +
+                "<td class=\"user-status\">" + user.registerDate + "</td>" +
                 "</tr>"
             $(".list-table > tbody").append(str);
         })

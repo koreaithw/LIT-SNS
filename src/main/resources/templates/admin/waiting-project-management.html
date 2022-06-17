@@ -97,12 +97,7 @@
                                                 <!-- 기간 달력 input -->
                                                 <div class="calendar-wrap flex">
                                                     <div>
-                                                        <input
-                                                                type="text"
-                                                                class="datepicker"
-                                                                name="startDate"
-                                                                readonly
-                                                        />
+                                                        <input type="text" class="datepicker" name="startDate" readonly />
                                                     </div>
                                                     <div class="calendar-icon-wrap">
                                                         <img
@@ -153,14 +148,14 @@
                                             <td class="flex">
                                                 <div>
                                                     <select name="type" id="search-select">
-                                                        <option value="email">작성자</option>
+                                                        <option value="title">글 제목</option>
                                                         <option value="projectNumber">글 번호</option>
                                                         <option value="userNumber">회원 번호</option>
                                                     </select>
                                                 </div>
                                                 <div>
                                                     <!-- name 설정하여 사용 -->
-                                                    <input id="search-input" type="text" name=""/>
+                                                    <input id="search-input" type="text" name="keyword"/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -196,7 +191,7 @@
                                         <div>
                                             <!-- db조회 결과 숫자로 넣기 -->
                                             [오늘 등록된 새 글 <span>0</span>건] 검색결과
-                                            <span>0</span>건
+                                            <span class="searchResult">0</span>건
                                         </div>
                                         <div class="flex">
                                             <div class="button-box">
@@ -236,36 +231,12 @@
                                                 <th>내용</th>
                                                 <th>작성자</th>
                                                 <th>프로젝트 <br/>미리보기</th>
-                                                <th>작성일</th>
+                                                <th>시작일</th>
+                                                <th>종료일</th>
+                                                <th>상태</th>
                                             </tr>
                                             <!-- 리스트 불러와서 반복문으로 페이지당 10개씩 -->
-                                            <!-- 아래는 예시 -->
-                                            <tr>
-                                                <td class="list-checkbox">
-                                                    <input type="checkbox" value=""/>
-                                                    <!-- checkbox의 value속성에 user number를 꽂거나-->
-                                                    <!-- hidden 사용할듯? -->
-                                                </td>
-                                                <td class="project-number">1</td>
-                                                <td class="project-category">운동</td>
-                                                <td class="project-title">매일 헬스장가기!</td>
-                                                <td class="project-contenet">
-                                                    내용내용내용내용.....
-                                                </td>
 
-                                                <td class="user-email">qwer@naver.com</td>
-                                                <td class="project-preview">
-                                                    <!-- 미리보기 경로 -->
-                                                    <div>
-                                                        <a class="a-btn not-selected" href="">보기</a>
-                                                    </div>
-                                                </td>
-                                                <td class="project-register-date">
-                                                    2022-06-10<br/>22:44:17
-                                                </td>
-                                            </tr>
-
-                                            <!-- 예시 끝 -->
                                             </tbody>
                                         </table>
                                     </form>
@@ -292,6 +263,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/assets/js/admin/waiting-project-management.js"></script>
 <script src="/assets/js/admin/side-bar.js"></script>
+<script src="/assets/js/admin/adminAjax.js"></script>
 <script src="/assets/js/admin/admin-common.js"></script>
 <!-- date picker script -->
 <script
@@ -302,5 +274,5 @@
 ></script>
 <!-- chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
-<script src="/assets/js/admin/adminAjax.js"></script>
+
 </html>
