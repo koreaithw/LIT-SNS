@@ -13,14 +13,12 @@
     </delete>
 
     <select id="followingCount" resultType="_int">
-        SELECT COUNT(followingNumber) FROM TBL_FOLLOW
-        WHERE FOLLOWING_NUMBER = #{followingNumber}
-        AND FOLLOWER_NUMBER = #{followerNumber}
+            SELECT COUNT(FOLLOWING_NUMBER) FROM TBL_FOLLOW
+            WHERE FOLLOWING_NUMBER = #{followingNumber}
     </select>
 
     <select id="followerCount" resultType="_int">
         SELECT COUNT(FOLLOWER_NUMBER) FROM TBL_FOLLOW
-        WHERE FOLLOWING_NUMBER = #{followingNumber}
-        AND FOLLOWER_NUMBER = #{followerNumber}
+        WHERE FOLLOWER_NUMBER = #{followerNumber}
     </select>
 </mapper>
