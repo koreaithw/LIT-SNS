@@ -4,6 +4,7 @@ import com.example.lit.domain.dao.project.ParticipationDAO;
 import com.example.lit.domain.dao.project.ProjectDAO;
 import com.example.lit.domain.dao.project.ProjectFileDAO;
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ParticipationVO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
@@ -77,5 +78,11 @@ public class LitServiceImple implements LitService{
     @Override
     public ProjectFileVO getImg(Long projectNumber) {
         return null;
+    }
+
+
+    @Override
+    public List<ProjectVO> searchProject(SearchDTO searchDTO) {
+        return projectDAO.searchProject(searchDTO);
     }
 }

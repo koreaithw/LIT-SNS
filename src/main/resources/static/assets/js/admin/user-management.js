@@ -176,7 +176,6 @@ let deleteUser = function deleteUser(){
 
     adminService.deleteUser(list.join("-"), function(){
         searchUser();
-        console.log("aaaaaaaaaaaaaaaaaaaaa");
     })
 
 }

@@ -126,45 +126,56 @@ function searchProject() {
     endDate: $("input[name='endDate']").val(),
     type: $("select[name='type']").val(),
     keyword: $("input[name='keyword']").val(),
-    kakao: $("input[name='kakao']:checked").val()
   }, function (result) {
     //검색 결과 건수
     $(".searchResult").text(result.length);
-
-    //결과 리스트 처리
-    result.forEach(function (user, i) {
-      let str = "";
-      str += " <tr>\n" +
-          "<td class=\"list-checkbox\">\n" +
-          "<input type=\"checkbox\" value=\"" + user.userNumber + "\" />\n" +
-          " <!-- checkbox의 value속성에 user number를 꽂거나-->\n" +
-          " <!-- hidden 사용할듯? -->\n" +
-          "</td>\n" +
-          "<td class=\"user-name\">" + user.name + "</td>\n" +
-          "<td class=\"user-email\">" + user.email + "</td>\n" +
-          "<td class=\"user-nickname\">" + user.nickname + "</td>\n" +
-          "<td class=\"user-kakao\">" + (user.kakao ? user.kakao : "")  + "</td>\n" +
-          "<td class=\"user-status\">" + user.registerDate + "</td>\n" +
-          "</tr>"
-      $(".list-table > tbody").append(str);
-    })
+    //
+    // //결과 리스트 처리
+    // result.forEach(function (user, i) {
+    //   let str = "";
+    //
+    //   str +=
+    //   "<tr>\n" +
+    //   "<td class=\"list-checkbox\">" +
+    //   "<input type=\"checkbox\" value=\"\"/>" +
+    //   "<!-- checkbox의 value속성에 user number를 꽂거나-->\n" +
+    //   "<!-- hidden 사용할듯? -->\n" +
+    //   "</td>\n" +
+    //   "<td class=\"project-number\">1</td>" +
+    //   "<td class=\"project-category\">운동</td>" +
+    //   "<td class=\"project-title\">매일 헬스장가기!</td>" +
+    //   "<td class=\"project-contenet\">" +
+    //   "내용내용내용내용....." +
+    //   "</td>" +
+    //   "<td class=\"user-email\">qwer@naver.com</td>" +
+    //   "<td class=\"project-preview\">" +
+    //   "<!-- 미리보기 경로 -->" +
+    //   "<div>" +
+    //   "<a class=\"a-btn not-selected\" href=\"\">보기</a>" +
+    //   "</div>" +
+    //   "</td>" +
+    //   "<td class=\"project-register-date\">" +
+    //   "2022-06-10<br/>22:44:17" +
+    //   "</td>" +
+    //   "</tr>";
+    //   $(".list-table > tbody").append(str);
+    // })
   });
 }
 
 //삭제하기
-let deleteUser = function deleteUser(){
-  let $checked = $(".list-checkbox > input[type='checkbox']:checked");
-  let list = [];
-  $checked.each((i, box) => {
-    list.push(box.value);
-  });
+// let deleteProjec = function deleteProject(){
+//   let $checked = $(".list-checkbox > input[type='checkbox']:checked");
+//   let list = [];
+//   $checked.each((i, box) => {
+//     list.push(box.value);
+//   });
+//
+//   adminService.deleteUser(list.join("-"), function(){
+//     searchUser();
+//   })
 
-  adminService.deleteUser(list.join("-"), function(){
-    searchUser();
-    console.log("aaaaaaaaaaaaaaaaaaaaa");
-  })
-
-}
+// }
 // 삭제 버튼 이벤트 ==========================================
 //checkAlert() 는 admin-common.js 에 정의됨
 //매개변수에 실행시킬 함수 콜백함수로 넘겨서 사용하기 -> checkAlert("msg", function(){......})

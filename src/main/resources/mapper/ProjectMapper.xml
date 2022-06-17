@@ -40,15 +40,6 @@
     </select>
 
     <select id="searchProject" resultType="projectVO">
-<!--        SELECT PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, STATUS-->
-<!--        FROM TBL_PROJECT-->
-<!--        WHERE TITLE  LIKE '%%'-->
-<!--        AND CATEGORY = 'hoby'-->
-<!--        AND START_DATE >= '2022-06-01'-->
-<!--        AND END_DATE <= '2022-07-01';-->
-
-
-
         SELECT PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, STATUS
         FROM TBL_PROJECT
         WHERE ${type} LIKE '%'||#{keyword}||'%'

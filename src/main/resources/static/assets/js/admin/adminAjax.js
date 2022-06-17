@@ -2,11 +2,11 @@ console.log("Admin Module......");
 
 let adminService = (function(){
     console.log("adminSevice");
-    function searchUser(userSearch, callback, error){
+    function searchUser(searchInfo, callback, error){
         $.ajax({
             url: "/admin/searchUser",
             type: "post",
-            data: JSON.stringify(userSearch),
+            data: JSON.stringify(searchInfo),
             contentType: "application/json",
             dataType: "json",
             success: function(result){
@@ -40,9 +40,17 @@ let adminService = (function(){
         })
     }
 
-    function searchProject() {
+    function searchProject(searchInfo, callback, error) {
+        console.log(searchInfo);
         $.ajax({
-
+            url: "/admin/waitingProject/search",
+            type : "post",
+            data : JSON.stringify(searchInfo),
+            contentType: "application/json",
+            dataType: "json",
+            success : function (result) {
+                console.log(result);
+            }
         })
 
     }

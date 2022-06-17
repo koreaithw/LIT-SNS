@@ -6,6 +6,7 @@ import com.example.lit.domain.vo.review.ReviewVO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.service.User.UserService;
+import com.example.lit.service.project.LitService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminRestController {
     private final UserService userService;
+    private final LitService litService;
 
     //회원 검색
     @PostMapping("/searchUser")
@@ -104,10 +106,13 @@ public class AdminRestController {
 
     //대기중인 프로젝트 검색
     @PostMapping("/waitingProject/search")
-    public List<ProjectVO> searchWaitingProject(){
+    public List<ProjectVO> searchWaitingProject(@RequestBody SearchDTO searchDTO){
         log.info("***************************");
         log.info("AdminRestController : searchWaitingProject(post)");
         log.info("***************************");
+
+        log.info(searchDTO.getType());
+
 
         return null;
     }

@@ -1,6 +1,7 @@
 package com.example.lit.service.project;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ParticipationVO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
@@ -34,4 +35,7 @@ public interface LitService {
     public List<ProjectFileVO> getOldFiles();
     // 사진 리스트
     public ProjectFileVO getImg(Long projectNumber);
+
+    //프로젝트 검색
+    public List<ProjectVO> searchProject(SearchDTO searchDTO);
 }
