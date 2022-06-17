@@ -1,9 +1,7 @@
 package com.example.lit.service.User;
 
-import com.example.lit.domain.vo.user.FollowVO;
-import com.example.lit.domain.vo.user.MessageVO;
-import com.example.lit.domain.vo.user.UserFileVO;
-import com.example.lit.domain.vo.user.UserVO;
+import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.user.*;
 import com.example.lit.domain.vo.user.achievement.AchievementVO;
 
 import java.util.List;
@@ -60,4 +58,8 @@ public interface UserService {
     public List<AchievementVO> getMedalList(Long userNumber);
     //메달 하나 보기
     public AchievementVO readMedal(Long userNumber);
+
+
+    // 관리자 유저 검색
+    public List<UserVO> userSearch(SearchDTO searchDTO);
 }

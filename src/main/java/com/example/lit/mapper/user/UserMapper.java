@@ -1,8 +1,11 @@
 package com.example.lit.mapper.user;
 
+import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.user.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -20,6 +23,7 @@ public interface UserMapper {
     public void updatePw(@Param("userVO") UserVO userVO, @Param("newPassword") String newPassword);
     // 대표 메달 설정
     public void updateMedal(UserVO userVO);
-
+    // 관리자 검색
+    public List<UserVO> userSearch(SearchDTO searchDTO);
 
 }

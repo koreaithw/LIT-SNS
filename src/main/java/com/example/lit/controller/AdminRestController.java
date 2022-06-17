@@ -3,12 +3,14 @@ package com.example.lit.controller;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.ReportVO;
 import com.example.lit.domain.vo.review.ReviewVO;
+import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.service.User.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -19,22 +21,24 @@ public class AdminRestController {
     private final UserService userService;
 
     //회원 검색
-    @PostMapping("/user/search")
-    public List<UserVO> searchUser(){
+    @PostMapping("/searchUser")
+    public List<UserVO> searchUser(@RequestBody SearchDTO searchDTO){
         log.info("***************************");
         log.info("AdminRestController : searchUser(post)");
         log.info("***************************");
-        return null;
+
+        log.info(searchDTO.getKeyword());
+        return userService.userSearch(searchDTO);
     }
 
     //회원 삭제
     @DeleteMapping("/user/{uno}")
-    public List<UserVO> deleteUser(){
+    public void deleteUser(@PathVariable("uno") String list){
         log.info("***************************");
         log.info("AdminRestController : deleteUser(delete)");
         log.info("***************************");
-        //삭제 후 리스트 반환
-        return null;
+        //삭제
+        Arrays.stream(list.split("-")).map(Long::valueOf).forEach(i -> userService.remove(i));
     }
 
     //승인된 프로젝트 검색

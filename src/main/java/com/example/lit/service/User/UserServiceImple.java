@@ -5,10 +5,8 @@ import com.example.lit.domain.dao.user.MessageDAO;
 import com.example.lit.domain.dao.user.UserDAO;
 import com.example.lit.domain.dao.user.UserFileDAO;
 import com.example.lit.domain.dao.user.achievement.AchievementDAO;
-import com.example.lit.domain.vo.user.FollowVO;
-import com.example.lit.domain.vo.user.MessageVO;
-import com.example.lit.domain.vo.user.UserFileVO;
-import com.example.lit.domain.vo.user.UserVO;
+import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.user.*;
 import com.example.lit.domain.vo.user.achievement.AchievementVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,7 +33,7 @@ public class UserServiceImple implements UserService{
 
     @Override
     public void remove(Long userNumber) {
-
+        userDAO.remove(userNumber);
     }
 
     @Override
@@ -126,5 +124,11 @@ public class UserServiceImple implements UserService{
     @Override
     public AchievementVO readMedal(Long userNumber) {
         return null;
+    }
+
+
+    @Override
+    public List<UserVO> userSearch(SearchDTO searchDTO) {
+        return userDAO.userSearch(searchDTO);
     }
 }

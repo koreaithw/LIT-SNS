@@ -1,9 +1,12 @@
 package com.example.lit.domain.dao.user;
 
+import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.mapper.user.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,4 +27,6 @@ public class UserDAO {
     public void modifyPw(UserVO userVO, String newPassword){ userMapper.updatePw(userVO, newPassword); }
     // 대표 메달 설정
     public void modifyMedal(UserVO userVO){ userMapper.updateMedal(userVO); }
+    // 관리자 유저 검색
+    public List<UserVO> userSearch(SearchDTO searchDTO){ return userMapper.userSearch(searchDTO);}
 }
