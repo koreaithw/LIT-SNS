@@ -26,6 +26,22 @@ public class UserServiceImple implements UserService{
 
     @Override
     public void register(UserVO userVO) {
+        userDAO.register(userVO);
+    }
+
+    @Override
+    public void kakaoRegister(UserVO userVO) {
+
+    }
+
+    @Override
+    public boolean dbEmailCheck(String email) {
+        return userDAO.dbEmailCheck(email) == 1;
+    }
+
+    @Override
+    public boolean dbNicknameCheck(String nickname) {
+        return userDAO.dbNicknameCheck(nickname) == 1;
     }
 
     @Override
