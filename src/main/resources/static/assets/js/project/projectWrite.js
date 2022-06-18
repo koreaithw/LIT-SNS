@@ -168,9 +168,29 @@ function submitEvent() {
     return false;
   }
 
-  alert("성공");
   // 유효성 이후 submit
-  submitFun(form.serializeArray());
+  var object = form.serializeArray();
+  let jsond = {};
+  for(var i = 0; i < object.length; i++){
+
+    jsond[object[i]['name']] = object[i]['value'];
+  }
+  var submitJson = JSON.stringify(jsond);
+
+  console.log(submitJson);
+
+  $.ajax({
+    url : "/lit/addWrite",
+    type : "POST",
+    data : submitJson,
+    dataType: 'JSON',
+    success : function(data) {
+      alert("success");
+    },
+    error : function() {
+      alert("error");
+    }
+  });
 }
 
 // 스타트 / 마지막 날짜 계산기
@@ -226,14 +246,3 @@ $().ready(function dateInputSet() {
     }
   });
 });
-
-function submitFun(getform) {
-
-  let jsond = {};
-
-  for(var i = 0; i < getform.length; i++){
-      jsond[getform[i]['name']] = getform[i]['value'];
-  }
-
-  console.log(jsond);
-}
