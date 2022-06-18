@@ -12,8 +12,6 @@ public class ProjectVO {
     private String category;
     private String content;
     private String authentication;
-    private Long applyCount;
-    private Long userNumber;
     private String startDate;
     private String endDate;
     private Long status;

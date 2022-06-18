@@ -114,8 +114,3 @@ $('.innerImageWrapper > .innerImageSideButtons > div').click(function () {
 
     $post.click();
 });
-
-
-let replyService = (function () {
-
-})();

@@ -1,30 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.project.ProjectMapper">
+
+    <select id="getList" resultType="projectVO">
+        <![CDATA[
+        SELECT ROWNUM, COUNT(pr.PROJECT_NUMBER) cont,
+        pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT, pr.AUTHENTICATION, pr.START_DATE, pr.END_DATE, pr.STATUS
+        FROM (
+        SELECT
+        ROWNUM, COUNT(pr.PROJECT_NUMBER) cont,
+        pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT, pr.AUTHENTICATION, pr.START_DATE, pr.END_DATE, pr.STATUS
+        FROM TBL_PROJECT pr,TBL_PARTICIPATION pa
+        WHERE pr.PROJECT_NUMBER  = pa.PROJECT_NUMBER
+        ]]>
+        <choose>
+            <when test="category == 'popular'">
+                AND pr.CATEGORY = '예술'  <!--카테고리 선택-->
+            </when>
+        </choose>
+        <![CDATA[
+        AND pr.STATUS = 1   <!--인증된 목록-->
+        AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+        GROUP BY ROWNUM, pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT,
+        pr.AUTHENTICATION, pr.START_DATE, pr.END_DATE, pr.STATUS,
+        pa.PROJECT_NUMBER, ROWNUM;
+        ]]>
+        <choose>
+            <when test="category == 'popular'">
+                ORDER BY cont DESC;인기순
+            </when>
+            <when test="category == 'popular'">
+                ORDER BY ROWNUM DESC; 신규
+            </when>
+        </choose>
+        <![CDATA[
+        )
+        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}
+        ]]>
+    </select>
     <!--    ###############################동적 쿼리 쓸것-->
     <select id="getList" resultType="projectVO">
-<!--        <![CDATA[-->
-<!--        SELECT RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
-<!--        FROM-->
-<!--        (-->
-<!--                SELECT ROWNUM RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
-<!--                FROM    TBL_PROJECT PJ, TBL_PARTICIPATION PT-->
-<!--        ]]>-->
-<!--                 <choose>-->
-<!--                     <when test="category == 'popular'">-->
-<!--                         <![CDATA[   WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY COUNT(PT.USER_NUMBER)  ]]>-->
-<!--                     </when>-->
-<!--                     <when test="category == 'new'">-->
-<!--                         <![CDATA[  WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
-<!--                     </when>-->
-<!--                     <otherwise>-->
-<!--                         <![CDATA[  WHERE PJ.CATEGORY =#{category} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
-<!--                     </otherwise>-->
-<!--                 </choose>-->
-<!--        <![CDATA[-->
-<!--        )-->
-<!--        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}-->
-<!--        ]]>-->
+        <![CDATA[
+        SELECT RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE
+        FROM
+        (
+                SELECT ROWNUM RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE
+                FROM    TBL_PROJECT PJ, TBL_PARTICIPATION PT
+        ]]>
+                 <choose>
+                     <when test="category == 'popular'">
+                         <![CDATA[   WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY COUNT(PT.USER_NUMBER)  ]]>
+                     </when>
+                     <when test="category == 'new'">
+                         <![CDATA[  WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>
+                     </when>
+                     <otherwise>
+                         <![CDATA[  WHERE PJ.CATEGORY =#{category} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>
+                     </otherwise>
+                 </choose>
+        <![CDATA[
+        )
+        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}
+        ]]>
     </select>
     <!--    ###############################동적 쿼리 쓸것-->
 

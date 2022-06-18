@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LitController {
     private final LitService litService;
 
+    @GetMapping("/projectInfo")
+    public String projectInfo(){
+
+        return "/project/projectInfo";
+    }
 
 
 }

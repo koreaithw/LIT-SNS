@@ -22,4 +22,3 @@
         WHERE UPLOAD_PATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
     </select>
 </mapper>
-

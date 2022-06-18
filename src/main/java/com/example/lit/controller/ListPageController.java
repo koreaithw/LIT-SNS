@@ -22,6 +22,8 @@ public class ListPageController {
     //인기 목록 페이지
     @GetMapping("/popular")
     public List<ReviewVO> goPopularPage(){
+
+
         return null;
     }
 

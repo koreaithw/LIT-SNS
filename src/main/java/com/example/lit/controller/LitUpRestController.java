@@ -1,7 +1,6 @@
 package com.example.lit.controller;
 
 import com.example.lit.domain.vo.project.ProjectVO;
-import com.example.lit.domain.vo.review.LikeVO;
 import com.example.lit.domain.vo.review.ReplyVO;
 import com.example.lit.domain.vo.review.ReportVO;
 import com.example.lit.domain.vo.review.ReviewVO;
@@ -31,13 +30,13 @@ public class LitUpRestController {
     }
 
     //모달창 인증글 상세 댓글 작성 -> 전달 방식 다시 생각하기
-    @PostMapping("/reply")
-    public String registerReply(@RequestBody ReplyVO replyVO){
+    @GetMapping("/reply")
+    public List<ReplyVO> registerReply(){
         log.info("***************************");
         log.info("LitUpRestController : registerReply(get)");
         log.info("***************************");
-        litUpService.registerReply(replyVO);
-        return "댓글 생성 완료";
+
+        return null;
     }
 
     //모달창 인증글 상세 댓글 삭제
@@ -51,8 +50,8 @@ public class LitUpRestController {
     }
 
     //모달창 인증글 상세 신고
-    @PostMapping("/report")
-    public String registerReport(@RequestBody ReportVO reportVO){
+    @GetMapping("/report")
+    public String registerReport(ReportVO reportVO){
         log.info("***************************");
         log.info("LitUpRestController : registerReport(get)");
         log.info("***************************");
@@ -61,23 +60,14 @@ public class LitUpRestController {
         return "신고 성공";
     }
 
-    //모달창 인증글 상세 좋아요 -> 좋아요 전체 갯수도 같이 사용되어야 함
-    @PostMapping("/like")
-    public String registerLike(@RequestBody LikeVO likeVO){
+    //모달창 인증글 상세 좋아요 -> 뭘 반환해야 하는가? 성공여부?
+    @GetMapping("/like")
+    public String registerLike(){
         log.info("***************************");
         log.info("LitUpRestController : registerLike(get)");
         log.info("***************************");
-        litUpService.registerLike(likeVO);
-        return "litUpService.getTotal(likeVO.getReviewNumber()) 이렇게 하는건가? 고민할 것";
-    }
 
-    @PostMapping("/removeLike")
-    public String removeLike(@RequestBody LikeVO likeVO){
-        log.info("***************************");
-        log.info("LitUpRestController : registerLike(get)");
-        log.info("***************************");
-        litUpService.removeLike(likeVO);
-        return "좋아요 해제 성공";
+        return null;
     }
 
 //    ================= 인증글 작성 ====================

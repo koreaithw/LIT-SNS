@@ -20,28 +20,8 @@ public class UserRestController {
     
     //닉네임 중복확인
     @PostMapping("/checkNickName")
-    public String checkNickName(String nickname){
+    public String checkNickName(){
         return null;
-    }
-//
-//    //이메일 중복확인
-//    @ResponseBody
-//    @RequestMapping(value = "/dbEmailCheck", method = RequestMethod.POST)
-//    public boolean dbEmailCheck(String email){
-//        log.info("checkEmail====================");
-//        return userService.dbEmailCheck(email);
-//    }
-//
-    @GetMapping("/dbEmailCheck/{email}")
-    public boolean dbEmailCheck(@PathVariable("email") String email){
-        log.info("이메일 중복검사=============");
-        return userService.dbEmailCheck(email);
-    }
-
-    @GetMapping("/dbNicknameCheck/{nickname}")
-    public boolean dbNicknameCheck(@PathVariable("nickname") String nickname){
-        log.info("닉네임 중복검사=============");
-        return userService.dbNicknameCheck(nickname);
     }
 
     //비밀번호 확인

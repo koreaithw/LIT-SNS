@@ -1,13 +1,10 @@
 package com.example.lit.controller;
 
-import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.service.User.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequiredArgsConstructor
@@ -70,19 +67,11 @@ public class UserController {
     }
 
     //가입
-    @PostMapping("/join")
-    public RedirectView register(UserVO userVO, RedirectAttributes rttr){
-        userService.register(userVO);
-
-        return new RedirectView("/main");
-    }
-
-    //로그인
     @PostMapping("/login")
     public String login(){
         return null;
     }
-
+    
     //카톡 가입은 api활용하기(카카오 id값(숫자) 가져오기)
 
     //마이페이지 데이터 가져와서 들어가기

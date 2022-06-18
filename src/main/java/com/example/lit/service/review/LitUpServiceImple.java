@@ -19,22 +19,17 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public void registerLike(LikeVO likeVO) {
-        likeDAO.register(likeVO);
+
     }
 
     @Override
     public void removeLike(LikeVO likeVO) {
-        likeDAO.remove(likeVO);
-    }
 
-    @Override
-    public int getLikeTotal(Long reviewNumber) {
-        return likeDAO.getTotal(reviewNumber);
     }
 
     @Override
     public void registerReply(ReplyVO replyVO) {
-        replyDAO.register(replyVO);
+
     }
 
     @Override

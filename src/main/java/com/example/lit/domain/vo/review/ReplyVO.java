@@ -11,7 +11,6 @@ public class ReplyVO {
     private Long userNumber;
     private String content;
     private String registerDate;
-    private String nickname;
 
 
 }
