@@ -1,6 +1,8 @@
 package com.example.lit.domain.dao.review;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.review.ReviewDTO;
 import com.example.lit.domain.vo.review.ReviewVO;
 import com.example.lit.mapper.review.ReviewMapper;
 import lombok.RequiredArgsConstructor;
@@ -27,4 +29,6 @@ public class ReviewDAO {
     public int getTotal(){ return reviewMapper.getTotal(); }
     //    성공, 실패용 인증 수 카운트
     public int resultCount(){ return reviewMapper.resultCount(); }
+    //  인증글 검색(관리자)
+    public List<ReviewDTO> searchReview(SearchDTO searchDTO){ return reviewMapper.searchReview(searchDTO); }
 }

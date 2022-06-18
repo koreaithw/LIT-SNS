@@ -12,5 +12,5 @@ public class SearchDTO {
     private String kakao;
     private String type;
     private String category;
-    private String status;
+    private Long status;
 }

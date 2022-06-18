@@ -27,7 +27,7 @@ public class ProjectDAO {
     //    프로젝트 검색
     public List<ProjectVO> searchProject(SearchDTO searchDTO){ return projectMapper.searchProject(searchDTO); }
     //  프로젝트 승인(상태변경)
-    public void changeStatus(@Param("projectNumber") Long projectNumber, @Param("status") Long status){
+    public void changeStatus(Long projectNumber, Long status){
         projectMapper.changeStatus(projectNumber, status);
     }
 }

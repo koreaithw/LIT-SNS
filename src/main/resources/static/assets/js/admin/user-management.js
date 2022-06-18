@@ -146,32 +146,33 @@ function searchUser() {
         $(".searchResult").text(result.length);
 
         //결과 리스트 처리
+        let str = "";
         result.forEach(function (user, i) {
-            let str = "";
             str += " <tr>" +
                 "<td class=\"list-checkbox\">" +
                 "<input type=\"checkbox\" value=\"" + user.userNumber + "\" />" +
                 "</td>\n" +
+                "<td class=\"user-number\">" + user.userNumber + "</td>" +
                 "<td class=\"user-name\">" + user.name + "</td>" +
                 "<td class=\"user-email\">" + user.email + "</td>" +
                 "<td class=\"user-nickname\">" + user.nickname + "</td>" +
                 "<td class=\"user-kakao\">" + (user.kakao ? user.kakao : "")  + "</td>" +
                 "<td class=\"user-status\">" + user.registerDate + "</td>" +
                 "</tr>"
-            $(".list-table > tbody").append(str);
         })
+        $(".list-table > tbody").append(str);
     });
 }
 
 //삭제하기
-let deleteUser = function deleteUser(){
+let deleteUser = function(){
     let $checked = $(".list-checkbox > input[type='checkbox']:checked");
     let list = [];
     $checked.each((i, box) => {
         list.push(box.value);
     });
 
-    adminService.deleteUser(list.join("-"), function(){
+    adminService.deleteUser(list.join(","), function(){
         searchUser();
     })
 

@@ -1,7 +1,11 @@
 package com.example.lit.mapper.review;
 
+import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.review.ReportDTO;
 import com.example.lit.domain.vo.review.ReportVO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface ReportMapper {
@@ -9,4 +13,7 @@ public interface ReportMapper {
     public void insert(ReportVO reportVO);
     // 신고 취소(작성자)
     public void delete(Long reportNumber);
+
+    //리포트 검색(관리자)
+    public List<ReportDTO> searchReport(SearchDTO searchDTO);
 }

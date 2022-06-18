@@ -1,6 +1,7 @@
 package com.example.lit.service.review;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.review.*;
 
 import java.util.List;
@@ -58,4 +59,10 @@ public interface LitUpService {
     public List<ReviewFileVO> getImgs(Long reviewNumber);
     // DB에 없는 이미지 삭제
     public List<ReviewFileVO> getOldFiles();
+
+
+    //  인증글 검색(관리자)
+    public List<ReviewDTO> searchReview(SearchDTO searchDTO);
+    //리포트 검색(관리자)
+    public List<ReportDTO> searchReport(SearchDTO searchDTO);
 }

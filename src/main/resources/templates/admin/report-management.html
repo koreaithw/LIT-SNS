@@ -51,7 +51,7 @@
                       <table class="search-table border__gray">
                         <tbody>
                           <tr>
-                            <th class="background__gray">기간</th>
+                            <th class="background__gray">신고 기간</th>
                             <td class="flex col__period">
                               <div>
                                 <!-- 기간 버튼 백엔드 작업 시 href 속성 값 사용 -->
@@ -100,7 +100,7 @@
                                   <input
                                     type="text"
                                     class="datepicker"
-                                    name="start-date"
+                                    name="startDate"
                                     readonly
                                   />
                                 </div>
@@ -114,7 +114,7 @@
                                   <input
                                     type="text"
                                     class="datepicker"
-                                    name="end-date"
+                                    name="endDate"
                                     readonly
                                   />
                                 </div>
@@ -132,35 +132,36 @@
                               <div>
                                 <!-- 임시 name, value -->
                                 <select
-                                  name="categoryType"
+                                  name="category"
                                   id="category-select"
                                 >
-                                  <option value="categoryAll">전체목록</option>
-                                  <option value="categoryLife">생활</option>
-                                  <option value="categoryExercise">운동</option>
-                                  <option value="categoryHobby">취미</option>
-                                  <option value="categoryArt">예술</option>
-                                  <option value="categoryHeart">정서</option>
-                                  <option value="categoryEating">식습관</option>
-                                  <option value="categoryStudy">공부</option>
+                                  <option value="">전체목록</option>
+                                  <option value="life">생활</option>
+                                  <option value="exercise">운동</option>
+                                  <option value="hobby">취미</option>
+                                  <option value="art">예술</option>
+                                  <option value="heart">정서</option>
+                                  <option value="eating">식습관</option>
+                                  <option value="study">공부</option>
                                   <!-- 카테고리 설정 -->
                                 </select>
                               </div>
                             </td>
                           </tr>
                           <tr>
-                            <th class="background__gray">프로젝트 선택</th>
+                            <th class="background__gray">신고글 검색</th>
                             <td class="flex">
                               <div>
                                 <select name="type" id="search-select">
-                                  <option value="userName">작성자</option>
-                                  <option value="projectNumber">글 번호</option>
-                                  <option value="userNumber">회원 번호</option>
+                                  <option value="report_number">신고 번호</option>
+                                  <option value="email">신고 회원</option>
+                                  <option value="review_number">글 번호</option>
+<!--                                  검색 조건 추가되어야 할 듯-->
                                 </select>
                               </div>
                               <div>
                                 <!-- name 설정하여 사용 -->
-                                <input id="search-input" type="text" name="" />
+                                <input id="search-input" type="text" name="keyword" />
                               </div>
                             </td>
                           </tr>
@@ -170,6 +171,7 @@
                         <button
                           type="button"
                           class="search-button btn background__red"
+                          onclick="searchReport()"
                         >
                           검색
                         </button>
@@ -195,7 +197,7 @@
                         <div>
                           <!-- db조회 결과 숫자로 넣기 -->
                           [오늘 신고된 글 <span>0</span>건] 검색결과
-                          <span>0</span>건
+                          <span class="searchResult">0</span>건
                         </div>
                         <div class="flex">
                           <div class="button-box">
@@ -225,17 +227,19 @@
                       <form action="" name="list-form">
                         <table class="list-table">
                           <tbody>
-                            <tr>
+                            <tr class="table-head">
                               <th>
                                 <input type="checkbox" class="check-all" />
                               </th>
-                              <th>글 번호</th>
-                              <th>작성자</th>
-                              <th>작성일</th>
-                              <th>인증글 <br />보기</th>
+                              <th>신고 번호</th>
                               <th>신고한 회원</th>
                               <th>신고 사유</th>
                               <th>신고 일자</th>
+                              <th>글 번호</th>
+                              <th>작성자</th>
+                              <th>작성일</th>
+                              <th>카테고리</th>
+                              <th>인증글 <br />보기</th>
                             </tr>
                             <!-- 리스트 불러와서 반복문으로 페이지당 10개씩 -->
                             <!-- 아래는 예시 -->
@@ -245,22 +249,27 @@
                                 <!-- checkbox의 value속성에 user number를 꽂거나-->
                                 <!-- hidden 사용할듯? -->
                               </td>
-                              <td class="review-number">1</td>
-                              <td class="user-email">qwer@naver.com</td>
-
+                              <td class="report-number">1</td>
+                              <td class="report-user-email">qwer@naver.com</td>
+                              <td>주제와 상관없는 내용</td>
                               <td class="project-register-date">
                                 2022-06-10<br />22:44:17
+                              </td>
+
+                              <td class="review-number">1</td>
+                              <td class="review-user-email">aaa@naver.com</td>
+
+                              <td class="review-register-date">
+                                2022-06-11<br />12:44:00
+                              </td>
+                              <td class="category">
+                                운동
                               </td>
                               <td class="project-view">
                                 <!-- 미리보기 경로 -->
                                 <div>
                                   <a class="a-btn not-selected" href="">보기</a>
                                 </div>
-                              </td>
-                              <td class="project-preview-cnt">aaa@naver.com</td>
-                              <td>주제와 상관없는 내용</td>
-                              <td class="project-register-date">
-                                2022-06-11<br />12:44:00
                               </td>
                             </tr>
 
@@ -292,6 +301,7 @@
   <script src="/assets/js/admin/report-management.js"></script>
   <script src="/assets/js/admin/side-bar.js"></script>
   <script src="/assets/js/admin/admin-common.js"></script>
+  <script src="/assets/js/admin/adminAjax.js"></script>
   <!-- date picker script -->
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"

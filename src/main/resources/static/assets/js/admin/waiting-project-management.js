@@ -53,8 +53,8 @@ $(".a-btn").on("click", function (e) {
   $(this).addClass("a-btn__selected");
 
   //기간 버튼 클릭시 input에 자동 삽입
-  let $startInput = $("input[name='start-date']");
-  let $endInput = $("input[name='end-date']");
+  let $startInput = $("input[name='startDate']");
+  let $endInput = $("input[name='endDate']");
   let val = $(this).attr("href");
 
   //전체 버튼 선택시 공백으로 바꾸기
@@ -82,7 +82,7 @@ $(".a-btn").on("click", function (e) {
     [
       todayObj.getFullYear(),
       (todayObj.getMonth() + 1 < 10 ? "0" : "") + (todayObj.getMonth() + 1),
-      (todayObj.getDate() < 10 ? "0" : "") + todayObj.getDate(),
+      (todayObj.getDate()+1 < 10 ? "0" : "") + todayObj.getDate(),
     ].join("-")
   );
   $endInput.val(resultDateAr.join("-"));
@@ -142,6 +142,7 @@ function searchProject() {
     type: $("select[name='type']").val(),
     keyword: $("input[name='keyword']").val(),
     category: $("select[name='category']").val(),
+    status: 0
   }, function (result) {
     //검색 결과 건수
     $(".searchResult").text(result.length);
@@ -158,8 +159,7 @@ function searchProject() {
       "<td class=\"project-number\">" + project.projectNumber + "</td>" +
       "<td class=\"project-category\">" + project.category + "</td>" +
       "<td class=\"project-title\">" + project.title + "</td>" +
-      "<td class=\"project-contenet\">" + project.content + "</td>" +
-      "<td class=\"user-email\">테이블 수정필요</td>" +
+      "<td class=\"user-email\">" + project.userNumber + "</td>" +
       "<td class=\"project-preview\">" +
       "<!-- 미리보기 경로 -->" +
       "<div>" +

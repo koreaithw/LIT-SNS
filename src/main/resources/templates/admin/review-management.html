@@ -132,17 +132,17 @@
                               <div>
                                 <!-- 임시 name, value -->
                                 <select
-                                  name="categoryType"
+                                  name="category"
                                   id="category-select"
                                 >
-                                  <option value="categoryAll">전체목록</option>
-                                  <option value="categoryLife">생활</option>
-                                  <option value="categoryExercise">운동</option>
-                                  <option value="categoryHobby">취미</option>
-                                  <option value="categoryArt">예술</option>
-                                  <option value="categoryHeart">정서</option>
-                                  <option value="categoryEating">식습관</option>
-                                  <option value="categoryStudy">공부</option>
+                                  <option value="">전체목록</option>
+                                  <option value="life">생활</option>
+                                  <option value="exercise">운동</option>
+                                  <option value="hobby">취미</option>
+                                  <option value="art">예술</option>
+                                  <option value="heart">정서</option>
+                                  <option value="eating">식습관</option>
+                                  <option value="study">공부</option>
                                   <!-- 카테고리 설정 -->
                                 </select>
                               </div>
@@ -153,14 +153,14 @@
                             <td class="flex">
                               <div>
                                 <select name="type" id="search-select">
-                                  <option value="userName">작성자</option>
-                                  <option value="projectNumber">글 번호</option>
-                                  <option value="userNumber">회원 번호</option>
+                                  <option value="email">작성자</option>
+                                  <option value="review_number">글 번호</option>
+                                  <option value="user_number">회원 번호</option>
                                 </select>
                               </div>
                               <div>
                                 <!-- name 설정하여 사용 -->
-                                <input id="search-input" type="text" name="" />
+                                <input id="search-input" type="text" name="keyword" />
                               </div>
                             </td>
                           </tr>
@@ -171,8 +171,8 @@
                               <label>
                                 <input
                                   type="radio"
-                                  name="boardStatus"
-                                  value="all"
+                                  name="status"
+                                  value=""
                                   checked
                                 />
                                 <span>전체</span>
@@ -180,7 +180,7 @@
                               <label>
                                 <input
                                   type="radio"
-                                  name="boardStatus"
+                                  name="status"
                                   value="1"
                                 />
                                 <span>진행중</span>
@@ -188,40 +188,10 @@
                               <label>
                                 <input
                                   type="radio"
-                                  name="boardStatus"
-                                  value="0"
+                                  name="status"
+                                  value="2"
                                 />
                                 <span>완료</span>
-                              </label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th class="background__gray">임시 상태</th>
-                            <td class="flex">
-                              <label>
-                                <input
-                                  type="radio"
-                                  name="tempStatus"
-                                  value="all"
-                                  checked
-                                />
-                                <span>전체</span>
-                              </label>
-                              <label>
-                                <input
-                                  type="radio"
-                                  name="tempStatus"
-                                  value="new"
-                                />
-                                <span> 신규</span>
-                              </label>
-                              <label>
-                                <input
-                                  type="radio"
-                                  name="tempStatus"
-                                  value="popular"
-                                />
-                                <span>인기</span>
                               </label>
                             </td>
                           </tr>
@@ -231,6 +201,7 @@
                         <button
                           type="button"
                           class="search-button btn background__red"
+                          onclick="searchReview()"
                         >
                           검색
                         </button>
@@ -256,7 +227,7 @@
                         <div>
                           <!-- db조회 결과 숫자로 넣기 -->
                           [오늘 등록된 새 글 <span>0</span>건] 검색결과
-                          <span>0</span>건
+                          <span class="searchResult">0</span>건
                         </div>
                         <div class="button-box">
                           <button type="button" class="delete-btn">
@@ -275,43 +246,21 @@
                       <form action="" name="list-form">
                         <table class="list-table">
                           <tbody>
-                            <tr>
+                            <tr class="table-head">
                               <th>
                                 <input type="checkbox" class="check-all" />
                               </th>
                               <th>글 번호</th>
-                              <th>회원 번호</th>
-                              <th>카테고리</th>
                               <th>인증글 <br />보기</th>
+                              <th>회원 번호</th>
                               <th>작성자</th>
-                              <th>조회수</th>
+                              <th>프로젝트 번호</th>
+                              <th>카테고리</th>
+                              <th>프로젝트 상태</th>
                               <th>작성일</th>
                             </tr>
                             <!-- 리스트 불러와서 반복문으로 페이지당 10개씩 -->
-                            <!-- 아래는 예시 -->
-                            <tr>
-                              <td class="list-checkbox">
-                                <input type="checkbox" value="" />
-                                <!-- checkbox의 value속성에 user number를 꽂거나-->
-                                <!-- hidden 사용할듯? -->
-                              </td>
-                              <td class="review-number">1</td>
-                              <td class="user-number">1</td>
-                              <td class="project-category">운동</td>
-                              <td class="project-view">
-                                <!-- 미리보기 경로 -->
-                                <div>
-                                  <a class="a-btn not-selected" href="">보기</a>
-                                </div>
-                              </td>
-                              <td class="user-email">qwer@naver.com</td>
-                              <td class="project-preview-cnt">62</td>
-                              <td class="project-register-date">
-                                2022-06-10<br />22:44:17
-                              </td>
-                            </tr>
 
-                            <!-- 예시 끝 -->
                           </tbody>
                         </table>
                       </form>
@@ -339,6 +288,7 @@
   <script src="/assets/js/admin/review-management.js"></script>
   <script src="/assets/js/admin/side-bar.js"></script>
   <script src="/assets/js/admin/admin-common.js"></script>
+  <script src="/assets/js/admin/adminAjax.js"></script>
   <!-- date picker script -->
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
