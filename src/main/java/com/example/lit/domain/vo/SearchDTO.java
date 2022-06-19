@@ -20,6 +20,7 @@ public class SearchDTO {
     private String type;
     private String keyword;
 
+
     public SearchDTO() {
         this(1, 10);
     }

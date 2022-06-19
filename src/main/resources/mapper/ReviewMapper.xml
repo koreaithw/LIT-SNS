@@ -47,41 +47,59 @@
     </select>
 
     <select id="searchReview" resultType="reviewDTO">
-        SELECT
-        r.REVIEW_NUMBER, r.USER_NUMBER, r.PROJECT_NUMBER, r.CONTENT, r.REGISTER_DATE,
-        p.CATEGORY, p.STATUS,
-        u.EMAIL
-        FROM TBL_USER u
-        INNER JOIN TBL_REVIEW r
-        ON r.USER_NUMBER = u.USER_NUMBER
-        INNER JOIN TBL_PROJECT p
-        ON p.PROJECT_NUMBER = r.PROJECT_NUMBER
-        WHERE
-        <choose>
-            <when test="type.equals('email')">
-                u.${type}
-            </when>
-            <otherwise>
-                r.${type}
-            </otherwise>
-        </choose>
-        LIKE '%'||#{keyword}||'%'
-        <if test="category != null and category != ''">
-            AND p.CATEGORY = #{category}
-        </if>
-        <if test="startDate != null and startDate != ''">
-            <![CDATA[
-        AND TO_CHAR(r.REGISTER_DATE, 'yyyy-mm-dd') >= #{startDate}
-        ]]>
-        </if>
-        <if test="endDate != null and endDate != ''">
-            <![CDATA[
-        AND TO_CHAR(r.REGISTER_DATE, 'yyyy-mm-dd') <= #{endDate}
-        ]]>
-        </if>
-        <if test="status != null and status != ''">
-            AND p.STATUS = #{status}
-        </if>
+    SELECT TOTAL,
+    REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT, REGISTER_DATE,
+    CATEGORY, STATUS,
+    EMAIL
+    FROM(
+        SELECT ROWNUM RN, TOTAL, REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT, REGISTER_DATE,
+        CATEGORY, STATUS,
+        EMAIL
+        FROM(
+            SELECT COUNT(r.REVIEW_NUMBER) OVER() AS TOTAL,
+            r.REVIEW_NUMBER, r.USER_NUMBER, r.PROJECT_NUMBER, r.CONTENT, r.REGISTER_DATE,
+            p.CATEGORY, p.STATUS,
+            u.EMAIL
+            FROM TBL_USER u
+            INNER JOIN TBL_REVIEW r
+            ON r.USER_NUMBER = u.USER_NUMBER
+            INNER JOIN TBL_PROJECT p
+            ON p.PROJECT_NUMBER = r.PROJECT_NUMBER
+            WHERE
+            <choose>
+                <when test="type.equals('email')">
+                    u.${type}
+                </when>
+                <otherwise>
+                    r.${type}
+                </otherwise>
+            </choose>
+            LIKE '%'||#{keyword}||'%'
+            <if test="category != null and category != ''">
+                AND p.CATEGORY = #{category}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                <![CDATA[
+            AND TO_CHAR(r.REGISTER_DATE, 'yyyy-mm-dd') >= #{startDate}
+            ]]>
+            </if>
+            <if test="endDate != null and endDate != ''">
+                <![CDATA[
+            AND TO_CHAR(r.REGISTER_DATE, 'yyyy-mm-dd') <= #{endDate}
+            ]]>
+            </if>
+            <if test="status != null and status != ''">
+                AND p.STATUS = #{status}
+            </if>
+        )
+        <![CDATA[
+            WHERE ROWNUM <= #{pageNum} * #{amount}
+            ]]>
+    )
+    <![CDATA[
+    WHERE RN > (#{pageNum} - 1) * #{amount}
+    ]]>
+
     </select>
     <select id="getTotalToday" resultType="_int">
         SELECT COUNT(REVIEW_NUMBER) FROM TBL_REVIEW

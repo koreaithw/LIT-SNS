@@ -40,10 +40,11 @@ $(document).ready(function(){
 //================================ ajax =========================================
 
 //검색하기
-function searchUser() {
+function searchUser(page) {
     $(".list-table tr:not(.table-head)").html("");
 
     adminService.searchUser({
+        page : page,
         startDate: $("input[name='startDate']").val(),
         endDate: $("input[name='endDate']").val(),
         type: $("select[name='type']").val(),
@@ -51,7 +52,11 @@ function searchUser() {
         kakao: $("input[name='kakao']:checked").val()
     }, function (result) {
         //검색 결과 건수
-        $(".searchResult").text(result.length);
+        if(result == null || result.length == 0){
+            $(".searchResult").text(0);
+            return;
+        }
+        $(".searchResult").text(result[0].total);
 
         //결과 리스트 처리
         let str = "";
@@ -69,8 +74,17 @@ function searchUser() {
                 "</tr>"
         })
         $(".list-table > tbody").append(str);
+        pageBlock(result[0].total);//admin-common.js에 정의되어 있음
     });
 }
+
+$(".paging-block").on("click", "a.changePage", function (e) {
+    e.preventDefault();
+    pageNum = $(this).attr("href");
+    searchUser(pageNum);
+});
+
+
 
 //삭제하기
 let deleteUser = function(){
@@ -81,7 +95,7 @@ let deleteUser = function(){
     });
 
     adminService.deleteUser(list.join(","), function(){
-        searchUser();
+        searchUser(pageNum);
     })
 
 }
@@ -93,11 +107,14 @@ $(".delete-btn").on("click", function () {
 });
 
 
-//차트=====
+//차트===============================
 
 function chartData(){
     chartService.userChartData(function(result){
         chartResult = result;
     })
 }
+
+
+
 

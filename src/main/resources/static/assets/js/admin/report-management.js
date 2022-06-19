@@ -30,17 +30,24 @@ window.onload = function () {
 
 //================================ ajax =========================================
 
-function searchReport() {
+function searchReport(page) {
     $(".list-table tr:not(.table-head)").html("");
 
     adminService.searchReport({
+        page : page,
         startDate: $("input[name='startDate']").val(),
         endDate: $("input[name='endDate']").val(),
         type: $("select[name='type']").val(),
         keyword: $("input[name='keyword']").val(),
         category: $("select[name='category']").val(),
     }, function (result) {
-        $(".searchResult").text(result.length);
+
+        if(result == null || result.length == 0){
+            $(".searchResult").text(0);
+            return;
+        }
+
+        $(".searchResult").text(result[0].total);
         let str = "";
         result.forEach((report, i) => {
             str +=
@@ -70,9 +77,14 @@ function searchReport() {
                 "</tr>"
         })
         $(".list-table > tbody").append(str);
+        pageBlock(result[0].total);//admin-common.js에 정의되어 있음
     });
 }
-
+$(".paging-block").on("click", "a.changePage", function (e) {
+    e.preventDefault();
+    pageNum = $(this).attr("href");
+    searchReport(pageNum);
+});
 //신고된 글 삭제
 let deleteReport = function(){
     let $checked = $(".list-checkbox > input[type='checkbox']:checked");
@@ -84,7 +96,7 @@ let deleteReport = function(){
     });
 
     adminService.deleteReport(list.join(","), function(){
-        searchReport();
+        searchReport(pageNum);
     })
 }
 
@@ -98,7 +110,7 @@ let cancelReport = function(){
     });
 
     adminService.cancelReport(list.join(","), function(){
-        searchReport();
+        searchReport(pageNum);
     })
 }
 

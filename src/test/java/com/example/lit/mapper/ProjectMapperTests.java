@@ -63,7 +63,7 @@ public class ProjectMapperTests {
         searchDTO.setEndDate("2022-07-01");
         searchDTO.setKeyword("");
         searchDTO.setType("title");
-        searchDTO.setCategory("hoby");
+        searchDTO.setCategory("");
         projectMapper.searchProject(searchDTO).stream().map(ProjectDTO::toString).forEach(log::info);
     }
 

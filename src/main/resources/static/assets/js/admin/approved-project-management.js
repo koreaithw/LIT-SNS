@@ -24,16 +24,17 @@ let deleteProject = function (){
   });
 
   adminService.deleteProject(list.join(","), function(){
-    searchProject();
+    searchProject(pageNum);
   })
 }
 
 //검색하기
-function searchProject() {
+function searchProject(page) {
   $(".list-table tr:not(.table-head)").html("");
   console.log( $("input[name='status']:checked").val())
 
   adminService.searchProject({
+    page : page,
     startDate: $("input[name='startDate']").val(),
     endDate: $("input[name='endDate']").val(),
     type: $("select[name='type']").val(),
@@ -42,7 +43,11 @@ function searchProject() {
     status : $("input[name='status']:checked").val()
   }, function (result) {
     //검색 결과 건수
-    $(".searchResult").text(result.length);
+    if(result == null || result.length == 0){
+      $(".searchResult").text(0);
+      return;
+    }
+    $(".searchResult").text(result[0].total);
 
     //결과 리스트 처리
     let str = "";
@@ -70,9 +75,15 @@ function searchProject() {
           "</tr>"
     })
     $(".list-table > tbody").append(str);
+    pageBlock(result[0].total); //admin-common.js에 정의되어 있음
   });
 }
 
+$(".paging-block").on("click", "a.changePage", function (e) {
+  e.preventDefault();
+  pageNum = $(this).attr("href");
+  searchProject(pageNum);
+});
 // 삭제 버튼 이벤트 ==========================================
 //checkAlert() 는 admin-common.js 에 정의됨
 //매개변수에 실행시킬 함수 콜백함수로 넘겨서 사용하기 -> checkAlert("msg", function(){......})

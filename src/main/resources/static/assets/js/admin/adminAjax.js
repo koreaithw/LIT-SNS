@@ -5,8 +5,9 @@ let adminService = (function(){
     
     //유저 찾기
     function searchUser(searchInfo, callback, error){
+        let page = searchInfo.page || 1;
         $.ajax({
-            url: "/admin/searchUser",
+            url: "/admin/searchUser/" + page,
             type: "post",
             data: JSON.stringify(searchInfo),
             contentType: "application/json",
@@ -45,9 +46,10 @@ let adminService = (function(){
 
     //프로젝트 찾기 (대기, 승인)
     function searchProject(searchInfo, callback, error) {
-        console.log(searchInfo);
+        // console.log(searchInfo);
+        let page = searchInfo.page || 1;
         $.ajax({
-            url: "/admin/project/search",
+            url: "/admin/project/search/" + page,
             type : "post",
             data : JSON.stringify(searchInfo),
             contentType: "application/json",
@@ -106,8 +108,9 @@ let adminService = (function(){
 
     //리뷰 검색
     function searchReview(searchInfo, callback, error){
+        let page = searchInfo.page || 1;
         $.ajax({
-            url : "/admin/review/search",
+            url : "/admin/review/search/" + page,
             type : "post",
             data : JSON.stringify(searchInfo),
             contentType : "application/json",
@@ -142,8 +145,9 @@ let adminService = (function(){
 
     //리포트 검색
     function searchReport(searchInfo, callback, error){
+        let page = searchInfo.page || 1;
         $.ajax({
-            url : "/admin/report/search",
+            url : "/admin/report/search/" + page,
             type : "post",
             data : JSON.stringify(searchInfo),
             contentType : "application/json",

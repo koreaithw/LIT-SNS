@@ -223,10 +223,14 @@ input[name="endDate"] {
   font-weight: bold;
   font-size: 18px;
   color: var(--red);
+  display: flex;
+  justify-content: center;
 }
 
 .paging-block li {
+  list-style: none;
   display: inline-block;
+  margin : 0 5px;
 }
 
 /* period */

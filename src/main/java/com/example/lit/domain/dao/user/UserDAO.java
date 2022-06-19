@@ -1,6 +1,7 @@
 package com.example.lit.domain.dao.user;
 
 import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.user.UserDTO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.mapper.user.UserMapper;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class UserDAO {
     public void modifyMedal(UserVO userVO){ userMapper.updateMedal(userVO); }
 
     // 관리자 유저 검색
-    public List<UserVO> userSearch(SearchDTO searchDTO){ return userMapper.userSearch(searchDTO);}
+    public List<UserDTO> userSearch(SearchDTO searchDTO){ return userMapper.userSearch(searchDTO);}
     // 유저 토탈
     public int getTotal() {return userMapper.getTotal(); }
     // 차트 정보

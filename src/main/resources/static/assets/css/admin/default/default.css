@@ -23,6 +23,7 @@ h1 {
 
 a {
   text-decoration: none;
+  color: var(--side-black);
 }
 
 ul,

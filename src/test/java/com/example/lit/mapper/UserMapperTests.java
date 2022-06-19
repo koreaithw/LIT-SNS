@@ -2,6 +2,7 @@ package com.example.lit.mapper;
 
 
 import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.user.UserDTO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.mapper.user.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -104,11 +105,13 @@ public class UserMapperTests {
 //        AND REGISTER_DATE > '2022-06-14' AND REGISTER_DATE < '2022-06-16';
         SearchDTO search = new SearchDTO();
         search.setStartDate("2022-06-14");
-        search.setEndDate("2022-06-16");
-        search.setKeyword("test");
+        search.setEndDate("2022-06-19");
+        search.setKeyword("");
         search.setType("email");
-        search.setKakao("2"); // kakao를 0(all), 1(null), 2(not null) 로 받아서 검사하기
-        userMapper.userSearch(search).stream().map(UserVO::toString).forEach(log::info);
+        search.setKakao("0"); // kakao를 0(all), 1(null), 2(not null) 로 받아서 검사하기
+        log.info(search.getAmount() + "aaaaa");
+        log.info(search.getPageNum() + "aaaaa");
+        userMapper.userSearch(search).stream().map(UserDTO::toString).forEach(log::info);
     }
 
     @Test

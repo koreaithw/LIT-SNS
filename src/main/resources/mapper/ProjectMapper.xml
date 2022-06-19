@@ -38,53 +38,70 @@
     </insert>
 
     <select id="searchProject" resultType="projectDTO">
-        SELECT p.PROJECT_NUMBER, p.TITLE, p.CATEGORY, p.CONTENT, p.APPLY_COUNT,
-        p.AUTHENTICATION, p.START_DATE, p.END_DATE, p.STATUS, p.USER_NUMBER,
-        u.EMAIL,
-        pt.PARTICIPATION_COUNT
-        FROM TBL_PROJECT p
-        LEFT OUTER JOIN (
-            SELECT PROJECT_NUMBER, COUNT(USER_NUMBER) AS PARTICIPATION_COUNT
-            FROM TBL_PARTICIPATION
-            GROUP BY PROJECT_NUMBER
-        ) pt
-        ON pt.PROJECT_NUMBER = p.PROJECT_NUMBER
-        LEFT OUTER JOIN TBL_USER u
-        ON u.USER_NUMBER = p.USER_NUMBER
-        WHERE
-        <choose>
-            <when test="type == 'email'">
-                u.${type}
-            </when>
-            <otherwise>
-                p.${type}
-            </otherwise>
-        </choose>
-        LIKE '%'||#{keyword}||'%'
-        <if test="category != null and category != ''">
-            AND p.CATEGORY = #{category}
-        </if>
-        <if test="startDate != null and startDate != ''">
+        SELECT TOTAL, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, APPLY_COUNT,
+        AUTHENTICATION, START_DATE, END_DATE, STATUS, USER_NUMBER,
+        EMAIL,
+        PARTICIPATION_COUNT
+        FROM(
+            SELECT ROWNUM RN, TOTAL, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, APPLY_COUNT,
+            AUTHENTICATION, START_DATE, END_DATE, STATUS, USER_NUMBER,
+            EMAIL,
+            PARTICIPATION_COUNT
+            FROM(
+                SELECT COUNT(p.PROJECT_NUMBER) OVER() AS TOTAL, p.PROJECT_NUMBER, p.TITLE, p.CATEGORY, p.CONTENT, p.APPLY_COUNT,
+                p.AUTHENTICATION, p.START_DATE, p.END_DATE, p.STATUS, p.USER_NUMBER,
+                u.EMAIL,
+                pt.PARTICIPATION_COUNT
+                FROM TBL_PROJECT p
+                LEFT OUTER JOIN (
+                    SELECT PROJECT_NUMBER, COUNT(USER_NUMBER) AS PARTICIPATION_COUNT
+                    FROM TBL_PARTICIPATION
+                    GROUP BY PROJECT_NUMBER
+                ) pt
+                ON pt.PROJECT_NUMBER = p.PROJECT_NUMBER
+                LEFT OUTER JOIN TBL_USER u
+                ON u.USER_NUMBER = p.USER_NUMBER
+                WHERE
+                <choose>
+                    <when test="type == 'email'">
+                        u.${type}
+                    </when>
+                    <otherwise>
+                        p.${type}
+                    </otherwise>
+                </choose>
+                LIKE '%'||#{keyword}||'%'
+                <if test="category != null and category != ''">
+                    AND p.CATEGORY = #{category}
+                </if>
+                <if test="startDate != null and startDate != ''">
+                    <![CDATA[
+                           AND TO_CHAR(p.START_DATE, 'yyyy-mm-dd') >= #{startDate}
+                    ]]>
+                </if>
+                <if test="endDate != null and endDate != ''">
+                    <![CDATA[
+                           AND TO_CHAR(p.END_DATE, 'yyyy-mm-dd') <= #{endDate}
+                    ]]>
+                </if>
+                <trim prefix="AND">
+                    <choose>
+                        <when test="status == 0 or status == 1 or status == 2">
+                            p.STATUS = #{status}
+                        </when>
+                        <when test="status == 3">
+                            (p.STATUS = 1 OR p.STATUS = 2)
+                        </when>
+                    </choose>
+                </trim>
+            )
             <![CDATA[
-                   AND TO_CHAR(p.START_DATE, 'yyyy-mm-dd') >= #{startDate}
-            ]]>
-        </if>
-        <if test="endDate != null and endDate != ''">
-            <![CDATA[
-                   AND TO_CHAR(p.END_DATE, 'yyyy-mm-dd') <= #{endDate}
-            ]]>
-        </if>
-        <trim prefix="AND">
-            <choose>
-                <when test="status == 0 or status == 1 or status == 2">
-                    p.STATUS = #{status}
-                </when>
-                <when test="status == 3">
-                    (p.STATUS = 1 OR p.STATUS = 2)
-                </when>
-            </choose>
-        </trim>
-
+                WHERE ROWNUM <= #{pageNum} * #{amount}
+                ]]>
+        )
+        <![CDATA[
+        WHERE RN > (#{pageNum} - 1) * #{amount}
+        ]]>
     </select>
 
     <select id="get" resultType="projectVO">

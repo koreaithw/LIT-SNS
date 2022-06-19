@@ -32,9 +32,10 @@ window.onload = function () {
 
 //================================ ajax =========================================
 
-function searchReview() {
+function searchReview(page) {
     $(".list-table tr:not(.table-head)").html("");
     adminService.searchReview({
+        page : page,
         startDate: $("input[name='startDate']").val(),
         endDate: $("input[name='endDate']").val(),
         type: $("select[name='type']").val(),
@@ -42,7 +43,11 @@ function searchReview() {
         category: $("select[name='category']").val(),
         status: $("input[name='status']:checked").val()
     }, function (result) {
-        $(".searchResult").text(result.length);
+        if(result == null || result.length == 0){
+            $(".searchResult").text(0);
+            return;
+        }
+        $(".searchResult").text(result[0].total);
         let str = "";
         result.forEach(function(review, i){
             str +=
@@ -67,9 +72,15 @@ function searchReview() {
                 "</tr>"
         })
         $(".list-table > tbody").append(str);
-
+        pageBlock(result[0].total);//admin-common.js에 정의되어 있음
     })
 }
+
+$(".paging-block").on("click", "a.changePage", function (e) {
+    e.preventDefault();
+    pageNum = $(this).attr("href");
+    searchReview(pageNum);
+});
 
 //삭제하기
 let deleteReview = function (){
@@ -81,7 +92,7 @@ let deleteReview = function (){
     });
 
     adminService.deleteReview(list.join(","), function(){
-        searchReview();
+        searchReview(pageNum);
     })
 }
 

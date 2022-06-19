@@ -7,6 +7,7 @@ import com.example.lit.domain.vo.review.ReportVO;
 import com.example.lit.domain.vo.review.ReviewDTO;
 import com.example.lit.domain.vo.review.ReviewVO;
 import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.user.UserDTO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.service.User.UserService;
 import com.example.lit.service.project.LitService;
@@ -29,13 +30,12 @@ public class AdminRestController {
     private final LitUpService litUpService;
 
     //회원 검색
-    @PostMapping("/searchUser")
-    public List<UserVO> searchUser(@RequestBody SearchDTO searchDTO){
+    @PostMapping("/searchUser/{page}")
+    public List<UserDTO> searchUser(@RequestBody SearchDTO searchDTO, @PathVariable("page") int pageNum){
         log.info("***************************");
         log.info("AdminRestController : searchUser(post)");
         log.info("***************************");
-
-        log.info(searchDTO.getKeyword());
+        searchDTO.setPageNum(pageNum);
         return userService.userSearch(searchDTO);
     }
 
@@ -50,16 +50,15 @@ public class AdminRestController {
     }
 
     //프로젝트 검색
-    @PostMapping("/project/search")
-    public List<ProjectDTO> searchWaitingProject(@RequestBody SearchDTO searchDTO){
+    @PostMapping("/project/search/{page}")
+    public List<ProjectDTO> searchWaitingProject(@RequestBody SearchDTO searchDTO, @PathVariable("page") int pageNum){
         log.info("***************************");
         log.info("AdminRestController : searchWaitingProject(post)");
         log.info("***************************");
 
 //        litService.searchProject(searchDTO).stream().forEach(ProjectDTO::toString);
 
-
-
+        searchDTO.setPageNum(pageNum);
         return litService.searchProject(searchDTO);
     }
 
@@ -95,14 +94,14 @@ public class AdminRestController {
     }
 
     //인증글 검색
-    @PostMapping("/review/search")
-    public List<ReviewDTO> searchReview(@RequestBody SearchDTO searchDTO){
+    @PostMapping("/review/search/{page}")
+    public List<ReviewDTO> searchReview(@RequestBody SearchDTO searchDTO, @PathVariable("page") int pageNum){
         log.info("***************************");
         log.info("AdminRestController : searchReview(post)");
         log.info("***************************");
 
 //        litUpService.searchReview(searchDTO).stream().map(ReviewDTO::toString).forEach(log::info);
-
+        searchDTO.setPageNum(pageNum);
         return litUpService.searchReview(searchDTO);
     }
 
@@ -129,13 +128,14 @@ public class AdminRestController {
 
 
     //신고 검색
-    @PostMapping("/report/search")
-    public List<ReportDTO> searchReport(@RequestBody SearchDTO searchDTO){
+    @PostMapping("/report/search/{page}")
+    public List<ReportDTO> searchReport(@RequestBody SearchDTO searchDTO, @PathVariable("page") int pageNum){
         log.info("***************************");
         log.info("AdminRestController : searchReport(post)");
         log.info("***************************");
 
 //        litUpService.searchReport(searchDTO).stream().map(ReportDTO::toString).forEach(log::info);
+        searchDTO.setPageNum(pageNum);
         return litUpService.searchReport(searchDTO);
     }
 

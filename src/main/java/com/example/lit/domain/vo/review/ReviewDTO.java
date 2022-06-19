@@ -8,7 +8,6 @@ import java.util.List;
 @Component
 @Data
 public class ReviewDTO{
-//    VO를 주입하는게 더 좋을까?
     private Long reviewNumber;
     private Long userNumber;
     private Long projectNumber;
@@ -20,4 +19,5 @@ public class ReviewDTO{
     private Long status;
     private String category;
     private String email;
+    private Long total;
 }

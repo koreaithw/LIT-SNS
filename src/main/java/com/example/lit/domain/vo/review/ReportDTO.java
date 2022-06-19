@@ -17,4 +17,5 @@ public class ReportDTO {
     private String reviewEmail;
     private String reportEmail;
     private String category;
+    private Long total;
 }

@@ -144,7 +144,7 @@ public class UserServiceImple implements UserService{
 
 
     @Override
-    public List<UserVO> userSearch(SearchDTO searchDTO) {
+    public List<UserDTO> userSearch(SearchDTO searchDTO) {
         return userDAO.userSearch(searchDTO);
     }
 

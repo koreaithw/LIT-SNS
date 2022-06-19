@@ -16,6 +16,7 @@ public class ProjectDTO {
     private String startDate;
     private String endDate;
     private Long status;
+    private Long total;
 
     private ProjectFileVO projectFile;
 

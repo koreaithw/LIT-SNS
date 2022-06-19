@@ -1,6 +1,7 @@
 package com.example.lit.mapper.user;
 
 import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.user.UserDTO;
 import com.example.lit.domain.vo.user.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -25,7 +26,7 @@ public interface UserMapper {
     public void updateMedal(UserVO userVO);
 
     // 관리자 검색
-    public List<UserVO> userSearch(SearchDTO searchDTO);
+    public List<UserDTO> userSearch(SearchDTO searchDTO);
     // 유저 토탈
     public int getTotal();
     // 차트 정보

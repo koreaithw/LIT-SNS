@@ -30,10 +30,11 @@ window.onload = function () {
 //================================ ajax =========================================
 
 //검색하기
-function searchProject() {
+function searchProject(page) {
     $(".list-table tr:not(.table-head)").html("");
 
     adminService.searchProject({
+        page : page,
         startDate: $("input[name='startDate']").val(),
         endDate: $("input[name='endDate']").val(),
         type: $("select[name='type']").val(),
@@ -42,7 +43,11 @@ function searchProject() {
         status: 0
     }, function (result) {
         //검색 결과 건수
-        $(".searchResult").text(result.length);
+        if(result == null || result.length == 0){
+            $(".searchResult").text(0);
+            return;
+        }
+        $(".searchResult").text(result[0].total);
 
         //결과 리스트 처리
         result.forEach(function (project, i) {
@@ -68,9 +73,17 @@ function searchProject() {
                 "<td class=\"project-status\">" + renameStatus(project.status) + "</td>" +
                 "</tr>";
             $(".list-table > tbody").append(str);
+            pageBlock(result[0].total);//admin-common.js에 정의되어 있음
         })
     });
 }
+
+$(".paging-block").on("click", "a.changePage", function (e) {
+    e.preventDefault();
+    pageNum = $(this).attr("href");
+    searchProject(pageNum);
+});
+
 
 //삭제하기
 let deleteProject = function () {
@@ -81,7 +94,7 @@ let deleteProject = function () {
     });
 
     adminService.deleteProject(list.join(","), function () {
-        searchProject();
+        searchProject(pageNum);
     })
 }
 
@@ -97,7 +110,7 @@ let changeStatus = function () {
         projectNumber: list.join(","),
         status: 1
     }, function () {
-        searchProject();
+        searchProject(pageNum);
     })
 }
 // 삭제 버튼 이벤트 ==========================================
