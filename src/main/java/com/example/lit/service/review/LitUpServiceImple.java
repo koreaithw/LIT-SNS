@@ -39,7 +39,8 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public boolean removeReply(Long replyNumber) {
-        return false;
+
+        return replyDAO.remove(replyNumber);
     }
 
     @Override
@@ -49,7 +50,7 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public List<ReplyVO> getReplyList(Criteria criteria, Long reviewNumber) {
-        return null;
+        return replyDAO.getList(criteria, reviewNumber);
     }
 
     @Override

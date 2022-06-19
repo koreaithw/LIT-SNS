@@ -19,7 +19,8 @@ public class ReplyMapperTests {
     public void getListTest() {
 
 
-        replyMapper.getList(new Criteria(), 1L);
+        replyMapper.getList(new Criteria(1,10), 1L)
+                .stream().map(ReplyVO::toString).forEach(log::info);
     }
 
     @Test
