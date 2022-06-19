@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.lit.mapper.user.MessageMapper">
+<mapper namespace="com.example.lit.mapper.message.MessageMapper">
     <insert id="insert">
         INSERT INTO TBL_MESSAGE
-        (SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM, CONTENT)
-        VALUES(#{sendUserNumber}, #{receiveUserNumber}, SEQ_MESSAGE.NEXTVAL, #{content})
+        (MESSAGE_NUMBER, SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM, CONTENT, MESSAGE_DATE)
+        VALUES(SEQ_MESSAGE.NEXTVAL, #{sendUserNumber}, #{receiveUserNumber}, #{room}, #{content}, #{messageDate})
     </insert>
 
     <select id="getList" resultType="messageVO">
-        SELECT SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM, CONTENT, MESSAGE_DATE
+        SELECT MESSAGE_NUMBER, SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM, CONTENT, MESSAGE_DATE
         FROM TBL_MESSAGE
-        WHERE ROOM =#{room}
+        WHERE ROOM = #{room}
     </select>
+
+    <select id="getFollowerList" resultType="userVO">
+        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT
+        FROM TBL_FOLLOW f LEFT outer JOIN TBL_USER u
+        ON f.FOLLOWER_NUMBER = u.USER_NUMBER
+        WHERE f.FOLLOWING_NUMBER = #{userNumber}
+    </select>
+
+    <select id="getRecentMessage" resultType="map">
+        SELECT u.NICKNAME, m.CONTENT
+        FROM
+        (
+        SELECT u.NICKNAME, m.CONTENT
+        FROM TBL_MESSAGE m LEFT OUTER JOIN TBL_USER u
+        on m.SEND_USER_NUMBER = u.USER_NUMBER
+        WHERE m.RECEIVE_USER_NUMBER = #{receiveUserNumber}
+        ORDER BY m.MESSAGE_DATE DESC
+        )
+        WHERE ROWNUM = 1;
+    </select>
+
 </mapper>

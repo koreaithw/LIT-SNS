@@ -88,8 +88,8 @@ div.firstBox .userListBtn > a:hover{
 .link>div.iconBox{
     position: absolute;
     display: block;
-    width: 24px;
-    height: 24px;
+    width: 25px;
+    height: 25px;
     right: 10px;
 }
 
@@ -168,8 +168,8 @@ div.firstBox .userListBtn > a:hover{
     position: absolute;
     content: "";
     display: block;
-    width: 24px;
-    height: 24px;
+    width: 25px;
+    height: 25px;
     right: 10px;
 }
 
@@ -179,14 +179,17 @@ div.firstBox .userListBtn > a:hover{
     overflow: hidden auto;
 }
 .content>div{
+    /*flex-direction: column-reverse;*/
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100%;
 }
+
 .content > div:nth-child(1){
     flex-grow: 1;
     /* border: 1px solid #e5e5e5; */
     padding: 20px 20px 0;
-    min-height: 100%;
 }
 .content > div:nth-child(2){
     padding: 10px;
@@ -257,7 +260,6 @@ div.firstBox .userListBtn > a:hover{
     background-repeat: no-repeat;
     width: 24px;
     height: 24px;
-    margin: 0 5px;
 }
 
 a.icon_heart_pink{
@@ -272,9 +274,9 @@ a.icon_happy{
 a.icon_writing_square{
     background: url("../../../images/project/icon/icon-writing-square.png") 100% 100%;
 }
-a.icon_info{
-    background: url("../../../images/project/icon/icon-info.png") 100% 100%;
-}
+/*a.icon_info{*/
+/*    background: url("../../../images/project/icon/icon-info.png") 100% 100%;*/
+/*}*/
 
 
 /* 모달창 ================================= */
