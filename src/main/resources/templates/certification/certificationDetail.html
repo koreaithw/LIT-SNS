@@ -262,7 +262,6 @@
     // 댓글 목록 불러오기  -> 댓글 전체 수가 10개 넘어갔을때 +표 노출, append 추가 필요
     function showList(page){
         reviewDetailService.getList({reviewNum: 1, page: page}, function(total, list){
-
                 let str = "";
 
                 if(list == null || list.length == 0){
@@ -300,140 +299,156 @@
                     str += '</div>';
 
                 });
-                replyDiv.html(str);
-
-                //showReplyPage(total);
+                replyDiv.html(str.trim());
+                showReplyPage(total);
             },function (a,b,c){console.log("error");}
         );
-            console.log("showlist:  "+page);
-            console.log("showlist:  "+(page+1));
 
-        reviewDetailService.getList({reviewNum: 1, page: page+1}, function(total, list){
-            if(list != null || list.length != 0){
-                $(".appendReply div").html("<svg aria-label=\"댓글 더 읽어들이기\" class=\"_ab6-\" color=\"#262626\" fill=\"#262626\" height=\"24\" role=\"img\" viewBox=\"0 0 24 24\" " +
-                    "width=\"24\"><circle cx=\"12.001\" cy=\"12.005\" fill=\"none\" r=\"10.5\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></circle>" +
-                    "<line fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" x1=\"7.001\" x2=\"17.001\" y1=\"12.005\" y2=\"12.005\"></line>" +
-                    "<line fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" x1=\"12.001\" x2=\"12.001\" y1=\"7.005\" y2=\"17.005\"></line></svg>")
-            }
-        })
     };
 
     //댓글 추가 보기기
-   function showAppendList(page){
+   function showAppendList(page) {
 
-        reviewDetailService.getList({reviewNum: 1, page: page}, function(total, list){
+       reviewDetailService.getList({reviewNum: 1, page: page}, function (total, list) {
 
-                $(".appendReply div").html("");
-                let str = "";
+               $(".appendReply div").html("");
+               let str = "";
 
-                $.each(list, function(i, reply){
-                    str += '<div class="detailContentWriteContainer">';
-                    str += '<div class="detailContentWriteWrapper">';
-                    str += '<div class="detailContentProfileImage">';
-                    str += '<div class="detailContentProfileImageInne">';
-                    str += '<img class="detailProfileImage" src="/" style="width:100%">';
-                    str += '</div>';
-                    str += '</div>';
-                    str += '</div>';
-                    str += '<div class="detailContentWriteFeed">';
-                    str += '<div class="detailContentWrite">';
-                    str += '<div class="detailContentWriteName">'
-                    str +=  reply.nickname;
-                    str += '</div>';
-                    str += '<div class="detailContentWriteComment">';
-                    str +=  reply.content;
-                    str += '</div>';
-                    str += '</div>';
-                    str += '<div class="detailContentWriteFeedBottom">';
-                    str += '<div class="detailContentRegisterDate">';
-                    str +=  reviewDetailService.getReplyDate(reply.registerDate);
-                    str += '</div>';
-                    str += '<div class="detailContentCommentDelete">';
-                    str += '<a class="remove ' + reply.replyNumber + '" style="cursor: pointer;">삭제</a>';
-                    str += '</div>';
-                    str += '</div>';
-                    str += '</div>';
-                    str += '</div>';
+               $.each(list, function (i, reply) {
+                   str += '<div class="detailContentWriteContainer">';
+                   str += '<div class="detailContentWriteWrapper">';
+                   str += '<div class="detailContentProfileImage">';
+                   str += '<div class="detailContentProfileImageInne">';
+                   str += '<img class="detailProfileImage" src="/" style="width:100%">';
+                   str += '</div>';
+                   str += '</div>';
+                   str += '</div>';
+                   str += '<div class="detailContentWriteFeed">';
+                   str += '<div class="detailContentWrite">';
+                   str += '<div class="detailContentWriteName">'
+                   str += reply.nickname;
+                   str += '</div>';
+                   str += '<div class="detailContentWriteComment">';
+                   str += reply.content;
+                   str += '</div>';
+                   str += '</div>';
+                   str += '<div class="detailContentWriteFeedBottom">';
+                   str += '<div class="detailContentRegisterDate">';
+                   str += reviewDetailService.getReplyDate(reply.registerDate);
+                   str += '</div>';
+                   str += '<div class="detailContentCommentDelete">';
+                   str += '<a class="remove ' + reply.replyNumber + '" style="cursor: pointer;">삭제</a>';
+                   str += '</div>';
+                   str += '</div>';
+                   str += '</div>';
+                   str += '</div>';
 
-                });
-                replyDiv.append(str.trim());
+               });
 
-                //showReplyPage(total);
-            },function (a,b,c){console.log("error");}
-        );
-       console.log("showappendlist:  "+page);
-       console.log("showappendlist:  "+(page+1));
-       reviewDetailService.getList({reviewNum: 1, page: page+1}, function(total, list){
-           if(list != null || list.length != 0){
-               $(".appendReply div").html("<svg aria-label=\"댓글 더 읽어들이기\" class=\"_ab6-\" color=\"#262626\" fill=\"#262626\" height=\"24\" role=\"img\" viewBox=\"0 0 24 24\" " +
-                   "width=\"24\"><circle cx=\"12.001\" cy=\"12.005\" fill=\"none\" r=\"10.5\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></circle>" +
-                   "<line fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" x1=\"7.001\" x2=\"17.001\" y1=\"12.005\" y2=\"12.005\"></line>" +
-                   "<line fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" x1=\"12.001\" x2=\"12.001\" y1=\"7.005\" y2=\"17.005\"></line></svg>")
+               replyDiv.append(str.trim());
+               showReplyPage(total);
+           }, function (a, b, c) {
+               console.log("error");
            }
+       )};
+
+
+       // 신고하기
+       $(".reportButton").on("click", function () {
+           let $reason = $(this).attr("value");
+
+           reviewDetailService.addReport({
+                   userNumber: 1, reviewNumber: 1, reason: $reason
+               },
+               function (result) {
+                   reportModalClose();
+                   alert("신고 되었습니다.");
+               },
+               function (a, b, c) {
+                   console.log(a, b, c)
+               }
+           );
        })
 
-    };
+       // 댓글쓰기
+       $(".commentButton").on("click", function () {
+           let $commentValue = $(".detailContentFooterCommentInputArea").val();
+           reviewDetailService.addReply({
+                   reviewNumber: 1, userNumber: 1, content: $commentValue
+               },
+               function (result) {
+                   $(".detailContentFooterCommentInputArea").val("");
+                   alert(result);
+                   showList(1);
+               },
+               function (a, b, c) {
+                   console.log(a, b, c)
+               }
+           );
+       })
+
+       // 좋아요
+       $(".detailContentLikeButton").on("click", function () {
+           reviewDetailService.addLike({reviewNumber: 1, userNumber: 1},
+               function (result) {
+                   $("#likeCount").html(result);
+               },
+               function (a, b, c) {
+                   console.log(a, b, c)
+               })
+       })
 
 
-    // 신고하기
-    $(".reportButton").on("click",function () {
-        let $reason = $(this).attr("value");
+       // 좋아요 해제
+       $(".detailContentLikeCancel").on("click", function () {
+           reviewDetailService.removeLike({userNumber: 1, reviewNumber: 1},
+               function (result) {
+                   $("#likeCount").html(result);
+               },
+               function (a, b, c) {
+                   console.log(a, b, c)
+               })
+       })
 
-        reviewDetailService.addReport({
-                userNumber: 1, reviewNumber: 1, reason: $reason},
-            function(result){reportModalClose();
-                alert("신고 되었습니다.");},
-            function(a, b, c){console.log(a, b, c)}
-        );
-    })
+       //댓글 append
+       $(".appendReply div").on("click", function (e) {
+           e.preventDefault();
+           pageNum = pageNum + 1;
+           showAppendList(pageNum);
 
-    // 댓글쓰기
-    $(".commentButton").on("click",function () {
-        let $commentValue =$(".detailContentFooterCommentInputArea").val();
-        reviewDetailService.addReply({
-                reviewNumber: 1, userNumber: 1,content: $commentValue},
-            function(result){
-                $(".detailContentFooterCommentInputArea").val("");
-                alert(result);
-                showList(1);
-            },
-            function(a, b, c){console.log(a, b, c)}
-        );
-    })
+       })
 
-    // 좋아요
-    $(".detailContentLikeButton").on("click",function () {
-        reviewDetailService.addLike({ reviewNumber: 1, userNumber: 1},
-            function(result){
-                $("#likeCount").html(result);},
-            function(a, b, c){console.log(a, b, c)})
-    })
+       //댓글 삭제
+       $(".reply_area").on("click", "div.detailContentCommentDelete a.remove", function (e) {
+           e.preventDefault();
+           let $replyNumber = $(this).attr("class").split(/\s+/);
+           reviewDetailService.removeReply($replyNumber[1], function (result) {
+               pageNum = 1;
+               showList(pageNum);
+           })
+       })
+
+       // 클릭시 노출페이지 조절
+       function showReplyPage(total) {
+           let endPage = Math.ceil(pageNum / 4.0) * 10;
+           let realEnd = Math.ceil(total / 4.0);
+           const $paging = $(".appendReply div");
+
+           if (endPage > realEnd) {
+               endPage = realEnd;
+           }
+           let next = pageNum < realEnd;
+           let str = "<svg aria-label=\"댓글 더 읽어들이기\" class=\"_ab6-\" color=\"#262626\" fill=\"#262626\" height=\"24\" role=\"img\" viewBox=\"0 0 24 24\" " +
+               "width=\"24\"><circle cx=\"12.001\" cy=\"12.005\" fill=\"none\" r=\"10.5\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></circle>" +
+               "<line fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" x1=\"7.001\" x2=\"17.001\" y1=\"12.005\" y2=\"12.005\"></line>" +
+               "<line fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" x1=\"12.001\" x2=\"12.001\" y1=\"7.005\" y2=\"17.005\"></line></svg>";
+
+           if (next) {
+               $paging.html(str);
+           }
 
 
-    // 좋아요 해제
-    $(".detailContentLikeCancel").on("click",function () {
-        reviewDetailService.removeLike({ userNumber: 1, reviewNumber: 1 },
-            function(result){
-                $("#likeCount").html(result);},
-            function(a, b, c){console.log(a, b, c)})
-    })
-
-    //댓글 append
-    $(".appendReply div").on("click", function(e){
-        e.preventDefault();
-        pageNum = pageNum +1;
-        showAppendList(pageNum);
-
-    })
-
-    //댓글 삭제
-    $(".reply_area").on("click", "div.detailContentCommentDelete a.remove", function(e){
-        e.preventDefault();
-        let $replyNumber = $(this).attr("class").split(/\s+/);
-        reviewDetailService.removeReply($replyNumber[1],function (result) {
-            showList(pageNum);
-        })
-    })
+       }
 
 
 

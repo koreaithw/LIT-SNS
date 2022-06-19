@@ -51,7 +51,7 @@ public class LitUpRestController {
 
     @GetMapping("/reply/{reviewNumber}/{page}")
     public ReplyPageDTO getList(@PathVariable("page") int pageNum, @PathVariable("reviewNumber") Long reviewNumber){
-        return new ReplyPageDTO(litUpService.getReplyList(new Criteria(pageNum,2),reviewNumber), litUpService.getTotalReply(reviewNumber));
+        return new ReplyPageDTO(litUpService.getReplyList(new Criteria(pageNum,4),reviewNumber), litUpService.getTotalReply(reviewNumber));
     }
 
 

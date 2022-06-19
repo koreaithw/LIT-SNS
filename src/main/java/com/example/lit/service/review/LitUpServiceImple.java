@@ -55,7 +55,7 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public int getTotalReply(Long reviewNumber) {
-        return 0;
+        return replyDAO.getTotal(reviewNumber);
     }
 
     @Override
