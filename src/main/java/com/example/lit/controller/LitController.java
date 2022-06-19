@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,10 +23,11 @@ public class LitController {
     }
 
     @PostMapping("/addWrite")
-    public String addWrite(ProjectVO projectVO) {
-        litService.register(projectVO);
+    public String addWrite(ProjectVO projectVO, ProjectFileVO projectFileVO) {
+        litService.register(projectVO, projectFileVO);
         return "/main/main";
     }
+
 
 
 }

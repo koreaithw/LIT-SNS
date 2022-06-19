@@ -47,33 +47,73 @@ $(".imgData")
     // 이미지 저장할 데이터 담기....
     uploadFiles.push(file);
   });
+
+let arFile = Array.from($("input[type='file']")[0].files);
+
+// 이미지 미리보기 화면에 출력
+function imgEvent(files) {
+  $(".imgData").hide();
+  let str ="";
+
+  console.log(files);
+
+  let imageUrl = "";
+  $(files).each(function(i, file) {
+    str += "<div data-filename='" + file.name + "' data-uuid='" + file.uuid + "' data-uploadpath='" + file.uploadPath + "' data-image='" + file.image + "'></div>";
+    imageUrl += "/lit/display?fileName=" + file.uploadPath + file.uuid + "_"  + file.image;
+  });
+
+  console.log(imageUrl);
+
+  $(".imgView").append(str);
+  $(".imgView").show().css("background-image", "url(" + imageUrl +  ")");
+  $(".topmenu > div").eq(0).show();
+  $(".topmenu > div").eq(2).show();
+}
+
 // 파일 input 업로드
 $("#btnImage").on("change", function (e) {
-  e.stopPropagation();
-  e.preventDefault();
-  // 파일 객체화
-  let file = e.target.files[0];
-  // 파일 유효성
-  if (!$(this).val().match(fileType)) {
-    alert("파일업로드 실패");
-    return;
-  }
+    e.stopPropagation();
+    e.preventDefault();
+    // 파일 객체화
+    let file = e.target.files[0];
+
+    let formData =   new FormData();
+    let inputFile = $("input[name='uploadFiles']");
+    let files = inputFile[0].files;
+    for(let i=0; i<files.length; i++){
+      if(!checkExtension(files[i].name, files[i].size)){ return; }
+      formData.append("uploadFiles", files[i]);
+    }
+    Array.from($(this)[0].files).forEach(file => arFile.push(file));
+    const dataTransfer = new DataTransfer();
+    arFile.forEach(file => dataTransfer.items.add(file));
+    $(this)[0].files = dataTransfer.files;
+
+    $.ajax({
+      url: "/lit/upload",
+      type: "post",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function(files){
+        imgEvent(files);
+      }
+    });
+
   // 이미지 미리보기
-  imgEvent(file);
   // 이미지 저장할 데이터 담기....
   uploadFiles.push(file);
 });
 
-// 이미지 미리보기 화면에 출력
-function imgEvent(file) {
-  $(".imgData").hide();
-  $(".imgView")
-    .show()
-    .css({
-      "background-image": "url(" + window.URL.createObjectURL(file) + ")",
-    });
-  $(".topmenu > div").eq(0).show();
-  $(".topmenu > div").eq(2).show();
+function checkExtension(file) {
+  // 파일 유효성
+  console.log(file);
+  if (!file.match(fileType)) {
+    alert("파일업로드 실패");
+    return false;
+  }
+  return true;
 }
 
 //=========================================================================
@@ -168,19 +208,40 @@ function submitEvent() {
     return false;
   }
 
-  // 유효성 이후 submit
-  var object = form.serializeArray();
   let jsond = {};
-  for(var i = 0; i < object.length; i++){
 
+  // 유효성 이후 submit
+  // 유효성 이후
+
+  let object = form.serializeArray();
+  let $fileSrc = $("#fileSrc");
+
+  let str = "";
+  $.each($("#fileSrc"), function(i, div){
+    str += "<input type='hidden' name='fileName' value='" + $(div).data("filename") + "'>"
+    str += "<input type='hidden' name='uuid' value='" + $(div).data("uuid") + "'>"
+    str += "<input type='hidden' name='uploadPath' value='" + $(div).data("uploadpath") + "'>"
+    str += "<input type='hidden' name='image' value='" + $(div).data("image") + "'>"
+    str += "<input type='hidden' name='fileSize' value='" + $(div).data("filesize") + "'>"
+  });
+
+  for(let i = 0; i < object.length; i++){
     jsond[object[i]['name']] = object[i]['value'];
   }
-  var submitJson = JSON.stringify(jsond);
 
-  console.log(submitJson);
+  for(let i = 0; i < $fileSrc.length; i++){
+    jsond[$fileSrc[i]['name']] = $fileSrc[i]['value'];
+  }
+
+  let projectVo = JSON.stringify(jsond);
+
+  str += "<input type='hidden' name='fileSize' value='" + $fileSrc.data("filesize") + "'>"
+
+  console.log($fileSrc.append(str));
+  console.log(projectVo);
 
   $.ajax({
-    url : "/lit/addWrite",
+    url : "/lit/upload",
     type : "POST",
     data : submitJson,
     dataType: 'JSON',
