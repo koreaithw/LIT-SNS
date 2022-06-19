@@ -1,4 +1,4 @@
-package com.example.lit.domain.vo.user;
+package com.example.lit.domain.vo.messsage;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class MessageVO {
+    private Long messageNumber;
     private Long sendUserNumber;
     private Long receiveUserNumber;
     private String room;
