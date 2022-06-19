@@ -45,7 +45,6 @@ public class LitRestController {
 
             log.info("--------------------------------");
             log.info("Upload File Name : " + uploadFileName);
-            log.info("Upload File Size : " + file.getSize());
 
             File saveFile = new File(uploadPath, uploadFileName);
             file.transferTo(saveFile);

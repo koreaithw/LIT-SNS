@@ -60,7 +60,7 @@ function imgEvent(files) {
   let imageUrl = "";
   $(files).each(function(i, file) {
     str += "<div data-filename='" + file.name + "' data-uuid='" + file.uuid + "' data-uploadpath='" + file.uploadPath + "' data-image='" + file.image + "'></div>";
-    imageUrl += "/lit/display?fileName=" + file.uploadPath + file.uuid + "_"  + file.image;
+    imageUrl += "/lit/display?fileName=" + file.uploadPath + "/" + file.uuid + "_"  + file.name;
   });
 
   console.log(imageUrl);
@@ -208,50 +208,22 @@ function submitEvent() {
     return false;
   }
 
-  let jsond = {};
-
   // 유효성 이후 submit
   // 유효성 이후
 
-  let object = form.serializeArray();
-  let $fileSrc = $("#fileSrc");
+  let $form = $("form#projectForm");
 
   let str = "";
-  $.each($("#fileSrc"), function(i, div){
+  $.each($(".imgView div"), function(i, div){
     str += "<input type='hidden' name='fileName' value='" + $(div).data("filename") + "'>"
     str += "<input type='hidden' name='uuid' value='" + $(div).data("uuid") + "'>"
     str += "<input type='hidden' name='uploadPath' value='" + $(div).data("uploadpath") + "'>"
     str += "<input type='hidden' name='image' value='" + $(div).data("image") + "'>"
-    str += "<input type='hidden' name='fileSize' value='" + $(div).data("filesize") + "'>"
   });
 
-  for(let i = 0; i < object.length; i++){
-    jsond[object[i]['name']] = object[i]['value'];
-  }
+  console.log($form);
 
-  for(let i = 0; i < $fileSrc.length; i++){
-    jsond[$fileSrc[i]['name']] = $fileSrc[i]['value'];
-  }
-
-  let projectVo = JSON.stringify(jsond);
-
-  str += "<input type='hidden' name='fileSize' value='" + $fileSrc.data("filesize") + "'>"
-
-  console.log($fileSrc.append(str));
-  console.log(projectVo);
-
-  $.ajax({
-    url : "/lit/upload",
-    type : "POST",
-    data : submitJson,
-    dataType: 'JSON',
-    success : function(data) {
-      alert("success");
-    },
-    error : function() {
-      alert("error");
-    }
-  });
+  $form.append(str).submit();
 }
 
 // 스타트 / 마지막 날짜 계산기

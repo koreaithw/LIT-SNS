@@ -1,6 +1,5 @@
 package com.example.lit.controller;
 
-import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.service.project.LitService;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +21,11 @@ public class LitController {
         return "/project/projectWrite";
     }
 
-    @PostMapping("/addWrite")
-    public String addWrite(ProjectVO projectVO, ProjectFileVO projectFileVO) {
-        litService.register(projectVO, projectFileVO);
-        return "/main/main";
+    @PostMapping("/write")
+    public String addWrite(ProjectVO projectVO) {
+        log.info("--------------------write---------------------");
+        litService.register(projectVO);
+        return "/main";
     }
 
 
