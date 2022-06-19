@@ -147,4 +147,14 @@ public class UserServiceImple implements UserService{
     public List<UserVO> userSearch(SearchDTO searchDTO) {
         return userDAO.userSearch(searchDTO);
     }
+
+    @Override
+    public int getTotal() {
+        return userDAO.getTotal();
+    }
+
+    @Override
+    public Long getUserChart(String date) {
+        return userDAO.getUserChart(date);
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.ReportDTO;
 import com.example.lit.domain.vo.review.ReportVO;
@@ -14,9 +15,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
@@ -48,15 +49,14 @@ public class AdminRestController {
         list.stream().forEach( i -> userService.remove(i) );
     }
 
-    //대기중인 프로젝트 검색
-    @PostMapping("/waitingProject/search")
-    public List<ProjectVO> searchWaitingProject(@RequestBody SearchDTO searchDTO){
+    //프로젝트 검색
+    @PostMapping("/project/search")
+    public List<ProjectDTO> searchWaitingProject(@RequestBody SearchDTO searchDTO){
         log.info("***************************");
         log.info("AdminRestController : searchWaitingProject(post)");
         log.info("***************************");
 
-//        log.info(searchDTO.toString());
-//        litService.searchProject(searchDTO).stream().forEach(ProjectVO::toString);
+//        litService.searchProject(searchDTO).stream().forEach(ProjectDTO::toString);
 
 
 
@@ -64,24 +64,24 @@ public class AdminRestController {
     }
 
     //프로젝트 삭제 (대기중, 승인된 둘다 같이 사용)
-    @DeleteMapping("/waitingProject/{pno}")
-    public void deleteWaitingProject(@PathVariable("pno") String list){
+    @DeleteMapping("/project/{param}")
+    public void deleteWaitingProject(@PathVariable("param") List<Long> param){
         log.info("***************************");
         log.info("AdminRestController : deleteWaitingProject(delete)");
         log.info("***************************");
 
         //삭제
-        Arrays.stream(list.split("-")).map(Long::valueOf).forEach(i -> litService.remove(i));
+        param.stream().forEach( i -> litService.remove(i) );
     }
 
     //프로젝트 승인(상태 변경)
-    @GetMapping("/waitingProject/{pno}/{status}")
-    public void changeStatus(@PathVariable("pno")String pno, @PathVariable("status")Long status){
+    @GetMapping("/project/{param}/{status}")
+    public void changeStatus(@PathVariable("param")List<Long> param, @PathVariable("status")Long status){
         log.info("***************************");
         log.info("AdminRestController : changeStatus(get)");
         log.info("***************************");
 
-        Arrays.stream(pno.split("-")).forEach(p -> litService.changeStatus(Long.valueOf(p), status));
+        param.stream().forEach( i -> litService.changeStatus(i, status));
     }
 
     //프로젝트 미리보기
@@ -174,7 +174,63 @@ public class AdminRestController {
     }
 
 
+    //차트 데이터
 
+    @GetMapping("/user/chart")
+    public List<Long> userChart(){
+        log.info("***************************");
+        log.info("AdminRestController : userChart(get)");
+        log.info("***************************");
+        Calendar today = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        List<Long> list = new ArrayList<>();
+
+        for(int i=0; i<7; i++){
+            list.add(userService.getUserChart(sdf.format(today.getTime())));
+            today.add(Calendar.DATE, -1);
+        }
+
+        Collections.reverse(list);
+//        list.stream().forEach(System.out::println);
+
+        return list;
+    }
+
+    @GetMapping("/review/chart")
+    public List<Long> reviewChart(){
+        log.info("***************************");
+        log.info("AdminRestController : reviewChart(get)");
+        log.info("***************************");
+        Calendar today = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        List<Long> list = new ArrayList<>();
+
+        for(int i=0; i<7; i++){
+            list.add(litUpService.getReviewChart(sdf.format(today.getTime())));
+            today.add(Calendar.DATE, -1);
+        }
+
+        Collections.reverse(list);
+        return list;
+    }
+
+    @GetMapping("/report/chart")
+    public List<Long> reportChart(){
+        log.info("***************************");
+        log.info("AdminRestController : reportChart(get)");
+        log.info("***************************");
+        Calendar today = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        List<Long> list = new ArrayList<>();
+
+        for(int i=0; i<7; i++){
+            list.add(litUpService.getReportChart(sdf.format(today.getTime())));
+            today.add(Calendar.DATE, -1);
+        }
+
+        Collections.reverse(list);
+        return list;
+    }
 
 }
 

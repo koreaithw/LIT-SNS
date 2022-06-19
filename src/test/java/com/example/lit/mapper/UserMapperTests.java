@@ -9,6 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 @Slf4j
 @SpringBootTest
 public class UserMapperTests {
@@ -91,7 +96,7 @@ public class UserMapperTests {
     }
 
     @Test
-    public void adminSelect(){
+    public void adminSelectTest(){
 //        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT, KAKAO, REGISTER_DATE, ACHIEVEMENT_NUMBER
 //        FROM TBL_USER
 //        WHERE EMAIL LIKE '%test%'
@@ -104,6 +109,26 @@ public class UserMapperTests {
         search.setType("email");
         search.setKakao("2"); // kakao를 0(all), 1(null), 2(not null) 로 받아서 검사하기
         userMapper.userSearch(search).stream().map(UserVO::toString).forEach(log::info);
+    }
+
+    @Test
+    public void getTotalTest(){
+        log.info(String.valueOf(userMapper.getTotal()));
+    }
+
+    @Test
+    public void getUserChartTest(){
+        Calendar today = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        List<Long> list = new ArrayList<>();
+
+        for(int i=0; i<7; i++){
+            list.add(userMapper.getUserChart(sdf.format(today.getTime())));
+            today.add(Calendar.DATE, -1);
+        }
+
+        log.info(list.toString());
+
     }
 
 }

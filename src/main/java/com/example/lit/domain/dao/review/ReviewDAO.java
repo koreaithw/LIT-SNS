@@ -31,4 +31,8 @@ public class ReviewDAO {
     public int resultCount(){ return reviewMapper.resultCount(); }
     //  인증글 검색(관리자)
     public List<ReviewDTO> searchReview(SearchDTO searchDTO){ return reviewMapper.searchReview(searchDTO); }
+    //  오늘 등록된 인증글 수
+    public int getTotalToday(){ return reviewMapper.getTotalToday(); }
+    //  차트 정보
+    public Long getReviewChart(String date){ return reviewMapper.getReviewChart(date); }
 }

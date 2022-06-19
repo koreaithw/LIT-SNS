@@ -138,4 +138,24 @@ public class LitUpServiceImple implements LitUpService{
     public void removeReport(Long reportNumber) {
         reportDAO.remove(reportNumber);
     }
+
+    @Override
+    public int getTotalTodayReview() {
+        return reviewDAO.getTotalToday();
+    }
+
+    @Override
+    public int getTotalTodayReport() {
+        return reportDAO.getTotalToday();
+    }
+
+    @Override
+    public Long getReviewChart(String date) {
+        return reviewDAO.getReviewChart(date);
+    }
+
+    @Override
+    public Long getReportChart(String date) {
+        return reportDAO.getReviewChart(date);
+    }
 }

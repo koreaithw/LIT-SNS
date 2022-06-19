@@ -1,5 +1,5 @@
 // $(document).ready(function () {
-//   $(".side-bar").load("/templates/admin/side-bar.html");
+//
 // });
 
 window.onload = function () {
@@ -7,108 +7,23 @@ window.onload = function () {
   $(".menu-box").eq(3).addClass("menu-box__select");
 };
 
-// 체크박스 이벤트 ==========================================
-$(".check-all").change(function () {
-  let $allBox = $(this).is(":checked");
-  let $otherBox = $(".list-checkbox > input[type='checkbox']");
-  if ($allBox) {
-    $otherBox.prop("checked", true);
-  } else {
-    $otherBox.prop("checked", false);
-  }
-});
-
-$(".list-checkbox > input[type='checkbox']").change(function () {
-  if (!$(this).is(":checked")) {
-    $(".check-all").prop("checked", false);
-  }
-});
 
 
 // ========================================================
 
-//기간 버튼
-$(".a-btn").on("click", function (e) {
-  e.preventDefault();
-  if ($(this).hasClass("not-selected")) {
-    return;
-  }
-  $(".period-button-wrap > .a-btn").removeClass("a-btn__selected");
-  $(this).addClass("a-btn__selected");
 
-  //기간 버튼 클릭시 input에 자동 삽입
-  let $startInput = $("input[name='startDate']");
-  let $endInput = $("input[name='endDate']");
-  let val = $(this).attr("href");
-
-  //전체 버튼 선택시 공백으로 바꾸기
-  if (val == "") {
-    $startInput.val("");
-    $endInput.val("");
-    return;
-  }
-
-  let todayObj = new Date();
-  let dateResult = new Date(
-    todayObj.getTime() + 1000 * 60 * 60 * 24 * parseInt(val)
-  );
-  let year = dateResult.getFullYear();
-  let month = dateResult.getMonth() + 1;
-  let date = dateResult.getDate();
-
-  let resultDateAr = [
-    year,
-    (month < 10 ? "0" : "") + month,
-    (date < 10 ? "0" : "") + date,
-  ];
-
-  $startInput.val(
-    [
-      todayObj.getFullYear(),
-      (todayObj.getMonth() + 1 < 10 ? "0" : "") + (todayObj.getMonth() + 1),
-      (todayObj.getDate() < 10 ? "0" : "") + todayObj.getDate(),
-    ].join("-")
-  );
-  $endInput.val(resultDateAr.join("-"));
-});
-
-//date picker
-$(function () {
-  $(".datepicker").datepicker();
-});
-
-$(".calendar-icon-wrap").on("click", function () {
-  $input = $(this).prev("div").find("input");
-  $input.trigger("focus");
-});
 
 //================================ ajax =========================================
-//가져온 상태 값 수정하기
-function renameStatus(status){
-  let result;
-  switch (status) {
-    case 0:
-      result = "대기중";
-      break;
-    case 1:
-      result = "진행중";
-      break;
-    case 2:
-      result = "완료";
-      break;
-  }
-  return result;
-}
 
 //삭제하기
-let deleteProject = function deleteProject(){
+let deleteProject = function (){
   let $checked = $(".list-checkbox > input[type='checkbox']:checked");
   let list = [];
   $checked.each((i, box) => {
     list.push(box.value);
   });
 
-  adminService.deleteProject(list.join("-"), function(){
+  adminService.deleteProject(list.join(","), function(){
     searchProject();
   })
 }
@@ -130,32 +45,31 @@ function searchProject() {
     $(".searchResult").text(result.length);
 
     //결과 리스트 처리
+    let str = "";
     result.forEach(function (project, i) {
-      let str = "";
-
       str +=
           "<tr>" +
           "<td class=\"list-checkbox\">" +
           "<input type=\"checkbox\" value=\"" + project.projectNumber + "\" />" +
           "</td>" +
           "<td class=\"project-number\">" + project.projectNumber + "</td>" +
-          "<td class=\"project-category\">" + project.category + "</td>" +
+          "<td class=\"project-category\">" + renameCategory(project.category) + "</td>" +
           "<td class=\"project-title\">" + project.title + "</td>" +
           "<td class=\"project-view\">" +
           "<div>" +
           "<a class=\"a-btn not-selected\" href=\"\">보기</a>" +
           "</div>" +
           "</td>" +
-          "<td class=\"user-email\">" + project.userNumber + "</td>" +
-          "<td class=\"project-join-cnt\">" + "구현필요" + "</td>" +
+          "<td class=\"user-email\">" + project.email + "</td>" +
+          "<td class=\"project-join-cnt\">" + (project.participationCount != null ? project.participationCount : 0) + "</td>" +
           "<td class=\"project-apply-cnt\">" + project.applyCount + "</td>" +
           "<td class=\"project-start-date\">" +
           project.startDate +
           "</td>" +
           "<td class=\"project-status\">" + renameStatus(project.status) + "</td>" +
           "</tr>"
-      $(".list-table > tbody").append(str);
     })
+    $(".list-table > tbody").append(str);
   });
 }
 

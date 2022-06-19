@@ -196,7 +196,7 @@
                       <div>
                         <div>
                           <!-- db조회 결과 숫자로 넣기 -->
-                          [오늘 신고된 글 <span>0</span>건] 검색결과
+                          [오늘 신고된 글 <span th:text="${total}"></span>건] 검색결과
                           <span class="searchResult">0</span>건
                         </div>
                         <div class="flex">
@@ -226,7 +226,7 @@
                       <!-- list-form -->
                       <form action="" name="list-form">
                         <table class="list-table">
-                          <tbody>
+                          <tbody class="list-tbody">
                             <tr class="table-head">
                               <th>
                                 <input type="checkbox" class="check-all" />
@@ -242,38 +242,7 @@
                               <th>인증글 <br />보기</th>
                             </tr>
                             <!-- 리스트 불러와서 반복문으로 페이지당 10개씩 -->
-                            <!-- 아래는 예시 -->
-                            <tr>
-                              <td class="list-checkbox">
-                                <input type="checkbox" value="" />
-                                <!-- checkbox의 value속성에 user number를 꽂거나-->
-                                <!-- hidden 사용할듯? -->
-                              </td>
-                              <td class="report-number">1</td>
-                              <td class="report-user-email">qwer@naver.com</td>
-                              <td>주제와 상관없는 내용</td>
-                              <td class="project-register-date">
-                                2022-06-10<br />22:44:17
-                              </td>
 
-                              <td class="review-number">1</td>
-                              <td class="review-user-email">aaa@naver.com</td>
-
-                              <td class="review-register-date">
-                                2022-06-11<br />12:44:00
-                              </td>
-                              <td class="category">
-                                운동
-                              </td>
-                              <td class="project-view">
-                                <!-- 미리보기 경로 -->
-                                <div>
-                                  <a class="a-btn not-selected" href="">보기</a>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <!-- 예시 끝 -->
                           </tbody>
                         </table>
                       </form>

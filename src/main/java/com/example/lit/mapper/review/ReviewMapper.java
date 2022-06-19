@@ -26,4 +26,8 @@ public interface ReviewMapper {
     public int resultCount();
     //  인증글 검색(관리자)
     public List<ReviewDTO> searchReview(SearchDTO searchDTO);
+    //  오늘 등록된 인증글 수
+    public int getTotalToday();
+    //  차트 정보
+    public Long getReviewChart(String date);
 }

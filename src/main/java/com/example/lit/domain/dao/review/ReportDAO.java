@@ -21,4 +21,10 @@ public class ReportDAO {
 
     //리포트 검색(관리자)
     public List<ReportDTO> searchReport(SearchDTO searchDTO){ return reportMapper.searchReport(searchDTO); }
+
+    //오늘 등록된 리포트 토탈
+    public int getTotalToday(){ return reportMapper.getTotalToday(); }
+
+    //  차트 정보
+    public Long getReviewChart(String date){ return reportMapper.getReportChart(date); }
 }

@@ -65,4 +65,12 @@ public interface LitUpService {
     public List<ReviewDTO> searchReview(SearchDTO searchDTO);
     //리포트 검색(관리자)
     public List<ReportDTO> searchReport(SearchDTO searchDTO);
+    //  오늘 등록된 인증글 수
+    public int getTotalTodayReview();
+    //오늘 등록된 리포트 토탈
+    public int getTotalTodayReport();
+    //  차트 정보
+    public Long getReviewChart(String date);
+    //  차트 정보
+    public Long getReportChart(String date);
 }

@@ -26,6 +26,10 @@ public interface UserMapper {
 
     // 관리자 검색
     public List<UserVO> userSearch(SearchDTO searchDTO);
+    // 유저 토탈
+    public int getTotal();
+    // 차트 정보
+    public Long getUserChart(String date);
 
     //카카오 로그인/회원가입
     public void kakaoInsert(UserVO userVO);

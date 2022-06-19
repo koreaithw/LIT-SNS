@@ -69,4 +69,8 @@ public interface UserService {
 
     // 관리자 유저 검색
     public List<UserVO> userSearch(SearchDTO searchDTO);
+    // 유저 토탈
+    public int getTotal();
+    // 차트 정보
+    public Long getUserChart(String date);
 }

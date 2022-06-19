@@ -100,7 +100,7 @@
                                   <input
                                     type="text"
                                     class="datepicker"
-                                    name="start-date"
+                                    name="startDate"
                                     readonly
                                   />
                                 </div>
@@ -114,7 +114,7 @@
                                   <input
                                     type="text"
                                     class="datepicker"
-                                    name="end-date"
+                                    name="endDate"
                                     readonly
                                   />
                                 </div>
@@ -226,7 +226,7 @@
                       <div>
                         <div>
                           <!-- db조회 결과 숫자로 넣기 -->
-                          [오늘 등록된 새 글 <span>0</span>건] 검색결과
+                          [오늘 등록된 새 글 <span th:text="${total}"></span>건] 검색결과
                           <span class="searchResult">0</span>건
                         </div>
                         <div class="button-box">
@@ -245,15 +245,15 @@
                       <!-- list-form -->
                       <form action="" name="list-form">
                         <table class="list-table">
-                          <tbody>
+                          <tbody class="list-tbody">
                             <tr class="table-head">
                               <th>
                                 <input type="checkbox" class="check-all" />
                               </th>
                               <th>글 번호</th>
-                              <th>인증글 <br />보기</th>
                               <th>회원 번호</th>
                               <th>작성자</th>
+                              <th>인증글 <br />보기</th>
                               <th>프로젝트 번호</th>
                               <th>카테고리</th>
                               <th>프로젝트 상태</th>

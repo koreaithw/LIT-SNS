@@ -6,6 +6,7 @@ import com.example.lit.domain.dao.project.ProjectFileDAO;
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ParticipationVO;
+import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import lombok.RequiredArgsConstructor;
@@ -83,12 +84,17 @@ public class LitServiceImple implements LitService{
 
 
     @Override
-    public List<ProjectVO> searchProject(SearchDTO searchDTO) {
+    public List<ProjectDTO> searchProject(SearchDTO searchDTO) {
         return projectDAO.searchProject(searchDTO);
     }
 
     @Override
     public void changeStatus(Long projectNumber, Long status) {
         projectDAO.changeStatus(projectNumber, status);
+    }
+
+    @Override
+    public int getTotalByStatus(Long status) {
+        return projectDAO.getTotalByStatus(status);
     }
 }

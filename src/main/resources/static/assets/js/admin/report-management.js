@@ -1,11 +1,7 @@
-// $(document).ready(function () {
-//   $(".side-bar").load("/templates/admin/side-bar.html");
-// });
+let chartResult;
 
-window.onload = function () {
-    sideAni(); //사이드바 애니메이션 side-bar.js
-    $(".menu-box").eq(5).addClass("menu-box__select");
-
+$(document).ready(function(){
+    chartData();
     // ====== 차트 ======
     //makechart 메소드는 admin-common.js에 정의되어 있음
 
@@ -20,84 +16,16 @@ window.onload = function () {
     //data는 그래프에 그려질 값
     makechart("chart__report", {
         label: "최근 등록된 신고글",
-        labels: ["06.07", "06.08", "06.09", "06.10", "06.11", "06.12", "06.13"],
-        data: [0, 0, 1, 0, 3, 7, 4],
+        labels: getDateInfo(),
+        data: chartResult,
     });
+})
+window.onload = function () {
+    sideAni(); //사이드바 애니메이션 side-bar.js
+    $(".menu-box").eq(5).addClass("menu-box__select");
 };
 
-// 체크박스 이벤트 ==========================================
-$(".check-all").change(function () {
-    let $allBox = $(this).is(":checked");
-    let $otherBox = $(".list-checkbox > input[type='checkbox']");
-    if ($allBox) {
-        $otherBox.prop("checked", true);
-    } else {
-        $otherBox.prop("checked", false);
-    }
-});
 
-$(".list-checkbox > input[type='checkbox']").change(function () {
-    if (!$(this).is(":checked")) {
-        $(".check-all").prop("checked", false);
-    }
-});
-
-
-
-//기간 버튼
-$(".a-btn").on("click", function (e) {
-    e.preventDefault();
-    if ($(this).hasClass("not-selected")) {
-        return;
-    }
-    $(".period-button-wrap > .a-btn").removeClass("a-btn__selected");
-    $(this).addClass("a-btn__selected");
-
-    //기간 버튼 클릭시 input에 자동 삽입
-    let $startInput = $("input[name='startDate']");
-    let $endInput = $("input[name='endDate']");
-    let val = $(this).attr("href");
-
-    //전체 버튼 선택시 공백으로 바꾸기
-    if (val == "") {
-        $startInput.val("");
-        $endInput.val("");
-        return;
-    }
-
-    let todayObj = new Date();
-    let dateResult = new Date(
-        todayObj.getTime() + 1000 * 60 * 60 * 24 * parseInt(val)
-    );
-    let year = dateResult.getFullYear();
-    let month = dateResult.getMonth() + 1;
-    let date = dateResult.getDate();
-
-    let resultDateAr = [
-        year,
-        (month < 10 ? "0" : "") + month,
-        (date < 10 ? "0" : "") + date,
-    ];
-
-    $startInput.val(
-        [
-            todayObj.getFullYear(),
-            (todayObj.getMonth() + 1 < 10 ? "0" : "") + (todayObj.getMonth() + 1),
-            (todayObj.getDate() < 10 ? "0" : "") + todayObj.getDate(),
-        ].join("-")
-    );
-    $endInput.val(resultDateAr.join("-"));
-});
-
-//date picker
-$(function () {
-    $(".datepicker").datepicker();
-});
-
-$(".calendar-icon-wrap").on("click", function () {
-    let $input = $(this).prev("div").find("input");
-    $input.trigger("focus");
-});
 
 
 //================================ ajax =========================================
@@ -132,7 +60,7 @@ function searchReport() {
                 report.reviewRegisterDate +
                 "</td>" +
                 "<td class=\"category\">" +
-                report.category +
+                renameCategory(report.category) +
                 "</td>" +
                 "<td class=\"project-view\">" +
                 "<div>" +
@@ -188,3 +116,11 @@ $(".delete-btn").on("click", function () {
     checkAlert("정말로 삭제하시겠습니까?", deleteReport);
 });
 // ========================================================
+
+//차트=====
+
+function chartData(){
+    chartService.reportChartData(function(result){
+        chartResult = result;
+    })
+}

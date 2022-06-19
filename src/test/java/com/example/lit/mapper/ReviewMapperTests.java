@@ -15,7 +15,7 @@ public class ReviewMapperTests {
     private ReviewMapper reviewMapper;
 
     @Test
-    public void searchReview(){
+    public void searchReviewTest(){
         SearchDTO searchDTO = new SearchDTO();
 
         searchDTO.setCategory("hobby");
@@ -23,5 +23,10 @@ public class ReviewMapperTests {
         searchDTO.setType("user_number");
 
         reviewMapper.searchReview(searchDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+    }
+
+    @Test
+    public void getTotalTodayTest(){
+        log.info(String.valueOf(reviewMapper.getTotalToday()));
     }
 }

@@ -30,6 +30,10 @@ public class UserDAO {
 
     // 관리자 유저 검색
     public List<UserVO> userSearch(SearchDTO searchDTO){ return userMapper.userSearch(searchDTO);}
+    // 유저 토탈
+    public int getTotal() {return userMapper.getTotal(); }
+    // 차트 정보
+    public Long getUserChart(String date) { return userMapper.getUserChart(date); }
 
     //카카오 로그인/회원가입
     public void kakaoRegister(UserVO userVO){userMapper.kakaoInsert(userVO);}

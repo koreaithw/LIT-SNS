@@ -47,7 +47,7 @@ let adminService = (function(){
     function searchProject(searchInfo, callback, error) {
         console.log(searchInfo);
         $.ajax({
-            url: "/admin/waitingProject/search",
+            url: "/admin/project/search",
             type : "post",
             data : JSON.stringify(searchInfo),
             contentType: "application/json",
@@ -69,7 +69,7 @@ let adminService = (function(){
     //프로젝트 삭제
     function deleteProject(list, callback, error){
         $.ajax({
-            url: "/admin/waitingProject/" + list,
+            url: "/admin/project/" + list,
             type : "delete",
             success: function () {
                 if(callback){
@@ -88,7 +88,7 @@ let adminService = (function(){
     //프로젝트 상태 변경
     function changeStatus(info, callback, error) {
         $.ajax({
-            url : "/admin/waitingProject/" + info.projectNumber + "/" + info.status,
+            url : "/admin/project/" + info.projectNumber + "/" + info.status,
             type : "get",
             success: function () {
                 if(callback){
@@ -198,4 +198,59 @@ let adminService = (function(){
         deleteReport:deleteReport,
         cancelReport:cancelReport
     };
+})();
+
+let chartService = (function(){
+    console.log("chartService");
+
+    function userChartData(callback, error){
+        $.ajax({
+            url : "/admin/user/chart",
+            type : "get",
+            dataType : "json",
+            async : false,
+            success : function(result){
+                if(callback) { callback(result); }
+            },
+            error : function (xhr, status, er) {
+                if(error) { error(er); }
+            }
+        });
+    }
+
+    function reviewChartData(callback, error){
+        $.ajax({
+            url : "/admin/review/chart",
+            type : "get",
+            dataType : "json",
+            async : false,
+            success : function(result){
+                if(callback) { callback(result); }
+            },
+            error : function (xhr, status, er) {
+                if(error) { error(er); }
+            }
+        });
+    }
+
+    function reportChartData(callback, error){
+        $.ajax({
+            url : "/admin/report/chart",
+            type : "get",
+            dataType : "json",
+            async : false,
+            success : function(result){
+                if(callback) { callback(result); }
+            },
+            error : function (xhr, status, er) {
+                if(error) { error(er); }
+            }
+        });
+    }
+
+    return {
+        userChartData:userChartData,
+        reviewChartData:reviewChartData,
+        reportChartData:reportChartData
+    }
 })();

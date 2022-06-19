@@ -18,5 +18,6 @@
         <typeAlias type="com.example.lit.domain.vo.user.achievement.MedalDTO" alias="medalDTO"/>
         <typeAlias type="com.example.lit.domain.vo.review.ReviewDTO" alias="reviewDTO"></typeAlias>
         <typeAlias type="com.example.lit.domain.vo.review.ReportDTO" alias="reportDTO"></typeAlias>
+        <typeAlias type="com.example.lit.domain.vo.project.ProjectDTO" alias="projectDTO"></typeAlias>
     </typeAliases>
 </configuration>

@@ -16,4 +16,10 @@ public interface ReportMapper {
 
     //리포트 검색(관리자)
     public List<ReportDTO> searchReport(SearchDTO searchDTO);
+
+    //오늘 등록된 리포트 토탈
+    public int getTotalToday();
+
+    //  차트 정보
+    public Long getReportChart(String date);
 }

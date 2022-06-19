@@ -33,7 +33,7 @@ public class ReportMapperTests {
     }
 
     @Test
-    public void searchReport(){
+    public void searchReportTest(){
         SearchDTO searchDTO =  new SearchDTO();
         searchDTO.setCategory("hobby");
         searchDTO.setKeyword("aa");
@@ -43,6 +43,11 @@ public class ReportMapperTests {
 //        searchDTO.setEndDate("2022-08-15");
 
         reportMapper.searchReport(searchDTO).stream().map(ReportDTO::toString).forEach(log::info);
+    }
+
+    @Test
+    public void getTotalToday(){
+        log.info(String.valueOf(reportMapper.getTotalToday()));
     }
 
 }
