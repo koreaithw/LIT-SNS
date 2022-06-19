@@ -1,10 +1,8 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.project.ProjectVO;
-import com.example.lit.domain.vo.review.LikeVO;
-import com.example.lit.domain.vo.review.ReplyVO;
-import com.example.lit.domain.vo.review.ReportVO;
-import com.example.lit.domain.vo.review.ReviewVO;
+import com.example.lit.domain.vo.review.*;
 import com.example.lit.service.review.LitUpService;
 import com.example.lit.service.review.LitUpServiceImple;
 import lombok.RequiredArgsConstructor;
@@ -41,14 +39,21 @@ public class LitUpRestController {
     }
 
     //모달창 인증글 상세 댓글 삭제
-    @DeleteMapping("/reply")
-    public List<ReplyVO> deleteReply(){
+    @GetMapping("/reply/{replyNumber}")
+    public String deleteReply(@PathVariable("replyNumber") Long replyNumber){
         log.info("***************************");
         log.info("LitUpRestController : deleteReply(delete)");
         log.info("***************************");
+        if(litUpService.removeReply(replyNumber)){
+            return "삭제 성공";}
+        else{return "삭제 실패";}
+        }
 
-        return null;
+    @GetMapping("/reply/{reviewNumber}/{page}")
+    public ReplyPageDTO getList(@PathVariable("page") int pageNum, @PathVariable("reviewNumber") Long reviewNumber){
+        return new ReplyPageDTO(litUpService.getReplyList(new Criteria(pageNum,2),reviewNumber), litUpService.getTotalReply(reviewNumber));
     }
+
 
     //모달창 인증글 상세 신고
     @PostMapping("/report")
@@ -79,6 +84,15 @@ public class LitUpRestController {
         litUpService.removeLike(likeVO);
         return litUpService.getLikeTotal(likeVO.getReviewNumber()).intValue();
     }
+
+    @GetMapping("/getLikeTotal/{reviewNumber}")
+    public int getLikeTotal(@PathVariable("reviewNumber") Long reviewNumber){
+        log.info("***************************");
+        log.info("LitUpRestController : registerLike(get)");
+        log.info("***************************");
+        return litUpService.getLikeTotal(reviewNumber).intValue();
+    }
+
 
 //    ================= 인증글 작성 ====================
     //모달창 인증글 업로드
