@@ -76,6 +76,6 @@ public class LitServiceImple implements LitService{
 
     @Override
     public ProjectFileVO getImg(Long projectNumber) {
-        return null;
+        return projectFileDAO.getImg(projectNumber);
     }
 }
