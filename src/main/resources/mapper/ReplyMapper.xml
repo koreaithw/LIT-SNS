@@ -11,7 +11,7 @@
     </insert>
 
     <delete id="delete">
-        DELETE FROM TBL_REPLY WHERE REPLY_NUMBER = #{replyNumber}
+        DELETE FROM TBL_REPLY WHERE REPLY_NUMBER = #{replyNumber} AND USER_NUMBER = #{userNumber}
     </delete>
 
 
