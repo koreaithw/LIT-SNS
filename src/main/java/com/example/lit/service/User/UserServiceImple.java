@@ -1,12 +1,12 @@
 package com.example.lit.service.User;
 
 import com.example.lit.domain.dao.user.FollowDAO;
-import com.example.lit.domain.dao.user.MessageDAO;
+import com.example.lit.domain.dao.message.MessageDAO;
 import com.example.lit.domain.dao.user.UserDAO;
 import com.example.lit.domain.dao.user.UserFileDAO;
 import com.example.lit.domain.dao.user.achievement.AchievementDAO;
 import com.example.lit.domain.vo.user.FollowVO;
-import com.example.lit.domain.vo.user.MessageVO;
+import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.domain.vo.user.UserFileVO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.domain.vo.user.achievement.AchievementVO;
@@ -36,17 +36,17 @@ public class UserServiceImple implements UserService{
 
     @Override
     public boolean dbEmailCheck(String email) {
-        return userDAO.dbEmailCheck(email) == 1;
+        return userDAO.dbEmailCheck(email) != 1;
     }
 
     @Override
     public boolean dbNicknameCheck(String nickname) {
-        return userDAO.dbNicknameCheck(nickname) == 1;
+        return userDAO.dbNicknameCheck(nickname) != 1;
     }
 
     @Override
-    public boolean login(String email, String pw) {
-        return false;
+    public UserVO login(String email, String pw) {
+        return userDAO.login(email, pw);
     }
 
     @Override

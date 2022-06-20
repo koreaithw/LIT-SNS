@@ -106,40 +106,6 @@ function loginBtnF() {
    }
 }
 
-//
-// // 이메일 중복검사
-// $("#email").on("blur",function(){
-//    checkEmail($(this).val());
-// });
-//
-// function checkEmail(email){
-//    if(email == ""){
-//       $('.checkArea').eq(0).text("");
-//       return;
-//    }
-//    $.ajax({
-//       url: contextPath + "/user/UserCheckEmailOk.us?userEmail=" + email,
-//       type: "get",
-//       dataType:"json",
-//       success:function(result){
-//          if(result.status == 'ok'){
-//             $('.checkEmail').html("<div class='checkEmail'> 사용가능한 이메일 입니다.</div>");
-//          } else{
-//             $('.checkEmail').html("<div class='checkEmail'> 이미 존재하는 이메일 입니다.</div>");
-//          }
-//       },
-//       error:function(){
-//          console.log("오류");
-//       }
-//    });
-
-   let dbCheckService = (function(){
-      function checkEmail() {
-
-      }
-
-})
-
 email.keyup(loginBtnF)
 userName.keyup(loginBtnF)
 nickName.keyup(loginBtnF)
