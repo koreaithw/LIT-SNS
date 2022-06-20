@@ -13,7 +13,7 @@ public class UserDAO {
     //회원 가입
     public void register(UserVO userVO){ userMapper.insert(userVO); }
     //로그인
-    public boolean login(String email, String pw){ return userMapper.login(email, pw) != 0; }
+    public UserVO login(String email, String pw){ return userMapper.login(email, pw); }
     //회원 탈퇴
     public void remove(Long userNumber){ userMapper.delete(userNumber); }
     //내 정보 가져 오기
@@ -24,4 +24,11 @@ public class UserDAO {
     public void modifyPw(UserVO userVO, String newPassword){ userMapper.updatePw(userVO, newPassword); }
     // 대표 메달 설정
     public void modifyMedal(UserVO userVO){ userMapper.updateMedal(userVO); }
+    //카카오 로그인/회원가입
+    public void kakaoRegister(UserVO userVO){userMapper.kakaoInsert(userVO);}
+    //이메일 중복체크
+    public int dbEmailCheck(String email){ return userMapper.emailCheck(email);}
+    //닉네임 중복체크
+    public int dbNicknameCheck(String nickname){ return userMapper.nicknameCheck(nickname);}
+
 }

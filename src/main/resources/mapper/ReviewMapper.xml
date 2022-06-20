@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.review.ReviewMapper">
-<!--    동적 쿼리 쓸것-->
+<!--    ###############################동적 쿼리 쓸것-->
     <select id="getList" resultType="reviewVO">
 
     </select>
+ <!--    ###############################동적 쿼리 쓸것-->
 
     <insert id="insert">
         <selectKey keyProperty="reviewNumber" resultType="long" order="BEFORE">
@@ -15,12 +16,14 @@
         VALUES(#{reviewNumber}, #{userNumber}, #{projectNumber}, #{content})
     </insert>
 
+<!--    ###################### 닉네임 이슈로 resultType 변경 검토 ############# -->
     <select id="get" resultType="reviewVO">
         SELECT US.NICKNAME , US.CONTENT ,RV.CONTENT ,RV.CONTENT
         FROM TBL_REVIEW RV, TBL_USER US
         WHERE RV.USER_NUMBER = US.USER_NUMBER
         AND RV.REVIEW_NUMBER = #{reviewNumber};
     </select>
+    <!--    ###################### 닉네임 이슈로 resultType 변경 검토 ############# -->
 
     <delete id="delete">
         DELETE FROM TBL_REVIEW WHERE REVIEW_NUMBER = #{reviewNumber}

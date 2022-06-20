@@ -29,7 +29,9 @@ public class LitUpController {
         log.info("******************************");
         log.info("LitUpController : detail");
         log.info("******************************");
-        return "/certification/certificationDetail";
+        return "certification/certificationDetail";
     }
+
+
 
 }

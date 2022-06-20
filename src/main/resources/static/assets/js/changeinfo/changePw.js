@@ -38,7 +38,7 @@ function nPwChenk(){
 }
 
 function ckeckOldPw() {
-    if(oldPw.val() != "aaaaa"){ // 현제 비밀번호 유효성 검사
+    if(oldPw.val() != "aaaaa"){ // 현재 비밀번호 유효성 검사
         $ ('._checkArea1').html('비밀번호가 일치하지 않습니다.');
         $('._checkArea1').css('color', 'red');
         return false;
