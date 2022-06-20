@@ -40,10 +40,14 @@ function headerAction(){
 const $fidOn = $("#fidOn");
 const $fidOff = $("#fidOff");
 
+const $likeBtn = $("#likeBtn");
+const $follwBtn = $("#followBtn");
+
 $fidOff.on("click", function() {
     $fidOff.css("display", "none");
     $fidOn.css("display", "block");
     $("._aa5z").css("display", "flex");
+    likeBtnAct();
 });
 
 $fidOn.on("click", function() {
@@ -52,6 +56,28 @@ $fidOn.on("click", function() {
     $("._aa5z").css("display", "none");
 });
 
+function likeBtnAct(){
+    $follwBtn.css("color", "#8e8e99");
+    $likeBtn.css("color", "");
+    $.ajax({
+        url: "/lit/upload",
+        type: "post",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(files){
+            imgEvent(files);
+        }
+    });
+}
+
+function foll0wBtnAct(){
+    $likeBtn.css("color", "#8e8e99");
+    $follwBtn.css("color", "");
+}
+
+$likeBtn.click(likeBtnAct);
+$follwBtn.click(foll0wBtnAct);
         
 
 
