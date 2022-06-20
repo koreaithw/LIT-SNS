@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.user.UserFileMapper">
     <insert id="insert">
-        INSERT INTO TBL_USER_FILE (UUID, UPLOAD_PATH, NAME, IMAGE, USER_NUMBER)
-        VALUES (#{uuid}, #{uploadPath}, #{name}, #{image}, #{userNumber})
+        INSERT INTO TBL_USER_FILE (UUID, UPLOAD_PATH, NAME, IMAGE, USER_NUMBER, FILE_NUMBER)
+        VALUES (#{uuid}, #{uploadPath}, #{name}, #{image}, #{userNumber}, SEQ_USERFILE.NEXTVAL)
     </insert>
 
     <delete id="delete">
@@ -11,7 +11,7 @@
     </delete>
 
     <select id="getImg" resultType="userFileVO">
-        SELECT UUID, UPLOAD_PATH, NAME, IMAGE, USER_NUMBER
+        SELECT UUID, UPLOAD_PATH, NAME, IMAGE, REVIEW_NUMBER, FILE_NUMBER
         FROM TBL_USER_FILE
         WHERE USER_NUMBER = #{userNumber}
     </select>
@@ -23,7 +23,7 @@
     </update>
 
     <select id="getOldFiles" resultType="userFileVO">
-        SELECT UUID, UPLOAD_PATH, NAME, IMAGE, USER_NUMBER
+        SELECT UUID, UPLOAD_PATH, NAME, IMAGE, REVIEW_NUMBER, FILE_NUMBER
         FROM TBL_USER_FILE
         WHERE UPLOAD_PATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
     </select>

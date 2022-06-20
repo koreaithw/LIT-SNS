@@ -40,7 +40,7 @@ body{
     z-index: 1;
 }
 
-.certifcationWriteModalContainer{
+.certificationWriteModalContainer{
     position: relative;
     min-height: 100%;
 }
@@ -260,7 +260,7 @@ body{
 }
 
 .certificationContentButtons > div > div > button:hover{
-    color: rgba(0,0,0);
+    color: rgb(0, 0, 0);
 }
 
 .certificationContentFooterButtonsWrapper{
