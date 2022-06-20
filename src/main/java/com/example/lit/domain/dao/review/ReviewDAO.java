@@ -4,6 +4,7 @@ import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.review.ReviewVO;
 import com.example.lit.mapper.review.ReviewMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class ReviewDAO {
     private final ReviewMapper reviewMapper;
 
     //    리뷰 목록 가져오기
-    public List<ReviewVO> getList(Criteria criteria){ return reviewMapper.getList(criteria); }
+    public List<ReviewVO> getList(Criteria criteria, String category){ return reviewMapper.getList(criteria, category); }
     //    리뷰 등록
     public void register(ReviewVO reviewVO){ reviewMapper.insert(reviewVO); }
     //    리뷰 상세보기
