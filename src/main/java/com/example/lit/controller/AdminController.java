@@ -1,5 +1,6 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.vo.AdminSession;
 import com.example.lit.service.User.UserService;
 import com.example.lit.service.project.LitService;
 import com.example.lit.service.review.LitUpService;
@@ -10,12 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -35,63 +37,78 @@ public class AdminController {
     }
 
     @PostMapping("/login")
-    public RedirectView adminLogin(String email, String password){
+    public RedirectView adminLogin(@RequestParam Map<String, String> info, RedirectAttributes rttr, HttpServletRequest req){
         log.info("***************************");
         log.info("AdminController : login(post)");
         log.info("***************************");
-        //아이디 비밀번호 확인
-        String result =  userService.login(email, password) ? "/admin/user" : "/admin/login";
-        //관리자 페이지는 단순히 email pw만 일치해서 들어갈 수 잇으면 안됨 => 수정해야함
+
+        if(info.get("email") == null || info.get("password") == null){
+            return new RedirectView("/admin/login");
+        }
+        HttpSession session = req.getSession();
+
+        AdminSession.setSession(session);
+
+
+        String result = userService.adminLogin(info.get("email"), info.get("password")) ? "/admin/user" : "/admin/login";
+        //관리자 페이지는 단순히 email pw만 일치해서 들어갈 수 있으면 안됨 => 수정해야함
         return new RedirectView(result);
     }
 
 
     @GetMapping("/user")
-    public String user(Model model){
+    public String user(Model model, HttpServletRequest req){
         log.info("***************************");
         log.info("AdminController : user(get)");
         log.info("***************************");
         model.addAttribute("total", userService.getTotal());
+        String result = AdminSession.checkSession(req.getSession(), "/admin/user-management");
 
-        return "/admin/user-management";
+        return result;
     }
 
     @GetMapping("/approvedProject")
-    public String approvedProject(Model model){
+    public String approvedProject(Model model, HttpServletRequest req){
         log.info("***************************");
         log.info("AdminController : approvedProject(get)");
         log.info("***************************");
         model.addAttribute("total", litService.getTotalByStatus(1L));
-        return "/admin/approved-project-management";
+
+        String result = AdminSession.checkSession(req.getSession(), "/admin/approved-project-management");
+        return result;
     }
 
     @GetMapping("/report")
-    public String  report(Model model){
+    public String  report(Model model, HttpServletRequest req){
         log.info("***************************");
         log.info("AdminController : report(get)");
         log.info("***************************");
         model.addAttribute("total", litUpService.getTotalTodayReport());
 
-        return "/admin/report-management";
+        String result = AdminSession.checkSession(req.getSession(), "/admin/report-management");
+        return result;
     }
 
     @GetMapping("/waitingProject")
-    public String waitingProject(Model model){
+    public String waitingProject(Model model, HttpServletRequest req){
         log.info("***************************");
         log.info("AdminController : waitingProject(get)");
         log.info("***************************");
         model.addAttribute("total", litService.getTotalByStatus(0L));
-        return "/admin/waiting-project-management";
+
+        String result = AdminSession.checkSession(req.getSession(), "/admin/waiting-project-management");
+        return result;
     }
 
     @GetMapping("/review")
-    public String reviewManagement(Model model){
+    public String reviewManagement(Model model, HttpServletRequest req){
         log.info("***************************");
         log.info("AdminController : review(get)");
         log.info("***************************");
 
         model.addAttribute("total", litUpService.getTotalTodayReview());
-        return "/admin/review-management";
+        String result = AdminSession.checkSession(req.getSession(), "/admin/review-management");
+        return result;
     }
 
 

@@ -222,7 +222,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="list-box border__gray">
                                     <!-- list-form -->
                                     <form action="" name="list-form">
@@ -262,6 +261,7 @@
         </div>
     </div>
 </div>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/assets/js/admin/user-management.js"></script>
@@ -278,6 +278,10 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
 <script src="/assets/js/admin/adminAjax.js"></script>
 <script th:inline="javascript">
+    // let userNumber = (String)session.getAttribute("admin");
+    let userNumber2 = [[${session.admin}]];
+    console.log(userNumber2);
+
 
 </script>
 </html>

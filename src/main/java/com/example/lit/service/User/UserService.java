@@ -15,7 +15,11 @@ public interface UserService {
     //회원 가입
     public void register(UserVO userVO);
     //로그인
+
     public UserVO login(String email, String pw);
+
+    public boolean adminLogin(String email, String password);
+
     //회원 탈퇴
     public void remove(Long userNumber);
     //내 정보 가져 오기

@@ -13,7 +13,11 @@ public interface UserMapper {
     //회원 가입
     public void insert(UserVO userVO);
     //로그인
+
     public UserVO login(String email, String password);
+
+    public int adminLogin(String email, String password);
+
     //회원 탈퇴
     public void delete(Long userNumber);
     //내 정보 가져 오기
