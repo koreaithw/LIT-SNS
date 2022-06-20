@@ -114,9 +114,9 @@ let reviewDetailService = (function () {
     }
 
     // 댓글 삭제
-    function removeReply(replyNumber, callback) {
+    function removeReply(replyNumber,userNumber, callback) {
         $.ajax({
-            url:"/litUp/reply/" + parseInt(replyNumber),
+            url:"/litUp/delete/" + parseInt(replyNumber)+ "/" +parseInt(userNumber),
             type:"get",
             success:function (result) {
                 if(callback){
@@ -146,10 +146,36 @@ let reviewDetailService = (function () {
         }
     }
 
+    // 리뷰 디테일 조회
+    function readDetail(replyNumber, callback) {
+        $.ajax({
+            url:"/litUp/read/" + parseInt(replyNumber),
+            type:"get",
+            success:function (reviewVO) {
+                if(callback){
+                    callback(reviewVO.nickname, reviewVO.content, reviewVO.registerDate)
+                }
+            }
+        })
+    }
+
+    function getCheckLike(userNumber,callback) {
+        $.ajax({
+            url:"/litUp/like/" + parseInt(userNumber),
+            type:"get",
+            success:function (result) {
+                if(callback){
+                    callback(result)
+                }
+            }
+        })
+
+    }
 
 
 
-    return{addReport:addReport, addReply:addReply, addLike:addLike, removeLike:removeLike, getList:getList, removeReply:removeReply, getLikeTotal:getLikeTotal, getReplyDate:getReplyDate};
+
+    return{addReport:addReport, addReply:addReply, addLike:addLike, removeLike:removeLike, getList:getList, removeReply:removeReply, getLikeTotal:getLikeTotal, getReplyDate:getReplyDate, readDetail:readDetail, getCheckLike:getCheckLike};
 })();
 
 

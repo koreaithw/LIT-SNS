@@ -501,7 +501,7 @@ svg:not(:root) {
 ._aajc {
     max-height: 362px;
     min-height: 100px;
-    overflow-y: auto;
+    overflow-y: hidden;
     width: 500px;
 }
 

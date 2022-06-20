@@ -24,8 +24,10 @@ public class LitController {
     @PostMapping("/write")
     public String addWrite(ProjectVO projectVO) {
         log.info("--------------------write---------------------");
+        log.info(projectVO.toString());
+        log.info(projectVO.getProjectFile() + "");
         litService.register(projectVO);
-        return "/main";
+        return "/main/main";
     }
 
 
