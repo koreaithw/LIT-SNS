@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,12 +35,14 @@ public class AdminController {
     }
 
     @PostMapping("/login")
-    public String adminLogin(String id, String password){
+    public RedirectView adminLogin(String email, String password){
         log.info("***************************");
         log.info("AdminController : login(post)");
         log.info("***************************");
         //아이디 비밀번호 확인
-        return "/admin/user-management";
+        String result =  userService.login(email, password) ? "/admin/user" : "/admin/login";
+        //관리자 페이지는 단순히 email pw만 일치해서 들어갈 수 잇으면 안됨 => 수정해야함
+        return new RedirectView(result);
     }
 
 
