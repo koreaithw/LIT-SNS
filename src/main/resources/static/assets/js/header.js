@@ -37,6 +37,21 @@ function headerAction(){
             
             })
 
+const $fidOn = $("#fidOn");
+const $fidOff = $("#fidOff");
+
+$fidOff.on("click", function() {
+    $fidOff.css("display", "none");
+    $fidOn.css("display", "block");
+    $("._aa5z").css("display", "flex");
+});
+
+$fidOn.on("click", function() {
+    $fidOn.css("display", "none");
+    $fidOff.css("display", "block");
+    $("._aa5z").css("display", "none");
+});
+
         
 
 
