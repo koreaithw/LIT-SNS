@@ -2,6 +2,10 @@ package com.example.lit.service.User;
 
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.user.*;
+import com.example.lit.domain.vo.user.FollowVO;
+import com.example.lit.domain.vo.messsage.MessageVO;
+import com.example.lit.domain.vo.user.UserFileVO;
+import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.domain.vo.user.achievement.AchievementVO;
 
 import java.util.List;

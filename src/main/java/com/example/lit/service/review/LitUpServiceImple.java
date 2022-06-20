@@ -29,7 +29,7 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
-    public int getLikeTotal(Long reviewNumber) {
+    public Long getLikeTotal(Long reviewNumber) {
         return likeDAO.getTotal(reviewNumber);
     }
 
@@ -40,7 +40,8 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public boolean removeReply(Long replyNumber) {
-        return false;
+
+        return replyDAO.remove(replyNumber);
     }
 
     @Override
@@ -50,12 +51,12 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public List<ReplyVO> getReplyList(Criteria criteria, Long reviewNumber) {
-        return null;
+        return replyDAO.getList(criteria, reviewNumber);
     }
 
     @Override
     public int getTotalReply(Long reviewNumber) {
-        return 0;
+        return replyDAO.getTotal(reviewNumber);
     }
 
     @Override

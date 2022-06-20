@@ -11,7 +11,7 @@
         <typeAlias type="com.example.lit.domain.vo.review.ReviewFileVO" alias="reviewFileVO"/>
         <typeAlias type="com.example.lit.domain.vo.review.ReviewVO" alias="reviewVO"/>
         <typeAlias type="com.example.lit.domain.vo.user.FollowVO" alias="followVO"/>
-        <typeAlias type="com.example.lit.domain.vo.user.MessageVO" alias="messageVO"/>
+        <typeAlias type="com.example.lit.domain.vo.messsage.MessageVO" alias="messageVO"/>
         <typeAlias type="com.example.lit.domain.vo.user.UserFileVO" alias="userFileVO"/>
         <typeAlias type="com.example.lit.domain.vo.user.UserVO" alias="userVO"/>
         <typeAlias type="com.example.lit.domain.vo.user.achievement.AchievementVO" alias="achievementVO"/>
