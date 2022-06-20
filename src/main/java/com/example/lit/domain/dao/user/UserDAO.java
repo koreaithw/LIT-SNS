@@ -13,7 +13,7 @@ public class UserDAO {
     //회원 가입
     public void register(UserVO userVO){ userMapper.insert(userVO); }
     //로그인
-    public boolean login(String email, String pw){ return userMapper.login(email, pw) != 0; }
+    public UserVO login(String email, String pw){ return userMapper.login(email, pw); }
     //회원 탈퇴
     public void remove(Long userNumber){ userMapper.delete(userNumber); }
     //내 정보 가져 오기

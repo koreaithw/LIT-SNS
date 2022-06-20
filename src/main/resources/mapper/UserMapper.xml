@@ -23,8 +23,8 @@
         WHERE NICKNAME = #{nickname}
     </select>
 
-    <select id="login" resultType="_int">
-        SELECT COUNT(USER_NUMBER) FROM TBL_USER
+    <select id="login" resultType="userVO">
+        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT FROM TBL_USER
         WHERE EMAIL = #{email} AND PASSWORD = #{password}
     </select>
 
