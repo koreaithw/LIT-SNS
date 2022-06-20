@@ -24,13 +24,12 @@ public class Criteria {
         this.amount = amount;
     }
 
-    //검색과 함께 이동 필요하면 쓸 것
 //    public String getListLink(){
 //        UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
-//                .queryParam()
-//                .queryParam()
-//                .queryParam()
-//                .queryParam();
+//                .queryParam("pageNum", this.pageNum)
+//                .queryParam("amount", this.amount)
+//                .queryParam("type", this.type)
+//                .queryParam("keyword", this.keyword);
 //
 //        return builder.toUriString();
 //    }
@@ -39,3 +38,5 @@ public class Criteria {
 //        return type == null ? new String[] {} : type.split("");
 //    }
 }
+
+

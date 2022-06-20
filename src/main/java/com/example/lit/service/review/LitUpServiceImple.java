@@ -19,22 +19,28 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public void registerLike(LikeVO likeVO) {
-
+        likeDAO.register(likeVO);
     }
 
     @Override
     public void removeLike(LikeVO likeVO) {
+        likeDAO.remove(likeVO);
+    }
 
+    @Override
+    public Long getLikeTotal(Long reviewNumber) {
+        return likeDAO.getTotal(reviewNumber);
     }
 
     @Override
     public void registerReply(ReplyVO replyVO) {
-
+        replyDAO.register(replyVO);
     }
 
     @Override
     public boolean removeReply(Long replyNumber) {
-        return false;
+
+        return replyDAO.remove(replyNumber);
     }
 
     @Override
@@ -44,17 +50,17 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public List<ReplyVO> getReplyList(Criteria criteria, Long reviewNumber) {
-        return null;
+        return replyDAO.getList(criteria, reviewNumber);
     }
 
     @Override
     public int getTotalReply(Long reviewNumber) {
-        return 0;
+        return replyDAO.getTotal(reviewNumber);
     }
 
     @Override
     public void registerReport(ReportVO reportVO) {
-
+        reportDAO.register(reportVO);
     }
 
     @Override

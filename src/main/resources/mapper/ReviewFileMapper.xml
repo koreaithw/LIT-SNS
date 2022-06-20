@@ -3,7 +3,7 @@
 <mapper namespace="com.example.lit.mapper.review.ReviewFileMapper">
     <insert id="insert">
         INSERT INTO TBL_REVIEW_FILE (UUID, UPLOAD_PATH, NAME, IMAGE, REVIEW_NUMBER)
-        VALUES (#{uuid}, #{uploadPath}, #{fileName}, #{image}, #{reviewNumber})
+        VALUES (#{uuid}, #{uploadPath}, #{name}, #{image}, #{reviewNumber})
     </insert>
 
     <delete id="delete">
@@ -16,11 +16,6 @@
         WHERE REVIEW_NUMBER = #{reviewNumber}
     </select>
 
-    <update id="update">
-        UPDATE TBL_REVIEW_FILE
-        SET UUID = #{uuid}, UPLOAD_PATH = #{uploadPath}, NAME = #{name}, IMAGE = #{image}
-        WHERE REVIEW_NUMBER = #{reviewNumber}
-    </update>
 
     <select id="getOldFiles" resultType="reviewFileVO">
         SELECT UUID, UPLOAD_PATH, NAME, IMAGE, REVIEW_NUMBER

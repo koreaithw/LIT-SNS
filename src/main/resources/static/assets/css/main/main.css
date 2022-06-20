@@ -10,8 +10,14 @@ div {
 
 main {
     background: rgb(250, 250, 250);
-    margin-top: 60px;
 
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transform: translate(0%, -100%);
 }
 
 a {

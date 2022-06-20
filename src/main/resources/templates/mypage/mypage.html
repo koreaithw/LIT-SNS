@@ -10,11 +10,12 @@
 
     <link rel="stylesheet" href="/assets/css/default.css" />
     <link rel="stylesheet" href="/assets/css/mypage/mypage.css"/>
-
+    <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
 </head>
 
 <body>
-<header></header>
+<header th:insert="~{/header :: header}"></header>
 <main class="mypageMain">
     <div class="mainInner">
         <div class="mypageHeader">
@@ -393,7 +394,7 @@
         </div>
     </div>
 </div> -->
-<footer></footer>
+<footer th:insert="~{/footer :: footer}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="/assets/js/mypage/mypage.js"></script>

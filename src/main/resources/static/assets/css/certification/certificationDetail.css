@@ -355,7 +355,11 @@ body{
     justify-content: space-between;
 }
 
-.example{
+.content_area{
+    min-height: 80px;
+}
+
+.reply_area{
     min-height: 80px;
 }
 
