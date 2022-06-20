@@ -3,28 +3,42 @@
 <mapper namespace="com.example.lit.mapper.project.ProjectMapper">
     <!--    ###############################동적 쿼리 쓸것-->
     <select id="getList" resultType="projectVO">
-<!--        <![CDATA[-->
-<!--        SELECT RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
-<!--        FROM-->
-<!--        (-->
-<!--                SELECT ROWNUM RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
-<!--                FROM    TBL_PROJECT PJ, TBL_PARTICIPATION PT-->
-<!--        ]]>-->
-<!--                 <choose>-->
-<!--                     <when test="category == 'popular'">-->
-<!--                         <![CDATA[   WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY COUNT(PT.USER_NUMBER)  ]]>-->
-<!--                     </when>-->
-<!--                     <when test="category == 'new'">-->
-<!--                         <![CDATA[  WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
-<!--                     </when>-->
-<!--                     <otherwise>-->
-<!--                         <![CDATA[  WHERE PJ.CATEGORY =#{category} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
-<!--                     </otherwise>-->
-<!--                 </choose>-->
-<!--        <![CDATA[-->
-<!--        )-->
-<!--        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}-->
-<!--        ]]>-->
+        <![CDATA[
+        SELECT cont, ROWNUM, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, STATUS
+        FROM (
+            SELECT cont, ROWNUM, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, STATUS
+            FROM (
+                SELECT COUNT(pr.PROJECT_NUMBER) cont,
+                pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT, pr.AUTHENTICATION, pr.START_DATE, pr.END_DATE, pr.STATUS
+                FROM TBL_PROJECT pr
+                JOIN TBL_PARTICIPATION pa ON  pr.PROJECT_NUMBER = pa.PROJECT_NUMBER
+                WHERE pr.STATUS = 1
+                ]]>
+                AND pr.CATEGORY = '운동'
+
+                <![CDATA[
+                GROUP BY pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT, pr.AUTHENTICATION, pr.START_DATE,
+                pr.END_DATE, pr.STATUS, pa.PROJECT_NUMBER
+            )
+            WHERE ROWNUM <= #{pageNum} * #{amount}
+            ]]>
+            <choose>
+                <when test="type == ''">
+                    (BOARD_TITLE LIKE '%'||#{keyword}||'%')
+                </when>
+                <when test="type == 'C'.toString()">
+                    (BOARD_CONTENT LIKE '%'||#{keyword}||'%')
+                </when>
+                <when test="type == 'W'.toString()">
+                    (BOARD_WRITER LIKE '%'||#{keyword}||'%')
+                </when>
+            </choose>
+            --    ORDER BY cont DESC
+            ORDER BY ROWNUM DESC
+            <![CDATA[
+        )
+        WHERE ROWNUM > 0
+        ]]>
     </select>
     <!--    ###############################동적 쿼리 쓸것-->
 
