@@ -12,4 +12,12 @@
         AND REVIEW_NUMBER = #{reviewNumber}
     </delete>
 
+<<<<<<< HEAD
+=======
+    <select id="getTotal" resultType="long">
+        SELECT COUNT(USER_NUMBER) FROM TBL_LIKE
+        WHERE REVIEW_NUMBER = #{reviewNumber}
+    </select>
+
+>>>>>>> 964678f7f59d499d7898a5c43e7f72704ba32956
 </mapper>

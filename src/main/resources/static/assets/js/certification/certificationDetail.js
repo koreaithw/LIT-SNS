@@ -20,6 +20,12 @@ commentInputArea.addEventListener("input", function (e) {
 function projectDetailModalShow() {
     modal.style.display = 'block';
     projectDetailButton.style.display = 'none';
+    pageNum = 1;
+    showList(pageNum);
+    // 좋아요 총 갯수
+    reviewDetailService.getLikeTotal(1,function (result) {
+        $("#likeCount").html(result);
+    })
 }
 
 //프로젝트 모달 창 숨기는 버튼,
@@ -113,4 +119,12 @@ $('.innerImageWrapper > .innerImageSideButtons > div').click(function () {
     };
 
     $post.click();
+<<<<<<< HEAD
 });
+=======
+});
+
+//################################ AJAX 실행 영역 #############################################
+
+
+>>>>>>> 964678f7f59d499d7898a5c43e7f72704ba32956
