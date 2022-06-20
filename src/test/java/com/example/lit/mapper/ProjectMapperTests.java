@@ -1,10 +1,6 @@
 package com.example.lit.mapper;
 
-
-<<<<<<< HEAD
-=======
 import com.example.lit.domain.vo.Criteria;
->>>>>>> 09c9f30dc9fd9b3ffc31aad2394c373cacaa5c9c
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.mapper.project.ProjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -20,15 +16,11 @@ public class ProjectMapperTests {
     private ProjectMapper projectMapper;
 
     @Test
-<<<<<<< HEAD
-=======
     public void getListTest(){
         projectMapper.getList(new Criteria(1, 5),"popular").stream().map(ProjectVO::toString).forEach(log::info);
     }
 
-
     @Test
->>>>>>> 09c9f30dc9fd9b3ffc31aad2394c373cacaa5c9c
     public void insertTest(){
         ProjectVO projectVO = new ProjectVO();
         projectVO.setTitle("Testtitle");
