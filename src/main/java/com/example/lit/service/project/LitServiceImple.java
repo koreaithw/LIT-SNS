@@ -35,7 +35,7 @@ public class LitServiceImple implements LitService{
         //프로젝트 이미지 처리(1장)
         if(projectVO.getProjectFile() != null){
             ProjectFileVO projectFileVO = projectVO.getProjectFile();
-            projectVO.getProjectFile().setProjectNumber(projectVO.getProjectNumber());
+            projectFileVO.setProjectNumber(projectVO.getProjectNumber());
             projectFileDAO.register(projectFileVO);
         }
     }

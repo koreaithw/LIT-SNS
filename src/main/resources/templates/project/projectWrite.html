@@ -19,7 +19,7 @@
     <main>
         <div class="mainWrap">
             <section class="sec4">
-                <form method="post" action="/lit/write" name="projectForm" enctype="multipart/form-data" id="projectForm">
+                <form method="post" action="/lit/write" id="projectForm" name="projectForm" enctype="multipart/form-data">
                     <div>
                         <div class="topmenu">
                             <div class="">
@@ -77,41 +77,41 @@
 
                                 <label class="togle">제목</label>
                                 <div>
-                                    <input type="text" name="projectTitle" placeholder="내용입력...">
+                                    <input type="text" name="title" placeholder="내용입력...">
                                 </div>
 
                                 <label class="togle">카테고리</label>
                                 <div>
                                     <div class="selecBox">
                                         <div>
-                                            <input type="radio" id="btnCate1" name="projectCategory" value="life">
+                                            <input type="radio" id="btnCate1" name="category" value="life">
                                             <label for="btnCate1">생활</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnCate2" name="projectCategory" value="exercise">
+                                            <input type="radio" id="btnCate2" name="category" value="exercise">
                                             <label for="btnCate2">운동</label>
                                         </div>
 
                                         <div>
-                                            <input type="radio" id="btnCate3" name="projectCategory" value="hobby">
+                                            <input type="radio" id="btnCate3" name="category" value="hobby">
                                             <label for="btnCate3">취미</label>
                                         </div>
 
                                         <div>
-                                            <input type="radio" id="btnCate4" name="projectCategory" value="art">
+                                            <input type="radio" id="btnCate4" name="category" value="art">
                                             <label for="btnCate4">예술</label>
                                         </div>
 
                                         <div>
-                                            <input type="radio" id="btnCate5" name="projectCategory" value="heart">
+                                            <input type="radio" id="btnCate5" name="category" value="heart">
                                             <label for="btnCate5">정서</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnCate6" name="projectCategory" value="eating">
+                                            <input type="radio" id="btnCate6" name="category" value="eating">
                                             <label for="btnCate6">식습관</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnCate7" name="projectCategory" value="study">
+                                            <input type="radio" id="btnCate7" name="category" value="study">
                                             <label for="btnCate7">공부</label>
                                         </div>
 
@@ -119,31 +119,31 @@
                                 </div>
                                 <label class="togle">첼린지소개</label>
                                 <div class="textareaBox">
-                                    <textarea name="projectContent" placeholder="소개 입력..."></textarea>
+                                    <textarea name="content" placeholder="소개 입력..."></textarea>
                                     <p><span>0</span> / 400</p>
                                 </div>
                                 <label class="togle">인증방법</label>
                                 <div class="textareaBox">
-                                    <textarea name="projectAuth" placeholder="인증 입력..."></textarea>
+                                    <textarea name="authentication" placeholder="인증 입력..."></textarea>
                                     <p><span>0</span> / 400</p>
                                 </div>
                                 <label class="togle">시작일</label>
                                 <div>
                                     <div class="selecBox startDate">
                                         <div>
-                                            <input type="radio" id="btnStart1" name="projectStrar" value="6/6">
+                                            <input type="radio" id="btnStart1" name="startDate" value="">
                                             <label for="btnStart1">6/6</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnStart2" name="projectStrar" value="6/6">
+                                            <input type="radio" id="btnStart2" name="startDate" value="">
                                             <label for="btnStart2">6/13</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnStart3" name="projectStrar" value="">
+                                            <input type="radio" id="btnStart3" name="startDate" value="">
                                             <label for="btnStart3">6/20</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnStart4" name="projectStrar" value="">
+                                            <input type="radio" id="btnStart4" name="startDate" value="">
                                             <label for="btnStart4">6/27</label>
                                         </div>
                                     </div>
@@ -153,28 +153,25 @@
                                 <div>
                                     <div class="selecBox periodDate">
                                         <div>
-                                            <input type="radio" id="btnPeriod1" name="projectEnd" value="1">
+                                            <input type="radio" id="btnPeriod1" name="endDate" value="1">
                                             <label for="btnPeriod1">1주</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnPeriod2" name="projectEnd" value="2">
+                                            <input type="radio" id="btnPeriod2" name="endDate" value="2">
                                             <label for="btnPeriod2">2주</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnPeriod3" name="projectEnd" value="3">
+                                            <input type="radio" id="btnPeriod3" name="endDate" value="3">
                                             <label for="btnPeriod3">3주</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="btnPeriod4" name="projectEnd" value="4">
+                                            <input type="radio" id="btnPeriod4" name="endDate" value="4">
                                             <label for="btnPeriod4">4주</label>
                                         </div>
 <!--                                        <input type="hidden" name="endDate">-->
                                     </div>
                                 </div>
-
-
                             </div>
-
                         </div>
                     </div>
                 </form>

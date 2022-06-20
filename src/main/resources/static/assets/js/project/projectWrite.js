@@ -59,11 +59,9 @@ function imgEvent(files) {
 
   let imageUrl = "";
   $(files).each(function(i, file) {
-    str += "<div data-filename='" + file.name + "' data-uuid='" + file.uuid + "' data-uploadpath='" + file.uploadPath + "' data-image='" + file.image + "'></div>";
+    str += "<div data-name='" + file.name + "' data-uuid='" + file.uuid + "' data-uploadpath='" + file.uploadPath + "' data-image='" + file.image + "'></div>";
     imageUrl += "/lit/display?fileName=" + file.uploadPath + "/" + file.uuid + "_"  + file.name;
   });
-
-  console.log(imageUrl);
 
   $(".imgView").append(str);
   $(".imgView").show().css("background-image", "url(" + imageUrl +  ")");
@@ -118,10 +116,10 @@ function checkExtension(file) {
 
 //=========================================================================
 
-function submitEvent() {
-  let form = $(projectForm);
-  console.log(form.find('input[name="titel"]').val());
-}
+// function submitEvent() {
+//   let form = $(projectForm);
+//   console.log(form.find('input[name="titel"]').val());
+// }
 
 // 업로드 페이지 추가 이벤트
 function formEvent() {
@@ -165,14 +163,13 @@ $(".textareaBox > textarea").on("input", function () {
 });
 
 // submit 유효성 감사
-function submitEvent() {
-  const form = $(projectForm);
-  let projectTitle = $("input[name='projectTitle']");
-  let projectCategory = $("input[name='projectCategory']:checked");
-  let projectContent = $("textarea[name='projectContent']");
-  let projectAuth = $("textarea[name='projectAuth']");
-  let projectStrar = $("input[name='projectStrar']:checked");
-  let projectEnd = $("input[name='projectEnd']:checked");
+function submitEvent(e) {
+  let projectTitle = $("input[name='title']");
+  let projectCategory = $("input[name='category']:checked");
+  let projectContent = $("textarea[name='content']");
+  let projectAuth = $("textarea[name='authentication']");
+  let startDate = $("input[name='startDate']:checked");
+  let projectEnd = $("input[name='endDate']:checked");
 
   // 제목 입력
   if (projectTitle.val() == "") {
@@ -197,7 +194,7 @@ function submitEvent() {
     return false;
   }
   // 시작일 선택
-  if (projectStrar.length < 1) {
+  if (startDate.length < 1) {
     alert("시작일을 선택하세요");
     projectContent.focus();
     return false;
@@ -209,28 +206,23 @@ function submitEvent() {
   }
 
   // 유효성 이후 submit
-  // 유효성 이후
-
-  let $form = $("form#projectForm");
-
   let str = "";
-  $.each($(".imgView div"), function(i, div){
-    str += "<input type='hidden' name='fileName' value='" + $(div).data("filename") + "'>"
-    str += "<input type='hidden' name='uuid' value='" + $(div).data("uuid") + "'>"
-    str += "<input type='hidden' name='uploadPath' value='" + $(div).data("uploadpath") + "'>"
-    str += "<input type='hidden' name='image' value='" + $(div).data("image") + "'>"
+  var form = $('#projectForm');
+  $.each($(".imgView div"), function (i, div) {
+    str += "<input type='hidden' name='projectFile.name' value='" + $(div).data("name") + "'>"
+    str += "<input type='hidden' name='projectFile.uuid' value='" + $(div).data("uuid") + "'>"
+    str += "<input type='hidden' name='projectFile.uploadPath' value='" + $(div).data("uploadpath") + "'>"
+    str += "<input type='hidden' name='projectFile.image' value='" + $(div).data("image") + "'>"
   });
-
-  console.log($form);
-
-  $form.append(str).submit();
+  form.append(str).submit();
 }
+
 
 // 스타트 / 마지막 날짜 계산기
 $().ready(function dateInputSet() {
   let date = new Date();
-  const startTags = $("input[name='projectStrar']"); // start 데이터를 넣어줄 곳
-  const endTags = $("input[name='projectEnd']"); // end 데이터 넣어줄 곳
+  const startTags = $("input[name='startDate']"); // start 데이터를 넣어줄 곳
+  const endTags = $("input[name='endDate']"); // end 데이터 넣어줄 곳
   const dateVals = [6, 0, 1, 2, 3, 4, 5]; //요일별 더할 날짜
 
   // Start 월요일 날짜 계산
@@ -271,8 +263,8 @@ $().ready(function dateInputSet() {
     }
   });
 
-  $("input[name='projectEnd']").on("click", function () {
-    const dateInputCk = $("input[name='projectStrar']:checked"); // 기간 값
+  $("input[name='endDate']").on("click", function () {
+    const dateInputCk = $("input[name='startDate']:checked"); // 기간 값
     if (dateInputCk.length < 1) {
       alert("시작일을 먼저 선택하세요");
       return false;
