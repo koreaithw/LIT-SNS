@@ -10,6 +10,8 @@ public interface LitUpService {
     public void registerLike(LikeVO likeVO);
     // 좋아요 취소(작성자)
     public void removeLike(LikeVO likeVO);
+    // 좋아요 갯수 카운트
+    public Long getLikeTotal(Long reviewNumber);
 
 
     //댓글 추가

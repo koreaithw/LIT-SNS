@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -8,14 +8,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>mypage</title>
 
+    <link rel="stylesheet" href="/assets/css/default.css" />
     <link rel="stylesheet" href="/assets/css/mypage/mypage.css"/>
-
+    <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
 </head>
 
-<body style="background-color: rgba(250,250,250);">
+<body>
+<header th:insert="~{/header :: header}"></header>
 <main class="mypageMain">
     <div class="mainInner">
-        <header class="mypageHeader">
+        <div class="mypageHeader">
             <div class="profile1">
                 <div class="profile2">
                     <div class="profile3">
@@ -59,7 +62,7 @@
                     <br>
                 </div>
             </section>
-        </header>
+        </div>
         <div class="litChange">
             <div>
                 <a class="lits1On" id="lits1">
@@ -239,6 +242,7 @@
                                         </button>
                                     </div>
                                 </div>
+                            </div>
                         </li>
                     </div>
                 </ul>
@@ -390,7 +394,7 @@
         </div>
     </div>
 </div> -->
-
+<footer th:insert="~{/footer :: footer}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="/assets/js/mypage/mypage.js"></script>

@@ -113,7 +113,7 @@ $(function () {
   $(".datepicker").datepicker({
     showAnim: "slide",
     dateFormat:'yy-mm-dd'
-  })
+  });
 
   $endDate.datepicker('option', 'minDate', $startDate.val());
   $startDate.datepicker("option", "onClose", function (selectedDate){

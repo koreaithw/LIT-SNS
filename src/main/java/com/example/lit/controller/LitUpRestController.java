@@ -1,9 +1,10 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.project.ProjectVO;
-import com.example.lit.domain.vo.review.ReplyVO;
-import com.example.lit.domain.vo.review.ReviewVO;
+import com.example.lit.domain.vo.review.*;
 import com.example.lit.service.review.LitUpService;
+import com.example.lit.service.review.LitUpServiceImple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -28,44 +29,70 @@ public class LitUpRestController {
     }
 
     //모달창 인증글 상세 댓글 작성 -> 전달 방식 다시 생각하기
-    @GetMapping("/reply")
-    public List<ReplyVO> registerReply(){
+    @PostMapping("/reply")
+    public String registerReply(@RequestBody ReplyVO replyVO){
         log.info("***************************");
         log.info("LitUpRestController : registerReply(get)");
         log.info("***************************");
-
-        return null;
+        litUpService.registerReply(replyVO);
+        return "댓글 생성 완료";
     }
 
     //모달창 인증글 상세 댓글 삭제
-    @DeleteMapping("/reply")
-    public List<ReplyVO> deleteReply(){
+    @GetMapping("/reply/{replyNumber}")
+    public String deleteReply(@PathVariable("replyNumber") Long replyNumber){
         log.info("***************************");
         log.info("LitUpRestController : deleteReply(delete)");
         log.info("***************************");
+        if(litUpService.removeReply(replyNumber)){
+            return "삭제 성공";}
+        else{return "삭제 실패";}
+        }
 
-        return null;
+    @GetMapping("/reply/{reviewNumber}/{page}")
+    public ReplyPageDTO getList(@PathVariable("page") int pageNum, @PathVariable("reviewNumber") Long reviewNumber){
+        return new ReplyPageDTO(litUpService.getReplyList(new Criteria(pageNum,4),reviewNumber), litUpService.getTotalReply(reviewNumber));
     }
 
+
     //모달창 인증글 상세 신고
-    @GetMapping("/report")
-    public String registerReport(){
+    @PostMapping("/report")
+    public String registerReport(@RequestBody ReportVO reportVO){
         log.info("***************************");
         log.info("LitUpRestController : registerReport(get)");
         log.info("***************************");
 
-        return null;
+        litUpService.registerReport(reportVO);
+        return "신고 성공";
     }
 
-    //모달창 인증글 상세 좋아요 -> 뭘 반환해야 하는가? 성공여부?
-    @GetMapping("/like")
-    public String registerLike(){
+    //모달창 인증글 상세 좋아요 -> 좋아요 전체 갯수도 같이 사용되어야 함
+    @PostMapping("/like")
+    public int registerLike(@RequestBody LikeVO likeVO){
         log.info("***************************");
         log.info("LitUpRestController : registerLike(get)");
         log.info("***************************");
-
-        return null;
+        litUpService.registerLike(likeVO);
+        return litUpService.getLikeTotal(likeVO.getReviewNumber()).intValue();
     }
+
+    @PostMapping("/removeLike")
+    public int removeLike(@RequestBody LikeVO likeVO){
+        log.info("***************************");
+        log.info("LitUpRestController : registerLike(get)");
+        log.info("***************************");
+        litUpService.removeLike(likeVO);
+        return litUpService.getLikeTotal(likeVO.getReviewNumber()).intValue();
+    }
+
+    @GetMapping("/getLikeTotal/{reviewNumber}")
+    public int getLikeTotal(@PathVariable("reviewNumber") Long reviewNumber){
+        log.info("***************************");
+        log.info("LitUpRestController : registerLike(get)");
+        log.info("***************************");
+        return litUpService.getLikeTotal(reviewNumber).intValue();
+    }
+
 
 //    ================= 인증글 작성 ====================
     //모달창 인증글 업로드

@@ -3,25 +3,32 @@
 <mapper namespace="com.example.lit.mapper.review.ReplyMapper">
     <insert id="insert">
         INSERT INTO TBL_REPLY
-        (REPLY_NUMBER, REVIEW_NUMBER, USER_NUMBER, CONTENT)
-        VALUES(SEQ_REPLY.NEXTVAL, #{reviewNumber}, #{userNumber}, #{content})
+        (REPLY_NUMBER, REVIEW_NUMBER, USER_NUMBER, NICKNAME, CONTENT)
+        VALUES
+        (SEQ_REPLY.NEXTVAL, #{reviewNumber},  #{userNumber},
+        (SELECT NICKNAME FROM TBL_USER WHERE USER_NUMBER = #{userNumber}),
+        #{content})
     </insert>
 
     <delete id="delete">
         DELETE FROM TBL_REPLY WHERE REPLY_NUMBER = #{replyNumber}
     </delete>
 
+
     <select id="getList" resultType="replyVO">
-        <![CDATA[
-        SELECT US.NICKNAME, RP.CONTENT , RP.RGISTER_DATE FROM
+         <![CDATA[
+        SELECT REPLY_NUMBER, REVIEW_NUMBER, USER_NUMBER, NICKNAME, CONTENT, REGISTER_DATE
+        FROM
             (
-                SELECT /*+ INDEX_DESC(TBL_REPLY SYS_C007522) */ ROWNUM RN, US.NICKNAME, RP.CONTENT , RP.RGISTER_DATE
-                FROM TBL_REPLY RP, TBL_USER US, TBL_REVIEW RV
-                WHERE RV.REVIEW_NUMBER = #{reviewNumber} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+                SELECT /*+ INDEX_DESC(TBL_REPLY SYS_C007599) */
+                ROWNUM RN, REPLY_NUMBER, REVIEW_NUMBER, USER_NUMBER, NICKNAME, CONTENT, REGISTER_DATE
+                FROM TBL_REPLY
+                WHERE REVIEW_NUMBER = #{reviewNumber} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
             )
         WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}
         ]]>
     </select>
+
 
     <select id="getTotal" resultType="_int">
         SELECT COUNT(REPLY_NUMBER) FROM TBL_REPLY WHERE REVIEW_NUMBER = #{reviewNumber}
