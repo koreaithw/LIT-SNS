@@ -69,7 +69,7 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
-    public List<ReviewVO> getList(Criteria criteria) {
+    public List<ReviewVO> getList(Criteria criteria, String category) {
         return null;
     }
 
