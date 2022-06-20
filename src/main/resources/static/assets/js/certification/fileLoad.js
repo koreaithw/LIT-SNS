@@ -199,6 +199,49 @@ $(".fileUploadPreview").on('mousewheel', function (e) {
 
 
 
+// 폼 서브밋
+$("button[type='submit']").on("click", function(e){
+    e.preventDefault();
+    let $form = $("form#registerForm");
+    let str = "";
+
+    $.each($(".uploadResult ul li"), function(i, li){
+        str += "<input type='hidden' name='fileList[" + i + "].fileName' value='" + $(li).data("fileNumber") + "'>"
+        str += "<input type='hidden' name='fileList[" + i + "].fileName' value='" + $(li).data("name") + "'>"
+        str += "<input type='hidden' name='fileList[" + i + "].uuid' value='" + $(li).data("uuid") + "'>"
+        str += "<input type='hidden' name='fileList[" + i + "].uploadPath' value='" + $(li).data("uploadpath") + "'>"
+        str += "<input type='hidden' name='fileList[" + i + "].image' value='" + $(li).data("image") + "'>"
+    });
+
+    $form.append(str).submit();
+
+});
+
+
+let arFile = Array.from($("input[type='file']")[0].files);
+$("input[type='file']").on("change", function(e){
+    let formData =   new FormData();
+    let inputFile = $("input[id='fileClickInput']");
+    let files = inputFile[0].files;
+
+    Array.from($(this)[0].files).forEach(file => arFile.push(file));
+    const dataTransfer = new DataTransfer();
+    arFile.forEach(file => dataTransfer.items.add(file));
+    $(this)[0].files = dataTransfer.files;
+
+    $.ajax({
+        url: "/upload/upload",
+        type: "post",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(files){
+
+        }
+    });
+});
+
+
 // 제출 시에 사용
 // $("#btnSubmit").on("click", function () {
 //     var formData = new FormData();

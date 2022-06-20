@@ -15,8 +15,8 @@
 <body>
 
 <div class="certificationWriteBackground">
-    <form action="">
-    <button class="modalCloseButton" onclick="certificationWriteModalHide()">
+    <form class="registerForm" action="" enctype="multipart/form-data">
+    <button class="modalCloseButton" type="button" onclick="certificationWriteModalHide()">
         <svg aria-label="닫기" class="fg7vo5n6 lrzqjn8y" color="#ffffff" fill="#ffffff" height="18" role="img"
              viewBox="0 0 48 48" width="18">
             <title>닫기</title>
@@ -26,26 +26,26 @@
         </svg>
     </button>
 
-    <div class="certifcationWriteModalContainer">
+    <div class="certificationWriteModalContainer">
         <div class="certificationWriteModal">
 
             <div class="certificationHeader">
                 <div class="certificationBackButton" style="display:none;">
-                    <button class="firstButton" style="display:none;">
+                    <button class="firstButton" type="button" style="display:none;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                              class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
                                   d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                         </svg>
                     </button>
-                    <button class="backButton" style="display:none;">
+                    <button class="backButton" type="button" style="display:none;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                              class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
                                   d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                         </svg>
                     </button>
-                    <button class="backBackButton" style="display:none;">
+                    <button class="backBackButton" type="button" style="display:none;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                              class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -57,9 +57,9 @@
                     <strong>사진 업로드</strong>
                 </div>
                 <dvi class="certificationNextButton">
-                    <button class="nextButton" style="display:none">다음</button>
-                    <button class="nextNextButton" style="display:none;">다음</button>
-                    <button class="completeButton" style="display:none;">작성완료</button>
+                    <button class="nextButton" type="button" style="display:none">다음</button>
+                    <button class="nextNextButton" type="button" style="display:none;">다음</button>
+                    <button class="completeButton" type="submit"  style="display:none;">작성완료</button>
                 </dvi>
             </div>
 
@@ -108,7 +108,7 @@
                         </div>
                     </div>
                     <div class="previewButton">
-                        <button>
+                        <button type="button">
                             <svg aria-label="미디어 갤러리 열기" class="btnIcon" color="white" fill="white" height="16"
                                  role="img" viewBox="0 0 24 24" width="16">
                                 <path
@@ -134,38 +134,7 @@
                             <span></span>
                             <img src="monkey.jpg">
                         </div>
-                        <div>
-                            <span></span>
-                            <img src="monkey.jpg">
-                        </div>
-                        <div>
-                            <span></span>
-                            <img src="monkey.jpg">
-                        </div>
-                        <div>
-                            <span></span>
-                            <img src="monkey.jpg">
-                        </div>
-                        <div>
-                            <span></span>
-                            <img src="monkey.jpg">
-                        </div>
-                        <div>
-                            <span></span>
-                            <img src="monkey.jpg">
-                        </div>
-                        <div>
-                            <span></span>
-                            <img src="monkey.jpg">
-                        </div>
-                        <div>
-                            <span></span>
-                            <img src="monkey.jpg">
-                        </div>
-                        <div>
-                            <span></span>
-                            <img src="monkey.jpg">
-                        </div>
+
                     </div>
 
                 </div>
@@ -188,7 +157,7 @@
                         <div class="certificationContentButtons">
                             <div>
                                 <div style="display:none;">400자 까지 작성 가능합니다!</div>
-                                <div><button><span>0</span>/400</button></div>
+                                <div><button type="button"><span>0</span>/400</button></div>
                             </div>
                         </div>
                     </div>
@@ -276,8 +245,8 @@
             </div>
             <div class="deleteModalContent">
                 <div class="deleteModalButtons">
-                    <div><button class="deleteModalButton" value="y">삭제</button></div>
-                    <div><button class="deleteModalButton" value="n">취소</button></div>
+                    <div><button class="deleteModalButton" type="button" value="y">삭제</button></div>
+                    <div><button class="deleteModalButton" type="button" value="n">취소</button></div>
                 </div>
             </div>
 
@@ -294,8 +263,8 @@
             </div>
             <div class="deleteImageModalContent">
                 <div class="deleteImageModalButtons">
-                    <div><button class="deleteImageModalButton" value="y">삭제</button></div>
-                    <div><button class="deleteImageModalButton" value="n">취소</button></div>
+                    <div><button class="deleteImageModalButton" type="button" value="y">삭제</button></div>
+                    <div><button class="deleteImageModalButton" type="button" value="n">취소</button></div>
                 </div>
             </div>
 
