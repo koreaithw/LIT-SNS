@@ -42,7 +42,6 @@ public class UserServiceImple implements UserService{
     @Override
     public boolean dbNicknameCheck(String nickname) {
         return userDAO.dbNicknameCheck(nickname) != 1;
->>>>>>> 9842f4960b21a4e489dca42cbea21e156552fc37
     }
 
     @Override

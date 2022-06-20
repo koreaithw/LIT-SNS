@@ -7,8 +7,6 @@
         VALUES(SEQ_USER.NEXTVAL, #{email}, #{name}, #{nickname}, #{password})
     </insert>
 
-    <select id="login" resultType="_int">
-        SELECT COUNT(USER_NUMBER) FROM TBL_USER
     <insert id="kakaoInsert">
         INSERT INTO TBL_USER
         (USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD )
@@ -27,7 +25,6 @@
 
     <select id="login" resultType="userVO">
         SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT FROM TBL_USER
->>>>>>> 9842f4960b21a4e489dca42cbea21e156552fc37
         WHERE EMAIL = #{email} AND PASSWORD = #{password}
     </select>
 

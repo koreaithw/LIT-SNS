@@ -1,6 +1,5 @@
 package com.example.lit.controller;
 
-import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.review.ReviewVO;
 import com.example.lit.service.project.LitService;
 import com.example.lit.service.review.LitUpService;

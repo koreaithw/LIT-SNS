@@ -3,45 +3,7 @@
 <mapper namespace="com.example.lit.mapper.review.ReviewMapper">
 <!--    ###############################동적 쿼리 쓸것-->
     <select id="getList" resultType="reviewVO">
-        <![CDATA[
-        SELECT cont, ROWNUM, CATEGORY,
-        REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT, REGISTER_DATE
-        FROM(
-            SELECT cont, ROWNUM, CATEGORY,
-            REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT, REGISTER_DATE
-            FROM(
-                SELECT COUNT(li.USER_NUMBER) cont,
-                tp.CATEGORY,
-                re.REVIEW_NUMBER, re.USER_NUMBER, re.PROJECT_NUMBER, re.CONTENT, re.REGISTER_DATE
-                FROM TBL_REVIEW re
-                JOIN TBL_LIKE li ON  re.REVIEW_NUMBER  = li.REVIEW_NUMBER
-                JOIN TBL_PROJECT TP ON re.PROJECT_NUMBER  = tp.PROJECT_NUMBER
-        ]]>
-                <choose>
-                    <when test="category != 'lanking' and category != 'newproject'">
-                        WHERE pr.CATEGORY = #{category}
-                    </when>
-                </choose>
-        <![CDATA[
-                GROUP BY
-                tp.PROJECT_NUMBER, tp.CATEGORY,
-                re.REVIEW_NUMBER, re.USER_NUMBER, re.PROJECT_NUMBER, re.CONTENT, re.REGISTER_DATE
-            )
-            WHERE ROWNUM <= 3
-        ]]>
-        <choose>
-            <when test="category == 'lanking'">
-                ORDER BY cont DESC
-            </when>
-            <when test="category == 'newproject'  or category != 'lanking'">
-                ORDER BY ROWNUM DESC
-            </when>
-        </choose>
-        <![CDATA[
-        )
-        WHERE ROWNUM > 0
-        ;
-        ]]>
+
     </select>
  <!--    ###############################동적 쿼리 쓸것-->
 

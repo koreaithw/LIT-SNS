@@ -16,4 +16,5 @@ public interface AchievementMapper {
     //메달 하나 보기 이거 조건은 어떻게 같이 표시함?
     public AchievementVO get(Long userNumber);
 
+
 }

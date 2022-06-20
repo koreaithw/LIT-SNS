@@ -20,6 +20,12 @@ public interface UserMapper {
     public void updatePw(@Param("userVO") UserVO userVO, @Param("newPassword") String newPassword);
     // 대표 메달 설정
     public void updateMedal(UserVO userVO);
+    //카카오 로그인/회원가입
+    public void kakaoInsert(UserVO userVO);
+    //이메일 중복체크
+    public int emailCheck(String email);
+    //닉네임 중복체크
+    public int nicknameCheck(String nickname);
 
 
 }

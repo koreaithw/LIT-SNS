@@ -2,13 +2,7 @@ package com.example.lit.controller;
 
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.project.ProjectVO;
-<<<<<<< HEAD
-import com.example.lit.domain.vo.review.ReplyVO;
-import com.example.lit.domain.vo.review.ReportVO;
-import com.example.lit.domain.vo.review.ReviewVO;
-=======
 import com.example.lit.domain.vo.review.*;
->>>>>>> 964678f7f59d499d7898a5c43e7f72704ba32956
 import com.example.lit.service.review.LitUpService;
 import com.example.lit.service.review.LitUpServiceImple;
 import lombok.RequiredArgsConstructor;
@@ -35,13 +29,13 @@ public class LitUpRestController {
     }
 
     //모달창 인증글 상세 댓글 작성 -> 전달 방식 다시 생각하기
-    @GetMapping("/reply")
-    public List<ReplyVO> registerReply(){
+    @PostMapping("/reply")
+    public String registerReply(@RequestBody ReplyVO replyVO){
         log.info("***************************");
         log.info("LitUpRestController : registerReply(get)");
         log.info("***************************");
-
-        return null;
+        litUpService.registerReply(replyVO);
+        return "댓글 생성 완료";
     }
 
     //모달창 인증글 상세 댓글 삭제
@@ -62,8 +56,8 @@ public class LitUpRestController {
 
 
     //모달창 인증글 상세 신고
-    @GetMapping("/report")
-    public String registerReport(ReportVO reportVO){
+    @PostMapping("/report")
+    public String registerReport(@RequestBody ReportVO reportVO){
         log.info("***************************");
         log.info("LitUpRestController : registerReport(get)");
         log.info("***************************");
@@ -72,16 +66,6 @@ public class LitUpRestController {
         return "신고 성공";
     }
 
-<<<<<<< HEAD
-    //모달창 인증글 상세 좋아요 -> 뭘 반환해야 하는가? 성공여부?
-    @GetMapping("/like")
-    public String registerLike(){
-        log.info("***************************");
-        log.info("LitUpRestController : registerLike(get)");
-        log.info("***************************");
-
-        return null;
-=======
     //모달창 인증글 상세 좋아요 -> 좋아요 전체 갯수도 같이 사용되어야 함
     @PostMapping("/like")
     public int registerLike(@RequestBody LikeVO likeVO){
@@ -99,7 +83,6 @@ public class LitUpRestController {
         log.info("***************************");
         litUpService.removeLike(likeVO);
         return litUpService.getLikeTotal(likeVO.getReviewNumber()).intValue();
->>>>>>> 964678f7f59d499d7898a5c43e7f72704ba32956
     }
 
     @GetMapping("/getLikeTotal/{reviewNumber}")

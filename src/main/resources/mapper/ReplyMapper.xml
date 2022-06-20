@@ -16,19 +16,12 @@
 
 
     <select id="getList" resultType="replyVO">
-<<<<<<< HEAD
-        <![CDATA[
-        SELECT CONTENT , RGISTER_DATE FROM
-            (
-                SELECT /*+ INDEX(TBL_REPLY SYS_C007522) */ CONTENT , RGISTER_DATE, ROWNUM RN
-=======
          <![CDATA[
         SELECT REPLY_NUMBER, REVIEW_NUMBER, USER_NUMBER, NICKNAME, CONTENT, REGISTER_DATE
         FROM
             (
                 SELECT /*+ INDEX_DESC(TBL_REPLY SYS_C007599) */
                 ROWNUM RN, REPLY_NUMBER, REVIEW_NUMBER, USER_NUMBER, NICKNAME, CONTENT, REGISTER_DATE
->>>>>>> 964678f7f59d499d7898a5c43e7f72704ba32956
                 FROM TBL_REPLY
                 WHERE REVIEW_NUMBER = #{reviewNumber} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
             )

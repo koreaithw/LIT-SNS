@@ -119,12 +119,8 @@ $('.innerImageWrapper > .innerImageSideButtons > div').click(function () {
     };
 
     $post.click();
-<<<<<<< HEAD
-});
-=======
 });
 
 //################################ AJAX 실행 영역 #############################################
 
 
->>>>>>> 964678f7f59d499d7898a5c43e7f72704ba32956

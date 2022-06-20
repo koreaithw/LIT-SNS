@@ -2,7 +2,6 @@ package com.example.lit.service.review;
 
 import com.example.lit.domain.dao.review.*;
 import com.example.lit.domain.vo.Criteria;
-import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,23 +19,22 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public void registerLike(LikeVO likeVO) {
-
+        likeDAO.register(likeVO);
     }
 
     @Override
     public void removeLike(LikeVO likeVO) {
+        likeDAO.remove(likeVO);
+    }
 
-<<<<<<< HEAD
-=======
     @Override
     public Long getLikeTotal(Long reviewNumber) {
         return likeDAO.getTotal(reviewNumber);
->>>>>>> 964678f7f59d499d7898a5c43e7f72704ba32956
     }
 
     @Override
     public void registerReply(ReplyVO replyVO) {
-
+        replyDAO.register(replyVO);
     }
 
     @Override
@@ -74,16 +72,6 @@ public class LitUpServiceImple implements LitUpService{
     public List<ReviewVO> getList(Criteria criteria) {
         return null;
     }
-
-//    @Override
-//    public List<ReviewVO> getList(Criteria criteria, String category) {
-//        List<ReviewVO> reviewVOS = reviewDAO.getList(criteria, category);
-//        // 가져온 프로젝트 리스트에 이미지 ProjectFileVO 추가
-////        for(ProjectVO projectVO :  projectVOS){
-////            projectVO.setProjectFile( projectFileDAO.getImg( projectVO.getProjectNumber() ));
-////        }
-//        return reviewVOS;
-//    }
 
     @Override
     public void register(ReviewVO reviewVO) {
