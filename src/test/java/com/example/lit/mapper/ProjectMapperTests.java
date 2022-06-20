@@ -1,6 +1,5 @@
 package com.example.lit.mapper;
 
-
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ProjectDTO;
@@ -22,7 +21,6 @@ public class ProjectMapperTests {
     public void getListTest(){
         projectMapper.getList(new Criteria(1, 5),"popular").stream().map(ProjectVO::toString).forEach(log::info);
     }
-
 
     @Test
     public void insertTest(){

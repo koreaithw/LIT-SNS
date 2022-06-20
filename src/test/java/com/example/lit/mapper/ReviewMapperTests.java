@@ -1,5 +1,6 @@
 package com.example.lit.mapper;
 
+
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.review.ReviewDTO;
 import com.example.lit.mapper.review.ReviewMapper;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 @Slf4j
 public class ReviewMapperTests {
+
     @Autowired
     private ReviewMapper reviewMapper;
 
@@ -28,5 +30,6 @@ public class ReviewMapperTests {
     @Test
     public void getTotalTodayTest(){
         log.info(String.valueOf(reviewMapper.getTotalToday()));
+
     }
 }

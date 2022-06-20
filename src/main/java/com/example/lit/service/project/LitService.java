@@ -14,7 +14,7 @@ public interface LitService {
     //    프로젝트 목록 가져오기
     public List<ProjectVO> getList(Criteria criteria, String category);
     //    프로젝트 등록 (이미지 포함)
-    public void register(ProjectVO projectVO, ProjectFileVO projectFileVO);
+    public void register(ProjectVO projectVO);
     //    프로젝트 상세보기
     public ProjectVO read(Long projectNumber);
     //    프로젝트 삭제

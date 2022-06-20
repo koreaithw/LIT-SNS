@@ -13,12 +13,14 @@ public interface LitUpService {
     public void removeLike(LikeVO likeVO);
     // 좋아요 갯수 카운트
     public Long getLikeTotal(Long reviewNumber);
+    // 좋아요 확인
+    public int getCheckLike(Long userNumber);
 
 
     //댓글 추가
     public void registerReply(ReplyVO replyVO);
     //댓글 삭제
-    public boolean removeReply(Long replyNumber);
+    public boolean removeReply(ReplyVO replyVO);
     //댓글 수정
     public boolean modifyReply(ReplyVO replyVO);
     //댓글 목록
