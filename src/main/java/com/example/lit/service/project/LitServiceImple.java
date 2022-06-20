@@ -22,7 +22,12 @@ public class LitServiceImple implements LitService{
 
     @Override
     public List<ProjectVO> getList(Criteria criteria, String category) {
-        return projectDAO.getList(criteria, category);
+        List<ProjectVO> projectVOS = projectDAO.getList(criteria, category);
+        // 가져온 프로젝트 리스트에 이미지 ProjectFileVO 추가
+        for(ProjectVO projectVO :  projectVOS){
+            projectVO.setProjectFile( projectFileDAO.getImg( projectVO.getProjectNumber() ));
+        }
+        return projectVOS;
     }
 
     @Override

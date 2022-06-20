@@ -4,65 +4,65 @@
 
     <select id="getList" resultType="projectVO">
         <![CDATA[
-        SELECT ROWNUM, COUNT(pr.PROJECT_NUMBER) cont,
-        pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT, pr.AUTHENTICATION, pr.START_DATE, pr.END_DATE, pr.STATUS
+        SELECT cont, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, STATUS
         FROM (
-        SELECT
-        ROWNUM, COUNT(pr.PROJECT_NUMBER) cont,
-        pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT, pr.AUTHENTICATION, pr.START_DATE, pr.END_DATE, pr.STATUS
-        FROM TBL_PROJECT pr,TBL_PARTICIPATION pa
-        WHERE pr.PROJECT_NUMBER  = pa.PROJECT_NUMBER
-        ]]>
-        <choose>
-            <when test="category == 'popular'">
-                AND pr.CATEGORY = '예술'  <!--카테고리 선택-->
-            </when>
-        </choose>
-        <![CDATA[
-        AND pr.STATUS = 1   <!--인증된 목록-->
-        AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
-        GROUP BY ROWNUM, pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT,
-        pr.AUTHENTICATION, pr.START_DATE, pr.END_DATE, pr.STATUS,
-        pa.PROJECT_NUMBER, ROWNUM;
-        ]]>
-        <choose>
-            <when test="category == 'popular'">
-                ORDER BY cont DESC;인기순
-            </when>
-            <when test="category == 'popular'">
-                ORDER BY ROWNUM DESC; 신규
-            </when>
-        </choose>
-        <![CDATA[
-        )
-        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}
-        ]]>
-    </select>
-    <!--    ###############################동적 쿼리 쓸것-->
-    <select id="getList" resultType="projectVO">
-        <![CDATA[
-        SELECT RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE
-        FROM
-        (
-                SELECT ROWNUM RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE
-                FROM    TBL_PROJECT PJ, TBL_PARTICIPATION PT
-        ]]>
-                 <choose>
-                     <when test="category == 'popular'">
-                         <![CDATA[   WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY COUNT(PT.USER_NUMBER)  ]]>
-                     </when>
-                     <when test="category == 'new'">
-                         <![CDATA[  WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>
-                     </when>
-                     <otherwise>
-                         <![CDATA[  WHERE PJ.CATEGORY =#{category} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>
-                     </otherwise>
-                 </choose>
-        <![CDATA[
-        )
-        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}
+            SELECT cont, ROWNUM, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, STATUS
+            FROM (
+                SELECT COUNT(pr.PROJECT_NUMBER) cont,
+                pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT, pr.AUTHENTICATION, pr.START_DATE, pr.END_DATE, pr.STATUS
+                FROM TBL_PROJECT pr, TBL_PARTICIPATION pa
+                WHERE pr.PROJECT_NUMBER = pa.PROJECT_NUMBER
+                AND pr.STATUS = 1
+                ]]>
+                <choose>
+                    <when test="category != 'lanking' and category != 'newproject'">
+                        AND pr.CATEGORY = #{category}
+                    </when>
+                </choose>
+                <![CDATA[
+                GROUP BY pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT, pr.AUTHENTICATION, pr.START_DATE,
+                pr.END_DATE, pr.STATUS, pa.PROJECT_NUMBER
+            )
+            WHERE ROWNUM > (#{criteria.pageNum} - 1) * #{criteria.amount}
+            ]]>
+            <choose>
+                <when test="category == 'lanking'">
+                    ORDER BY cont DESC
+                </when>
+                <when test="category == 'newproject'  or category != 'lanking'">
+                    ORDER BY ROWNUM DESC
+                </when>
+            </choose>
+            <![CDATA[
+            )
+        WHERE ROWNUM > (#{criteria.pageNum} - 1) * #{criteria.amount}
         ]]>
     </select>
+
+<!--    <select id="getList" resultType="projectVO">-->
+<!--        <![CDATA[-->
+<!--        SELECT RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
+<!--        FROM-->
+<!--        (-->
+<!--                SELECT ROWNUM RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
+<!--                FROM    TBL_PROJECT PJ, TBL_PARTICIPATION PT-->
+<!--        ]]>-->
+<!--                 <choose>-->
+<!--                     <when test="category == 'popular'">-->
+<!--                         <![CDATA[   WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY COUNT(PT.USER_NUMBER)  ]]>-->
+<!--                     </when>-->
+<!--                     <when test="category == 'new'">-->
+<!--                         <![CDATA[  WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
+<!--                     </when>-->
+<!--                     <otherwise>-->
+<!--                         <![CDATA[  WHERE PJ.CATEGORY =#{category} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
+<!--                     </otherwise>-->
+<!--                 </choose>-->
+<!--        <![CDATA[-->
+<!--        )-->
+<!--        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}-->
+<!--        ]]>-->
+<!--    </select>-->
     <!--    ###############################동적 쿼리 쓸것-->
 
     <insert id="insert">

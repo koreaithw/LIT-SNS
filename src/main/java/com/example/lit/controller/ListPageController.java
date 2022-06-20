@@ -1,5 +1,6 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.review.ReviewVO;
 import com.example.lit.service.project.LitService;
 import com.example.lit.service.review.LitUpService;
@@ -22,8 +23,6 @@ public class ListPageController {
     //인기 목록 페이지
     @GetMapping("/popular")
     public List<ReviewVO> goPopularPage(){
-
-
         return null;
     }
 

@@ -2,6 +2,7 @@ package com.example.lit.service.review;
 
 import com.example.lit.domain.dao.review.*;
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -66,6 +67,16 @@ public class LitUpServiceImple implements LitUpService{
     public List<ReviewVO> getList(Criteria criteria) {
         return null;
     }
+
+//    @Override
+//    public List<ReviewVO> getList(Criteria criteria, String category) {
+//        List<ReviewVO> reviewVOS = reviewDAO.getList(criteria, category);
+//        // 가져온 프로젝트 리스트에 이미지 ProjectFileVO 추가
+////        for(ProjectVO projectVO :  projectVOS){
+////            projectVO.setProjectFile( projectFileDAO.getImg( projectVO.getProjectNumber() ));
+////        }
+//        return reviewVOS;
+//    }
 
     @Override
     public void register(ReviewVO reviewVO) {

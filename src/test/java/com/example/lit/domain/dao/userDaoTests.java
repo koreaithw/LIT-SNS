@@ -27,13 +27,13 @@ public class userDaoTests {
     @Test
     public void emailCheck(){
         String email="lje1343@naver.com";
-        log.info("이메일 중복체크: " + userDAO.dbEmailCheck(email));
+//        log.info("이메일 중복체크: " + userDAO.dbEmailCheck(email));
     }
 
     @Test
     public void nicknameCheck(){
         String nickname="xldms.dl";
-        log.info("닉네임 중복체크: " + userDAO.dbNicknameCheck(nickname));
+//        log.info("닉네임 중복체크: " + userDAO.dbNicknameCheck(nickname));
     }
 
 }
