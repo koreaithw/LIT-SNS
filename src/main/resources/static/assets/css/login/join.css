@@ -444,3 +444,19 @@ div{
     width: 100px;
     text-align: right;
 }
+
+.checkEmail{
+    font-size: 14px;
+    text-align: right;
+    display: none;
+    margin-right: 41px;
+    height: 29px;
+}
+
+.checkNickname{
+    font-size: 14px;
+    text-align: right;
+    display: none;
+    margin-right: 41px;
+    height: 29px;
+}

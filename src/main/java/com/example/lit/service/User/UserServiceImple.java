@@ -36,17 +36,17 @@ public class UserServiceImple implements UserService{
 
     @Override
     public boolean dbEmailCheck(String email) {
-        return userDAO.dbEmailCheck(email) == 1;
+        return userDAO.dbEmailCheck(email) != 1;
     }
 
     @Override
     public boolean dbNicknameCheck(String nickname) {
-        return userDAO.dbNicknameCheck(nickname) == 1;
+        return userDAO.dbNicknameCheck(nickname) != 1;
     }
 
     @Override
-    public boolean login(String email, String pw) {
-        return false;
+    public UserVO login(String email, String pw) {
+        return userDAO.login(email, pw);
     }
 
     @Override
