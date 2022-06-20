@@ -33,14 +33,19 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
+    public int getCheckLike(Long userNumber) {
+        return likeDAO.checkLike(userNumber);
+    }
+
+    @Override
     public void registerReply(ReplyVO replyVO) {
         replyDAO.register(replyVO);
     }
 
     @Override
-    public boolean removeReply(Long replyNumber) {
+    public boolean removeReply(ReplyVO replyVO) {
 
-        return replyDAO.remove(replyNumber);
+        return replyDAO.remove(replyVO);
     }
 
     @Override
@@ -80,7 +85,7 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public ReviewVO read(Long reviewNumber) {
-        return null;
+        return reviewDAO.read(reviewNumber);
     }
 
     @Override

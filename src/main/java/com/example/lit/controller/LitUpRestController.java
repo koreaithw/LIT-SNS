@@ -19,13 +19,14 @@ public class LitUpRestController {
     private final LitUpService litUpService;
 
     //모달창 인증글 상세 보기
-    @GetMapping("/read")
-    public ReviewVO read(){
+    @GetMapping("/read/{reviewNumber}")
+    public ReviewVO read(@PathVariable("reviewNumber") Long reviewNumber){
         log.info("***************************");
         log.info("LitUpRestController : read(get)");
         log.info("***************************");
 
-        return null;
+
+        return litUpService.read(reviewNumber);
     }
 
     //모달창 인증글 상세 댓글 작성 -> 전달 방식 다시 생각하기
@@ -39,19 +40,22 @@ public class LitUpRestController {
     }
 
     //모달창 인증글 상세 댓글 삭제
-    @GetMapping("/reply/{replyNumber}")
-    public String deleteReply(@PathVariable("replyNumber") Long replyNumber){
+    @GetMapping("/delete/{replyNumber}/{userNumber}")
+    public boolean deleteReply(@PathVariable("replyNumber") Long replyNumber, @PathVariable("userNumber") Long userNumber){
         log.info("***************************");
         log.info("LitUpRestController : deleteReply(delete)");
         log.info("***************************");
-        if(litUpService.removeReply(replyNumber)){
-            return "삭제 성공";}
-        else{return "삭제 실패";}
+        ReplyVO replyVO = new ReplyVO();
+        replyVO.setUserNumber(userNumber);
+        replyVO.setReplyNumber(replyNumber);
+        return litUpService.removeReply(replyVO);
+
         }
 
+    // 댓글 페이징
     @GetMapping("/reply/{reviewNumber}/{page}")
     public ReplyPageDTO getList(@PathVariable("page") int pageNum, @PathVariable("reviewNumber") Long reviewNumber){
-        return new ReplyPageDTO(litUpService.getReplyList(new Criteria(pageNum,4),reviewNumber), litUpService.getTotalReply(reviewNumber));
+        return new ReplyPageDTO(litUpService.getReplyList(new Criteria(pageNum,10),reviewNumber), litUpService.getTotalReply(reviewNumber));
     }
 
 
@@ -61,7 +65,6 @@ public class LitUpRestController {
         log.info("***************************");
         log.info("LitUpRestController : registerReport(get)");
         log.info("***************************");
-
         litUpService.registerReport(reportVO);
         return "신고 성공";
     }
@@ -74,6 +77,11 @@ public class LitUpRestController {
         log.info("***************************");
         litUpService.registerLike(likeVO);
         return litUpService.getLikeTotal(likeVO.getReviewNumber()).intValue();
+    }
+
+    @GetMapping("/like/{userNumber}")
+    public boolean getCheckLike(@PathVariable("userNumber") Long userNumber){
+        return litUpService.getCheckLike(userNumber) == 1;
     }
 
     @PostMapping("/removeLike")
