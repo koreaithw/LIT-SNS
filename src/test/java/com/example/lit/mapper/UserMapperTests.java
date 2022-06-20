@@ -46,10 +46,10 @@ public class UserMapperTests {
     }
 
     @Test
-    public void loginTest(){
+    public void adminLoginTest(){
         String email="test12";
         String password = "1234";
-        log.info(userMapper.login(email,password)+"");
+        log.info(userMapper.adminLogin(email,password)+"");
     }
 
     @Test

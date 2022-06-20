@@ -23,7 +23,7 @@
         WHERE NICKNAME = #{nickname}
     </select>
 
-    <select id="login" resultType="_int">
+    <select id="adminLogin" resultType="_int">
         SELECT COUNT(USER_NUMBER) FROM TBL_USER
         WHERE EMAIL = #{email} AND PASSWORD = #{password}
     </select>
@@ -55,36 +55,6 @@
         SET ACHIEVEMENT_NUMBER = #{achievementNumber}
         WHERE USER_NUMBER = #{userNumber}
     </update>
-
-<!--    <select id="userSearch" resultType="userVO">-->
-<!--        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, CONTENT, KAKAO, REGISTER_DATE-->
-<!--        FROM TBL_USER-->
-<!--        WHERE ${type} LIKE '%'||#{keyword}||'%'-->
-<!--        <trim prefix="AND">-->
-<!--            <choose>-->
-<!--                <when test="kakao == '1'.toString()">-->
-<!--                    KAKAO IS NOT NULL-->
-<!--                </when>-->
-<!--                <when test="kakao == '2'.toString()">-->
-<!--                    KAKAO IS NULL-->
-<!--                </when>-->
-<!--            </choose>-->
-<!--        </trim>-->
-<!--        <trim prefix="AND">-->
-<!--                <if test="startDate != ''">-->
-<!--                    <![CDATA[-->
-<!--                    TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') >= #{startDate}-->
-<!--                    ]]>-->
-<!--                </if>-->
-<!--        </trim>-->
-<!--        <trim prefix="AND">-->
-<!--                <if test="endDate != ''">-->
-<!--                    <![CDATA[-->
-<!--                    TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') <= #{endDate}-->
-<!--                    ]]>-->
-<!--                </if>-->
-<!--        </trim>-->
-<!--    </select>-->
 
     <select id="userSearch" resultType="userDTO">
 

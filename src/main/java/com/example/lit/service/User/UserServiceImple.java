@@ -47,8 +47,8 @@ public class UserServiceImple implements UserService{
     }
 
     @Override
-    public boolean login(String email, String password) {
-        return userDAO.login(email, password);
+    public boolean adminLogin(String email, String password) {
+        return userDAO.adminLogin(email, password);
     }
 
     @Override
