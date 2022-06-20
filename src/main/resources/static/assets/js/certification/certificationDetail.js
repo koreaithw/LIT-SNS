@@ -26,6 +26,26 @@ function projectDetailModalShow() {
     reviewDetailService.getLikeTotal(1,function (result) {
         $("#likeCount").html(result);
     })
+
+    // 리뷰 디테일 조회, 리뷰넘버 받아와서 넣어줘야 함
+    reviewDetailService.readDetail(1,function (nickname, content, registerDate) {
+        $(".detailContentProfileName").html(nickname);
+        $(".detailContentWriteName").html(nickname);
+        $(".detailContentWriteComment").html(content);
+        $(".detailContentRegisterDate").html(reviewDetailService.getReplyDate(registerDate));
+        $(".detailContentFooterWirtesInnerDate").html(reviewDetailService.getReplyDate(registerDate));
+    })
+
+    // 좋아요 여부 확인
+    reviewDetailService.getCheckLike(1,function (result) {
+        if(result){
+            detailContentLikeButton.style.display = 'none';
+            detailContentLikeCancel.style.display = 'block';
+        }else{
+            detailContentLikeButton.style.display = 'block';
+            detailContentLikeCancel.style.display = 'none';
+        }
+    })
 }
 
 //프로젝트 모달 창 숨기는 버튼,
@@ -57,7 +77,6 @@ detailContentLikeCancel.addEventListener("click", function (e) {
 //작은 추가 프로필 정보 모달창 1초 뒤에 생성
 //마우스를 떼면 사라짐
 
-console.log(profileModal);
 profileImage.forEach(function (item) {
     item.addEventListener("mouseover", function (e) {
         setTimeoutConst = setTimeout(function () {
@@ -120,7 +139,5 @@ $('.innerImageWrapper > .innerImageSideButtons > div').click(function () {
 
     $post.click();
 });
-
-//################################ AJAX 실행 영역 #############################################
 
 
