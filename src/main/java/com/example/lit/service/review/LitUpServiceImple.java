@@ -2,6 +2,7 @@ package com.example.lit.service.review;
 
 import com.example.lit.domain.dao.review.*;
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.review.*;
 import lombok.RequiredArgsConstructor;
@@ -163,5 +164,10 @@ public class LitUpServiceImple implements LitUpService{
     @Override
     public Long getReportChart(String date) {
         return reportDAO.getReviewChart(date);
+    }
+
+    @Override
+    public List<ReviewDTO> getList2(ListDTO listDTO) {
+        return reviewDAO.getList2(listDTO);
     }
 }
