@@ -100,13 +100,13 @@ input[type="radio"] {
   width: 20px;
   height: 20px;
   cursor: pointer;
-  background: url("/src/main/resources/static/images/admin/bg_radio.png");
+  background: url("/images/admin/bg_radio.png");
   background-size: 20px 20px;
   margin-right: 5px;
 }
 
 input[type="radio"]:checked {
-  background: url("/src/main/resources/static/images/admin/bg_radio_checked.png");
+  background: url("/images/admin/bg_radio_checked.png");
   background-size: 20px 20px;
 }
 
@@ -215,7 +215,7 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked {
   -webkit-appearance: none;
   border: 0;
-  background: url("/src/main/resources/static/images/admin/bg_checkbox_checked.png");
+  background: url("/images/admin/bg_checkbox_checked.png");
 }
 
 /* calendar */
@@ -234,8 +234,8 @@ input[type="checkbox"]:checked {
   cursor: pointer;
 }
 
-input[name="start-date"],
-input[name="end-date"] {
+input[name="startDate"],
+input[name="endDate"] {
   width: 100px;
   height: 32px;
   border: 1px solid var(--border-gray);
@@ -252,11 +252,14 @@ input[name="end-date"] {
   font-weight: bold;
   font-size: 18px;
   color: var(--red);
+  display: flex;
+  justify-content: center;
 }
 
-.paging-block > li {
+.paging-block li {
   list-style: none;
   display: inline-block;
+  margin : 0 5px;
 }
 
 /* period */
@@ -285,28 +288,4 @@ input[name="end-date"] {
   max-width: 700px;
   overflow: visible;
   margin: 0 100px;
-}
-
-/* datepicker */
-.ui-datepicker-prev span {
-  background-image: url(http://legacy.australianetwork.com/img/icon_arrow_left_black.png) !important;
-  background-position: 0px 0px !important;
-  background-color: rgba(0,0,0,0.5);
-  border-radius: 50%;
-}
-
-.ui-datepicker-next{
-  top: 5px;
-  right: 5px;
-}
-.ui-datepicker-prev{
-  top: 5px;
-  left: 5px;
-}
-
-.ui-datepicker-next span {
-  background-image: url(http://legacy.australianetwork.com/img/icon_arrow_right_black.png) !important;
-  background-position: 0px 0px !important;
-  background-color: rgba(0,0,0,0.5);
-  border-radius: 50%;
 }

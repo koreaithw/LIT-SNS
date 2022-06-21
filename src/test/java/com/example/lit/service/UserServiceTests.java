@@ -8,6 +8,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 @SpringBootTest
 @Slf4j
 public class UserServiceTests {
@@ -35,5 +40,20 @@ public class UserServiceTests {
     public void nicknameCheck(){
         String nickname="xldms.dl";
         log.info("닉네임 중복체크: " + userService.dbNicknameCheck(nickname));
+    }
+
+    @Test
+    public void getUserChartTest(){
+        Calendar today = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        List<Long> list = new ArrayList<>();
+
+        for(int i=0; i<7; i++){
+            list.add(userService.getUserChart(sdf.format(today.getTime())));
+            today.add(Calendar.DATE, -1);
+        }
+
+        log.info(list.toString());
+
     }
 }

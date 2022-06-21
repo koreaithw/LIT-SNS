@@ -1,6 +1,8 @@
 package com.example.lit.mapper.review;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.review.ReviewDTO;
 import com.example.lit.domain.vo.review.ReviewVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,4 +24,10 @@ public interface ReviewMapper {
     public int getTotal();
     //    성공, 실패용 인증 수 카운트
     public int resultCount();
+    //  인증글 검색(관리자)
+    public List<ReviewDTO> searchReview(SearchDTO searchDTO);
+    //  오늘 등록된 인증글 수
+    public int getTotalToday();
+    //  차트 정보
+    public Long getReviewChart(String date);
 }
