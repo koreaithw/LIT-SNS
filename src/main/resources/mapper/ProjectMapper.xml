@@ -37,33 +37,8 @@
         )
         WHERE ROWNUM > (#{criteria.pageNum} - 1) * #{criteria.amount}
         ]]>
-
-        <!--        <![CDATA[-->
-        <!--        SELECT RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
-        <!--        FROM-->
-        <!--        (-->
-        <!--                SELECT ROWNUM RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
-        <!--                FROM    TBL_PROJECT PJ, TBL_PARTICIPATION PT-->
-        <!--        ]]>-->
-        <!--                 <choose>-->
-        <!--                     <when test="category == 'popular'">-->
-        <!--                         <![CDATA[   WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY COUNT(PT.USER_NUMBER)  ]]>-->
-        <!--                     </when>-->
-        <!--                     <when test="category == 'new'">-->
-        <!--                         <![CDATA[  WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
-        <!--                     </when>-->
-        <!--                     <otherwise>-->
-        <!--                         <![CDATA[  WHERE PJ.CATEGORY =#{category} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
-        <!--                     </otherwise>-->
-        <!--                 </choose>-->
-        <!--        <![CDATA[-->
-        <!--        )-->
-        <!--        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}-->
-        <!--        ]]>-->
->>>>>>> cd2b8955962488f33178cfb86132b107f60dafb3
     </select>
     <!--    ###############################동적 쿼리 쓸것-->
-
     <insert id="insert">
         <selectKey keyProperty="projectNumber" resultType="long" order="BEFORE">
             SELECT SEQ_PROJECT.NEXTVAL FROM DUAL
