@@ -129,7 +129,7 @@ html .ui-button.ui-state-disabled:active {
 }
 
 .ui-widget-header .ui-icon {
-  background-image: url("/src/main/resources/static/images/admin/btns.png");
+  background-image: url("/images/admin/btns.png");
 }
 
 .ui-icon-circle-triangle-e {
