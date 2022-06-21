@@ -38,6 +38,29 @@
         WHERE ROWNUM > (#{criteria.pageNum} - 1) * #{criteria.amount}
         ]]>
 
+        <!--        <![CDATA[-->
+        <!--        SELECT RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
+        <!--        FROM-->
+        <!--        (-->
+        <!--                SELECT ROWNUM RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
+        <!--                FROM    TBL_PROJECT PJ, TBL_PARTICIPATION PT-->
+        <!--        ]]>-->
+        <!--                 <choose>-->
+        <!--                     <when test="category == 'popular'">-->
+        <!--                         <![CDATA[   WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY COUNT(PT.USER_NUMBER)  ]]>-->
+        <!--                     </when>-->
+        <!--                     <when test="category == 'new'">-->
+        <!--                         <![CDATA[  WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
+        <!--                     </when>-->
+        <!--                     <otherwise>-->
+        <!--                         <![CDATA[  WHERE PJ.CATEGORY =#{category} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
+        <!--                     </otherwise>-->
+        <!--                 </choose>-->
+        <!--        <![CDATA[-->
+        <!--        )-->
+        <!--        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}-->
+        <!--        ]]>-->
+>>>>>>> cd2b8955962488f33178cfb86132b107f60dafb3
     </select>
     <!--    ###############################동적 쿼리 쓸것-->
 
@@ -49,6 +72,73 @@
         (PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE)
         VALUES(#{projectNumber}, #{title}, #{category}, #{content}, #{authentication}, #{startDate}, #{endDate})
     </insert>
+
+    <select id="searchProject" resultType="projectDTO">
+        SELECT TOTAL, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, APPLY_COUNT,
+        AUTHENTICATION, START_DATE, END_DATE, STATUS, USER_NUMBER,
+        EMAIL,
+        PARTICIPATION_COUNT
+        FROM(
+            SELECT ROWNUM RN, TOTAL, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, APPLY_COUNT,
+            AUTHENTICATION, START_DATE, END_DATE, STATUS, USER_NUMBER,
+            EMAIL,
+            PARTICIPATION_COUNT
+            FROM(
+                SELECT COUNT(p.PROJECT_NUMBER) OVER() AS TOTAL, p.PROJECT_NUMBER, p.TITLE, p.CATEGORY, p.CONTENT, p.APPLY_COUNT,
+                p.AUTHENTICATION, p.START_DATE, p.END_DATE, p.STATUS, p.USER_NUMBER,
+                u.EMAIL,
+                pt.PARTICIPATION_COUNT
+                FROM TBL_PROJECT p
+                LEFT OUTER JOIN (
+                    SELECT PROJECT_NUMBER, COUNT(USER_NUMBER) AS PARTICIPATION_COUNT
+                    FROM TBL_PARTICIPATION
+                    GROUP BY PROJECT_NUMBER
+                ) pt
+                ON pt.PROJECT_NUMBER = p.PROJECT_NUMBER
+                LEFT OUTER JOIN TBL_USER u
+                ON u.USER_NUMBER = p.USER_NUMBER
+                WHERE
+                <choose>
+                    <when test="type == 'email'">
+                        u.${type}
+                    </when>
+                    <otherwise>
+                        p.${type}
+                    </otherwise>
+                </choose>
+                LIKE '%'||#{keyword}||'%'
+                <if test="category != null and category != ''">
+                    AND p.CATEGORY = #{category}
+                </if>
+                <if test="startDate != null and startDate != ''">
+                    <![CDATA[
+                           AND TO_CHAR(p.START_DATE, 'yyyy-mm-dd') >= #{startDate}
+                    ]]>
+                </if>
+                <if test="endDate != null and endDate != ''">
+                    <![CDATA[
+                           AND TO_CHAR(p.END_DATE, 'yyyy-mm-dd') <= #{endDate}
+                    ]]>
+                </if>
+                <trim prefix="AND">
+                    <choose>
+                        <when test="status == 0 or status == 1 or status == 2">
+                            p.STATUS = #{status}
+                        </when>
+                        <when test="status == 3">
+                            (p.STATUS = 1 OR p.STATUS = 2)
+                        </when>
+                    </choose>
+                </trim>
+            )
+            <![CDATA[
+                WHERE ROWNUM <= #{pageNum} * #{amount}
+                ]]>
+        )
+        <![CDATA[
+        WHERE RN > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
 
     <select id="get" resultType="projectVO">
         SELECT PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE
@@ -62,5 +152,17 @@
     <select id="getTotal" resultType="_int">
         SELECT COUNT(PROJECT_NUMBER) FROM TBL_PROJECT
     </select>
+
+    <update id="changeStatus">
+        UPDATE TBL_PROJECT
+        SET STATUS = #{status}
+        WHERE PROJECT_NUMBER = #{projectNumber}
+    </update>
+    
+    <select id="getTotalByStatus" resultType="_int">
+        SELECT COUNT(PROJECT_NUMBER) FROM TBL_PROJECT
+        WHERE STATUS = #{status}
+    </select>
+
 
 </mapper>

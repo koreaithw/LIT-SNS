@@ -1,13 +1,20 @@
 package com.example.lit.controller;
 
-import com.example.lit.domain.vo.review.ReviewVO;
+import com.example.lit.domain.vo.project.ProjectFileVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,5 +22,57 @@ import java.util.List;
 @RequestMapping("/lit/*")
 public class LitRestController {
 
+
+    @PostMapping("/upload")
+    public List<ProjectFileVO> upload(MultipartFile[] uploadFiles) throws IOException {
+        String uploadFolder = "D:/upload";
+        ArrayList<ProjectFileVO> files = new ArrayList<>();
+
+//        yyyy/MM/dd 경로 만들기
+        File uploadPath = new File(uploadFolder, getFolder());
+        if(!uploadPath.exists()){uploadPath.mkdirs();}
+
+        for(MultipartFile file : uploadFiles){
+            ProjectFileVO ProjectFileVO = new ProjectFileVO();
+            String uploadFileName = file.getOriginalFilename();
+
+            UUID uuid = UUID.randomUUID();
+            ProjectFileVO.setName(uploadFileName);
+            ProjectFileVO.setUuid(uuid.toString());
+            ProjectFileVO.setUploadPath(getFolder());
+
+            uploadFileName = uuid.toString() + "_" + uploadFileName;
+
+            log.info("--------------------------------");
+            log.info("Upload File Name : " + uploadFileName);
+
+            File saveFile = new File(uploadPath, uploadFileName);
+            file.transferTo(saveFile);
+
+            if(checkImageType(saveFile)){
+                ProjectFileVO.setImage("1");
+            }
+            files.add(ProjectFileVO);
+        }
+        return files;
+    }
+
+    @GetMapping("/display")
+    public byte[] getFile(String fileName) throws IOException{
+        File file = new File("D:/upload/", fileName);
+        log.info(file.toString());
+        return FileCopyUtils.copyToByteArray(file);
+    }
+
+    private boolean checkImageType(File file) throws IOException{
+        String contentType = Files.probeContentType(file.toPath());
+        return contentType.startsWith("image");
+    }
+
+    private String getFolder(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        return sdf.format(date);
+    }
 
 }

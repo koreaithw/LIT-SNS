@@ -51,4 +51,36 @@ public class FollowMapperTest {
         log.info("---------------------");
     }
 
+=======
+//    @Test
+//    public void insert(){
+//        log.info("---------------------");
+//        FollowVO followVO = new FollowVO();
+//        followVO.setFollowerNumber(1L);
+//        followVO.setFollowingNumber(2L);
+//        log.info( "insert : " + followMapper.insert(followVO) );
+//        log.info("---------------------");
+//    }
+////    @Test
+//    public void delete(){
+//        log.info("---------------------");
+//        FollowVO followVO = new FollowVO();
+//        log.info( "delete : " + followMapper.delete(followVO) );
+//        log.info("---------------------");
+//    }
+//    @Test
+//    public void followingCount(){
+//        log.info("---------------------");
+//        FollowVO followVO = new FollowVO();
+//        log.info( "followingCount : " + followMapper.followingCount(followVO) );
+//        log.info("---------------------");
+//    }
+//    @Test
+//    public void followerCount(){
+//        log.info("---------------------");
+//        FollowVO followVO = new FollowVO();
+//        log.info( "followerCount : " + followMapper.followerCount(followVO) );
+//        log.info("---------------------");
+//    }
+>>>>>>> cd2b8955962488f33178cfb86132b107f60dafb3
 }

@@ -59,8 +59,8 @@
                                         </div>
                                     </div>
                                     <div class="detailContentProfileNameWrapper">
-                                        <div class="detailContentProfileName">아이디</div>
-                                        <div class="detailContentProfileIntro">소개</div>
+                                        <div class="detailContentProfileName"></div>
+                                        <div class="detailContentProfileIntro"></div>
                                     </div>
                                 </div>
                                 <div class="detailContentProfileButtonWrapper">
@@ -95,47 +95,21 @@
                                         </div>
                                         <div class="detailContentWriteFeed">
                                             <div class="detailContentWrite">
-                                                <div class="detailContentWriteName">아이디</div>
+                                                <div class="detailContentWriteName"></div>
                                                 <div class="detailContentWriteComment">
-                                                    원숭이 사진 공유합니다 ^^
+
                                                 </div>
                                             </div>
                                             <div class="detailContentWriteFeedBottom">
                                                 <div class="detailContentRegisterDate">
-                                                    등록일
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="reply_area">
-<!--                                    <div class="detailContentWriteContainer">-->
-<!--                                        <div class="detailContentWriteWrapper">-->
-<!--                                            <div class="detailContentProfileImage">-->
-<!--                                                <div class="detailContentProfileImageInner">-->
-<!--                                                    <img class="detailProfileImage" src="monkey.jpg" style="width:100%">-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="detailContentWriteFeed">-->
-<!--                                            <div class="detailContentWrite">-->
-<!--                                                <div class="detailContentWriteName">친구아이디</div>-->
-<!--                                                <div class="detailContentWriteComment">-->
-<!--                                                    너무 멋져요!-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <div class="detailContentWriteFeedBottom">-->
-<!--                                                <div class="detailContentRegisterDate">-->
-<!--                                                    등록일-->
-<!--                                                </div>-->
-
-<!--                                                <div class="detailContentCommentDelete">-->
-<!--                                                    <a>삭제</a>-->
-<!--                                                </div>-->
-
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
+                                <!--반복구역-->
                                 </div>
                                 <a class="appendReply" style="text-align: center; padding: 20px;"><div></div></a>
 
@@ -259,10 +233,11 @@
     const replyDiv = $(".reply_area");
     let pageNum = 1;
 
-    // 댓글 목록 불러오기  -> 댓글 전체 수가 10개 넘어갔을때 +표 노출, append 추가 필요
+    // 댓글 목록 불러오기
     function showList(page){
         reviewDetailService.getList({reviewNum: 1, page: page}, function(total, list){
                 let str = "";
+
 
                 if(list == null || list.length == 0){
                     replyDiv.html("");
@@ -306,7 +281,7 @@
 
     };
 
-    //댓글 추가 보기기
+    //댓글 추가 보기
    function showAppendList(page) {
 
        reviewDetailService.getList({reviewNum: 1, page: page}, function (total, list) {
@@ -378,8 +353,8 @@
                },
                function (result) {
                    $(".detailContentFooterCommentInputArea").val("");
-                   alert(result);
                    showList(1);
+                   $(".detailContentFeed").scrollTop(0);
                },
                function (a, b, c) {
                    console.log(a, b, c)
@@ -422,16 +397,20 @@
        $(".reply_area").on("click", "div.detailContentCommentDelete a.remove", function (e) {
            e.preventDefault();
            let $replyNumber = $(this).attr("class").split(/\s+/);
-           reviewDetailService.removeReply($replyNumber[1], function (result) {
-               pageNum = 1;
-               showList(pageNum);
+           reviewDetailService.removeReply($replyNumber[1], 1, function (result) {
+               if(result) {
+                   pageNum = 1;
+                   showList(pageNum);
+               }else{
+                   alert("본인 게시물만 삭제 가능합니다.");
+               }
            })
        })
 
        // 클릭시 노출페이지 조절
        function showReplyPage(total) {
-           let endPage = Math.ceil(pageNum / 4.0) * 10;
-           let realEnd = Math.ceil(total / 4.0);
+           let endPage = Math.ceil(pageNum / 10.0) * 10;
+           let realEnd = Math.ceil(total / 10.0);
            const $paging = $(".appendReply div");
 
            if (endPage > realEnd) {
@@ -449,6 +428,10 @@
 
 
        }
+
+
+
+
 
 
 

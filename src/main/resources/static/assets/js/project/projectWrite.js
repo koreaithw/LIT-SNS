@@ -47,41 +47,79 @@ $(".imgData")
     // 이미지 저장할 데이터 담기....
     uploadFiles.push(file);
   });
-// 파일 input 업로드
-$("#btnImage").on("change", function (e) {
-  e.stopPropagation();
-  e.preventDefault();
-  // 파일 객체화
-  let file = e.target.files[0];
-  // 파일 유효성
-  if (!$(this).val().match(fileType)) {
-    alert("파일업로드 실패");
-    return;
-  }
-  // 이미지 미리보기
-  imgEvent(file);
-  // 이미지 저장할 데이터 담기....
-  uploadFiles.push(file);
-});
+
+let arFile = Array.from($("input[type='file']")[0].files);
 
 // 이미지 미리보기 화면에 출력
-function imgEvent(file) {
+function imgEvent(files) {
   $(".imgData").hide();
-  $(".imgView")
-    .show()
-    .css({
-      "background-image": "url(" + window.URL.createObjectURL(file) + ")",
-    });
+  let str ="";
+
+  console.log(files);
+
+  let imageUrl = "";
+  $(files).each(function(i, file) {
+    str += "<div data-name='" + file.name + "' data-uuid='" + file.uuid + "' data-uploadpath='" + file.uploadPath + "' data-image='" + file.image + "'></div>";
+    imageUrl += "/lit/display?fileName=" + file.uploadPath + "/" + file.uuid + "_"  + file.name;
+  });
+
+  $(".imgView").append(str);
+  $(".imgView").show().css("background-image", "url(" + imageUrl +  ")");
   $(".topmenu > div").eq(0).show();
   $(".topmenu > div").eq(2).show();
 }
 
+// 파일 input 업로드
+$("#btnImage").on("change", function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    // 파일 객체화
+    let file = e.target.files[0];
+
+    let formData =   new FormData();
+    let inputFile = $("input[name='uploadFiles']");
+    let files = inputFile[0].files;
+    for(let i=0; i<files.length; i++){
+      if(!checkExtension(files[i].name, files[i].size)){ return; }
+      formData.append("uploadFiles", files[i]);
+    }
+    Array.from($(this)[0].files).forEach(file => arFile.push(file));
+    const dataTransfer = new DataTransfer();
+    arFile.forEach(file => dataTransfer.items.add(file));
+    $(this)[0].files = dataTransfer.files;
+
+    $.ajax({
+      url: "/lit/upload",
+      type: "post",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function(files){
+        imgEvent(files);
+      }
+    });
+
+  // 이미지 미리보기
+  // 이미지 저장할 데이터 담기....
+  uploadFiles.push(file);
+});
+
+function checkExtension(file) {
+  // 파일 유효성
+  console.log(file);
+  if (!file.match(fileType)) {
+    alert("파일업로드 실패");
+    return false;
+  }
+  return true;
+}
+
 //=========================================================================
 
-function submitEvent() {
-  let form = $(projectForm);
-  console.log(form.find('input[name="titel"]').val());
-}
+// function submitEvent() {
+//   let form = $(projectForm);
+//   console.log(form.find('input[name="titel"]').val());
+// }
 
 // 업로드 페이지 추가 이벤트
 function formEvent() {
@@ -125,14 +163,13 @@ $(".textareaBox > textarea").on("input", function () {
 });
 
 // submit 유효성 감사
-function submitEvent() {
-  const form = $(projectForm);
-  let projectTitle = $("input[name='projectTitle']");
-  let projectCategory = $("input[name='projectCategory']:checked");
-  let projectContent = $("textarea[name='projectContent']");
-  let projectAuth = $("textarea[name='projectAuth']");
-  let projectStrar = $("input[name='projectStrar']:checked");
-  let projectEnd = $("input[name='projectEnd']:checked");
+function submitEvent(e) {
+  let projectTitle = $("input[name='title']");
+  let projectCategory = $("input[name='category']:checked");
+  let projectContent = $("textarea[name='content']");
+  let projectAuth = $("textarea[name='authentication']");
+  let startDate = $("input[name='startDate']:checked");
+  let projectEnd = $("input[name='endDate']:checked");
 
   // 제목 입력
   if (projectTitle.val() == "") {
@@ -157,7 +194,7 @@ function submitEvent() {
     return false;
   }
   // 시작일 선택
-  if (projectStrar.length < 1) {
+  if (startDate.length < 1) {
     alert("시작일을 선택하세요");
     projectContent.focus();
     return false;
@@ -168,16 +205,24 @@ function submitEvent() {
     return false;
   }
 
-  alert("성공");
   // 유효성 이후 submit
-  // form.submit();
+  let str = "";
+  var form = $('#projectForm');
+  $.each($(".imgView div"), function (i, div) {
+    str += "<input type='hidden' name='projectFile.name' value='" + $(div).data("name") + "'>"
+    str += "<input type='hidden' name='projectFile.uuid' value='" + $(div).data("uuid") + "'>"
+    str += "<input type='hidden' name='projectFile.uploadPath' value='" + $(div).data("uploadpath") + "'>"
+    str += "<input type='hidden' name='projectFile.image' value='" + $(div).data("image") + "'>"
+  });
+  form.append(str).submit();
 }
+
 
 // 스타트 / 마지막 날짜 계산기
 $().ready(function dateInputSet() {
   let date = new Date();
-  const startTags = $("input[name='projectStrar']"); // start 데이터를 넣어줄 곳
-  const endTags = $("input[name='projectEnd']"); // end 데이터 넣어줄 곳
+  const startTags = $("input[name='startDate']"); // start 데이터를 넣어줄 곳
+  const endTags = $("input[name='endDate']"); // end 데이터 넣어줄 곳
   const dateVals = [6, 0, 1, 2, 3, 4, 5]; //요일별 더할 날짜
 
   // Start 월요일 날짜 계산
@@ -191,16 +236,16 @@ $().ready(function dateInputSet() {
     // console.log("======================");
     // console.log("일 : " + date.getDate());
     // console.log("월 : " + (date.getMonth() + 1));
-    calcDate = date.getMonth() + 1 + "/" + date.getDate();
+    calcDate = date.getMonth() + 1 + "-" + date.getDate();
     startTags.eq(i).next().text(calcDate);
-    calcDate = date.getFullYear() + "/" + calcDate;
+    calcDate = date.getFullYear() + "-" + calcDate;
     startTags.eq(i).attr("value", calcDate);
   }
 
   // 기간 선택 js
   startTags.on("change", function () {
     let calcDate;
-    let dateArr = $(this).val().split("/");
+    let dateArr = $(this).val().split("-");
     let endDate = parseInt(dateArr[2]);
     date.setMonth(parseInt(dateArr[1]) - 1);
     date.setDate(endDate);
@@ -213,13 +258,13 @@ $().ready(function dateInputSet() {
     for (let i = 0; i < endTags.length; i++) {
       date.setDate(date.getDate() + 7);
       calcDate =
-        date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+        date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
       endTags.eq(i).attr("value", calcDate);
     }
   });
 
-  $("input[name='projectEnd']").on("click", function () {
-    const dateInputCk = $("input[name='projectStrar']:checked"); // 기간 값
+  $("input[name='endDate']").on("click", function () {
+    const dateInputCk = $("input[name='startDate']:checked"); // 기간 값
     if (dateInputCk.length < 1) {
       alert("시작일을 먼저 선택하세요");
       return false;

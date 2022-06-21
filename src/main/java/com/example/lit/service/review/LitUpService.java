@@ -1,6 +1,7 @@
 package com.example.lit.service.review;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.review.*;
 
 import java.util.List;
@@ -12,12 +13,14 @@ public interface LitUpService {
     public void removeLike(LikeVO likeVO);
     // 좋아요 갯수 카운트
     public Long getLikeTotal(Long reviewNumber);
+    // 좋아요 확인
+    public int getCheckLike(Long userNumber);
 
 
     //댓글 추가
     public void registerReply(ReplyVO replyVO);
     //댓글 삭제
-    public boolean removeReply(Long replyNumber);
+    public boolean removeReply(ReplyVO replyVO);
     //댓글 수정
     public boolean modifyReply(ReplyVO replyVO);
     //댓글 목록
@@ -58,4 +61,18 @@ public interface LitUpService {
     public List<ReviewFileVO> getImgs(Long reviewNumber);
     // DB에 없는 이미지 삭제
     public List<ReviewFileVO> getOldFiles();
+
+
+    //  인증글 검색(관리자)
+    public List<ReviewDTO> searchReview(SearchDTO searchDTO);
+    //리포트 검색(관리자)
+    public List<ReportDTO> searchReport(SearchDTO searchDTO);
+    //  오늘 등록된 인증글 수
+    public int getTotalTodayReview();
+    //오늘 등록된 리포트 토탈
+    public int getTotalTodayReport();
+    //  차트 정보
+    public Long getReviewChart(String date);
+    //  차트 정보
+    public Long getReportChart(String date);
 }
