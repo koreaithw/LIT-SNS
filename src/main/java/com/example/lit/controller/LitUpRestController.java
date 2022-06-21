@@ -189,6 +189,17 @@ public class LitUpRestController {
         return null;
     }
 
+
+    //========== 메인 리스트 ===========
+    @GetMapping("/getList2")
+    public List<ReviewDTO> getList2(){
+        log.info("***************************");
+        log.info("LitUpRestController : getList2(get)");
+        log.info("***************************");
+
+        return null;
+    }
+
     //모달창 인증글 작성하기 중 프로젝트 정보 가져오기
     @GetMapping("/getProject/{projectNumber}")
     public ProjectVO getProject(@PathVariable("projectNumber") Long projectNumber){
@@ -198,8 +209,5 @@ public class LitUpRestController {
 
         return litUpService.readPjt(projectNumber);
     }
-
-
-
 
 }

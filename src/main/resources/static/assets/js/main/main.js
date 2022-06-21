@@ -112,3 +112,16 @@ lit1.on("click", function(){
     lit1.attr('class', 'lits1Off');
     $('#lit1Img').attr('src', '/images/mypage/menu2.png');
   });
+
+
+
+  let mainService = (function(){
+      function mainLitUp(){}
+      function mainLit(){}
+
+
+      return {
+          mainLit:mainLit,
+          mainLitUp:mainLitUp
+      };
+  })();
