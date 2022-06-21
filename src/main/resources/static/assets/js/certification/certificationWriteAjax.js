@@ -1,6 +1,24 @@
 let reviewWriteService = (function () {
 
-
+    //리뷰 작성
+    function reviewRegister(reviewVO, callback, error) {
+        $.ajax({
+            url: "/litUp/register/"+reviewVO.userNumber+"/"+reviewVO.projectNumber ,
+            type: "get" ,
+            data: JSON.stringify(reviewVO) ,
+            contentType: "application/json" ,
+            success: function (result) {
+                if(callback){
+                    callback(result);
+                }
+            } ,
+            error: function (xhr, status, er) {
+                if(error){
+                    error(xhr, status, er);
+                }
+            }
+        })
+    }
 
     //프로젝트 유저번호로 유저 네임 가져오는 DTO 유무 확인 필요, 관련해서 PROJECT MAPPER ,LISTUPSERVICE, IMPLE, CONTROLLER 수정 필요
     function getProject(projectNumber, callback, error) {
