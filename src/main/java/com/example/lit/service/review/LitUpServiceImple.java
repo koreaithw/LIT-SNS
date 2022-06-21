@@ -71,8 +71,8 @@ public class LitUpServiceImple implements LitUpService{
 
 
     @Override
-    public List<ReviewVO> getList(Criteria criteria) {
-        return null;
+    public List<ReviewVO> getList(Criteria criteria, String category) {
+        return reviewDAO.getList(criteria, category);
     }
 
     @Override
