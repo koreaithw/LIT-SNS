@@ -1,12 +1,19 @@
 package com.example.lit.mapper;
 
 
+import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.user.UserDTO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.mapper.user.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 @Slf4j
 @SpringBootTest
@@ -39,10 +46,10 @@ public class UserMapperTests {
     }
 
     @Test
-    public void loginTest(){
+    public void adminLoginTest(){
         String email="test12";
         String password = "1234";
-        log.info(userMapper.login(email,password)+"");
+        log.info(userMapper.adminLogin(email,password)+"");
     }
 
     @Test
@@ -89,6 +96,42 @@ public class UserMapperTests {
         userMapper.updateMedal(userVO);
     }
 
+    @Test
+    public void adminSelectTest(){
+//        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT, KAKAO, REGISTER_DATE, ACHIEVEMENT_NUMBER
+//        FROM TBL_USER
+//        WHERE EMAIL LIKE '%test%'
+//        AND KAKAO IS NULL
+//        AND REGISTER_DATE > '2022-06-14' AND REGISTER_DATE < '2022-06-16';
+        SearchDTO search = new SearchDTO();
+        search.setStartDate("2022-06-14");
+        search.setEndDate("2022-06-19");
+        search.setKeyword("");
+        search.setType("email");
+        search.setKakao("0"); // kakao를 0(all), 1(null), 2(not null) 로 받아서 검사하기
+        log.info(search.getAmount() + "aaaaa");
+        log.info(search.getPageNum() + "aaaaa");
+        userMapper.userSearch(search).stream().map(UserDTO::toString).forEach(log::info);
+    }
 
+    @Test
+    public void getTotalTest(){
+        log.info(String.valueOf(userMapper.getTotal()));
+    }
+
+    @Test
+    public void getUserChartTest(){
+        Calendar today = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        List<Long> list = new ArrayList<>();
+
+        for(int i=0; i<7; i++){
+            list.add(userMapper.getUserChart(sdf.format(today.getTime())));
+            today.add(Calendar.DATE, -1);
+        }
+
+        log.info(list.toString());
+
+    }
 
 }
