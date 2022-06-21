@@ -56,5 +56,56 @@
         WHERE USER_NUMBER = #{userNumber}
     </update>
 
+    <select id="mypageReviewCnt" resultType="_int">
+        SELECT COUNT(REVIEW_NUMBER)
+        FROM TBL_REVIEW
+        WHERE USER_NUMBER =
+                            (
+                            SELECT USER_NUMBER
+                            FROM TBL_USER
+                            WHERE USER_NUMBER = #{userNumber}
+                            )
+    </select>
+
+    <select id="followerCnt" resultType="_int">
+        SELECT COUNT(FOLLOWER_NUMBER)
+        FROM TBL_FOLLOW
+        WHERE FOLLOWING_NUMBER =
+                            (
+                                SELECT USER_NUMBER
+                                FROM TBL_USER
+                                WHERE USER_NUMBER = #{userNumber}
+                            )
+    </select>
+
+    <select id="followingCnt" resultType="_int">
+        SELECT COUNT(FOLLOWING_NUMBER)
+        FROM TBL_FOLLOW
+        WHERE FOLLOWER_NUMBER =
+                            (
+                                SELECT USER_NUMBER
+                                FROM TBL_USER
+                                WHERE USER_NUMBER = #{userNumber}
+                            )
+    </select>
+
+    <select id="getFollowerList" resultType="userVO">
+        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT
+        FROM TBL_FOLLOW f LEFT OUTER JOIN TBL_USER u
+        ON f.FOLLOWER_NUMBER = u.USER_NUMBER
+        WHERE f.FOLLOWING_NUMBER = #{userNumber}
+    </select>
+
+    <select id="getFollowingList" resultType="userVO">
+        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT
+        FROM TBL_FOLLOW f LEFT OUTER JOIN TBL_USER u
+        ON f.FOLLOWING_NUMBER = u.USER_NUMBER
+        WHERE f.FOLLOWER_NUMBER = #{userNumber}
+    </select>
+
+    <delete id="deleteFollower">
+        DELETE FROM TBL_FOLLOW
+        WHERE FOLLOWER_NUMBER = #{followerNumber} AND FOLLOWING_NUMBER = #{followingNumber}
+    </delete>
 
 </mapper>

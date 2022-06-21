@@ -30,9 +30,7 @@ public class UserServiceImple implements UserService{
     }
 
     @Override
-    public void kakaoRegister(UserVO userVO) {
-
-    }
+    public void kakaoRegister(UserVO userVO) {;}
 
     @Override
     public boolean dbEmailCheck(String email) {
@@ -45,19 +43,33 @@ public class UserServiceImple implements UserService{
     }
 
     @Override
+    public int MyReviewCnt(Long userNumber) { return userDAO.MyReviewCnt(userNumber); }
+
+    @Override
+    public int MyFollowerCnt(Long userNumber) { return userDAO.MyFollowerCnt(userNumber); }
+
+    @Override
+    public int MyFollowingCnt(Long userNumber) { return userDAO.MyFollowingCnt(userNumber); }
+
+    @Override
+    public List<UserVO> ModalFollower(Long userNumber) { return userDAO.ModalFollower(userNumber); }
+
+    @Override
+    public List<UserVO> ModalFollowing(Long userNumber) { return userDAO.ModalFollowing(userNumber); }
+
+    @Override
+    public void removeFollower(Long followerNumber, Long followingNumber) { userDAO.removeFollower(followerNumber, followingNumber); }
+
+    @Override
     public UserVO login(String email, String pw) {
         return userDAO.login(email, pw);
     }
 
     @Override
-    public void remove(Long userNumber) {
-
-    }
+    public void remove(Long userNumber) {}
 
     @Override
-    public UserVO read(Long userNumber) {
-        return null;
-    }
+    public UserVO read(Long userNumber) { return userDAO.read(userNumber); }
 
     @Override
     public void modify(UserVO userVO) {

@@ -30,7 +30,18 @@ public interface UserService {
     public boolean dbEmailCheck(String email);
     //닉네임 중복체크
     public boolean dbNicknameCheck(String nickname);
-
+    //마이페이지 게시글 수 불러오기
+    public int MyReviewCnt(Long userNumber);
+    //마이페이지 팔로워 수
+    public int MyFollowerCnt(Long userNumber);
+    //마이페이지 팔로잉 수
+    public int MyFollowingCnt(Long userNumber);
+    //마이페이지 팔로워 모달 정보 띄우기
+    public List<UserVO> ModalFollower(Long userNumber);
+    //마이페이지 팔로우 모달 정보 띄우기
+    public List<UserVO> ModalFollowing(Long userNumber);
+    //마이페이지 팔로우 삭제
+    public void removeFollower(Long followerNumber, Long followingNumber);
 
 
     //유저 파일 업로드

@@ -5,6 +5,8 @@ import com.example.lit.mapper.user.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class UserDAO {
@@ -17,7 +19,7 @@ public class UserDAO {
     //회원 탈퇴
     public void remove(Long userNumber){ userMapper.delete(userNumber); }
     //내 정보 가져 오기
-    public UserVO getUser(Long userNumber){ return userMapper.getUser(userNumber); }
+    public UserVO read(Long userNumber){ return userMapper.getUser(userNumber); }
     //내 정보 수정
     public void modify(UserVO userVO){ userMapper.update(userVO); }
     //비밀 번호 변경
@@ -30,5 +32,17 @@ public class UserDAO {
     public int dbEmailCheck(String email){ return userMapper.emailCheck(email);}
     //닉네임 중복체크
     public int dbNicknameCheck(String nickname){ return userMapper.nicknameCheck(nickname);}
+    //마이페이지 게시글 수 불러오기
+    public int MyReviewCnt(Long userNumber){ return userMapper.mypageReviewCnt(userNumber); }
+    //마이페이지 팔로워 수
+    public int MyFollowerCnt(Long userNumber){ return userMapper.followerCnt(userNumber); }
+    //마이페이지 팔로잉 수
+    public int MyFollowingCnt(Long userNumber){ return userMapper.followingCnt(userNumber); }
+    //마이페이지 팔로워 모달 정보 띄우기
+    public List<UserVO> ModalFollower(Long userNumber) { return userMapper.getFollowerList(userNumber); }
+    //마이페이지 팔로우 모달 정보 띄우기
+    public List<UserVO> ModalFollowing(Long userNumber) { return userMapper.getFollowingList(userNumber); }
+    //마이페이지 팔로우 삭제
+    public void removeFollower(Long followerNumber, Long followingNumber) { userMapper.deleteFollower(followerNumber, followingNumber); }
 
 }

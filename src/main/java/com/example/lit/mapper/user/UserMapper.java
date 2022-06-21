@@ -4,6 +4,8 @@ import com.example.lit.domain.vo.user.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
     //회원 가입
@@ -26,6 +28,17 @@ public interface UserMapper {
     public int emailCheck(String email);
     //닉네임 중복체크
     public int nicknameCheck(String nickname);
-
+    //마이페이지 게시글 수 불러오기
+    public int mypageReviewCnt(Long userNumber);
+    //마이페이지 팔로워 수
+    public int followerCnt(Long userNumber);
+    //마이페이지 팔로잉 수
+    public int followingCnt(Long userNumber);
+    //마이페이지 팔로워 모달 정보 띄우기
+    public List<UserVO> getFollowerList(Long userNumber);
+    //마이페이지 팔로우 모달 정보 띄우기
+    public List<UserVO> getFollowingList(Long userNumber);
+    //마이페이지 팔로우 삭제
+    public void deleteFollower(Long followerNumber, Long followingNumber);
 
 }

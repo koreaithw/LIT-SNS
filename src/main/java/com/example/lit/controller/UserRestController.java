@@ -68,4 +68,12 @@ public class UserRestController {
         return null;
     }
 
+
+    // 마이페이지 팔로워 삭제하기
+    @DeleteMapping("/removeFollower/{followerNumber}/{followingNumber}")
+    public String removeFollower(@PathVariable("followerNumber") Long followerNumber, @PathVariable("followingNumber") Long followingNumber){
+        userService.removeFollower(followerNumber, followingNumber);
+        return "팔로워 삭제 성공" + followerNumber;
+    }
+
 }
