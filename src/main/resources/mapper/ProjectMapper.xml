@@ -3,6 +3,41 @@
 <mapper namespace="com.example.lit.mapper.project.ProjectMapper">
     <!--    ###############################동적 쿼리 쓸것-->
     <select id="getList" resultType="projectVO">
+        <![CDATA[
+        SELECT APPLY_COUNT, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, STATUS
+        FROM (
+            SELECT APPLY_COUNT, ROWNUM, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, STATUS
+            FROM (
+                SELECT COUNT(pr.PROJECT_NUMBER) APPLY_COUNT,
+                pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT, pr.AUTHENTICATION, pr.START_DATE, pr.END_DATE, pr.STATUS
+                FROM TBL_PROJECT pr
+                JOIN TBL_PARTICIPATION pa ON  pr.PROJECT_NUMBER = pa.PROJECT_NUMBER
+                WHERE pr.STATUS = 1
+                ]]>
+                <choose>
+                    <when test="category != 'lanking' and category != 'newproject'">
+                        AND pr.CATEGORY = #{category}
+                    </when>
+                </choose>
+                <![CDATA[
+                GROUP BY pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT, pr.AUTHENTICATION, pr.START_DATE,
+                pr.END_DATE, pr.STATUS, pa.PROJECT_NUMBER
+            )
+            WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+            ]]>
+        <choose>
+            <when test="category == 'lanking'">
+                ORDER BY APPLY_COUNT DESC
+            </when>
+            <when test="category == 'newproject'  or category != 'lanking'">
+                ORDER BY ROWNUM DESC
+            </when>
+        </choose>
+        <![CDATA[
+        )
+        WHERE ROWNUM > (#{criteria.pageNum} - 1) * #{criteria.amount}
+        ]]>
+
         <!--        <![CDATA[-->
         <!--        SELECT RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
         <!--        FROM-->
@@ -25,6 +60,7 @@
         <!--        )-->
         <!--        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}-->
         <!--        ]]>-->
+
     </select>
     <!--    ###############################동적 쿼리 쓸것-->
 

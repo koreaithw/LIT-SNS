@@ -33,6 +33,7 @@ function certificationWriteModalShow() {
     certificationWriteBackground.style.display = 'block';
     certificationWriteButton.style.display = 'none';
     $('body').css("overflow", "hidden");
+    uploadFiles = [];
 }
 
 //프로젝트 모달 창 숨기는 버튼,
@@ -178,6 +179,8 @@ $certificationNextNextButton.on("click", function () {
     }
     twinkle();
 
+
+
     $certificationContent.css("display", "block");
     $detailProjectContent.css("display", "none");
     $certificationNextNextButton.css("display", "none");
@@ -230,6 +233,15 @@ typeDownButton.addEventListener("click", function () {
     typeUpButton.style.display = 'block';
     typeDownButton.style.display = 'none';
     projectInfoDropDown.style.height = '100px';
+
+    //프로젝트 설명 가져오기
+    reviewWriteService.getProject(1, function (title, content, startDate) {
+        console.log(title)
+        console.log(content)
+        console.log(startDate)
+    },function (a,b,c) {
+        console.log("error")
+    })
 });
 
 //인증글 작성에서 인증글 신고 안내글 관련 v자 버튼
