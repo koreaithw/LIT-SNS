@@ -23,6 +23,7 @@
                 <div>
                     <div class="projectImg">
                         <a>
+                            <!-- 이미지 링크 추가 -->
                             <img src="/images/project/domImg/indi01.webp" alt="">
                         </a>
                     </div>
@@ -147,7 +148,49 @@
 
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
 <script th:inline="javascript">
+    let pageNum = 1;
+    const contBox = $('.sec2 > div'); // 이미지 리스트 뿌릴 위치
+    // 최신순으로
+    litUpList("newproject");
 
+    function litUpList(category) {
+        $.ajax({
+            url: "/list/litsups/" + newproject + "/" + pageNum,
+            type: "get",
+            dataType: 'json',
+            success: function (result) {
+                pageNum++; // 다음 페이지 번호 지정
+                // alert('성공');
+                listadd(result);
+            }, error: function (xhr, textStatus, errorThrown) {
+                console.log('통신 실패');
+                console.log(xhr);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    // 리스트에 추가하기
+    function listadd(result) {
+
+        let str = "";
+        // console.log(result);
+        $.each(result, function (i, ReviewDTO) {
+            let src = "";
+            //이미지 경로 첫번째 이미지만
+            src += ReviewDTO.reviewFileList.get(0).uploadPath;
+            src += ReviewDTO.reviewFileList.get(0).uuid + "_";
+            src += ReviewDTO.reviewFileList.get(0).name;
+
+
+            str += " <figure><a href='"+ReviewDTO.reviewNumber+"'>";
+            str += " <img src='"+"1"+"'> ";
+            str += "</a></figure>";
+
+        });
+        contBox.append(str);
+    }
 </script>
 
 </html>

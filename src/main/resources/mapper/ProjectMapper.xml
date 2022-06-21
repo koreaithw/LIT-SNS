@@ -63,7 +63,6 @@
 
     </select>
     <!--    ###############################동적 쿼리 쓸것-->
-
     <insert id="insert">
         <selectKey keyProperty="projectNumber" resultType="long" order="BEFORE">
             SELECT SEQ_PROJECT.NEXTVAL FROM DUAL
