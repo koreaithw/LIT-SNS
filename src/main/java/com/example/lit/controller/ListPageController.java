@@ -37,5 +37,9 @@ public class ListPageController {
         return null;
     }
 
+    @GetMapping("/list")
+    public String list(){
+        return "/main/list";
+    }
 
 }
