@@ -180,22 +180,22 @@
                     <div>
                         <figure>
                             <a href="">
-                                <img alt="" src="/static/images/project/upload/">
+                                <img alt="" src="">
                             </a>
                         </figure>
                         <figure>
                             <a href="">
-                                <img alt="" src="/src/main/resources/static//images/main/jenny2.jpg">
+                                <img alt="" src="">
                             </a>
                         </figure>
                         <figure>
                             <a href="">
-                                <img alt="" src="/src/main/resources/static//images/main/jenny2.jpg">
+                                <img alt="" src="">
                             </a>
                         </figure>
                         <figure>
                             <a href="">
-                                <img alt="" src="/src/main/resources/static//images/main/jenny2.jpg">
+                                <img alt="" src="">
                             </a>
                         </figure>
                     </div>
@@ -211,12 +211,12 @@
 <script src="/src/main/resources/static/assets/js/main/main.js"></script>
 
 <script th:inline="javascript">
+
     let pageNum = 1;
     // 기본 시작은 lit
     litList("lanking");
 
     function litList(category) {
-
         $.ajax({
             url: "/list/lits/" + category + "/" + pageNum,
             type: "get",
@@ -236,9 +236,8 @@
 
     // 리스트에 추가하기
     function listadd(result) {
-        const contBox = $('div.content2');
-        let str = "";
-        // console.log(result);
+        const contBox = $('div.photoContents > div');
+        let str = "";  //
 
         $.each(result, function (i, projectVO) {
             let src = "";
@@ -247,18 +246,15 @@
             src += projectVO.projectFile.uuid + "_";
             src += projectVO.projectFile.name;
 
-            str += "<div class='content3'><a class='aContent' href='" + projectVO.projectNumber + "'>";
-            str += "<div class='content4'><div class='content5'>";
-            str += "<img class='contentImage' src='" + src + "'>";
-            str += "</div><div class='content6'></div></div>";
-            str += "</a></div>";
+            str += " <figure><a href='"+projectVO.projectNumber+"'>";
+            str += " <img src='"+"src"+"'> ";
+            str += "</a></figure>";
+
         });
+
         contBox.append(str);
     }
 
-    function litUpList() {
-        alert("22");
-    }
 </script>
 
 </html>

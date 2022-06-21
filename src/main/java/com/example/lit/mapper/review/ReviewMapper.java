@@ -4,7 +4,6 @@ import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.review.ReviewDTO;
->>>>>>> cd2b8955962488f33178cfb86132b107f60dafb3
 import com.example.lit.domain.vo.review.ReviewVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
