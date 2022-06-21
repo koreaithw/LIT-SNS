@@ -1,6 +1,7 @@
 package com.example.lit.service;
 
 import com.example.lit.domain.dao.message.MessageDAO;
+import com.example.lit.domain.vo.messsage.MessageDTO;
 import com.example.lit.domain.vo.messsage.MessageVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -38,7 +39,19 @@ public class MessageServiceTests {
         messageDAO.getFollowerList(1L);
     }
 
+    @Test
+    public void getReceiveUserNumberTest() { messageDAO.getReceiveUserNumber(1L); }
 
+    @Test
+    public void getRecentMessageTest(){ messageDAO.getRecentMessage(5L); }
+
+    @Test
+    public void getMessageListTest(){
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setSendUserNumber(1L);
+        messageDTO.setReceiveUserNumber(10L);
+        messageDAO.getMessageList(messageDTO);
+    }
 
 
 }
