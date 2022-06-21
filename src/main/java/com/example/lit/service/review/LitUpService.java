@@ -1,9 +1,10 @@
 package com.example.lit.service.review;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
-
 import java.util.List;
 
 public interface LitUpService {
@@ -49,6 +50,8 @@ public interface LitUpService {
     public int getTotal();
     //    성공, 실패용 인증 수 카운트
     public int resultCount();
+    //    프로젝트 정보 가져오기
+    public ProjectVO readPjt(Long projectNumber);
 
 
     // 사진 추가
@@ -75,4 +78,6 @@ public interface LitUpService {
     public Long getReviewChart(String date);
     //  차트 정보
     public Long getReportChart(String date);
+    // 리뷰 목록 가져오기2(테스트)
+    public List<ReviewDTO> getList2(ListDTO listDTO);
 }

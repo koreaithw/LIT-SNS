@@ -15,22 +15,67 @@
 
     <select id="getFollowerList" resultType="userVO">
         SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT
-        FROM TBL_FOLLOW f LEFT outer JOIN TBL_USER u
+        FROM TBL_FOLLOW f LEFT OUTER JOIN TBL_USER u
         ON f.FOLLOWER_NUMBER = u.USER_NUMBER
         WHERE f.FOLLOWING_NUMBER = #{userNumber}
     </select>
 
+    <select id="getReceiveUserNumber" resultType="long">
+        SELECT DISTINCT RECEIVE_USER_NUMBER
+        FROM TBL_MESSAGE
+        WHERE SEND_USER_NUMBER = #{userNumber}
+    </select>
+
     <select id="getRecentMessage" resultType="map">
-        SELECT u.NICKNAME, m.CONTENT
+        SELECT NICKNAME, CONTENT, RECEIVE_USER_NUMBER
+        FROM
+            (
+            SELECT u.NICKNAME, m.CONTENT, m.RECEIVE_USER_NUMBER
+            FROM TBL_USER u LEFT OUTER JOIN TBL_MESSAGE m
+            ON u.USER_NUMBER  = m.RECEIVE_USER_NUMBER
+            WHERE m.RECEIVE_USER_NUMBER = #{receiveUserNumber}
+            ORDER BY m.MESSAGE_DATE DESC
+            )
+        WHERE ROWNUM = 1
+    </select>
+
+    <select id="searchFollower" resultType="userVO">
+        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT
         FROM
         (
-        SELECT u.NICKNAME, m.CONTENT
-        FROM TBL_MESSAGE m LEFT OUTER JOIN TBL_USER u
-        on m.SEND_USER_NUMBER = u.USER_NUMBER
-        WHERE m.RECEIVE_USER_NUMBER = #{receiveUserNumber}
-        ORDER BY m.MESSAGE_DATE DESC
+        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT
+        FROM TBL_FOLLOW f LEFT OUTER JOIN TBL_USER u
+        ON f.FOLLOWER_NUMBER = u.USER_NUMBER
+        WHERE f.FOLLOWING_NUMBER = #{userNumber}
         )
-        WHERE ROWNUM = 1;
+        WHERE (NICKNAME LIKE '%'||#{keyword}||'%') OR (NAME LIKE '%'||#{keyword}||'%')
+    </select>
+
+<!--    <select id="getMessageList" resultType="string">-->
+<!--        SELECT CONTENT-->
+<!--        FROM TBL_MESSAGE-->
+<!--        WHERE SEND_USER_NUMBER = #{sendUserNumber} AND RECEIVE_USER_NUMBER = #{receiveUserNumber}-->
+<!--        ORDER BY MESSAGE_DATE DESC-->
+<!--    </select>-->
+
+    <select id="getMessageList" resultType="messageDTO">
+        <![CDATA[
+        SELECT CONTENT, TOTAL, SEND_USER_NUMBER, RECEIVE_USER_NUMBER
+        FROM
+        (
+            SELECT ROWNUM RN, CONTENT, TOTAL, SEND_USER_NUMBER, RECEIVE_USER_NUMBER
+            FROM
+            (
+                SELECT COUNT(CONTENT) OVER() AS TOTAL, CONTENT, SEND_USER_NUMBER, RECEIVE_USER_NUMBER
+                FROM TBL_MESSAGE
+                WHERE (SEND_USER_NUMBER = #{sendUserNumber} AND RECEIVE_USER_NUMBER = #{receiveUserNumber})
+                OR (SEND_USER_NUMBER = #{receiveUserNumber} AND RECEIVE_USER_NUMBER = #{sendUserNumber})
+                ORDER BY MESSAGE_DATE DESC
+            )
+            WHERE ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE RN > (#{pageNum}-1) * #{amount}
+        ]]>
     </select>
 
 </mapper>

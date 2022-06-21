@@ -1,33 +1,40 @@
 let $contentIn = $('.content > div');
 
+const amount = 20;
+
+//세션에서 받아올 유저넘버
+const userNumber = 1;
+
 //메세지 인풋 창에서 엔터키입력
 $('.messageWrite').on('keyup', function (key) {
-    let sendUserNumber = 1; // 채팅방 들어올 때 받아오기
-    let receiveUserNumber = 5; // 채팅방 들어올 때 받아오기
+    let receiveUserNumber = 10; // 채팅방 들어올 때 받아오기
     let room = "3번방"; // 채팅방 들어올 때 받아오기
-    let content = $('.messageWrite').val();
+    let content = $('.messageWrite').val()
+
+
+    /////////////////////webSocket 메세지 추가 부분 연결 필요
 
     if (key.keyCode == 13) {
 
         messageService.send({
-            sendUserNumber: sendUserNumber,
+            sendUserNumber: userNumber,
             receiveUserNumber: receiveUserNumber,
             room: room,
             content: content
-        });
+            // });
 
-        // 하나씩 뿌려줄때
-        // },function(result){
-        // let message = "<div class=\"dmStyle1\">" +
-        //         "<div class=\"dmImg\">" +
-        //         "<img src=\"\" alt=\"\">" +
-        //         "</div>" +
-        //         "<div class=\"text\">" +
-        //         result.content +
-        //         "</div>" +
-        //         "</div>"
-        //     $contentIn.append(message);
-        // });
+            // 하나씩 뿌려줄 때
+        }, function (result) {
+            let message = "<div class=\"dmStyle1\">" +
+                "<div class=\"dmImg\">" +
+                "<img src=\"\" alt=\"\">" +
+                "</div>" +
+                "<div class=\"text\">" +
+                result.content +
+                "</div>" +
+                "</div>"
+            $contentIn.append(message);
+        });
 
         let message = "<div class=\"dmStyle1\">" +
             "<div class=\"dmImg\">" +
@@ -46,24 +53,15 @@ $('.messageWrite').on('keyup', function (key) {
 });
 
 
-// 스크롤 시 20개씩 불러오기
-// 불러올 글이 없을 때 에러처리 필요
-$('.content').scroll(function () {
 
-    if ($(this).scrollTop() == 0) {
-        alert("글불러오기!")
-    }
-
-});
 
 
 // 유저 리스트 모달창
 function dmSubmit() {
 
-    //세션에서 유저 넘버 받아서 넘겨주기 추가해야함!!
-    messageService.getFollowerList(1,function(result){
+    messageService.getFollowerList(userNumber, function (result) {
         let res = "";
-        $.each(result, function(i,item){
+        $.each(result, function (i, item) {
             res += '<div>' +
                 '<div class="dmImg">' +
                 '<img src="/images/project/domImg/indi01.webp" alt="">' +
@@ -75,6 +73,7 @@ function dmSubmit() {
                 '<p>' +
                 item.name +
                 '</p>' +
+                '<input type="hidden" value="' + item.userNumber + '">' +
                 '</div>' +
                 '<div class="dmBtn">' +
                 '<a href="" class="userDMLink">채팅</a>' +
@@ -92,7 +91,8 @@ $("a#modalClose").on("click", function (e) {
     $("#modal1").removeClass("on");
 });
 
-// dm 선택시 리스트 가져오기
+
+// 메세지 내역 선택 시 리스트 가져오기
 $(".dmBtn>a").on("click", function (e) {
     e.preventDefault();
     // 처음 클릭이면
@@ -101,35 +101,158 @@ $(".dmBtn>a").on("click", function (e) {
         $(".dmBox").addClass("on");
     }
     $("#modal1").removeClass("on");
+    $contentIn.empty();
 
-    // AJAX 실행
-    dmList();
+    ///////////////////////webSocket 방 열어 주는 부분 추가 해야 함
+    ///////////////////////////////////////////////////////////
+
+    let receiveUserNumber = $(this).find("input[type='hidden']").val();
+    let nickname = $(this).find('.dmData').children(0).html();
+    let pageNum = $contentIn.children().length / amount || 1;
+
+    $('.contentTop').children(1).find('span').text(nickname + '님');
+    $('.contentTop').find('input[type="hidden"]').val(receiveUserNumber);
+
+    messageService.getMessageList({
+        sendUserNumber: userNumber,
+        receiveUserNumber: receiveUserNumber,
+        pageNum : pageNum
+    },function(result){
+        let message = "";
+
+        //채팅에 맞게 순서 반대로 뿌려줌, 기본 20개
+        for (let i = result.length - 1; i >= 0; i--) {
+            if (result[i].sendUserNumber == userNumber){
+                message += "<div class=\"dmStyle1\">" +
+                    "<div class=\"dmImg\">" +
+                    "<img src=\"\" alt=\"\">" +
+                    "</div>" +
+                    "<div class=\"text\">" +
+                    result[i].content +
+                    "</div>" +
+                    "</div>";
+            }else{
+                message += "<div class=\"dmStyle2\">" +
+                    "<div class=\"dmImg\">" +
+                    "<img src='/images/project/domImg/indi01.webp' alt=''>" +
+                    "</div>" +
+                    "<div class=\"text\">" +
+                    result[i].content +
+                    "</div>" +
+                    "</div>";
+            }
+
+        }
+
+        // $.each(result, function(i, item){
+        //     if (item.sendUserNumber == sendUserNumber){
+        //         message += "<div class=\"dmStyle1\">" +
+        //             "<div class=\"dmImg\">" +
+        //             "<img src=\"\" alt=\"\">" +
+        //             "</div>" +
+        //             "<div class=\"text\">" +
+        //             item.content +
+        //             "</div>" +
+        //             "</div>"
+        //     }else{
+        //         message += "<div class=\"dmStyle2\">" +
+        //             "<div class=\"dmImg\">" +
+        //             "<img src=\"\" alt=\"\">" +
+        //             "</div>" +
+        //             "<div class=\"text\">" +
+        //             item.content +
+        //             "</div>" +
+        //             "</div>"
+        //     }
+        // });
+        $contentIn.html(message);
+        $('.content > div').attr("class", result[0].total.toString());
+        $('.content').scrollTop($contentIn.height());
+    });
 
 });
 
-// dm 내용 가져오기 ajax
-function dmList() {
-    console.log("유저 리스트 가져오기");
-    // Ajax 에섯 데이타 가져오기
-    // $.ajax({
-    // });
-}
+// 스크롤 시 20개씩 불러오기
+// 불러올 글이 없을 때 에러처리 필요
+$('.content').scroll(function () {
+
+    let total = $('.content > div').attr('class');
+
+    if ($(this).scrollTop() == 0) {
+        if (total == $contentIn.children().length){
+            return;
+        }
+
+        let pageNum = $contentIn.children().length / amount + 1;
+        let receiveUserNumber = $('.contentTop').find('input[type="hidden"]').val()
+
+        messageService.getMessageList({
+            sendUserNumber: userNumber,
+            receiveUserNumber: receiveUserNumber,
+            pageNum: pageNum,
+        }, function(result){
+            let message = "";
+
+            //채팅에 맞게 순서 반대로 뿌려줌, 기본 20개
+            for (let i = result.length - 1; i >= 0; i--) {
+                if (result[i].sendUserNumber == userNumber) {
+                    message += "<div class=\"dmStyle1\">" +
+                        "<div class=\"dmImg\">" +
+                        "<img src=\"\" alt=\"\">" +
+                        "</div>" +
+                        "<div class=\"text\">" +
+                        result[i].content +
+                        "</div>" +
+                        "</div>";
+
+                } else {
+                    message += "<div class=\"dmStyle2\">" +
+                        "<div class=\"dmImg\">" +
+                        "<img src='/images/project/domImg/indi01.webp' alt=''>" +
+                        "</div>" +
+                        "<div class=\"text\">" +
+                        result[i].content +
+                        "</div>" +
+                        "</div>";
+                }
+            }
+            $contentIn.prepend(message);
+            $('.content').scrollTop($contentIn.height()/2);
+        });
+    }
+
+});
+
 
 // 유저 검색 이텐트
 $(".modalSearch > input").keyup(function () {
     // 입력 값 가져오기
-    let keyWord = $(this).val();
-    console.log(keyWord);
-    userList()
-    //
+    let keyword = $(this).val();
+
+    messageService.searchFollowerList({
+        keyword: keyword,
+        userNumber: userNumber
+    }, function (result) {
+        let res = "";
+        $.each(result, function (i, item) {
+            res += '<div>' +
+                '<div class="dmImg">' +
+                '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                '</div>' +
+                '<div class="userData">' +
+                '<p>' +
+                item.nickname +
+                '</p>' +
+                '<p>' +
+                item.name +
+                '</p>' +
+                '<input type="hidden" value="' + item.userNumber + '">' +
+                '</div>' +
+                '<div class="dmBtn">' +
+                '<a href="" class="userDMLink">채팅</a>' +
+                '</div>' +
+                '</div>';
+        });
+        $('.userList').html(res)
+    });
 });
-
-// DM 유저 리스트
-function userList() {
-    console.log("유저 리스트 가져오기");
-    // Ajax 에섯 데이타 가져오기
-    // $.ajax({
-    // });
-}
-
-// 스크롤시 DM 리스트 가져오기

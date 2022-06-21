@@ -542,6 +542,7 @@ ul {
   flex-direction: row;
   width: 100%;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .followerModalWrapper {
@@ -642,6 +643,7 @@ ul {
   flex-direction: column;
   flex-grow: 1;
   list-style: none;
+  margin: 5px 0px;
 }
 
 .followerTwoWrapper {

@@ -1,6 +1,7 @@
 package com.example.lit.mapper.project;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
@@ -27,4 +28,6 @@ public interface ProjectMapper {
     public void changeStatus(@Param("projectNumber") Long projectNumber, @Param("status") Long status);
     // 프로젝트 상태로 토탈 가져오기
     public int getTotalByStatus(Long status);
+    // 프로젝트 목록(메인)
+    public List<ProjectVO> getList2(ListDTO listDTO);
 }

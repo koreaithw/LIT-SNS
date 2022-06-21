@@ -1,5 +1,6 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.vo.user.FollowVO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.service.User.UserService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.net.http.HttpRequest;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -100,7 +103,7 @@ public class UserController {
         return new RedirectView("/main");
     }
 
-
+    // 로그아웃
     @GetMapping("/logout")
     public String logout(HttpServletRequest req) {
         log.info("로그아웃 컨트롤러 들어옴");
@@ -113,10 +116,27 @@ public class UserController {
 
     //마이페이지 데이터 가져와서 들어가기
     @GetMapping("/mypage")
-    public String mypage(){
-        log.info("******************************");
-        log.info("MyPageController : mypage");
-        log.info("******************************");
+    public String mypage(Long userNumber, Model model){
+        log.info("마이페이지 컨트롤러 =============================");
+        userNumber = 1L; // 임시
+
+        UserVO userVO = userService.read(userNumber);
+        List<UserVO> followerVO = userService.ModalFollower(userNumber);
+        List<UserVO> followingVO = userService.ModalFollowing(userNumber);
+
+        model.addAttribute("followerCnt", userService.MyFollowerCnt(userNumber));
+        model.addAttribute("followingCnt", userService.MyFollowingCnt(userNumber));
+        model.addAttribute("reviewCnt", userService.MyReviewCnt(userNumber));
+        model.addAttribute("nickname", userVO.getNickname());
+        model.addAttribute("content", userVO.getContent());
+        model.addAttribute("userNumber", userNumber);
+
+        model.addAttribute("modalFollower",followerVO);
+        log.info("###################  follower모달정보     " + followerVO);
+        model.addAttribute("modalFollowing",followingVO);
+        log.info("###################  following모달정보     " + followingVO);
+
         return "/mypage/mypage";
     }
+
 }

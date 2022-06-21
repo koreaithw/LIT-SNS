@@ -30,8 +30,7 @@
             </div>
             <section class="mypageSection">
                 <div class="sectionH2">
-                    <h2>jennierubyjane
-                    </h2>
+                    <h2 th:text="${nickname}"></h2>
                     <!-- <div class="medalImg" onclick="medalModal()" id="medalImg"></div> -->
                     <!-- <img class="medalImg" src="/src/main/resources/static/images/mypage/medal.png" onclick="medalModal()" id="medalImg"> -->
                     <img class="medalImg" src="/images/mypage/medal.png" id="medalImg">
@@ -42,23 +41,24 @@
                 <ul class="mypageUl">
                     <li class="mypageLi">
                         <div class="divInfo">게시물
-                            <div class="spanInfo">854</div>
+                            <div class="spanInfo" th:text="${reviewCnt}"></div>
                         </div>
                     </li>
                     <li class="mypageLi">
                         <div class="divInfo" style="cursor:pointer" onclick="followerModal()">팔로워
-                            <div class="spanInfo">67.2M</div>
+                            <div class="spanInfo" th:text="${followerCnt}"></div>
                         </div>
                     </li>
                     <li class="mypageLi">
                         <div class="divInfo" onclick="followeringModal()">팔로우
-                            <div class="spanInfo">1</div>
+                            <div class="spanInfo" th:text="${followingCnt}"></div>
                         </div>
                     </li>
                 </ul>
                 <div>
-                        <span><strong>J</strong><br>
-                            @lesyeuxdenini<br>youtu.be/erYPvNbc_mc</span>
+                    <span th:text="${content}"></span>
+                    <!--                        <span><strong>J</strong><br>-->
+                    <!--                            @lesyeuxdenini<br>youtu.be/erYPvNbc_mc</span>-->
                     <br>
                 </div>
             </section>
@@ -146,7 +146,7 @@
                 </div>
             </div>
             <div class="followerTwo">
-                <ul class="followerTwoUl">
+                <ul class="followerTwoUl" th:each="follower:${modalFollower}">
                     <div class="followerTwoWrapper">
                         <li class="followerTwoLi">
                             <div class="follower1">
@@ -164,14 +164,15 @@
                                         </div>
                                     </div>
                                     <div class="follower5">
-                                        <div class="follower6">
+                                        <div class="follower6" th:object="${follower}">
                                                 <span class="followerSpann">
                                                     <a style=" text-decoration-line: none;"
                                                        href="" role="link" tabindex="0">
-                                                        <span class="follower7">xldms.dl</span>
+                                                        <input type="hidden" th:value="*{userNumber}" id="removeFollower"/>
+                                                        <span class="follower7" th:text="*{nickname}"></span>
                                                     </a>
                                                 </span>
-                                            <div class="follower8">이지은</div>
+                                            <div class="follower8" th:text="*{content}"></div>
                                         </div>
                                     </div>
                                     <div class="follower9">
@@ -205,7 +206,7 @@
                 </div>
             </div>
             <div class="followerTwo">
-                <ul class="followerTwoUl">
+                <ul class="followerTwoUl" th:each="following:${modalFollowing}">
                     <div class="followerTwoWrapper">
                         <li class="followerTwoLi">
                             <div class="follower1">
@@ -223,14 +224,14 @@
                                         </div>
                                     </div>
                                     <div class="follower5">
-                                        <div class="follower6">
+                                        <div class="follower6" th:object="${following}">
                                                 <span class="followerSpann">
                                                     <a style=" text-decoration-line: none;"
                                                        href="" role="link" tabindex="0">
-                                                        <span class="follower7">xldms.dl</span>
+                                                        <span class="follower7" th:text="*{nickname}"></span>
                                                     </a>
                                                 </span>
-                                            <div class="follower8">이지은</div>
+                                            <div class="follower8" th:text="*{content}"></div>
                                         </div>
                                     </div>
                                     <div class="follower9">
@@ -369,7 +370,7 @@
         </div>
     </div>
 </div>
-<!-- 
+<!--
 <div class="medal">
     <div class="followerModalWrapper">
         <div class="medalModal">
@@ -398,5 +399,24 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="/assets/js/mypage/mypage.js"></script>
+<script src="/assets/js/mypage/mypageAjax.js"></script>
+<script th:inline="javascript">
 
+    let $followerRemoveBtn = $('.followerBtnn');
+    let mypageUser = [[${userNumber}]]; // 팔로워 모달에서 삭제할때 사용 (팔로잉 넘버)
+
+    /* ########### $followerUser -> 원하는 번호가 삭제가 안됌 ################ */
+    let $followerUser = $('#removeFollower').val(); // 팔로워 모달에서 삭제할때 사용 (팔로워 넘버)
+    let $test = 3;
+
+    //모달 - 팔로워 삭제
+    $followerRemoveBtn.on("click", function () {
+        // console.log($followerNumber);
+        myPageAjaxService.removeFollower($test, mypageUser, function (result) {
+            alert(result);
+            showList();
+        });
+    });
+
+</script>
 </html>
