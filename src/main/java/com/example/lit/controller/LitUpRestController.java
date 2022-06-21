@@ -120,4 +120,14 @@ public class LitUpRestController {
 
         return null;
     }
+
+    //========== 메인 리스트 ===========
+    @GetMapping("/getList2")
+    public List<ReviewDTO> getList2(){
+        log.info("***************************");
+        log.info("LitUpRestController : getList2(get)");
+        log.info("***************************");
+
+        return null;
+    }
 }
