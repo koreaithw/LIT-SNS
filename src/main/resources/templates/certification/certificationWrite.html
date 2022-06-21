@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="/assets/css/certification/certificationWrite.css">
     <link rel="stylesheet" href="/assets/css/certification/fileLoad.css">
     <link rel="stylesheet" href="/assets/css/default.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
 
 <div class="certificationWriteBackground">
-    <form class="registerForm" action="" enctype="multipart/form-data">
+<!--    <form class="registerForm" action="/board/register" enctype="multipart/form-data">-->
     <button class="modalCloseButton" type="button" onclick="certificationWriteModalHide()">
         <svg aria-label="닫기" class="fg7vo5n6 lrzqjn8y" color="#ffffff" fill="#ffffff" height="18" role="img"
              viewBox="0 0 48 48" width="18">
@@ -191,7 +192,7 @@
                                     Writer<span>박진욱</span>
                                 </div>
                                 <div class="projectInfoDropDownContent">
-                                    RegisterDate<span>2022/06/13</span>
+                                    StartDate<span>2022/06/13</span>
                                 </div>
                             </div>
                         </div>
@@ -233,7 +234,7 @@
         </div>
     </div>
     <div class="closeArea" onclick="certificationWriteModalHide()"></div>
-    </form>
+<!--    </form>-->
 </div>
 
 <div class="deleteBackground">
@@ -276,10 +277,25 @@
 <button class="certificationWriteButton" onclick="certificationWriteModalShow()">인증글 작성하기</button>
 
 </body>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 
 <script defer src="/assets/js/certification/certificationWrite.js"></script>
+<script defer src="/assets/js/certification/certificationWriteAjax.js"></script>
 <script defer src="/assets/js/certification/fileLoad.js"></script>
+<script defer th:inline="javascript">
 
+    $('.certificationNextButton > button.completeButton').on("click",function () {
+        reviewWriteService.reviewRegister({
+            userNumber:1,
+            projectNumber:1,
+            content:"test"
+        },function (result) {console.log("테스트")
+        },function (a,b,c) {console.log("error")})
+    })
+
+
+
+
+</script>
 
 </html>

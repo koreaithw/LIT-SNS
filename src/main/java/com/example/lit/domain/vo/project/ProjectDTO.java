@@ -22,4 +22,6 @@ public class ProjectDTO {
 
     private String email;
     private Long participationCount;
+
+    private String nickname;
 }
