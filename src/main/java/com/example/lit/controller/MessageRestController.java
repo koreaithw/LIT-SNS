@@ -50,13 +50,15 @@ public class MessageRestController {
         return messageService.searchFollower(keyword, userNumber);
     }
 
-    @GetMapping("/getMessageList/{sendUserNumber}/{receiveUserNumber}")
+    @GetMapping("/getMessageList/{sendUserNumber}/{receiveUserNumber}/{pageNum}")
     public List<MessageDTO> getMessageList(@PathVariable("sendUserNumber") Long sendUserNumber,
-                                          @PathVariable("receiveUserNumber") Long receiveUserNumber){
+                                          @PathVariable("receiveUserNumber") Long receiveUserNumber,
+                                           @PathVariable("pageNum") Long pageNum){
 
         MessageDTO messageDTO = new MessageDTO();
         messageDTO.setSendUserNumber(sendUserNumber);
         messageDTO.setReceiveUserNumber(receiveUserNumber);
+        messageDTO.setPageNum(pageNum);
 
         return messageService.getMessageList(messageDTO);
     }
