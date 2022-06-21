@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>메세지 기능</title>
-    <link rel="stylesheet" href="/assets/css/project/default.css">
     <link rel="stylesheet" href="/assets/css/message/message.css">
     <link rel="stylesheet" href="/assets/css/default.css">
+    <link rel="stylesheet" href="/assets/css/project/default.css">
 
 </head>
 
@@ -29,28 +29,18 @@
                         </div>
                     </div>
                     <div class="dmList">
-                        <figure class="dmBtn">
-                            <a href="" data-userNo="12" class="userDMList">
-                                <div class="dmImg">
-                                    <img src="/images/project/domImg/indi01.webp" alt="">
-                                </div>
-                                <div class="dmData">
-                                    <p>XXX님</p>
-                                    <p>마지막 채팅 내용 요약</p>
-                                </div>
-                            </a>
-                        </figure>
-                        <figure class="dmBtn">
-                            <a href="" data-userNo="12" class="userDMList">
-                                <div class="dmImg">
-                                    <img src="/images/project/domImg/indi02.webp" alt="">
-                                </div>
-                                <div class="dmData">
-                                    <p>XXX님</p>
-                                    <p>마지막 채팅 내용 요약</p>
-                                </div>
-                            </a>
-                        </figure>
+                            <figure th:each="item:${nicknameAndMessage}" class="dmBtn">
+                                <a href="" data-userNo="12" class="userDMList">
+                                    <div class="dmImg">
+                                        <img src="/images/project/domImg/indi01.webp" alt="">
+                                    </div>
+                                    <div class="dmData">
+                                        <p th:text="${item.get('NICKNAME')}"></p>
+                                        <p th:text="${item.get('CONTENT')}"></p>
+                                        <input type="hidden" th:value="${item.get('RECEIVE_USER_NUMBER')}">
+                                    </div>
+                                </a>
+                            </figure>
                     </div>
                 </div>
 
@@ -63,7 +53,7 @@
                             <span>XXX님</span>
                         </div>
                         <div class="iconBox">
-                            <a class="icon_info" href="/message/close">
+                            <a class="icon_info" href="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
                                     <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>

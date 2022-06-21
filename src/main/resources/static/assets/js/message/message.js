@@ -3,7 +3,7 @@ let $contentIn = $('.content > div');
 //메세지 인풋 창에서 엔터키입력
 $('.messageWrite').on('keyup', function (key) {
     let sendUserNumber = 1; // 채팅방 들어올 때 받아오기
-    let receiveUserNumber = 5; // 채팅방 들어올 때 받아오기
+    let receiveUserNumber = 10; // 채팅방 들어올 때 받아오기
     let room = "3번방"; // 채팅방 들어올 때 받아오기
     let content = $('.messageWrite').val();
 
@@ -14,20 +14,20 @@ $('.messageWrite').on('keyup', function (key) {
             receiveUserNumber: receiveUserNumber,
             room: room,
             content: content
-        });
+            // });
 
-        // 하나씩 뿌려줄때
-        // },function(result){
-        // let message = "<div class=\"dmStyle1\">" +
-        //         "<div class=\"dmImg\">" +
-        //         "<img src=\"\" alt=\"\">" +
-        //         "</div>" +
-        //         "<div class=\"text\">" +
-        //         result.content +
-        //         "</div>" +
-        //         "</div>"
-        //     $contentIn.append(message);
-        // });
+            // 하나씩 뿌려줄때
+        }, function (result) {
+            let message = "<div class=\"dmStyle1\">" +
+                "<div class=\"dmImg\">" +
+                "<img src=\"\" alt=\"\">" +
+                "</div>" +
+                "<div class=\"text\">" +
+                result.content +
+                "</div>" +
+                "</div>"
+            $contentIn.append(message);
+        });
 
         let message = "<div class=\"dmStyle1\">" +
             "<div class=\"dmImg\">" +
@@ -61,9 +61,9 @@ $('.content').scroll(function () {
 function dmSubmit() {
 
     //세션에서 유저 넘버 받아서 넘겨주기 추가해야함!!
-    messageService.getFollowerList(1,function(result){
+    messageService.getFollowerList(1, function (result) {
         let res = "";
-        $.each(result, function(i,item){
+        $.each(result, function (i, item) {
             res += '<div>' +
                 '<div class="dmImg">' +
                 '<img src="/images/project/domImg/indi01.webp" alt="">' +
@@ -102,25 +102,75 @@ $(".dmBtn>a").on("click", function (e) {
     }
     $("#modal1").removeClass("on");
 
+
+    //세션에서 받아오기
+    let sendUserNumber = 1;
+    let receiveUserNumber = $(this).find("input[type='hidden']").val();
     // AJAX 실행
-    dmList();
+    messageService.getMessageList({
+        sendUserNumber: sendUserNumber,
+        receiveUserNumber: receiveUserNumber,
+    },function(result){
+        let message = "";
+
+        $.each(result, function(i, item){
+            if (item.sendUserNumber == sendUserNumber){
+                message += "<div class=\"dmStyle1\">" +
+                    "<div class=\"dmImg\">" +
+                    "<img src=\"\" alt=\"\">" +
+                    "</div>" +
+                    "<div class=\"text\">" +
+                    item.content +
+                    "</div>" +
+                    "</div>"
+            }else{
+                message += "<div class=\"dmStyle2\">" +
+                    "<div class=\"dmImg\">" +
+                    "<img src=\"\" alt=\"\">" +
+                    "</div>" +
+                    "<div class=\"text\">" +
+                    item.content +
+                    "</div>" +
+                    "</div>"
+            }
+        });
+        $contentIn.html(message);
+    });
 
 });
 
-// dm 내용 가져오기 ajax
-function dmList() {
-    console.log("유저 리스트 가져오기");
-    // Ajax 에섯 데이타 가져오기
-    // $.ajax({
-    // });
-}
 
 // 유저 검색 이텐트
 $(".modalSearch > input").keyup(function () {
     // 입력 값 가져오기
-    let keyWord = $(this).val();
-    console.log(keyWord);
-    userList()
+    let keyword = $(this).val();
+    let userNumber = 1; //채팅방 들어올 때 받아 오기
+
+    messageService.searchFollowerList({
+        keyword: keyword,
+        userNumber: userNumber
+    }, function (result) {
+        let res = "";
+        $.each(result, function (i, item) {
+            res += '<div>' +
+                '<div class="dmImg">' +
+                '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                '</div>' +
+                '<div class="userData">' +
+                '<p>' +
+                item.nickname +
+                '</p>' +
+                '<p>' +
+                item.name +
+                '</p>' +
+                '</div>' +
+                '<div class="dmBtn">' +
+                '<a href="" class="userDMLink">채팅</a>' +
+                '</div>' +
+                '</div>';
+        });
+        $('.userList').html(res)
+    });
     //
 });
 

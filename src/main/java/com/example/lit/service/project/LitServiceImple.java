@@ -31,6 +31,7 @@ public class LitServiceImple implements LitService{
     //트랜잭션으로 묶어서 처리
     @Transactional(rollbackFor = Exception.class)
     public void register(ProjectVO projectVO) {
+
         //프로젝트 생성
         projectDAO.register(projectVO);
 
@@ -38,6 +39,7 @@ public class LitServiceImple implements LitService{
         if(projectVO.getProjectFile() != null){
             ProjectFileVO projectFileVO = projectVO.getProjectFile();
             projectFileVO.setProjectNumber(projectVO.getProjectNumber());
+
             projectFileDAO.register(projectFileVO);
         }
     }
@@ -80,7 +82,7 @@ public class LitServiceImple implements LitService{
 
     @Override
     public ProjectFileVO getImg(Long projectNumber) {
-        return null;
+        return projectFileDAO.getImg(projectNumber);
     }
 
     @Override
@@ -97,4 +99,5 @@ public class LitServiceImple implements LitService{
     public int getTotalByStatus(Long status) {
         return projectDAO.getTotalByStatus(status);
     }
+
 }
