@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="mid">
-                                <form class="loginFormStyel" id="loginForm" method="post">
+                                <form class="loginFormStyel" action="/user/loginOk" id="loginForm" method="post">
                                     <div class="underLoginForm">
                                         <div class="firstDiv">
                                             <div class="lainDiv"><label class="labelText">
@@ -88,5 +88,11 @@
 </body>
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
 <script src="/assets/js/login/login.js"></script>
+<script th:inline="javascript">
+    let cancel = [[${loginStatus}]];
 
+    if(cancel == false){
+        alert("로그인 또는 비밀번호가 잘 못 되었습니다.");
+    }
+</script>
 </html>

@@ -205,8 +205,8 @@ label {
   cursor: pointer;
 }
 
-input[name="start-date"],
-input[name="end-date"] {
+input[name="startDate"],
+input[name="endDate"] {
   width: 100px;
   height: 32px;
   border: 1px solid var(--border-gray);
@@ -224,10 +224,14 @@ input[name="end-date"] {
   font-weight: bold;
   font-size: 18px;
   color: var(--red);
+  display: flex;
+  justify-content: center;
 }
 
 .paging-block li {
+  list-style: none;
   display: inline-block;
+  margin : 0 5px;
 }
 
 /* period */

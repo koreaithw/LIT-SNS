@@ -12,9 +12,14 @@
         AND REVIEW_NUMBER = #{reviewNumber}
     </delete>
 
-    <select id="getTotal" resultType="_int">
+    <select id="getTotal" resultType="long">
         SELECT COUNT(USER_NUMBER) FROM TBL_LIKE
         WHERE REVIEW_NUMBER = #{reviewNumber}
+    </select>
+
+    <select id="checkLike" resultType="_int">
+        SELECT COUNT(REVIEW_NUMBER) FROM TBL_LIKE
+        WHERE USER_NUMBER = #{userNumber}
     </select>
 
 </mapper>

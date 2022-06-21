@@ -23,7 +23,12 @@
         WHERE NICKNAME = #{nickname}
     </select>
 
-    <select id="login" resultType="_int">
+    <select id="login" resultType="userVO">
+        SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT FROM TBL_USER
+        WHERE EMAIL = #{email} AND PASSWORD = #{password}
+    </select>
+
+    <select id="adminLogin" resultType="_int">
         SELECT COUNT(USER_NUMBER) FROM TBL_USER
         WHERE EMAIL = #{email} AND PASSWORD = #{password}
     </select>
@@ -56,5 +61,58 @@
         WHERE USER_NUMBER = #{userNumber}
     </update>
 
+    <select id="userSearch" resultType="userDTO">
+
+        SELECT TOTAL, USER_NUMBER, EMAIL, NAME, NICKNAME, CONTENT, KAKAO, REGISTER_DATE
+        FROM(
+            SELECT ROWNUM RN, TOTAL, USER_NUMBER, EMAIL, NAME, NICKNAME, CONTENT, KAKAO, REGISTER_DATE
+            FROM(
+
+                SELECT COUNT(USER_NUMBER) OVER() AS TOTAL, USER_NUMBER, EMAIL, NAME, NICKNAME, CONTENT, KAKAO, REGISTER_DATE
+                FROM TBL_USER
+                WHERE ${type} LIKE '%'||#{keyword}||'%'
+                <trim prefix="AND">
+                    <choose>
+                        <when test="kakao == '1'.toString()">
+                            KAKAO IS NOT NULL
+                        </when>
+                        <when test="kakao == '2'.toString()">
+                            KAKAO IS NULL
+                        </when>
+                    </choose>
+                </trim>
+                <trim prefix="AND">
+                    <if test="startDate != ''">
+                        <![CDATA[
+                            TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') >= #{startDate}
+                            ]]>
+                    </if>
+                </trim>
+                <trim prefix="AND">
+                    <if test="endDate != ''">
+                        <![CDATA[
+                            TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') <= #{endDate}
+                            ]]>
+                    </if>
+                </trim>
+            )
+            <![CDATA[
+            WHERE ROWNUM <= #{pageNum} * #{amount}
+            ]]>
+        )
+        <![CDATA[
+        WHERE RN > (#{pageNum} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(USER_NUMBER) FROM TBL_USER
+    </select>
+
+    <select id="getUserChart" resultType="long">
+        SELECT COUNT(USER_NUMBER)
+        FROM TBL_USER
+        WHERE TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') = #{date}
+    </select>
 
 </mapper>

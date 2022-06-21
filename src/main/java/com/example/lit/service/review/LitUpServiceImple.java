@@ -2,6 +2,7 @@ package com.example.lit.service.review;
 
 import com.example.lit.domain.dao.review.*;
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.review.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,13 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
-    public int getLikeTotal(Long reviewNumber) {
+    public Long getLikeTotal(Long reviewNumber) {
         return likeDAO.getTotal(reviewNumber);
+    }
+
+    @Override
+    public int getCheckLike(Long userNumber) {
+        return likeDAO.checkLike(userNumber);
     }
 
     @Override
@@ -38,8 +44,9 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
-    public boolean removeReply(Long replyNumber) {
-        return false;
+    public boolean removeReply(ReplyVO replyVO) {
+
+        return replyDAO.remove(replyVO);
     }
 
     @Override
@@ -49,12 +56,12 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public List<ReplyVO> getReplyList(Criteria criteria, Long reviewNumber) {
-        return null;
+        return replyDAO.getList(criteria, reviewNumber);
     }
 
     @Override
     public int getTotalReply(Long reviewNumber) {
-        return 0;
+        return replyDAO.getTotal(reviewNumber);
     }
 
     @Override
@@ -62,10 +69,6 @@ public class LitUpServiceImple implements LitUpService{
         reportDAO.register(reportVO);
     }
 
-    @Override
-    public void removeReport(Long reportNumber) {
-
-    }
 
     @Override
     public List<ReviewVO> getList(Criteria criteria) {
@@ -79,12 +82,12 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public ReviewVO read(Long reviewNumber) {
-        return null;
+        return reviewDAO.read(reviewNumber);
     }
 
     @Override
     public boolean remove(Long reviewNumber) {
-        return false;
+        return reviewDAO.remove(reviewNumber);
     }
 
     @Override
@@ -125,5 +128,40 @@ public class LitUpServiceImple implements LitUpService{
     @Override
     public List<ReviewFileVO> getOldFiles() {
         return null;
+    }
+
+    @Override
+    public List<ReviewDTO> searchReview(SearchDTO searchDTO) {
+        return reviewDAO.searchReview(searchDTO);
+    }
+
+    @Override
+    public List<ReportDTO> searchReport(SearchDTO searchDTO) {
+        return reportDAO.searchReport(searchDTO);
+    }
+
+    @Override
+    public void removeReport(Long reportNumber) {
+        reportDAO.remove(reportNumber);
+    }
+
+    @Override
+    public int getTotalTodayReview() {
+        return reviewDAO.getTotalToday();
+    }
+
+    @Override
+    public int getTotalTodayReport() {
+        return reportDAO.getTotalToday();
+    }
+
+    @Override
+    public Long getReviewChart(String date) {
+        return reviewDAO.getReviewChart(date);
+    }
+
+    @Override
+    public Long getReportChart(String date) {
+        return reportDAO.getReviewChart(date);
     }
 }

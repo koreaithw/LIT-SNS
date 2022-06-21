@@ -15,5 +15,7 @@ public class LikeDAO {
     // 좋아요 취소
     public void remove(LikeVO likeVO){ likeMapper.delete(likeVO);}
     // 좋아요 갯수
-    public int getTotal(Long reviewNumber){ return likeMapper.getTotal(reviewNumber);}
+    public Long getTotal(Long reviewNumber){ return likeMapper.getTotal(reviewNumber);}
+    // 좋아요 확인
+    public int checkLike(Long userNumber){return likeMapper.checkLike(userNumber);}
 }

@@ -1,5 +1,7 @@
 package com.example.lit.service.User;
 
+import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.user.*;
 import com.example.lit.domain.vo.user.FollowVO;
 import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.domain.vo.user.UserFileVO;
@@ -13,7 +15,11 @@ public interface UserService {
     //회원 가입
     public void register(UserVO userVO);
     //로그인
-    public boolean login(String email, String pw);
+
+    public UserVO login(String email, String pw);
+
+    public boolean adminLogin(String email, String password);
+
     //회원 탈퇴
     public void remove(Long userNumber);
     //내 정보 가져 오기
@@ -67,4 +73,12 @@ public interface UserService {
     public List<AchievementVO> getMedalList(Long userNumber);
     //메달 하나 보기
     public AchievementVO readMedal(Long userNumber);
+
+
+    // 관리자 유저 검색
+    public List<UserDTO> userSearch(SearchDTO searchDTO);
+    // 유저 토탈
+    public int getTotal();
+    // 차트 정보
+    public Long getUserChart(String date);
 }

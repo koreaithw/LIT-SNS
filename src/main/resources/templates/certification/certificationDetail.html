@@ -59,8 +59,8 @@
                                         </div>
                                     </div>
                                     <div class="detailContentProfileNameWrapper">
-                                        <div class="detailContentProfileName">아이디</div>
-                                        <div class="detailContentProfileIntro">소개</div>
+                                        <div class="detailContentProfileName"></div>
+                                        <div class="detailContentProfileIntro"></div>
                                     </div>
                                 </div>
                                 <div class="detailContentProfileButtonWrapper">
@@ -95,59 +95,23 @@
                                         </div>
                                         <div class="detailContentWriteFeed">
                                             <div class="detailContentWrite">
-                                                <div class="detailContentWriteName">아이디</div>
+                                                <div class="detailContentWriteName"></div>
                                                 <div class="detailContentWriteComment">
-                                                    원숭이 사진 공유합니다 ^^
+
                                                 </div>
                                             </div>
                                             <div class="detailContentWriteFeedBottom">
                                                 <div class="detailContentRegisterDate">
-                                                    등록일
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="reply_area">
-                                    <div class="detailContentWriteContainer">
-                                        <div class="detailContentWriteWrapper">
-                                            <div class="detailContentProfileImage">
-                                                <div class="detailContentProfileImageInner">
-                                                    <img class="detailProfileImage" src="monkey.jpg" style="width:100%">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="detailContentWriteFeed">
-                                            <div class="detailContentWrite">
-                                                <div class="detailContentWriteName">친구아이디</div>
-                                                <div class="detailContentWriteComment">
-                                                    너무 멋져요!
-                                                </div>
-                                            </div>
-                                            <div class="detailContentWriteFeedBottom">
-                                                <div class="detailContentRegisterDate">
-                                                    등록일
-                                                </div>
-                                                <!-- 삭제버튼 예시, 본인 댓글만 삭제가능하게 할 작업 필요 -->
-                                                <div class="detailContentCommentDelete">
-                                                    <a>삭제</a>
-                                                </div>
-                                                <!-- 댓글 좋아요, 답글 다는 부분 -->
-                                                <!-- <div class="detailContentLike" style="display:none;">
-                                                    좋아요
-                                                    <span>0</span>개
-                                                </div>
-                                                <div class="detailContentCommentIn" style="cursor:pointer">
-                                                    <a>답글달기</a>
-                                                </div>
-                                            </div>
-                                            <div class="detailContentCommentLook" style="cursor:pointer">
-                                                <div class="commentLine"></div>
-                                                <a>답글 보기(<span>0</span>개)</a> -->
-                                            </div>
-                                        </div>
-                                    </div>
+                                <!--반복구역-->
                                 </div>
+                                <a class="appendReply" style="text-align: center; padding: 20px;"><div></div></a>
 
                             </div>
                         </div>
@@ -168,8 +132,7 @@
                             </div>
                             <div class="detailContentFooterWrites">
                                 <div class="detailContentFooterWirtesInner">
-                                    <div>😊</div>
-                                    <div>&nbsp;<span>박진욱</span>님 외 <span>0</span>명이 좋아 합니다.</div>
+                                    <div>&nbsp;<span>좋아요&nbsp;</span><span id="likeCount">0</span><span>개</span></div>
                                 </div>
                                 <div class="detailContentFooterWirtesInnerDate">
                                     등록 날짜
@@ -267,48 +230,216 @@
 <script defer src="/assets/js/certification/report.js"></script>
 <script defer src="/assets/js/certification/certificationDetailAjax.js"></script>
 <script defer th:inline="javascript">
+    const replyDiv = $(".reply_area");
+    let pageNum = 1;
+
+    // 댓글 목록 불러오기
+    function showList(page){
+        reviewDetailService.getList({reviewNum: 1, page: page}, function(total, list){
+                let str = "";
 
 
-    // 신고하기
-    $(".reportButton").on("click",function () {
-        let $reason = $(this).attr("value");
+                if(list == null || list.length == 0){
+                    replyDiv.html("");
+                    return;
+                }
 
-        reportService.addReport({
-                userNumber: 1, reviewNumber: 1, reason: $reason},
-            function(result){reportModalClose();
-                alert("신고 완료");},
-            function(a, b, c){console.log(a, b, c)}
+                $.each(list, function(i, reply){
+                    str += '<div class="detailContentWriteContainer">';
+                    str += '<div class="detailContentWriteWrapper">';
+                    str += '<div class="detailContentProfileImage">';
+                    str += '<div class="detailContentProfileImageInne">';
+                    str += '<img class="detailProfileImage" src="/" style="width:100%">';
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</div>';
+                    str += '<div class="detailContentWriteFeed">';
+                    str += '<div class="detailContentWrite">';
+                    str += '<div class="detailContentWriteName">'
+                    str +=  reply.nickname;
+                    str += '</div>';
+                    str += '<div class="detailContentWriteComment">';
+                    str +=  reply.content;
+                    str += '</div>';
+                    str += '</div>';
+                    str += '<div class="detailContentWriteFeedBottom">';
+                    str += '<div class="detailContentRegisterDate">';
+                    str +=  reviewDetailService.getReplyDate(reply.registerDate);
+                    str += '</div>';
+                    str += '<div class="detailContentCommentDelete">';
+                    str += '<a class="remove ' + reply.replyNumber + '" style="cursor: pointer;">삭제</a>';
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</div>';
+
+                });
+                replyDiv.html(str.trim());
+                showReplyPage(total);
+            },function (a,b,c){console.log("error");}
         );
-    })
 
-    // 댓글쓰기
-    $(".commentButton").on("click",function () {
-        let $commentValue =$(".detailContentFooterCommentInputArea").val();
-        console.log("a")
-        reportService.addReply({
-                reviewNumber: 1, userNumber: 1,content: $commentValue},
-            function(result){
-                $(".detailContentFooterCommentInputArea").val("");
-                alert("댓글 등록 완료");},
-            function(a, b, c){console.log(a, b, c)}
-        );
-    })
+    };
 
-    // 좋아요
-    $(".detailContentLikeButton").on("click",function () {
-        reportService.addLike({ reviewNumber: 1, userNumber: 1},
-            function(result){
-                alert(result);},
-            function(a, b, c){console.log(a, b, c)})
-    })
+    //댓글 추가 보기
+   function showAppendList(page) {
 
-    // 좋아요 해제
-    $(".detailContentLikeCancel").on("click",function () {
-        reportService.removeLike({ userNumber: 1, reviewNumber: 1 },
-            function(result){
-                alert(result);},
-            function(a, b, c){console.log(a, b, c)})
-    })
+       reviewDetailService.getList({reviewNum: 1, page: page}, function (total, list) {
+
+               $(".appendReply div").html("");
+               let str = "";
+
+               $.each(list, function (i, reply) {
+                   str += '<div class="detailContentWriteContainer">';
+                   str += '<div class="detailContentWriteWrapper">';
+                   str += '<div class="detailContentProfileImage">';
+                   str += '<div class="detailContentProfileImageInne">';
+                   str += '<img class="detailProfileImage" src="/" style="width:100%">';
+                   str += '</div>';
+                   str += '</div>';
+                   str += '</div>';
+                   str += '<div class="detailContentWriteFeed">';
+                   str += '<div class="detailContentWrite">';
+                   str += '<div class="detailContentWriteName">'
+                   str += reply.nickname;
+                   str += '</div>';
+                   str += '<div class="detailContentWriteComment">';
+                   str += reply.content;
+                   str += '</div>';
+                   str += '</div>';
+                   str += '<div class="detailContentWriteFeedBottom">';
+                   str += '<div class="detailContentRegisterDate">';
+                   str += reviewDetailService.getReplyDate(reply.registerDate);
+                   str += '</div>';
+                   str += '<div class="detailContentCommentDelete">';
+                   str += '<a class="remove ' + reply.replyNumber + '" style="cursor: pointer;">삭제</a>';
+                   str += '</div>';
+                   str += '</div>';
+                   str += '</div>';
+                   str += '</div>';
+
+               });
+
+               replyDiv.append(str.trim());
+               showReplyPage(total);
+           }, function (a, b, c) {
+               console.log("error");
+           }
+       )};
+
+
+       // 신고하기
+       $(".reportButton").on("click", function () {
+           let $reason = $(this).attr("value");
+
+           reviewDetailService.addReport({
+                   userNumber: 1, reviewNumber: 1, reason: $reason
+               },
+               function (result) {
+                   reportModalClose();
+                   alert("신고 되었습니다.");
+               },
+               function (a, b, c) {
+                   console.log(a, b, c)
+               }
+           );
+       })
+
+       // 댓글쓰기
+       $(".commentButton").on("click", function () {
+           let $commentValue = $(".detailContentFooterCommentInputArea").val();
+           reviewDetailService.addReply({
+                   reviewNumber: 1, userNumber: 1, content: $commentValue
+               },
+               function (result) {
+                   $(".detailContentFooterCommentInputArea").val("");
+                   showList(1);
+                   $(".detailContentFeed").scrollTop(0);
+               },
+               function (a, b, c) {
+                   console.log(a, b, c)
+               }
+           );
+       })
+
+       // 좋아요
+       $(".detailContentLikeButton").on("click", function () {
+           reviewDetailService.addLike({reviewNumber: 1, userNumber: 1},
+               function (result) {
+                   $("#likeCount").html(result);
+               },
+               function (a, b, c) {
+                   console.log(a, b, c)
+               })
+       })
+
+
+       // 좋아요 해제
+       $(".detailContentLikeCancel").on("click", function () {
+           reviewDetailService.removeLike({userNumber: 1, reviewNumber: 1},
+               function (result) {
+                   $("#likeCount").html(result);
+               },
+               function (a, b, c) {
+                   console.log(a, b, c)
+               })
+       })
+
+       //댓글 append
+       $(".appendReply div").on("click", function (e) {
+           e.preventDefault();
+           pageNum = pageNum + 1;
+           showAppendList(pageNum);
+
+       })
+
+       //댓글 삭제
+       $(".reply_area").on("click", "div.detailContentCommentDelete a.remove", function (e) {
+           e.preventDefault();
+           let $replyNumber = $(this).attr("class").split(/\s+/);
+           reviewDetailService.removeReply($replyNumber[1], 1, function (result) {
+               if(result) {
+                   pageNum = 1;
+                   showList(pageNum);
+               }else{
+                   alert("본인 게시물만 삭제 가능합니다.");
+               }
+           })
+       })
+
+       // 클릭시 노출페이지 조절
+       function showReplyPage(total) {
+           let endPage = Math.ceil(pageNum / 10.0) * 10;
+           let realEnd = Math.ceil(total / 10.0);
+           const $paging = $(".appendReply div");
+
+           if (endPage > realEnd) {
+               endPage = realEnd;
+           }
+           let next = pageNum < realEnd;
+           let str = "<svg aria-label=\"댓글 더 읽어들이기\" class=\"_ab6-\" color=\"#262626\" fill=\"#262626\" height=\"24\" role=\"img\" viewBox=\"0 0 24 24\" " +
+               "width=\"24\"><circle cx=\"12.001\" cy=\"12.005\" fill=\"none\" r=\"10.5\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></circle>" +
+               "<line fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" x1=\"7.001\" x2=\"17.001\" y1=\"12.005\" y2=\"12.005\"></line>" +
+               "<line fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" x1=\"12.001\" x2=\"12.001\" y1=\"7.005\" y2=\"17.005\"></line></svg>";
+
+           if (next) {
+               $paging.html(str);
+           }
+
+
+       }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>

@@ -10,5 +10,7 @@ public interface LikeMapper {
     // 좋아요(취소)
     public void delete(LikeVO likeVO);
     // 좋아요 갯수 카운트
-    public int getTotal(Long reviewNumber);
+    public Long getTotal(Long reviewNumber);
+    // 좋아요 확인
+    public int checkLike(Long userNumber);
 }
