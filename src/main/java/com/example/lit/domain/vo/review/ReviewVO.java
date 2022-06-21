@@ -11,6 +11,7 @@ public class ReviewVO {
     private Long reviewNumber;
     private Long userNumber;
     private Long projectNumber;
+    private String nickname;
     private String content;
     private String registerDate;
 

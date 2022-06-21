@@ -32,14 +32,15 @@
               </div>
               <div class="form-wrapper">
                 <form
-                  action="/templates/admin/user-management.html"
+                  action="/admin/login"
                   class="login-form"
+                  method="post"
                 >
                   <div class="id-wrapper">
                     <input
                       type="text"
                       id="id"
-                      name="userEmail"
+                      name="email"
                       placeholder="아이디"
                     />
                   </div>
@@ -47,13 +48,13 @@
                     <input
                       type="password"
                       id="pw"
-                      name="userPassword"
+                      name="password"
                       placeholder="비밀번호"
                     />
                   </div>
                   <div class="button-wrapper flex">
                     <button
-                      type="submit"
+                      type="button"
                       class="btn background__red-none wh-100"
                     >
                       로그인
