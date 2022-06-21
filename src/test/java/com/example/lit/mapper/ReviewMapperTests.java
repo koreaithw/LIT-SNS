@@ -1,5 +1,10 @@
 package com.example.lit.mapper;
 
+
+import com.example.lit.domain.vo.ListDTO;
+import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.review.ReviewDTO;
+import com.example.lit.domain.vo.review.ReviewVO;
 import com.example.lit.mapper.review.ReviewMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -14,7 +19,25 @@ public class ReviewMapperTests {
     private ReviewMapper reviewMapper;
 
     @Test
-    public void getTest(){
-        reviewMapper.get(2L);
+    public void searchReviewTest(){
+        SearchDTO searchDTO = new SearchDTO();
+
+        searchDTO.setCategory("hobby");
+        searchDTO.setKeyword("21");
+        searchDTO.setType("user_number");
+
+        reviewMapper.searchReview(searchDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+    }
+
+    @Test
+    public void getTotalTodayTest(){
+        log.info(String.valueOf(reviewMapper.getTotalToday()));
+    }
+
+    @Test
+    public void getListTest(){
+        ListDTO listDTO = new ListDTO();
+        listDTO.setOrder("new");
+        reviewMapper.getList2(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
     }
 }

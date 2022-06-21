@@ -5,6 +5,8 @@ import com.example.lit.domain.dao.message.MessageDAO;
 import com.example.lit.domain.dao.user.UserDAO;
 import com.example.lit.domain.dao.user.UserFileDAO;
 import com.example.lit.domain.dao.user.achievement.AchievementDAO;
+import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.user.*;
 import com.example.lit.domain.vo.user.FollowVO;
 import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.domain.vo.user.UserFileVO;
@@ -30,9 +32,7 @@ public class UserServiceImple implements UserService{
     }
 
     @Override
-    public void kakaoRegister(UserVO userVO) {
-
-    }
+    public void kakaoRegister(UserVO userVO) {;}
 
     @Override
     public boolean dbEmailCheck(String email) {
@@ -45,18 +45,39 @@ public class UserServiceImple implements UserService{
     }
 
     @Override
+    public int MyReviewCnt(Long userNumber) { return userDAO.MyReviewCnt(userNumber); }
+
+    @Override
+    public int MyFollowerCnt(Long userNumber) { return userDAO.MyFollowerCnt(userNumber); }
+
+    @Override
+    public int MyFollowingCnt(Long userNumber) { return userDAO.MyFollowingCnt(userNumber); }
+
+    @Override
+    public List<UserVO> ModalFollower(Long userNumber) { return userDAO.ModalFollower(userNumber); }
+
+    @Override
+    public List<UserVO> ModalFollowing(Long userNumber) { return userDAO.ModalFollowing(userNumber); }
+
+    @Override
+    public void removeFollower(Long followerNumber, Long followingNumber) { userDAO.removeFollower(followerNumber, followingNumber); }
+
+    @Override
     public UserVO login(String email, String pw) {
         return userDAO.login(email, pw);
     }
 
     @Override
-    public void remove(Long userNumber) {
+    public UserVO read(Long userNumber) { return userDAO.read(userNumber); }
 
+    @Override
+    public boolean adminLogin(String email, String password) {
+        return userDAO.adminLogin(email, password);
     }
 
     @Override
-    public UserVO read(Long userNumber) {
-        return null;
+    public void remove(Long userNumber) {
+        userDAO.remove(userNumber);
     }
 
     @Override
@@ -142,5 +163,21 @@ public class UserServiceImple implements UserService{
     @Override
     public AchievementVO readMedal(Long userNumber) {
         return null;
+    }
+
+
+    @Override
+    public List<UserDTO> userSearch(SearchDTO searchDTO) {
+        return userDAO.userSearch(searchDTO);
+    }
+
+    @Override
+    public int getTotal() {
+        return userDAO.getTotal();
+    }
+
+    @Override
+    public Long getUserChart(String date) {
+        return userDAO.getUserChart(date);
     }
 }

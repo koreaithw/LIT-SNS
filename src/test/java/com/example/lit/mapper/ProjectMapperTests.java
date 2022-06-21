@@ -2,6 +2,9 @@ package com.example.lit.mapper;
 
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.ListDTO;
+import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.mapper.project.ProjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +21,7 @@ public class ProjectMapperTests {
 
     @Test
     public void getListTest(){
-        projectMapper.getList(new Criteria(1, 5),"popular").stream().map(ProjectVO::toString).forEach(log::info);
+        projectMapper.getList(new Criteria(1, 10),"lanking").stream().map(ProjectVO::toString).forEach(log::info);
     }
 
     @Test
@@ -53,4 +56,27 @@ public class ProjectMapperTests {
     }
 
 
+    @Test
+    public void searchProjectTest(){
+        SearchDTO searchDTO = new SearchDTO();
+        searchDTO.setStartDate("2022-06-01");
+        searchDTO.setEndDate("2022-07-01");
+        searchDTO.setKeyword("");
+        searchDTO.setType("title");
+        searchDTO.setCategory("");
+        projectMapper.searchProject(searchDTO).stream().map(ProjectDTO::toString).forEach(log::info);
+    }
+
+    @Test
+    public void getTotalByStatusTest(){
+        log.info(String.valueOf(projectMapper.getTotalByStatus(1L)));
+    }
+
+    @Test
+    public void getList2Test(){
+        ListDTO listDTO = new ListDTO();
+        listDTO.setOrder("popular");
+
+        projectMapper.getList2(listDTO).stream().map(ProjectVO::toString).forEach(log::info);
+    }
 }

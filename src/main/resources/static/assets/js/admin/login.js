@@ -9,3 +9,11 @@ $("#id, #pw").on("keyup keydown", function () {
         $button.addClass("background__red-none");
     }
 });
+
+$(".btn").on("click", function(e){
+    e.preventDefault();
+
+    if(!$(this).hasClass("background__red-none")){
+        $(".login-form").submit();
+    }
+})

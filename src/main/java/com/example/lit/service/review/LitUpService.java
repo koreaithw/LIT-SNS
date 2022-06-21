@@ -1,8 +1,10 @@
 package com.example.lit.service.review;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.ListDTO;
+import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
-
 import java.util.List;
 
 public interface LitUpService {
@@ -35,7 +37,7 @@ public interface LitUpService {
 
 
     //    리뷰 목록 가져오기
-    public List<ReviewVO> getList(Criteria criteria);
+    public List<ReviewVO> getList(Criteria criteria, String category);
     //    리뷰 등록
     public void register(ReviewVO reviewVO);
     //    리뷰 상세보기
@@ -48,6 +50,8 @@ public interface LitUpService {
     public int getTotal();
     //    성공, 실패용 인증 수 카운트
     public int resultCount();
+    //    프로젝트 정보 가져오기
+    public ProjectVO readPjt(Long projectNumber);
 
 
     // 사진 추가
@@ -60,4 +64,20 @@ public interface LitUpService {
     public List<ReviewFileVO> getImgs(Long reviewNumber);
     // DB에 없는 이미지 삭제
     public List<ReviewFileVO> getOldFiles();
+
+
+    //  인증글 검색(관리자)
+    public List<ReviewDTO> searchReview(SearchDTO searchDTO);
+    //리포트 검색(관리자)
+    public List<ReportDTO> searchReport(SearchDTO searchDTO);
+    //  오늘 등록된 인증글 수
+    public int getTotalTodayReview();
+    //오늘 등록된 리포트 토탈
+    public int getTotalTodayReport();
+    //  차트 정보
+    public Long getReviewChart(String date);
+    //  차트 정보
+    public Long getReportChart(String date);
+    // 리뷰 목록 가져오기2(테스트)
+    public List<ReviewDTO> getList2(ListDTO listDTO);
 }

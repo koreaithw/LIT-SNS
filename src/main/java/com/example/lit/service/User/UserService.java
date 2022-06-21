@@ -1,5 +1,7 @@
 package com.example.lit.service.User;
 
+import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.user.*;
 import com.example.lit.domain.vo.user.FollowVO;
 import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.domain.vo.user.UserFileVO;
@@ -13,7 +15,11 @@ public interface UserService {
     //회원 가입
     public void register(UserVO userVO);
     //로그인
+
     public UserVO login(String email, String pw);
+
+    public boolean adminLogin(String email, String password);
+
     //회원 탈퇴
     public void remove(Long userNumber);
     //내 정보 가져 오기
@@ -30,7 +36,18 @@ public interface UserService {
     public boolean dbEmailCheck(String email);
     //닉네임 중복체크
     public boolean dbNicknameCheck(String nickname);
-
+    //마이페이지 게시글 수 불러오기
+    public int MyReviewCnt(Long userNumber);
+    //마이페이지 팔로워 수
+    public int MyFollowerCnt(Long userNumber);
+    //마이페이지 팔로잉 수
+    public int MyFollowingCnt(Long userNumber);
+    //마이페이지 팔로워 모달 정보 띄우기
+    public List<UserVO> ModalFollower(Long userNumber);
+    //마이페이지 팔로우 모달 정보 띄우기
+    public List<UserVO> ModalFollowing(Long userNumber);
+    //마이페이지 팔로우 삭제
+    public void removeFollower(Long followerNumber, Long followingNumber);
 
 
     //유저 파일 업로드
@@ -67,4 +84,12 @@ public interface UserService {
     public List<AchievementVO> getMedalList(Long userNumber);
     //메달 하나 보기
     public AchievementVO readMedal(Long userNumber);
+
+
+    // 관리자 유저 검색
+    public List<UserDTO> userSearch(SearchDTO searchDTO);
+    // 유저 토탈
+    public int getTotal();
+    // 차트 정보
+    public Long getUserChart(String date);
 }

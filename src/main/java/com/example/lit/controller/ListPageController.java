@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -33,9 +34,13 @@ public class ListPageController {
 
     //카테고리 페이지
     @GetMapping("/cate/{cateName}")
-    public List<ReviewVO> goCatePage(){
+    public List<ReviewVO> goCatePage(@PathVariable String cateName){
         return null;
     }
 
+    @GetMapping("/list")
+    public String list(){
+        return "/main/list";
+    }
 
 }
