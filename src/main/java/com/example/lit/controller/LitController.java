@@ -33,7 +33,7 @@ public class LitController {
     @PostMapping("/info/{projectNumber}")
     public String info(){
 
-        litService.read();
+//        litService.read();
         return "";
     }
 
