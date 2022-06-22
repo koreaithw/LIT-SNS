@@ -1,5 +1,3 @@
-console.log("들어옴")
-console.log($("._icon_profile"));
 function headerAction(){
 
         if( $("._dropdown_wrapper").css("display") == 'none'){

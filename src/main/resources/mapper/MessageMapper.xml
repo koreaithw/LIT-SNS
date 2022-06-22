@@ -3,14 +3,14 @@
 <mapper namespace="com.example.lit.mapper.message.MessageMapper">
     <insert id="insert">
         INSERT INTO TBL_MESSAGE
-        (MESSAGE_NUMBER, SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM, CONTENT, MESSAGE_DATE)
-        VALUES(SEQ_MESSAGE.NEXTVAL, #{sendUserNumber}, #{receiveUserNumber}, #{room}, #{content}, #{messageDate})
+        (MESSAGE_NUMBER, SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM_ID, CONTENT, MESSAGE_DATE)
+        VALUES(SEQ_MESSAGE.NEXTVAL, #{sendUserNumber}, #{receiveUserNumber}, #{roomId}, #{content}, #{messageDate})
     </insert>
 
     <select id="getList" resultType="messageVO">
-        SELECT MESSAGE_NUMBER, SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM, CONTENT, MESSAGE_DATE
+        SELECT MESSAGE_NUMBER, SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM_ID, CONTENT, MESSAGE_DATE
         FROM TBL_MESSAGE
-        WHERE ROOM = #{room}
+        WHERE ROOM_ID = #{roomId}
     </select>
 
     <select id="getFollowerList" resultType="userVO">
@@ -77,5 +77,6 @@
         WHERE RN > (#{pageNum}-1) * #{amount}
         ]]>
     </select>
+
 
 </mapper>

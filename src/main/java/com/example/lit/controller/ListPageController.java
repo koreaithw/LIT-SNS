@@ -37,10 +37,16 @@ public class ListPageController {
     public List<ReviewVO> goCatePage(@PathVariable String cateName){
         return null;
     }
-
-    @GetMapping("/list")
-    public String list(){
-        return "/main/list";
+    
+    // 프로젝트 리스트
+    @GetMapping("/lits")
+    public String lits(){
+        return "/main/lits";
+    }
+    // 인증 리스트
+    @GetMapping("/litups")
+    public String litups(){
+        return "/main/litups";
     }
 
 }

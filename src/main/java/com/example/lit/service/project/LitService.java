@@ -1,11 +1,13 @@
 package com.example.lit.service.project;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ParticipationVO;
 import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
+import com.example.lit.domain.vo.review.ReviewDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,6 +19,7 @@ public interface LitService {
     public void register(ProjectVO projectVO);
     //    프로젝트 상세보기
     public ProjectVO read(Long projectNumber);
+
     //    프로젝트 삭제
     public boolean remove(Long projectNumber);
     //    프로젝트 전체 개수
@@ -44,4 +47,7 @@ public interface LitService {
     public void changeStatus(Long projectNumber, Long status);
     // 프로젝트 상태로 토탈 가져오기
     public int getTotalByStatus(Long status);
+
+    //메인 리스트
+    public List<ProjectDTO> getMainList(ListDTO listDTO);
 }

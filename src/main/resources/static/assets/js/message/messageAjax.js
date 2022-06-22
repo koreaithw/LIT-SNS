@@ -45,7 +45,7 @@ let messageService = (function () {
 
     function getMessageList(param, callback, error){
         $.ajax({
-            url: "/message/getMessageList/ " + param.sendUserNumber + "/" + param.receiveUserNumber,
+            url: "/message/getMessageList/ " + param.sendUserNumber + "/" + param.receiveUserNumber + "/" + param.pageNum,
             type: "get",
             dataType: "json",
             contentType: "application/json",
@@ -54,11 +54,9 @@ let messageService = (function () {
                     callback(result);
                 }
             }
-
-
-
-        })
+        });
     }
+
 
     return {send: send, getFollowerList: getFollowerList, searchFollowerList:searchFollowerList, getMessageList:getMessageList};
 })();

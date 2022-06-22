@@ -1,5 +1,6 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.dao.message.ChatRoomRepository;
 import com.example.lit.domain.vo.messsage.MessageDTO;
 import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.domain.vo.user.UserVO;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/message/*")
 public class MessageRestController {
     private final MessageService messageService;
+    private final ChatRoomRepository chatRoomRepository;
 
 //    public static List<MessageVO> messageList = new ArrayList<MessageVO>();
 
@@ -50,13 +52,15 @@ public class MessageRestController {
         return messageService.searchFollower(keyword, userNumber);
     }
 
-    @GetMapping("/getMessageList/{sendUserNumber}/{receiveUserNumber}")
+    @GetMapping("/getMessageList/{sendUserNumber}/{receiveUserNumber}/{pageNum}")
     public List<MessageDTO> getMessageList(@PathVariable("sendUserNumber") Long sendUserNumber,
-                                          @PathVariable("receiveUserNumber") Long receiveUserNumber){
+                                          @PathVariable("receiveUserNumber") Long receiveUserNumber,
+                                           @PathVariable("pageNum") Long pageNum){
 
         MessageDTO messageDTO = new MessageDTO();
         messageDTO.setSendUserNumber(sendUserNumber);
         messageDTO.setReceiveUserNumber(receiveUserNumber);
+        messageDTO.setPageNum(pageNum);
 
         return messageService.getMessageList(messageDTO);
     }

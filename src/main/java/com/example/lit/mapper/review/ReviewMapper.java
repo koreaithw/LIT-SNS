@@ -1,6 +1,7 @@
 package com.example.lit.mapper.review;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.review.ReviewDTO;
@@ -32,4 +33,6 @@ public interface ReviewMapper {
     public int getTotalToday();
     //  차트 정보
     public Long getReviewChart(String date);
+    // 리뷰 목록 가져오기2(테스트)
+    public List<ReviewDTO> getMainList(ListDTO listDTO);
 }

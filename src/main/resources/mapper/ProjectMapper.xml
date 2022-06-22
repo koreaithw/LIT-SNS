@@ -38,32 +38,8 @@
         WHERE ROWNUM > (#{criteria.pageNum} - 1) * #{criteria.amount}
         ]]>
 
-        <!--        <![CDATA[-->
-        <!--        SELECT RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
-        <!--        FROM-->
-        <!--        (-->
-        <!--                SELECT ROWNUM RN, PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE-->
-        <!--                FROM    TBL_PROJECT PJ, TBL_PARTICIPATION PT-->
-        <!--        ]]>-->
-        <!--                 <choose>-->
-        <!--                     <when test="category == 'popular'">-->
-        <!--                         <![CDATA[   WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY COUNT(PT.USER_NUMBER)  ]]>-->
-        <!--                     </when>-->
-        <!--                     <when test="category == 'new'">-->
-        <!--                         <![CDATA[  WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
-        <!--                     </when>-->
-        <!--                     <otherwise>-->
-        <!--                         <![CDATA[  WHERE PJ.CATEGORY =#{category} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount} ORDER BY PJ.START_DATE DESC ]]>-->
-        <!--                     </otherwise>-->
-        <!--                 </choose>-->
-        <!--        <![CDATA[-->
-        <!--        )-->
-        <!--        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}-->
-        <!--        ]]>-->
-
     </select>
     <!--    ###############################동적 쿼리 쓸것-->
-
     <insert id="insert">
         <selectKey keyProperty="projectNumber" resultType="long" order="BEFORE">
             SELECT SEQ_PROJECT.NEXTVAL FROM DUAL
@@ -145,6 +121,11 @@
         FROM TBL_PROJECT WHERE PROJECT_NUMBER = #{projectNumber}
     </select>
 
+    <select id="getForReview" resultType="projectDTO">
+        SELECT PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE, US.NICKNAME
+        FROM TBL_PROJECT PJ, TBL_USER US WHERE PJ.PROJECT_NUMBER = #{projectNumber} AND US.USER_NUMBER =#{userNumber}
+    </select>
+
     <delete id="delete">
         DELETE FROM TBL_PROJECT WHERE PROJECT_NUMBER = #{projectNumber}
     </delete>
@@ -158,11 +139,44 @@
         SET STATUS = #{status}
         WHERE PROJECT_NUMBER = #{projectNumber}
     </update>
-    
+
     <select id="getTotalByStatus" resultType="_int">
         SELECT COUNT(PROJECT_NUMBER) FROM TBL_PROJECT
         WHERE STATUS = #{status}
     </select>
 
+    <select id="getMainList" resultType="projectDTO">
+        SELECT TOTAL, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION,
+        APPLY_COUNT, USER_NUMBER, START_DATE, END_DATE, STATUS, REGISTER_DATE
+        FROM(
+            SELECT ROWNUM RN, TOTAL, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION,
+            APPLY_COUNT, USER_NUMBER, START_DATE, END_DATE, STATUS, REGISTER_DATE
+            FROM(
+                SELECT COUNT(PROJECT_NUMBER) OVER() AS TOTAL, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION,
+                APPLY_COUNT, USER_NUMBER, START_DATE, END_DATE, STATUS, REGISTER_DATE
+                FROM TBL_PROJECT
+                WHERE STATUS = 1 --메인은 진행중인 것만 띄우기
+                <if test="category != null and category != ''">
+                    AND p.CATEGORY = #{category}
+                </if>
+                <if test="order != null and order != ''">
+                    <choose>
+                        <when test="order == 'popular'">
+                            ORDER BY APPLY_COUNT DESC
+                        </when>
+                         <when test="order == 'new'">
+                             ORDER BY START_DATE
+                         </when>
+                    </choose>
+                </if>
+            )
+            <![CDATA[
+                WHERE ROWNUM <= #{pageNum} * #{amount}
+                ]]>
+        )
+        <![CDATA[
+    WHERE RN > (#{pageNum} - 1) * #{amount}
+    ]]>
+    </select>
 
 </mapper>

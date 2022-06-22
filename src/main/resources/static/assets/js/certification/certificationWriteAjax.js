@@ -1,16 +1,33 @@
 let reviewWriteService = (function () {
 
-
+    //리뷰 작성
+    function reviewRegister(reviewVO, callback, error) {
+        $.ajax({
+            url: "/litUp/register",
+            type: "post" ,
+            data: JSON.stringify(reviewVO) ,
+            contentType: "application/json" ,
+            success: function (result) {
+                if(callback){
+                    callback(result);
+                }
+            } ,
+            error: function (xhr, status, er) {
+                if(error){
+                    error(xhr, status, er);
+                }
+            }
+        })
+    }
 
     //프로젝트 유저번호로 유저 네임 가져오는 DTO 유무 확인 필요, 관련해서 PROJECT MAPPER ,LISTUPSERVICE, IMPLE, CONTROLLER 수정 필요
-    function getProject(projectNumber, callback, error) {
+    function getProject(number, callback, error) {
         $.ajax({
-            url: "/litUp/getProject/"+projectNumber ,
+            url: "/litUp/getProject/"+number.projectNumber+"/"+number.userNumber ,
             type: "get" ,
-            success: function (projectVO) {
+            success: function (projectDTO) {
                 if(callback){
-                    // 닉네임이 빠짐!!@!@!!@!@!!!!!!!!!!
-                    callback(projectVO.title, projectVO.content, projectVO.startDate);
+                    callback(projectDTO.title, projectDTO.content, projectDTO.startDate, projectDTO.nickname);
                 }
             } ,
             error: function (xhr, status, er) {

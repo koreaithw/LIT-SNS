@@ -1,7 +1,7 @@
 package com.example.lit.mapper;
 
 import com.example.lit.domain.vo.Criteria;
-import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
@@ -69,5 +69,13 @@ public class ProjectMapperTests {
     @Test
     public void getTotalByStatusTest(){
         log.info(String.valueOf(projectMapper.getTotalByStatus(1L)));
+    }
+
+    @Test
+    public void getMainListTest(){
+        ListDTO listDTO = new ListDTO();
+        listDTO.setOrder("popular");
+
+        projectMapper.getMainList(listDTO).stream().map(ProjectDTO::toString).forEach(log::info);
     }
 }

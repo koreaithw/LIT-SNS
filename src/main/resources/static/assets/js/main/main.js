@@ -16,7 +16,7 @@
 //             idx= 1;
 
 //     }
-    
+
 //     $("._ad_wrapper>img").eq(now - 1).css({"left": "0%", "z-index":"0"});
 //     $("._ad_wrapper>img").eq(now).css({"left": "-100%"});
 //     $("._ad_wrapper>img").eq(idx).css({"left": "0%", "z-index":"-10"});
@@ -34,7 +34,7 @@ let len = $("._ad_wrapper>img").length;
 
 $("._ad_wrapper>img").css({"left": "-100%", "z-index":"0"}).eq(now).css({"left": "0%", "z-index":"1"});
 function slide() {
-    ani = (now+1) == len ? 0 : now + 1; 
+    ani = (now+1) == len ? 0 : now + 1;
 
     $("._ad_wrapper>img").eq(now).css({"z-index":"0"});
     $("._ad_wrapper>img").eq(ani).css({"left": "0%", "z-index":"1"});
@@ -63,6 +63,9 @@ $(document).ready(function(){
 
     $("#header").load("/src/main/resources/templates/header.html")
     $("#footer").load("/src/main/resources/templates/footer.html")
+
+    getLitUpList();
+
 })
 
     // ####################################################
@@ -70,9 +73,9 @@ $(document).ready(function(){
 
     // $(".list1").on("click",function(e){
     //     e.preventDefault();
-        
+
     //     $.ajax({
-            
+
 
 
     //     })
@@ -83,11 +86,11 @@ $(document).ready(function(){
 
     // $(".list2").on("click",function(e){
     //     e.preventDefault();
-        
-    //     $.ajax({
-            
 
-            
+    //     $.ajax({
+
+
+
     //     })
     // })
 
@@ -103,12 +106,97 @@ lit1.on("click", function(){
     $('#lit1Img').attr('src', '/images/mypage/menu.png');
     lit2.attr('class', 'lits2Off');
     $('#lit2Img').attr('src', '/images/mypage/fire.png');
+    getLitUpList();
   });
-  
+
   lit2.on("click", function(){
     // color: rgb(142, 142, 142); 검은색
     lit2.attr('class', 'lits2On');
     $('#lit2Img').attr('src', '/images/mypage/lists.png');
     lit1.attr('class', 'lits1Off');
     $('#lit1Img').attr('src', '/images/mypage/menu2.png');
+    getLitList();
   });
+
+
+
+  let getLitUpList = function(){
+      mainService.mainLitUp({
+          order : "new"
+      }, function(result){
+          let str = "";
+          $(".photoContents > div").html("");
+          result.forEach( (data, i) => {
+              let file = data.reviewFileList;
+              if(file[0]){
+                  str +=
+                      "<figure>" +
+                      "<a href=\"" + data.reviewNumber + "\">" +
+                      "<img alt=\"\" src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">" +
+                      "</a>" +
+                      "</figure>";
+              }
+          })
+          $(".photoContents > div").append(str);
+      })
+  }
+
+  let getLitList = function(){
+      mainService.mainLit({order : "new"}, function(result){
+          let str = "";
+          $(".photoContents > div").html("");
+          result.forEach( (data, i) => {
+              let file = data.projectFile;
+              if(file){
+                  str +=
+                      "<figure>" +
+                      "<a href=\"" + data.reviewNumber + "\">" +
+                      "<img alt=\"\" src=\"/litUp/display?fileName=" + file.uploadPath + "/" + file.uuid + "_" + file.name + "\">" +
+                      "</a>" +
+                      "</figure>";
+              }
+          })
+          $(".photoContents > div").append(str);
+
+      })
+  }
+
+
+  let mainService = (function(){
+      function mainLitUp(info, callback, error){
+          $.ajax({
+              url : "/litUp/getMainList",
+              type : "post",
+              data : JSON.stringify(info),
+              contentType : "application/json",
+              dataType : "json",
+              success : function(result){
+                  if(callback) { callback(result); }
+              },
+              error : function (xhr, status, er) {
+                  if(error) { error(er); }
+              }
+          })
+      }
+      function mainLit(info, callback, error){
+          $.ajax({
+              url : "/lit/getMainList",
+              type : "post",
+              data : JSON.stringify(info),
+              contentType: "application/json",
+              dataType : "json",
+              success : function(result){
+                  if(callback) { callback(result); }
+              },
+              error : function (xhr, status, er) {
+                  if(error) { error(er); }
+              }
+          })
+      }
+
+
+      return {
+          mainLit:mainLit,
+          mainLitUp:mainLitUp
+      };
+  })();
