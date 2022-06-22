@@ -15,7 +15,7 @@ public interface MessageMapper {
     public void insert(MessageVO messageVO);
 
     //메세지 리스트 띄우기
-    public List<MessageVO> getList(String room);
+    public List<MessageVO> getList(String roomId);
 
     //메세지 할 팔로워 목록 불러오기
     public List<UserVO> getFollowerList(Long userNumber);
@@ -33,4 +33,5 @@ public interface MessageMapper {
 //    public List<MessageDTO> getMessageList(@Param("messageDTO") MessageDTO messageDTO, @Param("sendUserNumber") Long sendUserNumber, @Param("receiveUserNumber") Long receiveUserNumber);
 //    public List<MessageDTO> getMessageList(MessageDTO messageDTO, Long sendUserNumber, Long receiveUserNumber);
     public List<MessageDTO> getMessageList(MessageDTO messageDTO);
+
 }
