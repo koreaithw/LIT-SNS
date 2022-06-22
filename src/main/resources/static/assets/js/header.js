@@ -74,6 +74,8 @@ function likeBtnAct() {
         },
     });
 }
+
+// 알림 작업중 미완성
 function alterLike(likes) {
     let str = "";
     $(likes).each(function (i, like) {

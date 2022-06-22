@@ -1,6 +1,5 @@
 package com.example.lit.controller;
 
-import com.example.lit.service.review.LitUpService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

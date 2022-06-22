@@ -25,5 +25,5 @@
         SELECT UUID, UPLOAD_PATH, NAME, IMAGE, REVIEW_NUMBER, FILE_NUMBER
         FROM TBL_REVIEW_FILE
         WHERE UPLOAD_PATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
-        </select>
-    </mapper>
+    </select>
+</mapper>
