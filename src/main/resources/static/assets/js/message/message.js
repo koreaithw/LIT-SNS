@@ -7,19 +7,19 @@ const userNumber = 1;
 
 //메세지 인풋 창에서 엔터키입력
 $('.messageWrite').on('keyup', function (key) {
-    let receiveUserNumber = 10; // 채팅방 들어올 때 받아오기
-    let room = "3번방"; // 채팅방 들어올 때 받아오기
+    let receiveUserNumber = $('.contentTop').find('input[type="hidden"]').attr('id'); // 채팅방 들어올 때 받아오기
+    let roomId = "1번방"; // 채팅방 들어올 때 받아오기
     let content = $('.messageWrite').val()
 
 
     /////////////////////webSocket 메세지 추가 부분 연결 필요
 
-    if (key.keyCode == 13) {
+    if (key.keyCode == 13 && content != "") {
 
         messageService.send({
             sendUserNumber: userNumber,
             receiveUserNumber: receiveUserNumber,
-            room: room,
+            roomId: roomId,
             content: content
             // });
 
@@ -49,7 +49,11 @@ $('.messageWrite').on('keyup', function (key) {
 
         $('.content').scrollTop($contentIn.height());
         $('.messageWrite').val("");
+        $('.dmList > figure > a[href="' + receiveUserNumber + '"]').find('.dmData').find('.recentMessage').text(content);
+    }else{
+        return;
     }
+    send(content);
 });
 
 
@@ -73,10 +77,10 @@ function dmSubmit() {
                 '<p>' +
                 item.name +
                 '</p>' +
-                '<input type="hidden" value="' + item.userNumber + '">' +
+                '<input type="hidden" id="' + item.userNumber + '">' +
                 '</div>' +
-                '<div class="dmBtn">' +
-                '<a href="" class="userDMLink">채팅</a>' +
+                '<div class="dmBtn2">' +
+                '<a class="userDMLink" onclick="startChat(' + item.userNumber + ',this' + ')">채팅</a>' +
                 '</div>' +
                 '</div>';
         });
@@ -106,12 +110,12 @@ $(".dmBtn>a").on("click", function (e) {
     ///////////////////////webSocket 방 열어 주는 부분 추가 해야 함
     ///////////////////////////////////////////////////////////
 
-    let receiveUserNumber = $(this).find("input[type='hidden']").val();
-    let nickname = $(this).find('.dmData').children(0).html();
+    let receiveUserNumber = $(this).find("input[type='hidden']").attr('id');
+    nickname = $(this).find('.dmData').children(0).html();
     let pageNum = $contentIn.children().length / amount || 1;
 
     $('.contentTop').children(1).find('span').text(nickname + '님');
-    $('.contentTop').find('input[type="hidden"]').val(receiveUserNumber);
+    $('.contentTop').find('input[type="hidden"]').attr('id',receiveUserNumber);
 
     messageService.getMessageList({
         sendUserNumber: userNumber,
@@ -166,10 +170,12 @@ $(".dmBtn>a").on("click", function (e) {
         //     }
         // });
         $contentIn.html(message);
-        $('.content > div').attr("class", result[0].total.toString());
+        if(result[0]){
+            $('.content > div').attr("class", result[0].total.toString());
+        }
         $('.content').scrollTop($contentIn.height());
     });
-
+    connect();
 });
 
 // 스크롤 시 20개씩 불러오기
@@ -184,7 +190,7 @@ $('.content').scroll(function () {
         }
 
         let pageNum = $contentIn.children().length / amount + 1;
-        let receiveUserNumber = $('.contentTop').find('input[type="hidden"]').val()
+        let receiveUserNumber = $('.contentTop').find('input[type="hidden"]').attr('id')
 
         messageService.getMessageList({
             sendUserNumber: userNumber,
@@ -220,7 +226,6 @@ $('.content').scroll(function () {
             $('.content').scrollTop($contentIn.height()/2);
         });
     }
-
 });
 
 
@@ -248,11 +253,77 @@ $(".modalSearch > input").keyup(function () {
                 '</p>' +
                 '<input type="hidden" value="' + item.userNumber + '">' +
                 '</div>' +
-                '<div class="dmBtn">' +
-                '<a href="" class="userDMLink">채팅</a>' +
+                '<div class="dmBtn2">' +
+                '<a class="userDMLink" onclick="startChat(' + item.userNumber + ',this' + ')">채팅</a>' +
                 '</div>' +
                 '</div>';
         });
         $('.userList').html(res)
     });
 });
+
+function startChat(receiveUserNumber, nick){
+
+    // 해당 유저와의 채팅방이 없다면 채팅방 추가하기
+
+
+
+
+    // 처음 클릭이면
+    if (!$(".dmBox").hasClass("on")) {
+        $(".firstBox").removeClass("on");
+        $(".dmBox").addClass("on");
+    }
+    $("#modal1").removeClass("on");
+    $contentIn.empty();
+
+    ///////////////////////webSocket 방 열어 주는 부분 추가 해야 함
+    ///////////////////////////////////////////////////////////
+
+    let nickname = $(nick).parent().siblings('.userData').children(1).html();
+    let pageNum = $contentIn.children().length / amount || 1;
+
+    $('.contentTop').children(1).find('span').text(nickname + '님');
+    $('.contentTop').find('input[type="hidden"]').attr('id', receiveUserNumber);
+
+    messageService.getMessageList({
+        sendUserNumber: userNumber,
+        receiveUserNumber: receiveUserNumber,
+        pageNum : pageNum
+    },function(result){
+        let message = "";
+
+        //채팅에 맞게 순서 반대로 뿌려줌, 기본 20개
+        for (let i = result.length - 1; i >= 0; i--) {
+            if (result[i].sendUserNumber == userNumber){
+                message += "<div class=\"dmStyle1\">" +
+                    "<div class=\"dmImg\">" +
+                    "<img src=\"\" alt=\"\">" +
+                    "</div>" +
+                    "<div class=\"text\">" +
+                    result[i].content +
+                    "</div>" +
+                    "</div>";
+            }else{
+                message += "<div class=\"dmStyle2\">" +
+                    "<div class=\"dmImg\">" +
+                    "<img src='/images/project/domImg/indi01.webp' alt=''>" +
+                    "</div>" +
+                    "<div class=\"text\">" +
+                    result[i].content +
+                    "</div>" +
+                    "</div>";
+            }
+
+        }
+
+        $contentIn.html(message);
+        if(result[0]){
+            $('.content > div').attr("class", result[0].total.toString());
+        }
+        $('.content').scrollTop($contentIn.height());
+    });
+
+
+
+}

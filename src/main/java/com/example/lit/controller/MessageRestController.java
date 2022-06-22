@@ -1,5 +1,6 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.dao.message.ChatRoomRepository;
 import com.example.lit.domain.vo.messsage.MessageDTO;
 import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.domain.vo.user.UserVO;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/message/*")
 public class MessageRestController {
     private final MessageService messageService;
+    private final ChatRoomRepository chatRoomRepository;
 
 //    public static List<MessageVO> messageList = new ArrayList<MessageVO>();
 

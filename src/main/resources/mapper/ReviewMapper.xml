@@ -51,8 +51,8 @@
             SELECT SEQ_REVIEW.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO TBL_REVIEW
-        (REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT)
-        VALUES(#{reviewNumber}, #{userNumber}, #{projectNumber}, #{content})
+        (REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT, NICKNAME)
+        VALUES(#{reviewNumber}, #{userNumber}, #{projectNumber}, #{content}, (SELECT NICKNAME FROM TBL_USER WHERE USER_NUMBER = #{userNumber}))
     </insert>
 
     <select id="get" resultType="reviewVO">

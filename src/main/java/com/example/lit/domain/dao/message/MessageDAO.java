@@ -19,7 +19,7 @@ public class MessageDAO {
     public void register(MessageVO messageVO){ messageMapper.insert(messageVO); }
 
     //메세지 리스트 띄우기
-    public List<MessageVO> getList(String room){ return messageMapper.getList(room); }
+    public List<MessageVO> getList(String roomId){ return messageMapper.getList(roomId); }
 
     //메세지 할 팔로워 목록 불러오기
     public List<UserVO> getFollowerList(Long userNumber){ return messageMapper.getFollowerList(userNumber); }
