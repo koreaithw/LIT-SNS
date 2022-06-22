@@ -51,5 +51,4 @@ public class FollowMapperTest {
         log.info("---------------------");
     }
 
-
 }
