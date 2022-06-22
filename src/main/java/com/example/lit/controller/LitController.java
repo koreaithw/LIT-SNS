@@ -30,6 +30,13 @@ public class LitController {
         return "/main/main";
     }
 
+    @PostMapping("/info/{projectNumber}")
+    public String info(){
+
+//        litService.read();
+        return "";
+    }
+
 
 
 }

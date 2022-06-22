@@ -47,4 +47,7 @@ public interface LitService {
     public void changeStatus(Long projectNumber, Long status);
     // 프로젝트 상태로 토탈 가져오기
     public int getTotalByStatus(Long status);
+
+    //메인 리스트
+    public List<ProjectDTO> getMainList(ListDTO listDTO);
 }
