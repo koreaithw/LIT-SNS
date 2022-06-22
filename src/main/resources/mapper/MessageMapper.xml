@@ -78,5 +78,10 @@
         ]]>
     </select>
 
+    <insert id="newRoom">
+        INSERT INTO TBL_MESSAGE_ROOM
+        (ROOM_ID, ROOM)
+        VALUES(#{roomId}, #{room})
+    </insert>
 
 </mapper>
