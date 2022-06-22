@@ -84,11 +84,6 @@ public class UserController {
         return null;
     }
 
-    //회원 탈퇴
-    @DeleteMapping("/withdraw")
-    public String withdraw(String pw){
-        return null;
-    }
 
     //가입
     @PostMapping("/join")

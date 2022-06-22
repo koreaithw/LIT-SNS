@@ -41,7 +41,7 @@ public class UserRestController {
         return "팔로워 삭제 성공" + followerNumber;
     }
 
-    // 마이페이지 - 비밀번호 변경 - 이전 비밀번호 조회
+    // 마이페이지 - 비밀번호 변경부분 유저 정보 띄우기
     @PostMapping("/oldPwCheck")
     public boolean dbOldPwCheck(@RequestBody UserVO userVO){
         log.info("이전 비밀번호 조회=============");
@@ -51,13 +51,20 @@ public class UserRestController {
         return userService.dbOldPwCheck(userVO.getPassword(), userVO.getUserNumber());
     }
 
-    // 마이페이지 - 회원 탈퇴
+    // 마이페이지 - 회원 탈퇴부분 유저 정보 띄우기
     @PostMapping("/withdrawCheck")
     public boolean withdrawCheck(@RequestBody UserVO userVO){
         log.info(userVO.getPassword() + "###################");
         log.info(userVO + "###################");
         log.info(userService.dbOldPwCheck(userVO.getPassword(), userVO.getUserNumber()) + " $$$$$$$$$$$");
         return userService.dbOldPwCheck(userVO.getPassword(), userVO.getUserNumber());
+    }
+
+    // 마이페이지 - 회원 탈퇴 버튼
+    @DeleteMapping("/withdraw/{userNumber}")
+    public String withdraw(@PathVariable("followerNumber") Long userNumber){
+        userService.remove(userNumber);
+        return "회원 탈퇴 성공";
     }
 
     // 유저 프로필 사진 불러오기
