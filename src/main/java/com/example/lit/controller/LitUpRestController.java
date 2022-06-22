@@ -2,20 +2,18 @@ package com.example.lit.controller;
 
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.project.ProjectDTO;
-import com.example.lit.domain.vo.project.ProjectFileVO;
+import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
 import com.example.lit.domain.vo.user.UserFileVO;
 import com.example.lit.service.User.UserService;
 import com.example.lit.service.review.LitUpService;
-import com.example.lit.service.review.LitUpServiceImple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -212,13 +210,14 @@ public class LitUpRestController {
 
 
     //========== 메인 리스트 ===========
-    @GetMapping("/getList2")
-    public List<ReviewDTO> getList2(){
+    @PostMapping("/getList2")
+    public List<ReviewDTO> getList2(@RequestBody ListDTO listDTO){
         log.info("***************************");
-        log.info("LitUpRestController : getList2(get)");
+        log.info("LitUpRestController : getList2(post)");
         log.info("***************************");
 
-        return null;
+        litUpService.getList2(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+        return litUpService.getList2(listDTO);
     }
 
     //모달창 인증글 작성하기 중 프로젝트 정보 가져오기
