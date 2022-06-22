@@ -144,14 +144,16 @@ lit1.on("click", function(){
   let getLitList = function(){
       mainService.mainLit({order : "new"}, function(result){
           let str = "";
+          console.log(result);
           $(".photoContents > div").html("");
           result.forEach( (data, i) => {
               let file = data.projectFile;
+              console.log(data)
               if(file){
                   str +=
                       "<figure>" +
-                      "<a href=\"" + data.reviewNumber + "\">" +
-                      "<img alt=\"\" src=\"/litUp/display?fileName=" + file.uploadPath + "/" + file.uuid + "_" + file.name + "\">" +
+                      "<a href=\"" + data.projectNumber + "\">" +
+                      "<img alt=\"\" src=\"/lit/display?fileName=" + file.uploadPath + "/" + file.uuid + "_" + file.name + "\">" +
                       "</a>" +
                       "</figure>";
               }
@@ -178,6 +180,7 @@ lit1.on("click", function(){
               }
           })
       }
+
       function mainLit(info, callback, error){
           $.ajax({
               url : "/lit/getMainList",
