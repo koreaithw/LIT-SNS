@@ -5,6 +5,7 @@ import com.example.lit.domain.dao.review.*;
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
 import lombok.RequiredArgsConstructor;
@@ -118,13 +119,8 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
-    public ProjectVO readPjt(Long projectNumber) {
-        return projectDAO.read(projectNumber);
-    }
-
-    @Override
-    public void registerImg(ReviewFileVO reviewFileVO) {
-
+    public ProjectDTO readForReview(Long projectNumber, Long userNumber) {
+        return projectDAO.getForReview(projectNumber, userNumber);
     }
 
     @Override
