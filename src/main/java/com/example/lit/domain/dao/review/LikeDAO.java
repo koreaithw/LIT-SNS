@@ -1,9 +1,12 @@
 package com.example.lit.domain.dao.review;
 
+import com.example.lit.domain.vo.review.LikeDTO;
 import com.example.lit.domain.vo.review.LikeVO;
 import com.example.lit.mapper.review.LikeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -18,4 +21,7 @@ public class LikeDAO {
     public Long getTotal(Long reviewNumber){ return likeMapper.getTotal(reviewNumber);}
     // 좋아요 확인
     public int checkLike(Long userNumber){return likeMapper.checkLike(userNumber);}
+
+    // 좋아요 리스트(알림용)
+    public List<LikeDTO> getList(Long userNumber) {return likeMapper.getList(userNumber);}
 }

@@ -1,6 +1,9 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.vo.ListDTO;
+import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
+import com.example.lit.service.project.LitService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.FileCopyUtils;
@@ -21,11 +24,11 @@ import java.util.UUID;
 @Slf4j
 @RequestMapping("/lit/*")
 public class LitRestController {
-
+    private final LitService litService;
 
     @PostMapping("/upload")
     public List<ProjectFileVO> upload(MultipartFile[] uploadFiles) throws IOException {
-        String uploadFolder = "D:/upload";
+        String uploadFolder = "C:/upload";
         ArrayList<ProjectFileVO> files = new ArrayList<>();
 
 //        yyyy/MM/dd 경로 만들기
@@ -59,7 +62,7 @@ public class LitRestController {
 
     @GetMapping("/display")
     public byte[] getFile(String fileName) throws IOException{
-        File file = new File("D:/upload/", fileName);
+        File file = new File("C:/upload/", fileName);
         log.info(file.toString());
         return FileCopyUtils.copyToByteArray(file);
     }
@@ -73,6 +76,16 @@ public class LitRestController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         return sdf.format(date);
+    }
+
+    @PostMapping("/getMainList")
+    public List<ProjectDTO> getMainList(@RequestBody ListDTO listDTO){
+        log.info("***************************");
+        log.info("LitRestController : getMainList(post)");
+        log.info("***************************");
+//        litService.getMainList(listDTO).stream().map(ProjectDTO::toString).forEach(log::info);
+        listDTO.setAmount(200);
+        return litService.getMainList(listDTO);
     }
 
 }

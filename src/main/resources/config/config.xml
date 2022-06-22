@@ -20,6 +20,7 @@
         <typeAlias type="com.example.lit.domain.vo.user.UserDTO" alias="userDTO"></typeAlias>
         <typeAlias type="com.example.lit.domain.vo.review.ReviewDTO" alias="reviewDTO"></typeAlias>
         <typeAlias type="com.example.lit.domain.vo.review.ReportDTO" alias="reportDTO"></typeAlias>
+        <typeAlias type="com.example.lit.domain.vo.review.LikeDTO" alias="likeDTO"></typeAlias>
         <typeAlias type="com.example.lit.domain.vo.project.ProjectDTO" alias="projectDTO"></typeAlias>
     </typeAliases>
 </configuration>

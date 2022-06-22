@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -102,4 +103,14 @@ public class LitServiceImple implements LitService{
         return projectDAO.getTotalByStatus(status);
     }
 
+    @Override
+    public List<ProjectDTO> getMainList(ListDTO listDTO) {
+        List<ProjectDTO> result = projectDAO.getMainList(listDTO).stream().map( project -> {
+            ProjectFileVO projectFileVO = projectFileDAO.getImg(project.getProjectNumber());
+            project.setProjectFile(projectFileVO);
+            return project;
+        }).collect(Collectors.toList());
+
+        return result;
+    }
 }

@@ -18,7 +18,7 @@ public class ReviewDAO {
     private final ReviewMapper reviewMapper;
 
     //    리뷰 목록 가져오기
-    public List<ReviewVO> getList(Criteria criteria, String category){ return reviewMapper.getList(criteria, category); }
+    public List<ReviewDTO> getList(ListDTO listDTO){ return reviewMapper.getList(listDTO); }
     //    리뷰 등록
     public void register(ReviewVO reviewVO){ reviewMapper.insert(reviewVO); }
     //    리뷰 상세보기
@@ -38,6 +38,6 @@ public class ReviewDAO {
     //  차트 정보
     public Long getReviewChart(String date){ return reviewMapper.getReviewChart(date); }
     // 리뷰 목록 가져오기2(테스트)
-    public List<ReviewDTO> getList2(ListDTO listDTO) { return reviewMapper.getList2(listDTO); }
+    public List<ReviewDTO> getMainList(ListDTO listDTO) { return reviewMapper.getMainList(listDTO); }
 
 }

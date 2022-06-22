@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface ReviewMapper {
     //    리뷰 목록 가져오기
-    public List<ReviewVO> getList(@Param("criteria") Criteria criteria, @Param("category") String category );
+    public List<ReviewDTO> getList(ListDTO listDTO);
     //    리뷰 등록
     public void insert(ReviewVO reviewVO);
     //    리뷰 상세보기
@@ -34,5 +34,5 @@ public interface ReviewMapper {
     //  차트 정보
     public Long getReviewChart(String date);
     // 리뷰 목록 가져오기2(테스트)
-    public List<ReviewDTO> getList2(ListDTO listDTO);
+    public List<ReviewDTO> getMainList(ListDTO listDTO);
 }

@@ -35,9 +35,9 @@ public class ReviewMapperTests {
     }
 
     @Test
-    public void getListTest(){
+    public void getMainListTest(){
         ListDTO listDTO = new ListDTO();
         listDTO.setOrder("new");
-        reviewMapper.getList2(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+        reviewMapper.getMainList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
     }
 }
