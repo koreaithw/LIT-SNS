@@ -70,8 +70,11 @@
 <script src="/assets/js/changeinfo/withdraw.js"></script>
 <script src="/assets/js/changeinfo/changeInfoAjax.js"></script>
 <script th:inline="javascript">
-    let userNumber = 2; // 임시
+    let pw = $('#_withdrawlPassword');
+    let userNumber = 47; // 임시
+    let pwBtn = $('#btnNoOff');
 
+    // 비밀번호 확인
     $('#_withdrawlPassword').on("keyup", function () {
         let $password = $(this).val();
 
@@ -82,9 +85,37 @@
             password : $password
         }, function (result) {
             console.log(result);
-            ckeckOldPw(result);
+
+                if(pw.val().length <= 0) {
+                    $('._checkArea1').html('');
+                }
+                if(result){ // 비번 유효성 검사
+                    $ ('._checkArea1').html('비밀번호가 일치합니다.');
+                    pwBtn.attr('class', 'buttonOn');
+                    $('._checkArea1').css('color', 'black');
+                } else{
+                    $ ('._checkArea1').html('비밀번호가 일치하지 않습니다.');
+                    $('._checkArea1').css('color', 'red');
+                    pwBtn.attr('class', 'buttonStyle');
+                }
+            });
         });
+
+    // 회원 탈퇴
+    pwBtn.on("click", function(){
+        function removeCheck() {
+            if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+                changeInfoAjax.withdrawUser(userNumber, function (result) {
+                    console.log(result);
+                })
+                alert("회원탈퇴가 완료되었습니다.");
+            }else{   //취소
+                return false;
+            }
+        }
+
     });
+
 
 </script>
 </html>
