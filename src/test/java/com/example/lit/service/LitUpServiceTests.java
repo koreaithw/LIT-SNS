@@ -28,10 +28,10 @@ public class LitUpServiceTests {
     }
 
     @Test
-    public void getList2Test(){
+    public void getMainListTest(){
         ListDTO listDTO = new ListDTO();
         listDTO.setOrder("new");
-        litUpService.getList2(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+        litUpService.getMainList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
     }
 
     @Test

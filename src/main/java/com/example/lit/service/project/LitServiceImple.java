@@ -102,4 +102,12 @@ public class LitServiceImple implements LitService{
         return projectDAO.getTotalByStatus(status);
     }
 
+    @Override
+    public List<ProjectDTO> getMainList(ListDTO listDTO) {
+        for(ProjectDTO projectDTO : projectDAO.getMainList(listDTO)){
+            ProjectFileVO projectFileVO = projectFileDAO.getImg(projectDTO.getProjectNumber());
+            projectDTO.setProjectFile(projectFileVO);
+        }
+        return projectDAO.getMainList(listDTO);
+    }
 }

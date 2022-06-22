@@ -72,10 +72,10 @@ public class ProjectMapperTests {
     }
 
     @Test
-    public void getList2Test(){
+    public void getMainListTest(){
         ListDTO listDTO = new ListDTO();
         listDTO.setOrder("popular");
 
-        projectMapper.getList2(listDTO).stream().map(ProjectVO::toString).forEach(log::info);
+        projectMapper.getMainList(listDTO).stream().map(ProjectDTO::toString).forEach(log::info);
     }
 }

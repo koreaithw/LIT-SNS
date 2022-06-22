@@ -1,6 +1,7 @@
 package com.example.lit.domain.dao.project;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
@@ -37,5 +38,8 @@ public class ProjectDAO {
     }
     // 프로젝트 상태로 토탈 가져오기
     public int getTotalByStatus(Long status){ return projectMapper.getTotalByStatus(status); }
+
+    //메인 리스트
+    public List<ProjectDTO> getMainList(ListDTO listDTO) { return projectMapper.getMainList(listDTO); }
 
 }

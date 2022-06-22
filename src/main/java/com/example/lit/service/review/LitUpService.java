@@ -78,5 +78,5 @@ public interface LitUpService {
     //  차트 정보
     public Long getReportChart(String date);
     // 리뷰 목록 가져오기2(테스트)
-    public List<ReviewDTO> getList2(ListDTO listDTO);
+    public List<ReviewDTO> getMainList(ListDTO listDTO);
 }
