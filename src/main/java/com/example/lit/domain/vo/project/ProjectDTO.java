@@ -24,4 +24,5 @@ public class ProjectDTO {
     private Long participationCount;
 
     private String nickname;
+    private String registerDate;
 }
