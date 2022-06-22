@@ -121,6 +121,11 @@
         FROM TBL_PROJECT WHERE PROJECT_NUMBER = #{projectNumber}
     </select>
 
+    <select id="getForReview" resultType="projectDTO">
+        SELECT PJ.PROJECT_NUMBER, PJ.TITLE, PJ.CATEGORY, PJ.CONTENT, PJ.AUTHENTICATION, PJ.START_DATE, PJ.END_DATE, US.NICKNAME
+        FROM TBL_PROJECT PJ, TBL_USER US WHERE PJ.PROJECT_NUMBER = #{projectNumber} AND US.USER_NUMBER =#{userNumber}
+    </select>
+
     <delete id="delete">
         DELETE FROM TBL_PROJECT WHERE PROJECT_NUMBER = #{projectNumber}
     </delete>

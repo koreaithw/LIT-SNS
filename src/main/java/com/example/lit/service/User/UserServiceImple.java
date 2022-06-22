@@ -112,7 +112,7 @@ public class UserServiceImple implements UserService{
 
     @Override
     public UserFileVO getImg(Long userNumber) {
-        return null;
+        return userFileDAO.getImg(userNumber);
     }
 
     @Override

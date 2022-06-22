@@ -1,19 +1,24 @@
 package com.example.lit.controller;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
+import com.example.lit.domain.vo.user.UserFileVO;
+import com.example.lit.service.User.UserService;
 import com.example.lit.service.review.LitUpService;
 import com.example.lit.service.review.LitUpServiceImple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
@@ -28,6 +33,7 @@ import java.util.UUID;
 @RequestMapping("/litUp/*")
 public class LitUpRestController {
     private final LitUpService litUpService;
+    private final UserService userService;
 
     //모달창 인증글 상세 보기
     @GetMapping("/read/{reviewNumber}")
@@ -115,15 +121,12 @@ public class LitUpRestController {
 
 //    ================= 인증글 작성 ====================
     //모달창 인증글 업로드
-    @GetMapping("/register/{userNumber}/{projectNumber}")
-    public void register(@RequestBody ReviewVO reviewVO, @PathVariable("userNumber") Long userNumber, @PathVariable("projectNumber") Long projectNumber){
+    @PostMapping("/register")
+    public void register(@RequestBody ReviewVO reviewVO){
         log.info("***************************");
         log.info("LitUpRestController : register(post)");
         log.info("************** *************");
-        reviewVO.setUserNumber(userNumber);
-        reviewVO.setProjectNumber(projectNumber);
         litUpService.register(reviewVO);
-
     }
 
     @PostMapping("/uploadFile")
@@ -153,6 +156,9 @@ public class LitUpRestController {
             file.transferTo(saveFile);
 
             if(checkImageType(saveFile)){
+                FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+                Thumbnailator.createThumbnail(file.getInputStream(), thumbnail, 100, 100);
+                thumbnail.close();
                 reviewFileVO.setImage("1");
             }
             files.add(reviewFileVO);
@@ -162,9 +168,18 @@ public class LitUpRestController {
 
     @GetMapping("/display")
     public byte[] getFile(String fileName) throws IOException{
-        File file = new File("D:/upload/", fileName);
+        File file = new File("C:/upload/", fileName);
         log.info(file.toString());
         return FileCopyUtils.copyToByteArray(file);
+    }
+
+    @PostMapping("/delete")
+    public void delete(String fileName){
+        File file = new File("C:/upload/", fileName);
+        if(file.exists()){ file.delete(); }
+
+        file = new File("C:/upload/", fileName.replace("s_", ""));
+        if(file.exists()){ file.delete(); }
     }
 
     private boolean checkImageType(File file) throws IOException{
@@ -176,6 +191,12 @@ public class LitUpRestController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         return sdf.format(date);
+    }
+
+    @GetMapping("/profilePic")
+    public UserFileVO getProfile(Long userNumber){
+        log.info(userNumber.toString());
+        return userService.getImg(userNumber);
     }
 
 
@@ -201,13 +222,13 @@ public class LitUpRestController {
     }
 
     //모달창 인증글 작성하기 중 프로젝트 정보 가져오기
-    @GetMapping("/getProject/{projectNumber}")
-    public ProjectVO getProject(@PathVariable("projectNumber") Long projectNumber){
+    @GetMapping("/getProject/{projectNumber}/{userNumber}")
+    public ProjectDTO getProject(@PathVariable("projectNumber") Long projectNumber, @PathVariable("userNumber") Long userNumber){
         log.info("***************************");
         log.info("LitUpRestController : getProject(get)");
         log.info("***************************");
 
-        return litUpService.readPjt(projectNumber);
+        return litUpService.readForReview(projectNumber, userNumber);
     }
 
 }

@@ -19,6 +19,7 @@ public interface LitService {
     public void register(ProjectVO projectVO);
     //    프로젝트 상세보기
     public ProjectVO read(Long projectNumber);
+
     //    프로젝트 삭제
     public boolean remove(Long projectNumber);
     //    프로젝트 전체 개수
