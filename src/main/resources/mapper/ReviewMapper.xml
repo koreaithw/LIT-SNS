@@ -18,8 +18,11 @@
                 JOIN TBL_PROJECT TP ON re.PROJECT_NUMBER  = tp.PROJECT_NUMBER
                 ]]>
                 <choose>
-                    <when test="category != 'lanking' and category != 'newproject'">
+                    <when test="category != 'lanking' and category != 'newproject' and category != 'project'">
                         WHERE pr.CATEGORY = #{category}
+                    </when>
+                    <when test="category == 'project'">
+                        WHERE re.PROJECT_NUMBER = #{projectNumber}
                     </when>
                 </choose>
                 <![CDATA[
@@ -33,7 +36,7 @@
                 <when test="category == 'lanking'">
                     ORDER BY cont DESC
                 </when>
-                <when test="category == 'newproject'  or category != 'lanking'">
+                <when test="category != 'lanking'">
                     ORDER BY ROWNUM DESC
                 </when>
             </choose>
