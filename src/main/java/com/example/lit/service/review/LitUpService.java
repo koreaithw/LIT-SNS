@@ -38,7 +38,7 @@ public interface LitUpService {
 
 
     //    리뷰 목록 가져오기
-    public List<ReviewVO> getList(Criteria criteria, String category);
+    public List<ReviewDTO> getList(ListDTO listDTO);
     //    리뷰 등록
     public void register(ReviewVO reviewVO);
     //    리뷰 상세보기

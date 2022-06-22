@@ -11,13 +11,13 @@
     </delete>
 
     <select id="getImg" resultType="projectFileVO">
-        SELECT UUID, UPLOAD_PATH, NAME, IMAGE, REVIEW_NUMBER, FILE_NUMBER
+        SELECT UUID, UPLOAD_PATH, NAME, IMAGE, PROJECT_NUMBER, FILE_NUMBER
         FROM TBL_PROJECT_FILE
         WHERE PROJECT_NUMBER = #{projectNumber}
     </select>
 
     <select id="getOldFiles" resultType="projectFileVO">
-        SELECT UUID, UPLOAD_PATH, NAME, IMAGE, REVIEW_NUMBER, FILE_NUMBER
+        SELECT UUID, UPLOAD_PATH, NAME, IMAGE, PROJECT_NUMBER, FILE_NUMBER
         FROM TBL_PROJECT_FILE
         WHERE UPLOAD_PATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
     </select>
