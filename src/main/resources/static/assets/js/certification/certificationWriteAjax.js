@@ -3,8 +3,8 @@ let reviewWriteService = (function () {
     //리뷰 작성
     function reviewRegister(reviewVO, callback, error) {
         $.ajax({
-            url: "/litUp/register/"+reviewVO.userNumber+"/"+reviewVO.projectNumber ,
-            type: "get" ,
+            url: "/litUp/register",
+            type: "post" ,
             data: JSON.stringify(reviewVO) ,
             contentType: "application/json" ,
             success: function (result) {

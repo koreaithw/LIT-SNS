@@ -154,7 +154,7 @@
                         </div>
                     </div>
                     <div class="certificationContentArea">
-                        <textarea placeholder="문구 입력..."></textarea>
+                        <textarea placeholder="문구 입력..." id="reviewContent"></textarea>
                         <div class="certificationContentButtons">
                             <div>
                                 <div style="display:none;">400자 까지 작성 가능합니다!</div>
@@ -283,14 +283,82 @@
 <script defer src="/assets/js/certification/certificationWriteAjax.js"></script>
 <script defer src="/assets/js/certification/fileLoad.js"></script>
 <script defer th:inline="javascript">
+    let filesList
+    let arFile = Array.from($("input[type='file']")[0].files);
+
+    $("input[type='file']").on("change", function(e){
+        let formData =   new FormData();
+        let inputFile = $("input[id='fileClickInput']");
+        let files = inputFile[0].files;
+
+        for(let i=0; i<files.length; i++){
+            formData.append("uploadFiles", files[i]);
+        }
+        Array.from($(this)[0].files).forEach(file => arFile.push(file));
+        const dataTransfer = new DataTransfer();
+        arFile.forEach(file => dataTransfer.items.add(file));
+        $(this)[0].files = dataTransfer.files;
+
+        $.ajax({
+            url: "/litUp/uploadFile",
+            type: "post",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(files){
+                filesList=files;
+            }
+        });
+    });
+
+
 
     $('.certificationNextButton > button.completeButton').on("click",function () {
+        let reviewContent = $("textarea#reviewContent").val();
         reviewWriteService.reviewRegister({
-            userNumber:1,
-            projectNumber:1,
-            content:"test"
-        },function (result) {console.log("테스트")
-        },function (a,b,c) {console.log("error")})
+            userNumber:1, projectNumber:1, content:reviewContent, reviewFileList:filesList
+        },function (result) {
+                certificationWriteBackground.style.display = 'none';
+                certificationWriteButton.style.display = 'block';
+
+                $('.certificationImages ul li:first-child').addClass('active');
+                $('.certificationImages ul li:first-child').siblings('.active').removeClass('active');
+                $('.certificationImages div div:first-child').addClass("active");
+                $('.certificationImages div div:first-child').siblings('.active').removeClass('active');
+                $('.certificationContentArea > textarea').val('');
+                $('.certificationImageInner').empty();
+                $('.innerImagePageButtons').empty();
+                $fileUploadPreview.empty();
+                $('#fileClickInput').val("");
+                $('body').css("overflow", "auto");
+
+                $.each($detailProjects, function () {
+                    $(this).removeClass("on");
+                });
+
+                uploadFiles = [];
+
+                $detailProjectContent.css("width", "0");
+                $certificationWriteModal.css("width", "35%");
+                $whiteBackground.css("display", "block");
+                $certificationNextButton.css("display", "none");
+                $certificationHeaderLabel.text('사진 업로드');
+                $certificationContent.css("display", "none");
+                $detailProjectContent.css("display", "none");
+                $certificationNextNextButton.css("display", "none");
+                $certificationBackButton.css("display", "none");
+                $certificationBackBackButton.css("display", "none");
+                $certificationCompleteButton.css("display", "none");
+                $certificationImageWrapper.css("display", "none");
+                $fileUploadAreaWrapper.css("display", "block");
+                $certificationFirstButton.css("display", "none");
+                $fileUploadPreview.css("display", "none");
+                $previewButton.find('button').css("backgroundColor", '#373737');
+                $('.btnIcon').attr("fill", "white");
+                $previewButton.val('0');
+                $deleteBackground.css("display", "none");
+            },
+            function (a,b,c) {console.log("error")})
     })
 
 

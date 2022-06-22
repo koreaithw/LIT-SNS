@@ -115,15 +115,12 @@ public class LitUpRestController {
 
 //    ================= 인증글 작성 ====================
     //모달창 인증글 업로드
-    @GetMapping("/register/{userNumber}/{projectNumber}")
-    public void register(@RequestBody ReviewVO reviewVO, @PathVariable("userNumber") Long userNumber, @PathVariable("projectNumber") Long projectNumber){
+    @PostMapping("/register")
+    public void register(@RequestBody ReviewVO reviewVO){
         log.info("***************************");
         log.info("LitUpRestController : register(post)");
         log.info("************** *************");
-        reviewVO.setUserNumber(userNumber);
-        reviewVO.setProjectNumber(projectNumber);
         litUpService.register(reviewVO);
-
     }
 
     @PostMapping("/uploadFile")
