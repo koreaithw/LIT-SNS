@@ -41,6 +41,9 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
+    public List<LikeDTO> getLikeList(Long userNumber) { return likeDAO.getList(userNumber);}
+
+    @Override
     public int getCheckLike(Long userNumber) {
         return likeDAO.checkLike(userNumber);
     }
@@ -186,8 +189,8 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
-    public List<ReviewDTO> getList2(ListDTO listDTO) {
-        List<ReviewDTO> result = reviewDAO.getList2(listDTO).stream().map( review -> {
+    public List<ReviewDTO> getMainList(ListDTO listDTO) {
+        List<ReviewDTO> result = reviewDAO.getMainList(listDTO).stream().map( review -> {
             List<ReviewFileVO> list = reviewFileDAO.getImgs(review.getReviewNumber());
             review.setReviewFileList(list);
             return review;

@@ -21,4 +21,9 @@ public class ReviewMapperTest {
 //        reviewMapper.getList(new Criteria(1, 10),"newproject").stream().map(ReviewVO::toString).forEach(log::info);
 //    }
 
+    @Test
+    public void registerTest() {
+
+    }
+
 }

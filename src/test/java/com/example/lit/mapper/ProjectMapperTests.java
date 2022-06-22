@@ -7,7 +7,6 @@ import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.mapper.project.ProjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import oracle.sql.DATE;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -72,10 +71,10 @@ public class ProjectMapperTests {
     }
 
     @Test
-    public void getList2Test(){
+    public void getMainListTest(){
         ListDTO listDTO = new ListDTO();
         listDTO.setOrder("popular");
 
-        projectMapper.getList2(listDTO).stream().map(ProjectVO::toString).forEach(log::info);
+        projectMapper.getMainList(listDTO).stream().map(ProjectDTO::toString).forEach(log::info);
     }
 }

@@ -115,6 +115,7 @@ lit1.on("click", function(){
     $('#lit2Img').attr('src', '/images/mypage/lists.png');
     lit1.attr('class', 'lits1Off');
     $('#lit1Img').attr('src', '/images/mypage/menu2.png');
+    getLitList();
   });
 
 
@@ -140,17 +141,17 @@ lit1.on("click", function(){
       })
   }
 
-  let getLitsList = function(){
+  let getLitList = function(){
       mainService.mainLit({order : "new"}, function(result){
           let str = "";
           $(".photoContents > div").html("");
           result.forEach( (data, i) => {
-              let file = data.reviewFileList;
-              if(file[0]){
+              let file = data.projectFile;
+              if(file){
                   str +=
                       "<figure>" +
                       "<a href=\"" + data.reviewNumber + "\">" +
-                      "<img alt=\"\" src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">" +
+                      "<img alt=\"\" src=\"/litUp/display?fileName=" + file.uploadPath + "/" + file.uuid + "_" + file.name + "\">" +
                       "</a>" +
                       "</figure>";
               }
@@ -164,7 +165,7 @@ lit1.on("click", function(){
   let mainService = (function(){
       function mainLitUp(info, callback, error){
           $.ajax({
-              url : "/litUp/getList2",
+              url : "/litUp/getMainList",
               type : "post",
               data : JSON.stringify(info),
               contentType : "application/json",
@@ -179,7 +180,7 @@ lit1.on("click", function(){
       }
       function mainLit(info, callback, error){
           $.ajax({
-              url : "/lit/getList2",
+              url : "/lit/getMainList",
               type : "post",
               data : JSON.stringify(info),
               contentType: "application/json",

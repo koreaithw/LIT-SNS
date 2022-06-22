@@ -31,5 +31,5 @@ public interface ProjectMapper {
     // 프로젝트 상태로 토탈 가져오기
     public int getTotalByStatus(Long status);
     // 프로젝트 목록(메인)
-    public List<ProjectVO> getList2(ListDTO listDTO);
+    public List<ProjectDTO> getMainList(ListDTO listDTO);
 }

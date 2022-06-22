@@ -28,14 +28,19 @@ public class LitUpServiceTests {
     }
 
     @Test
-    public void getList2Test(){
+
+    public void getLikeListTest() {
+        litUpService.getLikeList(1L);
+    }
+    public void getMainListTest(){
         ListDTO listDTO = new ListDTO();
         listDTO.setOrder("new");
-        litUpService.getList2(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+        litUpService.getMainList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
     }
 
     @Test
     public void getImgsTest(){
         litUpService.getImgs(67L).stream().map(ReviewFileVO::toString).forEach(log::info);
+
     }
 }

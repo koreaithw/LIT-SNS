@@ -210,14 +210,14 @@ public class LitUpRestController {
 
 
     //========== 메인 리스트 ===========
-    @PostMapping("/getList2")
+    @PostMapping("/getMainList")
     public List<ReviewDTO> getList2(@RequestBody ListDTO listDTO){
         log.info("***************************");
-        log.info("LitUpRestController : getList2(post)");
+        log.info("LitUpRestController : getMainList(post)");
         log.info("***************************");
 
-        litUpService.getList2(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
-        return litUpService.getList2(listDTO);
+        litUpService.getMainList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+        return litUpService.getMainList(listDTO);
     }
 
     //모달창 인증글 작성하기 중 프로젝트 정보 가져오기
@@ -229,5 +229,5 @@ public class LitUpRestController {
 
         return litUpService.readForReview(projectNumber, userNumber);
     }
-
+    
 }
