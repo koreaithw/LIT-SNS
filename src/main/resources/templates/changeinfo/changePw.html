@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="_profile_nickname">
-                        <h1 class="_nickname">xldms.dl</h1>
+                        <h1 class="_nickname" th:text="${nickName}"></h1>
                     </div>
                 </div>
                 <form class="_changepw_form">
@@ -48,7 +48,7 @@
                             <label for="cppOldPassword">이전 비밀번호</label>
                         </div>
                         <div class="_input_wrapper">
-                            <input autocomplete="current-password" class="cppOldPassword" id="cppOldPassword"
+                            <input class="cppOldPassword" id="cppOldPassword"
                                 name="cppOldPassword" required="" spellcheck="true" type="password" value=""
                                 style="padding-right: 140px;">
                         </div>
@@ -62,7 +62,7 @@
                             <label for="cppNewPassword">새 비밀번호</label>
                         </div>
                         <div class="_input_wrapper">
-                            <input autocomplete="current-password" class="cppNewPassword" id="cppNewPassword"
+                            <input class="cppNewPassword" id="cppNewPassword"
                                 name="cppNewPassword" required="" spellcheck="true" type="password" value=""
                                 style="padding-right: 140px;">
                         </div>
@@ -74,7 +74,7 @@
                             <label for="cppCheckPassword">새 비밀번호 확인</label>
                         </div>
                         <div class="_input_wrapper">
-                            <input autocomplete="current-password" class="cppCheckPassword" id="cppCheckPassword"
+                            <input class="cppCheckPassword" id="cppCheckPassword"
                                 name="cppCheckPassword" required="" spellcheck="true" type="password" value=""
                                 style="padding-right: 140px;">
                         </div>
@@ -95,5 +95,31 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="/assets/js/changeinfo/changePw.js"></script>
+<script src="/assets/js/changeinfo/changeInfoAjax.js"></script>
+<script th:inline="javascript">
+    let userNumber = 2; // 임시
 
+    $('#cppOldPassword').on("keyup", function () {
+        let $password = $(this).val();
+
+        console.log($('#cppOldPassword'));
+
+        changeInfoAjax.checkOldPw({
+            userNumber : userNumber,
+            password : $password
+        }, function (result) {
+            console.log(result);
+            ckeckOldPw(result);
+        });
+    });
+
+    // $('#cppCheckPassword').on("keyup", function () {
+    //     let $newCheckPw = $('#cppCheckPassword').val();
+    //
+    //
+    // })
+
+
+
+</script>
 </html>

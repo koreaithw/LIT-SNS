@@ -26,10 +26,17 @@ public class UserController {
 
     //이동
     @GetMapping("/changePw")
-    public String goChangePwPage(){
+    public String goChangePwPage(Long userNumber, Model model){
         log.info("******************************");
         log.info("changeInfoController : changePw");
         log.info("******************************");
+        userNumber = 2L; // 임시
+
+        UserVO userVO = userService.getChangePwInfo(userNumber);
+        model.addAttribute("userNumber", userNumber);
+        model.addAttribute("nickName", userVO.getNickname());
+        log.info(userVO.getUserNumber() + "########################");
+        log.info(userVO.getNickname() + "########################");
         return "/changeinfo/changePw";
     }
     //이동
@@ -38,14 +45,20 @@ public class UserController {
         log.info("******************************");
         log.info("changeInfoController : editInfo");
         log.info("******************************");
+
         return "/changeinfo/editInfo";
     }
     //이동
     @GetMapping("/withdraw")
-    public String goWithdrawPage(){
+    public String goWithdrawPage(Long userNumber, Model model){
         log.info("******************************");
         log.info("changeInfoController : withdraw");
         log.info("******************************");
+        userNumber = 2L; // 임시
+
+        UserVO userVO = userService.getChangePwInfo(userNumber);
+        model.addAttribute("userNumber", userNumber);
+        model.addAttribute("nickName", userVO.getNickname());
         return "/changeinfo/withdraw";
     }
     //이동

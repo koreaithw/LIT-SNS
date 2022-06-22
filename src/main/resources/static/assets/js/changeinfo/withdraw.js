@@ -2,9 +2,9 @@
 const pw = $('#_withdrawlPassword');
 const pwBtn = $('#btnNoOff');
 
-pw.keyup(function(){
+pw.keyup(function(result){
     
-    if(pw.val() == "1111"){ // 비번 유효성 검사
+    if(result){ // 비번 유효성 검사
         $ ('._checkArea1').html('');
         pwBtn.attr('class', 'buttonOn');
     } else if(pw.val().length <= 0){
