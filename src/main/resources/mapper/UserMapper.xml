@@ -61,7 +61,6 @@
         WHERE USER_NUMBER = #{userNumber}
     </update>
 
-<<<<<<< HEAD
     <select id="mypageReviewCnt" resultType="_int">
         SELECT COUNT(REVIEW_NUMBER)
         FROM TBL_REVIEW
@@ -113,7 +112,7 @@
         DELETE FROM TBL_FOLLOW
         WHERE FOLLOWER_NUMBER = #{followerNumber} AND FOLLOWING_NUMBER = #{followingNumber}
     </delete>
-=======
+
     <select id="userSearch" resultType="userDTO">
 
         SELECT TOTAL, USER_NUMBER, EMAIL, NAME, NICKNAME, CONTENT, KAKAO, REGISTER_DATE
@@ -167,6 +166,5 @@
         FROM TBL_USER
         WHERE TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') = #{date}
     </select>
->>>>>>> 6e5e1c75bf2f71be3657486f9d8112c30c4533de
 
 </mapper>
