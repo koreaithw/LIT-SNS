@@ -21,8 +21,8 @@ public class MessageServiceImple implements MessageService{
     }
 
     @Override
-    public List<MessageVO> getList(String room) {
-        return messageDAO.getList(room);
+    public List<MessageVO> getList(String roomId) {
+        return messageDAO.getList(roomId);
     }
 
     @Override

@@ -9,7 +9,9 @@ public class MessageVO {
     private Long messageNumber;
     private Long sendUserNumber;
     private Long receiveUserNumber;
-    private String room;
+    private String roomId;
     private String content;
     private String messageDate;
+
+    private MessageType type;
 }

@@ -12,7 +12,7 @@ public interface MessageService {
     public void register(MessageVO messageVO);
 
     //메세지 리스트 띄우기
-    public List<MessageVO> getList(String room);
+    public List<MessageVO> getList(String roomId);
 
     //메세지 할 팔로워 목록 불러오기
     public List<UserVO> getFollowerList(Long userNumber);

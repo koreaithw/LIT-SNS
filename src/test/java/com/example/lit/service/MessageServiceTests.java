@@ -27,7 +27,7 @@ public class MessageServiceTests {
         MessageVO messageVO = new MessageVO();
         messageVO.setSendUserNumber(1L);
         messageVO.setReceiveUserNumber(10L);
-        messageVO.setRoom("1번방");
+        messageVO.setRoomId("1번방");
         messageVO.setContent("ddkdjfe");
         messageVO.setMessageDate("2022-06-19");
         messageDAO.register(messageVO);

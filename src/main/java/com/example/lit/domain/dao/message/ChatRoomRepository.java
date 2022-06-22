@@ -16,20 +16,22 @@ public class ChatRoomRepository {
         messageRoomMap = new LinkedHashMap<>();
     }
 
+    public MessageRoom createMessageRoom(String name){
+        MessageRoom messageRoom = MessageRoom.create(name);
+        messageRoomMap.put(messageRoom.getRoomId(), messageRoom);
+        return messageRoom;
+    }
+
     public List<MessageRoom> findAllRoom(){
         List messageRooms = new ArrayList<>(messageRoomMap.values());
         Collections.reverse(messageRooms);
         return messageRooms;
     }
 
-    public MessageRoom findRoom(String room){
+    public MessageRoom findRoomById(String room){
         return messageRoomMap.get(room);
     }
 
-    public MessageRoom createChatRoom(String name){
-        MessageRoom messageRoom = MessageRoom.create(name);
-        messageRoomMap.put(messageRoom.getRoomId(), messageRoom);
-        return messageRoom;
-    }
+
 
 }
