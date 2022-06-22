@@ -18,6 +18,8 @@ public interface ProjectMapper {
     public void insert(ProjectVO projectVO);
     //    프로젝트 상세보기
     public ProjectVO get(Long projectNumber);
+    //    프로젝트 상세 가져오기(리뷰작성용)
+    public ProjectDTO getForReview(@Param("projectNumber") Long projectNumber, @Param("userNumber") Long userNumber);
     //    프로젝트 삭제 ( 관리자)
     public int delete(Long projectNumber);
     //    프로젝트 전체 개수
@@ -29,5 +31,5 @@ public interface ProjectMapper {
     // 프로젝트 상태로 토탈 가져오기
     public int getTotalByStatus(Long status);
     // 프로젝트 목록(메인)
-    public List<ProjectVO> getList2(ListDTO listDTO);
+    public List<ProjectDTO> getMainList(ListDTO listDTO);
 }

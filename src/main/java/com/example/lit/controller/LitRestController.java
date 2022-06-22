@@ -1,8 +1,9 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.vo.ListDTO;
+import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
-import com.example.lit.domain.vo.review.LikeVO;
-import com.example.lit.service.review.LitUpService;
+import com.example.lit.service.project.LitService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.FileCopyUtils;
@@ -23,6 +24,7 @@ import java.util.UUID;
 @Slf4j
 @RequestMapping("/lit/*")
 public class LitRestController {
+    private final LitService litService;
 
     @PostMapping("/upload")
     public List<ProjectFileVO> upload(MultipartFile[] uploadFiles) throws IOException {
@@ -74,6 +76,15 @@ public class LitRestController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         return sdf.format(date);
+    }
+
+    @PostMapping("/getMainList")
+    public List<ProjectDTO> getMainList(@RequestBody ListDTO listDTO){
+        log.info("***************************");
+        log.info("LitRestController : getMainList(post)");
+        log.info("***************************");
+        litService.getMainList(listDTO).stream().map(ProjectDTO::toString).forEach(log::info);
+        return null;
     }
 
 }

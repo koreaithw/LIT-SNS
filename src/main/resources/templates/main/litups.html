@@ -7,7 +7,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>list</title>
-
+<!--    <link rel="stylesheet" href="/src/main/resources/static/assets/css/main/main.css" />-->
+<!--    <link rel="stylesheet" href="/src/main/resources/static/assets/css/default.css" />-->
+<!--    <link rel="stylesheet" href="/src/main/resources/static/assets/css/header.css" />-->
+<!--    <link rel="stylesheet" href="/src/main/resources/static/assets/css/footer.css" />-->
     <link rel="stylesheet" href="/assets/css/main/main.css"/>
     <link rel="stylesheet" href="/assets/css/default.css"/>
     <link rel="stylesheet" href="/assets/css/header.css" />
@@ -17,32 +20,21 @@
             height: 100%;
         }
 
-        div.photoContents > div {
+        div.photoContents>div {
             display: flex;
             flex-wrap: wrap;
         }
 
-        div.photoContents figure {
-            width: 33.33%;
-            height: 298px;
+        figure {
             padding: 10px;
+            width: 25%;
+            height: 250px;
         }
 
-        div.photoContents figure a {
-            display: block;
-            height: 100%;
-            overflow: hidden;
-        }
-        div.photoContents figure img {
+        figure img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: 1s ease;
-            transform-origin: center center;
-        }
-        div.photoContents img:hover {
-            transform: scale(1.1);
-            transform-origin: center center;
         }
     </style>
 
@@ -53,31 +45,9 @@
 <main>
     <div class="_main_wrapper">
         <div class="_main_top_wrapper">
-            <!-- 선택창 -->
-            <div class="_top_selector">
-                <div class="_selector_wrapper">
-                    <a href="/" class="_top_home">
-                        <div class="_selector">홈</div>
-                    </a>
-                    <a href="/" class="_top_popular">
-                        <div class="_selector">인기</div>
-                    </a>
-                    <a href="/" class="_top_new">
-                        <div class="_selector">신규</div>
-                    </a>
-                </div>
-            </div>
-            <!-- 광고 배너 -->
-            <div class="_top_ad">
-                <div class="_ad_wrapper">
-                    <img src="/images/main/banner_ad1.jpg" width="895" height="208">
-                    <img src="/images/main/banner_ad2.png" width="895" height="208" style="left:0%; z-index:1">
-                    <img src="/images/main/banner_ad3.png" width="895" height="208" style="left:-100%">
-                </div>
-            </div>
             <!-- 카테고리 선택 창 -->
             <div class="_category_wrapper">
-                <a href="/">
+                <a href="life">
                     <div class="_category_detail _life">
                         <div class="_category_img_box" style="padding:10px ;">
                             <div class="_category_img">
@@ -89,7 +59,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/">
+                <a href="exercise">
                     <div class="_category_detail _exercise">
                         <div class="_category_img_box">
                             <div class="_category_img">
@@ -101,7 +71,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/">
+                <a href="hobby">
                     <div class="_category_detail _hobby">
                         <div class="_category_img_box">
                             <div class="_category_img">
@@ -113,7 +83,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/">
+                <a href="art">
                     <div class="_category_detail _art">
                         <div class="_category_img_box">
                             <div class="_category_img">
@@ -125,7 +95,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/">
+                <a href="heart">
                     <div class="_category_detail _heart">
                         <div class="_category_img_box">
                             <div class="_category_img">
@@ -137,7 +107,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/">
+                <a href="eating">
                     <div class="_category_detail _eating">
                         <div class="_category_img_box">
                             <div class="_category_img">
@@ -149,7 +119,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/">
+                <a href="study">
                     <div class="_category_detail _study">
                         <div class="_category_img_box">
                             <div class="_category_img">
@@ -168,14 +138,14 @@
             <!-- 변경 버튼 -->
             <div class="litChange">
                 <div>
-                    <a class="lits1On" id="lits1">
+                    <a class="lits1Off" id="lits1" href="/list/lits">
                         <div><img class="litSvg" id="lit1Img" src="/images/mypage/menu.png">
                             <span class="litSpan">Lit up</span>
                         </div>
                     </a>
                 </div>
                 <div>
-                    <a class="lits2Off" id="lits2">
+                    <a class="lits2On" id="lits2" >
                         <div><img class="litSvg" id="lit2Img" src="/images/mypage/fire.png">
                             <span class="litSpan">Lits</span>
                         </div>
@@ -186,22 +156,106 @@
             <!-- 프로젝트 시작 -->
             <div class="photoContents">
                 <div>
-                <!-- 사진 리스트 -->
+                    <figure>
+                        <a href="">
+                            <img alt="" src="/static/images/project/upload/">
+                        </a>
+                    </figure>
+                    <figure>
+                        <a href="">
+                            <img alt="" src="/src/main/resources/static//images/main/jenny2.jpg">
+                        </a>
+                    </figure>
+                    <figure>
+                        <a href="">
+                            <img alt="" src="/src/main/resources/static//images/main/jenny2.jpg">
+                        </a>
+                    </figure>
+                    <figure>
+                        <a href="">
+                            <img alt="" src="/src/main/resources/static//images/main/jenny2.jpg">
+                        </a>
+                    </figure>
                 </div>
-
             </div>
         </div>
     </div>
-<!--    <footer th:insert="~{/footer :: footer}"></footer>-->
+    <div><a href="javascript:litList('lanking')">다음 리스트</a></div>
+    <footer th:insert="~{/footer :: footer}"></footer>
 </main>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
  <script src="/assets/js/main/main.js"></script>
+<!--<script src="/src/main/resources/static/assets/js/main/main.js"></script>-->
 
 <script th:inline="javascript">
-    let test = [[${session.userNumber}]];
-    console.log("---------------------------------")
-    console.log(test)
+    let pageNum = 1;
+    const contBox = $('.photoContents > div'); // 이미지 리스트 뿌릴 위치
+    // 기본 시작은 lit
+    litUpList("lanking");
+
+    function litUpList(category) {
+        $.ajax({
+            url: "/list/litsups/" + category + "/" + pageNum,
+            type: "get",
+            dataType: 'json',
+            success: function (result) {
+                pageNum++; // 다음 페이지 번호 지정
+                // alert('성공');
+                listadd(result);
+            }, error: function (xhr, textStatus, errorThrown) {
+                console.log('통신 실패');
+                console.log(xhr);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    // 리스트에 추가하기
+    function listadd(result) {
+
+        let str = "";
+        // console.log(result);
+        $.each(result, function (i, ReviewDTO) {
+            let src = "";
+            //이미지 경로 첫번째 이미지만
+            src += ReviewDTO.reviewFileList.get(0).uploadPath;
+            src += ReviewDTO.reviewFileList.get(0).uuid + "_";
+            src += ReviewDTO.reviewFileList.get(0).name;
+
+            str += " <figure><a href='"+ReviewDTO.reviewNumber+"'>";
+            str += " <img src='"+"1"+"'> ";
+            str += "</a></figure>";
+
+        });
+        contBox.append(str);
+    }
+    // 카테고리 클릭시 이벤트 페이지 이동
+    $("._category_wrapper a").on("click", function (e) {
+        e.preventDefault();
+        if( $(this).hasClass("on") ){  // 같은 태그 선택시 이벤트 취소
+            return false;
+        }
+
+        // 선택 태그 클래스 주입
+        $("._category_wrapper a").removeClass("on");
+        $(this).addClass("on");
+        contBox.html();  // 이미지 리스트 초기화
+        let category = $(this).attr("href"); // 링크 변수값( 카테고리 값 )
+        console.log(link);
+        litUpList(category);
+    });
+
+    // 리스트 클릭시 페이지 이동
+    $("photoContents a").on("click", function (e) {
+        e.preventDefault();
+        let link = $(this).attr("href"); // 링크 변수값
+        console.log(link);
+        // location.href="";
+    });
+
+
 </script>
 
 </html>

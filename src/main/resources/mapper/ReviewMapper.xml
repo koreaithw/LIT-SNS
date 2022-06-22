@@ -18,8 +18,11 @@
                 JOIN TBL_PROJECT TP ON re.PROJECT_NUMBER  = tp.PROJECT_NUMBER
                 ]]>
                 <choose>
-                    <when test="category != 'lanking' and category != 'newproject'">
+                    <when test="category != 'lanking' and category != 'newproject' and category != 'project'">
                         WHERE pr.CATEGORY = #{category}
+                    </when>
+                    <when test="category == 'project'">
+                        WHERE re.PROJECT_NUMBER = #{projectNumber}
                     </when>
                 </choose>
                 <![CDATA[
@@ -33,7 +36,7 @@
                 <when test="category == 'lanking'">
                     ORDER BY cont DESC
                 </when>
-                <when test="category == 'newproject'  or category != 'lanking'">
+                <when test="category != 'lanking'">
                     ORDER BY ROWNUM DESC
                 </when>
             </choose>
@@ -48,8 +51,8 @@
             SELECT SEQ_REVIEW.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO TBL_REVIEW
-        (REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT)
-        VALUES(#{reviewNumber}, #{userNumber}, #{projectNumber}, #{content})
+        (REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT, NICKNAME)
+        VALUES(#{reviewNumber}, #{userNumber}, #{projectNumber}, #{content}, (SELECT NICKNAME FROM TBL_USER WHERE USER_NUMBER = #{userNumber}))
     </insert>
 
     <select id="get" resultType="reviewVO">
@@ -144,39 +147,58 @@
         WHERE TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') = #{date}
     </select>
 
-    <select id="getList2" resultType="reviewDTO">
-        SELECT REVIEW_NUMBER, USER_NUMBER,
+    <select id="getMainList" resultType="reviewDTO">
+        SELECT REVIEW_NUMBER, TOTAL, USER_NUMBER,
         PROJECT_NUMBER, CONTENT, REGISTER_DATE,
         CATEGORY,STATUS,
-        NVL(LIKE_CNT, 0) AS LIKE_COUNT
-        FROM(
-            SELECT r.REVIEW_NUMBER, r.USER_NUMBER,
-            r.PROJECT_NUMBER, r.CONTENT, r.REGISTER_DATE,
-            p.CATEGORY, p.STATUS,
-            l.LIKE_CNT
-            FROM TBL_REVIEW r
-            INNER JOIN TBL_PROJECT p
-            ON p.PROJECT_NUMBER = r.PROJECT_NUMBER
-            LEFT OUTER JOIN (
-                SELECT REVIEW_NUMBER, COUNT(USER_NUMBER) AS LIKE_CNT
-                FROM TBL_LIKE
-                GROUP BY REVIEW_NUMBER
-            ) l
-            ON l.REVIEW_NUMBER = r.REVIEW_NUMBER
+        LIKE_COUNT
+        FROM
+        (
+            SELECT ROWNUM RN, TOTAL, REVIEW_NUMBER, USER_NUMBER,
+            PROJECT_NUMBER, CONTENT, REGISTER_DATE,
+            CATEGORY,STATUS,
+            LIKE_COUNT
+            FROM(
+                SELECT COUNT(REVIEW_NUMBER) OVER() AS TOTAL, REVIEW_NUMBER, USER_NUMBER,
+                PROJECT_NUMBER, CONTENT, REGISTER_DATE,
+                CATEGORY,STATUS,
+                NVL(LIKE_CNT, 0) AS LIKE_COUNT
+                FROM(
+                    SELECT r.REVIEW_NUMBER, r.USER_NUMBER,
+                    r.PROJECT_NUMBER, r.CONTENT, r.REGISTER_DATE,
+                    p.CATEGORY, p.STATUS,
+                    l.LIKE_CNT
+                    FROM TBL_REVIEW r
+                    INNER JOIN TBL_PROJECT p
+                    ON p.PROJECT_NUMBER = r.PROJECT_NUMBER
+                    LEFT OUTER JOIN (
+                        SELECT REVIEW_NUMBER, COUNT(USER_NUMBER) AS LIKE_CNT
+                        FROM TBL_LIKE
+                        GROUP BY REVIEW_NUMBER
+                    ) l
+                    ON l.REVIEW_NUMBER = r.REVIEW_NUMBER
+                )
+                WHERE STATUS = 1 --메인은 진행중인 것만 띄우기
+                <if test="category != null and category != ''">
+                    AND CATEGORY = #{category}
+                </if>
+                <if test="order != null and order != ''">
+                    <choose>
+                        <when test="order == 'popular'">
+                            ORDER BY APPLY_COUNT DESC
+                        </when>
+                        <when test="order == 'new'">
+                            ORDER BY REGISTER_DATE
+                        </when>
+                    </choose>
+                </if>
+            )
+            <![CDATA[
+                WHERE ROWNUM <= #{pageNum} * #{amount}
+                ]]>
         )
-        WHERE STATUS = 1 --메인은 진행중인 것만 띄우기
-        <if test="category != null and category != ''">
-            AND CATEGORY = #{category}
-        </if>
-        <if test="order != null and order != ''">
-            <choose>
-                <when test="order == 'popular'">
-                    ORDER BY APPLY_COUNT DESC
-                </when>
-                <when test="order == 'new'">
-                    ORDER BY REGISTER_DATE
-                </when>
-            </choose>
-        </if>
+        <![CDATA[
+    WHERE RN > (#{pageNum} - 1) * #{amount}
+    ]]>
     </select>
 </mapper>

@@ -5,6 +5,7 @@ import com.example.lit.domain.dao.review.*;
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -121,13 +123,8 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
-    public ProjectVO readPjt(Long projectNumber) {
-        return projectDAO.read(projectNumber);
-    }
-
-    @Override
-    public void registerImg(ReviewFileVO reviewFileVO) {
-
+    public ProjectDTO readForReview(Long projectNumber, Long userNumber) {
+        return projectDAO.getForReview(projectNumber, userNumber);
     }
 
     @Override
@@ -186,7 +183,13 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
-    public List<ReviewDTO> getList2(ListDTO listDTO) {
-        return reviewDAO.getList2(listDTO);
+    public List<ReviewDTO> getMainList(ListDTO listDTO) {
+        List<ReviewDTO> result = reviewDAO.getMainList(listDTO).stream().map( review -> {
+            List<ReviewFileVO> list = reviewFileDAO.getImgs(review.getReviewNumber());
+            review.setReviewFileList(list);
+            return review;
+        }).collect(Collectors.toList());
+
+        return result;
     }
 }

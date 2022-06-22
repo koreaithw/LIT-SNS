@@ -1,7 +1,9 @@
 package com.example.lit.service;
 
+import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.review.ReviewDTO;
+import com.example.lit.domain.vo.review.ReviewFileVO;
 import com.example.lit.service.review.LitUpService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -26,7 +28,19 @@ public class LitUpServiceTests {
     }
 
     @Test
+
     public void getLikeListTest() {
         litUpService.getLikeList(1L);
+    }
+    public void getMainListTest(){
+        ListDTO listDTO = new ListDTO();
+        listDTO.setOrder("new");
+        litUpService.getMainList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+    }
+
+    @Test
+    public void getImgsTest(){
+        litUpService.getImgs(67L).stream().map(ReviewFileVO::toString).forEach(log::info);
+
     }
 }

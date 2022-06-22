@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="/assets/css/message/message.css">
     <link rel="stylesheet" href="/assets/css/default.css">
     <link rel="stylesheet" href="/assets/css/project/default.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
 
 </head>
 
 <body>
-<header></header>
+<header th:insert="~{/header :: header}"></header>
 <main>
     <div class="mainWrap">
 
@@ -30,14 +31,14 @@
                     </div>
                     <div class="dmList">
                             <figure th:each="item:${nicknameAndMessage}" class="dmBtn">
-                                <a href="" data-userNo="12" class="userDMList">
+                                <a th:href="${item.get('RECEIVE_USER_NUMBER')}" class="userDMList">
                                     <div class="dmImg">
                                         <img src="/images/project/domImg/indi01.webp" alt="">
                                     </div>
                                     <div class="dmData">
                                         <p th:text="${item.get('NICKNAME')}"></p>
-                                        <p th:text="${item.get('CONTENT')}"></p>
-                                        <input type="hidden" th:value="${item.get('RECEIVE_USER_NUMBER')}">
+                                        <p class="recentMessage" th:text="${item.get('CONTENT')}"></p>
+                                        <input type="hidden" th:id="${item.get('RECEIVE_USER_NUMBER')}">
                                     </div>
                                 </a>
                             </figure>
@@ -162,5 +163,45 @@
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
 <script defer src="/assets/js/message/messageAjax.js"></script>
 <script defer src="/assets/js/message/message.js"></script>
+<script th:inline = "javascript">
+    let webSocket;
+    let nickname;
+    let roomId;
 
+    function connect(){
+        webSocket = new WebSocket("ws://localhost:12000/message");
+        webSocket.onopen = onOpen;
+        webSocket.onclose = onClose;
+        // webSocket.onmessage = onMessage;
+    }
+
+    function disconnect(){
+        webSocket.send(JSON.stringify({chatRoomId : roomId, type:'LEAVE', writer:nickname}));
+        webSocket.close();
+    }
+
+    function send(content){
+        webSocket.send(JSON.stringify({chatRoomId : roomId, type:'CHAT', writer:nickname, message : content}));
+        document.getElementById("message").value = "";
+    }
+
+    function onOpen(){
+        webSocket.send(JSON.stringify({chatRoomId : roomId, type:'ENTER', writer:nickname}));
+    }
+
+    // function onMessage(e){
+    //     data = e.data;
+    //     chatroom = document.getElementById("chatroom");
+    //     chatroom.innerHTML = chatroom.innerHTML + "<br>" + data;
+    // }
+
+    function onClose(){
+        disconnect();
+    }
+
+
+
+
+
+</script>
 </html>

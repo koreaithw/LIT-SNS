@@ -199,55 +199,6 @@ $(".fileUploadPreview").on('mousewheel', function (e) {
 
 
 
-//////////////////////////////////////////// Ajax로 바꿔야 함 ////////////////////////////////////////////
-
-$("input[type='submit']").on("click", function(e){
-    e.preventDefault();
-    let $form = $("form#registerForm");
-    let str = "";
-
-    $.each($(".uploadResult ul li"), function(i, li){
-        str += "<input type='hidden' name='fileList[" + i + "].fileName' value='" + $(li).data("filename") + "'>"
-        str += "<input type='hidden' name='fileList[" + i + "].uuid' value='" + $(li).data("uuid") + "'>"
-        str += "<input type='hidden' name='fileList[" + i + "].uploadPath' value='" + $(li).data("uploadpath") + "'>"
-        str += "<input type='hidden' name='fileList[" + i + "].image' value='" + $(li).data("image") + "'>"
-        str += "<input type='hidden' name='fileList[" + i + "].fileSize' value='" + $(li).data("filesize") + "'>"
-    });
-
-    $form.append(str).submit();
-
-});
-
-//////////////////////////////////////////// 강사님 코드 //////////////////////////////////////////// 수정할 것
-
-let arFile = Array.from($("input[type='file']")[0].files);
-
-$("input[type='file']").on("change", function(e){
-    let formData =   new FormData();
-    let inputFile = $("input[id='fileClickInput']");
-    let files = inputFile[0].files;
-
-    for(let i=0; i<files.length; i++){
-       formData.append("uploadFiles", files[i]);
-    }
-    Array.from($(this)[0].files).forEach(file => arFile.push(file));
-    const dataTransfer = new DataTransfer();
-    arFile.forEach(file => dataTransfer.items.add(file));
-    $(this)[0].files = dataTransfer.files;
-
-    $.ajax({
-        url: "/litUp/uploadFile",
-        type: "post",
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(files){
-            ////////작성 핋요
-        }
-    });
-});
-
-
 // 제출 시에 사용
 // $("#btnSubmit").on("click", function () {
 //     var formData = new FormData();
@@ -266,23 +217,3 @@ $("input[type='file']").on("change", function(e){
 //         }
 //     });
 // });
-
-//내가 만든 코드
-// function reviewRegister(reviewVO, callback, error) {
-//     $.ajax({
-//         url: "/litUp/register/"+reviewVO.userNumber+"/"+reviewVO.projectNumber ,
-//         type: "get" ,
-//         data: JSON.stringify(reviewVO) ,
-//         contentType: "application/json" ,
-//         success: function (result) {
-//             if(callback){
-//                 callback(result);
-//             }
-//         } ,
-//         error: function (xhr, status, er) {
-//             if(error){
-//                 error(xhr, status, er);
-//             }
-//         }
-//     })
-// }
