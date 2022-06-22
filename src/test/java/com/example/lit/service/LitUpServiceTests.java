@@ -24,4 +24,9 @@ public class LitUpServiceTests {
 
         litUpService.searchReview(searchDTO).stream().map(ReviewDTO::toString).forEach(log::info);
     }
+
+    @Test
+    public void getLikeListTest() {
+        litUpService.getLikeList(1L);
+    }
 }

@@ -51,7 +51,6 @@ public class FollowMapperTest {
         log.info("---------------------");
     }
 
-=======
 //    @Test
 //    public void insert(){
 //        log.info("---------------------");
@@ -82,5 +81,5 @@ public class FollowMapperTest {
 //        log.info( "followerCount : " + followMapper.followerCount(followVO) );
 //        log.info("---------------------");
 //    }
->>>>>>> cd2b8955962488f33178cfb86132b107f60dafb3
+
 }

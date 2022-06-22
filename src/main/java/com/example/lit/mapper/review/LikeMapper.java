@@ -1,7 +1,10 @@
 package com.example.lit.mapper.review;
 
+import com.example.lit.domain.vo.review.LikeDTO;
 import com.example.lit.domain.vo.review.LikeVO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface LikeMapper {
@@ -13,4 +16,7 @@ public interface LikeMapper {
     public Long getTotal(Long reviewNumber);
     // 좋아요 확인
     public int checkLike(Long userNumber);
+    // 좋아요 리스트(알림용)
+    public List<LikeDTO> getList(Long userNumber);
+
 }

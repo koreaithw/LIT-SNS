@@ -1,5 +1,6 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.vo.user.UserFileVO;
 import com.example.lit.service.User.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -74,6 +75,11 @@ public class UserRestController {
     public String removeFollower(@PathVariable("followerNumber") Long followerNumber, @PathVariable("followingNumber") Long followingNumber){
         userService.removeFollower(followerNumber, followingNumber);
         return "팔로워 삭제 성공" + followerNumber;
+    }
+
+    @GetMapping("/userImg")
+    public UserFileVO getImg(Long userNumber) {
+        return userService.getImg(userNumber);
     }
 
 }

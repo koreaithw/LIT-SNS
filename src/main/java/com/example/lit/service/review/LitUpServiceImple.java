@@ -39,6 +39,9 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
+    public List<LikeDTO> getLikeList(Long userNumber) { return likeDAO.getList(userNumber);}
+
+    @Override
     public int getCheckLike(Long userNumber) {
         return likeDAO.checkLike(userNumber);
     }
@@ -139,7 +142,7 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public List<ReviewFileVO> getImgs(Long reviewNumber) {
-        return null;
+        return reviewFileDAO.getImgs(reviewNumber);
     }
 
     @Override
