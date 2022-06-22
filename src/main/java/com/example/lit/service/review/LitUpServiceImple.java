@@ -81,9 +81,15 @@ public class LitUpServiceImple implements LitUpService{
 
 
     @Override
-    public List<ReviewVO> getList(Criteria criteria, String category) {
-        return reviewDAO.getList(criteria, category);
+    public List<ReviewDTO> getList(ListDTO listDTO) {
+        List<ReviewDTO> result = reviewDAO.getList(listDTO).stream().map( review -> {
+            List<ReviewFileVO> list = reviewFileDAO.getImgs(review.getReviewNumber());
+            review.setReviewFileList(list);
+            return review;
+        }).collect(Collectors.toList());
+        return result;
     }
+
 
     @Override
     @Transactional(rollbackFor = Exception.class)
