@@ -506,6 +506,7 @@ ul {
   left: 50%;
   top: 50vh;
   transform: translate(-50%, -50%);
+  overflow: hidden;
 }
 
 .medalModal {
@@ -635,7 +636,12 @@ ul {
   display: block;
   flex: 1 1;
   min-height: 200px;
-  overflow: auto hidden;
+  overflow-y: scroll;
+  max-height: 350px;
+}
+
+.followerTwo::-webkit-scrollbar{
+  display:none;
 }
 
 .followerTwoUl {

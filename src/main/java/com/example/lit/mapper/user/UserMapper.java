@@ -54,5 +54,6 @@ public interface UserMapper {
     public List<UserVO> getFollowingList(Long userNumber);
     //마이페이지 팔로우 삭제
     public void deleteFollower(Long followerNumber, Long followingNumber);
-
+    //회원정보수정페이지 비번 조회
+    public int oldPasswordCheck(String password, Long userNumber);
 }

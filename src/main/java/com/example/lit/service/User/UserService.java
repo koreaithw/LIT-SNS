@@ -48,7 +48,10 @@ public interface UserService {
     public List<UserVO> ModalFollowing(Long userNumber);
     //마이페이지 팔로우 삭제
     public void removeFollower(Long followerNumber, Long followingNumber);
-
+    //회원정보수정페이지 비번 조회
+    public boolean dbOldPwCheck(String password, Long userNumber);
+    //정보수정페이지 해당 유저 정보 띄워주기
+    public UserVO getChangePwInfo(Long userNumber);
 
     //유저 파일 업로드
     public void registerImg(UserFileVO userFileVO);

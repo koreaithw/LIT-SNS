@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="_profile_nickname">
-                        <h1 class="_nickname">xldms.dl</h1>
+                        <h1 class="_nickname" th:text="${nickName}"></h1>
                     </div>
                 </div>
                 <form class="_withdrawl_form">
@@ -68,5 +68,23 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="/assets/js/changeinfo/withdraw.js"></script>
+<script src="/assets/js/changeinfo/changeInfoAjax.js"></script>
+<script th:inline="javascript">
+    let userNumber = 2; // 임시
 
+    $('#_withdrawlPassword').on("keyup", function () {
+        let $password = $(this).val();
+
+        console.log($('#_withdrawlPassword'));
+
+        changeInfoAjax.checkWithdrawPw({
+            userNumber : userNumber,
+            password : $password
+        }, function (result) {
+            console.log(result);
+            ckeckOldPw(result);
+        });
+    });
+
+</script>
 </html>

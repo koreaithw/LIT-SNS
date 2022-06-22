@@ -1,5 +1,7 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.vo.user.UserFileVO;
+import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.service.User.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,63 +19,51 @@ public class UserRestController {
     @PostMapping("/changeImg")
     public void changeImg(){
     }
-    
-    //닉네임 중복확인
-    @PostMapping("/checkNickName")
-    public String checkNickName(String nickname){
-        return null;
-    }
-//
-//    //이메일 중복확인
-//    @ResponseBody
-//    @RequestMapping(value = "/dbEmailCheck", method = RequestMethod.POST)
-//    public boolean dbEmailCheck(String email){
-//        log.info("checkEmail====================");
-//        return userService.dbEmailCheck(email);
-//    }
-//
+
+    // 회원가입 - 이메일 중복검사
     @GetMapping("/dbEmailCheck/{email}")
     public boolean dbEmailCheck(@PathVariable("email") String email){
         log.info("이메일 중복검사=============");
         return userService.dbEmailCheck(email);
     }
 
+    // 회원가입 - 닉네임 중복검사
     @GetMapping("/dbNicknameCheck/{nickname}")
     public boolean dbNicknameCheck(@PathVariable("nickname") String nickname){
         log.info("닉네임 중복검사=============");
         return userService.dbNicknameCheck(nickname);
     }
 
-    //비밀번호 확인
-    @PostMapping("/checkPw")
-    public String checkPw(){
-        return null;
-    }
-
-
-    //============= 팔로잉 ===============
-
-    @GetMapping("/following")
-    public String following(){
-        return null;
-    }
-
-    @GetMapping("/follower")
-    public String follower(){
-        return null;
-    }
-
-    @GetMapping("/follow")
-    public String follow(){
-        return null;
-    }
-
-
-    // 마이페이지 팔로워 삭제하기
+    // 마이페이지 - 팔로워 삭제하기
     @DeleteMapping("/removeFollower/{followerNumber}/{followingNumber}")
     public String removeFollower(@PathVariable("followerNumber") Long followerNumber, @PathVariable("followingNumber") Long followingNumber){
         userService.removeFollower(followerNumber, followingNumber);
         return "팔로워 삭제 성공" + followerNumber;
+    }
+
+    // 마이페이지 - 비밀번호 변경 - 이전 비밀번호 조회
+    @PostMapping("/oldPwCheck")
+    public boolean dbOldPwCheck(@RequestBody UserVO userVO){
+        log.info("이전 비밀번호 조회=============");
+        log.info(userVO.getPassword() + "###################");
+        log.info(userVO + "###################");
+        log.info(userService.dbOldPwCheck(userVO.getPassword(), userVO.getUserNumber()) + " $$$$$$$$$$$");
+        return userService.dbOldPwCheck(userVO.getPassword(), userVO.getUserNumber());
+    }
+
+    // 마이페이지 - 회원 탈퇴
+    @PostMapping("/withdrawCheck")
+    public boolean withdrawCheck(@RequestBody UserVO userVO){
+        log.info(userVO.getPassword() + "###################");
+        log.info(userVO + "###################");
+        log.info(userService.dbOldPwCheck(userVO.getPassword(), userVO.getUserNumber()) + " $$$$$$$$$$$");
+        return userService.dbOldPwCheck(userVO.getPassword(), userVO.getUserNumber());
+    }
+
+    // 유저 프로필 사진 불러오기
+    @GetMapping("/userImg")
+    public UserFileVO getImg(Long userNumber) {
+        return userService.getImg(userNumber);
     }
 
 }
