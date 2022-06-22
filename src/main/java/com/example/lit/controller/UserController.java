@@ -85,13 +85,12 @@ public class UserController {
     //로그인
     @PostMapping("/loginOk")
     public RedirectView login(String email, String password, Model model, HttpServletRequest req, RedirectAttributes rttr){
-
         try{
             HttpSession session = req.getSession();
             UserVO userVO = userService.login(email,password);
             /* ##### 유저 프로필 사진으로 수정 필요 #####*/
             model.addAttribute("info", userVO.getNickname() + "님 환영합니다.");
-            session.setAttribute("userVO", userVO.getUserNumber());
+            session.setAttribute("userNumber", userVO.getUserNumber());
 
         }catch (Exception e){
             rttr.addFlashAttribute("loginStatus", false);

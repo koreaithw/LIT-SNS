@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -123,7 +124,7 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public List<ReviewFileVO> getImgs(Long reviewNumber) {
-        return null;
+        return reviewFileDAO.getImgs(reviewNumber);
     }
 
     @Override
@@ -168,6 +169,12 @@ public class LitUpServiceImple implements LitUpService{
 
     @Override
     public List<ReviewDTO> getList2(ListDTO listDTO) {
-        return reviewDAO.getList2(listDTO);
+        List<ReviewDTO> result = reviewDAO.getList2(listDTO).stream().map( review -> {
+            List<ReviewFileVO> list = reviewFileDAO.getImgs(review.getReviewNumber());
+            review.setReviewFileList(list);
+            return review;
+        }).collect(Collectors.toList());
+
+        return result;
     }
 }

@@ -1,14 +1,19 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.dao.review.ReviewFileDAO;
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
 import com.example.lit.service.review.LitUpService;
 import com.example.lit.service.review.LitUpServiceImple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -122,12 +127,19 @@ public class LitUpRestController {
     }
 
     //========== 메인 리스트 ===========
-    @GetMapping("/getList2")
-    public List<ReviewDTO> getList2(){
+    @PostMapping("/getList2")
+    public List<ReviewDTO> getList2(@RequestBody ListDTO listDTO){
         log.info("***************************");
-        log.info("LitUpRestController : getList2(get)");
+        log.info("LitUpRestController : getList2(post)");
         log.info("***************************");
 
-        return null;
+        litUpService.getList2(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+        return litUpService.getList2(listDTO);
+    }
+
+    @GetMapping("/display")
+    public byte[] getFile(String fileName) throws IOException {
+        File file = new File("C:/upload/", fileName);
+        return FileCopyUtils.copyToByteArray(file);
     }
 }
