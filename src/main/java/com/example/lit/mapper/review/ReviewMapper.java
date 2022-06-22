@@ -1,17 +1,20 @@
 package com.example.lit.mapper.review;
 
 import com.example.lit.domain.vo.Criteria;
+import com.example.lit.domain.vo.ListDTO;
+import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.review.ReviewDTO;
 import com.example.lit.domain.vo.review.ReviewVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface ReviewMapper {
     //    리뷰 목록 가져오기
-    public List<ReviewVO> getList(Criteria criteria);
+    public List<ReviewVO> getList(@Param("criteria") Criteria criteria, @Param("category") String category );
     //    리뷰 등록
     public void insert(ReviewVO reviewVO);
     //    리뷰 상세보기
@@ -30,4 +33,6 @@ public interface ReviewMapper {
     public int getTotalToday();
     //  차트 정보
     public Long getReviewChart(String date);
+    // 리뷰 목록 가져오기2(테스트)
+    public List<ReviewDTO> getList2(ListDTO listDTO);
 }

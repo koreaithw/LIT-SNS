@@ -20,4 +20,5 @@ public class ReviewDTO{
     private String category;
     private String email;
     private Long total;
+    private Long likeCount;
 }
