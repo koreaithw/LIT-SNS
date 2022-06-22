@@ -28,7 +28,7 @@ public class LitRestController {
 
     @PostMapping("/upload")
     public List<ProjectFileVO> upload(MultipartFile[] uploadFiles) throws IOException {
-        String uploadFolder = "D:/upload";
+        String uploadFolder = "C:/upload";
         ArrayList<ProjectFileVO> files = new ArrayList<>();
 
 //        yyyy/MM/dd 경로 만들기
@@ -62,7 +62,7 @@ public class LitRestController {
 
     @GetMapping("/display")
     public byte[] getFile(String fileName) throws IOException{
-        File file = new File("D:/upload/", fileName);
+        File file = new File("C:/upload/", fileName);
         log.info(file.toString());
         return FileCopyUtils.copyToByteArray(file);
     }

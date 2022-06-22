@@ -501,8 +501,29 @@ svg:not(:root) {
 ._aajc {
     max-height: 362px;
     min-height: 100px;
-    overflow-y: auto;
-    width: 500px;
+    overflow-y: hidden;
+    width: 490px;
+}
+
+.alterCss{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+}
+
+.userFile {
+    margin-left: 25px;
+    margin-top: 6px;
+}
+
+.alterspan {
+    margin-left: 13px;
+}
+
+.alterRR {
+    width: 60px;
+    margin-top: 10px;
+    height: 60px;
 }
 
 

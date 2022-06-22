@@ -229,5 +229,5 @@ public class LitUpRestController {
 
         return litUpService.readForReview(projectNumber, userNumber);
     }
-
+    
 }
