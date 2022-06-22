@@ -21,6 +21,10 @@ public class ProjectDAO {
     public void register(ProjectVO projectVO){ projectMapper.insert(projectVO);}
     //    프로젝트 상세보기
     public ProjectVO read(Long projectNumber){ return projectMapper.get(projectNumber); }
+    //    프로젝트 상세보기(리뷰작성용)
+    public ProjectDTO getForReview(Long projectNumber, Long userNumber){
+        return projectMapper.getForReview(projectNumber, userNumber);
+    };
     //    프로젝트 삭제
     public boolean remove(Long projectNumber){ return projectMapper.delete(projectNumber) != 0; }
     //    프로젝트 전체 개수
@@ -33,4 +37,5 @@ public class ProjectDAO {
     }
     // 프로젝트 상태로 토탈 가져오기
     public int getTotalByStatus(Long status){ return projectMapper.getTotalByStatus(status); }
+
 }

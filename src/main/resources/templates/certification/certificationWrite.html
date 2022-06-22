@@ -144,12 +144,11 @@
                     <div class="certificationContentHeader">
                         <div class="certificationContHeaderWrapper">
                             <div class="ceritficationContentProfileImageWrapper">
-                                <div class="certificationContentProfileImage">
-                                    <img style="width:100%;" src="monkey.jpg">
-                                </div>
+<!--                                <div class="certificationContentProfileImage">-->
+<!--                                    <img style="width:100%;" src="monkey.jpg">-->
+<!--                                </div>-->
                             </div>
                             <div class="certificationUserId">
-                                jin jin
                             </div>
                         </div>
                     </div>
@@ -183,16 +182,16 @@
                         <div class="projectInfoDropDown">
                             <div class="projectInfoDropDownContentWrapper">
                                 <div class="projectInfoDropDownContent">
-                                    Title<span>숨쉬기 챌린지</span>
+                                    Title<span class="title"></span>
                                 </div>
                                 <div class="projectInfoDropDownContent">
-                                    Content<span>하루에 숨 여덟번 쉬기</span>
+                                    Content<span class="content"></span>
                                 </div>
                                 <div class="projectInfoDropDownContent">
-                                    Writer<span>박진욱</span>
+                                    Writer<span class="writer"></span>
                                 </div>
                                 <div class="projectInfoDropDownContent">
-                                    StartDate<span>2022/06/13</span>
+                                    StartDate<span class="startDate"></span>
                                 </div>
                             </div>
                         </div>
@@ -285,7 +284,9 @@
 <script defer th:inline="javascript">
     let filesList
     let arFile = Array.from($("input[type='file']")[0].files);
+    let $uploadResult = $(".ceritficationContentProfileImageWrapper")
 
+    // 사진 업로드 패스에 저장
     $("input[type='file']").on("change", function(e){
         let formData =   new FormData();
         let inputFile = $("input[id='fileClickInput']");
@@ -312,7 +313,7 @@
     });
 
 
-
+    //리뷰 작성 버튼
     $('.certificationNextButton > button.completeButton').on("click",function () {
         let reviewContent = $("textarea#reviewContent").val();
         reviewWriteService.reviewRegister({
@@ -361,7 +362,21 @@
             function (a,b,c) {console.log("error")})
     })
 
+    // 출력할 사진 리스트 받아오기기
+        $(".nextNextButton").on("click",function () {
+            $.getJSON("/litUp/profilePic", {userNumber: 1}, function(pic){showUserPic(pic);})
+        })
 
+
+    // 프로필 사진 출력
+    function showUserPic(file){
+        let str ="";
+            str += "<div class=\"certificationContentProfileImage\">"
+            str += "<img style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+            str += "</div>"
+
+        $uploadResult.html(str);
+    }
 
 
 </script>

@@ -11,7 +11,7 @@
     </delete>
 
     <select id="getImg" resultType="userFileVO">
-        SELECT UUID, UPLOAD_PATH, NAME, IMAGE, REVIEW_NUMBER, FILE_NUMBER
+        SELECT UUID, UPLOAD_PATH, NAME, IMAGE, USER_NUMBER, FILE_NUMBER
         FROM TBL_USER_FILE
         WHERE USER_NUMBER = #{userNumber}
     </select>

@@ -177,6 +177,18 @@ $certificationNextNextButton.on("click", function () {
         return;
     }
     twinkle();
+    //////////////// 프로젝트 넘버, 유저 넘버 받아오기
+    reviewWriteService.getProject({projectNumber:1, userNumber:1},
+        function (title, content, startDate, nickname) {
+            $(".projectInfoDropDownContent span.title").html(title)
+            $(".projectInfoDropDownContent span.content").html(content)
+            $(".projectInfoDropDownContent span.startDate").html(reviewWriteService.getRegisterDate(startDate))
+            $(".projectInfoDropDownContent span.writer").html(nickname)
+            $(".certificationUserId").html(nickname)
+
+        },function (a,b,c) {
+            console.log("error");
+        })
 
     $certificationContent.css("display", "block");
     $detailProjectContent.css("display", "none");
@@ -230,6 +242,8 @@ typeDownButton.addEventListener("click", function () {
     typeUpButton.style.display = 'block';
     typeDownButton.style.display = 'none';
     projectInfoDropDown.style.height = '100px';
+
+
 });
 
 //인증글 작성에서 인증글 신고 안내글 관련 v자 버튼
