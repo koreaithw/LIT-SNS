@@ -20,21 +20,32 @@
             height: 100%;
         }
 
-        div.photoContents>div {
+        div.photoContents > div {
             display: flex;
             flex-wrap: wrap;
         }
 
-        figure {
-            padding: 10px;
-            width: 25%;
+        div.photoContents figure {
+            width: 33.33%;
             height: 250px;
+            padding: 10px;
         }
 
-        figure img {
+        div.photoContents figure a {
+            display: block;
+            height: 100%;
+            overflow: hidden;
+        }
+        div.photoContents figure img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: 1s ease;
+            transform-origin: center center;
+        }
+        div.photoContents img:hover {
+            transform: scale(1.1);
+            transform-origin: center center;
         }
     </style>
 
@@ -245,6 +256,31 @@
         let link = $(this).attr("href"); // 링크 변수값
         console.log(link);
         // location.href="";
+    });
+
+    //스크롤 이벤트
+    let timer;
+    $(window).scroll(function () {
+        // 현 스크롤 탑의 위치
+        let windowTop = $(window).scrollTop();
+        // 변화될 아이
+        let contentHeight = $(".photoContents").height();
+        // 창의 전체 높이
+        let windowHeight = $(window).height();
+
+        // 스크롤이 마지막 이면 데이터 가져오기
+        if (windowTop > (contentHeight - windowHeight)) {
+            // 스크롤 맨 아래
+            if (timer) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(() => {
+                // ajax 실행
+                litList("lanking");
+            }, 500);
+        } else {
+            //스크롤중..
+        }
     });
 
 </script>
