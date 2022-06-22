@@ -53,12 +53,10 @@ $('.messageWrite').on('keyup', function (key) {
     }else{
         return;
     }
+
+    //웹소켓 쪽 전송
     send(content);
 });
-
-
-
-
 
 // 유저 리스트 모달창
 function dmSubmit() {
@@ -175,6 +173,7 @@ $(".dmBtn>a").on("click", function (e) {
         }
         $('.content').scrollTop($contentIn.height());
     });
+    console.log("연결")
     connect();
 });
 
@@ -324,6 +323,9 @@ function startChat(receiveUserNumber, nick){
         $('.content').scrollTop($contentIn.height());
     });
 
+}
 
-
+function exitChat(e){
+    console.log('채팅끝');
+    disconnect();
 }
