@@ -147,9 +147,9 @@ let reviewDetailService = (function () {
     }
 
     // 리뷰 디테일 조회
-    function readDetail(replyNumber, callback) {
+    function readDetail(reviewNumber, callback) {
         $.ajax({
-            url:"/litUp/read/" + parseInt(replyNumber),
+            url:"/litUp/read/" + parseInt(reviewNumber),
             type:"get",
             success:function (reviewVO) {
                 if(callback){
@@ -159,9 +159,9 @@ let reviewDetailService = (function () {
         })
     }
 
-    function getCheckLike(userNumber,callback) {
+    function getCheckLike(param,callback) {
         $.ajax({
-            url:"/litUp/like/" + parseInt(userNumber),
+            url:"/litUp/like/" + param.userNumber + "/" +param.reviewNumber,
             type:"get",
             success:function (result) {
                 if(callback){

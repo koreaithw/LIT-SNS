@@ -17,18 +17,19 @@ commentInputArea.addEventListener("input", function (e) {
 })
 
 //프로젝트 모달 창 켜는 버튼
-function projectDetailModalShow() {
+function projectDetailModalShow(reviewNumber) {
     modal.style.display = 'block';
     projectDetailButton.style.display = 'none';
     pageNum = 1;
+    $reviewNumber= 1
     showList(pageNum);
     // 좋아요 총 갯수
-    reviewDetailService.getLikeTotal(1,function (result) {
+    reviewDetailService.getLikeTotal($reviewNumber,function (result) {
         $("#likeCount").html(result);
     })
 
     // 리뷰 디테일 조회, 리뷰넘버 받아와서 넣어줘야 함
-    reviewDetailService.readDetail(1,function (nickname, content, registerDate) {
+    reviewDetailService.readDetail($reviewNumber,function (nickname, content, registerDate) {
         $(".detailContentProfileName").html(nickname);
         $(".detailContentWriteName").html(nickname);
         $(".detailContentWriteComment").html(content);
@@ -37,7 +38,7 @@ function projectDetailModalShow() {
     })
 
     // 좋아요 여부 확인
-    reviewDetailService.getCheckLike(1,function (result) {
+    reviewDetailService.getCheckLike({userNumber:1, reviewNumber:$reviewNumber},function (result) {
         if(result){
             detailContentLikeButton.style.display = 'none';
             detailContentLikeCancel.style.display = 'block';
