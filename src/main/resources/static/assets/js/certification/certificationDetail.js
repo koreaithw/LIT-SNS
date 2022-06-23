@@ -23,10 +23,7 @@ function projectDetailModalShow(reviewNumber) {
     pageNum = 1;
     $reviewNumber= 1
     showList(pageNum);
-    // 좋아요 총 갯수
-    reviewDetailService.getLikeTotal($reviewNumber,function (result) {
-        $("#likeCount").html(result);
-    })
+
 
     // 리뷰 디테일 조회, 리뷰넘버 받아와서 넣어줘야 함
     reviewDetailService.readDetail($reviewNumber,function (nickname, content, registerDate) {
@@ -35,6 +32,11 @@ function projectDetailModalShow(reviewNumber) {
         $(".detailContentWriteComment").html(content);
         $(".detailContentRegisterDate").html(reviewDetailService.getReplyDate(registerDate));
         $(".detailContentFooterWirtesInnerDate").html(reviewDetailService.getReplyDate(registerDate));
+    })
+
+    // 좋아요 총 갯수
+    reviewDetailService.getLikeTotal($reviewNumber,function (result) {
+        $("#likeCount").html(result);
     })
 
     // 좋아요 여부 확인
