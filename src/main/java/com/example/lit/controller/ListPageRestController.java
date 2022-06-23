@@ -25,7 +25,6 @@ public class ListPageRestController {
     //lits탭 리스트 (현재 페이지가 카테고리인지 신규인지 인기인지 받아오기)
     private final LitServiceImple litServiceImple;
     private final LitUpServiceImple litUpServiceImple;
-    private final LitUpService litUpService;
 
 
     // 프로젝트 리스트
@@ -41,14 +40,14 @@ public class ListPageRestController {
     }
 
     //litup탭 리스트
-    @GetMapping("/litups/{cate}/{page}")
-    public List<ReviewDTO> litups(@PathVariable("page") int pageNum, @PathVariable("cate") String category){
-        ListDTO listDTO = new ListDTO();
-        listDTO.setPageNum(pageNum);
+    @GetMapping("/litups/{order}/{cate}/{page}")
+    public List<ReviewDTO> litups(@PathVariable("page") int pageNum, @PathVariable("cate") String category, @PathVariable("order") String order){
+        ListDTO listDTO = new ListDTO(pageNum, 2);
         listDTO.setCategory(category);
+        listDTO.setOrder(order);
 
-        litUpService.getList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
-        return litUpService.getList(listDTO);
+//        litUpServiceImple.getList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+        return litUpServiceImple.getList(listDTO);
     }
 
 }

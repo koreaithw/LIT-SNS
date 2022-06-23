@@ -24,27 +24,27 @@
                         SELECT REVIEW_NUMBER, COUNT(USER_NUMBER) AS LIKE_CNT
                         FROM TBL_LIKE
                         GROUP BY REVIEW_NUMBER
-            ) l
-            ON l.REVIEW_NUMBER = r.REVIEW_NUMBER
-        )
-        WHERE STATUS = 1 --메인은 진행중인 것만 띄우기
-        <if test="category != null and category != ''">
-            AND CATEGORY = #{category}
-        </if>
-        <if test="order != null and order != ''">
-            <choose>
-                <when test="order == 'popular'">
-                    ORDER BY APPLY_COUNT DESC
-                </when>
-                <when test="order == 'new'">
-                    ORDER BY REGISTER_DATE
-                </when>
-            </choose>
-        </if>
-        )
-        <![CDATA[
-                WHERE ROWNUM <= #{pageNum} * #{amount}
-                ]]>
+                    ) l
+                    ON l.REVIEW_NUMBER = r.REVIEW_NUMBER
+                )
+                WHERE STATUS = 1 --메인은 진행중인 것만 띄우기
+                <if test="category != null and category != ''">
+                    AND CATEGORY = #{category}
+                </if>
+                <if test="order != null and order != ''">
+                    <choose>
+                        <when test="order == 'popular'">
+                            ORDER BY APPLY_COUNT DESC
+                        </when>
+                        <when test="order == 'new'">
+                            ORDER BY REGISTER_DATE
+                        </when>
+                    </choose>
+                </if>
+            )
+            <![CDATA[
+            WHERE ROWNUM <= #{pageNum} * #{amount}
+            ]]>
         )
         <![CDATA[
         WHERE RN > (#{pageNum} - 1) * #{amount}

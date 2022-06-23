@@ -63,7 +63,7 @@
             <div class="_main_top_wrapper">
                 <!-- 카테고리 선택 창 -->
                 <div class="_category_wrapper">
-                    <a href="life" class="on">
+                    <a href="life">
                         <div class="_category_detail _life">
                             <div class="_category_img_box" style="padding:10px ;">
                                 <div class="_category_img">
@@ -191,26 +191,35 @@
  <script src="/assets/js/main/list.js"></script>
 <!--<script src="/src/main/resources/static/assets/js/main/main.js"></script>-->
 
-<script>
+<script th:inline="javascript">
 
     let pageNum = 1;
     const contBox = $('div.photoContents > div');
     let cate1 = "lits";     // lits / litups
     let cate2 = "lanking";  // 카테고리
-
+    let order = "new";
     // 기본 시작은 lit
     litList();
 
     function litList() {
         console.log("ajax----------------");
+        let url = "/list/" +cate1+ "/" + cate2 + "/" + pageNum;
+        if( cate1 == "litups"){
+            url = "/list/" +cate1+ "/" + order +"/" + cate2 + "/" + pageNum;
+        }
         $.ajax({
-            url: "/list/" +cate1+ "/" + cate2 + "/" + pageNum,
+            url: url,
             type: "get",
             dataType: 'json',
             success: function (result) {
                 pageNum++; // 다음 페이지 번호 지정
-                litsadd(result);
-                // litupadd();  //
+
+                if( cate1 == "litups"){
+                    litupadd(result);
+                }else {
+                    litsadd(result);
+                }
+
             }, error: function (xhr, textStatus, errorThrown) {
                 console.log('통신 실패');
                 console.log(xhr);
@@ -238,43 +247,19 @@
         contBox.append(str);
     }
 
-
-    function getLitUpList(){
-        mainLitUp({
-            order : "new"
-        }, function(result){
-            let str = "";
-            $(".photoContents > div").html("");
-            pageNum = 1;                    // 페이지번호 초기화
-            result.forEach( (data, i) => {
-                let file = data.reviewFileList;
-                if(file[0]){
-                    str +=
-                        "<figure>" +
-                        "<a href=\"" + data.reviewNumber + "\">" +
-                        "<img alt=\"\" src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">" +
-                        "</a>" +
-                        "</figure>";
-                }
-            })
-            $(".photoContents > div").append(str);
-        })
-    }
-
-    function mainLitUp(info, callback, error){
-        $.ajax({
-            url : "/litUp/getList2",
-            type : "post",
-            data : JSON.stringify(info),
-            contentType : "application/json",
-            dataType : "json",
-            success : function(result){
-                if(callback) { callback(result); }
-            },
-            error : function (xhr, status, er) {
-                if(error) { error(er); }
+    function litupadd(result) {
+        let str = "";
+        $(".photoContents > div").html("");
+        pageNum = 1;                    // 페이지번호 초기화
+        result.forEach( (data, i) => {
+            let file = data.reviewFileList;
+            if(file[0]){
+                str += "<figure><a href=\"" + data.reviewNumber + "\">";
+                str += "<img src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">";
+                str += "</a></figure>";
             }
         })
+        $(".photoContents > div").append(str);
     }
 
     //-----------------------------------------------------
