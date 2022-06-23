@@ -28,10 +28,12 @@ public class ListPageRestController {
 
 
     // 프로젝트 리스트
-    @GetMapping("/lits/{cate}/{page}")
-    public List<ProjectVO> lits(@PathVariable("page") int pageNum, @PathVariable("cate") String category){
-        Criteria criteria = new Criteria(pageNum, 3);
-        List<ProjectVO> projectVOS = litServiceImple.getList(criteria, category);
+    @GetMapping("/lits/{order}/{cate}/{page}")
+    public List<ProjectVO> lits(@PathVariable("page") int pageNum, @PathVariable("cate") String category, @PathVariable("order") String order){
+        ListDTO listDTO = new ListDTO(pageNum, 3);
+        listDTO.setOrder(order);
+        listDTO.setCategory(category);
+        List<ProjectVO> projectVOS = litServiceImple.getList(listDTO);
 
         for(ProjectVO projectVO : projectVOS){
             projectVO.setProjectFile(litServiceImple.getImg( projectVO.getProjectNumber() ));
@@ -42,9 +44,9 @@ public class ListPageRestController {
     //litup탭 리스트
     @GetMapping("/litups/{order}/{cate}/{page}")
     public List<ReviewDTO> litups(@PathVariable("page") int pageNum, @PathVariable("cate") String category, @PathVariable("order") String order){
-        ListDTO listDTO = new ListDTO(pageNum, 2);
-        listDTO.setCategory(category);
+        ListDTO listDTO = new ListDTO(pageNum, 3);
         listDTO.setOrder(order);
+        listDTO.setCategory(category);
 
 //        litUpServiceImple.getList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
         return litUpServiceImple.getList(listDTO);

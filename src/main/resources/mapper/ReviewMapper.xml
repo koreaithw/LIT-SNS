@@ -27,17 +27,17 @@
                     ) l
                     ON l.REVIEW_NUMBER = r.REVIEW_NUMBER
                 )
-                WHERE STATUS = 1 --메인은 진행중인 것만 띄우기
-                <if test="category != null and category != ''">
+                WHERE STATUS = 1
+                <if test="category != 'all'">
                     AND CATEGORY = #{category}
                 </if>
                 <if test="order != null and order != ''">
                     <choose>
                         <when test="order == 'popular'">
-                            ORDER BY APPLY_COUNT DESC
+                            ORDER BY LIKE_CNT DESC
                         </when>
                         <when test="order == 'new'">
-                            ORDER BY REGISTER_DATE
+                            ORDER BY REGISTER_DATE DESC
                         </when>
                     </choose>
                 </if>

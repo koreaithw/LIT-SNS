@@ -1,131 +1,161 @@
-// let imgs = 2;
-// let now = 0;
-// let idx = 2;
 
-// function slide() {
-//     now = now == imgs ? 0 : now += 1;
+let pageNum = 1;
+const contBox = $('div.photoContents > div');
+let cate1 = "lits";     // lits / litups
+let cate2 = "all";  // 카테고리
+let order = "new";  // new 신규 / popular 인기
+// 기본 시작은 lit
+litList();
 
-//     switch(now){
-//         case 1:
-//             idx= 2;
-//             break;
-//         case 2:
-//             idx= 0;
-//             break;
-//         case 0:
-//             idx= 1;
+function litList() {
+    console.log("ajax----------------");
+    $.ajax({
+        url: "/list/" +cate1+ "/" + order +"/" + cate2 + "/" + pageNum,
+        type: "get",
+        dataType: 'json',
+        success: function (result) {
+            console.log("page : " + pageNum);
+            pageNum++; // 다음 페이지 번호 지정
 
-//     }
+            if( cate1 == "litups"){
+                console.log("litup");
+                litupadd(result);
+            }else {
+                litsadd(result);
+            }
 
-//     $("._ad_wrapper>img").eq(now - 1).css({"left": "0%", "z-index":"0"});
-//     $("._ad_wrapper>img").eq(now).css({"left": "-100%"});
-//     $("._ad_wrapper>img").eq(idx).css({"left": "0%", "z-index":"-10"});
-// }
-
-// function start() {
-//     setInterval(function () { slide()}, 2000);
-// }
-// start();
-
-// 뉴 방식
-let now = 0;
-let ani = 0;
-let len = $("._ad_wrapper>img").length;
-
-$("._ad_wrapper>img").css({"left": "-100%", "z-index":"0"}).eq(now).css({"left": "0%", "z-index":"1"});
-function slide() {
-    ani = (now+1) == len ? 0 : now + 1;
-
-    $("._ad_wrapper>img").eq(now).css({"z-index":"0"});
-    $("._ad_wrapper>img").eq(ani).css({"left": "0%", "z-index":"1"});
-    setTimeout(function(){
-        $("._ad_wrapper>img").eq(now).css({"left": "-100%"});
-        now = ani;
-    }, 1000);
-}
-
-function start() {
-    setInterval(function () { slide()}, 3000);
-}
-start();
-
-window.onload =function () {
-    $("._icon_profile").on("click",function(){
-        headerAction();
+        }, error: function (xhr, textStatus, errorThrown) {
+            console.log('통신 실패');
+            console.log(xhr);
+            console.log(textStatus);
+            console.log(errorThrown);
+        }
     });
-};
-// $(document).ready(function(){
-//
-//     $("#header").load("/src/main/resources/templates/header.html")
-//     $("#footer").load("/src/main/resources/templates/footer.html")
-//
-//     getLitUpList();
-//
-// })
+}
 
-// ####################################################
-// lit up(인증글 페이지 이동) 클릭 이벤트 Ajax 사용하세요
+// 리스트에 추가하기
+function litsadd(result) {
+    let str = "";  // 리스트 html 담을 변수
 
-// $(".list1").on("click",function(e){
-//     e.preventDefault();
+    $.each(result, function (i, projectVO) {
+        let src = "/lit/display?fileName=";
+        //이미지 경로
+        src += projectVO.projectFile.uploadPath + "/";
+        src += projectVO.projectFile.uuid + "_";
+        src += projectVO.projectFile.name;
+        // console.log(src);
+        str += "<figure><a href='"+projectVO.projectNumber+"'>";
+        str += "<img src='"+src+"'>";
+        str += "</a></figure>";
+    });
+    contBox.append(str);
+}
 
-//     $.ajax({
+function litupadd(result) {
+    let str = "";
+    result.forEach( (data, i) => {
+        let file = data.reviewFileList;
+        if(file[0]){
+            str += "<figure><a href=\"" + data.reviewNumber + "\">";
+            str += "<img src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">";
+            str += "</a></figure>";
+        }
+    })
+    $(".photoContents > div").append(str);
+}
 
+//-----------------------------------------------------
 
+// 카테고리 클릭시 이벤트 페이지 이동
+$("._category_wrapper a").on("click", function (e) {
+    e.preventDefault();
+    if( $(this).hasClass("on") ){  // 같은 태그 선택시 이벤트 취소
+        return false;
+    }
 
-//     })
-// })
+    // 선택 태그 클래스 주입
+    $("._category_wrapper a").removeClass("on");
+    $(this).addClass("on");
+    contBox.html("");                 // 이미지 리스트 초기화
+    pageNum = 1;                    // 페이지번호 초기화
+    cate2 = $(this).attr("href");   // 링크 변수값( 카테고리 값 )
+    console.log(cate2);
+    litList();                      // ajax 실행
+});
 
-// ####################################################
-// lit(프로젝트 페이지 이동) 클릭 이벤트 Ajax 사용하세요
+// 이미지 클릭시 모달창 오픈 ----------------------------------------------------------------
+$("photoContents a").on("click", function (e) {
+    e.preventDefault();
+    let link = $(this).attr("href"); // 링크 변수값
 
-// $(".list2").on("click",function(e){
-//     e.preventDefault();
+});
+//---------------------------------------------------------------------------------------
 
-//     $.ajax({
+//스크롤 이벤트
+let timer;
+$(window).scroll(function () {
+    // 라스트 페이지면 실행 불가
+    // if(pageNum == last){
+    //     return false;
+    // }
+    // 현 스크롤 탑의 위치
+    let windowTop = $(window).scrollTop();
+    // 변화될 아이
+    let contentHeight = $(".photoContents").height();
+    // 창의 전체 높이
+    let windowHeight = $(window).height();
 
+    // 스크롤이 마지막 이면 데이터 가져오기
+    if (windowTop > (contentHeight - windowHeight)) {
+        // 스크롤 맨 아래
+        if (timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+            litList();  // ajax 실행
+        }, 500);
+    } else {
+        //스크롤중..
+    }
+});
 
+// lis litup 스위치 -----------------
+const lit1 = $('#lits1');
+const lit2 = $('#lits2');
+// lit Up 버튼 액션
+lit1.on("click", function(){
+    if( !$(this).hasClass("on") ){
+        $(this).addClass("on");
+        lit2.removeClass("on")
+        cate1 = "litups";   // lits / litups
+        contBox.html(""); // 이미지리스트 초기화
+        pageNum = 1;                    // 페이지번호 초기화
+        litList(); //리스트 가져오기
+    }
 
-//     })
-// })
+    lit1.attr('class', 'lits1On');
+    $('#lit1Img').attr('src', '/images/mypage/menu.png');
 
-// ####################################################
+    lit2.attr('class', 'lits2Off');
+    $('#lit2Img').attr('src', '/images/mypage/fire.png');
 
+    // getLitUpList();
+});
 
-//
-// function getLitUpList(){
-//     mainLitUp({
-//         order : "new"
-//     }, function(result){
-//         let str = "";
-//         $(".photoContents > div").html("");
-//         result.forEach( (data, i) => {
-//             let file = data.reviewFileList;
-//             if(file[0]){
-//                 str +=
-//                     "<figure>" +
-//                     "<a href=\"" + data.reviewNumber + "\">" +
-//                     "<img alt=\"\" src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">" +
-//                     "</a>" +
-//                     "</figure>";
-//             }
-//         })
-//         $(".photoContents > div").append(str);
-//     })
-// }
-//
-// function mainLitUp(info, callback, error){
-//     $.ajax({
-//         url : "/litUp/getList2",
-//         type : "post",
-//         data : JSON.stringify(info),
-//         contentType : "application/json",
-//         dataType : "json",
-//         success : function(result){
-//             if(callback) { callback(result); }
-//         },
-//         error : function (xhr, status, er) {
-//             if(error) { error(er); }
-//         }
-//     })
-// }
+// LITS 버튼 액션
+lit2.on("click", function(){
+    if( !$(this).hasClass("on") ){
+        $(this).addClass("on");
+        lit1.removeClass("on");
+        cate1 = "lits";     // lits / litups
+        contBox.html("");     // 이미지리스트 초기화
+        pageNum = 1;         // 페이지번호 초기화
+        litList();          //리스트 가져오기
+    }
+
+    lit2.attr('class', 'lits2On');
+    $('#lit2Img').attr('src', '/images/mypage/lists.png');
+    lit1.attr('class', 'lits1Off');
+    $('#lit1Img').attr('src', '/images/mypage/menu2.png');
+
+});

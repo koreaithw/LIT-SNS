@@ -196,25 +196,23 @@
     let pageNum = 1;
     const contBox = $('div.photoContents > div');
     let cate1 = "lits";     // lits / litups
-    let cate2 = "lanking";  // 카테고리
-    let order = "new";
+    let cate2 = "all";  // 카테고리
+    let order = "new";  // new 신규 / popular 인기
     // 기본 시작은 lit
     litList();
 
     function litList() {
         console.log("ajax----------------");
-        let url = "/list/" +cate1+ "/" + cate2 + "/" + pageNum;
-        if( cate1 == "litups"){
-            url = "/list/" +cate1+ "/" + order +"/" + cate2 + "/" + pageNum;
-        }
         $.ajax({
-            url: url,
+            url: "/list/" +cate1+ "/" + order +"/" + cate2 + "/" + pageNum,
             type: "get",
             dataType: 'json',
             success: function (result) {
+                console.log("page : " + pageNum);
                 pageNum++; // 다음 페이지 번호 지정
 
                 if( cate1 == "litups"){
+                    console.log("litup");
                     litupadd(result);
                 }else {
                     litsadd(result);
@@ -249,8 +247,6 @@
 
     function litupadd(result) {
         let str = "";
-        $(".photoContents > div").html("");
-        pageNum = 1;                    // 페이지번호 초기화
         result.forEach( (data, i) => {
             let file = data.reviewFileList;
             if(file[0]){
@@ -292,6 +288,10 @@
     //스크롤 이벤트
     let timer;
     $(window).scroll(function () {
+        // 라스트 페이지면 실행 불가
+        // if(pageNum == last){
+        //     return false;
+        // }
         // 현 스크롤 탑의 위치
         let windowTop = $(window).scrollTop();
         // 변화될 아이
@@ -322,7 +322,7 @@
             $(this).addClass("on");
             lit2.removeClass("on")
             cate1 = "litups";   // lits / litups
-            contBox.html(); // 이미지리스트 초기화
+            contBox.html(""); // 이미지리스트 초기화
             pageNum = 1;                    // 페이지번호 초기화
             litList(); //리스트 가져오기
         }
@@ -342,8 +342,8 @@
             $(this).addClass("on");
             lit1.removeClass("on");
             cate1 = "lits";     // lits / litups
-            contBox.html();     // 이미지리스트 초기화
-            pageNum = 1;                    // 페이지번호 초기화
+            contBox.html("");     // 이미지리스트 초기화
+            pageNum = 1;         // 페이지번호 초기화
             litList();          //리스트 가져오기
         }
 
