@@ -53,7 +53,7 @@ $('.messageWrite').on('keyup', function (key) {
     }else{
         return;
     }
-
+    console.log("전송")
     //웹소켓 쪽 전송
     send(content);
 });
