@@ -27,7 +27,7 @@ public interface UserService {
     //내 정보 수정
     public void modify(UserVO userVO);
     //비밀 번호 변경
-    public void modifyPw(UserVO userVO, String newPassword);
+    public void modifyPw(Long userNumber, String newPassword);
     // 대표 메달 설정
     public void modifyMedal(UserVO userVO);
     //카카오 로그인/회원가입

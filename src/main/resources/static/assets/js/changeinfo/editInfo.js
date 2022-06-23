@@ -51,18 +51,23 @@ $('#ModalFileInput').on("change", function(e){
 
 })
 
-function checkNick(){
-    if(nickNameCk.val() == 'aa'){
-        $ ('._checkArea1').html('사용이 불가능한 사용자 이름입니다.');
+
+function checkNick(result) {
+    console.log(nickNameCk.val() + "++++++++++++");
+
+    if (!result) {
+
+        $('._checkArea1').html('사용이 불가능한 사용자 이름입니다.');
         $('._checkArea1').css('color', 'red');
-        return false;
-    } else if(nickNameCk.val().length <= 0){
-        return false;
-    } else{
-        $ ('._checkArea1').html('');
-        return true;
+
+    } else {
+
+        $('._checkArea1').html('사용 가능한 사용자 이름입니다.');
+        $('._checkArea1').css('color', 'black');
+
     }
 }
+
 
 //버튼 활성화/비활성화
 function buttonOn(){
