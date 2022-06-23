@@ -57,6 +57,18 @@ let messageService = (function () {
         });
     }
 
+    function getRoomId(param, callback, error){
+        $.ajax({
+            url: "/message/getRoomId/ " + param.sendUserNumber + "/" + param.receiveUserNumber,
+            type: "get",
+            success: function(result){
+                if(callback){
+                    callback(result);
+                }
+            }
+        })
+    }
 
-    return {send: send, getFollowerList: getFollowerList, searchFollowerList:searchFollowerList, getMessageList:getMessageList};
+
+    return {send: send, getFollowerList: getFollowerList, searchFollowerList:searchFollowerList, getMessageList:getMessageList, getRoomId:getRoomId};
 })();

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.project.ProjectMapper">
-    <!--    ###############################동적 쿼리 쓸것-->
     <select id="getList" resultType="projectVO">
         <![CDATA[
         SELECT APPLY_COUNT, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, STATUS
@@ -14,28 +13,28 @@
                 JOIN TBL_PARTICIPATION pa ON pr.PROJECT_NUMBER = pa.PROJECT_NUMBER
                 WHERE pr.STATUS = 1
                 ]]>
-                <choose>
-                    <when test="category != 'lanking' and category != 'newproject'">
-                        AND pr.CATEGORY = #{category}
-                    </when>
-                </choose>
+                <if test="category != 'all'">
+                    AND pr.CATEGORY = #{category}
+                </if>
                 <![CDATA[
                 GROUP BY pr.PROJECT_NUMBER, pr.TITLE, pr.CATEGORY, pr.CONTENT, pr.AUTHENTICATION, pr.START_DATE,
                 pr.END_DATE, pr.STATUS, pa.PROJECT_NUMBER
                 ]]>
-                <choose>
-                    <when test="category == 'lanking'">
-                        ORDER BY APPLY_COUNT DESC
-                    </when>
-                    <when test="category == 'newproject'  or category != 'lanking'">
-                        ORDER BY START_DATE DESC
-                    </when>
-                </choose>
+                <if test="order != null and order != ''">
+                    <choose>
+                        <when test="order == 'popular'">
+                            ORDER BY APPLY_COUNT DESC
+                        </when>
+                        <when test="order == 'new'">
+                            ORDER BY START_DATE DESC
+                        </when>
+                    </choose>
+                </if>
             <![CDATA[
             )
-            WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+            WHERE ROWNUM <= #{pageNum} * #{amount}
         )
-        WHERE RN > (#{criteria.pageNum} - 1) * #{criteria.amount}
+        WHERE RN > (#{pageNum} - 1) * #{amount}
         ]]>
 
     </select>
@@ -45,8 +44,8 @@
             SELECT SEQ_PROJECT.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO TBL_PROJECT
-        (PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE)
-        VALUES(#{projectNumber}, #{title}, #{category}, #{content}, #{authentication}, #{startDate}, #{endDate})
+        (PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, USER_NUMBER)
+        VALUES(#{projectNumber}, #{title}, #{category}, #{content}, #{authentication}, #{startDate}, #{endDate}, #{userNumber})
     </insert>
 
     <select id="searchProject" resultType="projectDTO">
@@ -178,5 +177,6 @@
     WHERE RN > (#{pageNum} - 1) * #{amount}
     ]]>
     </select>
+
 
 </mapper>

@@ -51,6 +51,11 @@ public class FollowMapperTest {
         log.info("---------------------");
     }
 
+    @Test
+    public void folloListTest(){
+        followMapper.followList(1L);
+    }
+
 //    @Test
 //    public void insert(){
 //        log.info("---------------------");

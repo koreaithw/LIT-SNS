@@ -1,7 +1,10 @@
 package com.example.lit.mapper.user;
 
+import com.example.lit.domain.vo.user.FollowDTO;
 import com.example.lit.domain.vo.user.FollowVO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface FollowMapper {
@@ -13,4 +16,6 @@ public interface FollowMapper {
     public int followingCount(FollowVO followVO);
     // 팔로워 카운트 (다른 사람)
     public int followerCount(FollowVO followVO);
+
+    public List<FollowDTO> followList(Long userNumber);
 }

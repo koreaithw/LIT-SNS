@@ -125,7 +125,6 @@ public class UserController {
     @GetMapping("/mypage")
     public String mypage(Long userNumber, Model model){
         log.info("마이페이지 컨트롤러 =============================");
-        userNumber = 1L; // 임시
 
         UserVO userVO = userService.read(userNumber);
         List<UserVO> followerVO = userService.ModalFollower(userNumber);

@@ -17,6 +17,6 @@ public class ProjectDAOTast {
 
     @Test
     public void getListTest(){
-        projectDAO.getList(new Criteria(1, 10),"newproject").stream().map(ProjectVO::toString).forEach(log::info);
+//        projectDAO.getList(new Criteria(1, 10),"newproject").stream().map(ProjectVO::toString).forEach(log::info);
     }
 }

@@ -69,4 +69,5 @@ public class MessageMapperTests {
         messageMapper.getMessageList(messageDTO);
     }
 
+
 }

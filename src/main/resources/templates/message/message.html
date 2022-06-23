@@ -31,14 +31,14 @@
                     </div>
                     <div class="dmList">
                             <figure th:each="item:${nicknameAndMessage}" class="dmBtn">
-                                <a th:href="${item.get('RECEIVE_USER_NUMBER')}" class="userDMList">
+                                <a th:id="${item.get('RECEIVE_USER_NUMBER')}" class="userDMList">
                                     <div class="dmImg">
                                         <img src="/images/project/domImg/indi01.webp" alt="">
                                     </div>
                                     <div class="dmData">
                                         <p th:text="${item.get('NICKNAME')}"></p>
                                         <p class="recentMessage" th:text="${item.get('CONTENT')}"></p>
-                                        <input type="hidden" th:id="${item.get('RECEIVE_USER_NUMBER')}">
+                                        <input type="hidden" th:id="${item.get('ROOM_ID')}">
                                     </div>
                                 </a>
                             </figure>
@@ -54,7 +54,7 @@
                             <span></span>
                         </div>
                         <div class="iconBox">
-                            <a class="icon_info" href="javascript:exitChat();">
+                            <a class="icon_info" href="/message/message">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
                                     <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
@@ -165,14 +165,15 @@
 <script defer src="/assets/js/message/message.js"></script>
 <script th:inline = "javascript">
     let webSocket;
-    let nickname;
+    // 헤더에서 뽑아 오기
+    let nickname = "전송자";
     let roomId;
 
     function connect(){
-        webSocket = new WebSocket("ws://localhost:12000/message/message");
+        webSocket = new WebSocket("ws://localhost:12000/ws/message/message");
         webSocket.onopen = onOpen;
         webSocket.onclose = onClose;
-        // webSocket.onmessage = onMessage;
+        webSocket.onmessage = onMessage;
     }
 
     function disconnect(){
@@ -180,20 +181,50 @@
         webSocket.close();
     }
 
-    function send(content){
+    function send(roomId, nickname, content){
         webSocket.send(JSON.stringify({chatRoomId : roomId, type:'CHAT', writer:nickname, message : content}));
-        document.getElementById("message").value = "";
     }
 
     function onOpen(){
         webSocket.send(JSON.stringify({chatRoomId : roomId, type:'ENTER', writer:nickname}));
     }
 
-    // function onMessage(e){
-    //     data = e.data;
-    //     chatroom = document.getElementById("chatroom");
-    //     chatroom.innerHTML = chatroom.innerHTML + "<br>" + data;
-    // }
+    function onMessage(e){
+        let data = e.data;
+        console.log(data)
+        console.log(e)
+        let arr = data.replace("{","").replace("}","").split(":");
+
+        for (let i = 0; i < arr.length ; i++) {
+            console.log('arr[' + i + ']:' + arr[i]);
+        }
+
+        if(arr[4]){
+            //메세지 두개 비교해줄 조건
+            if(true) {
+                let str = "<div class=\"dmStyle1\">" +
+                    "<div class=\"dmImg\">" +
+                    "<img src=\"\" alt=\"\">" +
+                    "</div>" +
+                    "<div class=\"text\">" +
+                    arr[4].replace(/\"/gi, "") +
+                    "</div>" +
+                    "</div>"
+                $contentIn.append(str);
+            }else{
+                let str = "<div class=\"dmStyle2\">" +
+                    "<div class=\"dmImg\">" +
+                    "<img src='/images/project/domImg/indi01.webp' alt=''>" +
+                    "</div>" +
+                    "<div class=\"text\">" +
+                    arr[4].replace(/\"/gi, "") +
+                    "</div>" +
+                    "</div>";
+                $contentIn.append(str);
+            }
+        }
+        $('.content').scrollTop($contentIn.height());
+    }
 
     function onClose(){
         disconnect();

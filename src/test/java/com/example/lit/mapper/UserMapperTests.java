@@ -60,7 +60,7 @@ public class UserMapperTests {
 
     @Test
     public void getUserTest(){
-        Long userNumber = 622L;
+        Long userNumber = 2L;
         userMapper.getUser(userNumber);
         log.info(userMapper.getUser(userNumber).toString());
     }

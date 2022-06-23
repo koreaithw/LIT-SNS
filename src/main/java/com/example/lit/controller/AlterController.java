@@ -1,6 +1,8 @@
 package com.example.lit.controller;
 
 import com.example.lit.domain.vo.review.LikeDTO;
+import com.example.lit.domain.vo.review.ReviewFileVO;
+import com.example.lit.domain.vo.user.FollowDTO;
 import com.example.lit.service.User.UserService;
 import com.example.lit.service.review.LitUpService;
 import lombok.RequiredArgsConstructor;
@@ -29,12 +31,25 @@ public class AlterController {
     public List<LikeDTO> getLikeList(@PathVariable("userNumber") Long userNumber){
         log.info("--------------------------------------------------------");
         List<LikeDTO> likeDTOS = litUpService.getLikeList(userNumber);
-        for(LikeDTO likeDTO : likeDTOS) {
-            likeDTO.setReviewFileVO(litUpService.getImgs(likeDTO.getReviewNumber()));
-            likeDTO.setUserFileVO(userService.getImg(likeDTO.getUserNumber()));
 
+
+        for(LikeDTO likeDTO : likeDTOS) {
+            List<ReviewFileVO> reviewFileVOS = litUpService.getImgs(likeDTO.getReviewNumber());
+            likeDTO.setReviewFileVO(reviewFileVOS.get(0));
+            likeDTO.setUserFileVO(userService.getImg(likeDTO.getUserNumber()));
         }
         log.info(likeDTOS.toString());
         return likeDTOS;
+    }
+
+    @GetMapping("/follow/{userNumber}")
+    public List<FollowDTO> followDTOList(@PathVariable("userNumber") Long userNumber){
+       log.info("--------------------------------------------");
+       List<FollowDTO> followDTOS = userService.followList(userNumber);
+       for (FollowDTO followDTO : followDTOS){
+           followDTO.setUserFileVO(userService.getImg(followDTO.getFollowingNumber()));
+       }
+       log.info(followDTOS.toString());
+       return followDTOS;
     }
 }

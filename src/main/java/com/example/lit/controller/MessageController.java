@@ -1,14 +1,12 @@
 package com.example.lit.controller;
 
 
-import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -28,6 +26,7 @@ public class MessageController {
         log.info("ProjectController : message");
         log.info("******************************");
 
+        //로그인 시 세션에서 받아옴
         userNumber = 1L;
 
         //메세지 페이지 이동할 때 메시지 한 유저 닉네임과 최근 메시지를 담아준다.

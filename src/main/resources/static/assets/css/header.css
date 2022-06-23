@@ -513,6 +513,7 @@ svg:not(:root) {
 
 .userFile {
     margin-left: 25px;
+    margin-bottom: -5px;
     margin-top: 6px;
 }
 
@@ -524,6 +525,15 @@ svg:not(:root) {
     width: 60px;
     margin-top: 10px;
     height: 60px;
+    margin-bottom: -15px;
+}
+
+.alterTime{
+    padding-left: 68px;
+    font-size: 13px;
+    padding-right: 302px;
+    padding-bottom: 1px;
+    border-bottom: 2px solid rgb(219, 219, 219);
 }
 
 
