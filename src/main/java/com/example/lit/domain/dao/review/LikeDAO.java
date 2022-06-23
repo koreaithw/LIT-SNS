@@ -20,7 +20,7 @@ public class LikeDAO {
     // 좋아요 갯수
     public Long getTotal(Long reviewNumber){ return likeMapper.getTotal(reviewNumber);}
     // 좋아요 확인
-    public int checkLike(Long userNumber){return likeMapper.checkLike(userNumber);}
+    public int checkLike(Long userNumber, Long reviewNumber){return likeMapper.checkLike(userNumber, reviewNumber);}
 
     // 좋아요 리스트(알림용)
     public List<LikeDTO> getList(Long userNumber) {return likeMapper.getList(userNumber);}

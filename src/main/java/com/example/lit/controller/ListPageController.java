@@ -6,9 +6,8 @@ import com.example.lit.service.review.LitUpService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,6 +38,13 @@ public class ListPageController {
     }
     
     // 프로젝트 리스트
+    @PostMapping("/list")
+    public String list(@RequestParam String category, Model model ){
+        model.addAttribute("category", category);
+        return "/main/list";
+    }
+    // 프로젝트 리스트
+
     @GetMapping("/lits")
     public String lits(){
         return "/main/lits";

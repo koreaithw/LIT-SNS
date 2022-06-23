@@ -16,4 +16,6 @@ public interface ProjectFileMapper {
     public ProjectFileVO getImg(Long projectNumber);
     // DB에 없는 이미지 삭제
     public List<ProjectFileVO> getOldFiles();
+    // 내 프로젝트 이미지 가져오기
+    public List<ProjectFileVO> getMyProject(Long userNumber);
 }

@@ -26,7 +26,7 @@
 
     <select id="checkLike" resultType="_int">
         SELECT COUNT(REVIEW_NUMBER) FROM TBL_LIKE
-        WHERE USER_NUMBER = #{userNumber}
+        WHERE USER_NUMBER = #{userNumber} AND REVIEW_NUMBER = #{reviewNumber}
     </select>
 
 </mapper>

@@ -2,6 +2,7 @@ package com.example.lit.controller;
 
 import com.example.lit.domain.dao.message.ChatRoomRepository;
 import com.example.lit.domain.vo.messsage.MessageDTO;
+import com.example.lit.domain.vo.messsage.MessageRoom;
 import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.service.message.MessageService;
@@ -58,11 +59,29 @@ public class MessageRestController {
                                            @PathVariable("pageNum") Long pageNum){
 
         MessageDTO messageDTO = new MessageDTO();
+
+        if(messageService.findRoom(sendUserNumber, receiveUserNumber) == 0){
+            MessageRoom messageRoom = MessageRoom.create(sendUserNumber, receiveUserNumber);
+            messageService.newRoom(messageRoom);
+            messageDTO.setNewRoomCheck(true);
+        }
+
+        String roomId = messageService.getRoom(sendUserNumber, receiveUserNumber).getRoomId();
+
         messageDTO.setSendUserNumber(sendUserNumber);
         messageDTO.setReceiveUserNumber(receiveUserNumber);
         messageDTO.setPageNum(pageNum);
+        messageDTO.setRoomId(roomId);
 
         return messageService.getMessageList(messageDTO);
+    }
+
+    @GetMapping("/getRoomId/{sendUserNumber}/{receiveUserNumber}")
+    public String getRoomId(@PathVariable("sendUserNumber") Long sendUserNumber, @PathVariable("receiveUserNumber") Long receiveUserNumber){
+
+        log.info(messageService.getRoom(sendUserNumber, receiveUserNumber).getRoomId());
+
+        return messageService.getRoom(sendUserNumber, receiveUserNumber).getRoomId();
     }
 
 

@@ -17,7 +17,7 @@ import java.util.List;
 public class ProjectDAO {
     private final ProjectMapper projectMapper;
     //    프로젝트 목록 가져오기
-    public List<ProjectVO> getList(Criteria criteria, String category){ return projectMapper.getList(criteria, category); }
+    public List<ProjectVO> getList(ListDTO listDTO){ return projectMapper.getList(listDTO); }
     //    프로젝트 등록
     public void register(ProjectVO projectVO){ projectMapper.insert(projectVO);}
     //    프로젝트 상세보기

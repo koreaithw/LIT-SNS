@@ -7,10 +7,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>list</title>
-<!--    <link rel="stylesheet" href="/src/main/resources/static/assets/css/main/main.css" />-->
-<!--    <link rel="stylesheet" href="/src/main/resources/static/assets/css/default.css" />-->
-<!--    <link rel="stylesheet" href="/src/main/resources/static/assets/css/header.css" />-->
-<!--    <link rel="stylesheet" href="/src/main/resources/static/assets/css/footer.css" />-->
+    <!--    <link rel="stylesheet" href="/src/main/resources/static/assets/css/main/main.css" />-->
+    <!--    <link rel="stylesheet" href="/src/main/resources/static/assets/css/default.css" />-->
+    <!--    <link rel="stylesheet" href="/src/main/resources/static/assets/css/header.css" />-->
+    <!--    <link rel="stylesheet" href="/src/main/resources/static/assets/css/footer.css" />-->
     <link rel="stylesheet" href="/assets/css/main/main.css"/>
     <link rel="stylesheet" href="/assets/css/default.css"/>
     <link rel="stylesheet" href="/assets/css/header.css" />
@@ -20,22 +20,38 @@
             height: 100%;
         }
 
-        div.photoContents>div {
+        div.photoContents > div {
             display: flex;
             flex-wrap: wrap;
         }
 
-        figure {
-            padding: 10px;
-            width: 25%;
+        div.photoContents figure {
+            width: 33.33%;
             height: 250px;
+            padding: 10px;
         }
 
-        figure img {
+        div.photoContents figure a {
+            display: block;
+            height: 100%;
+            overflow: hidden;
+        }
+        div.photoContents figure img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: 1s ease;
+            transform-origin: center center;
         }
+        div.photoContents img:hover {
+            transform: scale(1.1);
+            transform-origin: center center;
+        }
+
+        div._category_wrapper > a.on div._category_img_box{
+            border:2px solid rgb(255 87 87);
+        }
+
     </style>
 
 </head>
@@ -138,15 +154,16 @@
             <!-- 변경 버튼 -->
             <div class="litChange">
                 <div>
-                    <a class="lits1Off" id="lits1" href="/list/lits">
-                        <div><img class="litSvg" id="lit1Img" src="/images/mypage/menu.png">
+                    <a class="lits1Off" id="lits1">
+                        <div>
+                            <img class="litSvg" id="lit1Img" src="/images/mypage/menu2.png">
                             <span class="litSpan">Lit up</span>
                         </div>
                     </a>
                 </div>
                 <div>
-                    <a class="lits2On" id="lits2" >
-                        <div><img class="litSvg" id="lit2Img" src="/images/mypage/fire.png">
+                    <a class="lits2On" id="lits2">
+                        <div><img class="litSvg" id="lit2Img" src="/images/mypage/lists.png">
                             <span class="litSpan">Lits</span>
                         </div>
                     </a>
@@ -156,106 +173,29 @@
             <!-- 프로젝트 시작 -->
             <div class="photoContents">
                 <div>
-                    <figure>
-                        <a href="">
-                            <img alt="" src="/static/images/project/upload/">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a href="">
-                            <img alt="" src="/src/main/resources/static//images/main/jenny2.jpg">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a href="">
-                            <img alt="" src="/src/main/resources/static//images/main/jenny2.jpg">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a href="">
-                            <img alt="" src="/src/main/resources/static//images/main/jenny2.jpg">
-                        </a>
-                    </figure>
+                    <!--                        <figure>-->
+                    <!--                            <a href="">-->
+                    <!--                                <img alt="" src="">-->
+                    <!--                            </a>-->
+                    <!--                        </figure>-->
+
                 </div>
             </div>
         </div>
     </div>
-    <div><a href="javascript:litList('lanking')">다음 리스트</a></div>
-    <footer th:insert="~{/footer :: footer}"></footer>
+
+    <!--        <footer th:insert="~{/footer :: footer}"></footer>-->
 </main>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
- <script src="/assets/js/main/main.js"></script>
-<!--<script src="/src/main/resources/static/assets/js/main/main.js"></script>-->
-
 <script th:inline="javascript">
+    let aaa = [[${ category }]];
     let pageNum = 1;
-    const contBox = $('.photoContents > div'); // 이미지 리스트 뿌릴 위치
-    // 기본 시작은 lit
-    litUpList("lanking");
-
-    function litUpList(category) {
-        $.ajax({
-            url: "/list/litsups/" + category + "/" + pageNum,
-            type: "get",
-            dataType: 'json',
-            success: function (result) {
-                pageNum++; // 다음 페이지 번호 지정
-                // alert('성공');
-                listadd(result);
-            }, error: function (xhr, textStatus, errorThrown) {
-                console.log('통신 실패');
-                console.log(xhr);
-                console.log(textStatus);
-                console.log(errorThrown);
-            }
-        });
-    }
-
-    // 리스트에 추가하기
-    function listadd(result) {
-
-        let str = "";
-        // console.log(result);
-        $.each(result, function (i, ReviewDTO) {
-            let src = "";
-            //이미지 경로 첫번째 이미지만
-            src += ReviewDTO.reviewFileList.get(0).uploadPath;
-            src += ReviewDTO.reviewFileList.get(0).uuid + "_";
-            src += ReviewDTO.reviewFileList.get(0).name;
-
-            str += " <figure><a href='"+ReviewDTO.reviewNumber+"'>";
-            str += " <img src='"+"1"+"'> ";
-            str += "</a></figure>";
-
-        });
-        contBox.append(str);
-    }
-    // 카테고리 클릭시 이벤트 페이지 이동
-    $("._category_wrapper a").on("click", function (e) {
-        e.preventDefault();
-        if( $(this).hasClass("on") ){  // 같은 태그 선택시 이벤트 취소
-            return false;
-        }
-
-        // 선택 태그 클래스 주입
-        $("._category_wrapper a").removeClass("on");
-        $(this).addClass("on");
-        contBox.html();  // 이미지 리스트 초기화
-        let category = $(this).attr("href"); // 링크 변수값( 카테고리 값 )
-        console.log(link);
-        litUpList(category);
-    });
-
-    // 리스트 클릭시 페이지 이동
-    $("photoContents a").on("click", function (e) {
-        e.preventDefault();
-        let link = $(this).attr("href"); // 링크 변수값
-        console.log(link);
-        // location.href="";
-    });
-
-
+    const contBox = $('div.photoContents > div');
+    let cate1 = "lits";     // lits / litups
+    let cate2 = "all";  // 카테고리
+    let order = "new";  // new 신규 / popular 인기
 </script>
+<script src="/assets/js/main/list.js"></script>
 
 </html>

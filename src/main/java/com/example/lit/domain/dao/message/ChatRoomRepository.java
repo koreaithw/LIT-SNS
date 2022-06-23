@@ -16,8 +16,8 @@ public class ChatRoomRepository {
         messageRoomMap = new LinkedHashMap<>();
     }
 
-    public MessageRoom createMessageRoom(String name){
-        MessageRoom messageRoom = MessageRoom.create(name);
+    public MessageRoom createMessageRoom(Long sendUserNumber, Long receiveUserNumber){
+        MessageRoom messageRoom = MessageRoom.create(sendUserNumber, receiveUserNumber);
         messageRoomMap.put(messageRoom.getRoomId(), messageRoom);
         return messageRoom;
     }
@@ -28,8 +28,8 @@ public class ChatRoomRepository {
         return messageRooms;
     }
 
-    public MessageRoom findRoomById(String room){
-        return messageRoomMap.get(room);
+    public MessageRoom findRoomById(String roomId){
+        return messageRoomMap.get(roomId);
     }
 
 
