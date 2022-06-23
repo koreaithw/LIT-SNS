@@ -25,29 +25,28 @@ $('.messageWrite').on('keyup', function (key) {
 
             // 하나씩 뿌려줄 때
         }, function (result) {
-            let message = "<div class=\"dmStyle1\">" +
-                "<div class=\"dmImg\">" +
-                "<img src=\"\" alt=\"\">" +
-                "</div>" +
-                "<div class=\"text\">" +
-                result.content +
-                "</div>" +
-                "</div>"
-            $contentIn.append(message);
+            // let message = "<div class=\"dmStyle1\">" +
+            //     "<div class=\"dmImg\">" +
+            //     "<img src=\"\" alt=\"\">" +
+            //     "</div>" +
+            //     "<div class=\"text\">" +
+            //     result.content +
+            //     "</div>" +
+            //     "</div>"
+            // $contentIn.append(message);
         });
 
-        let message = "<div class=\"dmStyle1\">" +
-            "<div class=\"dmImg\">" +
-            "<img src=\"\" alt=\"\">" +
-            "</div>" +
-            "<div class=\"text\">" +
-            $('.messageWrite').val() +
-            "</div>" +
-            "</div>";
+        // let message = "<div class=\"dmStyle1\">" +
+        //     "<div class=\"dmImg\">" +
+        //     "<img src=\"\" alt=\"\">" +
+        //     "</div>" +
+        //     "<div class=\"text\">" +
+        //     $('.messageWrite').val() +
+        //     "</div>" +
+        //     "</div>";
+        // $contentIn.append(message);
 
-        $contentIn.append(message);
-
-        $('.content').scrollTop($contentIn.height());
+        $('.content').scrollTop($contentIn.height() + $(window).height());
         $('.messageWrite').val("");
         $('.dmList > figure > a[id="' + receiveUserNumber + '"]').find('.dmData').find('.recentMessage').text(content);
     }else{
@@ -55,7 +54,7 @@ $('.messageWrite').on('keyup', function (key) {
     }
     console.log("전송")
     //웹소켓 쪽 전송
-    send(content);
+    send(roomId, nickname, content);
 });
 
 // 유저 리스트 모달창
@@ -111,10 +110,10 @@ $(".dmBtn > a").on("click", function (e) {
 
     let receiveUserNumber = $(this).attr('id');
     let roomId = $(this).find("input[type='hidden']").attr('id');
-    nickname = $(this).find('.dmData').children(0).html();
+    receiveNickname = $(this).find('.dmData').children(0).html();
     let pageNum = $contentIn.children().length / amount || 1;
 
-    $('.contentTop').children(1).find('span').text(nickname + '님');
+    $('.contentTop').children(1).find('span').text(receiveNickname + '님');
     $('.contentTop').find('input[type="hidden"]').attr('id',receiveUserNumber);
     $('.contentTop').find('input[type="hidden"]').attr('class',roomId);
 
@@ -174,10 +173,13 @@ $(".dmBtn > a").on("click", function (e) {
         if(result[0]){
             $('.content > div').attr("class", result[0].total.toString());
         }
-        $('.content').scrollTop($contentIn.height());
+        $('.content').scrollTop($contentIn.height() + $(window).height());
     });
     console.log("연결")
-    connect();
+    if(!webSocket){
+        connect(roomId, nickname);
+    }
+
 });
 
 // 스크롤 시 20개씩 불러오기
@@ -344,20 +346,19 @@ function startChat(receiveUserNumber, nick){
             }
         }
         $contentIn.html(message);
-        console.log(result[0].roomId)
+        let roomId = result[0].roomId;
         if(result[0]){
             $('.content > div').attr("class", result[0].total.toString());
-            console.log(result[0].roomId)
         }
-        $('.content').scrollTop($contentIn.height());
+
+        $('.content').scrollTop($contentIn.height() + $(window).height());
+
+        if(!webSocket){
+            connect(roomId, nickname);
+        }
     });
-
 }
 
-function exitChat(e){
-    console.log('채팅끝');
-    disconnect();
-}
 
 function goMessage(e){
 
@@ -416,7 +417,7 @@ function goMessage(e){
         if(result[0]){
             $('.content > div').attr("class", result[0].total.toString());
         }
-        $('.content').scrollTop($contentIn.height());
+        $('.content').scrollTop($contentIn.height() + $(window).height());
     });
     console.log("연결")
     connect();
