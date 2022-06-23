@@ -44,8 +44,8 @@
             SELECT SEQ_PROJECT.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO TBL_PROJECT
-        (PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE)
-        VALUES(#{projectNumber}, #{title}, #{category}, #{content}, #{authentication}, #{startDate}, #{endDate})
+        (PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, USER_NUMBER)
+        VALUES(#{projectNumber}, #{title}, #{category}, #{content}, #{authentication}, #{startDate}, #{endDate}, #{userNumber})
     </insert>
 
     <select id="searchProject" resultType="projectDTO">
