@@ -2,6 +2,7 @@ package com.example.lit.service.message;
 
 import com.example.lit.domain.dao.message.MessageDAO;
 import com.example.lit.domain.vo.messsage.MessageDTO;
+import com.example.lit.domain.vo.messsage.MessageRoom;
 import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.domain.vo.user.UserVO;
 import lombok.RequiredArgsConstructor;
@@ -45,14 +46,24 @@ public class MessageServiceImple implements MessageService{
         return messageDAO.searchFollower(keyword,userNumber);
     }
 
-//    @Override
-//    public List<MessageDTO> getMessageList(MessageDTO messageDTO, Long sendUserNumber, Long receiveUserNumber) {
-//        return messageDAO.getMessageList(messageDTO, sendUserNumber, receiveUserNumber);
-//
-//    }
     @Override
     public List<MessageDTO> getMessageList(MessageDTO messageDTO) {
         return messageDAO.getMessageList(messageDTO);
 
+    }
+
+    @Override
+    public void newRoom(MessageRoom messageRoom) {
+        messageDAO.newRoom(messageRoom);
+    }
+
+    @Override
+    public int findRoom(Long sendUserNumber, Long receiveUserNumber) {
+        return messageDAO.findRoom(sendUserNumber, receiveUserNumber);
+    }
+
+    @Override
+    public MessageRoom getRoom(Long sendUserNumber, Long receiveUserNumber) {
+        return messageDAO.getRoom(sendUserNumber, receiveUserNumber);
     }
 }

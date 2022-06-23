@@ -31,14 +31,14 @@
                     </div>
                     <div class="dmList">
                             <figure th:each="item:${nicknameAndMessage}" class="dmBtn">
-                                <a th:href="${item.get('RECEIVE_USER_NUMBER')}" class="userDMList">
+                                <a th:id="${item.get('RECEIVE_USER_NUMBER')}" class="userDMList">
                                     <div class="dmImg">
                                         <img src="/images/project/domImg/indi01.webp" alt="">
                                     </div>
                                     <div class="dmData">
                                         <p th:text="${item.get('NICKNAME')}"></p>
                                         <p class="recentMessage" th:text="${item.get('CONTENT')}"></p>
-                                        <input type="hidden" th:id="${item.get('RECEIVE_USER_NUMBER')}">
+                                        <input type="hidden" th:id="${item.get('ROOM_ID')}">
                                     </div>
                                 </a>
                             </figure>
@@ -182,7 +182,6 @@
 
     function send(content){
         webSocket.send(JSON.stringify({chatRoomId : roomId, type:'CHAT', writer:nickname, message : content}));
-        document.getElementById("message").value = "";
     }
 
     function onOpen(){

@@ -1,6 +1,7 @@
 package com.example.lit.service.message;
 
 import com.example.lit.domain.vo.messsage.MessageDTO;
+import com.example.lit.domain.vo.messsage.MessageRoom;
 import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.domain.vo.user.UserVO;
 
@@ -26,8 +27,14 @@ public interface MessageService {
     //팔로워 리스트 검색
     public List<UserVO> searchFollower(String keyword, Long userNumber);
 
-//    //메세지 리스트 뽑아오기
-//    public List<MessageDTO> getMessageList(MessageDTO messageDTO, Long sendUserNumber, Long receiveUserNumber);
     //메세지 리스트 뽑아오기
     public List<MessageDTO> getMessageList(MessageDTO messageDTO);
+
+    //새 방 만들기
+    public void newRoom(MessageRoom messageRoom);
+
+    //방 db 조회
+    public int findRoom(Long sendUserNumber, Long receiveUserNumber);
+
+    public MessageRoom getRoom(Long sendUserNumber, Long receiveUserNumber);
 }
