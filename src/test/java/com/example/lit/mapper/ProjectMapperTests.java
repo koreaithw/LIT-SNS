@@ -19,7 +19,7 @@ public class ProjectMapperTests {
 
     @Test
     public void getListTest(){
-        projectMapper.getList(new Criteria(1, 10),"lanking").stream().map(ProjectVO::toString).forEach(log::info);
+//        projectMapper.getList(new Criteria(1, 10),"lanking").stream().map(ProjectVO::toString).forEach(log::info);
     }
 
     @Test
