@@ -17,6 +17,8 @@ public interface LitUpService {
     public Long getLikeTotal(Long reviewNumber);
     // 좋아요 확인
     public int getCheckLike(Long userNumber);
+    // 좋아요 리스트(알림용)
+    public List<LikeDTO> getLikeList(Long userNumber);
 
 
     //댓글 추가
@@ -38,7 +40,7 @@ public interface LitUpService {
 
 
     //    리뷰 목록 가져오기
-    public List<ReviewVO> getList(Criteria criteria, String category);
+    public List<ReviewDTO> getList(ListDTO listDTO);
     //    리뷰 등록
     public void register(ReviewVO reviewVO);
     //    리뷰 상세보기

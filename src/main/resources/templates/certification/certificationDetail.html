@@ -246,10 +246,16 @@
                 }
 
                 $.each(list, function(i, reply){
-                    ////////// getJSON -> AJAX 비동기식으로 변경해서 file에 pic 담을 것
-                    $.getJSON("/litUp/profilePic", {userNumber: reply.userNumber}, function(pic){
-                       file = pic })
-
+                    ////////// getJSON -> AJAX 동기식으로 변경해서 file에 pic 담을 것
+                    $.ajax({
+                        url:"/litUp/profilePic",
+                        type: "get",
+                        data:{userNumber:reply.userNumber},
+                        async:false,
+                        success:function (pic) {
+                            file = pic;
+                        }
+                    })
                     str += '<div class="detailContentWriteContainer">';
                     str += '<div class="detailContentWriteWrapper">';
                     str += '<div class="detailContentProfileImage">';
@@ -295,7 +301,15 @@
                let str = "";
 
                $.each(list, function (i, reply) {
-                   $.getJSON("/litUp/profilePic", {userNumber: reply.userNumber}, function(pic){showUserPic(pic);})
+                   $.ajax({
+                       url:"/litUp/profilePic",
+                       type: "get",
+                       data:{userNumber:reply.userNumber},
+                       async:false,
+                       success:function (pic) {
+                           file = pic;
+                       }
+                   })
                    str += '<div class="detailContentWriteContainer">';
                    str += '<div class="detailContentWriteWrapper">';
                    str += '<div class="detailContentProfileImage">';
@@ -454,7 +468,6 @@
         $(".bottom").html(str);
         $(".top").html(str2);
     }
-
 
 
 
