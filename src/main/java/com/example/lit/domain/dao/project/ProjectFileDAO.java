@@ -19,4 +19,6 @@ public class ProjectFileDAO {
     public ProjectFileVO getImg(Long projectNumber){ return projectFileMapper.getImg(projectNumber); }
     // DB에 없는 이미지 삭제
     public List<ProjectFileVO> getOldFiles(){ return projectFileMapper.getOldFiles(); }
+    // 나의 프로젝트 가져오기(리뷰 선택용)
+    public List<ProjectFileVO> getMyProject(Long userNumber){ return projectFileMapper.getMyProject(userNumber);}
 }

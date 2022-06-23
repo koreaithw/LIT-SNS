@@ -23,16 +23,16 @@
                 <div class="detailContentInnerImage">
                     <div class="innerImageWrapper">
                         <ul class="innerImageSlides">
-                            <li class="active"><img class="innerImage" src="monkey.jpg" /></li>
-                            <li><img class="innerImage" src="info.png" /></li>
-                            <li><img class="innerImage" src="monkey.jpg" /></li>
-                            <li><img class="innerImage" src="info.png" /></li>
+<!--                            <li class="active"><img class="innerImage" src="monkey.jpg" /></li>-->
+<!--                            <li><img class="innerImage" src="info.png" /></li>-->
+<!--                            <li><img class="innerImage" src="monkey.jpg" /></li>-->
+<!--                            <li><img class="innerImage" src="info.png" /></li>-->
                         </ul>
                         <div class="innerImagePageButtons">
-                            <div class="active"></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
+<!--                            <div class="active"></div>-->
+<!--                            <div></div>-->
+<!--                            <div></div>-->
+<!--                            <div></div>-->
                         </div>
                         <div class="innerImageSideButtons">
                             <div>
@@ -142,7 +142,7 @@
                                 <div class="detailContentFooterCommentInner">
                                     <div class="detailContentFooterCommentImo">
                                         <div class="detailContentFooterCommentImoIcon">
-                                            <img class="detailContentFooterCommentImoIconImage" src="monkey.jpg" style="width:100%">
+                                            <img class="detailContentFooterCommentImoIconImage" src="/images/certification/smile.png" style="width:90%; height:35%">
                                         </div>
                                     </div>
                                     <div class="detailContentFooterCommentInput">
@@ -166,7 +166,7 @@
                         <div class="detailContentProfileImageWrapper">
                             <div class="detailContentProfileImage">
                                 <div class="detailContentProfileImageInner">
-                                    <img class="detailProfileImage" src="monkey.jpg" style="width:100%">
+<!--                                    <img class="detailProfileImage" src="monkey.jpg" style="width:100%">-->
                                 </div>
                             </div>
                         </div>
@@ -447,9 +447,10 @@
            }
        }
 
-    // 출력할 사진 리스트 받아오기기
+    // 출력할 프로필 사진, 리뷰 사진 받아오기기  숫자 받아오기
     $(".projectDetailButton").on("click",function () {
         $.getJSON("/litUp/profilePic", {userNumber: 1}, function(pic){showUserPic(pic);})
+        $.getJSON("/litUp/reviewPic", {reviewNumber: 1}, function(pic){showReviewPic(pic);})
     })
 
 
@@ -467,6 +468,19 @@
 
         $(".bottom").html(str);
         $(".top").html(str2);
+    }
+
+    function showReviewPic(pic) {
+           let str ="";
+           let strBtn ="";
+           $.each(pic,function (i, file) {
+                str += "<li id=a" + i + "><img class=\"innerImage\" src='/litUp/display?fileName=" + file.uploadPath  + "/" + file.uuid + "_"  + file.name + "' /></li>"
+                strBtn +="<div id=b"+ i +"></div>"
+           })
+           $(".innerImageSlides").html(str);
+           $(".innerImagePageButtons").html(strBtn);
+           $("li#a0").addClass("active");
+           $("div#b0").addClass("active");
     }
 
 
