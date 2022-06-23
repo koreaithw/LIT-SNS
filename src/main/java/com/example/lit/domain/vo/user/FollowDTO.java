@@ -5,8 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class FollowVO {
+public class FollowDTO {
     private Long followingNumber;
     private Long followerNumber;
     private String registerDate;
+    private String nickName;
+    private UserFileVO userFileVO;
 }

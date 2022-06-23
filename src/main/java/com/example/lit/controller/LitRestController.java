@@ -62,6 +62,7 @@ public class LitRestController {
 
     @GetMapping("/display")
     public byte[] getFile(String fileName) throws IOException{
+        log.info(fileName);
         File file = new File("C:/upload/", fileName);
         log.info(file.toString());
         return FileCopyUtils.copyToByteArray(file);

@@ -13,7 +13,7 @@
     </delete>
 
     <select id="getList" resultType="likeDTO">
-        SELECT tl.REVIEW_NUMBER, tl.USER_NUMBER, tl.REGISTER_DATA, tu.NICKNAME
+        SELECT tl.REVIEW_NUMBER, tl.USER_NUMBER, tl.REGISTER_DATE, tu.NICKNAME
         FROM TBL_LIKE tl, TBL_USER tu
         WHERE REVIEW_NUMBER in (SELECT REVIEW_NUMBER FROM TBL_REVIEW WHERE USER_NUMBER = #{userNumber})
         AND tu.USER_NUMBER = tl.USER_NUMBER
