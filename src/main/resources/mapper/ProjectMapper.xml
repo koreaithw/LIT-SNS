@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.project.ProjectMapper">
-    <!--    ###############################동적 쿼리 쓸것-->
     <select id="getList" resultType="projectVO">
         <![CDATA[
         SELECT APPLY_COUNT, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, STATUS
@@ -45,8 +44,8 @@
             SELECT SEQ_PROJECT.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO TBL_PROJECT
-        (PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE)
-        VALUES(#{projectNumber}, #{title}, #{category}, #{content}, #{authentication}, #{startDate}, #{endDate})
+        (PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE, USER_NUMBER)
+        VALUES(#{projectNumber}, #{title}, #{category}, #{content}, #{authentication}, #{startDate}, #{endDate}, #{userNumber})
     </insert>
 
     <select id="searchProject" resultType="projectDTO">
@@ -178,5 +177,6 @@
     WHERE RN > (#{pageNum} - 1) * #{amount}
     ]]>
     </select>
+
 
 </mapper>

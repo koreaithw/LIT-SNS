@@ -8,18 +8,19 @@
     <title>프로젝트 생성</title>
 
     <link rel="stylesheet" href="/assets/css/project/projectWrite.css">
-    <link rel="stylesheet" href="/assets/css/project/project.css">
     <link rel="stylesheet" href="/assets/css/default.css">
+    <link rel="stylesheet" href="/assets/css/header.css" />
 
 </head>
 
 <body>
-    <header></header>
+    <header th:insert="~{/header :: header}"></header>
 
     <main>
         <div class="mainWrap">
             <section class="sec4">
                 <form method="post" action="/lit/write" id="projectForm" name="projectForm" enctype="multipart/form-data">
+                    <input type="hidden" name="userNumber" th:value="${userNumber}">
                     <div>
                         <div class="topmenu">
                             <div class="">

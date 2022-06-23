@@ -3,6 +3,7 @@ package com.example.lit.controller;
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.ListDTO;
+import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
 import com.example.lit.domain.vo.user.UserFileVO;
@@ -94,9 +95,9 @@ public class LitUpRestController {
         return litUpService.getLikeTotal(likeVO.getReviewNumber()).intValue();
     }
 
-    @GetMapping("/like/{userNumber}")
-    public boolean getCheckLike(@PathVariable("userNumber") Long userNumber){
-        return litUpService.getCheckLike(userNumber) == 1;
+    @GetMapping("/like/{userNumber}/{reviewNumber}")
+    public boolean getCheckLike(@PathVariable("userNumber") Long userNumber, @PathVariable("reviewNumber") Long reviewNumber){
+        return litUpService.getCheckLike(userNumber, reviewNumber) == 1;
     }
 
     @PostMapping("/removeLike")
@@ -197,15 +198,21 @@ public class LitUpRestController {
         return userService.getImg(userNumber);
     }
 
+    @GetMapping("/reviewPic")
+    public List<ReviewFileVO> getReviewPic(Long reviewNumber){
+        log.info(reviewNumber.toString());
+        return litUpService.getImgs(reviewNumber);
+    }
+
 
     //모달창 인증글 작성하기 중 프로젝트 불러오기
-    @GetMapping("/getProjectList")
-    public List<ProjectVO> getProjectList(){
+    @GetMapping("/getMyProjectList")
+    public List<ProjectFileVO> getProjectList(Long userNumber){
         log.info("***************************");
         log.info("LitUpRestController : getProjectList(get)");
         log.info("***************************");
 
-        return null;
+        return litUpService.getMyProject(userNumber);
     }
 
 
@@ -216,7 +223,8 @@ public class LitUpRestController {
         log.info("LitUpRestController : getMainList(post)");
         log.info("***************************");
 
-        litUpService.getMainList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+//        litUpService.getMainList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+        listDTO.setAmount(9);
         return litUpService.getMainList(listDTO);
     }
 

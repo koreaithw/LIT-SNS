@@ -95,7 +95,7 @@
                                 </div>
                             </div>
                             <!-- #########첼린지 생성########## -->
-                            <div class="_icon_each"><a href="/lit/write" role="link" tabindex="0">
+                            <div class="_icon_each"><a href="/lit/write" role="link" tabindex="0" class="lit-write__link">
                                 <img src="/images/main/write.png" alt="img\write.png">
                             </a></div>
                             <!-- #########활동 피드########## -->
@@ -123,12 +123,12 @@
                                                     <span id="likeBtn">좋아요</span>
                                                     <div style="border: 1px solid #8e8e8e;"></div>
                                                     <span id="followBtn">팔로우</span></div>
-                                                <div style="height: 362px; overflow: hidden auto;">
+                                                <div style="height: 362px; overflow: auto;">
                                                     <div id="alterLike" style="display: none">
                                                     </div>
                                                     <div id="alterfollow" style="display: none">
                                                     </div>
-                                                    <div style="flex-direction: column; padding-bottom: 952px; padding-top: 0px;"></div>
+                                                    <div style="flex-direction: column; padding-bottom: 40px; padding-top: 0px;"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -152,7 +152,7 @@
                                     <div class="_dropdown_wrapper" style="display:none;">
                                         <div class="_rbtri" style="left: 184px;"></div>
                                         <div class="_dropdown_manu">
-                                            <a class="_dropdown_a " href="/">
+                                            <a class="_dropdown_a mypage__link" href="/">
                                                 <div class="_dropdown_profile" style="padding:20px;">
                                                     <div class="_dropdown_profile_img">
                                                         <svg aria-label="프로필" class="_ab6-" color="#262626"
@@ -181,7 +181,7 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                            <a class="_dropdown_a _setting" href="/">
+                                            <a class="_dropdown_a _setting profile-setting__link" href="/">
                                                 <div class="_dropdown_setting" style="padding:20px; ">
                                                     <div class="_dropdown_setting_img">
                                                         <svg aria-label="설정" class="_ab6-" color="#262626"
@@ -224,6 +224,25 @@
 </main>
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
 <script src="/assets/js/header.js"></script>
+<script th:inline="javascript">
+    let userNumber = [[${session.userNumber}]];
+    console.log("---------------------------------")
+    console.log(userNumber)
+    $(".mypage__link").on("click", function(e){
+        e.preventDefault();
+        location.href = "/user/mypage?userNumber=" + userNumber;
+    });
+
+    $(".profile-setting__link").on("click", function(e){
+        e.preventDefault();
+        location.href = "/user/editInfo?userNumber=" + userNumber;
+    })
+
+    $(".lit-write__link").on("click", function(e){
+        e.preventDefault();
+        location.href = "/lit/write?userNumber=" + userNumber;
+    })
+</script>
 </body>
 
 

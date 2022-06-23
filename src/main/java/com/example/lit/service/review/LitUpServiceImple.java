@@ -1,11 +1,13 @@
 package com.example.lit.service.review;
 
 import com.example.lit.domain.dao.project.ProjectDAO;
+import com.example.lit.domain.dao.project.ProjectFileDAO;
 import com.example.lit.domain.dao.review.*;
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ProjectDTO;
+import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ public class LitUpServiceImple implements LitUpService{
     private final ReviewDAO reviewDAO;
     private final ReviewFileDAO reviewFileDAO;
     private final ProjectDAO projectDAO;
+    private final ProjectFileDAO projectFileDAO;
 
     @Override
     public void registerLike(LikeVO likeVO) {
@@ -44,8 +47,8 @@ public class LitUpServiceImple implements LitUpService{
     public List<LikeDTO> getLikeList(Long userNumber) { return likeDAO.getList(userNumber);}
 
     @Override
-    public int getCheckLike(Long userNumber) {
-        return likeDAO.checkLike(userNumber);
+    public int getCheckLike(Long userNumber, Long reviewNumber) {
+        return likeDAO.checkLike(userNumber, reviewNumber);
     }
 
     @Override
@@ -131,6 +134,11 @@ public class LitUpServiceImple implements LitUpService{
     @Override
     public ProjectDTO readForReview(Long projectNumber, Long userNumber) {
         return projectDAO.getForReview(projectNumber, userNumber);
+    }
+
+    @Override
+    public List<ProjectFileVO> getMyProject(Long userNumber) {
+        return projectFileDAO.getMyProject(userNumber);
     }
 
     @Override

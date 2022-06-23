@@ -8,5 +8,5 @@ import org.springframework.stereotype.Component;
 public class LikeVO {
     private Long reviewNumber;
     private Long userNumber;
-    private String registerData;
+    private String registerDate;
 }

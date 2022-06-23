@@ -183,8 +183,8 @@ input[type="radio"]+label {
 
 input[type="radio"]+label::before {
   border: 1px solid #e5e5e5;
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
   text-align: center;
   content: "";
   margin-right: 10px;
@@ -192,6 +192,7 @@ input[type="radio"]+label::before {
 
 input[type="radio"]:checked+label::before {
   content: "\2714";
+  font-size: 16px;
   background: rgb(255, 69, 67);
   color: #ffffff;
 
@@ -251,12 +252,12 @@ form[name="projectForm"]>div {
 }
 
 .topmenu {
-  width: 100%;
+  width: 95%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #e5e5e5;
-  padding: 10px 20px;
+  padding: 10px 24px;
 }
 
 .topmenu>div {
@@ -416,3 +417,34 @@ label.togle+div>textarea {
   color: #cccccc;
   text-align: end;
 }
+
+
+/*==================================*/
+a{
+  color: black;
+}
+
+.projectData::-webkit-scrollbar {
+  display: none;
+}
+label.togle{
+  position: relative;
+  padding-left: 30px;
+}
+label.togle::before{
+  content: "";
+  background-image: url("/images/admin/menu-arrow__black.png");
+  background-size: 14px;
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background-repeat: no-repeat;
+  left: 8px;
+  margin-top: 5px;
+  transition: 0.3s ease-in-out;
+}
+
+label.rotate::before{
+  transform: rotate(180deg);
+}
+
