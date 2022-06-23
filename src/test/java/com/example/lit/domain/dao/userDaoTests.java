@@ -32,7 +32,7 @@ public class userDaoTests {
 
     @Test
     public void nicknameCheck(){
-        String nickname="xldms.dl";
+        String nickname="testname";
         log.info("닉네임 중복체크: " + userDAO.dbNicknameCheck(nickname));
     }
 

@@ -52,7 +52,7 @@
     <update id="updatePw">
         UPDATE TBL_USER
         SET PASSWORD = #{newPassword}
-        WHERE PASSWORD = #{userVO.password} AND USER_NUMBER = #{userVO.userNumber}
+        WHERE USER_NUMBER = #{userNumber}
     </update>
 
     <update id="updateMedal">
@@ -165,6 +165,11 @@
         SELECT COUNT(USER_NUMBER)
         FROM TBL_USER
         WHERE TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') = #{date}
+    </select>
+
+    <select id="oldPasswordCheck" resultType="_int">
+        SELECT COUNT(PASSWORD) FROM TBL_USER
+        WHERE PASSWORD = #{password} AND USER_NUMBER = #{userNumber}
     </select>
 
 </mapper>

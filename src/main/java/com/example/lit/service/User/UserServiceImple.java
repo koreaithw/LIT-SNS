@@ -63,6 +63,12 @@ public class UserServiceImple implements UserService{
     public void removeFollower(Long followerNumber, Long followingNumber) { userDAO.removeFollower(followerNumber, followingNumber); }
 
     @Override
+    public boolean dbOldPwCheck(String password, Long userNumber) { return userDAO.dbOldPwCheck(password, userNumber); }
+
+    @Override
+    public UserVO getChangePwInfo(Long userNumber) { return userDAO.getChangePwInfo(userNumber); }
+
+    @Override
     public UserVO login(String email, String pw) {
         return userDAO.login(email, pw);
     }
@@ -81,14 +87,10 @@ public class UserServiceImple implements UserService{
     }
 
     @Override
-    public void modify(UserVO userVO) {
-
-    }
+    public void modify(UserVO userVO) { userDAO.modify(userVO); }
 
     @Override
-    public void modifyPw(UserVO userVO, String newPassword) {
-
-    }
+    public void modifyPw(Long userNumber, String newPassword) { userDAO.modifyPw(userNumber, newPassword); }
 
     @Override
     public void modifyMedal(UserVO userVO) {

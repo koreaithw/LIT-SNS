@@ -27,7 +27,7 @@ public interface UserService {
     //내 정보 수정
     public void modify(UserVO userVO);
     //비밀 번호 변경
-    public void modifyPw(UserVO userVO, String newPassword);
+    public void modifyPw(Long userNumber, String newPassword);
     // 대표 메달 설정
     public void modifyMedal(UserVO userVO);
     //카카오 로그인/회원가입
@@ -48,7 +48,10 @@ public interface UserService {
     public List<UserVO> ModalFollowing(Long userNumber);
     //마이페이지 팔로우 삭제
     public void removeFollower(Long followerNumber, Long followingNumber);
-
+    //회원정보수정페이지 비번 조회
+    public boolean dbOldPwCheck(String password, Long userNumber);
+    //정보수정페이지 해당 유저 정보 띄워주기
+    public UserVO getChangePwInfo(Long userNumber);
 
     //유저 파일 업로드
     public void registerImg(UserFileVO userFileVO);
