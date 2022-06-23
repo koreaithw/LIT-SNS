@@ -42,9 +42,13 @@ public class ListPageRestController {
 
     //litup탭 리스트
     @GetMapping("/litups/{cate}/{page}")
-    public List<ReviewDTO> litups(@RequestBody ListDTO listDTO){
-        litUpService.getList2(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
-        return litUpService.getList2(listDTO);
+    public List<ReviewDTO> litups(@PathVariable("page") int pageNum, @PathVariable("cate") String category){
+        ListDTO listDTO = new ListDTO();
+        listDTO.setPageNum(pageNum);
+        listDTO.setCategory(category);
+
+        litUpService.getList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+        return litUpService.getList(listDTO);
     }
 
 }

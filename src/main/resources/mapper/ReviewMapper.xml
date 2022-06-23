@@ -3,35 +3,29 @@
 <mapper namespace="com.example.lit.mapper.review.ReviewMapper">
     <!--    ###############################동적 쿼리 쓸것-->
     <select id="getList" resultType="reviewDTO">
-        SELECT REVIEW_NUMBER, USER_NUMBER,
-        PROJECT_NUMBER, CONTENT, REGISTER_DATE,
-        CATEGORY,STATUS,
-        LIKE_COUNT
-        FROM
-        (
-        SELECT ROWNUM RN, REVIEW_NUMBER, USER_NUMBER,
-        PROJECT_NUMBER, CONTENT, REGISTER_DATE,
-        CATEGORY,STATUS,
-        LIKE_COUNT
+        SELECT REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT, REGISTER_DATE, CATEGORY, STATUS, LIKE_COUNT
         FROM(
-        SELECT REVIEW_NUMBER, USER_NUMBER,
-        PROJECT_NUMBER, CONTENT, REGISTER_DATE,
-        CATEGORY,STATUS,
-        NVL(LIKE_CNT, 0) AS LIKE_COUNT
-        FROM(
-        SELECT r.REVIEW_NUMBER, r.USER_NUMBER,
-        r.PROJECT_NUMBER, r.CONTENT, r.REGISTER_DATE,
-        p.CATEGORY, p.STATUS,
-        l.LIKE_CNT
-        FROM TBL_REVIEW r
-        INNER JOIN TBL_PROJECT p
-        ON p.PROJECT_NUMBER = r.PROJECT_NUMBER
-        LEFT OUTER JOIN (
-        SELECT REVIEW_NUMBER, COUNT(USER_NUMBER) AS LIKE_CNT
-        FROM TBL_LIKE
-        GROUP BY REVIEW_NUMBER
-        ) l
-        ON l.REVIEW_NUMBER = r.REVIEW_NUMBER
+            SELECT ROWNUM RN,
+            REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT, REGISTER_DATE, CATEGORY, STATUS, LIKE_COUNT
+            FROM(
+                SELECT REVIEW_NUMBER, USER_NUMBER,
+                PROJECT_NUMBER, CONTENT, REGISTER_DATE,
+                CATEGORY,STATUS,
+                NVL(LIKE_CNT, 0) AS LIKE_COUNT
+                FROM(
+                    SELECT r.REVIEW_NUMBER, r.USER_NUMBER,
+                    r.PROJECT_NUMBER, r.CONTENT, r.REGISTER_DATE,
+                    p.CATEGORY, p.STATUS,
+                    l.LIKE_CNT
+                    FROM TBL_REVIEW r
+                    INNER JOIN TBL_PROJECT p
+                    ON p.PROJECT_NUMBER = r.PROJECT_NUMBER
+                    LEFT OUTER JOIN (
+                        SELECT REVIEW_NUMBER, COUNT(USER_NUMBER) AS LIKE_CNT
+                        FROM TBL_LIKE
+                        GROUP BY REVIEW_NUMBER
+            ) l
+            ON l.REVIEW_NUMBER = r.REVIEW_NUMBER
         )
         WHERE STATUS = 1 --메인은 진행중인 것만 띄우기
         <if test="category != null and category != ''">
@@ -53,8 +47,8 @@
                 ]]>
         )
         <![CDATA[
-    WHERE RN > (#{pageNum} - 1) * #{amount}
-    ]]>
+        WHERE RN > (#{pageNum} - 1) * #{amount}
+        ]]>
     </select>
 
     <insert id="insert">

@@ -47,6 +47,11 @@
             transform: scale(1.1);
             transform-origin: center center;
         }
+
+        div._category_wrapper > a.on div._category_img_box{
+            border:2px solid rgb(255 87 87);
+        }
+
     </style>
 
 </head>
@@ -58,7 +63,7 @@
             <div class="_main_top_wrapper">
                 <!-- 카테고리 선택 창 -->
                 <div class="_category_wrapper">
-                    <a href="life">
+                    <a href="life" class="on">
                         <div class="_category_detail _life">
                             <div class="_category_img_box" style="padding:10px ;">
                                 <div class="_category_img">
@@ -149,7 +154,7 @@
                 <!-- 변경 버튼 -->
                 <div class="litChange">
                     <div>
-                        <a class="lits1off" id="lits1">
+                        <a class="lits1Off" id="lits1">
                             <div>
                                 <img class="litSvg" id="lit1Img" src="/images/mypage/menu2.png">
                                 <span class="litSpan">Lit up</span>
@@ -157,7 +162,7 @@
                         </a>
                     </div>
                     <div>
-                        <a class="lits2on" id="lits2">
+                        <a class="lits2On" id="lits2">
                             <div><img class="litSvg" id="lit2Img" src="/images/mypage/lists.png">
                                 <span class="litSpan">Lits</span>
                             </div>
@@ -196,7 +201,8 @@
     // 기본 시작은 lit
     litList();
 
-    function litList(category) {
+    function litList() {
+        console.log("ajax----------------");
         $.ajax({
             url: "/list/" +cate1+ "/" + cate2 + "/" + pageNum,
             type: "get",
@@ -232,6 +238,47 @@
         contBox.append(str);
     }
 
+
+    function getLitUpList(){
+        mainLitUp({
+            order : "new"
+        }, function(result){
+            let str = "";
+            $(".photoContents > div").html("");
+            pageNum = 1;                    // 페이지번호 초기화
+            result.forEach( (data, i) => {
+                let file = data.reviewFileList;
+                if(file[0]){
+                    str +=
+                        "<figure>" +
+                        "<a href=\"" + data.reviewNumber + "\">" +
+                        "<img alt=\"\" src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">" +
+                        "</a>" +
+                        "</figure>";
+                }
+            })
+            $(".photoContents > div").append(str);
+        })
+    }
+
+    function mainLitUp(info, callback, error){
+        $.ajax({
+            url : "/litUp/getList2",
+            type : "post",
+            data : JSON.stringify(info),
+            contentType : "application/json",
+            dataType : "json",
+            success : function(result){
+                if(callback) { callback(result); }
+            },
+            error : function (xhr, status, er) {
+                if(error) { error(er); }
+            }
+        })
+    }
+
+    //-----------------------------------------------------
+
     // 카테고리 클릭시 이벤트 페이지 이동
     $("._category_wrapper a").on("click", function (e) {
         e.preventDefault();
@@ -242,10 +289,11 @@
         // 선택 태그 클래스 주입
         $("._category_wrapper a").removeClass("on");
         $(this).addClass("on");
-        contBox.html();                 // 이미지 리스트 초기화
+        contBox.html("");                 // 이미지 리스트 초기화
+        pageNum = 1;                    // 페이지번호 초기화
         cate2 = $(this).attr("href");   // 링크 변수값( 카테고리 값 )
-
-        litList(); // ajax 실행
+        console.log(cate2);
+        litList();                      // ajax 실행
     });
 
     // 이미지 클릭시 모달창 오픈 ----------------------------------------------------------------
@@ -290,6 +338,7 @@
             lit2.removeClass("on")
             cate1 = "litups";   // lits / litups
             contBox.html(); // 이미지리스트 초기화
+            pageNum = 1;                    // 페이지번호 초기화
             litList(); //리스트 가져오기
         }
 
@@ -298,7 +347,8 @@
 
         lit2.attr('class', 'lits2Off');
         $('#lit2Img').attr('src', '/images/mypage/fire.png');
-        getLitUpList();
+
+        // getLitUpList();
     });
 
     // LITS 버튼 액션
@@ -308,6 +358,7 @@
             lit1.removeClass("on");
             cate1 = "lits";     // lits / litups
             contBox.html();     // 이미지리스트 초기화
+            pageNum = 1;                    // 페이지번호 초기화
             litList();          //리스트 가져오기
         }
 
@@ -315,6 +366,7 @@
         $('#lit2Img').attr('src', '/images/mypage/lists.png');
         lit1.attr('class', 'lits1Off');
         $('#lit1Img').attr('src', '/images/mypage/menu2.png');
+
     });
 
 </script>

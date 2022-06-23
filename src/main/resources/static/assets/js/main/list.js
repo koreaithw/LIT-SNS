@@ -49,11 +49,6 @@ function start() {
 }
 start();
 
-
-
-
-
-
 window.onload =function () {
     $("._icon_profile").on("click",function(){
         headerAction();
@@ -97,9 +92,9 @@ window.onload =function () {
 // ####################################################
 
 
-
-// let getLitUpList = function(){
-//     mainService.mainLitUp({
+//
+// function getLitUpList(){
+//     mainLitUp({
 //         order : "new"
 //     }, function(result){
 //         let str = "";
@@ -119,62 +114,18 @@ window.onload =function () {
 //     })
 // }
 //
-// let getLitsList = function(){
-//     mainService.mainLit({order : "new"}, function(result){
-//         let str = "";
-//         $(".photoContents > div").html("");
-//         result.forEach( (data, i) => {
-//             let file = data.reviewFileList;
-//             if(file[0]){
-//                 str +=
-//                     "<figure>" +
-//                     "<a href=\"" + data.reviewNumber + "\">" +
-//                     "<img alt=\"\" src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">" +
-//                     "</a>" +
-//                     "</figure>";
-//             }
-//         })
-//         $(".photoContents > div").append(str);
-//
+// function mainLitUp(info, callback, error){
+//     $.ajax({
+//         url : "/litUp/getList2",
+//         type : "post",
+//         data : JSON.stringify(info),
+//         contentType : "application/json",
+//         dataType : "json",
+//         success : function(result){
+//             if(callback) { callback(result); }
+//         },
+//         error : function (xhr, status, er) {
+//             if(error) { error(er); }
+//         }
 //     })
 // }
-//
-//
-// let mainService = (function(){
-//     function mainLitUp(info, callback, error){
-//         $.ajax({
-//             url : "/litUp/getList2",
-//             type : "post",
-//             data : JSON.stringify(info),
-//             contentType : "application/json",
-//             dataType : "json",
-//             success : function(result){
-//                 if(callback) { callback(result); }
-//             },
-//             error : function (xhr, status, er) {
-//                 if(error) { error(er); }
-//             }
-//         })
-//     }
-//     function mainLit(info, callback, error){
-//         $.ajax({
-//             url : "/lit/getList2",
-//             type : "post",
-//             data : JSON.stringify(info),
-//             contentType: "application/json",
-//             dataType : "json",
-//             success : function(result){
-//                 if(callback) { callback(result); }
-//             },
-//             error : function (xhr, status, er) {
-//                 if(error) { error(er); }
-//             }
-//         })
-//     }
-//
-//
-//     return {
-//         mainLit:mainLit,
-//         mainLitUp:mainLitUp
-//     };
-// })();
