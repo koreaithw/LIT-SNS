@@ -62,7 +62,7 @@ public class UserRestController {
 
     // 마이페이지 - 회원 탈퇴 버튼
     @DeleteMapping("/withdraw/{userNumber}")
-    public String withdraw(@PathVariable("followerNumber") Long userNumber){
+    public String withdraw(@PathVariable("userNumber") Long userNumber){
         userService.remove(userNumber);
         return "회원 탈퇴 성공";
     }
@@ -71,6 +71,20 @@ public class UserRestController {
     @GetMapping("/userImg")
     public UserFileVO getImg(Long userNumber) {
         return userService.getImg(userNumber);
+    }
+
+    // 마이페이지 - 비밀 번호 변경
+    @PatchMapping("/modifyPw/{userNumber}/{newPassword}")
+    public void modifyPw(@PathVariable("userNumber") Long userNumber, @PathVariable("newPassword") String newPassword){
+        log.info("마이페이지 비밀 번호 변경..................");
+        userService.modifyPw(userNumber, newPassword);
+    }
+
+    // 마이페이지 - 프로필 편집 닉네임 중복 검사
+    @GetMapping("/profileEditNicknameCheck/{nickname}")
+    public boolean profileEditNicknameCheck(@PathVariable("nickname") String nickname){
+        log.info("프로필 편집 닉네임 중복 검사 =============");
+        return userService.dbNicknameCheck(nickname);
     }
 
 }

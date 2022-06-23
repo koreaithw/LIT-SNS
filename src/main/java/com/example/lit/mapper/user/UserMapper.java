@@ -25,7 +25,7 @@ public interface UserMapper {
     //내 정보 수정
     public void update(UserVO userVO);
     //비밀 번호 변경
-    public void updatePw(@Param("userVO") UserVO userVO, @Param("newPassword") String newPassword);
+    public void updatePw(Long userNumber, String newPassword);
     // 대표 메달 설정
     public void updateMedal(UserVO userVO);
 

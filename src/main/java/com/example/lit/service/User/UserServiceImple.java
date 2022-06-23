@@ -87,14 +87,10 @@ public class UserServiceImple implements UserService{
     }
 
     @Override
-    public void modify(UserVO userVO) {
-
-    }
+    public void modify(UserVO userVO) { userDAO.modify(userVO); }
 
     @Override
-    public void modifyPw(UserVO userVO, String newPassword) {
-
-    }
+    public void modifyPw(Long userNumber, String newPassword) { userDAO.modifyPw(userNumber, newPassword); }
 
     @Override
     public void modifyMedal(UserVO userVO) {

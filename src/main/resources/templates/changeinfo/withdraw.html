@@ -22,10 +22,13 @@
     <main>
         <div class="_changepw_main_wrapper">
             <ul class="mainUl">
-                <li class="mainLi"><a class="mainA" href="/changeinfo/editInfo" tabindex="0">프로필 편집</a></li>
-                <li class="mainLi"><a class="mainA" href="/changeinfo/changePw" tabindex="0">비밀번호 변경</a>
+                <li class="mainLi"><a class="mainA" href="/user/editInfo"
+                                      tabindex="0">프로필 편집</a></li>
+                <li class="mainLi"><a class="mainA" href="/user/changePw"
+                                      tabindex="0">비밀번호 변경</a>
                 </li>
-                <li class="mainLi"><a class="mainA" href="/changeinfo/withdraw" tabindex="0">회원 탈퇴</a>
+                <li class="mainLi"><a class="mainA" href="/user/withdraw"
+                                      tabindex="0">회원 탈퇴</a>
                 </li>
 
             </ul>
@@ -71,14 +74,18 @@
 <script src="/assets/js/changeinfo/changeInfoAjax.js"></script>
 <script th:inline="javascript">
     let pw = $('#_withdrawlPassword');
-    let userNumber = 47; // 임시
+    let userNumber = 2; // 임시
     let pwBtn = $('#btnNoOff');
 
     // 비밀번호 확인
     $('#_withdrawlPassword').on("keyup", function () {
         let $password = $(this).val();
-
+        console.log($password);
         console.log($('#_withdrawlPassword'));
+
+        if($password.length == 0) {
+            $('._checkArea1').html('');
+        }
 
         changeInfoAjax.checkWithdrawPw({
             userNumber : userNumber,
@@ -86,14 +93,11 @@
         }, function (result) {
             console.log(result);
 
-                if(pw.val().length <= 0) {
-                    $('._checkArea1').html('');
-                }
                 if(result){ // 비번 유효성 검사
                     $ ('._checkArea1').html('비밀번호가 일치합니다.');
                     pwBtn.attr('class', 'buttonOn');
                     $('._checkArea1').css('color', 'black');
-                } else{
+                } else if($password.length != 0 && !result){
                     $ ('._checkArea1').html('비밀번호가 일치하지 않습니다.');
                     $('._checkArea1').css('color', 'red');
                     pwBtn.attr('class', 'buttonStyle');
@@ -103,18 +107,20 @@
 
     // 회원 탈퇴
     pwBtn.on("click", function(){
-        function removeCheck() {
-            if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+
+            if (confirm("정말 탈퇴하시겠습니까?") == true){    //확인
                 changeInfoAjax.withdrawUser(userNumber, function (result) {
                     console.log(result);
-                })
+                });
                 alert("회원탈퇴가 완료되었습니다.");
-            }else{   //취소
+
+                location.href= "/main";
+
+            } else{   //취소
                 return false;
             }
-        }
+        });
 
-    });
 
 
 </script>

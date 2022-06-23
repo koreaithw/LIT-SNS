@@ -36,7 +36,7 @@ let changeInfoAjax = (function () {
     // 회원탈퇴 버튼 클릭시
     function withdrawUser(userNumber, callback){
         $.ajax({
-            url: "/withdraw/" + userNumber,
+            url: "/user/withdraw/" + userNumber,
             type: "delete",
             success: function(result){
                 if(callback){
@@ -46,6 +46,30 @@ let changeInfoAjax = (function () {
         });
     }
 
-    return {checkOldPw: checkOldPw, checkWithdrawPw: checkWithdrawPw, withdrawUser: withdrawUser}
+    // 비밀번호 변경 버튼 클릭시
+    function modifyPw(param) {
+        console.log(param.newPassword + "$newPassword");
+        $.ajax({
+            url: "/user/modifyPw/" + param.userNumber + "/" + param.newPassword,
+            type: "patch"
+        });
+    }
+
+    // 프로필 편집 - 닉네임 중복 검사
+    function profileEditNicknameCheck(nickname, callback) {
+        console.log("profileEditNicknameCheck...........");
+        $.ajax({
+            url:"/user/profileEditNicknameCheck/" + nickname,
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                if(callback){
+                    callback(result);
+                }
+            }
+        });
+    }
+
+    return {checkOldPw: checkOldPw, checkWithdrawPw: checkWithdrawPw, withdrawUser: withdrawUser, modifyPw: modifyPw, profileEditNicknameCheck: profileEditNicknameCheck}
 
 })();

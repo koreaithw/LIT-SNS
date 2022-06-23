@@ -20,12 +20,12 @@
     <main>
         <div class="_changepw_main_wrapper">
             <ul class="mainUl">
-                <li class="mainLi"><a class="mainA" href="/changeinfo/editInfo"
+                <li class="mainLi"><a class="mainA" href="/user/editInfo"
                         tabindex="0">프로필 편집</a></li>
-                <li class="mainLi"><a class="mainA" href="/changeinfo/changePw"
+                <li class="mainLi"><a class="mainA" href="/user/changePw"
                         tabindex="0">비밀번호 변경</a>
                 </li>
-                <li class="mainLi"><a class="mainA" href="/changeinfo/withdraw"
+                <li class="mainLi"><a class="mainA" href="/user/withdraw"
                         tabindex="0">회원 탈퇴</a>
                 </li>
 
@@ -99,6 +99,7 @@
 <script th:inline="javascript">
     let userNumber = 2; // 임시
 
+    // 비밀번호 유효성 검사 (db조회)
     $('#cppOldPassword').on("keyup", function () {
         let $password = $(this).val();
 
@@ -113,12 +114,18 @@
         });
     });
 
-    // $('#cppCheckPassword').on("keyup", function () {
-    //     let $newCheckPw = $('#cppCheckPassword').val();
-    //
-    //
-    // })
+    // 비밀번호 변경
+    $("#subBtn").on("click", function () {
+        let $newPassword = $('#cppCheckPassword').val();
 
+        changeInfoAjax.modifyPw({
+            userNumber: userNumber,
+            newPassword: $newPassword
+        });
+
+        location.reload();
+
+    });
 
 
 </script>

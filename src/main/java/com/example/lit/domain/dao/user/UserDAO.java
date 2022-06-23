@@ -29,7 +29,7 @@ public class UserDAO {
     //내 정보 수정
     public void modify(UserVO userVO){ userMapper.update(userVO); }
     //비밀 번호 변경
-    public void modifyPw(UserVO userVO, String newPassword){ userMapper.updatePw(userVO, newPassword); }
+    public void modifyPw(Long userNumber, String newPassword){ userMapper.updatePw(userNumber, newPassword); }
     // 대표 메달 설정
     public void modifyMedal(UserVO userVO){ userMapper.updateMedal(userVO); }
 

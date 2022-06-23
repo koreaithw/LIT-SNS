@@ -41,10 +41,14 @@ public class UserController {
     }
     //이동
     @GetMapping("/editInfo")
-    public String goEditInfoPage(){
+    public String goEditInfoPage(Long userNumber, Model model){
         log.info("******************************");
         log.info("changeInfoController : editInfo");
         log.info("******************************");
+        userNumber = 2L;
+
+        UserVO userVO = userService.read(userNumber);
+        model.addAttribute("userVO", userVO);
 
         return "/changeinfo/editInfo";
     }
@@ -144,6 +148,13 @@ public class UserController {
         log.info("###################  following모달정보     " + followingVO);
 
         return "/mypage/mypage";
+    }
+
+    @PostMapping("/updateEditInfo")
+    public String updateEditInfo(UserVO userVO, Model model){
+        userVO.setUserNumber(2L);
+        userService.modify(userVO);
+        return goEditInfoPage(2L,model);
     }
 
 }

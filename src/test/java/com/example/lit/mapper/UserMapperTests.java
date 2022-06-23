@@ -41,7 +41,7 @@ public class UserMapperTests {
 
     @Test
     public void nicknameCheck(){
-        String nickname="xldms.dl";
+        String nickname="testname";
         log.info("닉네임 중복체크: " + userMapper.nicknameCheck(nickname));
     }
 
@@ -72,20 +72,20 @@ public class UserMapperTests {
         userVO.setNickname("updateTest");
         userVO.setEmail("updateTest");
         userVO.setContent("updateTest");
-        userVO.setUserNumber(622L);
+        userVO.setUserNumber(40L);
 
         userMapper.update(userVO);
     }
 
-    @Test
-    public void updatePwTest(){
-        UserVO userVO = new UserVO();
-        userVO.setUserNumber(622L);
-        userVO.setPassword("2345");
-        String newPassword="1234";
-
-        userMapper.updatePw(userVO,newPassword);
-    }
+//    @Test
+//    public void updatePwTest(){
+//        UserVO userVO = new UserVO();
+//        userVO.setUserNumber(622L);
+//        userVO.setPassword("2345");
+//        String newPassword="1234";
+//
+//        userMapper.updatePw(userVO,newPassword);
+//    }
 
     @Test
     public void updateMedalTest(){
