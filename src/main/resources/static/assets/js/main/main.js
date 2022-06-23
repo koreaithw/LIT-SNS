@@ -165,11 +165,9 @@ let getLitList = function (page) {
         pageNum: page
     }, function (result) {
         let str = "";
-        console.log(result);
         // $(".photoContents > div").html("");
         result.forEach((data, i) => {
             let file = data.projectFile;
-            console.log(data)
             if (file) {
                 str +=
                     "<figure>" +

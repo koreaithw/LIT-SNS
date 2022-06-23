@@ -84,7 +84,7 @@ public class LitRestController {
         log.info("LitRestController : getMainList(post)");
         log.info("***************************");
 //        litService.getMainList(listDTO).stream().map(ProjectDTO::toString).forEach(log::info);
-        listDTO.setAmount(6);
+        listDTO.setAmount(9);
         return litService.getMainList(listDTO);
     }
 

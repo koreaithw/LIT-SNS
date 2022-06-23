@@ -216,7 +216,8 @@ public class LitUpRestController {
         log.info("LitUpRestController : getMainList(post)");
         log.info("***************************");
 
-        litUpService.getMainList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+//        litUpService.getMainList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
+        listDTO.setAmount(9);
         return litUpService.getMainList(listDTO);
     }
 

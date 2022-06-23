@@ -5,6 +5,7 @@ import com.example.lit.service.project.LitService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,12 @@ public class LitController {
     private final LitService litService;
 
     @GetMapping("/write")
-    public String write(){
+    public String write(Long userNumber, Model model){
+        log.info("*************************************");
+        log.info("LitController : write(get)" );
+        log.info("*************************************");
+        log.info(userNumber + "");
+        model.addAttribute("userNumber",userNumber);
         return "/project/projectWrite";
     }
 
