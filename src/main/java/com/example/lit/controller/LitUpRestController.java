@@ -95,9 +95,9 @@ public class LitUpRestController {
         return litUpService.getLikeTotal(likeVO.getReviewNumber()).intValue();
     }
 
-    @GetMapping("/like/{userNumber}")
-    public boolean getCheckLike(@PathVariable("userNumber") Long userNumber){
-        return litUpService.getCheckLike(userNumber) == 1;
+    @GetMapping("/like/{userNumber}/{reviewNumber}")
+    public boolean getCheckLike(@PathVariable("userNumber") Long userNumber, @PathVariable("reviewNumber") Long reviewNumber){
+        return litUpService.getCheckLike(userNumber, reviewNumber) == 1;
     }
 
     @PostMapping("/removeLike")
