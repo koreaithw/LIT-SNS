@@ -271,3 +271,9 @@ $().ready(function dateInputSet() {
     }
   });
 });
+
+//==========================================
+//    transform: rotate(180deg);
+$("label.togle").on("click", function(){
+  $(this).toggleClass("rotate");
+})

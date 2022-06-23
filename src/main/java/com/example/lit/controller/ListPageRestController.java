@@ -51,5 +51,4 @@ public class ListPageRestController {
 //        litUpServiceImple.getList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
         return litUpServiceImple.getList(listDTO);
     }
-
 }
