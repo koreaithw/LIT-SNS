@@ -4,6 +4,7 @@ import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ProjectDTO;
+import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
 import java.util.List;
@@ -16,7 +17,7 @@ public interface LitUpService {
     // 좋아요 갯수 카운트
     public Long getLikeTotal(Long reviewNumber);
     // 좋아요 확인
-    public int getCheckLike(Long userNumber);
+    public int getCheckLike(Long userNumber, Long reviewNumber);
     // 좋아요 리스트(알림용)
     public List<LikeDTO> getLikeList(Long userNumber);
 
@@ -55,6 +56,8 @@ public interface LitUpService {
     public int resultCount();
     //    프로젝트 상세보기(리뷰 작성용)
     public ProjectDTO readForReview(Long projectNumber, Long userNumber);
+    //    나의 프로젝트 가져오기(리뷰 작성용)
+    public List<ProjectFileVO> getMyProject(Long userNumber);
 
 
     // 사진 삭제
