@@ -20,13 +20,14 @@ let $certificationCompleteButton = $('.certificationNextButton > button.complete
 let $certificationWriteModal = $('.certificationWriteModal');
 let $certificationContent = $('.certificationContent');
 let $detailProjectContent = $('.detailProjectContent');
-let $detailProjects = $('.detailProjectContentList > div');
+let $detailProjects = $('.detailProjectContentList');
 let $certificationHeaderLabel = $('.certificationHeaderLabel > strong');
 let $modalLight = $('.modalLight');
 let $projectAlert = $('.projectAlert');
 let $whiteBackground = $('.whiteBackground');
 let $deleteModalButton = $('.deleteModalButton');
 let $deleteImageModalButton = $('.deleteImageModalButton');
+let $clickFlag
 
 //프로젝트 모달 창 켜는 버튼
 function certificationWriteModalShow() {
@@ -90,23 +91,29 @@ function certificationWriteModalHide() {
 }
 
 
-//프로젝트 선택 시 이미지 위에 마우스오버 효과
 $.each($detailProjects, function () {
-    $(this).mouseover(function () {
+    $(".detailProjectContentList").on("mouseover",".projectPic",function () {
+
         $(this).find('span').css("display", "block");
     });
-    $(this).mouseleave(function () {
+    $(".detailProjectContentList").on("mouseleave",".projectPic",function (){
+
         $(this).find('span').css("display", "none");
     });
-    $(this).on('click', function () {
+    $(".detailProjectContentList").on("click",".projectPic",function () {
         if ($(this).hasClass("on")) {
             $(this).removeClass("on");
+            $clickFlag = false;
         } else {
             $(this).addClass("on");
             $(this).siblings(".on").removeClass("on");
+            $projectNumber = $(this).attr("id");
+            $clickFlag = true;
+
         }
     })
 });
+
 
 //모달창 화면 깜빡임 효과
 function twinkle() {
@@ -167,7 +174,7 @@ $certificationNextButton.on("click", function () {
 
 //다음 버튼 두 번 눌렀을 때
 $certificationNextNextButton.on("click", function () {
-    if (!$detailProjects.hasClass("on")) {
+    if (!$clickFlag) {
         $projectAlert.css("display", "block");
         $projectAlert.animate({ "opacity": 1 }, 400, function () {
             $projectAlert.animate({ "opacity": 0 }, 600, function () {
@@ -178,7 +185,7 @@ $certificationNextNextButton.on("click", function () {
     }
     twinkle();
     //////////////// 프로젝트 넘버, 유저 넘버 받아오기
-    reviewWriteService.getProject({projectNumber:1, userNumber:1},
+    reviewWriteService.getProject({projectNumber:$projectNumber, userNumber:1},
         function (title, content, startDate, nickname) {
             $(".projectInfoDropDownContent span.title").html(title)
             $(".projectInfoDropDownContent span.content").html(content)
@@ -228,7 +235,6 @@ $certificationBackBackButton.on("click", function () {
     $certificationBackBackButton.css("display", "none");
 });
 
-//인증글 작성 버튼 눌렀을 때
 
 
 //인증글 작성에서 프로젝트 정보 관련 v자 버튼

@@ -97,7 +97,7 @@ profileImage.forEach(function (item) {
 
 //버튼형 슬라이더
 //이미지 아래 버튼 클릭했을 때 해당하는 이미지로 넘겨주는 기능
-$('.innerImageWrapper > .innerImagePageButtons > div').click(function () {
+$('.innerImageWrapper > .innerImagePageButtons').on("click","div",function () {
     let $this = $(this);
     let index = $this.index();
     $this.addClass('active');

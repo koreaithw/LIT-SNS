@@ -3,6 +3,7 @@ package com.example.lit.controller;
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.ListDTO;
+import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
 import com.example.lit.domain.vo.user.UserFileVO;
@@ -197,15 +198,21 @@ public class LitUpRestController {
         return userService.getImg(userNumber);
     }
 
+    @GetMapping("/reviewPic")
+    public List<ReviewFileVO> getReviewPic(Long reviewNumber){
+        log.info(reviewNumber.toString());
+        return litUpService.getImgs(reviewNumber);
+    }
+
 
     //모달창 인증글 작성하기 중 프로젝트 불러오기
-    @GetMapping("/getProjectList")
-    public List<ProjectVO> getProjectList(){
+    @GetMapping("/getMyProjectList")
+    public List<ProjectFileVO> getProjectList(Long userNumber){
         log.info("***************************");
         log.info("LitUpRestController : getProjectList(get)");
         log.info("***************************");
 
-        return null;
+        return litUpService.getMyProject(userNumber);
     }
 
 

@@ -131,11 +131,10 @@
 
 
                     <div class="detailProjectContentList">
-                        <div>
-                            <span></span>
-                            <img src="monkey.jpg">
-                        </div>
-
+<!--                        <div>-->
+<!--                            <span></span>-->
+<!--                            <img src="monkey.jpg">-->
+<!--                        </div>-->
                     </div>
 
                 </div>
@@ -285,6 +284,7 @@
     let filesList
     let arFile = Array.from($("input[type='file']")[0].files);
     let $uploadResult = $(".ceritficationContentProfileImageWrapper")
+    let $projectNumber
 
     // 사진 업로드 패스에 저장
     $("input[type='file']").on("change", function(e){
@@ -367,6 +367,23 @@
             $.getJSON("/litUp/profilePic", {userNumber: 1}, function(pic){showUserPic(pic);})
         })
 
+    $(".nextButton").on("click",function () {
+        $.getJSON("/litUp/getMyProjectList", {userNumber: 1}, function(pic){showMyProject(pic);})
+    })
+
+
+    // 프로젝트 리스트 출력
+    function showMyProject(pic) {
+        let str ="";
+        $.each(pic, function (i, file) {
+            str += "<div class='projectPic' id='"+file.projectNumber +"'>"
+            str += "<span></span>"
+            str += "<img src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+            str += "</div>"
+        });
+
+        $(".detailProjectContentList").html(str);
+    }
 
     // 프로필 사진 출력
     function showUserPic(file){
