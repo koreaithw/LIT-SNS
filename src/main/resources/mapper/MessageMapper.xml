@@ -27,10 +27,10 @@
     </select>
 
     <select id="getRecentMessage" resultType="map">
-        SELECT NICKNAME, CONTENT, RECEIVE_USER_NUMBER
+        SELECT NICKNAME, CONTENT, RECEIVE_USER_NUMBER, ROOM_ID
         FROM
             (
-            SELECT u.NICKNAME, m.CONTENT, m.RECEIVE_USER_NUMBER
+            SELECT u.NICKNAME, m.CONTENT, m.RECEIVE_USER_NUMBER, m.ROOM_ID
             FROM TBL_USER u LEFT OUTER JOIN TBL_MESSAGE m
             ON u.USER_NUMBER  = m.RECEIVE_USER_NUMBER
             WHERE m.RECEIVE_USER_NUMBER = #{receiveUserNumber}
@@ -60,13 +60,13 @@
 
     <select id="getMessageList" resultType="messageDTO">
         <![CDATA[
-        SELECT CONTENT, TOTAL, SEND_USER_NUMBER, RECEIVE_USER_NUMBER
+        SELECT CONTENT, TOTAL, SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM_ID
         FROM
         (
-            SELECT ROWNUM RN, CONTENT, TOTAL, SEND_USER_NUMBER, RECEIVE_USER_NUMBER
+            SELECT ROWNUM RN, CONTENT, TOTAL, SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM_ID
             FROM
             (
-                SELECT COUNT(CONTENT) OVER() AS TOTAL, CONTENT, SEND_USER_NUMBER, RECEIVE_USER_NUMBER
+                SELECT COUNT(CONTENT) OVER() AS TOTAL, CONTENT, SEND_USER_NUMBER, RECEIVE_USER_NUMBER, ROOM_ID
                 FROM TBL_MESSAGE
                 WHERE (SEND_USER_NUMBER = #{sendUserNumber} AND RECEIVE_USER_NUMBER = #{receiveUserNumber})
                 OR (SEND_USER_NUMBER = #{receiveUserNumber} AND RECEIVE_USER_NUMBER = #{sendUserNumber})
@@ -80,8 +80,21 @@
 
     <insert id="newRoom">
         INSERT INTO TBL_MESSAGE_ROOM
-        (ROOM_ID, ROOM)
-        VALUES(#{roomId}, #{room})
+        (ROOM_ID, SEND_USER_NUMBER, RECEIVE_USER_NUMBER)
+        VALUES(#{roomId}, #{sendUserNumber}, #{receiveUserNumber})
     </insert>
+
+    <select id="findRoom" resultType="_int">
+        SELECT COUNT(ROOM_ID)
+        FROM TBL_MESSAGE_ROOM
+        WHERE SEND_USER_NUMBER = #{sendUserNumber} AND RECEIVE_USER_NUMBER = #{receiveUserNumber}
+    </select>
+
+    <select id="getRoom" resultType="messageRoom">
+        SELECT ROOM_ID, SEND_USER_NUMBER, RECEIVE_USER_NUMBER
+        FROM TBL_MESSAGE_ROOM
+        WHERE SEND_USER_NUMBER = #{sendUserNumber} and RECEIVE_USER_NUMBER = #{receiveUserNumber}
+    </select>
+
 
 </mapper>

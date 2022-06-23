@@ -10,6 +10,8 @@ public class MessageDTO {
     private Long receiveUserNumber;
     private Long total;
     private String content;
+    private String roomId;
+    private boolean newRoomCheck;
 
     private Long pageNum;
     private Long amount;

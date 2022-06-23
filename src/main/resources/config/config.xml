@@ -22,5 +22,7 @@
         <typeAlias type="com.example.lit.domain.vo.review.ReportDTO" alias="reportDTO"></typeAlias>
         <typeAlias type="com.example.lit.domain.vo.review.LikeDTO" alias="likeDTO"></typeAlias>
         <typeAlias type="com.example.lit.domain.vo.project.ProjectDTO" alias="projectDTO"></typeAlias>
+        <typeAlias type="com.example.lit.domain.vo.messsage.MessageRoom" alias="messageRoom"/>
+
     </typeAliases>
 </configuration>

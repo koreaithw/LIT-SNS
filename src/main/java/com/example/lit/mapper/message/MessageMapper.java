@@ -1,6 +1,7 @@
 package com.example.lit.mapper.message;
 
 import com.example.lit.domain.vo.messsage.MessageDTO;
+import com.example.lit.domain.vo.messsage.MessageRoom;
 import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.domain.vo.user.UserVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -34,4 +35,12 @@ public interface MessageMapper {
 //    public List<MessageDTO> getMessageList(MessageDTO messageDTO, Long sendUserNumber, Long receiveUserNumber);
     public List<MessageDTO> getMessageList(MessageDTO messageDTO);
 
+    //새 방 만들기
+    public void newRoom(MessageRoom messageRoom);
+
+    //방 db 조회
+    public int findRoom(Long sendUserNumber, Long receiveUserNumber);
+
+    //방 하나 정보
+    public MessageRoom getRoom(Long sendUserNumber, Long receiveUserNumber);
 }

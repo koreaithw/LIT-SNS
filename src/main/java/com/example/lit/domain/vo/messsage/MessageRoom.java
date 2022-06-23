@@ -15,14 +15,16 @@ import java.util.UUID;
 @Data
 public class MessageRoom {
     private String roomId;
-    private String room;
+    private Long sendUserNumber;
+    private Long receiveUserNumber;
 
     private Set<WebSocketSession> sessions = new HashSet<>();
 
-    public static MessageRoom create(String room){
+    public static MessageRoom create(Long sendUserNumber, Long receiveUserNumber){
         MessageRoom messageRoom = new MessageRoom();
         messageRoom.roomId = UUID.randomUUID().toString();
-        messageRoom.room = room;
+        messageRoom.sendUserNumber = sendUserNumber;
+        messageRoom.receiveUserNumber = receiveUserNumber;
         return messageRoom;
     }
 
