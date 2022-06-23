@@ -317,7 +317,7 @@
     $('.certificationNextButton > button.completeButton').on("click",function () {
         let reviewContent = $("textarea#reviewContent").val();
         reviewWriteService.reviewRegister({
-            userNumber:1, projectNumber:1, content:reviewContent, reviewFileList:filesList
+            userNumber:1, projectNumber:$projectNumber, content:reviewContent, reviewFileList:filesList
         },function (result) {
                 certificationWriteBackground.style.display = 'none';
                 certificationWriteButton.style.display = 'block';
