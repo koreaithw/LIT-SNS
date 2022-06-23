@@ -19,12 +19,12 @@
     <header></header>
     <main>
         <div class="mainWrap">
-            <section class="sec1">
-                <div>
+            <section class="sec1" th:object="${projectVO}">
+<!--                <div th:object="${projectVO}">-->
                     <div class="projectImg">
                         <a>
                             <!-- 이미지 링크 추가 -->
-                            <img src="/images/project/domImg/indi01.webp" alt="">
+                            <img src="/lit/display?fileName=" alt="">
                         </a>
                     </div>
                     <div class="projectInfoWrap">
@@ -49,23 +49,21 @@
                                 챌린지 기간
                             </p>
                             <p>
-                                <span>2022-06-01~06.22</span>
+<!--                                <span th:text="*{startDate}~*{endDate}"></span>-->
                             </p>
                         </div>
                         <div>
                             <p class="infoKey">
                                 챌린지 소개
                             </p>
-                            <p>
-                                누구나 운동을 열심히 해서 몸짱이 되어보자
+<!--                            <p th:text="*{content}">-->
                             </p>
                         </div>
                         <div>
                             <p class="infoKey">
                                 인증방법
                             </p>
-                            <p>
-                                헬스장[운동기구 3개 이상]이 나오게 사진찍기
+<!--                            <p th:text="*{authentication}">-->
                             </p>
                         </div>
                     </div>
@@ -73,66 +71,12 @@
             </section>
             <section class="sec2">
                 <div>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi01.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi02.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi03.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi04.jpg" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi05.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi06.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi01.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi02.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi03.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi04.jpg" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi05.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi06.webp" alt="">
-                        </a>
-                    </figure>
+<!--                    반복문 -->
+<!--                    <figure>-->
+<!--                        <a href="">-->
+<!--                            <img src="/images/project/domImg/indi01.webp" alt="">-->
+<!--                        </a>-->
+<!--                    </figure>-->
 
                 </div>
             </section>
@@ -148,20 +92,25 @@
 
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
 <script th:inline="javascript">
-    let pageNum = 1;
-    const contBox = $('.sec2 > div'); // 이미지 리스트 뿌릴 위치
-    // 최신순으로
-    litUpList("newproject");
+    // 페이지 이동시 프로젝트 넘버 가져오기
+    // const projectNumber = [[${ projectNumber }]];
+    const projectNumber = 1;
 
-    function litUpList(category) {
+    let pageNum = 1; // 인증글 리스트 페이지 번호
+    const contBox = $('.sec2 > div');  // 인증글 리스트 출력 위치
+
+    // 첫 이미지 리스트
+    litUpList();
+    // ajax 서버통신
+    function litUpList() {
+        console.log("ajax----------------");
         $.ajax({
-            url: "/list/litsups/" + newproject + "/" + pageNum,
+            url: "/litUp/litInfo/" + pageNum + "/" +projectNumber,
             type: "get",
             dataType: 'json',
             success: function (result) {
                 pageNum++; // 다음 페이지 번호 지정
-                // alert('성공');
-                listadd(result);
+                litupadd(result);
             }, error: function (xhr, textStatus, errorThrown) {
                 console.log('통신 실패');
                 console.log(xhr);
@@ -170,27 +119,48 @@
             }
         });
     }
-
-    // 리스트에 추가하기
-    function listadd(result) {
-
+    // LitUp 데이터 Html input
+    function litupadd(result) {
         let str = "";
-        // console.log(result);
-        $.each(result, function (i, ReviewDTO) {
-            let src = "";
-            //이미지 경로 첫번째 이미지만
-            src += ReviewDTO.reviewFileList.get(0).uploadPath;
-            src += ReviewDTO.reviewFileList.get(0).uuid + "_";
-            src += ReviewDTO.reviewFileList.get(0).name;
-
-
-            str += " <figure><a href='"+ReviewDTO.reviewNumber+"'>";
-            str += " <img src='"+"1"+"'> ";
-            str += "</a></figure>";
-
-        });
+        result.forEach( (data, i) => {
+            let file = data.reviewFileList;
+            if(file[0]){
+                str += "<figure><a href=\"" + data.reviewNumber + "\">";
+                str += "<img src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">";
+                str += "</a></figure>";
+            }
+        })
         contBox.append(str);
     }
+
+
+    //스크롤 이벤트
+    let timer;
+    $(window).scroll(function () {
+        // 라스트 페이지면 실행 불가
+        // if(pageNum == last){
+        //     return false;
+        // }
+        // 현 스크롤 탑의 위치
+        let windowTop = $(window).scrollTop();
+        // 변화될 아이
+        let contentHeight = $(".photoContents").height();
+        // 창의 전체 높이
+        let windowHeight = $(window).height();
+
+        // 스크롤이 마지막 이면 데이터 가져오기
+        if (windowTop > (contentHeight - windowHeight)) {
+            // 스크롤 맨 아래
+            if (timer) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(() => {
+                litUpList();  // ajax 실행
+            }, 500);
+        } else {
+            //스크롤중..
+        }
+    });
 </script>
 
 </html>

@@ -5,6 +5,7 @@ import com.example.lit.service.project.LitService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,13 +31,13 @@ public class LitController {
         return "/main/main";
     }
 
-    @PostMapping("/info/{projectNumber}")
-    public String info(){
-
-//        litService.read();
-        return "";
+    // ======= 페이지 상세보기 ========
+    @GetMapping("/info")
+    public String info(Long projectNumber, Model model){
+        Long testNumber = 1L;
+        ProjectVO projectVO = litService.read(testNumber);
+//        ProjectVO projectVO = litService.read(projectNumber);
+        model.addAttribute("projectVO", projectVO);
+        return "/project/projectInfo";
     }
-
-
-
 }

@@ -1,9 +1,3 @@
-
-let pageNum = 1;
-const contBox = $('div.photoContents > div');
-let cate1 = "lits";     // lits / litups
-let cate2 = "all";  // 카테고리
-let order = "new";  // new 신규 / popular 인기
 // 기본 시작은 lit
 litList();
 
@@ -152,10 +146,8 @@ lit2.on("click", function(){
         pageNum = 1;         // 페이지번호 초기화
         litList();          //리스트 가져오기
     }
-
     lit2.attr('class', 'lits2On');
     $('#lit2Img').attr('src', '/images/mypage/lists.png');
     lit1.attr('class', 'lits1Off');
     $('#lit1Img').attr('src', '/images/mypage/menu2.png');
-
 });
