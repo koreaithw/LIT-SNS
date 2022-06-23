@@ -56,4 +56,9 @@ public class UserServiceTests {
         log.info(list.toString());
 
     }
+
+    @Test
+    public void folloListTest(){
+        userService.followList(3L);
+    }
 }

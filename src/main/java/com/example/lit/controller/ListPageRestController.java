@@ -42,7 +42,6 @@ public class ListPageRestController {
     }
 
     //litup탭 리스트
-
     @GetMapping("/litups/{order}/{cate}/{page}")
     public List<ReviewDTO> litups(@PathVariable("page") int pageNum, @PathVariable("cate") String category, @PathVariable("order") String order){
         ListDTO listDTO = new ListDTO(pageNum, 3);
