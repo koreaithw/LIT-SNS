@@ -3,6 +3,7 @@ package com.example.lit.service.review;
 import com.example.lit.domain.dao.project.ProjectDAO;
 import com.example.lit.domain.dao.project.ProjectFileDAO;
 import com.example.lit.domain.dao.review.*;
+import com.example.lit.domain.dao.user.achievement.AchievementDAO;
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
@@ -11,6 +12,7 @@ import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class LitUpServiceImple implements LitUpService{
     private final LikeDAO likeDAO;
     private final ReplyDAO replyDAO;
@@ -27,6 +30,7 @@ public class LitUpServiceImple implements LitUpService{
     private final ReviewFileDAO reviewFileDAO;
     private final ProjectDAO projectDAO;
     private final ProjectFileDAO projectFileDAO;
+    private final AchievementDAO achievementDAO;
 
     @Override
     public void registerLike(LikeVO likeVO) {
@@ -104,6 +108,17 @@ public class LitUpServiceImple implements LitUpService{
                 reviewFileDAO.register(reviewFileVO);
             });
         }
+
+        log.info(reviewVO.getUserNumber() + "############################################");
+        Long ss = reviewVO.getUserNumber();
+        log.info(ss + "!!!!!!!!!!!!!!!!!!!!!!!1");
+
+        log.info(getTotalByUserNumber(ss) + "%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        // 3번째 메달 - 첫 lit up 작성하기
+        if(getTotalByUserNumber(reviewVO.getUserNumber()) == 1){
+            achievementDAO.insertMedal(reviewVO.getUserNumber(), "3");
+        }
+
     }
 
     @Override
@@ -206,4 +221,7 @@ public class LitUpServiceImple implements LitUpService{
 
         return result;
     }
+
+    @Override
+    public int getTotalByUserNumber(Long userNumber) { return reviewDAO.getTotalByUserNumber(userNumber); }
 }

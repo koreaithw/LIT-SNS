@@ -21,7 +21,7 @@ function projectDetailModalShow(reviewNumber) {
     modal.style.display = 'block';
     projectDetailButton.style.display = 'none';
     pageNum = 1;
-    $reviewNumber= 1
+    $reviewNumber= 23;
     showList(pageNum);
     // 좋아요 총 갯수
     reviewDetailService.getLikeTotal($reviewNumber,function (result) {

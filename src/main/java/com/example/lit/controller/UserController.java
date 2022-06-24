@@ -2,6 +2,7 @@ package com.example.lit.controller;
 
 import com.example.lit.domain.vo.user.FollowVO;
 import com.example.lit.domain.vo.user.UserVO;
+import com.example.lit.domain.vo.user.achievement.AchievementVO;
 import com.example.lit.service.User.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -156,4 +157,13 @@ public class UserController {
         return goEditInfoPage(2L,model);
     }
 
+//    *************************************
+//    MEDAL 메달
+//    *************************************
+    @GetMapping("/getMedal/{userNumber}")
+    @ResponseBody
+    public List<String> getMedal(@PathVariable("userNumber") Long userNumber){
+        log.info("getMedal................ : " + userNumber);
+        return userService.getMedal(userNumber);
+    }
 }

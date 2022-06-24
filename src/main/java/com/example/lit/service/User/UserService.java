@@ -97,4 +97,15 @@ public interface UserService {
     public int getTotal();
     // 차트 정보
     public Long getUserChart(String date);
+
+//    *************************************
+//    MEDAL 메달
+//    *************************************
+    public List<String> getMedal(Long userNumber);
+
+    //4번째 메달 조건 - 메달 10개 모으기
+    public int medal4Condition(Long userNumber);
+
+
+
 }

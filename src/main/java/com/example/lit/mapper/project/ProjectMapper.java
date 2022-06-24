@@ -32,4 +32,6 @@ public interface ProjectMapper {
     public int getTotalByStatus(Long status);
     // 프로젝트 목록(메인)
     public List<ProjectDTO> getMainList(ListDTO listDTO);
+    // 2번째 메달 - 첫 lit 생성하기
+    public int getTotalByUserNumber(Long userNumber);
 }
