@@ -8,7 +8,8 @@ window.onload = function () {
 
 $(document).ready(function(){
     chartData();
-    console.log(chartResult);
+
+    searchUser(1);
 
     // ====== 차트 ======
     //makechart 메소드는 admin-common.js에 정의되어 있음
