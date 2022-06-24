@@ -457,6 +457,7 @@
     $(".projectDetailButton").on("click",function () {
         $.getJSON("/litUp/profilePic", {userNumber: 1}, function(pic){showUserPic(pic);})
         $.getJSON("/litUp/reviewPic", {reviewNumber: $reviewNumber}, function(pic){showReviewPic(pic);})
+
     })
 
 

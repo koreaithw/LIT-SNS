@@ -2,6 +2,7 @@ let chartResult;
 
 $(document).ready(function(){
     chartData();
+    searchReport(1);
     // ====== 차트 ======
     //makechart 메소드는 admin-common.js에 정의되어 있음
 
