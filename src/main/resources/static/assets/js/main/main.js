@@ -2,6 +2,8 @@
 let now = 0;
 let ani = 0;
 let len = $("._ad_wrapper>img").length;
+let category;
+let order;
 
 $("._ad_wrapper>img").css({"left": "-100%", "z-index": "0"}).eq(now).css({"left": "0%", "z-index": "1"});
 
@@ -76,6 +78,56 @@ lit2.on("click", function () {
     $(window).trigger("scroll");
 });
 
+// 카테고리 클릭시 해당 이미지의 테두리 원 색을 변경
+$("._category_wrapper a").on("click", function (e) {
+    e.preventDefault();
+    if( $(this).hasClass("on") ){  // 같은 태그 선택시 이벤트 취소
+        return false;
+    }
+    // 선택 태그 클래스 추가
+    $("._category_wrapper a").removeClass("on");
+    $(this).addClass("on");
+
+    category = $(this).attr("href");
+    console.log(category);
+    page = 1;
+    $(".photoContents > div").html("");
+    if (lit1.hasClass('lits1On')) {
+        getLitUpList(page);
+    } else if (lit2.hasClass('lits2On')) {
+        getLitList(page);
+    }
+    page++;
+});
+
+//전체 인기 신규 클릭 이벤트
+$(".a__selector").on("click", function(e){
+    e.preventDefault();
+    let $selector = $(this).find("._selector");
+    order = $(this).attr("href");
+    console.log(order);
+    // if( $selector.hasClass("on") ){  // 같은 태그 선택시 이벤트 취소
+    //     return false;
+    // }
+    
+    $("._selector_wrapper ._selector").removeClass("on");
+    $selector.addClass("on");
+
+    if(!order){
+        $("._category_wrapper a").removeClass("on");
+        category = "";
+    }
+
+    page = 1;
+    $(".photoContents > div").html("");
+    if (lit1.hasClass('lits1On')) {
+        getLitUpList(page);
+    } else if (lit2.hasClass('lits2On')) {
+        getLitList(page);
+    }
+    page++;
+})
+
 
 //스크롤 이벤트
 let timer;
@@ -137,9 +189,11 @@ $(window).scroll(function () {
 // }
 
 
+
 let getLitUpList = function (page) {
     mainService.mainLitUp({
-        order: "new",
+        order: order,
+        category : category,
         pageNum: page
     }, function (result) {
         let str = "";
@@ -161,7 +215,8 @@ let getLitUpList = function (page) {
 
 let getLitList = function (page) {
     mainService.mainLit({
-        order: "new",
+        order: order,
+        category : category,
         pageNum: page
     }, function (result) {
         let str = "";

@@ -22,7 +22,9 @@ window.onload = function () {
     sideAni(0); //사이드바 애니메이션 side-bar.js
     $(".menu-box").eq(2).addClass("menu-box__select");
 };
-
+$(document).ready(function(){
+    searchProject(1);
+})
 
 
 

@@ -27,7 +27,7 @@
 
         div.photoContents figure {
             width: 33.33%;
-            height: 298px;
+            height: 250px;
             padding: 10px;
         }
 
@@ -47,6 +47,18 @@
             transform: scale(1.1);
             transform-origin: center center;
         }
+
+        div._category_wrapper > a.on div._category_img_box{
+            border:2px solid rgb(255 87 87);
+        }
+
+        div._selector_wrapper div.on{
+            border-bottom: 2px solid rgb(255 87 87);
+            color: rgb(255 87 87);
+        }
+        div._selector{
+            margin-top: -2px;
+        }
     </style>
 
 </head>
@@ -60,13 +72,13 @@
             <!-- 선택창 -->
             <div class="_top_selector">
                 <div class="_selector_wrapper">
-                    <a href="/" class="_top_home">
-                        <div class="_selector">홈</div>
+                    <a href="" class="_top_home a__selector">
+                        <div class="_selector on">전체</div>
                     </a>
-                    <a href="/" class="_top_popular">
+                    <a href="popular" class="_top_popular a__selector">
                         <div class="_selector">인기</div>
                     </a>
-                    <a href="/" class="_top_new">
+                    <a href="new" class="_top_new a__selector">
                         <div class="_selector">신규</div>
                     </a>
                 </div>
@@ -81,7 +93,7 @@
             </div>
             <!-- 카테고리 선택 창 -->
             <div class="_category_wrapper">
-                <a href="/">
+                <a href="life">
                     <div class="_category_detail _life">
                         <div class="_category_img_box" style="padding:10px ;">
                             <div class="_category_img">
@@ -93,7 +105,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/">
+                <a href="exercise">
                     <div class="_category_detail _exercise">
                         <div class="_category_img_box">
                             <div class="_category_img">
@@ -105,7 +117,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/">
+                <a href="hobby">
                     <div class="_category_detail _hobby">
                         <div class="_category_img_box">
                             <div class="_category_img">
@@ -117,7 +129,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/">
+                <a href="art">
                     <div class="_category_detail _art">
                         <div class="_category_img_box">
                             <div class="_category_img">
@@ -129,7 +141,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/">
+                <a href="heart">
                     <div class="_category_detail _heart">
                         <div class="_category_img_box">
                             <div class="_category_img">
@@ -141,7 +153,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/">
+                <a href="eating">
                     <div class="_category_detail _eating">
                         <div class="_category_img_box">
                             <div class="_category_img">
@@ -153,7 +165,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/">
+                <a href="study">
                     <div class="_category_detail _study">
                         <div class="_category_img_box">
                             <div class="_category_img">
@@ -202,9 +214,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="/assets/js/main/main.js"></script>
 <script th:inline="javascript">
-    let test = [[${session.userNumber}]];
-    console.log("---------------------------------")
-    console.log(test)
+
 </script>
 
 </html>
