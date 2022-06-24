@@ -23,7 +23,7 @@ public class ReviewMapperTest {
 
     @Test
     public void registerTest() {
-
+        reviewMapper.getForAlert(1L);
     }
 
 }

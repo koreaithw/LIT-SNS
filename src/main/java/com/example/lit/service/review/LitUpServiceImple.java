@@ -12,6 +12,7 @@ import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
 import com.example.lit.domain.vo.user.AlertDTO;
+import com.example.lit.domain.vo.user.AlertVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,13 @@ public class LitUpServiceImple implements LitUpService{
     @Override
     public void registerLike(LikeVO likeVO) {
         likeDAO.register(likeVO);
+        
+        // 좋아요 추가시 alert테이블에 같이 추가
+        AlertVO alertVO = new AlertVO();
+        alertVO.setAlertUser(reviewDAO.getReviewNumberForAlert(likeVO.getReviewNumber()));
+        alertVO.setUserNumber(likeVO.getUserNumber());
+        alertVO.setTypeAlert("like");
+        alertDAO.insert(alertVO);
     }
 
     @Override
@@ -50,6 +58,9 @@ public class LitUpServiceImple implements LitUpService{
     public int getCheckLike(Long userNumber, Long reviewNumber) {
         return likeDAO.checkLike(userNumber, reviewNumber);
     }
+
+    @Override
+    public Long searchLike(Long alertNumber, Long userNumber) { return likeDAO.searchLike(alertNumber, userNumber); }
 
     @Override
     public void registerReply(ReplyVO replyVO) {

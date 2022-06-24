@@ -32,12 +32,12 @@ public class AlterController {
         List<AlertDTO> alertDTOS = litUpService.getAlertList(userNumber);
 
         for(AlertDTO alertDTO : alertDTOS) {
-            List<ReviewFileVO> reviewFileVOS = litUpService.getImgs(alertDTO.getReviewNumber());
-            alertDTO.setReviewFileVO(reviewFileVOS.get(0));
             alertDTO.setUserFileVO(userService.getImg(alertDTO.getUserNumber()));
-            if(alertDTO.getReviewNumber() != null){
-                List<ReviewFileVO> list = litUpService.getImgs(alertDTO.getReviewNumber());
-                alertDTO.setReviewFileVO(list.get(0));
+            if(alertDTO.getTypeAlert().equals("like")){
+                log.info("============================================================");
+                alertDTO.setReviewNumber(litUpService.searchLike(alertDTO.getAlertUser(), alertDTO.getUserNumber()));
+                List<ReviewFileVO> reviewFileVOS = litUpService.getImgs(alertDTO.getReviewNumber());
+                alertDTO.setReviewFileVO(reviewFileVOS.get(0));
             }
         }
 

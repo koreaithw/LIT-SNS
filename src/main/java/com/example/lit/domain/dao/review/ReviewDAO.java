@@ -39,5 +39,7 @@ public class ReviewDAO {
     public Long getReviewChart(String date){ return reviewMapper.getReviewChart(date); }
     // 리뷰 목록 가져오기2(테스트)
     public List<ReviewDTO> getMainList(ListDTO listDTO) { return reviewMapper.getMainList(listDTO); }
+    // 리뷰 작성자 번호 가져오기 알림
+    public Long getReviewNumberForAlert(Long reviewNumber) { return reviewMapper.getForAlert(reviewNumber); }
 
 }

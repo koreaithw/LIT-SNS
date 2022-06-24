@@ -1,5 +1,6 @@
 package com.example.lit.service.User;
 
+import com.example.lit.domain.dao.user.AlertDAO;
 import com.example.lit.domain.dao.user.FollowDAO;
 import com.example.lit.domain.dao.message.MessageDAO;
 import com.example.lit.domain.dao.user.UserDAO;
@@ -25,6 +26,7 @@ public class UserServiceImple implements UserService{
     private final MessageDAO messageDAO;
     private final UserDAO userDAO;
     private final UserFileDAO userFileDAO;
+    private final AlertDAO alertDAO;
 
     @Override
     public void register(UserVO userVO) {
@@ -124,7 +126,13 @@ public class UserServiceImple implements UserService{
 
     @Override
     public void follow(FollowVO followVO) {
+        followDAO.register(followVO);
+        AlertVO alertVO = new AlertVO();
+        alertVO.setAlertUser(followVO.getFollowingNumber());
+        alertVO.setUserNumber(followVO.getFollowerNumber());
+        alertVO.setTypeAlert("follow");
 
+        alertDAO.insert(alertVO);
     }
 
     @Override

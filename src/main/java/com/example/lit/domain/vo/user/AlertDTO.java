@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class AlertDTO {
-
+    private Long alertUser;
     private Long userNumber;
     private String typeAlert;
     private String registerDate;

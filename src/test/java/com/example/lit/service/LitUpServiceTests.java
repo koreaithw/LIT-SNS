@@ -2,6 +2,7 @@ package com.example.lit.service;
 
 import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.review.LikeVO;
 import com.example.lit.domain.vo.review.ReviewDTO;
 import com.example.lit.domain.vo.review.ReviewFileVO;
 import com.example.lit.service.review.LitUpService;
@@ -38,5 +39,18 @@ public class LitUpServiceTests {
     public void getImgsTest(){
         litUpService.getImgs(67L).stream().map(ReviewFileVO::toString).forEach(log::info);
 
+    }
+
+    @Test
+    public void searchLikeTest() {
+        litUpService.searchLike(1L, 2L);
+    }
+
+    @Test
+    public void likeAlertTest() {
+        LikeVO likeVO = new LikeVO();
+        likeVO.setReviewNumber(1L);
+        likeVO.setUserNumber(3L);
+        litUpService.registerLike(likeVO);
     }
 }

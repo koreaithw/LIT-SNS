@@ -152,4 +152,6 @@ public class UserMapperTests {
     public void listTest(){
         log.info(alertMapper.alertList(1L).toString());
     }
+
+
 }

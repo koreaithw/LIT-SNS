@@ -8,8 +8,8 @@
     </insert>
 
     <select id="alertList" resultType="alertDTO">
-        SELECT ta.USER_NUMBER, ta.TYPE_ALERT, ta.REGISTER_DATE, tl.REVIEW_NUMBER, tu.NICKNAME
-        FROM TBL_ALERT ta, TBL_LIKE tl, TBL_USER tu
-        WHERE ta.ALERT_USER = #{userNumber} AND tl.USER_NUMBER = ta.USER_NUMBER AND tu.USER_NUMBER = ta.USER_NUMBER ORDER BY ta.REGISTER_DATE DESC
+        SELECT ta.ALERT_USER, ta.USER_NUMBER, ta.TYPE_ALERT, ta.REGISTER_DATE, tu.NICKNAME
+        FROM TBL_ALERT ta, TBL_USER tu
+        WHERE ta.ALERT_USER = #{userNumber} AND tu.USER_NUMBER = ta.USER_NUMBER ORDER BY ta.REGISTER_DATE DESC
     </select>
 </mapper>

@@ -206,4 +206,10 @@
     WHERE RN > (#{pageNum} - 1) * #{amount}
     ]]>
     </select>
+
+    <select id="getForAlert" resultType="long">
+        SELECT USER_NUMBER
+        FROM TBL_REVIEW
+        WHERE REVIEW_NUMBER = #{reviewNumber}
+    </select>
 </mapper>

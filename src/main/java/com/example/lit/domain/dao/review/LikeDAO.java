@@ -18,4 +18,6 @@ public class LikeDAO {
     public Long getTotal(Long reviewNumber){ return likeMapper.getTotal(reviewNumber);}
     // 좋아요 확인
     public int checkLike(Long userNumber, Long reviewNumber){return likeMapper.checkLike(userNumber, reviewNumber);}
+    // 알림 좋아요
+    public Long searchLike(Long alertNumber, Long userNumber) { return likeMapper.alertSearch(alertNumber, userNumber); }
 }

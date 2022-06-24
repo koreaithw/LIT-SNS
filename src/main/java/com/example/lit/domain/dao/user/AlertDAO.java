@@ -17,4 +17,5 @@ public class AlertDAO {
 
     public List<AlertDTO> getList(Long userNumber){ return alertMapper.alertList(userNumber); }
 
+
 }

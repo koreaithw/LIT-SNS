@@ -20,6 +20,8 @@ public interface LitUpService {
     public Long getLikeTotal(Long reviewNumber);
     // 좋아요 확인
     public int getCheckLike(Long userNumber, Long reviewNumber);
+    // 알림 좋아요 검색
+    public Long searchLike(Long alertNumber, Long userNumber);
 
 
     //댓글 추가
