@@ -277,3 +277,23 @@ $().ready(function dateInputSet() {
 $("label.togle").on("click", function(){
   $(this).toggleClass("rotate");
 })
+
+$(function userFile() {
+  let userNum = $('input[name=userNumber]').val();
+  $.ajax({
+    url: "/user/getUser/" + userNum,
+    type: "get",
+    contentType: "application/json; charset=utf-8;",
+    success: function (userVO) {
+      setUserCon(userVO);
+    }
+  });
+})
+
+function setUserCon(userVO) {
+  let userSrc = "";
+  userSrc += "/lit/display?fileName=" + userVO.userFileList.uploadPath + "/" + userVO.userFileList.uuid + "_" + name;
+
+  $("#userFile").attr("src", "/lit/display?fileName=" + userVO.userFileList.uploadPath + "/" + userVO.userFileList.uuid + "_" + name);
+  $("#nickName").text(userVO.nickname);
+}
