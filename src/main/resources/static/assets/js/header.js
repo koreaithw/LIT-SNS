@@ -74,9 +74,11 @@ function alterLike(alters) {
     $(alters).each(function (i, alter) {
         let userSrc = "";
         let reSrc = "";
-        str += "<div class='alterCss'>";
-        userSrc +=
-        str += "<a href=''><img width='30px' class='userFile' src='" + "/lit/display?fileName=" + alter.userFileVO.uploadPath + "/" + alter.userFileVO.uuid + "_" + alter.userFileVO.name + "'></a>"
+        str += "<div class='alterCss'>"
+        console.log(alter)
+        console.log(userSrc)
+
+        str += "<a href=''><img width='30px' class='userFile' src='/lit/display?fileName=" + alter.userFileVO.uploadPath + "/" + alter.userFileVO.uuid + "_" + alter.userFileVO.name + "'></a>"
         str += "<div style='margin-bottom: -5px; margin-right: 30px;'><span class='alterspan'>" + alter.nickName
         if(alter.typeAlert == "like") {
             str += "</span>님이 회원님의 사진을 좋아합니다.</div>"
