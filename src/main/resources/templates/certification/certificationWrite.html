@@ -14,8 +14,8 @@
 </head>
 
 <body>
-
-<div class="certificationWriteBackground">
+<div th:fragment="certificationWrite">
+<div class="certificationWriteBackground" >
 <!--    <form class="registerForm" action="/board/register" enctype="multipart/form-data">-->
     <button class="modalCloseButton" type="button" onclick="certificationWriteModalHide()">
         <svg aria-label="닫기" class="fg7vo5n6 lrzqjn8y" color="#ffffff" fill="#ffffff" height="18" role="img"
@@ -270,7 +270,7 @@
         </div>
     </div>
 </div>
-
+</div>
 
 <button class="certificationWriteButton" onclick="certificationWriteModalShow()">인증글 작성하기</button>
 <input type="hidden" id="userNumber" value="">
