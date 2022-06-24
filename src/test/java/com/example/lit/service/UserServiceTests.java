@@ -57,8 +57,4 @@ public class UserServiceTests {
 
     }
 
-    @Test
-    public void folloListTest(){
-        userService.followList(3L);
-    }
 }

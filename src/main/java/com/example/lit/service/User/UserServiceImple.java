@@ -143,9 +143,6 @@ public class UserServiceImple implements UserService{
     }
 
     @Override
-    public List<FollowDTO> followList(Long userNumber) { return followDAO.followList(userNumber); }
-
-    @Override
     public void registerMessageRoom(MessageVO messageVO) {
 
     }

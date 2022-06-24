@@ -28,10 +28,6 @@ public class LitUpServiceTests {
     }
 
     @Test
-
-    public void getLikeListTest() {
-        litUpService.getLikeList(1L);
-    }
     public void getMainListTest(){
         ListDTO listDTO = new ListDTO();
         listDTO.setOrder("new");

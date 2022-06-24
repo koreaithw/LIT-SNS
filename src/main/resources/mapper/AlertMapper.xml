@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lit.mapper.user.AlertMapper">
+    <insert id="insert">
+        INSERT INTO TBL_ALERT
+        (ALERT_NUMBER, ALERT_USER, USER_NUMBER, TYPE_ALERT)
+        VALUES(SEQ_ALERT.NEXTVAL, #{alertUser}, #{userNumber}, #{typeAlert})
+    </insert>
+
+    <select id="alertList" resultType="alertDTO">
+        SELECT ta.USER_NUMBER, ta.TYPE_ALERT, ta.REGISTER_DATE, tl.REVIEW_NUMBER, tu.NICKNAME
+        FROM TBL_ALERT ta, TBL_LIKE tl, TBL_USER tu
+        WHERE ta.ALERT_USER = #{userNumber} AND tl.USER_NUMBER = ta.USER_NUMBER AND tu.USER_NUMBER = ta.USER_NUMBER ORDER BY ta.REGISTER_DATE DESC
+    </select>
+</mapper>

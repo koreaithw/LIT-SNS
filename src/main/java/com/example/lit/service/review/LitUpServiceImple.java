@@ -3,6 +3,7 @@ package com.example.lit.service.review;
 import com.example.lit.domain.dao.project.ProjectDAO;
 import com.example.lit.domain.dao.project.ProjectFileDAO;
 import com.example.lit.domain.dao.review.*;
+import com.example.lit.domain.dao.user.AlertDAO;
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
@@ -10,6 +11,7 @@ import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
+import com.example.lit.domain.vo.user.AlertDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +29,7 @@ public class LitUpServiceImple implements LitUpService{
     private final ReviewFileDAO reviewFileDAO;
     private final ProjectDAO projectDAO;
     private final ProjectFileDAO projectFileDAO;
+    private final AlertDAO alertDAO;
 
     @Override
     public void registerLike(LikeVO likeVO) {
@@ -42,9 +45,6 @@ public class LitUpServiceImple implements LitUpService{
     public Long getLikeTotal(Long reviewNumber) {
         return likeDAO.getTotal(reviewNumber);
     }
-
-    @Override
-    public List<LikeDTO> getLikeList(Long userNumber) { return likeDAO.getList(userNumber);}
 
     @Override
     public int getCheckLike(Long userNumber, Long reviewNumber) {
@@ -205,5 +205,10 @@ public class LitUpServiceImple implements LitUpService{
         }).collect(Collectors.toList());
 
         return result;
+    }
+
+    @Override
+    public List<AlertDTO> getAlertList(Long userNumber){
+        return alertDAO.getList(userNumber);
     }
 }

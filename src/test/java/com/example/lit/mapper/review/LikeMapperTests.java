@@ -20,8 +20,4 @@ public class LikeMapperTests {
         likeMapper.insert(likeVO);
     }
 
-    @Test
-    public void getList() {
-        log.info(likeMapper.getList(1L).toString());
-    }
 }
