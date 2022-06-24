@@ -137,7 +137,14 @@ public class UserServiceImple implements UserService{
 
     @Override
     public void removeFollow(FollowVO followVO) {
+        followDAO.remove(followVO);
 
+        AlertVO alertVO = new AlertVO();
+        alertVO.setAlertUser(followVO.getFollowingNumber());
+        alertVO.setUserNumber(followVO.getFollowerNumber());
+        alertVO.setTypeAlert("follow");
+
+        alertDAO.remove(alertDAO.getAlertNumber(alertVO));
     }
 
     @Override

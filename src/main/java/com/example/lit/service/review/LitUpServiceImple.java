@@ -47,6 +47,13 @@ public class LitUpServiceImple implements LitUpService{
     @Override
     public void removeLike(LikeVO likeVO) {
         likeDAO.remove(likeVO);
+
+        // 좋아요 취소시 알림 삭제
+        AlertVO alertVO = new AlertVO();
+        alertVO.setAlertUser(reviewDAO.getReviewNumberForAlert(likeVO.getReviewNumber()));
+        alertVO.setUserNumber(likeVO.getUserNumber());
+        alertVO.setTypeAlert("like");
+        alertDAO.remove(alertDAO.getAlertNumber(alertVO));
     }
 
     @Override

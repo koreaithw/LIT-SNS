@@ -12,4 +12,15 @@
         FROM TBL_ALERT ta, TBL_USER tu
         WHERE ta.ALERT_USER = #{userNumber} AND tu.USER_NUMBER = ta.USER_NUMBER ORDER BY ta.REGISTER_DATE DESC
     </select>
+
+    <select id="getAlertNumber">
+        SELECT ALERT_NNUMBER
+        FROM TBL_ALERT
+        WHERE ALERT_USER = #{alertNumber} AND USER_NUMBER = #{userNumber} AND TYPE_ALERT = #{typeAlert}
+    </select>
+
+    <delete id="remove">
+        DELETE FROM TBL_ALERT
+        WHERE ALERT_NUMBER = #{alertNumber}
+    </delete>
 </mapper>
