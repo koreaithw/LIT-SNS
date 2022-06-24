@@ -289,7 +289,7 @@
     $('.certificationNextButton > button.completeButton').on("click",function () {
         let reviewContent = $("textarea#reviewContent").val();
         reviewWriteService.reviewRegister({
-                userNumber:1, projectNumber:$projectNumber, content:reviewContent, reviewFileList:filesList
+                userNumber:userNumber, projectNumber:$projectNumber, content:reviewContent, reviewFileList:filesList
             },function (result) {
                 certificationWriteBackground.style.display = 'none';
                 certificationWriteButton.style.display = 'block';
@@ -334,11 +334,11 @@
 
     // 출력할 사진 리스트 받아오기기
     $(".nextNextButton").on("click",function () {
-        $.getJSON("/litUp/profilePic", {userNumber: 1}, function(pic){showUserPic(pic);})
+        $.getJSON("/litUp/profilePic", {userNumber: userNumber}, function(pic){showUserPic(pic);})
     })
 
     $(".nextButton").on("click",function () {
-        $.getJSON("/litUp/getMyProjectList", {userNumber: 1}, function(pic){showMyProject(pic);})
+        $.getJSON("/litUp/getMyProjectList", {userNumber: userNumber}, function(pic){showMyProject(pic);})
     })
 
 

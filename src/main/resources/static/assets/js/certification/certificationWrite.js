@@ -187,7 +187,7 @@ $certificationNextNextButton.on("click", function () {
     }
     twinkle();
     //////////////// 프로젝트 넘버, 유저 넘버 받아오기
-    reviewWriteService.getProject({projectNumber:$projectNumber, userNumber:1},
+    reviewWriteService.getProject({projectNumber:$projectNumber, userNumber:userNumber},
         function (title, content, startDate, nickname) {
             $(".projectInfoDropDownContent span.title").html(title)
             $(".projectInfoDropDownContent span.content").html(content)
