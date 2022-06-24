@@ -224,7 +224,7 @@ public class LitUpRestController {
         log.info("***************************");
 
 //        litUpService.getMainList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
-        listDTO.setAmount(100);
+        listDTO.setAmount(9);
         return litUpService.getMainList(listDTO);
     }
 
