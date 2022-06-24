@@ -87,4 +87,12 @@ public class UserRestController {
         return userService.dbNicknameCheck(nickname);
     }
 
+    @GetMapping("/getUser/{userNumber}")
+    public UserVO getUser(@PathVariable("userNumber") Long userNumber){
+        UserVO userVO = userService.read(userNumber);
+        userVO.setUserFileList(userService.getImg(userVO.getUserNumber()));
+
+        return userVO;
+    }
+
 }
