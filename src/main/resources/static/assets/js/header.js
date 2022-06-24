@@ -92,6 +92,12 @@ function alterLike(likes) {
         str += "<div><span class='alterTime'>" + like.registerDate + "</span></div>"
     });
 
+    str += "<div class='alterCss'>";
+    userSrc += "/lit/display?fileName=" + follow.userFileVO.uploadPath + "/" + follow.userFileVO.uuid + "_" + follow.userFileVO.name
+    str += "<a href=''><img width='30px' class='userFile' src='" + userSrc + "'></a>"
+    str += " <div style='margin-bottom: -5px; margin-right: 30px;'><span class='alterspan'>" + follow.nickName + "</span>님이 회원님을 팔로우 했습니다.</div></div>"
+    str += "<div><span class='alterTime'>" + follow.registerDate + "</span></div>"
+
     if(str != ckLikes) {
         $("#alterLike").append(str);
         ckLikes += str
@@ -126,11 +132,7 @@ function alterfollow(follows){
     let str = "";
     $(follows).each(function (i, follow){
         let userSrc = "";
-        str += "<div class='alterCss'>";
-        userSrc += "/lit/display?fileName=" + follow.userFileVO.uploadPath + "/" + follow.userFileVO.uuid + "_" + follow.userFileVO.name
-        str += "<a href=''><img width='30px' class='userFile' src='" + userSrc + "'></a>"
-        str += " <div style='margin-bottom: -5px; margin-right: 30px;'><span class='alterspan'>" + follow.nickName + "</span>님이 회원님을 팔로우 했습니다.</div></div>"
-        str += "<div><span class='alterTime'>" + follow.registerDate + "</span></div>"
+
     });
     if(str != ckFollows) {
         $("#alterfollow").append(str);
