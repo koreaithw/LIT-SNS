@@ -25,7 +25,16 @@ window.onload = function () {
     $(".menu-box").eq(4).addClass("menu-box__select");
 };
 
-
+$(".search-button").on("click", function(e){
+    e.preventDefault();
+    page = 1;
+    searchReview(page);
+    //검색 버튼 누르면 페이징 번호도 1이 선택 되도록 바꿔줘야함
+    let $changePage = $("a.changePage");
+    if($changePage[0].getAttribute("href") == 1){
+        $($changePage[0]).trigger("click");
+    }
+})
 
 
 
