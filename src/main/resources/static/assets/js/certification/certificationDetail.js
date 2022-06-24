@@ -17,14 +17,13 @@ commentInputArea.addEventListener("input", function (e) {
 })
 
 //프로젝트 모달 창 켜는 버튼
-function projectDetailModalShow(reviewNumber) {
+function projectDetailModalShow(reviewNumber,userNumber) {
+    if(userNumber !=null){
     modal.style.display = 'block';
-    projectDetailButton.style.display = 'none';
+    // projectDetailButton.style.display = 'none';
     pageNum = 1;
-    $reviewNumber= 1
     showList(pageNum);
-
-
+    $reviewNumber = reviewNumber
     // 리뷰 디테일 조회, 리뷰넘버 받아와서 넣어줘야 함
     reviewDetailService.readDetail($reviewNumber,function (nickname, content, registerDate) {
         $(".detailContentProfileName").html(nickname);
@@ -49,6 +48,9 @@ function projectDetailModalShow(reviewNumber) {
             detailContentLikeCancel.style.display = 'none';
         }
     })
+    }else{
+        alert("로그인 후 이용해주세요")
+    }
 }
 
 //프로젝트 모달 창 숨기는 버튼,

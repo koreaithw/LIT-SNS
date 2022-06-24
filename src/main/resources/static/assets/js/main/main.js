@@ -202,10 +202,8 @@ let getLitUpList = function (page) {
             let file = data.reviewFileList;
             if (file[0]) {
                 str +=
-                    "<figure>" +
-                    "<a href=\"" + data.reviewNumber + "\">" +
+                    "<figure id='"+data.reviewNumber+"'>" +
                     "<img alt=\"\" src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">" +
-                    "</a>" +
                     "</figure>";
             }
         })
@@ -225,10 +223,8 @@ let getLitList = function (page) {
             let file = data.projectFile;
             if (file) {
                 str +=
-                    "<figure>" +
-                    "<a href=\"" + data.projectNumber + "\">" +
+                    "<figure id='"+data.projectNumber+"'>" +
                     "<img alt=\"\" src=\"/lit/display?fileName=" + file.uploadPath + "/" + file.uuid + "_" + file.name + "\">" +
-                    "</a>" +
                     "</figure>";
             }
         })
@@ -236,6 +232,8 @@ let getLitList = function (page) {
 
     })
 }
+
+
 
 
 let mainService = (function () {
