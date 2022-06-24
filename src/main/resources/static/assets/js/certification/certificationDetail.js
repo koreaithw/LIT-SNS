@@ -79,7 +79,6 @@ detailContentLikeCancel.addEventListener("click", function (e) {
 //프로필 이미지에 마우스 버튼 올릴 때
 //작은 추가 프로필 정보 모달창 1초 뒤에 생성
 //마우스를 떼면 사라짐
-
 profileImage.forEach(function (item) {
     item.addEventListener("mouseover", function (e) {
         setTimeoutConst = setTimeout(function () {
