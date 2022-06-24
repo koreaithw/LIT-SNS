@@ -31,25 +31,20 @@ public class AlterController {
     public List<LikeDTO> getLikeList(@PathVariable("userNumber") Long userNumber){
         log.info("--------------------------------------------------------");
         List<LikeDTO> likeDTOS = litUpService.getLikeList(userNumber);
-
+        List<FollowDTO> followDTOS = userService.followList(userNumber);
 
         for(LikeDTO likeDTO : likeDTOS) {
             List<ReviewFileVO> reviewFileVOS = litUpService.getImgs(likeDTO.getReviewNumber());
             likeDTO.setReviewFileVO(reviewFileVOS.get(0));
             likeDTO.setUserFileVO(userService.getImg(likeDTO.getUserNumber()));
         }
+
+        for (FollowDTO followDTO : followDTOS){
+            followDTO.setUserFileVO(userService.getImg(followDTO.getFollowingNumber()));
+        }
+
         log.info(likeDTOS.toString());
         return likeDTOS;
     }
 
-    @GetMapping("/follow/{userNumber}")
-    public List<FollowDTO> followDTOList(@PathVariable("userNumber") Long userNumber){
-       log.info("--------------------------------------------");
-       List<FollowDTO> followDTOS = userService.followList(userNumber);
-       for (FollowDTO followDTO : followDTOS){
-           followDTO.setUserFileVO(userService.getImg(followDTO.getFollowingNumber()));
-       }
-       log.info(followDTOS.toString());
-       return followDTOS;
-    }
 }
