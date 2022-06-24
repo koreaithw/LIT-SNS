@@ -24,6 +24,8 @@ body{
     height: 100%;
     overflow: hidden;
     background-size : cover;
+    position: absolute;
+    z-index: 10;
 }
 
 .modalCloseButton{
