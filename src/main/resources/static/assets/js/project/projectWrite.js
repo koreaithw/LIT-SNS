@@ -291,9 +291,7 @@ $(function userFile() {
 })
 
 function setUserCon(userVO) {
-  let userSrc = "";
-  userSrc += "/lit/display?fileName=" + userVO.userFileList.uploadPath + "/" + userVO.userFileList.uuid + "_" + name;
 
-  $("#userFile").attr("src", "/lit/display?fileName=" + userVO.userFileList.uploadPath + "/" + userVO.userFileList.uuid + "_" + name);
+  $("#userFile").attr("src", "/lit/display?fileName=" + userVO.userFileList.uploadPath + "/" + userVO.userFileList.uuid + "_" + userVO.userFileList.name);
   $("#nickName").text(userVO.nickname);
 }
