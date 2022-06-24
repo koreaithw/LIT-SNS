@@ -61,4 +61,9 @@ public class UserServiceTests {
     public void folloListTest(){
         userService.followList(3L);
     }
+
+    @Test
+    public void getMedalTest(){
+        userService.getMedal(2L).forEach(log::info);
+    }
 }
