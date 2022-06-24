@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="/assets/css/mypage/mypage.css"/>
     <link rel="stylesheet" href="/assets/css/header.css" />
     <link rel="stylesheet" href="/assets/css/footer.css" />
+    <link rel="stylesheet" href="/assets/css/certification/certificationWrite.css">
+    <link rel="stylesheet" href="/assets/css/certification/fileLoad.css">
 </head>
 
 <body>
@@ -35,7 +37,7 @@
                     <!-- <img class="medalImg" src="/src/main/resources/static/images/mypage/medal.png" onclick="medalModal()" id="medalImg"> -->
                     <img class="medalImg" src="/images/mypage/medal.png" id="medalImg">
                     <div class="editProfile">
-                        <div class="editProfileInner"><a class="profileA">프로필 편집</a></div>
+                        <div class="editProfileInner"><a href="/user/editInfo" class="profileA">프로필 편집</a></div>
                     </div>
                 </div>
                 <ul class="mypageUl">
@@ -168,7 +170,7 @@
                                                 <span class="followerSpann">
                                                     <a style=" text-decoration-line: none;"
                                                        href="" role="link" tabindex="0">
-                                                        <input type="hidden" th:value="*{userNumber}" id="removeFollower"/>
+                                                        <input type="hidden" th:value="*{userNumber}" class="removeFollower"/>
                                                         <span class="follower7" th:text="*{nickname}"></span>
                                                     </a>
                                                 </span>
@@ -404,17 +406,21 @@
 
     let $followerRemoveBtn = $('.followerBtnn');
     let mypageUser = [[${userNumber}]]; // 팔로워 모달에서 삭제할때 사용 (팔로잉 넘버)
+    let $pageNum = 1;
 
     /* ########### $followerUser -> 원하는 번호가 삭제가 안됌 ################ */
-    let $followerUser = $('#removeFollower').val(); // 팔로워 모달에서 삭제할때 사용 (팔로워 넘버)
+    let $followerUser = $('#removeFollower').eq(0).val(); // 팔로워 모달에서 삭제할때 사용 (팔로워 넘버)
     let $test = 3;
+
+    console.log($followerUser);
 
     //모달 - 팔로워 삭제
     $followerRemoveBtn.on("click", function () {
         // console.log($followerNumber);
+        $(this).parent().parent().parent().parent().parent().parent().remove();
         myPageAjaxService.removeFollower($test, mypageUser, function (result) {
             alert(result);
-            showList();
+            if(result){}
         });
     });
 

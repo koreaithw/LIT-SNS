@@ -23,10 +23,7 @@ function projectDetailModalShow(reviewNumber) {
     pageNum = 1;
     $reviewNumber= 1
     showList(pageNum);
-    // 좋아요 총 갯수
-    reviewDetailService.getLikeTotal($reviewNumber,function (result) {
-        $("#likeCount").html(result);
-    })
+
 
     // 리뷰 디테일 조회, 리뷰넘버 받아와서 넣어줘야 함
     reviewDetailService.readDetail($reviewNumber,function (nickname, content, registerDate) {
@@ -35,6 +32,11 @@ function projectDetailModalShow(reviewNumber) {
         $(".detailContentWriteComment").html(content);
         $(".detailContentRegisterDate").html(reviewDetailService.getReplyDate(registerDate));
         $(".detailContentFooterWirtesInnerDate").html(reviewDetailService.getReplyDate(registerDate));
+    })
+
+    // 좋아요 총 갯수
+    reviewDetailService.getLikeTotal($reviewNumber,function (result) {
+        $("#likeCount").html(result);
     })
 
     // 좋아요 여부 확인
@@ -77,7 +79,6 @@ detailContentLikeCancel.addEventListener("click", function (e) {
 //프로필 이미지에 마우스 버튼 올릴 때
 //작은 추가 프로필 정보 모달창 1초 뒤에 생성
 //마우스를 떼면 사라짐
-
 profileImage.forEach(function (item) {
     item.addEventListener("mouseover", function (e) {
         setTimeoutConst = setTimeout(function () {

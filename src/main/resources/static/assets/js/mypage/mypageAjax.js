@@ -2,6 +2,7 @@
 
 let myPageAjaxService = (function () {
 
+    //모달 - 팔로우 삭제
     function removeFollower(followerNumber, followingNumber, callback) {
         console.log("removeFollower..........");
         $.ajax({

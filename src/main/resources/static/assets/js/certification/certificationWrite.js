@@ -31,20 +31,26 @@ let $clickFlag
 
 //프로젝트 모달 창 켜는 버튼
 function certificationWriteModalShow() {
-    certificationWriteBackground.style.display = 'block';
-    certificationWriteButton.style.display = 'none';
-    $('body').css("overflow", "hidden");
+    if(userNumber != null) {
+        certificationWriteBackground.style.display = 'block';
+        // certificationWriteButton.style.display = 'none';
+        $('body').css("overflow", "hidden");
+    }else{
+        alert("로그인 후 이용해 주세요")
+    }
 }
 
 //프로젝트 모달 창 숨기는 버튼,
 //이미지 슬라이드와 버튼의 active 클래스를 다시 초기화해줌
+
 function certificationWriteModalHide() {
     $deleteBackground.css("display", "block");
+    $deleteBackground.css("z-index", "11");
 
     $('.deleteModalButton').on("click",function(){
         if($(this).val() == 'y'){
             certificationWriteBackground.style.display = 'none';
-            certificationWriteButton.style.display = 'block';
+            // certificationWriteButton.style.display = 'block';
 
             $('.certificationImages ul li:first-child').addClass('active');
             $('.certificationImages ul li:first-child').siblings('.active').removeClass('active');
@@ -185,7 +191,7 @@ $certificationNextNextButton.on("click", function () {
     }
     twinkle();
     //////////////// 프로젝트 넘버, 유저 넘버 받아오기
-    reviewWriteService.getProject({projectNumber:$projectNumber, userNumber:1},
+    reviewWriteService.getProject({projectNumber:$projectNumber, userNumber:userNumber},
         function (title, content, startDate, nickname) {
             $(".projectInfoDropDownContent span.title").html(title)
             $(".projectInfoDropDownContent span.content").html(content)

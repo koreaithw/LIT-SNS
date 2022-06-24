@@ -7,6 +7,9 @@ window.onload = function () {
   $(".menu-box").eq(3).addClass("menu-box__select");
 };
 
+$(document).ready(function(){
+  searchProject(1);
+})
 
 
 // ========================================================

@@ -26,26 +26,43 @@ public class UserController {
 
     //이동
     @GetMapping("/changePw")
-    public String goChangePwPage(){
+    public String goChangePwPage(Long userNumber, Model model){
         log.info("******************************");
         log.info("changeInfoController : changePw");
         log.info("******************************");
+        userNumber = 2L; // 임시
+
+        UserVO userVO = userService.getChangePwInfo(userNumber);
+        model.addAttribute("userNumber", userNumber);
+        model.addAttribute("nickName", userVO.getNickname());
+        log.info(userVO.getUserNumber() + "########################");
+        log.info(userVO.getNickname() + "########################");
         return "/changeinfo/changePw";
     }
     //이동
     @GetMapping("/editInfo")
-    public String goEditInfoPage(){
+    public String goEditInfoPage(Long userNumber, Model model){
         log.info("******************************");
         log.info("changeInfoController : editInfo");
         log.info("******************************");
+        userNumber = 2L;
+
+        UserVO userVO = userService.read(userNumber);
+        model.addAttribute("userVO", userVO);
+
         return "/changeinfo/editInfo";
     }
     //이동
     @GetMapping("/withdraw")
-    public String goWithdrawPage(){
+    public String goWithdrawPage(Long userNumber, Model model){
         log.info("******************************");
         log.info("changeInfoController : withdraw");
         log.info("******************************");
+        userNumber = 2L; // 임시
+
+        UserVO userVO = userService.getChangePwInfo(userNumber);
+        model.addAttribute("userNumber", userNumber);
+        model.addAttribute("nickName", userVO.getNickname());
         return "/changeinfo/withdraw";
     }
     //이동
@@ -71,11 +88,6 @@ public class UserController {
         return null;
     }
 
-    //회원 탈퇴
-    @DeleteMapping("/withdraw")
-    public String withdraw(String pw){
-        return null;
-    }
 
     //가입
     @PostMapping("/join")
@@ -135,6 +147,13 @@ public class UserController {
         log.info("###################  following모달정보     " + followingVO);
 
         return "/mypage/mypage";
+    }
+
+    @PostMapping("/updateEditInfo")
+    public String updateEditInfo(UserVO userVO, Model model){
+        userVO.setUserNumber(2L);
+        userService.modify(userVO);
+        return goEditInfoPage(2L,model);
     }
 
 }

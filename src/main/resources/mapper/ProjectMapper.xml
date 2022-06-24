@@ -156,7 +156,7 @@
                 FROM TBL_PROJECT
                 WHERE STATUS = 1 --메인은 진행중인 것만 띄우기
                 <if test="category != null and category != ''">
-                    AND p.CATEGORY = #{category}
+                    AND CATEGORY = #{category}
                 </if>
                 <if test="order != null and order != ''">
                     <choose>

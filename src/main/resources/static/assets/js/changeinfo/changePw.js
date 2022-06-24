@@ -1,13 +1,11 @@
-const oldPw = $('#cppOldPassword');
-const newPw = $('#cppNewPassword');
-const newPwCk = $('#cppCheckPassword');
-
+let $oldPw = $('#cppOldPassword');
+let $newPw = $('#cppNewPassword');
+let $newPwCk = $('#cppCheckPassword');
 
 // 비밀번호 변경 버튼 활성화/비활성화
-function buttonOn(){
+function buttonOn(oldCk){
 
-    var oldCk = ckeckOldPw();
-    var newCk = nPwChenk();
+    let newCk = $newPw.val() == $newPwCk.val();
 
     if(oldCk && newCk){
         $('#subBtn').attr("class", "buttonOn");
@@ -21,37 +19,57 @@ $('#subBtn').on("click", function(){
 });
 
 // 새 비밀번호 확인 유효성 검사
-function nPwChenk(){
 
-    if(newPw.val() != newPwCk.val()){ // 새 비밀번호 / 비밀번호 확인
+$newPw.on("keyup", function () {
+    if($newPw.val() != $newPwCk.val()){ // 새 비밀번호 / 비밀번호 확인
         $ ('._checkArea3').html('비밀번호가 일치하지 않습니다.');
         $('._checkArea3').css('color', 'red');
-        return false;
-    } else if(newPw.val().length <= 0 && newPwCk.val().length <= 0) {
+    } else if($newPw.val().length <= 0 && $newPwCk.val().length <= 0) {
         $ ('._checkArea3').html(' ');
-        return false;
     } else{
         $('._checkArea3').html('비밀번호가 일치합니다.');
         $('._checkArea3').css('color', 'black');
-        return true;
+        if($oldPw.val().length > 0) {
+            buttonOn(true);
+        }
     }
-}
+});
 
-function ckeckOldPw() {
-    if(oldPw.val() != "aaaaa"){ // 현재 비밀번호 유효성 검사
-        $ ('._checkArea1').html('비밀번호가 일치하지 않습니다.');
-        $('._checkArea1').css('color', 'red');
-        return false;
-    } else if(oldPw.val().length <= 0){
-        $('._checkArea1').html(' ');
-        return false;
+$newPwCk.on("keyup", function () {
+    if($newPw.val() != $newPwCk.val()){ // 새 비밀번호 / 비밀번호 확인
+        $ ('._checkArea3').html('비밀번호가 일치하지 않습니다.');
+        $('._checkArea3').css('color', 'red');
+    } else if($newPw.val().length <= 0 && $newPwCk.val().length <= 0) {
+        $ ('._checkArea3').html(' ');
     } else{
+        $('._checkArea3').html('비밀번호가 일치합니다.');
+        $('._checkArea3').css('color', 'black');
+        if($oldPw.val().length > 0) {
+            buttonOn(true);
+        }
+    }
+});
+
+
+function ckeckOldPw(result) {
+
+    if($oldPw.val().length <= 0){
         $('._checkArea1').html(' ');
+    }
+
+    if(!result){ // 현재 비밀번호 유효성 검사
+        $ ('._checkArea1').html('이전 비밀번호와 일치하지 않습니다.');
+        $('._checkArea1').css('color', 'red');
+            buttonOn(false);
+    } else{
+        $('._checkArea1').html('이전 비밀번호와 일치합니다.');
         $('._checkArea1').css('color', 'black');
-        return true;
+        if($newPw.val().length > 0) {
+            buttonOn(true);
+        }
     }
 }
 
-oldPw.keyup(buttonOn);
-newPw.keyup(buttonOn);
-newPwCk.keyup(buttonOn);
+// oldPw.keyup(buttonOn);
+// $newPw.keyup(buttonOn);
+// $newPwCk.keyup(buttonOn);

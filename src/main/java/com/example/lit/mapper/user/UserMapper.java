@@ -25,7 +25,7 @@ public interface UserMapper {
     //내 정보 수정
     public void update(UserVO userVO);
     //비밀 번호 변경
-    public void updatePw(@Param("userVO") UserVO userVO, @Param("newPassword") String newPassword);
+    public void updatePw(Long userNumber, String newPassword);
     // 대표 메달 설정
     public void updateMedal(UserVO userVO);
 
@@ -54,5 +54,6 @@ public interface UserMapper {
     public List<UserVO> getFollowingList(Long userNumber);
     //마이페이지 팔로우 삭제
     public void deleteFollower(Long followerNumber, Long followingNumber);
-
+    //회원정보수정페이지 비번 조회
+    public int oldPasswordCheck(String password, Long userNumber);
 }

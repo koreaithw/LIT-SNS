@@ -29,7 +29,7 @@ public class UserDAO {
     //내 정보 수정
     public void modify(UserVO userVO){ userMapper.update(userVO); }
     //비밀 번호 변경
-    public void modifyPw(UserVO userVO, String newPassword){ userMapper.updatePw(userVO, newPassword); }
+    public void modifyPw(Long userNumber, String newPassword){ userMapper.updatePw(userNumber, newPassword); }
     // 대표 메달 설정
     public void modifyMedal(UserVO userVO){ userMapper.updateMedal(userVO); }
 
@@ -58,5 +58,9 @@ public class UserDAO {
     public List<UserVO> ModalFollowing(Long userNumber) { return userMapper.getFollowingList(userNumber); }
     //마이페이지 팔로우 삭제
     public void removeFollower(Long followerNumber, Long followingNumber) { userMapper.deleteFollower(followerNumber, followingNumber); }
+    //회원정보수정페이지 비번 조회
+    public boolean dbOldPwCheck(String password, Long userNumber) { return userMapper.oldPasswordCheck(password, userNumber) == 1; }
+    //정보수정페이지 해당 유저 정보 띄워주기
+    public UserVO getChangePwInfo(Long userNumber) { return userMapper.getUser(userNumber); }
 
 }

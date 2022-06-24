@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/assets/css/header.css" />
     <link rel="stylesheet" href="/assets/css/footer.css" />
     <link rel="stylesheet" href="/assets/css/default.css" />
+    <link rel="stylesheet" href="/assets/css/certification/certificationWrite.css">
+    <link rel="stylesheet" href="/assets/css/certification/fileLoad.css">
     <!-- 경로 잡아야함 -->
 </head>
 
@@ -20,12 +22,12 @@
     <main>
         <div class="_changepw_main_wrapper">
             <ul class="mainUl">
-                <li class="mainLi"><a class="mainA" href="/changeinfo/editInfo"
+                <li class="mainLi"><a class="mainA" href="/user/editInfo"
                         tabindex="0">프로필 편집</a></li>
-                <li class="mainLi"><a class="mainA" href="/changeinfo/changePw"
+                <li class="mainLi"><a class="mainA" href="/user/changePw"
                         tabindex="0">비밀번호 변경</a>
                 </li>
-                <li class="mainLi"><a class="mainA" href="/changeinfo/withdraw"
+                <li class="mainLi"><a class="mainA" href="/user/withdraw"
                         tabindex="0">회원 탈퇴</a>
                 </li>
 
@@ -39,7 +41,7 @@
                         </div>
                     </div>
                     <div class="_profile_nickname">
-                        <h1 class="_nickname">xldms.dl</h1>
+                        <h1 class="_nickname" th:text="${nickName}"></h1>
                     </div>
                 </div>
                 <form class="_changepw_form">
@@ -48,7 +50,7 @@
                             <label for="cppOldPassword">이전 비밀번호</label>
                         </div>
                         <div class="_input_wrapper">
-                            <input autocomplete="current-password" class="cppOldPassword" id="cppOldPassword"
+                            <input class="cppOldPassword" id="cppOldPassword"
                                 name="cppOldPassword" required="" spellcheck="true" type="password" value=""
                                 style="padding-right: 140px;">
                         </div>
@@ -62,7 +64,7 @@
                             <label for="cppNewPassword">새 비밀번호</label>
                         </div>
                         <div class="_input_wrapper">
-                            <input autocomplete="current-password" class="cppNewPassword" id="cppNewPassword"
+                            <input class="cppNewPassword" id="cppNewPassword"
                                 name="cppNewPassword" required="" spellcheck="true" type="password" value=""
                                 style="padding-right: 140px;">
                         </div>
@@ -74,7 +76,7 @@
                             <label for="cppCheckPassword">새 비밀번호 확인</label>
                         </div>
                         <div class="_input_wrapper">
-                            <input autocomplete="current-password" class="cppCheckPassword" id="cppCheckPassword"
+                            <input class="cppCheckPassword" id="cppCheckPassword"
                                 name="cppCheckPassword" required="" spellcheck="true" type="password" value=""
                                 style="padding-right: 140px;">
                         </div>
@@ -95,5 +97,38 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="/assets/js/changeinfo/changePw.js"></script>
+<script src="/assets/js/changeinfo/changeInfoAjax.js"></script>
+<script th:inline="javascript">
+    let userNumber = 2; // 임시
 
+    // 비밀번호 유효성 검사 (db조회)
+    $('#cppOldPassword').on("keyup", function () {
+        let $password = $(this).val();
+
+        console.log($('#cppOldPassword'));
+
+        changeInfoAjax.checkOldPw({
+            userNumber : userNumber,
+            password : $password
+        }, function (result) {
+            console.log(result);
+            ckeckOldPw(result);
+        });
+    });
+
+    // 비밀번호 변경
+    $("#subBtn").on("click", function () {
+        let $newPassword = $('#cppCheckPassword').val();
+
+        changeInfoAjax.modifyPw({
+            userNumber: userNumber,
+            newPassword: $newPassword
+        });
+
+        location.reload();
+
+    });
+
+
+</script>
 </html>
