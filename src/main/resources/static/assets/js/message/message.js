@@ -1,5 +1,3 @@
-let $contentIn = $('.content > div');
-
 const amount = 20;
 
 //세션에서 받아올 유저넘버
@@ -19,12 +17,11 @@ function keyEnter(key) {
             content: content
         });
 
-        $('.dmWrap').find("#" + receiveNickname).find('.content').scrollTop($('.dmWrap').find("#" + receiveNickname).find('.content').height() + $(window).height());
         $('.messageWrite').val("");
-        $('.dmList > figure > a[id="' + receiveUserNumber + '"]').find('.dmData').find('.recentMessage').text(content);
     }else{
         return;
     }
+    $('.dmWrap').find("#" + receiveNickname).find('.content').scrollTop($('.dmWrap').find("#" + receiveNickname).find('.content').height() + $(window).height());
     console.log("전송")
     //웹소켓 쪽 전송
     send(roomId, nickname, content);
@@ -328,7 +325,7 @@ function startChat(receiveUserNumber, nick){
             '<input type="hidden" id="' + receiveUserNumber + '" class="' + roomId + '">' +
             '</div>' +
             '</div>' +
-            '<div class="content">' +
+            '<div class="content" onscroll="getMoreMessage(this)">' +
             '<div class="' +
             result[0].total.toString() +
             '">';
@@ -423,7 +420,7 @@ function goMessage(e){
             '<input type="hidden" id="' + receiveUserNumber + '" class="' + roomId + '">' +
             '</div>' +
             '</div>' +
-            '<div class="content">' +
+            '<div class="content" onscroll="getMoreMessage(this)">' +
             '<div class="' +
             result[0].total.toString() +
             '">';

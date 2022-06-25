@@ -152,16 +152,11 @@
     }
 
     function onMessage(e){
-        let data = e.data;
+        let data = JSON.parse(e.data);
+        let $messageBoard = $('.contentTop').find('.'+data.chatRoomId).closest('.contentTop').siblings('.content').children(0)
         console.log(data)
-        console.log(e)
-        let arr = data.replace("{","").replace("}","").split(":");
 
-        for (let i = 0; i < arr.length ; i++) {
-            console.log('arr[' + i + ']:' + arr[i]);
-        }
-
-        if(arr[4]){
+        if(data.message){
             //메세지 두개 비교해줄 조건
             if(true) {
                 let str = "<div class=\"dmStyle1\">" +
@@ -169,23 +164,24 @@
                     "<img src=\"\" alt=\"\">" +
                     "</div>" +
                     "<div class=\"text\">" +
-                    arr[4].replace(/\"/gi, "") +
+                    data.message +
                     "</div>" +
                     "</div>"
-                $contentIn.append(str);
+                $messageBoard.append(str);
             }else{
                 let str = "<div class=\"dmStyle2\">" +
                     "<div class=\"dmImg\">" +
                     "<img src='/images/project/domImg/indi01.webp' alt=''>" +
                     "</div>" +
                     "<div class=\"text\">" +
-                    arr[4].replace(/\"/gi, "") +
+                    data.message +
                     "</div>" +
                     "</div>";
-                $contentIn.append(str);
+                $messageBoard.append(str);
             }
+            $('.dmList > figure > a').find('.dmData').find('#'+data.chatRoomId).siblings('.recentMessage').text(data.message);
         }
-        $('.content').scrollTop($contentIn.height());
+        $messageBoard.closest('.content').scrollTop($messageBoard.closest('.content').height() + $(window).height());
     }
 
     function onClose(){
