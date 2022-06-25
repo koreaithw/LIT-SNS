@@ -31,6 +31,9 @@
                 <if test="category != 'all'">
                     AND CATEGORY = #{category}
                 </if>
+                <if test="projectNumber != null and projectNumber != ''">
+                    AND PROJECT_NUMBER = #{projectNumber}
+                </if>
                 <if test="order != null and order != ''">
                     <choose>
                         <when test="order == 'popular'">
@@ -205,6 +208,10 @@
         <![CDATA[
     WHERE RN > (#{pageNum} - 1) * #{amount}
     ]]>
+    </select>
+
+    <select id="reviewTotal" resultType="long">
+        SELECT COUNT(*) FROM TBL_REVIEW WHERE PROJECT_NUMBER = #{projectNumber}
     </select>
 
     <select id="getForAlert" resultType="long">
