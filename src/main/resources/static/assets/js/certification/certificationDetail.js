@@ -57,7 +57,7 @@ function projectDetailModalShow(reviewNumber,userNumber) {
 //이미지 슬라이드와 버튼의 active 클래스를 다시 초기화해줌
 function projectDetailModalHide() {
     modal.style.display = 'none';
-    projectDetailButton.style.display = 'block';
+    // projectDetailButton.style.display = 'block';
 
     $('.innerImageWrapper ul li:first-child').addClass('active');
     $('.innerImageWrapper ul li:first-child').siblings('.active').removeClass('active');

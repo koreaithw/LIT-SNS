@@ -1,3 +1,26 @@
+function checkLoginLogout(userNumber) {
+    let str =""
+    console.log(userNumber)
+    if(userNumber){
+        str += " <a href=\"/user/logout\">" +
+            "<div class=\"_dropdown_loginout\">" +
+            "<div class=\"_dropdown_loginout_content\">로그아웃</div>" +
+            "</div>" +
+            "</a>"
+
+    }else{
+        str += " <a href=\"/user/login\">" +
+            "<div class=\"_dropdown_loginout\">" +
+            "<div class=\"_dropdown_loginout_content\">로그인</div>" +
+            "</div>" +
+            "</a>"
+    }
+
+    $("div.login_inOrOut").html(str)
+}
+
+
+
 function headerAction(){
 
         if( $("._dropdown_wrapper").css("display") == 'none'){
@@ -5,8 +28,10 @@ function headerAction(){
         }else{
             $("._dropdown_wrapper").hide();
         }
+
+
 }
-    // //프로필 아이콘 클릭시 드롭다운 활성화
+    // // //프로필 아이콘 클릭시 드롭다운 활성화
     // $("._icon_profile").on("click",function(){
     //     console.log("A")
     //     if( $("._dropdown_wrapper").css("display") == 'none'){
@@ -15,7 +40,7 @@ function headerAction(){
     //         $("._dropdown_wrapper").hide();
     //     }
     //     })
-        
+    //
         // 검색 버튼 클릭시 X버튼 노출
         $("._search_wrapper").on("click",function(){
             $("._search_cancle").show()

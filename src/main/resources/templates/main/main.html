@@ -230,8 +230,9 @@
 
     $(".a").on("click","figure",function () {
         $reviewNumber=$(this).attr("id")
+        $fileWriter = $(this).children("input").attr("id")
         projectDetailModalShow($reviewNumber, userNumber)
-        $.getJSON("/litUp/profilePic", {userNumber: 1}, function(pic){showUserPic(pic);})
+        $.getJSON("/litUp/profilePic", {userNumber: $fileWriter}, function(pic){showUserPic(pic);})
         $.getJSON("/litUp/reviewPic", {reviewNumber: $reviewNumber}, function(pic){showReviewPic(pic);})
     })
 
@@ -484,6 +485,7 @@
         $("li#a0").addClass("active");
         $("div#b0").addClass("active");
     }
+
 
 </script>
 
