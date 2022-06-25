@@ -17,7 +17,7 @@ public interface ProjectMapper {
     //    프로젝트 등록
     public void insert(ProjectVO projectVO);
     //    프로젝트 상세보기
-    public ProjectVO get(Long projectNumber);
+    public ProjectDTO get(Long projectNumber);
     //    프로젝트 상세 가져오기(리뷰작성용)
     public ProjectDTO getForReview(@Param("projectNumber") Long projectNumber, @Param("userNumber") Long userNumber);
     //    프로젝트 삭제 ( 관리자)

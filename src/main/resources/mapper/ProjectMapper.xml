@@ -116,7 +116,7 @@
         ]]>
     </select>
 
-    <select id="get" resultType="projectVO">
+    <select id="get" resultType="projectDTO">
         SELECT PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE
         FROM TBL_PROJECT WHERE PROJECT_NUMBER = #{projectNumber}
     </select>

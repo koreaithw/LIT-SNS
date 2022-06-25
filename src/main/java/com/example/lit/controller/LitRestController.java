@@ -1,6 +1,7 @@
 package com.example.lit.controller;
 
 import com.example.lit.domain.vo.ListDTO;
+import com.example.lit.domain.vo.project.ParticipationVO;
 import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.service.project.LitService;
@@ -85,6 +86,15 @@ public class LitRestController {
         log.info("***************************");
         litService.getMainList(listDTO).stream().map(ProjectDTO::toString).forEach(log::info);
         return null;
+    }
+
+    @PostMapping("/challenge")  // /lit
+    public void challenge(@RequestBody ParticipationVO participationVO){
+        log.info("***************************");
+        log.info("challenge  : " + participationVO.getProjectNumber());
+        log.info("challenge  : " + participationVO.getUserNumber());
+        log.info("***************************");
+        litService.join( participationVO );
     }
 
 }

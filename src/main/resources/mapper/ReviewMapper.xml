@@ -206,4 +206,9 @@
     WHERE RN > (#{pageNum} - 1) * #{amount}
     ]]>
     </select>
+
+    <select id="reviewTotal" resultType="long">
+        SELECT COUNT(*) FROM TBL_REVIEW WHERE PROJECT_NUMBER = #{projectNumber}
+    </select>
+
 </mapper>

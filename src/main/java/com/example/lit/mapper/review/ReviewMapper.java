@@ -35,4 +35,9 @@ public interface ReviewMapper {
     public Long getReviewChart(String date);
     // 리뷰 목록 가져오기2(테스트)
     public List<ReviewDTO> getMainList(ListDTO listDTO);
+
+    // project 리뷰 토탈
+    public Long reviewTotal(Long projectNumber);
+
+
 }
