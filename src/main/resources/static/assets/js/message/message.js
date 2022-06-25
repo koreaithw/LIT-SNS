@@ -3,50 +3,23 @@ let $contentIn = $('.content > div');
 const amount = 20;
 
 //세션에서 받아올 유저넘버
-const userNumber = 1;
+userNumber = 1;
 
-//메세지 인풋 창에서 엔터키입력
-$('.messageWrite').on('keyup', function (key) {
-    let receiveUserNumber = $('.contentTop').find('input[type="hidden"]').attr('id'); // 채팅방 들어올 때 받아오기
-    let roomId = $('.contentTop').find('input[type="hidden"]').attr('class'); // 채팅방 들어올 때 받아오기
-    let content = $('.messageWrite').val()
+function keyEnter(key) {
+    let receiveNickname = $(key).closest('.textInput').siblings('.contentTop').find('span').html();
+    let receiveUserNumber = $(key).closest('.textInput').siblings('.contentTop').find('input[type="hidden"]').attr('id'); // 채팅방 들어올 때 받아오기
+    let roomId = $('.dmWrap').find("#" + receiveNickname).find('.contentTop').find('input[type="hidden"]').attr('class');
+    let content = $(key).val()
 
-
-    /////////////////////webSocket 메세지 추가 부분 연결 필요
-
-    if (key.keyCode == 13 && content != "") {
-
+    if (this.event.keyCode == 13 && content != "") {
         messageService.send({
             sendUserNumber: userNumber,
             receiveUserNumber: receiveUserNumber,
             roomId: roomId,
             content: content
-            // });
-
-            // 하나씩 뿌려줄 때
-        }, function (result) {
-            // let message = "<div class=\"dmStyle1\">" +
-            //     "<div class=\"dmImg\">" +
-            //     "<img src=\"\" alt=\"\">" +
-            //     "</div>" +
-            //     "<div class=\"text\">" +
-            //     result.content +
-            //     "</div>" +
-            //     "</div>"
-            // $contentIn.append(message);
         });
 
-        // let message = "<div class=\"dmStyle1\">" +
-        //     "<div class=\"dmImg\">" +
-        //     "<img src=\"\" alt=\"\">" +
-        //     "</div>" +
-        //     "<div class=\"text\">" +
-        //     $('.messageWrite').val() +
-        //     "</div>" +
-        //     "</div>";
-        // $contentIn.append(message);
-
-        $('.content').scrollTop($contentIn.height() + $(window).height());
+        $('.dmWrap').find("#" + receiveNickname).find('.content').scrollTop($('.dmWrap').find("#" + receiveNickname).find('.content').height() + $(window).height());
         $('.messageWrite').val("");
         $('.dmList > figure > a[id="' + receiveUserNumber + '"]').find('.dmData').find('.recentMessage').text(content);
     }else{
@@ -55,7 +28,8 @@ $('.messageWrite').on('keyup', function (key) {
     console.log("전송")
     //웹소켓 쪽 전송
     send(roomId, nickname, content);
-});
+}
+
 
 // 유저 리스트 모달창
 function dmSubmit() {
@@ -97,111 +71,50 @@ $("a#modalClose").on("click", function (e) {
 $(".dmBtn > a").on("click", function (e) {
     e.preventDefault();
 
-    // 처음 클릭이면
-    if (!$(".dmBox").hasClass("on")) {
-        $(".firstBox").removeClass("on");
-        $(".dmBox").addClass("on");
-    }
-    $("#modal1").removeClass("on");
-    $contentIn.empty();
-
-    ///////////////////////webSocket 방 열어 주는 부분 추가 해야 함
-    ///////////////////////////////////////////////////////////
-
     let receiveUserNumber = $(this).attr('id');
     let roomId = $(this).find("input[type='hidden']").attr('id');
-    receiveNickname = $(this).find('.dmData').children(0).html();
-    let pageNum = $contentIn.children().length / amount || 1;
+    let receiveNickname = $(this).find('.dmData').children(0).html();
+    // let pageNum = Math.ceil($('.dmWrap').find("#" + receiveNickname).find('.content').children(0).children(0).length/amount) + 1 || 1;
 
-    $('.contentTop').children(1).find('span').text(receiveNickname + '님');
-    $('.contentTop').find('input[type="hidden"]').attr('id',receiveUserNumber);
-    $('.contentTop').find('input[type="hidden"]').attr('class',roomId);
+    if (!$('.dmWrap').find("#" + receiveNickname).hasClass("on")) {
+        $(".firstBox").removeClass("on");
+        $('.dmWrap').find("#" + receiveNickname).siblings('.dmBox').removeClass("on");
+        $('.dmWrap').find("#" + receiveNickname).addClass("on");
+    }
+    $("#modal1").removeClass("on");
+
 
     messageService.getMessageList({
         sendUserNumber: userNumber,
         receiveUserNumber: receiveUserNumber,
-        pageNum : pageNum
+        pageNum : 1
     },function(result){
-        let message = "";
-
-        //채팅에 맞게 순서 반대로 뿌려줌, 기본 20개
-        for (let i = result.length - 1; i >= 0; i--) {
-            if (result[i].sendUserNumber == userNumber){
-                message += "<div class=\"dmStyle1\">" +
-                    "<div class=\"dmImg\">" +
-                    "<img src=\"\" alt=\"\">" +
-                    "</div>" +
-                    "<div class=\"text\">" +
-                    result[i].content +
-                    "</div>" +
-                    "</div>";
-            }else{
-                message += "<div class=\"dmStyle2\">" +
-                    "<div class=\"dmImg\">" +
-                    "<img src='/images/project/domImg/indi01.webp' alt=''>" +
-                    "</div>" +
-                    "<div class=\"text\">" +
-                    result[i].content +
-                    "</div>" +
-                    "</div>";
-            }
-
-        }
-
-        // $.each(result, function(i, item){
-        //     if (item.sendUserNumber == sendUserNumber){
-        //         message += "<div class=\"dmStyle1\">" +
-        //             "<div class=\"dmImg\">" +
-        //             "<img src=\"\" alt=\"\">" +
-        //             "</div>" +
-        //             "<div class=\"text\">" +
-        //             item.content +
-        //             "</div>" +
-        //             "</div>"
-        //     }else{
-        //         message += "<div class=\"dmStyle2\">" +
-        //             "<div class=\"dmImg\">" +
-        //             "<img src=\"\" alt=\"\">" +
-        //             "</div>" +
-        //             "<div class=\"text\">" +
-        //             item.content +
-        //             "</div>" +
-        //             "</div>"
-        //     }
-        // });
-        $contentIn.html(message);
-        if(result[0]){
-            $('.content > div').attr("class", result[0].total.toString());
-        }
-        $('.content').scrollTop($contentIn.height() + $(window).height());
-    });
-    console.log("연결")
-    if(!webSocket){
-        connect(roomId, nickname);
-    }
-
-});
-
-// 스크롤 시 20개씩 불러오기
-// 불러올 글이 없을 때 에러처리 필요
-$('.content').scroll(function () {
-
-    let total = $('.content > div').attr('class');
-
-    if ($(this).scrollTop() == 0) {
-        if (total == $contentIn.children().length){
-            return;
-        }
-
-        let pageNum = $contentIn.children().length / amount + 1;
-        let receiveUserNumber = $('.contentTop').find('input[type="hidden"]').attr('id')
-
-        messageService.getMessageList({
-            sendUserNumber: userNumber,
-            receiveUserNumber: receiveUserNumber,
-            pageNum: pageNum,
-        }, function(result){
+        if(result.length != 0) {
             let message = "";
+            message +=
+                '<div class="contentTop">' +
+                '<div>' +
+                '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                '</div>' +
+                '<div>' +
+                '<span>' + receiveNickname + '</span>' +
+                '</div>' +
+                '<div class="iconBox">' +
+                '<a class="icon_info" href="/message/message">' +
+                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">' +
+                '<path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>' +
+                '<path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>' +
+                '</svg>' +
+                '</a>' +
+                '</div>' +
+                '<div>' +
+                '<input type="hidden" id="' + receiveUserNumber + '" class="' + roomId + '">' +
+                '</div>' +
+                '</div>' +
+                '<div class="content" onscroll="getMoreMessage(this)">' +
+                '<div class="' +
+                result[0].total.toString() +
+                '">';
 
             //채팅에 맞게 순서 반대로 뿌려줌, 기본 20개
             for (let i = result.length - 1; i >= 0; i--) {
@@ -214,7 +127,6 @@ $('.content').scroll(function () {
                         result[i].content +
                         "</div>" +
                         "</div>";
-
                 } else {
                     message += "<div class=\"dmStyle2\">" +
                         "<div class=\"dmImg\">" +
@@ -226,11 +138,86 @@ $('.content').scroll(function () {
                         "</div>";
                 }
             }
-            $contentIn.prepend(message);
-            $('.content').scrollTop($contentIn.height()/2);
-        });
+            message += '</div>' +
+                '</div>' +
+                '<div class="textInput">' +
+                '<div>' +
+                '<div class="iconBox">' +
+                '<a class="icon_happy"></a>' +
+                '</div>' +
+                '<div class="inputBox">' +
+                '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
+                '</div>' +
+                '<div class="iconBox">' +
+                '<a class="icon_heart_white"></a>' +
+                '</div>' +
+                '</div>' +
+                '</div>'
+
+            $('.dmWrap').find("#" + receiveNickname).html(message);
+        }
+        //스크롤처리................///////////////////////////////////////////
+        $('.dmWrap').find("#" + receiveNickname).find('.content').scrollTop($('.dmWrap').find("#" + receiveNickname).find('.content').height() + $(window).height());
+    });
+    console.log("연결")
+    if(!webSocket){
+        connect(roomId, nickname);
     }
+
 });
+
+// 스크롤 시 20개씩 불러오기
+// 불러올 글이 없을 때 에러처리 필요
+////////////////////////////////////////수정//////////////////////////////////////////////////
+// $('.content').scroll(function () {
+
+    function getMoreMessage(scrolling) {
+        let total = $(scrolling).children(0).attr('class');
+
+        if ($(scrolling).scrollTop() == 0) {
+            if (total == $(scrolling).children(0).children().length) {
+                return;
+            }
+            let receiveNickname = $(scrolling).siblings('.contentTop').find('span').html();
+            let pageNum = Math.ceil($('.dmWrap').find("#" + receiveNickname).find('.content').children(0).children(0).length / amount) + 1 || 1;
+            let receiveUserNumber = $('.contentTop').find('input[type="hidden"]').attr('id')
+
+            messageService.getMessageList({
+                sendUserNumber: userNumber,
+                receiveUserNumber: receiveUserNumber,
+                pageNum: pageNum,
+            }, function (result) {
+                let message = "";
+
+                //채팅에 맞게 순서 반대로 뿌려줌, 기본 20개
+                for (let i = result.length - 1; i >= 0; i--) {
+                    if (result[i].sendUserNumber == userNumber) {
+                        message += "<div class=\"dmStyle1\">" +
+                            "<div class=\"dmImg\">" +
+                            "<img src=\"\" alt=\"\">" +
+                            "</div>" +
+                            "<div class=\"text\">" +
+                            result[i].content +
+                            "</div>" +
+                            "</div>";
+
+                    } else {
+                        message += "<div class=\"dmStyle2\">" +
+                            "<div class=\"dmImg\">" +
+                            "<img src='/images/project/domImg/indi01.webp' alt=''>" +
+                            "</div>" +
+                            "<div class=\"text\">" +
+                            result[i].content +
+                            "</div>" +
+                            "</div>";
+                    }
+                }
+                $(scrolling).children(0).prepend(message);
+                $(scrolling).scrollTop($(scrolling).children(0).height() / 2);
+            });
+        }
+    }
+// });
 
 
 // 유저 검색 이텐트
@@ -266,29 +253,27 @@ $(".modalSearch > input").keyup(function () {
     });
 });
 
-function startChat(receiveUserNumber, nick){
 
-    // 처음 클릭이면
-    if (!$(".dmBox").hasClass("on")) {
-        $(".firstBox").removeClass("on");
-        $(".dmBox").addClass("on");
-    }
-    $("#modal1").removeClass("on");
-    $contentIn.empty();
+function startChat(receiveUserNumber, nick){
 
     ///////////////////////webSocket 방 열어 주는 부분 추가 해야 함
     ///////////////////////////////////////////////////////////
 
-    let nickname = $(nick).parent().siblings('.userData').children(1).html();
-    let pageNum = $contentIn.children().length / amount || 1;
+    let receiveNickname = $(nick).parent().siblings('.userData').children(1).html();
+    // let pageNum = Math.ceil($('.dmWrap').find("#" + receiveNickname).find('.content').children(0).children(0).length/amount) + 1 || 1;
+    $('.dmWrap').find("#" + receiveNickname).empty();
 
-    $('.contentTop').children(1).find('span').text(nickname + '님');
-    $('.contentTop').find('input[type="hidden"]').attr('id', receiveUserNumber);
+    if (!$('.dmWrap').find("#" + receiveNickname).hasClass("on")) {
+        $(".firstBox").removeClass("on");
+        $('.dmWrap').find("#" + receiveNickname).siblings('.dmBox').removeClass("on");
+        $('.dmWrap').find("#" + receiveNickname).addClass("on");
+    }
+    $("#modal1").removeClass("on");
 
     messageService.getMessageList({
         sendUserNumber: userNumber,
         receiveUserNumber: receiveUserNumber,
-        pageNum : pageNum
+        pageNum : 1
     },function(result){
 
         if(result.length == 0){
@@ -303,7 +288,7 @@ function startChat(receiveUserNumber, nick){
                     '<img src="/images/project/domImg/indi01.webp" alt="">' +
                     '</div>' +
                     '<div class="dmData">' +
-                    '<p>' + nickname + '</p>' +
+                    '<p>' + receiveNickname + '</p>' +
                     '<p class="recentMessage"></p>' +
                     '<input type="hidden" id="' + result +'">' +
                     '</div>' +
@@ -321,7 +306,32 @@ function startChat(receiveUserNumber, nick){
 
         }
 
+        let roomId = result[0].roomId;
         let message = "";
+        message +=
+            '<div class="contentTop">' +
+            '<div>' +
+            '<img src="/images/project/domImg/indi01.webp" alt="">' +
+            '</div>' +
+            '<div>' +
+            '<span>' + receiveNickname + '</span>' +
+            '</div>' +
+            '<div class="iconBox">' +
+            '<a class="icon_info" href="/message/message">' +
+            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">' +
+            '<path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>' +
+            '<path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>' +
+            '</svg>' +
+            '</a>' +
+            '</div>' +
+            '<div>' +
+            '<input type="hidden" id="' + receiveUserNumber + '" class="' + roomId + '">' +
+            '</div>' +
+            '</div>' +
+            '<div class="content">' +
+            '<div class="' +
+            result[0].total.toString() +
+            '">';
 
         //채팅에 맞게 순서 반대로 뿌려줌, 기본 20개
         for (let i = result.length - 1; i >= 0; i--) {
@@ -345,13 +355,26 @@ function startChat(receiveUserNumber, nick){
                     "</div>";
             }
         }
-        $contentIn.html(message);
-        let roomId = result[0].roomId;
-        if(result[0]){
-            $('.content > div').attr("class", result[0].total.toString());
-        }
+        message += '</div>' +
+            '</div>' +
+            '<div class="textInput">' +
+            '<div>' +
+            '<div class="iconBox">' +
+            '<a class="icon_happy"></a>' +
+            '</div>' +
+            '<div class="inputBox">' +
+            '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
+            '</div>' +
+            '<div class="iconBox">' +
+            '<a class="icon_heart_white"></a>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
 
-        $('.content').scrollTop($contentIn.height() + $(window).height());
+        $('.dmWrap').find("#" + receiveNickname).html(message);
+
+        //스크롤처리................///////////////////////////////////////////
+        $('.dmWrap').find("#" + receiveNickname).find('.content').scrollTop($('.dmWrap').find("#" + receiveNickname).find('.content').height() + $(window).height());
 
         if(!webSocket){
             connect(roomId, nickname);
@@ -361,33 +384,49 @@ function startChat(receiveUserNumber, nick){
 
 
 function goMessage(e){
-
-    // 처음 클릭이면
-    if (!$(".dmBox").hasClass("on")) {
-        $(".firstBox").removeClass("on");
-        $(".dmBox").addClass("on");
-    }
-    $("#modal1").removeClass("on");
-    $contentIn.empty();
-
-    ///////////////////////webSocket 방 열어 주는 부분 추가 해야 함
-    ///////////////////////////////////////////////////////////
-
     let receiveUserNumber = $(e).attr('id');
     let roomId = $(e).find("input[type='hidden']").attr('id');
-    nickname = $(e).find('.dmData').children(0).html();
-    let pageNum = $contentIn.children().length / amount || 1;
+    let receiveNickname = $(e).find('.dmData').children(0).html();
+    // let pageNum = Math.ceil($('.dmWrap').find("#" + receiveNickname).find('.content').children(0).children(0).length/amount) + 1 || 1;
+    $('.dmWrap').find("#" + receiveNickname).empty();
 
-    $('.contentTop').children(1).find('span').text(nickname + '님');
-    $('.contentTop').find('input[type="hidden"]').attr('id',receiveUserNumber);
-    $('.contentTop').find('input[type="hidden"]').attr('class',roomId);
+    if (!$('.dmWrap').find("#" + receiveNickname).hasClass("on")) {
+        $(".firstBox").removeClass("on");
+        $('.dmWrap').find("#" + receiveNickname).siblings('.dmBox').removeClass("on");
+        $('.dmWrap').find("#" + receiveNickname).addClass("on");
+    }
+    $("#modal1").removeClass("on");
 
     messageService.getMessageList({
         sendUserNumber: userNumber,
         receiveUserNumber: receiveUserNumber,
-        pageNum : pageNum
+        pageNum : 1
     },function(result){
         let message = "";
+        message +=
+            '<div class="contentTop">' +
+            '<div>' +
+            '<img src="/images/project/domImg/indi01.webp" alt="">' +
+            '</div>' +
+            '<div>' +
+            '<span>' + receiveNickname + '</span>' +
+            '</div>' +
+            '<div class="iconBox">' +
+            '<a class="icon_info" href="/message/message">' +
+            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">' +
+            '<path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>' +
+            '<path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>' +
+            '</svg>' +
+            '</a>' +
+            '</div>' +
+            '<div>' +
+            '<input type="hidden" id="' + receiveUserNumber + '" class="' + roomId + '">' +
+            '</div>' +
+            '</div>' +
+            '<div class="content">' +
+            '<div class="' +
+            result[0].total.toString() +
+            '">';
 
         //채팅에 맞게 순서 반대로 뿌려줌, 기본 20개
         for (let i = result.length - 1; i >= 0; i--) {
@@ -410,16 +449,26 @@ function goMessage(e){
                     "</div>" +
                     "</div>";
             }
-
         }
+        message += '</div>' +
+            '</div>' +
+            '<div class="textInput">' +
+            '<div>' +
+            '<div class="iconBox">' +
+            '<a class="icon_happy"></a>' +
+            '</div>' +
+            '<div class="inputBox">' +
+            '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
+            '</div>' +
+            '<div class="iconBox">' +
+            '<a class="icon_heart_white"></a>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
 
-        $contentIn.html(message);
-        if(result[0]){
-            $('.content > div').attr("class", result[0].total.toString());
-        }
-        $('.content').scrollTop($contentIn.height() + $(window).height());
+        $('.dmWrap').find("#" + receiveNickname).html(message);
+        $('.dmWrap').find("#" + receiveNickname).find('.content').scrollTop($('.dmWrap').find("#" + receiveNickname).find('.content').height() + $(window).height());
     });
     console.log("연결")
     connect();
 }
-

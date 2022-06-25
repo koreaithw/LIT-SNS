@@ -73,8 +73,6 @@ public interface UserService {
     public int followingCount(FollowVO followVO);
     // 팔로워 카운트 (다른 사람)
     public int followerCount(FollowVO followVO);
-    // 팔라우 알림
-    public List<FollowDTO> followList(Long userNumber);
 
 
     //메세지 룸 생성

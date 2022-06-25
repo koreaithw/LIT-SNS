@@ -63,6 +63,7 @@ let messageService = (function () {
             type: "get",
             success: function(result){
                 if(callback){
+                    console.log(result)
                     callback(result);
                 }
             }

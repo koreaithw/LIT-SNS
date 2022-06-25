@@ -9,6 +9,14 @@ import org.apache.ibatis.annotations.Param;
 public interface ParticipationMapper {
     // 참여하기
     public void insert(ParticipationVO participationVO);
+
     // 성공하기, 실패하기 상태변경 review에서 프로젝트 별 review 수 카운트 result로 초기화
     public  void update(@Param("participationVO") ParticipationVO participationVO, @Param("result") Long result);
+
+    // project 리뷰 토탈
+    public Long challengeTotal(Long projectNumber);
+    
+    // 나의 프로젝트 상태값
+    public Long select(ParticipationVO participationVO);
+
 }
