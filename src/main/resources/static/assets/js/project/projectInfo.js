@@ -6,9 +6,8 @@ const contBox = $('.sec2 > div');  // 인증글 리스트 출력 위치
 litUpList();
 // ajax 서버통신
 function litUpList() {
-    console.log("ajax----------------");
     $.ajax({
-        url: "/litUp/litInfo/" + pageNum + "/" +projectNumber,
+        url: "/litUp/litInfo/" + pageNum + "/" +projectNumber1,
         type: "get",
         dataType: 'json',
         success: function (result) {
@@ -68,12 +67,9 @@ $(window).scroll(function () {
 
 
 $("label[for='btn1']").on("click", function () {
-    console.log("클릭이벤트 ====================");
-    console.log(projectNumber);
-    console.log(userNumber);
     let datas = {
         projectNumber: projectNumber,
-        userNumber: userNumber,
+        userNumber: userNumber1,
         status : 1
     }
     replyService.challenge(datas, function () {

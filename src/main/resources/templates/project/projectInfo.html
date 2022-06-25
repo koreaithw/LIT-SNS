@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="/assets/css/default.css">
     <link rel="stylesheet" href="/assets/css/header.css" />
     <link rel="stylesheet" href="/assets/css/footer.css" />
+
+    <!--    여기 충돌 날수도 있는데 모달 헤더에 넣느라 추가 한거에여!! 필요함!!!-->
+    <link rel="stylesheet" href="/assets/css/certification/certificationWrite.css">
+    <link rel="stylesheet" href="/assets/css/certification/fileLoad.css">
 </head>
 
 <body>
@@ -42,7 +46,7 @@
                         </div>
                         <!--===================================================-->
                         <div class="challengeBtn" th:if="${projectDTO.participationStatus} == 0 or ${projectDTO.participationStatus} == null">
-                            <input type="hidden" id="btn1" th:value="${projectNumber}" name="projectNumber">
+                            <input type="hidden" id="btn1" th:value="*{projectNumber}" name="projectNumber">
                             <label for="btn1" class="btn">참여하기</label>
                         </div>
                         <div class="challengeBtn" th:if="${projectDTO.participationStatus} == 1">
@@ -98,8 +102,9 @@
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
 <script th:inline="javascript">
     // 페이지 이동시 프로젝트 넘버 가져오기
-    const projectNumber = [[${ projectDTO.projectNumber }]];
-    const userNumber = [[${ projectDTO.userNumber }]];
+    const projectNumber1 = [[${ projectDTO.projectNumber }]];
+    const userNumber1 = [[${ projectDTO.userNumber }]];
+    console.log("유저번호 : "+userNumber1);
 </script>
 <script src="/assets/js/project/projectInfo.js"></script>
 
