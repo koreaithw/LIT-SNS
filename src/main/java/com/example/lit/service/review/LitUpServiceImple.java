@@ -3,6 +3,7 @@ package com.example.lit.service.review;
 import com.example.lit.domain.dao.project.ProjectDAO;
 import com.example.lit.domain.dao.project.ProjectFileDAO;
 import com.example.lit.domain.dao.review.*;
+import com.example.lit.domain.dao.user.AlertDAO;
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
@@ -10,6 +11,8 @@ import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
+import com.example.lit.domain.vo.user.AlertDTO;
+import com.example.lit.domain.vo.user.AlertVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,15 +30,30 @@ public class LitUpServiceImple implements LitUpService{
     private final ReviewFileDAO reviewFileDAO;
     private final ProjectDAO projectDAO;
     private final ProjectFileDAO projectFileDAO;
+    private final AlertDAO alertDAO;
 
     @Override
     public void registerLike(LikeVO likeVO) {
         likeDAO.register(likeVO);
+        
+        // 좋아요 추가시 alert테이블에 같이 추가
+        AlertVO alertVO = new AlertVO();
+        alertVO.setAlertUser(reviewDAO.getReviewNumberForAlert(likeVO.getReviewNumber()));
+        alertVO.setUserNumber(likeVO.getUserNumber());
+        alertVO.setTypeAlert("like");
+        alertDAO.insert(alertVO);
     }
 
     @Override
     public void removeLike(LikeVO likeVO) {
         likeDAO.remove(likeVO);
+
+        // 좋아요 취소시 알림 삭제
+        AlertVO alertVO = new AlertVO();
+        alertVO.setAlertUser(reviewDAO.getReviewNumberForAlert(likeVO.getReviewNumber()));
+        alertVO.setUserNumber(likeVO.getUserNumber());
+        alertVO.setTypeAlert("like");
+        alertDAO.remove(alertDAO.getAlertNumber(alertVO));
     }
 
     @Override
@@ -44,12 +62,12 @@ public class LitUpServiceImple implements LitUpService{
     }
 
     @Override
-    public List<LikeDTO> getLikeList(Long userNumber) { return likeDAO.getList(userNumber);}
-
-    @Override
     public int getCheckLike(Long userNumber, Long reviewNumber) {
         return likeDAO.checkLike(userNumber, reviewNumber);
     }
+
+    @Override
+    public Long searchLike(Long alertNumber, Long userNumber) { return likeDAO.searchLike(alertNumber, userNumber); }
 
     @Override
     public void registerReply(ReplyVO replyVO) {
@@ -205,5 +223,10 @@ public class LitUpServiceImple implements LitUpService{
         }).collect(Collectors.toList());
 
         return result;
+    }
+
+    @Override
+    public List<AlertDTO> getAlertList(Long userNumber){
+        return alertDAO.getList(userNumber);
     }
 }

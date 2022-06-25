@@ -1,16 +1,18 @@
-package com.example.lit.domain.vo.review;
+package com.example.lit.domain.vo.user;
 
-import com.example.lit.domain.vo.user.UserFileVO;
+import com.example.lit.domain.vo.review.ReviewFileVO;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class LikeDTO {
-    private Long reviewNumber;
+public class AlertDTO {
+    private Long alertUser;
     private Long userNumber;
+    private String typeAlert;
     private String registerDate;
     private String nickName;
+    private Long reviewNumber;
     private UserFileVO userFileVO;
     private ReviewFileVO reviewFileVO;
 }
