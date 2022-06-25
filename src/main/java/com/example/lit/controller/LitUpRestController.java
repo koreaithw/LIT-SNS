@@ -237,5 +237,18 @@ public class LitUpRestController {
 
         return litUpService.readForReview(projectNumber, userNumber);
     }
+
+
+    //================ 프로젝트 상세 =================
+    //litup탭 리스트 /litUp/
+    @GetMapping("/litInfo/{page}/{proNum}")
+    public List<ReviewDTO> litups(@PathVariable("page") int pageNum, @PathVariable("proNum") Long projectNumber){
+        ListDTO listDTO = new ListDTO(pageNum, 3);
+        listDTO.setCategory("all");
+        listDTO.setOrder("new");
+        listDTO.setProjectNumber(projectNumber);
+
+        return litUpService.getList(listDTO);
+    }
     
 }
