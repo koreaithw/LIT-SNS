@@ -12,13 +12,6 @@
         AND REVIEW_NUMBER = #{reviewNumber}
     </delete>
 
-    <select id="getList" resultType="likeDTO">
-        SELECT tl.REVIEW_NUMBER, tl.USER_NUMBER, tl.REGISTER_DATE, tu.NICKNAME
-        FROM TBL_LIKE tl, TBL_USER tu
-        WHERE REVIEW_NUMBER in (SELECT REVIEW_NUMBER FROM TBL_REVIEW WHERE USER_NUMBER = #{userNumber})
-        AND tu.USER_NUMBER = tl.USER_NUMBER
-    </select>
-
     <select id="getTotal" resultType="long">
         SELECT COUNT(USER_NUMBER) FROM TBL_LIKE
         WHERE REVIEW_NUMBER = #{reviewNumber}
@@ -27,6 +20,12 @@
     <select id="checkLike" resultType="_int">
         SELECT COUNT(REVIEW_NUMBER) FROM TBL_LIKE
         WHERE USER_NUMBER = #{userNumber} AND REVIEW_NUMBER = #{reviewNumber}
+    </select>
+
+    <select id="alertSearch" resultType="long">
+        SELECT REVIEW_NUMBER
+        FROM TBL_LIKE
+        WHERE REVIEW_NUMBER = (SELECT REVIEW_NUMBER FROM TBL_REVIEW WHERE USER_NUMBER = #{alertNumber}) AND USER_NUMBER = #{userNumber}
     </select>
 
 </mapper>
