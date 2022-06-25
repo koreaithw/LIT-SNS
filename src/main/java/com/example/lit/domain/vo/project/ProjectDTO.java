@@ -21,7 +21,9 @@ public class ProjectDTO {
     private ProjectFileVO projectFile;
 
     private String email;
+    private Long reviewCount;
     private Long participationCount;
+    private Long participationStatus;
 
     private String nickname;
     private String registerDate;

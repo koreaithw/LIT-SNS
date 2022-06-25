@@ -10,5 +10,4 @@ public class ParticipationVO {
     private Long userNumber;
     private Long status;
     private String registerDate;
-
 }

@@ -12,7 +12,7 @@ img{
   object-fit: cover;
 }
 
-label{
+label.btn{
   cursor: pointer;
 }
 
@@ -25,7 +25,7 @@ figure{
 }
 
 .sec1{
-  
+  display: flex;
 }
 .sec1 div{
   /* border: 1px solid #e5e5e5; */
@@ -40,10 +40,11 @@ figure{
 }
 .sec1 .projectInfoWrap{
   flex-grow: 2;
+  flex-direction: column;
 }
 
 .sec1 .projectImg > a{
-  margin: auto;
+  /*margin: auto;*/
   border-radius: 100%;
   overflow: hidden;
   display: block;
@@ -68,12 +69,15 @@ label.btn{
   padding: 10px 0;
   width: 250px;
   border-radius: 5px;
-  background: #e5e5e5;
   text-align: center;
   background: rgb(250, 100, 98);
   color: #EFEFEF;
 }
-label.btn:hover{
+label.btn.end{
+  background: #e5e5e5;
+  color: #000000;
+}
+label[for='btn1']:hover{
   background: rgb(255, 69, 67);
   color: #FFFFFF;
 }
@@ -105,7 +109,7 @@ figure >a {
 }
 figure img:hover{
   transform: scale(1.1);
-  /* transition: 0.5s ease; */
+  transition: 0.5s ease;
 }
 /* 모달창==================================== */
 aside.modalWindow{
@@ -192,11 +196,15 @@ section {
   section{
     width: 100%;
     padding: 0;
-    
   }
-
+  .sec1{
+    flex-wrap: wrap;
+  }
   .sec2 > div{
     column-count: 3;
+  }
+  .sec1 .projectImg{
+    justify-content: center;
   }
 }
 /*
@@ -235,6 +243,7 @@ section {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    flex-direction:row;
   }
 
   .projectInfoWrap > div:nth-child(-n+2){
