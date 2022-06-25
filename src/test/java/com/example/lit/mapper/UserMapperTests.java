@@ -2,8 +2,10 @@ package com.example.lit.mapper;
 
 
 import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.user.AlertVO;
 import com.example.lit.domain.vo.user.UserDTO;
 import com.example.lit.domain.vo.user.UserVO;
+import com.example.lit.mapper.user.AlertMapper;
 import com.example.lit.mapper.user.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,9 @@ public class UserMapperTests {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private AlertMapper alertMapper;
 
     @Test
     public void insertTest(){
@@ -134,4 +139,23 @@ public class UserMapperTests {
 
     }
 
+    @Test
+    public void alertInsertTest() {
+        AlertVO alertVO = new AlertVO();
+        alertVO.setAlertUser(1L);
+        alertVO.setUserNumber(3L);
+        alertVO.setTypeAlert("like");
+        alertMapper.insert(alertVO);
+    }
+
+    @Test
+    public void listTest(){
+        log.info(alertMapper.alertList(1L).toString());
+    }
+
+
+    @Test
+    public void alertRemoveTest() {
+        alertMapper.remove(3L);
+    }
 }

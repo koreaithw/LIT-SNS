@@ -21,11 +21,4 @@
         SELECT COUNT(FOLLOWER_NUMBER) FROM TBL_FOLLOW
         WHERE FOLLOWER_NUMBER = #{followerNumber}
     </select>
-
-    <select id="followList" resultType="followDTO">
-        SELECT tf.FOLLOWING_NUMBER, tf.FOLLOWER_NUMBER, tf.REGISTER_DATE, tu.NICKNAME
-        FROM TBL_FOLLOW tf, TBL_USER tu
-        WHERE tf.FOLLOWING_NUMBER = #{userNumber}
-        AND tu.USER_NUMBER = tf.FOLLOWER_NUMBER
-    </select>
 </mapper>

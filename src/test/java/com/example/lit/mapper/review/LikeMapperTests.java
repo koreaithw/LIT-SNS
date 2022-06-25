@@ -21,7 +21,8 @@ public class LikeMapperTests {
     }
 
     @Test
-    public void getList() {
-        log.info(likeMapper.getList(1L).toString());
+    public void getLikeTest(){
+        log.info(likeMapper.alertSearch(1L, 2L) + "");
     }
+
 }

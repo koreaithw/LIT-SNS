@@ -183,17 +183,16 @@
             </div>
         </div>
     </div>
-
-    <!--        <footer th:insert="~{/footer :: footer}"></footer>-->
+    <footer th:insert="~{/footer :: footer}"></footer>
 </main>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script th:inline="javascript">
-    let aaa = [[${ category }]];
+    let category = [[${ category }]];
     let pageNum = 1;
     const contBox = $('div.photoContents > div');
     let cate1 = "lits";     // lits / litups
-    let cate2 = "all";  // 카테고리
+    let cate2 = "all";  // 카테고리 기본 all
     let order = "new";  // new 신규 / popular 인기
 </script>
 <script src="/assets/js/main/list.js"></script>
