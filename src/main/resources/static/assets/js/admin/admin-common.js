@@ -251,6 +251,7 @@ $(".list-tbody").on("change", "input[type='checkbox']", function (e) {
 let pageNum = 1;
 
 function pageBlock(total) {
+    console.log(pageNum)
     let endPage = Math.ceil(pageNum / 10.0) * 10;
     let startPage = endPage - 9;
     let realEnd = Math.ceil(total / 10.0);
