@@ -28,21 +28,28 @@ $(document).ready(function(){
 
 $(".search-button").on("click", function(e){
     e.preventDefault();
-    page = 1;
-    searchProject(page);
-    //검색 버튼 누르면 페이징 번호도 1이 선택 되도록 바꿔줘야함
-    let $changePage = $("a.changePage");
-    if($changePage[0].getAttribute("href") == 1){
-        $($changePage[0]).trigger("click");
-    }
+    pageNum = 1;
+    searchProject(pageNum);
+
 })
 
+//============== 정렬 버튼 =======================
+let desc = false;
+$(".order_btn").on("click",function () {
+    let name = $(this).attr("name");
+    $(".order").val(name);
+    $(".desc").val(desc);
+    desc = !desc;
+    searchProject(pageNum);
+})
 
 //================================ ajax =========================================
 
 //검색하기
 function searchProject(page) {
     $(".list-table tr:not(.table-head)").html("");
+    $("input[type=checkbox]").prop("checked", false);
+
 
     adminService.searchProject({
         page : page,
@@ -51,7 +58,9 @@ function searchProject(page) {
         type: $("select[name='type']").val(),
         keyword: $("input[name='keyword']").val(),
         category: $("select[name='category']").val(),
-        status: 0
+        status: 0,
+        order : $(".order").val(),
+        desc : $(".desc").val()
     }, function (result) {
         //검색 결과 건수
         if(result == null || result.length == 0){

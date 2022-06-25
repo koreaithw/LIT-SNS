@@ -114,8 +114,7 @@
     </delete>
 
     <select id="userSearch" resultType="userDTO">
-
-        SELECT TOTAL, USER_NUMBER, EMAIL, NAME, NICKNAME, CONTENT, KAKAO, REGISTER_DATE
+        SELECT TOTAL, USER_NUMBER, EMAIL, NAME, NICKNAME, CONTENT, KAKAO, TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') AS REGISTER_DATE
         FROM(
             SELECT ROWNUM RN, TOTAL, USER_NUMBER, EMAIL, NAME, NICKNAME, CONTENT, KAKAO, REGISTER_DATE
             FROM(
@@ -134,19 +133,29 @@
                     </choose>
                 </trim>
                 <trim prefix="AND">
-                    <if test="startDate != ''">
+                    <if test="startDate != null and startDate != ''">
                         <![CDATA[
                             TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') >= #{startDate}
                             ]]>
                     </if>
                 </trim>
                 <trim prefix="AND">
-                    <if test="endDate != ''">
+                    <if test="endDate != null and endDate != ''">
                         <![CDATA[
                             TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') <= #{endDate}
                             ]]>
                     </if>
                 </trim>
+                <if test="order != null and order != ''">
+                    <choose>
+                        <when test="desc == true">
+                            ORDER BY ${order} DESC
+                        </when>
+                        <otherwise>
+                            ORDER BY ${order}
+                        </otherwise>
+                    </choose>
+                </if>
             )
             <![CDATA[
             WHERE ROWNUM <= #{pageNum} * #{amount}

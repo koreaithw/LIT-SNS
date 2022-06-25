@@ -15,6 +15,9 @@ public class SearchDTO {
     private String category;
     private Long status;
 
+    private String order;
+    private boolean desc;
+
     private int pageNum;
     private int amount;
     private String type;
@@ -39,4 +42,5 @@ public class SearchDTO {
                 .queryParam("keyword", this.keyword);
         return builder.toUriString(); //쿼리 스트링 반환
     }
+
 }

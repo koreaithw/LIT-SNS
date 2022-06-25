@@ -104,11 +104,11 @@ public class UserMapperTests {
 //        AND KAKAO IS NULL
 //        AND REGISTER_DATE > '2022-06-14' AND REGISTER_DATE < '2022-06-16';
         SearchDTO search = new SearchDTO();
-        search.setStartDate("2022-06-14");
-        search.setEndDate("2022-06-19");
         search.setKeyword("");
         search.setType("email");
         search.setKakao("0"); // kakao를 0(all), 1(null), 2(not null) 로 받아서 검사하기
+        search.setDesc(false);
+        search.setOrder("user_number");
         log.info(search.getAmount() + "aaaaa");
         log.info(search.getPageNum() + "aaaaa");
         userMapper.userSearch(search).stream().map(UserDTO::toString).forEach(log::info);

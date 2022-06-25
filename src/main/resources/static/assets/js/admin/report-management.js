@@ -28,20 +28,27 @@ window.onload = function () {
 
 $(".search-button").on("click", function(e){
     e.preventDefault();
-    page = 1;
-    searchReport(page);
-    //검색 버튼 누르면 페이징 번호도 1이 선택 되도록 바꿔줘야함
-    let $changePage = $("a.changePage");
-    if($changePage[0].getAttribute("href") == 1){
-        $($changePage[0]).trigger("click");
-    }
+    pageNum = 1;
+    searchReport(pageNum);
 })
-
+//============== 정렬 버튼 =======================
+let desc = false;
+$(".order_btn").on("click",function () {
+    let name = $(this).attr("name");
+    $(".order").val(name);
+    $(".desc").val(desc);
+    console.log($(".order").val());
+    console.log($(".desc").val());
+    desc = !desc;
+    searchReport(pageNum);
+})
 
 //================================ ajax =========================================
 
 function searchReport(page) {
     $(".list-table tr:not(.table-head)").html("");
+    $("input[type=checkbox]").prop("checked", false);
+
 
     adminService.searchReport({
         page : page,
@@ -50,6 +57,8 @@ function searchReport(page) {
         type: $("select[name='type']").val(),
         keyword: $("input[name='keyword']").val(),
         category: $("select[name='category']").val(),
+        order : $(".order").val(),
+        desc : $(".desc").val()
     }, function (result) {
 
         if(result == null || result.length == 0){
