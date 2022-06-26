@@ -3,14 +3,17 @@ package com.example.lit.controller;
 import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
+import com.example.lit.domain.vo.review.ReviewFileVO;
 import com.example.lit.service.project.LitService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
@@ -27,22 +30,22 @@ public class LitRestController {
     private final LitService litService;
 
     @PostMapping("/upload")
-    public List<ProjectFileVO> upload(MultipartFile[] uploadFiles) throws IOException {
+    public List<ReviewFileVO> upload(MultipartFile[] uploadFiles) throws IOException {
         String uploadFolder = "C:/upload";
-        ArrayList<ProjectFileVO> files = new ArrayList<>();
+        ArrayList<ReviewFileVO> files = new ArrayList<>();
 
 //        yyyy/MM/dd 경로 만들기
         File uploadPath = new File(uploadFolder, getFolder());
         if(!uploadPath.exists()){uploadPath.mkdirs();}
 
         for(MultipartFile file : uploadFiles){
-            ProjectFileVO ProjectFileVO = new ProjectFileVO();
+            ReviewFileVO reviewFileVO = new ReviewFileVO();
             String uploadFileName = file.getOriginalFilename();
 
             UUID uuid = UUID.randomUUID();
-            ProjectFileVO.setName(uploadFileName);
-            ProjectFileVO.setUuid(uuid.toString());
-            ProjectFileVO.setUploadPath(getFolder());
+            reviewFileVO.setName(uploadFileName);
+            reviewFileVO.setUuid(uuid.toString());
+            reviewFileVO.setUploadPath(getFolder());
 
             uploadFileName = uuid.toString() + "_" + uploadFileName;
 
@@ -53,9 +56,12 @@ public class LitRestController {
             file.transferTo(saveFile);
 
             if(checkImageType(saveFile)){
-                ProjectFileVO.setImage("1");
+                FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+                Thumbnailator.createThumbnail(file.getInputStream(), thumbnail, 100, 100);
+                thumbnail.close();
+                reviewFileVO.setImage("1");
             }
-            files.add(ProjectFileVO);
+            files.add(reviewFileVO);
         }
         return files;
     }
