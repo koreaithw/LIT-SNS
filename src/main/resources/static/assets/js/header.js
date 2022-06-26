@@ -20,27 +20,28 @@ function checkLoginLogout(userNumber) {
 }
 
 
-
-function headerAction(){
-
+//
+// function headerAction(){
+//
+//         if( $("._dropdown_wrapper").css("display") == 'none'){
+//             $("._dropdown_wrapper").show();
+//         }else{
+//             $("._dropdown_wrapper").css("display","none")
+//             $("._dropdown_wrapper").hide();
+//         }
+//
+//
+// }
+    // // //프로필 아이콘 클릭시 드롭다운 활성화
+    $("._icon_profile").on("click",function(){
+        console.log("A")
         if( $("._dropdown_wrapper").css("display") == 'none'){
             $("._dropdown_wrapper").show();
         }else{
             $("._dropdown_wrapper").hide();
         }
+        })
 
-
-}
-    // // //프로필 아이콘 클릭시 드롭다운 활성화
-    // $("._icon_profile").on("click",function(){
-    //     console.log("A")
-    //     if( $("._dropdown_wrapper").css("display") == 'none'){
-    //         $("._dropdown_wrapper").show();
-    //     }else{
-    //         $("._dropdown_wrapper").hide();
-    //     }
-    //     })
-    //
         // 검색 버튼 클릭시 X버튼 노출
         $("._search_wrapper").on("click",function(){
             $("._search_cancle").show()
