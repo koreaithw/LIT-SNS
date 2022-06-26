@@ -374,6 +374,7 @@
             },
             function (result) {
                 $(".detailContentFooterCommentInputArea").val("");
+                pageNum = 1;
                 showList(1);
                 $(".detailContentFeed").scrollTop(0);
             },
@@ -431,13 +432,10 @@
 
     // 클릭시 노출페이지 조절
     function showReplyPage(total) {
-        let endPage = Math.ceil(pageNum / 10.0) * 10;
         let realEnd = Math.ceil(total / 10.0);
         const $paging = $(".appendReply div");
 
-        if (endPage > realEnd) {
-            endPage = realEnd;
-        }
+
         let next = pageNum < realEnd;
         let str = "<svg aria-label=\"댓글 더 읽어들이기\" class=\"_ab6-\" color=\"#262626\" fill=\"#262626\" height=\"24\" role=\"img\" viewBox=\"0 0 24 24\" " +
             "width=\"24\"><circle cx=\"12.001\" cy=\"12.005\" fill=\"none\" r=\"10.5\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></circle>" +
