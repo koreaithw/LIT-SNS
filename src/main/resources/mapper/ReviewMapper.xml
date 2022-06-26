@@ -92,7 +92,7 @@
 
     <select id="searchReview" resultType="reviewDTO">
     SELECT TOTAL,
-    REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT, REGISTER_DATE,
+    REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, CONTENT, TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') AS REGISTER_DATE,
     CATEGORY, STATUS,
     EMAIL
     FROM(
@@ -135,6 +135,16 @@
             <if test="status != null and status != ''">
                 AND p.STATUS = #{status}
             </if>
+        <if test="order != null and order != ''">
+            <choose>
+                <when test="desc == true">
+                    ORDER BY ${order} DESC
+                </when>
+                <otherwise>
+                    ORDER BY ${order}
+                </otherwise>
+            </choose>
+        </if>
         )
         <![CDATA[
             WHERE ROWNUM <= #{pageNum} * #{amount}
@@ -196,7 +206,7 @@
                             ORDER BY LIKE_CNT DESC
                         </when>
                         <when test="order == 'new'">
-                            ORDER BY REGISTER_DATE
+                            ORDER BY REGISTER_DATE DESC
                         </when>
                     </choose>
                 </if>

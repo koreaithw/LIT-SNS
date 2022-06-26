@@ -50,7 +50,7 @@
 
     <select id="searchProject" resultType="projectDTO">
         SELECT TOTAL, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, APPLY_COUNT,
-        AUTHENTICATION, START_DATE, END_DATE, STATUS, USER_NUMBER,
+        AUTHENTICATION, TO_CHAR(START_DATE, 'yyyy-mm-dd') AS START_DATE, TO_CHAR(END_DATE, 'yyyy-mm-dd') AS END_DATE, STATUS, USER_NUMBER,
         EMAIL,
         PARTICIPATION_COUNT
         FROM(
@@ -105,6 +105,16 @@
                         </when>
                     </choose>
                 </trim>
+                <if test="order != null and order != ''">
+                    <choose>
+                        <when test="desc == true">
+                            ORDER BY ${order} DESC
+                        </when>
+                        <otherwise>
+                            ORDER BY ${order}
+                        </otherwise>
+                    </choose>
+                </if>
             )
             <![CDATA[
                 WHERE ROWNUM <= #{pageNum} * #{amount}
@@ -166,7 +176,7 @@
                             ORDER BY APPLY_COUNT DESC
                         </when>
                          <when test="order == 'new'">
-                             ORDER BY START_DATE
+                             ORDER BY START_DATE DESC
                          </when>
                     </choose>
                 </if>
