@@ -291,7 +291,11 @@ $(function userFile() {
 })
 
 function setUserCon(userVO) {
+  if(userVO.userFileList != null) {
+    $("#userFile").attr("src", "/lit/display?fileName=" + userVO.userFileList.uploadPath + "/" + userVO.userFileList.uuid + "_" + userVO.userFileList.name);
+  } else{
+    $("#userFile").attr("src", "/images/main/profile_ex.png");
+  }
 
-  $("#userFile").attr("src", "/lit/display?fileName=" + userVO.userFileList.uploadPath + "/" + userVO.userFileList.uuid + "_" + userVO.userFileList.name);
   $("#nickName").text(userVO.nickname);
 }

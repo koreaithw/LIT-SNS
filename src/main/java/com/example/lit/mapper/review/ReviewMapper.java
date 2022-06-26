@@ -38,7 +38,7 @@ public interface ReviewMapper {
 
     // 3번째 메달 - 첫 lit up 작성하기
     public int getTotalByUserNumber(Long userNumber);
-
+    
     // project 리뷰 토탈
     public Long reviewTotal(Long projectNumber);
 

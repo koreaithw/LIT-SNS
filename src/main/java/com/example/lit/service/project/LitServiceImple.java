@@ -40,6 +40,11 @@ public class LitServiceImple implements LitService{
         //프로젝트 생성
         projectDAO.register(projectVO);
 
+        ParticipationVO participationVO = new ParticipationVO();
+        participationVO.setProjectNumber(projectVO.getProjectNumber());
+        participationVO.setUserNumber(projectVO.getUserNumber());
+        participationDAO.register(participationVO);
+
         //프로젝트 이미지 처리(1장)
         if(projectVO.getProjectFile() != null){
             ProjectFileVO projectFileVO = projectVO.getProjectFile();
