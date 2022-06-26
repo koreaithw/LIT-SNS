@@ -48,4 +48,5 @@ public class LitUpServiceTests {
         likeVO.setUserNumber(3L);
         litUpService.registerLike(likeVO);
     }
+    
 }

@@ -45,13 +45,12 @@ public class LitUpServiceImple implements LitUpService{
         alertVO.setAlertUser(reviewDAO.getReviewNumberForAlert(likeVO.getReviewNumber()));
         alertVO.setUserNumber(likeVO.getUserNumber());
         alertVO.setTypeAlert("like");
+        alertVO.setReviewNumber(likeVO.getReviewNumber());
         alertDAO.insert(alertVO);
     }
 
     @Override
     public void removeLike(LikeVO likeVO) {
-        likeDAO.remove(likeVO);
-
         // 좋아요 취소시 알림 삭제
         AlertVO alertVO = new AlertVO();
         alertVO.setAlertUser(reviewDAO.getReviewNumberForAlert(likeVO.getReviewNumber()));
@@ -59,6 +58,8 @@ public class LitUpServiceImple implements LitUpService{
         alertVO.setTypeAlert("like");
         alertVO.setReviewNumber(likeVO.getReviewNumber());
         alertDAO.remove(alertDAO.getAlertNumber(alertVO));
+
+        likeDAO.remove(likeVO);
     }
 
     @Override

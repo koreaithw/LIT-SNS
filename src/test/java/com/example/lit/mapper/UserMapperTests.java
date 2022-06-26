@@ -156,6 +156,6 @@ public class UserMapperTests {
 
     @Test
     public void alertRemoveTest() {
-        alertMapper.remove(3L);
+        alertMapper.remove(3);
     }
 }
