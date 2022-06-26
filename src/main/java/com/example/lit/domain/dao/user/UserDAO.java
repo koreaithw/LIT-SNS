@@ -63,4 +63,10 @@ public class UserDAO {
     //정보수정페이지 해당 유저 정보 띄워주기
     public UserVO getChangePwInfo(Long userNumber) { return userMapper.getUser(userNumber); }
 
+//    *************************************
+//    MEDAL 메달
+//    *************************************
+    public List<String> selectAchievementByUserNumber(Long userNumber){
+        return userMapper.selectAchievementByUserNumber(userNumber);
+    }
 }

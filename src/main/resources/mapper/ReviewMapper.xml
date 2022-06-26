@@ -220,6 +220,12 @@
     ]]>
     </select>
 
+    <!-- 메달3 조건 관련   -->
+    <select id="getTotalByUserNumber" resultType="_int">
+        SELECT COUNT(REVIEW_NUMBER) FROM TBL_REVIEW
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+
     <select id="reviewTotal" resultType="long">
         SELECT COUNT(*) FROM TBL_REVIEW WHERE PROJECT_NUMBER = #{projectNumber}
     </select>

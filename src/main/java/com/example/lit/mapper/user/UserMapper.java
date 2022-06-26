@@ -56,4 +56,12 @@ public interface UserMapper {
     public void deleteFollower(Long followerNumber, Long followingNumber);
     //회원정보수정페이지 비번 조회
     public int oldPasswordCheck(String password, Long userNumber);
+
+//    *************************************
+//    MEDAL 메달
+//    *************************************
+    
+//   메달 획득
+    public List<String> selectAchievementByUserNumber(Long userNumber);
+
 }

@@ -243,7 +243,7 @@ public class LitUpRestController {
     //litup탭 리스트 /litUp/
     @GetMapping("/litInfo/{page}/{proNum}")
     public List<ReviewDTO> litups(@PathVariable("page") int pageNum, @PathVariable("proNum") Long projectNumber){
-        ListDTO listDTO = new ListDTO(pageNum, 3);
+        ListDTO listDTO = new ListDTO(pageNum, 9);
         listDTO.setCategory("all");
         listDTO.setOrder("new");
         listDTO.setProjectNumber(projectNumber);
