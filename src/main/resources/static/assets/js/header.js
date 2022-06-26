@@ -1,6 +1,5 @@
 function checkLoginLogout(userNumber) {
     let str =""
-    console.log(userNumber)
     if(userNumber){
         str += " <a href=\"/user/logout\">" +
             "<div class=\"_dropdown_loginout\">" +
@@ -103,7 +102,12 @@ function alterLike(alters) {
         console.log(userSrc)
 
         str += "<div class='alterCss'>"
-        str += "<a href=''><img width='30px' class='userFile' src='/lit/display?fileName=" + alter.userFileVO.uploadPath + "/" + alter.userFileVO.uuid + "_" + alter.userFileVO.name + "'></a>"
+        if(userVO.userFileList != null) {
+            str += "<a href=''><img width='30px' class='userFile' src='/lit/display?fileName=" + alter.userFileVO.uploadPath + "/" + alter.userFileVO.uuid + "_" + alter.userFileVO.name + "'></a>"
+        } else{
+            str += "<a href=''><img width='30px' class='userFile' src='/images/main/profile_ex.png'></a>"
+        }
+
         str += "<div style='margin-bottom: -5px; margin-right: 30px;'><span class='alterspan'>" + alter.nickName
         if(alter.typeAlert == "like") {
             str += "</span>님이 회원님의 사진을 좋아합니다.</div>"

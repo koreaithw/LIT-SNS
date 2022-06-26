@@ -5,7 +5,7 @@ let warningDownButton = document.querySelector('.warningDownButton');
 let warningUpButton = document.querySelector('.warningUpButton');
 let projectInfoDropDown = document.querySelector('.projectInfoDropDown');
 let warningDropDown = document.querySelector('.warningDropDown');
-let certificationWriteButton = document.querySelector('.certificationWriteButton');
+// let certificationWriteButton = document.querySelector('.certificationWriteButton');
 
 let $BackButton = $('.certificationBackButton');
 let $NextButton = $('.certificationNextButton');
@@ -135,6 +135,7 @@ function twinkle() {
 //미리보기, 파일 비워주고 화면전환
 $certificationFirstButton.on("click", function () {
 
+    $deleteImageBackground.css("z-index", "11");
     $deleteImageBackground.css("display", "block");
 
     $('.deleteImageModalButton').on("click",function(){
@@ -152,8 +153,10 @@ $certificationFirstButton.on("click", function () {
             $('#fileClickInput').val("");
             uploadFiles = [];
             $deleteImageBackground.css("display", "none");
+            $deleteImageBackground.css("z-index", "0");
         }else{
             $deleteImageBackground.css("display", "none");
+            $deleteImageBackground.css("z-index", "0");
         }
     });
 });

@@ -203,7 +203,7 @@
                 <if test="order != null and order != ''">
                     <choose>
                         <when test="order == 'popular'">
-                            ORDER BY LIKE_CNT DESC
+                            ORDER BY LIKE_CNT
                         </when>
                         <when test="order == 'new'">
                             ORDER BY REGISTER_DATE DESC
