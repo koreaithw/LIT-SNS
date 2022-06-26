@@ -50,4 +50,7 @@ public interface LitService {
     //메인 리스트
     public List<ProjectDTO> getMainList(ListDTO listDTO);
 
+    // 2번째 메달 - 첫 lit 생성하기
+    public int getTotalByUserNumber(Long userNumber);
+
 }

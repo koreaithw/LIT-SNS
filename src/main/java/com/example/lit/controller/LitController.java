@@ -37,6 +37,7 @@ public class LitController {
         log.info(projectVO.toString());
         log.info(projectVO.getProjectFile() + "");
         litService.register(projectVO);
+
         return "/main/main";
     }
 
