@@ -24,7 +24,7 @@ function keyEnter(key) {
     $('.dmWrap').find("#" + receiveNickname).find('.content').scrollTop($('.dmWrap').find("#" + receiveNickname).find('.content').height() + $(window).height());
     console.log("전송")
     //웹소켓 쪽 전송
-    send(roomId, nickname, content);
+    send(roomId, nickname, receiveNickname, content);
 }
 
 
@@ -146,7 +146,7 @@ $(".dmBtn").on("click", "a", function (e) {
                 '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
                 '</div>' +
                 '<div class="iconBox">' +
-                '<a class="icon_heart_white"></a>' +
+                '<a class="icon_heart_white" onclick="enterHeart(this)"></a>' +
                 '</div>' +
                 '</div>' +
                 '</div>'
@@ -328,13 +328,14 @@ function startChat(receiveUserNumber, nick) {
                     '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
                     '</div>' +
                     '<div class="iconBox">' +
-                    '<a class="icon_heart_white"></a>' +
+                    '<a class="icon_heart_white"  onclick="enterHeart(this)"></a>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
                     '</div>'
                 $('.dmWrap').append(msg)
             } else {
+
                 ////////////////////////////여기 이미 있어도 다시 더 도는거 고치는 중..../////////////////////
                 $('.dmWrap').find("#" + receiveNickname).siblings('.dmBox').removeClass("on");
                 $('.dmWrap').find("#" + receiveNickname).addClass("on");
@@ -399,7 +400,7 @@ function startChat(receiveUserNumber, nick) {
                 '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
                 '</div>' +
                 '<div class="iconBox">' +
-                '<a class="icon_heart_white"></a>' +
+                '<a class="icon_heart_white"  onclick="enterHeart(this)"></a>' +
                 '</div>' +
                 '</div>' +
                 '</div>'
@@ -463,7 +464,7 @@ function goMessage(e) {
         '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
         '</div>' +
         '<div class="iconBox">' +
-        '<a class="icon_heart_white"></a>' +
+        '<a class="icon_heart_white"  onclick="enterHeart(this)"></a>' +
         '</div>' +
         '</div>' +
         '</div>'
@@ -473,4 +474,20 @@ function goMessage(e) {
     if (!webSocket) {
         connect(roomId, nickname);
     }
+}
+
+function enterHeart(key){
+    let receiveNickname = $(key).closest('.textInput').siblings('.contentTop').find('span').html();
+    let receiveUserNumber = $(key).closest('.textInput').siblings('.contentTop').find('input[type="hidden"]').attr('id'); // 채팅방 들어올 때 받아오기
+    let roomId = $('.dmWrap').find("#" + receiveNickname).find('.contentTop').find('input[type="hidden"]').attr('class');
+    let content = "❤️";
+
+    messageService.send({
+        sendUserNumber: userNumber,
+        receiveUserNumber: receiveUserNumber,
+        roomId: roomId,
+        content: content
+    });
+
+    send(roomId, nickname, receiveNickname, content);
 }

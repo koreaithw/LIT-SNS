@@ -142,8 +142,8 @@
         webSocket.close();
     }
 
-    function send(roomId, nickname, content){
-        webSocket.send(JSON.stringify({chatRoomId : roomId, type:'CHAT', writer:nickname, message : content}));
+    function send(roomId, nickname, receiveNickname, content){
+        webSocket.send(JSON.stringify({chatRoomId : roomId, type:'CHAT', writer:nickname, receiver: receiveNickname, message : content}));
     }
 
     function onOpen(){
@@ -154,6 +154,11 @@
         let data = JSON.parse(e.data);
         let $messageBoard = $('.contentTop').find('.'+data.chatRoomId).closest('.contentTop').siblings('.content').children(0)
         console.log(data)
+
+        if ($('.dmWrap').find("#" + data.receiver).length == 0){
+            //수우우우우우우우우우우우우저어어어어어어어어어어엉엉
+        }
+
 
         if(data.message){
             //메세지 두개 비교해줄 조건
