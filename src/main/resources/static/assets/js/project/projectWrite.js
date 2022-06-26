@@ -60,7 +60,7 @@ function imgEvent(files) {
   let imageUrl = "";
   $(files).each(function(i, file) {
     str += "<div data-name='" + file.name + "' data-uuid='" + file.uuid + "' data-uploadpath='" + file.uploadPath + "' data-image='" + file.image + "'></div>";
-    imageUrl += "/lit/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name;
+    imageUrl += "/lit/display?fileName=" + file.uploadPath + "/" + file.uuid + "_"  + file.name;
   });
 
   $(".imgView").append(str);
@@ -291,7 +291,11 @@ $(function userFile() {
 })
 
 function setUserCon(userVO) {
+  if(userVO.userFileList != null) {
+    $("#userFile").attr("src", "/lit/display?fileName=" + userVO.userFileList.uploadPath + "/" + userVO.userFileList.uuid + "_" + userVO.userFileList.name);
+  } else{
+    $("#userFile").attr("src", "/images/main/profile_ex.png");
+  }
 
-  $("#userFile").attr("src", "/lit/display?fileName=" + userVO.userFileList.uploadPath + "/" + userVO.userFileList.uuid + "_" + userVO.userFileList.name);
   $("#nickName").text(userVO.nickname);
 }
