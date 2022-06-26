@@ -229,8 +229,6 @@
 <script defer src="/assets/js/certification/fileLoad.js"></script>
 <script th:inline="javascript">
     let userNumber = [[${session.userNumber}]];
-    console.log("---------------------------------")
-    console.log(userNumber)
     $(".mypage__link").on("click", function(e){
         e.preventDefault();
         location.href = "/user/mypage";

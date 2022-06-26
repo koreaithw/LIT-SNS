@@ -39,7 +39,7 @@ function projectDetailModalShow(reviewNumber,userNumber) {
     })
 
     // 좋아요 여부 확인
-    reviewDetailService.getCheckLike({userNumber:1, reviewNumber:$reviewNumber},function (result) {
+    reviewDetailService.getCheckLike({userNumber:userNumber, reviewNumber:$reviewNumber},function (result) {
         if(result){
             detailContentLikeButton.style.display = 'none';
             detailContentLikeCancel.style.display = 'block';
