@@ -45,9 +45,7 @@ public class LitController {
     // ======= 페이지 상세보기 ========
     @GetMapping("/info/{proNum}")
     public String info(@PathVariable("proNum") Long projectNumber, ProjectDTO projectDTO, HttpSession session, Model model){
-//        Long userNumber = (Long)session.getAttribute("userNumber");
-
-        Long userNumber = 1L; // 테스트용
+        Long userNumber = (Long)session.getAttribute("userNumber");
 
         projectDTO.setProjectNumber(projectNumber);
         projectDTO.setUserNumber(userNumber);
