@@ -155,12 +155,8 @@
         let $messageBoard = $('.contentTop').find('.'+data.chatRoomId).closest('.contentTop').siblings('.content').children(0)
         console.log(data)
 
-        if ($('.dmWrap').find("#" + data.receiver).length == 0){
-            //수우우우우우우우우우우우우저어어어어어어어어어어엉엉
-        }
-
-
         if(data.message){
+
             //메세지 두개 비교해줄 조건
             if(true) {
                 let str = "<div class=\"dmStyle1\">" +
