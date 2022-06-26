@@ -232,7 +232,7 @@
         $reviewNumber=$(this).attr("id")
         $fileWriter = $(this).children("input").attr("id")
         projectDetailModalShow($reviewNumber, userNumber)
-        $.getJSON("/litUp/profilePic", {userNumber: $fileWriter}, function(pic){showUserPic(pic);})
+        $.getJSON("/litUp/profilePic", {userNumber: $fileWriter}, function(pic){showMainUserPic(pic);})
         $.getJSON("/litUp/reviewPic", {reviewNumber: $reviewNumber}, function(pic){showReviewPic(pic);})
     })
 
@@ -458,19 +458,20 @@
 
 
     // 프로필 사진 출력
-    function showUserPic(file){
+    function showMainUserPic(file){
         let str ="";
         let str2 ="";
+
         str += "<div class=\"detailContentProfileImageInner\">"
-        str += "<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+        str += "<img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
         str += "</div>"
 
         str2 +="<div class=\"detailContentProfileImageInner\">"
-        str2 +="<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+        str2 +="<img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
         str2 +="</div>"
 
-        $(".bottom").html(str);
-        $(".top").html(str2);
+        $("div.bottom").html(str);
+        $("div.top").html(str2);
     }
 
     function showReviewPic(pic) {
