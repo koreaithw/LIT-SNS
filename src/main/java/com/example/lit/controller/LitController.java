@@ -46,7 +46,6 @@ public class LitController {
     public String info(@PathVariable("proNum") Long projectNumber, ProjectDTO projectDTO, HttpSession session, Model model){
 //        Long userNumber = (Long)session.getAttribute("userNumber");
 
-        projectNumber = 8L; // 테스트용
         Long userNumber = 1L; // 테스트용
 
         projectDTO.setProjectNumber(projectNumber);
@@ -54,6 +53,7 @@ public class LitController {
 
         projectDTO = litService.read(projectDTO);
         projectDTO.setProjectFile( litService.getImg( projectNumber ) ); // 파일 이미지
+        projectDTO.setProjectNumber(projectNumber);
 
         model.addAttribute("projectDTO", projectDTO);
         return "/project/projectInfo";
