@@ -45,9 +45,6 @@
                             </figure>
                     </div>
                 </div>
-
-                <div th:each="item:${nicknameAndMessage}" class="colBox dmBox" th:id="${item.get('NICKNAME')}"></div>
-
                 <!-- 첫 페이지시 보여지는 창-->
                 <div class="colBox firstBox on">
                     <div>
@@ -70,6 +67,8 @@
                         </div>
                     </div>
                 </div>
+
+                <div th:each="item:${nicknameAndMessage}" class="colBox dmBox" th:id="${item.get('NICKNAME')}"></div>
 
             </div>
         </section>
