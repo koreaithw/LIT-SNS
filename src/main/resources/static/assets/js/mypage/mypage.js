@@ -95,23 +95,30 @@ $(".btn__x").on("click", function () {
 
 $(document).ready(function () {
   let $imgAr = $(".medal-icon-col > img");
+  myPageAjaxService.getMedal(mypageUser, function(medals){
+    let $imgAr = $(".medal-icon-col > img");
+    for(let i=0; i<medals.length; i++){
+      $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal" + medals[i] + ".png");
+      // $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal.png");
+    }
 
-  // 해제된 메달에 medal__unlock 클래스 부여(마우스 오버 이벤트 등등에 사용)
-  $imgAr
-    .filter((idx, img) => {
-      return img.src.substring(img.src.lastIndexOf("/") + 1) != "padlock.png";
-    })
-    .each((idx, img) => {
-      $(img).parent(".medal-icon-col").addClass("medal__unlock");
-    });
+    // 해제된 메달에 medal__unlock 클래스 부여(마우스 오버 이벤트 등등에 사용)
+    $imgAr
+        .filter((idx, img) => {
+          return img.src.substring(img.src.lastIndexOf("/") + 1) != "padlock.png";
+        })
+        .each((idx, img) => {
+          $(img).parent(".medal-icon-col").addClass("medal__unlock");
+        });
 
+      //해제된 메달 수 세기
+      let medalNumber = $(".medal__unlock").length || 0;
+      $("#medal-selected_number").text(medalNumber);
+  });
   //모달창 열면 내 대표 메달 이미지 가져오기
   //프론트 작업에서는 아이디 옆 메달을 가져왔지만 DB에서 가져오는게 좋을거 같음
   $(".medal-selected_medal > img").attr("src", $("#medalImg").attr("src"));
   setMedalMedal();
-  //해제된 메달 수 세기
-  let medalNumber = $(".medal__unlock").length;
-  $("#medal-selected_number").text(medalNumber);
 
   //클릭하면 내 대표메달로 변경하기
   $(".medal__unlock").on("click", function () {
@@ -141,9 +148,9 @@ $(document).ready(function () {
 
 // 미획득 메달 정보띄우기
 $(".medal-icon-col").on("click", function () {
-  if ($(this).hasClass("medal__unlock")) {
-    return;
-  }
+  // if ($(this).hasClass("medal__unlock")) {
+  //   return;
+  // }
   $(".medal__unlock").removeClass("medal__check");
   let $img = $(this).find("img");
   let $bigImg = $(".medal-selected_medal > img");

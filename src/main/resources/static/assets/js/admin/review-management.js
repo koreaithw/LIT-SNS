@@ -25,15 +25,31 @@ window.onload = function () {
     $(".menu-box").eq(4).addClass("menu-box__select");
 };
 
+$(".search-button").on("click", function(e){
+    e.preventDefault();
+    pageNum = 1;
+    searchReview(pageNum);
+})
 
-
-
+//============== 정렬 버튼 =======================
+let desc = false;
+$(".order_btn").on("click",function () {
+    let name = $(this).attr("name");
+    $(".order").val(name);
+    $(".desc").val(desc);
+    console.log($(".order").val());
+    console.log($(".desc").val());
+    desc = !desc;
+    searchReview(pageNum);
+})
 
 
 //================================ ajax =========================================
 
 function searchReview(page) {
     $(".list-table tr:not(.table-head)").html("");
+    $("input[type=checkbox]").prop("checked", false);
+
     adminService.searchReview({
         page : page,
         startDate: $("input[name='startDate']").val(),
@@ -41,7 +57,9 @@ function searchReview(page) {
         type: $("select[name='type']").val(),
         keyword: $("input[name='keyword']").val(),
         category: $("select[name='category']").val(),
-        status: $("input[name='status']:checked").val()
+        status: $("input[name='status']:checked").val(),
+        order : $(".order").val(),
+        desc : $(".desc").val()
     }, function (result) {
         if(result == null || result.length == 0){
             $(".searchResult").text(0);

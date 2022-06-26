@@ -24,7 +24,6 @@ $(document).ready(function(){
     //labels는 x축 데이터
     //data는 그래프에 그려질 값
 
-
     makechart("chart__recent", {
         label: "최근 가입한 회원",
         labels: getDateInfo(),
@@ -37,20 +36,36 @@ $(document).ready(function(){
     // });
 })
 
+$(".search-button").on("click", function(e){
+    e.preventDefault();
+    pageNum = 1;
+    searchUser(pageNum);
+})
+let desc = false;
+//============== 정렬 버튼 =======================
+$(".order_btn").on("click",function () {
+    let name = $(this).attr("name");
+    $(".order").val(name);
+    $(".desc").val(desc);
+    desc = !desc;
+    searchUser(pageNum)
+})
 
 //================================ ajax =========================================
 
 //검색하기
 function searchUser(page) {
     $(".list-table tr:not(.table-head)").html("");
-
+    $("input[type=checkbox]").prop("checked", false);
     adminService.searchUser({
         page : page,
         startDate: $("input[name='startDate']").val(),
         endDate: $("input[name='endDate']").val(),
         type: $("select[name='type']").val(),
         keyword: $("input[name='keyword']").val(),
-        kakao: $("input[name='kakao']:checked").val()
+        kakao: $("input[name='kakao']:checked").val(),
+        order : $(".order").val(),
+        desc : $(".desc").val()
     }, function (result) {
         //검색 결과 건수
         if(result == null || result.length == 0){

@@ -163,3 +163,22 @@ input[type="checkbox"]:checked {
 }
 
 /* ======================= */
+/*정렬버튼 관련*/
+.order_btn{
+  position: relative;
+}
+.order_btn:hover{
+  cursor : pointer;
+  background-color: #c9c9c9;
+}
+.order_btn::before{
+  content: "";
+  background-image: url('/images/admin/sort-arrow.png');
+  background-size: 15px;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-repeat: no-repeat;
+  right: 8px;
+  margin-top: 1px;
+}
