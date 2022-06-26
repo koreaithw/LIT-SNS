@@ -12,11 +12,30 @@
         VALUES (SEQ_ACHIEVEMENT.NEXTVAL, #{userNumber}, #{medal})
     </insert>
 
-    <select id="medal4Condition">
+    <select id="medal4Condition" resultType="_int">
         SELECT COUNT(MEDAL)
         FROM TBL_ACHIEVEMENT
-        WHERE USER_NUMBER = #{userNumber};
+        WHERE USER_NUMBER = #{userNumber}
     </select>
 
+    <select id="medal5Condition" resultType="_int">
+        SELECT COUNT(REVIEW_NUMBER)
+        FROM TBL_REVIEW
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+
+    <select id="medal8Condition" resultType="_int">
+        SELECT COUNT(tr.REVIEW_NUMBER)
+        FROM TBL_REVIEW tr, TBL_PROJECT tp
+        WHERE (tr.USER_NUMBER = #{userNumber}) AND (tp.USER_NUMBER = #{userNumber}) AND
+              tp.CATEGORY = #{category}
+    </select>
+
+
+    <select id="medalInsertBlock" resultType="_int">
+        SELECT COUNT(MEDAL)
+        FROM TBL_ACHIEVEMENT
+        WHERE USER_NUMBER = #{userNumber} AND MEDAL = #{medal}
+    </select>
 
 </mapper>

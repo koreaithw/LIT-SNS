@@ -25,4 +25,11 @@ public class AchievementDAO {
     }
     //4번째 메달 조건 - 메달 10개 모으기
     public int medal4Condition(Long userNumber) { return achievementMapper.medal4Condition(userNumber); }
+    // 5번째 메달 조건 - 전체 카테고리 litUp 100회 성공
+    public int medal5Condition(Long userNumber) {return achievementMapper.medal5Condition(userNumber); }
+    // 8번째 메달 조건 - 운동 카테고리 10회 성공하기
+    public int medal8Condition(Long userNumber, String category) {return achievementMapper.medal8Condition(userNumber, category); }
+    // 메달 1번이상 인서트 되는 것 막아주기
+    public int medalInsertBlock(Long userNumber, String medal) {return achievementMapper.medalInsertBlock(userNumber, medal); }
+
 }

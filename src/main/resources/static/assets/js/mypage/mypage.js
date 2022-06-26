@@ -95,12 +95,22 @@ $(".btn__x").on("click", function () {
 
 $(document).ready(function () {
   let $imgAr = $(".medal-icon-col > img");
+
+  // 메달 목록 띄워주는 ajax
   myPageAjaxService.getMedal(mypageUser, function(medals){
     let $imgAr = $(".medal-icon-col > img");
+
+    /*########################메달 4번##########################*/
+    if(medals.length >= 10){
+      console.log("메달 10개 모으기 성공");
+      myPageAjaxService.get4Medal(mypageUser)
+    }
+
     for(let i=0; i<medals.length; i++){
       $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal" + medals[i] + ".png");
       // $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal.png");
     }
+    $($imgAr[3]).data("bar", medals.length + "/10");
 
     // 해제된 메달에 medal__unlock 클래스 부여(마우스 오버 이벤트 등등에 사용)
     $imgAr
@@ -144,6 +154,22 @@ $(document).ready(function () {
     $("#medalImg").attr("src", src);
     $(".btn__x").trigger("click");
   });
+
+    /*########################메달 5번##########################*/
+    myPageAjaxService.get5Medal(mypageUser, function (result) {
+      $($imgAr[4]).data("bar", result + "/100");
+    });
+
+    /*########################메달 8번##########################*/
+    myPageAjaxService.get8Medal({
+      userNumber: mypageUser,
+      category: "exercise"
+    },function (result) {
+      console.log("마이페이지자바스크립트 들어옴");
+      $($imgAr[7]).data("bar", result + "/5");
+    });
+
+
 });
 
 // 미획득 메달 정보띄우기

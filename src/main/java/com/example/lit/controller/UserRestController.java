@@ -3,6 +3,7 @@ package com.example.lit.controller;
 import com.example.lit.domain.vo.user.UserFileVO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.service.User.UserService;
+import com.example.lit.service.review.LitUpService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -95,4 +96,60 @@ public class UserRestController {
         return userVO;
     }
 
+    // 메달 4번 조건 달성 했을 때
+    @GetMapping("/get4Medal/{userNumber}")
+    public void get4Medal(@PathVariable("userNumber") Long userNumber){
+
+        int medalCnt = userService.medalInsertBlock(userNumber,"4");
+
+        if(medalCnt == 0) {
+            userService.insertMedal(userNumber, "4");
+        }
+
+    }
+
+    // 메달 5번 달성
+    @GetMapping("/get5Medal/{userNumber}")
+    public int get5Medal(@PathVariable("userNumber") Long userNumber){
+        int reviewCnt = userService.medal5Condition(userNumber);
+        int medalCnt = userService.medalInsertBlock(userNumber,"5");
+        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        log.info(medalCnt + "#######################$$$$$$$$$$$$$$$$$$$#########");
+        if(medalCnt == 0) {
+            log.info(medalCnt + "################################");
+            if (reviewCnt >= 100) {
+                userService.insertMedal(userNumber, "5");
+            }
+        } else{
+            reviewCnt = 100; // 달성률 게이지 넘어가는 것 방지
+        }
+
+        return reviewCnt;
+    }
+
+    // 메달 8번 달성
+    @GetMapping("/get8Medal/{userNumber}/{categoryName}")
+    public int get8Medal(@PathVariable("userNumber") Long userNumber, @PathVariable("categoryName") String category){
+        int exerciseCategoryCnt = userService.medal8Condition(userNumber, category);
+        int medalCnt = userService.medalInsertBlock(userNumber,"8");
+
+        if(medalCnt == 0) {
+            if (exerciseCategoryCnt >= 5) {
+                log.info("55555");
+                userService.insertMedal(userNumber, "8");
+                log.info("왜 안돼");
+                exerciseCategoryCnt = 5;
+            }
+        } else{
+            exerciseCategoryCnt = 5; // 달성률 게이지 넘어가는 것 방지
+        }
+
+
+        return exerciseCategoryCnt;
+    }
 }

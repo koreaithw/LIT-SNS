@@ -7,6 +7,7 @@ import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.domain.vo.user.UserFileVO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.domain.vo.user.achievement.AchievementVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -101,9 +102,19 @@ public interface UserService {
 //    *************************************
     public List<String> getMedal(Long userNumber);
 
+    //메달 획득
+    public void insertMedal(@Param("userNumber") Long userNumber, @Param("medal") String medal);
+
     //4번째 메달 조건 - 메달 10개 모으기
     public int medal4Condition(Long userNumber);
 
+    // 5번째 메달 조건 - 전체 카테고리 litUp 100회 성공
+    public int medal5Condition(Long userNumber);
 
+    // 8번째 메달 조건 - 운동 카테고리 10회 성공하기
+    public int medal8Condition(Long userNumber, String category);
+
+    // 메달 1번이상 인서트 되는 것 막아주기
+    public int medalInsertBlock(Long userNumber, String medal);
 
 }

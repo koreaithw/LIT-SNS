@@ -29,12 +29,6 @@ public class UserServiceImple implements UserService{
     private final AlertDAO alertDAO;
 
     @Override
-    public void register(UserVO userVO) {
-        userDAO.register(userVO);
-        achievementDAO.insertMedal(userVO.getUserNumber(), "1");
-    }
-
-    @Override
     public void kakaoRegister(UserVO userVO) {;}
 
     @Override
@@ -202,13 +196,35 @@ public class UserServiceImple implements UserService{
 //    *************************************
 //    MEDAL 메달
 //    *************************************
+
+    /* 회원가입시 메달1 획득 */
+    @Override
+    public void register(UserVO userVO) {
+        userDAO.register(userVO);
+        achievementDAO.insertMedal(userVO.getUserNumber(), "1");
+    }
+
     @Override
     public List<String> getMedal(Long userNumber) {
         return userDAO.selectAchievementByUserNumber(userNumber);
     }
 
     @Override
+    public void insertMedal(Long userNumber, String medal) {
+        achievementDAO.insertMedal(userNumber, medal);
+    }
+
+    @Override
     public int medal4Condition(Long userNumber) { return achievementDAO.medal4Condition(userNumber); }
+
+    @Override
+    public int medal5Condition(Long userNumber) { return achievementDAO.medal5Condition(userNumber); }
+
+    @Override
+    public int medal8Condition(Long userNumber, String category) { return achievementDAO.medal8Condition(userNumber, category); }
+
+    @Override
+    public int medalInsertBlock(Long userNumber, String medal) { return achievementDAO.medalInsertBlock(userNumber, medal); }
 
 
 }
