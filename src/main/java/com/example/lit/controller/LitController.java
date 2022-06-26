@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,22 +38,23 @@ public class LitController {
         log.info(projectVO.toString());
         log.info(projectVO.getProjectFile() + "");
         litService.register(projectVO);
+
         return "/main/main";
     }
 
     // ======= 페이지 상세보기 ========
-    @GetMapping("/info")
-    public String info(Long projectNumber, ProjectDTO projectDTO, HttpSession session, Model model){
-        Long userNumber = (Long)session.getAttribute("userNumber");
+    @GetMapping("/info/{proNum}")
+    public String info(@PathVariable("proNum") Long projectNumber, ProjectDTO projectDTO, HttpSession session, Model model){
+//        Long userNumber = (Long)session.getAttribute("userNumber");
 
-        projectNumber = 1L; // 테스트용
-        userNumber = 1L; // 테스트용
+        Long userNumber = 1L; // 테스트용
 
         projectDTO.setProjectNumber(projectNumber);
         projectDTO.setUserNumber(userNumber);
 
         projectDTO = litService.read(projectDTO);
         projectDTO.setProjectFile( litService.getImg( projectNumber ) ); // 파일 이미지
+        projectDTO.setProjectNumber(projectNumber);
 
         model.addAttribute("projectDTO", projectDTO);
         return "/project/projectInfo";

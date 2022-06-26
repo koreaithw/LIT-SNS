@@ -3,6 +3,8 @@ package com.example.lit.service.project;
 import com.example.lit.domain.dao.project.ParticipationDAO;
 import com.example.lit.domain.dao.project.ProjectDAO;
 import com.example.lit.domain.dao.project.ProjectFileDAO;
+import com.example.lit.domain.dao.user.achievement.AchievementDAO;
+import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ParticipationVO;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 public class LitServiceImple implements LitService{
     private final ProjectDAO projectDAO;
     private final ProjectFileDAO projectFileDAO;
+    private final AchievementDAO achievementDAO;
     private final ParticipationDAO participationDAO;
 
 
@@ -44,6 +47,11 @@ public class LitServiceImple implements LitService{
 
             projectFileDAO.register(projectFileVO);
         }
+
+        // 2번째 메달 - 첫 lit 생성하기
+        if(getTotalByUserNumber(projectVO.getUserNumber()) == 1){
+            achievementDAO.insertMedal(projectVO.getUserNumber(), "2");
+        }
     }
 
     @Override
@@ -59,6 +67,7 @@ public class LitServiceImple implements LitService{
             projectDTO.setReviewCount( projectDAO.reviewTotal(projectNumber) );         // 게시물 토탈
             projectDTO.setParticipationCount( projectDAO.challengeTotal(projectNumber));// 참가자 토탈
             projectDTO.setParticipationStatus( participationDAO.select( participationVO ) );
+            projectDTO.setUserNumber( userNumber );
         return projectDTO;
     }
 
@@ -122,5 +131,8 @@ public class LitServiceImple implements LitService{
 
         return result;
     }
+
+    @Override
+    public int getTotalByUserNumber(Long userNumber) { return projectDAO.getTotalByUserNumber(userNumber); }
 
 }

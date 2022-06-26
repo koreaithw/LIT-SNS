@@ -57,11 +57,16 @@ figure{
   flex-wrap: wrap;
   margin-bottom: 30px;
 }
+
 .infoKey{
   width: 100%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.infoKey.infoTitel{
   font-size: 1.5rem;
   font-weight: 800;
-  margin-bottom: 10px;
 }
 
 label.btn{
@@ -91,7 +96,7 @@ label[for='btn1']:hover{
 .sec2 > div{
   padding: 20px 0;
   width: 100%;
-  column-count: 4;
+  column-count: 3;
   column-gap: 5px;
   /* transition: 1s ease; */
 }
@@ -99,7 +104,7 @@ label[for='btn1']:hover{
 .sec2 > div > figure {
   padding: 5px;
   margin-bottom: 3px;
-  box-shadow: 2px 2px 5px rgb(0 0 0 / 10%);
+  /*box-shadow: 2px 2px 5px rgb(0 0 0 / 10%);*/
 }
 figure >a {
   overflow: hidden;
@@ -138,9 +143,9 @@ aside.modalWindow{
 
 /* ------------------------- */
 section {
-  border-left: 1px solid #e5e5e5;
-  border-right: 1px solid #e5e5e5;
-  padding: 40px;
+  /*border-left: 1px solid #e5e5e5;*/
+  /*border-right: 1px solid #e5e5e5;*/
+  padding: 10px 40px;
 }
 
 .sec1>div {

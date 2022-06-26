@@ -2,6 +2,15 @@
 
 let myPageAjaxService = (function () {
 
+    function getMedal(userNumber, callback){
+        console.log("getMedal................");
+        $.getJSON("/user/getMedal/" + userNumber, function(medals){
+            if(callback){
+                callback(medals);
+            }
+        });
+    }
+
     //모달 - 팔로우 삭제
     function removeFollower(followerNumber, followingNumber, callback) {
         console.log("removeFollower..........");
@@ -17,6 +26,6 @@ let myPageAjaxService = (function () {
         });
     }
 
-    return {removeFollower: removeFollower}
+    return {removeFollower: removeFollower, getMedal: getMedal}
 
 })();

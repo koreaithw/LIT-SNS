@@ -26,13 +26,29 @@ window.onload = function () {
     $(".menu-box").eq(5).addClass("menu-box__select");
 };
 
-
-
+$(".search-button").on("click", function(e){
+    e.preventDefault();
+    pageNum = 1;
+    searchReport(pageNum);
+})
+//============== 정렬 버튼 =======================
+let desc = false;
+$(".order_btn").on("click",function () {
+    let name = $(this).attr("name");
+    $(".order").val(name);
+    $(".desc").val(desc);
+    console.log($(".order").val());
+    console.log($(".desc").val());
+    desc = !desc;
+    searchReport(pageNum);
+})
 
 //================================ ajax =========================================
 
 function searchReport(page) {
     $(".list-table tr:not(.table-head)").html("");
+    $("input[type=checkbox]").prop("checked", false);
+
 
     adminService.searchReport({
         page : page,
@@ -41,6 +57,8 @@ function searchReport(page) {
         type: $("select[name='type']").val(),
         keyword: $("input[name='keyword']").val(),
         category: $("select[name='category']").val(),
+        order : $(".order").val(),
+        desc : $(".desc").val()
     }, function (result) {
 
         if(result == null || result.length == 0){

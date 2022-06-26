@@ -19,5 +19,10 @@ public class AchievementDAO {
     public List<AchievementVO> getList(Long userNumber){ return achievementMapper.getList(userNumber); }
     //메달 하나 보기
     public AchievementVO read(Long userNumber){ return achievementMapper.get(userNumber); }
-
+    //메달 획득
+    public void insertMedal(Long userNumber, String medal){
+        achievementMapper.insertMedal(userNumber, medal);
+    }
+    //4번째 메달 조건 - 메달 10개 모으기
+    public int medal4Condition(Long userNumber) { return achievementMapper.medal4Condition(userNumber); }
 }

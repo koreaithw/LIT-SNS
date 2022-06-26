@@ -34,6 +34,8 @@
 <body>
 <!--<header></header>-->
 <div class="main">
+    <input type="text" class="order" hidden>
+    <input type="text" class="desc" hidden>
     <div class="wrapper">
         <div class="inner">
             <section class="sec1 flex">
@@ -165,7 +167,6 @@
                                         <button
                                                 type="button"
                                                 class="search-button btn background__red"
-                                                onclick="searchProject()"
                                         >
                                             검색
                                         </button>
@@ -225,14 +226,14 @@
                                                 <th>
                                                     <input type="checkbox" class="check-all"/>
                                                 </th>
-                                                <th>번호</th>
-                                                <th>카테고리</th>
-                                                <th>제목</th>
-                                                <th>작성자</th>
+                                                <th class="order_btn" name="project_number">번호</th>
+                                                <th class="order_btn" name="category">카테고리</th>
+                                                <th class="order_btn" name="title">제목</th>
+                                                <th class="order_btn" name="email">작성자</th>
                                                 <th>미리보기</th>
-                                                <th>시작일</th>
-                                                <th>종료일</th>
-                                                <th>상태</th>
+                                                <th class="order_btn" name="start_date">시작일</th>
+                                                <th class="order_btn" name="end_date">종료일</th>
+                                                <th class="order_btn" name="status">상태</th>
                                             </tr>
                                             <!-- 리스트 불러와서 반복문으로 페이지당 10개씩 -->
 

@@ -13,6 +13,7 @@ public class ReviewDTO{
     private Long projectNumber;
     private String content;
     private String registerDate;
+    private String nickname;
 
     private List<ReviewFileVO> reviewFileList;
 

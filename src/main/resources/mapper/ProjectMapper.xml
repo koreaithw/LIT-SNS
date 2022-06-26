@@ -50,7 +50,7 @@
 
     <select id="searchProject" resultType="projectDTO">
         SELECT TOTAL, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, APPLY_COUNT,
-        AUTHENTICATION, START_DATE, END_DATE, STATUS, USER_NUMBER,
+        AUTHENTICATION, TO_CHAR(START_DATE, 'yyyy-mm-dd') AS START_DATE, TO_CHAR(END_DATE, 'yyyy-mm-dd') AS END_DATE, STATUS, USER_NUMBER,
         EMAIL,
         PARTICIPATION_COUNT
         FROM(
@@ -105,6 +105,16 @@
                         </when>
                     </choose>
                 </trim>
+                <if test="order != null and order != ''">
+                    <choose>
+                        <when test="desc == true">
+                            ORDER BY ${order} DESC
+                        </when>
+                        <otherwise>
+                            ORDER BY ${order}
+                        </otherwise>
+                    </choose>
+                </if>
             )
             <![CDATA[
                 WHERE ROWNUM <= #{pageNum} * #{amount}
@@ -116,7 +126,9 @@
     </select>
 
     <select id="get" resultType="projectDTO">
-        SELECT PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, START_DATE, END_DATE
+        SELECT PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION,
+        TO_CHAR(START_DATE, 'yyyy-mm-dd') START_DATE,
+        TO_CHAR(END_DATE, 'yyyy-mm-dd') END_DATE
         FROM TBL_PROJECT WHERE PROJECT_NUMBER = #{projectNumber}
     </select>
 
@@ -164,7 +176,7 @@
                             ORDER BY APPLY_COUNT DESC
                         </when>
                          <when test="order == 'new'">
-                             ORDER BY START_DATE
+                             ORDER BY START_DATE DESC
                          </when>
                     </choose>
                 </if>
@@ -176,6 +188,12 @@
         <![CDATA[
     WHERE RN > (#{pageNum} - 1) * #{amount}
     ]]>
+    </select>
+
+    <!-- 메달2 조건 관련   -->
+    <select id="getTotalByUserNumber" resultType="_int">
+        SELECT COUNT(PROJECT_NUMBER) FROM TBL_PROJECT
+        WHERE USER_NUMBER = #{userNumber}
     </select>
 
 
