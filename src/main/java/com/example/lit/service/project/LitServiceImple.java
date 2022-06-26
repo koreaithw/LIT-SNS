@@ -67,6 +67,7 @@ public class LitServiceImple implements LitService{
             projectDTO.setReviewCount( projectDAO.reviewTotal(projectNumber) );         // 게시물 토탈
             projectDTO.setParticipationCount( projectDAO.challengeTotal(projectNumber));// 참가자 토탈
             projectDTO.setParticipationStatus( participationDAO.select( participationVO ) );
+            projectDTO.setUserNumber( userNumber );
         return projectDTO;
     }
 

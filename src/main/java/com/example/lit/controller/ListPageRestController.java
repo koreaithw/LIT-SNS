@@ -30,7 +30,7 @@ public class ListPageRestController {
     // 프로젝트 리스트
     @GetMapping("/lits/{order}/{cate}/{page}")
     public List<ProjectVO> lits(@PathVariable("page") int pageNum, @PathVariable("cate") String category, @PathVariable("order") String order){
-        ListDTO listDTO = new ListDTO(pageNum, 3);
+        ListDTO listDTO = new ListDTO(pageNum, 9);
         listDTO.setOrder(order);
         listDTO.setCategory(category);
         List<ProjectVO> projectVOS = litServiceImple.getList(listDTO);
@@ -44,7 +44,7 @@ public class ListPageRestController {
     //litup탭 리스트
     @GetMapping("/litups/{order}/{cate}/{page}")
     public List<ReviewDTO> litups(@PathVariable("page") int pageNum, @PathVariable("cate") String category, @PathVariable("order") String order){
-        ListDTO listDTO = new ListDTO(pageNum, 3);
+        ListDTO listDTO = new ListDTO(pageNum, 9);
         listDTO.setOrder(order);
         listDTO.setCategory(category);
 
