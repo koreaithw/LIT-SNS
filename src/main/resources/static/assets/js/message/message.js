@@ -66,7 +66,6 @@ $("a#modalClose").on("click", function (e) {
 
 // 메세지 내역 선택 시 리스트 가져오기
 $(".dmBtn").on("click", "a", function (e) {
-    console.log("여기는 다른곳")
     e.preventDefault();
 
     let receiveUserNumber = $(this).attr('id');
@@ -79,7 +78,6 @@ $(".dmBtn").on("click", "a", function (e) {
         $('.dmWrap').find("#" + receiveNickname).addClass("on");
     }
     $("#modal1").removeClass("on");
-
 
     messageService.getMessageList({
         sendUserNumber: userNumber,
@@ -140,7 +138,7 @@ $(".dmBtn").on("click", "a", function (e) {
                 '<div class="textInput">' +
                 '<div>' +
                 '<div class="iconBox">' +
-                '<a class="icon_happy"></a>' +
+                '<a class="icon_happy" onclick="enterSmile(this)"></a>' +
                 '</div>' +
                 '<div class="inputBox">' +
                 '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
@@ -322,7 +320,7 @@ function startChat(receiveUserNumber, nick) {
                     '<div class="textInput">' +
                     '<div>' +
                     '<div class="iconBox">' +
-                    '<a class="icon_happy"></a>' +
+                    '<a class="icon_happy" onclick="enterSmile(this)"></a>' +
                     '</div>' +
                     '<div class="inputBox">' +
                     '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
@@ -341,6 +339,69 @@ function startChat(receiveUserNumber, nick) {
                 $('.dmWrap').find("#" + receiveNickname).addClass("on");
             }
         } else {
+            if ($('.dmList > figure').find('#' + receiveUserNumber).length == 0) {
+                let str = '<figure class="dmBtn">' +
+                    '<a id="' + receiveUserNumber + '" class="userDMList" onclick="goMessage(this)">' +
+                    '<div class="dmImg">' +
+                    '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                    '</div>' +
+                    '<div class="dmData">' +
+                    '<p>' + receiveNickname + '</p>' +
+                    '<p class="recentMessage">' + result[result.length - 1].content + '</p>' +
+                    '<input type="hidden" id="' + roomId + '">' +
+                    '</div>' +
+                    '</a>' +
+                    '</figure>'
+                if ($('.dmList').children().length == 0) {
+                    $('.dmList').html(str);
+                } else {
+                    $('.dmList').append(str)
+                }
+            }
+
+            if ($('.dmWrap').find("#" + receiveNickname).length == 0) {
+                let msg = '<div class="colBox dmBox on" id="' + receiveNickname + '">' +
+                    '<div class="contentTop">' +
+                    '<div>' +
+                    '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                    '</div>' +
+                    '<div>' +
+                    '<span>' + receiveNickname + '</span>' +
+                    '</div>' +
+                    '<div class="iconBox">' +
+                    '<a class="icon_info" href="/message/message">' +
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">' +
+                    '<path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>' +
+                    '<path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>' +
+                    '</svg>' +
+                    '</a>' +
+                    '</div>' +
+                    '<div>' +
+                    '<input type="hidden" id="' + receiveUserNumber + '" class="' + roomId + '">' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="content" onscroll="getMoreMessage(this)">' +
+                    '<div class="">' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="textInput">' +
+                    '<div>' +
+                    '<div class="iconBox">' +
+                    '<a class="icon_happy" onclick="enterSmile(this)"></a>' +
+                    '</div>' +
+                    '<div class="inputBox">' +
+                    '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
+                    '</div>' +
+                    '<div class="iconBox">' +
+                    '<a class="icon_heart_white"  onclick="enterHeart(this)"></a>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
+                $('.dmWrap').append(msg)
+            }
+
+
             let message = "";
             message +=
                 '<div class="contentTop">' +
@@ -394,7 +455,7 @@ function startChat(receiveUserNumber, nick) {
                 '<div class="textInput">' +
                 '<div>' +
                 '<div class="iconBox">' +
-                '<a class="icon_happy"></a>' +
+                '<a class="icon_happy" onclick="enterSmile(this)"></a>' +
                 '</div>' +
                 '<div class="inputBox">' +
                 '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
@@ -431,44 +492,79 @@ function goMessage(e) {
     }
     $("#modal1").removeClass("on");
 
-    let msg =
-        '<div class="contentTop">' +
-        '<div>' +
-        '<img src="/images/project/domImg/indi01.webp" alt="">' +
-        '</div>' +
-        '<div>' +
-        '<span>' + receiveNickname + '</span>' +
-        '</div>' +
-        '<div class="iconBox">' +
-        '<a class="icon_info" href="/message/message">' +
-        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">' +
-        '<path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>' +
-        '<path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>' +
-        '</svg>' +
-        '</a>' +
-        '</div>' +
-        '<div>' +
-        '<input type="hidden" id="' + receiveUserNumber + '" class="' + roomId + '">' +
-        '</div>' +
-        '</div>' +
-        '<div class="content" onscroll="getMoreMessage(this)">' +
-        '<div class="">' +
-        '</div>' +
-        '</div>' +
-        '<div class="textInput">' +
-        '<div>' +
-        '<div class="iconBox">' +
-        '<a class="icon_happy"></a>' +
-        '</div>' +
-        '<div class="inputBox">' +
-        '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
-        '</div>' +
-        '<div class="iconBox">' +
-        '<a class="icon_heart_white"  onclick="enterHeart(this)"></a>' +
-        '</div>' +
-        '</div>' +
-        '</div>'
-    $('.dmWrap').find("#" + receiveNickname).html(msg);
+    messageService.getMessageList({
+        sendUserNumber: userNumber,
+        receiveUserNumber: receiveUserNumber,
+        pageNum: 1
+    }, function (result) {
+        if (result.length != 0) {
+            let message = "";
+            message +=
+                '<div class="contentTop">' +
+                '<div>' +
+                '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                '</div>' +
+                '<div>' +
+                '<span>' + receiveNickname + '</span>' +
+                '</div>' +
+                '<div class="iconBox">' +
+                '<a class="icon_info" href="/message/message">' +
+                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">' +
+                '<path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>' +
+                '<path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>' +
+                '</svg>' +
+                '</a>' +
+                '</div>' +
+                '<div>' +
+                '<input type="hidden" id="' + receiveUserNumber + '" class="' + roomId + '">' +
+                '</div>' +
+                '</div>' +
+                '<div class="content" onscroll="getMoreMessage(this)">' +
+                '<div class="' +
+                result[0].total.toString() +
+                '">';
+
+            //채팅에 맞게 순서 반대로 뿌려줌, 기본 20개
+            for (let i = result.length - 1; i >= 0; i--) {
+                if (result[i].sendUserNumber == userNumber) {
+                    message += "<div class=\"dmStyle1\">" +
+                        "<div class=\"dmImg\">" +
+                        "<img src=\"\" alt=\"\">" +
+                        "</div>" +
+                        "<div class=\"text\">" +
+                        result[i].content +
+                        "</div>" +
+                        "</div>";
+                } else {
+                    message += "<div class=\"dmStyle2\">" +
+                        "<div class=\"dmImg\">" +
+                        "<img src='/images/project/domImg/indi01.webp' alt=''>" +
+                        "</div>" +
+                        "<div class=\"text\">" +
+                        result[i].content +
+                        "</div>" +
+                        "</div>";
+                }
+            }
+            message += '</div>' +
+                '</div>' +
+                '<div class="textInput">' +
+                '<div>' +
+                '<div class="iconBox">' +
+                '<a class="icon_happy" onclick="enterSmile(this)"></a>' +
+                '</div>' +
+                '<div class="inputBox">' +
+                '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
+                '</div>' +
+                '<div class="iconBox">' +
+                '<a class="icon_heart_white" onclick="enterHeart(this)"></a>' +
+                '</div>' +
+                '</div>' +
+                '</div>'
+
+            $('.dmWrap').find("#" + receiveNickname).html(message);
+        }
+    });
 
     console.log("연결")
     if (!webSocket) {
@@ -476,11 +572,27 @@ function goMessage(e) {
     }
 }
 
-function enterHeart(key){
+function enterHeart(key) {
     let receiveNickname = $(key).closest('.textInput').siblings('.contentTop').find('span').html();
     let receiveUserNumber = $(key).closest('.textInput').siblings('.contentTop').find('input[type="hidden"]').attr('id'); // 채팅방 들어올 때 받아오기
     let roomId = $('.dmWrap').find("#" + receiveNickname).find('.contentTop').find('input[type="hidden"]').attr('class');
     let content = "❤️";
+
+    messageService.send({
+        sendUserNumber: userNumber,
+        receiveUserNumber: receiveUserNumber,
+        roomId: roomId,
+        content: content
+    });
+
+    send(roomId, nickname, receiveNickname, content);
+}
+
+function enterSmile(key){
+    let receiveNickname = $(key).closest('.textInput').siblings('.contentTop').find('span').html();
+    let receiveUserNumber = $(key).closest('.textInput').siblings('.contentTop').find('input[type="hidden"]').attr('id'); // 채팅방 들어올 때 받아오기
+    let roomId = $('.dmWrap').find("#" + receiveNickname).find('.contentTop').find('input[type="hidden"]').attr('class');
+    let content = "😊";
 
     messageService.send({
         sendUserNumber: userNumber,
