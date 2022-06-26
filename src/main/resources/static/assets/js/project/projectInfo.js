@@ -1,5 +1,5 @@
 
-let pageNum = 1; // 인증글 리스트 페이지 번호
+let projectInfoPageNum = 1; // 인증글 리스트 페이지 번호
 const contBox = $('.sec2 > div');  // 인증글 리스트 출력 위치
 
 // 첫 이미지 리스트
@@ -7,11 +7,11 @@ litUpList();
 // ajax 서버통신
 function litUpList() {
     $.ajax({
-        url: "/litUp/litInfo/" + pageNum + "/" +projectNumber1,
+        url: "/litUp/litInfo/" + projectInfoPageNum + "/" +projectNumber1,
         type: "get",
         dataType: 'json',
         success: function (result) {
-            pageNum++; // 다음 페이지 번호 지정
+            projectInfoPageNum++; // 다음 페이지 번호 지정
             litupadd(result);
         }, error: function (xhr, textStatus, errorThrown) {
             console.log('통신 실패');
@@ -40,7 +40,7 @@ function litupadd(result) {
 let timer;
 $(window).scroll(function () {
     // 라스트 페이지면 실행 불가
-    // if(pageNum == last){
+    // if(projectInfoPageNum == last){
     //     return false;
     // }
     // 현 스크롤 탑의 위치
