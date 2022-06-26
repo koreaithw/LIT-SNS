@@ -57,6 +57,7 @@ public class LitUpServiceImple implements LitUpService{
         alertVO.setAlertUser(reviewDAO.getReviewNumberForAlert(likeVO.getReviewNumber()));
         alertVO.setUserNumber(likeVO.getUserNumber());
         alertVO.setTypeAlert("like");
+        alertVO.setReviewNumber(likeVO.getReviewNumber());
         alertDAO.remove(alertDAO.getAlertNumber(alertVO));
     }
 
@@ -69,9 +70,6 @@ public class LitUpServiceImple implements LitUpService{
     public int getCheckLike(Long userNumber, Long reviewNumber) {
         return likeDAO.checkLike(userNumber, reviewNumber);
     }
-
-    @Override
-    public Long searchLike(Long alertNumber, Long userNumber) { return likeDAO.searchLike(alertNumber, userNumber); }
 
     @Override
     public void registerReply(ReplyVO replyVO) {

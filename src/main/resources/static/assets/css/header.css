@@ -502,7 +502,7 @@ svg:not(:root) {
     max-height: 362px;
     min-height: 100px;
     overflow-y: hidden;
-    width: 490px;
+    width: 520px;
 }
 
 .alterCss{
@@ -528,8 +528,10 @@ svg:not(:root) {
     margin-bottom: -15px;
 }
 
-.alterTime{
-    padding-left: 68px;
+.alterTime {
+    padding-top: 2px;
+    display: -webkit-box;
+    padding-left: 69px;
     font-size: 13px;
     padding-right: 302px;
     padding-bottom: 1px;

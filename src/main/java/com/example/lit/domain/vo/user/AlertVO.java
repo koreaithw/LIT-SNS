@@ -9,5 +9,6 @@ public class AlertVO {
     private Long alertUser;
     private Long userNumber;
     private String typeAlert;
+    private Long reviewNumber;
     private String registerDate;
 }
