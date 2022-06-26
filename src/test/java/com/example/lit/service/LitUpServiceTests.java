@@ -42,11 +42,6 @@ public class LitUpServiceTests {
     }
 
     @Test
-    public void searchLikeTest() {
-        litUpService.searchLike(1L, 2L);
-    }
-
-    @Test
     public void likeAlertTest() {
         LikeVO likeVO = new LikeVO();
         likeVO.setReviewNumber(1L);

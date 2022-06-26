@@ -22,10 +22,4 @@
         WHERE USER_NUMBER = #{userNumber} AND REVIEW_NUMBER = #{reviewNumber}
     </select>
 
-    <select id="alertSearch" resultType="long">
-        SELECT REVIEW_NUMBER
-        FROM TBL_LIKE
-        WHERE REVIEW_NUMBER = (SELECT REVIEW_NUMBER FROM TBL_REVIEW WHERE USER_NUMBER = #{alertNumber}) AND USER_NUMBER = #{userNumber}
-    </select>
-
 </mapper>
