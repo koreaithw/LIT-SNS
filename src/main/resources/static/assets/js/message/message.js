@@ -24,7 +24,7 @@ function keyEnter(key) {
     $('.dmWrap').find("#" + receiveNickname).find('.content').scrollTop($('.dmWrap').find("#" + receiveNickname).find('.content').height() + $(window).height());
     console.log("전송")
     //웹소켓 쪽 전송
-    send(roomId, nickname, content);
+    send(roomId, nickname, receiveNickname, content);
 }
 
 
@@ -335,6 +335,7 @@ function startChat(receiveUserNumber, nick) {
                     '</div>'
                 $('.dmWrap').append(msg)
             } else {
+
                 ////////////////////////////여기 이미 있어도 다시 더 도는거 고치는 중..../////////////////////
                 $('.dmWrap').find("#" + receiveNickname).siblings('.dmBox').removeClass("on");
                 $('.dmWrap').find("#" + receiveNickname).addClass("on");
@@ -488,5 +489,5 @@ function enterHeart(key){
         content: content
     });
 
-    send(roomId, nickname, content);
+    send(roomId, nickname, receiveNickname, content);
 }
