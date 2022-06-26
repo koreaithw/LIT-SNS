@@ -27,11 +27,11 @@ function start() {
 start();
 
 
-window.onload = function () {
-    $("._icon_profile").on("click", function () {
-        headerAction();
-    });
-};
+// window.onload = function () {
+//     $("._icon_profile").on("click", function () {
+//         headerAction();
+//     });
+// };
 $(document).ready(function () {
 
     $("#header").load("/src/main/resources/templates/header.html")
