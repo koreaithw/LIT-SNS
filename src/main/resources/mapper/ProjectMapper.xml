@@ -180,5 +180,11 @@
     ]]>
     </select>
 
+    <!-- 메달2 조건 관련   -->
+    <select id="getTotalByUserNumber" resultType="_int">
+        SELECT COUNT(PROJECT_NUMBER) FROM TBL_PROJECT
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+
 
 </mapper>

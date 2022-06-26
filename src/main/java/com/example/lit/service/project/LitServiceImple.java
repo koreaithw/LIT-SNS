@@ -3,6 +3,8 @@ package com.example.lit.service.project;
 import com.example.lit.domain.dao.project.ParticipationDAO;
 import com.example.lit.domain.dao.project.ProjectDAO;
 import com.example.lit.domain.dao.project.ProjectFileDAO;
+import com.example.lit.domain.dao.user.achievement.AchievementDAO;
+import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ParticipationVO;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 public class LitServiceImple implements LitService{
     private final ProjectDAO projectDAO;
     private final ProjectFileDAO projectFileDAO;
+    private final AchievementDAO achievementDAO;
     private final ParticipationDAO participationDAO;
 
 
@@ -43,6 +46,11 @@ public class LitServiceImple implements LitService{
             projectFileVO.setProjectNumber(projectVO.getProjectNumber());
 
             projectFileDAO.register(projectFileVO);
+        }
+
+        // 2번째 메달 - 첫 lit 생성하기
+        if(getTotalByUserNumber(projectVO.getUserNumber()) == 1){
+            achievementDAO.insertMedal(projectVO.getUserNumber(), "2");
         }
     }
 
@@ -123,5 +131,8 @@ public class LitServiceImple implements LitService{
 
         return result;
     }
+
+    @Override
+    public int getTotalByUserNumber(Long userNumber) { return projectDAO.getTotalByUserNumber(userNumber); }
 
 }

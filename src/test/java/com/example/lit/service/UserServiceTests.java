@@ -65,5 +65,9 @@ public class UserServiceTests {
         followVO.setFollowerNumber(3L);
         userService.follow(followVO);
     }
+    @Test
+    public void getMedalTest(){
+        userService.getMedal(2L).forEach(log::info);
+    }
 
 }

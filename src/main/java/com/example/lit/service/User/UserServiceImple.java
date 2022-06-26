@@ -31,6 +31,7 @@ public class UserServiceImple implements UserService{
     @Override
     public void register(UserVO userVO) {
         userDAO.register(userVO);
+        achievementDAO.insertMedal(userVO.getUserNumber(), "1");
     }
 
     @Override
@@ -197,4 +198,17 @@ public class UserServiceImple implements UserService{
     public Long getUserChart(String date) {
         return userDAO.getUserChart(date);
     }
+
+//    *************************************
+//    MEDAL 메달
+//    *************************************
+    @Override
+    public List<String> getMedal(Long userNumber) {
+        return userDAO.selectAchievementByUserNumber(userNumber);
+    }
+
+    @Override
+    public int medal4Condition(Long userNumber) { return achievementDAO.medal4Condition(userNumber); }
+
+
 }

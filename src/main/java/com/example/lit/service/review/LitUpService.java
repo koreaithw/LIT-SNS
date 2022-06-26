@@ -86,6 +86,8 @@ public interface LitUpService {
     public Long getReportChart(String date);
     // 리뷰 목록 가져오기2(테스트)
     public List<ReviewDTO> getMainList(ListDTO listDTO);
+    // 3번째 메달 - 첫 lit up 작성하기
+    public int getTotalByUserNumber(Long userNumber);
 
     // 알림 목록 가겨오기
     public List<AlertDTO> getAlertList(Long userNumber);
