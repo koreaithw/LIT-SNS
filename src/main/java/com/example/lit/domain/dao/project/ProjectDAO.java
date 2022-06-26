@@ -46,14 +46,13 @@ public class ProjectDAO {
     //메인 리스트
     public List<ProjectDTO> getMainList(ListDTO listDTO) { return projectMapper.getMainList(listDTO); }
 
-<<<<<<< HEAD
     // 2번째 메달 - 첫 lit 생성하기
     public int getTotalByUserNumber(Long userNumber){return projectMapper.getTotalByUserNumber(userNumber); }
-=======
+
     // 인증 전체 개수
     public Long reviewTotal(Long projectNumber){ return reviewMapper.reviewTotal( projectNumber ); }
     // 도전 전체 개수
     public Long challengeTotal(Long projectNumber){ return participationMapper.challengeTotal( projectNumber ); }
->>>>>>> 1b95e6407c4fe7d8110611532f7db09104f702d3
+
 
 }

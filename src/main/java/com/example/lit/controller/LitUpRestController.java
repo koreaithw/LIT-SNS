@@ -194,7 +194,7 @@ public class LitUpRestController {
 
     @GetMapping("/profilePic")
     public UserFileVO getProfile(Long userNumber){
-        log.info(userNumber.toString());
+        log.info(userNumber + "##########################");
         return userService.getImg(userNumber);
     }
 
