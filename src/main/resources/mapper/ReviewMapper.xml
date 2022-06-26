@@ -206,7 +206,7 @@
                             ORDER BY LIKE_CNT DESC
                         </when>
                         <when test="order == 'new'">
-                            ORDER BY REGISTER_DATE
+                            ORDER BY REGISTER_DATE DESC
                         </when>
                     </choose>
                 </if>
