@@ -18,7 +18,7 @@ public interface LitService {
     //    프로젝트 등록 (이미지 포함)
     public void register(ProjectVO projectVO);
     //    프로젝트 상세보기
-    public ProjectVO read(Long projectNumber);
+    public ProjectDTO read(ProjectDTO projectDTO);
 
     //    프로젝트 삭제
     public boolean remove(Long projectNumber);
@@ -47,7 +47,10 @@ public interface LitService {
     public void changeStatus(Long projectNumber, Long status);
     // 프로젝트 상태로 토탈 가져오기
     public int getTotalByStatus(Long status);
-
     //메인 리스트
     public List<ProjectDTO> getMainList(ListDTO listDTO);
+
+    // 2번째 메달 - 첫 lit 생성하기
+    public int getTotalByUserNumber(Long userNumber);
+
 }

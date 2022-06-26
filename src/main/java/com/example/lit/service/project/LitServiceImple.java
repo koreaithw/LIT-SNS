@@ -3,6 +3,7 @@ package com.example.lit.service.project;
 import com.example.lit.domain.dao.project.ParticipationDAO;
 import com.example.lit.domain.dao.project.ProjectDAO;
 import com.example.lit.domain.dao.project.ProjectFileDAO;
+import com.example.lit.domain.dao.user.achievement.AchievementDAO;
 import com.example.lit.domain.vo.Criteria;
 import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
@@ -10,7 +11,6 @@ import com.example.lit.domain.vo.project.ParticipationVO;
 import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
-import com.example.lit.domain.vo.review.ReviewDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,9 +21,11 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class LitServiceImple implements LitService{
-    private final ParticipationDAO participationDAO;
     private final ProjectDAO projectDAO;
     private final ProjectFileDAO projectFileDAO;
+    private final AchievementDAO achievementDAO;
+    private final ParticipationDAO participationDAO;
+
 
     @Override
     public List<ProjectVO> getList(ListDTO listDTO) {
@@ -50,17 +52,33 @@ public class LitServiceImple implements LitService{
 
             projectFileDAO.register(projectFileVO);
         }
+
+        // 2번째 메달 - 첫 lit 생성하기
+        if(getTotalByUserNumber(projectVO.getUserNumber()) == 1){
+            achievementDAO.insertMedal(projectVO.getUserNumber(), "2");
+        }
     }
 
     @Override
-    public ProjectVO read(Long projectNumber) {
-        return null;
+    public ProjectDTO read(ProjectDTO projectDTO) {
+        Long projectNumber = projectDTO.getUserNumber();
+        Long userNumber = projectDTO.getUserNumber();
+
+        ParticipationVO participationVO = new ParticipationVO();
+            participationVO.setProjectNumber(projectNumber);
+            participationVO.setUserNumber(userNumber);
+
+       projectDTO = projectDAO.read(projectNumber);                                     // 기본 데이터 겟
+            projectDTO.setReviewCount( projectDAO.reviewTotal(projectNumber) );         // 게시물 토탈
+            projectDTO.setParticipationCount( projectDAO.challengeTotal(projectNumber));// 참가자 토탈
+            projectDTO.setParticipationStatus( participationDAO.select( participationVO ) );
+            projectDTO.setUserNumber( userNumber );
+        return projectDTO;
     }
 
     @Override
     public boolean remove(Long projectNumber) {
-        projectDAO.remove(projectNumber);
-        return false;
+        return projectDAO.remove(projectNumber);
     }
 
     @Override
@@ -70,7 +88,7 @@ public class LitServiceImple implements LitService{
 
     @Override
     public void join(ParticipationVO participationVO) {
-
+        participationDAO.register(participationVO);
     }
 
     @Override
@@ -118,4 +136,8 @@ public class LitServiceImple implements LitService{
 
         return result;
     }
+
+    @Override
+    public int getTotalByUserNumber(Long userNumber) { return projectDAO.getTotalByUserNumber(userNumber); }
+
 }

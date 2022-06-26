@@ -10,6 +10,8 @@ public class ListDTO {
     private String order;
     private int pageNum;
     private int amount;
+    private Long projectNumber;
+
 
     public ListDTO() {
         this(1, 12);

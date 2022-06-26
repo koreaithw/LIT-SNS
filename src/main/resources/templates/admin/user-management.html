@@ -34,6 +34,9 @@
 <body>
 <!--<header></header>-->
 <div class="main">
+    <input type="text" class="order" hidden>
+    <input type="text" class="desc" hidden>
+
     <div class="wrapper">
         <div class="inner">
             <section class="sec1 flex">
@@ -184,7 +187,6 @@
                                         <button
                                                 type="button"
                                                 class="search-button btn background__red"
-                                                onclick="searchUser();"
                                         >
                                             검색
                                         </button>
@@ -231,12 +233,24 @@
                                                 <th>
                                                     <input type="checkbox" class="check-all"/>
                                                 </th>
-                                                <th>유저 번호</th>
-                                                <th>이름</th>
-                                                <th>이메일</th>
-                                                <th>닉네임</th>
-                                                <th>카카오</th>
-                                                <th>가입일</th>
+                                                <th class="order_btn" name="user_number">
+                                                    유저 번호
+                                                </th>
+                                                <th class="order_btn" name="name">
+                                                    이름
+                                                </th>
+                                                <th class="order_btn" name="email">
+                                                    이메일
+                                                </th>
+                                                <th class="order_btn" name="nickname">
+                                                    닉네임
+                                                </th>
+                                                <th class="order_btn" name="kakao">
+                                                    카카오
+                                                </th>
+                                                <th class="order_btn" name="register_date">
+                                                    가입일
+                                                </th>
                                             </tr>
 
                                             </tbody>

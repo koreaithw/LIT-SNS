@@ -25,7 +25,7 @@
                 <div class="profile2">
                     <div class="profile3">
                         <button class="profileButton">
-                            <img class="profileImg" src="/images/mypage/jennie.jpg">
+                            <img class="profileImg" src="/images/mypage/jennie.jpg" onerror="this.src='/images/main/sprofile_ex.jpg'">
                         </button>
                     </div>
                 </div>
@@ -34,8 +34,8 @@
                 <div class="sectionH2">
                     <h2 th:text="${nickname}"></h2>
                     <!-- <div class="medalImg" onclick="medalModal()" id="medalImg"></div> -->
-                    <!-- <img class="medalImg" src="/src/main/resources/static/images/mypage/medal.png" onclick="medalModal()" id="medalImg"> -->
-                    <img class="medalImg" src="/images/mypage/medal.png" id="medalImg">
+                    <!-- <img class="medalImg" src="/src/main/resources/static/images/mypage/medal1.png" onclick="medalModal()" id="medalImg"> -->
+                    <img class="medalImg" src="/images/mypage/medal1.png" id="medalImg">
                     <div class="editProfile">
                         <div class="editProfileInner"><a href="/user/editInfo" class="profileA">프로필 편집</a></div>
                     </div>
@@ -309,63 +309,60 @@
             <!-- 아래는 프론트 예시-->
             <div class="medal-icon-row">
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/medal(1).png" alt="별이 될 거야" data-detail="예술 카테고리 lit up 10회 돌파!"
-                         data-bar="10/10">
+                    <img src="/images/mypage/padlock.png" data-detail="회원가입 환영!" data-bar="1/1">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" alt="건강하게" data-detail="운동 카테고리 3회 인증하기!" data-bar="1/3">
+                    <img src="/images/mypage/padlock.png" data-detail="첫 lit 생성하기" data-bar="1/1">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" alt="코드 테스트" data-detail="테스트 열심히하기!" data-bar="205/500000">
-                </div>
-            </div>
-
-            <div class="medal-icon-row">
-                <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" alt="">
-                </div>
-                <div class="medal-icon-col">
-                    <img src="/images/mypage/medal(2).png" alt="무념무상" data-detail="정서 카테고리 lit 달성률 100%로 완료하기!"
-                         data-bar="100/100">
-                </div>
-                <div class="medal-icon-col">
-                    <img src="/images/mypage/medal(3).png" alt="공부가 제일 쉬웠어요" data-detail="공부 카테고리 lit 10회 생성하여 완료하기!"
-                         data-bar="10/10">
+                    <img src="/images/mypage/padlock.png" data-detail="첫 lit up 작성하기" data-bar="1/1">
                 </div>
             </div>
 
             <div class="medal-icon-row">
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" alt="">
+                    <img src="/images/mypage/padlock.png" data-detail="메달 10개 모으기" data-bar="10/10">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/medal.png" alt="환영합니다!" data-detail="이용해주셔서 감사합니다!">
+                    <img src="/images/mypage/padlock.png" data-detail="전체 카테고리 lit 100회 성공" data-bar="100/100">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" alt="">
+                    <img src="/images/mypage/padlock.png" data-detail="생활 카테고리 5회 인증하기" data-bar="5/5">
                 </div>
             </div>
 
             <div class="medal-icon-row">
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/gold-medal.png" alt="동메달" data-detail="메달 3개 수집하기!" data-bar="3/3">
+                    <img src="/images/mypage/padlock.png" data-detail="생활 카테고리 10회 성공하기" data-bar="10/10">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" alt="">
+                    <img src="/images/mypage/padlock.png" data-detail="운동 카테고리 5회 인증하기!" data-bar="5/5">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" alt="">
+                    <img src="/images/mypage/padlock.png" data-detail="운동 카테고리 10회 성공하기" data-bar="10/10">
+                </div>
+            </div>
+
+            <div class="medal-icon-row">
+                <div class="medal-icon-col">
+                    <img src="/images/mypage/padlock.png" data-detail="취미 카테고리 lit 5회 생성하여 완료하기" data-bar="5/5">
+                </div>
+                <div class="medal-icon-col">
+                    <img src="/images/mypage/padlock.png" data-detail="예술 카테고리 lit up 10회 돌파!" data-bar="10/10">
+                </div>
+                <div class="medal-icon-col">
+                    <img src="/images/mypage/padlock.png" data-detail="예술 카테고리 10회 성공하기" data-bar="10/10">
                 </div>
             </div>
             <div class="medal-icon-row">
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" alt="">
+                    <img src="/images/mypage/padlock.png" data-detail="정서 카테고리 lit 달성률 100%로 완료하기" data-bar="100/100">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" alt="">
+                    <img src="/images/mypage/padlock.png" data-detail="식습관 카테고리 lit 달성률 100%로 완료하기" data-bar="100/100">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" alt="">
+                    <img src="/images/mypage/padlock.png" data-detail="공부 카테고리 lit 달성률 100%로 완료하기" data-bar="100/100">
                 </div>
             </div>
             <!-- 예시 종료 -->
@@ -388,8 +385,8 @@
                         <img alt="" class="medalImgg"  onclick="representMedal(this)" src="/src/main/resources/static/images/mypage/medal (1).png" id="medal1">
                         <img alt="" class="medalImgg" onclick="representMedal(this)" src="/src/main/resources/static/images/mypage/medal (2).png" id="medal2">
                         <img alt="" class="medalImgg" onclick="representMedal(this)" src="/src/main/resources/static/images/mypage/medal (3).png" id="medal3">
-                        <img alt="" class="medalImgg" onclick="representMedal(this)" src="/src/main/resources/static/images/mypage/medal.png" id="medal4">
-                        <img alt="" class="medalImgg" onclick="representMedal(this)" src="/src/main/resources/static/images/mypage/gold-medal.png" id="medal5">
+                        <img alt="" class="medalImgg" onclick="representMedal(this)" src="/src/main/resources/static/images/mypage/medal1.png" id="medal4">
+                        <img alt="" class="medalImgg" onclick="representMedal(this)" src="/src/main/resources/static/images/mypage/gold-medal1.png" id="medal5">
                     </div>
                 </div>
             </div>
@@ -400,15 +397,13 @@
 <footer th:insert="~{/footer :: footer}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script th:inline="javascript">let mypageUser = [[${userNumber}]]; // 팔로워 모달에서 삭제할때 사용 (팔로잉 넘버)</script>
 <script src="/assets/js/mypage/mypage.js"></script>
 <script src="/assets/js/mypage/mypageAjax.js"></script>
 <script th:inline="javascript">
-
     let $followerRemoveBtn = $('.followerBtnn');
-    let mypageUser = [[${userNumber}]]; // 팔로워 모달에서 삭제할때 사용 (팔로잉 넘버)
     let $pageNum = 1;
 
-    /* ########### $followerUser -> 원하는 번호가 삭제가 안됌 ################ */
     let $followerUser = $('#removeFollower').eq(0).val(); // 팔로워 모달에서 삭제할때 사용 (팔로워 넘버)
     let $test = 3;
 

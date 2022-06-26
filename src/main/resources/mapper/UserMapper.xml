@@ -2,9 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.user.UserMapper">
     <insert id="insert">
+        <selectKey keyProperty="userNumber" resultType="long" order="BEFORE">
+            SELECT SEQ_USER.NEXTVAL FROM DUAL
+        </selectKey>
         INSERT INTO TBL_USER
         (USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD )
-        VALUES(SEQ_USER.NEXTVAL, #{email}, #{name}, #{nickname}, #{password})
+        VALUES(#{userNumber}, #{email}, #{name}, #{nickname}, #{password})
     </insert>
 
     <insert id="kakaoInsert">
@@ -114,8 +117,7 @@
     </delete>
 
     <select id="userSearch" resultType="userDTO">
-
-        SELECT TOTAL, USER_NUMBER, EMAIL, NAME, NICKNAME, CONTENT, KAKAO, REGISTER_DATE
+        SELECT TOTAL, USER_NUMBER, EMAIL, NAME, NICKNAME, CONTENT, KAKAO, TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') AS REGISTER_DATE
         FROM(
             SELECT ROWNUM RN, TOTAL, USER_NUMBER, EMAIL, NAME, NICKNAME, CONTENT, KAKAO, REGISTER_DATE
             FROM(
@@ -134,19 +136,29 @@
                     </choose>
                 </trim>
                 <trim prefix="AND">
-                    <if test="startDate != ''">
+                    <if test="startDate != null and startDate != ''">
                         <![CDATA[
                             TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') >= #{startDate}
                             ]]>
                     </if>
                 </trim>
                 <trim prefix="AND">
-                    <if test="endDate != ''">
+                    <if test="endDate != null and endDate != ''">
                         <![CDATA[
                             TO_CHAR(REGISTER_DATE, 'yyyy-mm-dd') <= #{endDate}
                             ]]>
                     </if>
                 </trim>
+                <if test="order != null and order != ''">
+                    <choose>
+                        <when test="desc == true">
+                            ORDER BY ${order} DESC
+                        </when>
+                        <otherwise>
+                            ORDER BY ${order}
+                        </otherwise>
+                    </choose>
+                </if>
             )
             <![CDATA[
             WHERE ROWNUM <= #{pageNum} * #{amount}
@@ -172,4 +184,12 @@
         WHERE PASSWORD = #{password} AND USER_NUMBER = #{userNumber}
     </select>
 
+    <!--************************************************************************************************************-->
+    <!--**********************************************MEDAL 메달****************************************************-->
+    <!--************************************************************************************************************-->
+
+    <select id="selectAchievementByUserNumber" resultType="string">
+        SELECT MEDAL FROM TBL_ACHIEVEMENT
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
 </mapper>

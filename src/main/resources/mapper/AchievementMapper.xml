@@ -6,4 +6,17 @@
         (ACHIEVEMENT_NUMBER, USER_NUMBER, MEDAL)
         VALUES(SEQ_ACHIEVEMENT.NEXTVAL, #{userNumber}, #{medal})
     </insert>
+
+    <insert id="insertMedal">
+        INSERT INTO TBL_ACHIEVEMENT(ACHIEVEMENT_NUMBER, USER_NUMBER, MEDAL)
+        VALUES (SEQ_ACHIEVEMENT.NEXTVAL, #{userNumber}, #{medal})
+    </insert>
+
+    <select id="medal4Condition">
+        SELECT COUNT(MEDAL)
+        FROM TBL_ACHIEVEMENT
+        WHERE USER_NUMBER = #{userNumber};
+    </select>
+
+
 </mapper>
