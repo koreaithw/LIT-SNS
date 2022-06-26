@@ -13,6 +13,7 @@
 </head>
 
 <body>
+<div th:fragment="certificationDetail">
 <div class="detailModalBackground">
     <button class="modalCloseButton" onclick="projectDetailModalHide()">
         <svg aria-label="닫기" class="fg7vo5n6 lrzqjn8y" color="#ffffff" fill="#ffffff" height="18" role="img" viewBox="0 0 48 48" width="18"><title>닫기</title><path clip-rule="evenodd" d="M41.8 9.8L27.5 24l14.2 14.2c.6.6.6 1.5 0 2.1l-1.4 1.4c-.6.6-1.5.6-2.1 0L24 27.5 9.8 41.8c-.6.6-1.5.6-2.1 0l-1.4-1.4c-.6-.6-.6-1.5 0-2.1L20.5 24 6.2 9.8c-.6-.6-.6-1.5 0-2.1l1.4-1.4c.6-.6 1.5-.6 2.1 0L24 20.5 38.3 6.2c.6-.6 1.5-.6 2.1 0l1.4 1.4c.6.6.6 1.6 0 2.2z" fill-rule="evenodd"></path></svg>
@@ -221,8 +222,8 @@
     </div>
     <div class="reportCloseArea" onclick="reportModalClose()"></div>
 </div>
-<input type="hidden" id="reviewNumber" value="">
-<input type="hidden" id="userNumber" value="">
+</div>
+
 <button class="projectDetailButton" onclick="projectDetailModalShow()">모달✌</button>
 
 </body>
@@ -236,8 +237,6 @@
     let pageNum = 1;
     // cretificationDetail에서 모달 버튼 매개변수로 넘어옴
     let $reviewNumber
-    // session에서 받아야함
-    let $userNumber = $("#userNumber").val();
 
     // 댓글 목록 불러오기
     function showList(page){
@@ -358,7 +357,7 @@
            let $reason = $(this).attr("value");
 
            reviewDetailService.addReport({
-                   userNumber: 1, reviewNumber: $reviewNumber, reason: $reason
+                   userNumber: use, reviewNumber: $reviewNumber, reason: $reason
                },
                function (result) {
                    reportModalClose();

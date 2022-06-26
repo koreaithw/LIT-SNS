@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="/assets/css/default.css">
     <link rel="stylesheet" href="/assets/css/project/default.css">
     <link rel="stylesheet" href="/assets/css/header.css">
-
+    <link rel="stylesheet" href="/assets/css/certification/certificationWrite.css">
+    <link rel="stylesheet" href="/assets/css/certification/fileLoad.css">
 </head>
 
 <body>
@@ -44,48 +45,6 @@
                             </figure>
                     </div>
                 </div>
-
-                <div class="colBox dmBox">
-                    <div class="contentTop">
-                        <div>
-                            <img src="/images/project/domImg/indi01.webp" alt="">
-                        </div>
-                        <div>
-                            <span></span>
-                        </div>
-                        <div class="iconBox">
-                            <a class="icon_info" href="/message/message">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
-                                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
-                                </svg>
-                            </a>
-                        </div>
-                        <div>
-                            <input type="hidden" value="">
-                        </div>
-                    </div>
-
-                    <div class="content">
-                        <div></div>
-                    </div>
-
-                    <div class="textInput">
-                        <div>
-                            <div class="iconBox">
-                                <a class="icon_happy"></a>
-                            </div>
-                            <div class="inputBox">
-                                <input class="messageWrite" type="text" placeholder="메세지를 입력하세요...">
-                            </div>
-                            <div class="iconBox">
-                                <a class="icon_heart_white"></a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
                 <!-- 첫 페이지시 보여지는 창-->
                 <div class="colBox firstBox on">
                     <div>
@@ -108,6 +67,8 @@
                         </div>
                     </div>
                 </div>
+
+                <div th:each="item:${nicknameAndMessage}" class="colBox dmBox" th:id="${item.get('NICKNAME')}"></div>
 
             </div>
         </section>
@@ -190,16 +151,11 @@
     }
 
     function onMessage(e){
-        let data = e.data;
+        let data = JSON.parse(e.data);
+        let $messageBoard = $('.contentTop').find('.'+data.chatRoomId).closest('.contentTop').siblings('.content').children(0)
         console.log(data)
-        console.log(e)
-        let arr = data.replace("{","").replace("}","").split(":");
 
-        for (let i = 0; i < arr.length ; i++) {
-            console.log('arr[' + i + ']:' + arr[i]);
-        }
-
-        if(arr[4]){
+        if(data.message){
             //메세지 두개 비교해줄 조건
             if(true) {
                 let str = "<div class=\"dmStyle1\">" +
@@ -207,23 +163,24 @@
                     "<img src=\"\" alt=\"\">" +
                     "</div>" +
                     "<div class=\"text\">" +
-                    arr[4].replace(/\"/gi, "") +
+                    data.message +
                     "</div>" +
                     "</div>"
-                $contentIn.append(str);
+                $messageBoard.append(str);
             }else{
                 let str = "<div class=\"dmStyle2\">" +
                     "<div class=\"dmImg\">" +
                     "<img src='/images/project/domImg/indi01.webp' alt=''>" +
                     "</div>" +
                     "<div class=\"text\">" +
-                    arr[4].replace(/\"/gi, "") +
+                    data.message +
                     "</div>" +
                     "</div>";
-                $contentIn.append(str);
+                $messageBoard.append(str);
             }
+            $('.dmList > figure > a').find('.dmData').find('#'+data.chatRoomId).siblings('.recentMessage').text(data.message);
         }
-        $('.content').scrollTop($contentIn.height());
+        $messageBoard.closest('.content').scrollTop($messageBoard.closest('.content').height() + $(window).height());
     }
 
     function onClose(){

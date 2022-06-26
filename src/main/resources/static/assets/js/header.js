@@ -1,21 +1,47 @@
-function headerAction(){
+function checkLoginLogout(userNumber) {
+    let str =""
+    console.log(userNumber)
+    if(userNumber){
+        str += " <a href=\"/user/logout\">" +
+            "<div class=\"_dropdown_loginout\">" +
+            "<div class=\"_dropdown_loginout_content\">로그아웃</div>" +
+            "</div>" +
+            "</a>"
 
+    }else{
+        str += " <a href=\"/user/login\">" +
+            "<div class=\"_dropdown_loginout\">" +
+            "<div class=\"_dropdown_loginout_content\">로그인</div>" +
+            "</div>" +
+            "</a>"
+    }
+
+    $("div.login_inOrOut").html(str)
+}
+
+
+//
+// function headerAction(){
+//
+//         if( $("._dropdown_wrapper").css("display") == 'none'){
+//             $("._dropdown_wrapper").show();
+//         }else{
+//             $("._dropdown_wrapper").css("display","none")
+//             $("._dropdown_wrapper").hide();
+//         }
+//
+//
+// }
+    // // //프로필 아이콘 클릭시 드롭다운 활성화
+    $("._icon_profile").on("click",function(){
+        console.log("A")
         if( $("._dropdown_wrapper").css("display") == 'none'){
             $("._dropdown_wrapper").show();
         }else{
             $("._dropdown_wrapper").hide();
         }
-}
-    // //프로필 아이콘 클릭시 드롭다운 활성화
-    // $("._icon_profile").on("click",function(){
-    //     console.log("A")
-    //     if( $("._dropdown_wrapper").css("display") == 'none'){
-    //         $("._dropdown_wrapper").show();
-    //     }else{
-    //         $("._dropdown_wrapper").hide();
-    //     }
-    //     })
-        
+        })
+
         // 검색 버튼 클릭시 X버튼 노출
         $("._search_wrapper").on("click",function(){
             $("._search_cancle").show()
@@ -38,17 +64,11 @@ function headerAction(){
 const $fidOn = $("#fidOn");
 const $fidOff = $("#fidOff");
 
-const $likeBtn = $("#likeBtn");
-const $follwBtn = $("#followBtn");
-
-const $alterLike = $("#alterLike");
-const $alterfollow = $("#alterfollow");
-
 $fidOff.on("click", function() {
     $fidOff.css("display", "none");
     $fidOn.css("display", "block");
     $("._aa5z").css("display", "flex");
-    likeBtnAct();
+    BtnAct();
 });
 
 $fidOn.on("click", function() {
@@ -57,95 +77,60 @@ $fidOn.on("click", function() {
     $("._aa5z").css("display", "none");
 });
 
-function likeBtnAct() {
-    $follwBtn.css("color", "#8e8e99");
-    $likeBtn.css("color", "");
-    $alterLike.css("display", "block");
-    $alterfollow.css("display", "none");
-
+function BtnAct() {
     let userNumber = 1;
 
     $.ajax({
-        url: "/alter/like/" + userNumber,
+        url: "/alert/get/" + userNumber,
         type: "get",
         contentType: "application/json; charset=utf-8;",
-        success: function (likes) {
-            alterLike(likes);
+        success: function (alters) {
+            alterLike(alters);
         }
     });
 }
 
 // 알림 작업중 미완성
 let ckLikes = "";
-function alterLike(likes) {
-    console.log(likes);
+function alterLike(alters) {
+    console.log(alters);
+
     let str = "";
-    $(likes).each(function (i, like) {
+    $(alters).each(function (i, alter) {
         let userSrc = "";
         let reSrc = "";
-        str += "<div class='alterCss'>";
-        userSrc += "/lit/display?fileName=" + like.userFileVO.uploadPath + "/" + like.userFileVO.uuid + "_" + like.userFileVO.name
-        str += "<a href=''><img width='30px' class='userFile' src='" + userSrc + "'></a>"
-        str += "<div style='margin-bottom: -5px; margin-right: 30px;'><span class='alterspan'>" + like.nickName + "</span>님이 회원님의 사진을 좋아합니다.</div>"
-        reSrc += "/lit/display?fileName=" + like.reviewFileVO.uploadPath + "/" + like.reviewFileVO.uuid + "_" + like.reviewFileVO.name
-        str += "<div><a src=''><img class='alterRR' src=" + reSrc + "></a></div></div>"
-        str += "<div><span class='alterTime'>" + like.registerDate + "</span></div>"
-    });
+        console.log(alter)
+        console.log(userSrc)
 
-    str += "<div class='alterCss'>";
-    userSrc += "/lit/display?fileName=" + follow.userFileVO.uploadPath + "/" + follow.userFileVO.uuid + "_" + follow.userFileVO.name
-    str += "<a href=''><img width='30px' class='userFile' src='" + userSrc + "'></a>"
-    str += " <div style='margin-bottom: -5px; margin-right: 30px;'><span class='alterspan'>" + follow.nickName + "</span>님이 회원님을 팔로우 했습니다.</div></div>"
-    str += "<div><span class='alterTime'>" + follow.registerDate + "</span></div>"
+        str += "<div class='alterCss'>"
+        str += "<a href=''><img width='30px' class='userFile' src='/lit/display?fileName=" + alter.userFileVO.uploadPath + "/" + alter.userFileVO.uuid + "_" + alter.userFileVO.name + "'></a>"
+        str += "<div style='margin-bottom: -5px; margin-right: 30px;'><span class='alterspan'>" + alter.nickName
+        if(alter.typeAlert == "like") {
+            str += "</span>님이 회원님의 사진을 좋아합니다.</div>"
+            reSrc += "/lit/display?fileName=" + alter.reviewFileVO.uploadPath + "/" + alter.reviewFileVO.uuid + "_" + alter.reviewFileVO.name
+            str += "<div><a src=''><img class='alterRR' src=" + reSrc + "></a></div></div>"
+            str += "<div><span class='alterTime'>" + alter.registerDate + "</span></div>"
+        } else {
+            str += "</span>님이 회원님을 팔로우 했습니다.</div></div>"
+            str += "<div><span class='alterTime'>" + alter.registerDate + "</span></div>"
+        }
+    });
+    $("#alterList").append(str);
 
     if(str != ckLikes) {
         $("#alterLike").append(str);
         ckLikes += str
     }
 }
+
 //     <div class="alterCss">
 //     <a href=""><img src="/images/login/checkIcon.png" width="30px" class="userFile"></a>
 //     <div style=" margin-bottom: 4px; margin-right: 30px;"><span class="alterspan">홍길동</span>님이 회원님의 사진을 좋아합니다.</div>
 //     <div><img src="/images/admin/logo.png" alt="" class="alterRR"></div></div>
-
-function foll0wBtnAct(){
-    $alterLike.css("display", "none");
-    $alterfollow.css("display", "block");
-    $likeBtn.css("color", "#8e8e99");
-    $follwBtn.css("color", "");
-
-    let userNumber = 1;
-
-    $.ajax({
-        url: "/alter/follow/" + userNumber,
-        type: "get",
-        contentType: "application/json; charset=utf-8;",
-        success: function (follows) {
-            alterfollow(follows);
-        }
-    });
-}
-
-let ckFollows = "";
-function alterfollow(follows){
-    console.log(follows)
-    let str = "";
-    $(follows).each(function (i, follow){
-        let userSrc = "";
-
-    });
-    if(str != ckFollows) {
-        $("#alterfollow").append(str);
-        ckFollows += str;
-    }
-}
-
 //     <div class="alterCss">
 //     <a href=""><img src="/images/login/checkIcon.png" width="30px" class="userFile"></a>
 //     <div style=" margin-bottom: 4px; margin-right: 30px;"><span class="alterspan">홍길동</span>님이 회원님의 사진을 좋아합니다.</div></div>
 
-$likeBtn.click(likeBtnAct);
-$follwBtn.click(foll0wBtnAct);
         
 
 

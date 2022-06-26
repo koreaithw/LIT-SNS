@@ -1,8 +1,7 @@
 package com.example.lit.controller;
 
-import com.example.lit.domain.vo.review.LikeDTO;
 import com.example.lit.domain.vo.review.ReviewFileVO;
-import com.example.lit.domain.vo.user.FollowDTO;
+import com.example.lit.domain.vo.user.AlertDTO;
 import com.example.lit.service.User.UserService;
 import com.example.lit.service.review.LitUpService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @RestController
-@RequestMapping("/alter")
+@RequestMapping("/alert")
 public class AlterController {
     @Autowired
     private LitUpService litUpService;
@@ -26,25 +25,22 @@ public class AlterController {
     @Autowired
     private UserService userService;
 
-    // 좋아요 목록 가져오기
-    @GetMapping("/like/{userNumber}")
-    public List<LikeDTO> getLikeList(@PathVariable("userNumber") Long userNumber){
+    // 알림 목록
+    @GetMapping("/get/{userNumber}")
+    public List<AlertDTO> getLikeList(@PathVariable("userNumber") Long userNumber){
         log.info("--------------------------------------------------------");
-        List<LikeDTO> likeDTOS = litUpService.getLikeList(userNumber);
-        List<FollowDTO> followDTOS = userService.followList(userNumber);
+        List<AlertDTO> alertDTOS = litUpService.getAlertList(userNumber);
 
-        for(LikeDTO likeDTO : likeDTOS) {
-            List<ReviewFileVO> reviewFileVOS = litUpService.getImgs(likeDTO.getReviewNumber());
-            likeDTO.setReviewFileVO(reviewFileVOS.get(0));
-            likeDTO.setUserFileVO(userService.getImg(likeDTO.getUserNumber()));
+        for(AlertDTO alertDTO : alertDTOS) {
+            alertDTO.setUserFileVO(userService.getImg(alertDTO.getUserNumber()));
+            if(alertDTO.getTypeAlert().equals("like")){
+                log.info("============================================================");
+                alertDTO.setReviewNumber(litUpService.searchLike(alertDTO.getAlertUser(), alertDTO.getUserNumber()));
+                List<ReviewFileVO> reviewFileVOS = litUpService.getImgs(alertDTO.getReviewNumber());
+                alertDTO.setReviewFileVO(reviewFileVOS.get(0));
+            }
         }
 
-        for (FollowDTO followDTO : followDTOS){
-            followDTO.setUserFileVO(userService.getImg(followDTO.getFollowingNumber()));
-        }
-
-        log.info(likeDTOS.toString());
-        return likeDTOS;
+        return alertDTOS;
     }
-
 }

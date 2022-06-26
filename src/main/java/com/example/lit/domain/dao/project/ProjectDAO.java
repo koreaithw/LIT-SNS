@@ -5,7 +5,9 @@ import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectVO;
+import com.example.lit.mapper.project.ParticipationMapper;
 import com.example.lit.mapper.project.ProjectMapper;
+import com.example.lit.mapper.review.ReviewMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -16,12 +18,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProjectDAO {
     private final ProjectMapper projectMapper;
+    private final ReviewMapper reviewMapper;
+    private final ParticipationMapper participationMapper;
     //    프로젝트 목록 가져오기
     public List<ProjectVO> getList(ListDTO listDTO){ return projectMapper.getList(listDTO); }
     //    프로젝트 등록
     public void register(ProjectVO projectVO){ projectMapper.insert(projectVO);}
     //    프로젝트 상세보기
-    public ProjectVO read(Long projectNumber){ return projectMapper.get(projectNumber); }
+    public ProjectDTO read(Long projectNumber){ return projectMapper.get(projectNumber); }
     //    프로젝트 상세보기(리뷰작성용)
     public ProjectDTO getForReview(Long projectNumber, Long userNumber){
         return projectMapper.getForReview(projectNumber, userNumber);
@@ -42,7 +46,14 @@ public class ProjectDAO {
     //메인 리스트
     public List<ProjectDTO> getMainList(ListDTO listDTO) { return projectMapper.getMainList(listDTO); }
 
+<<<<<<< HEAD
     // 2번째 메달 - 첫 lit 생성하기
     public int getTotalByUserNumber(Long userNumber){return projectMapper.getTotalByUserNumber(userNumber); }
+=======
+    // 인증 전체 개수
+    public Long reviewTotal(Long projectNumber){ return reviewMapper.reviewTotal( projectNumber ); }
+    // 도전 전체 개수
+    public Long challengeTotal(Long projectNumber){ return participationMapper.challengeTotal( projectNumber ); }
+>>>>>>> 1b95e6407c4fe7d8110611532f7db09104f702d3
 
 }

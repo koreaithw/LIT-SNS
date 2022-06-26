@@ -7,6 +7,8 @@ import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
 import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.*;
+import com.example.lit.domain.vo.user.AlertDTO;
+
 import java.util.List;
 
 public interface LitUpService {
@@ -18,8 +20,8 @@ public interface LitUpService {
     public Long getLikeTotal(Long reviewNumber);
     // 좋아요 확인
     public int getCheckLike(Long userNumber, Long reviewNumber);
-    // 좋아요 리스트(알림용)
-    public List<LikeDTO> getLikeList(Long userNumber);
+    // 알림 좋아요 검색
+    public Long searchLike(Long alertNumber, Long userNumber);
 
 
     //댓글 추가
@@ -86,4 +88,7 @@ public interface LitUpService {
     public List<ReviewDTO> getMainList(ListDTO listDTO);
     // 3번째 메달 - 첫 lit up 작성하기
     public int getTotalByUserNumber(Long userNumber);
+
+    // 알림 목록 가겨오기
+    public List<AlertDTO> getAlertList(Long userNumber);
 }

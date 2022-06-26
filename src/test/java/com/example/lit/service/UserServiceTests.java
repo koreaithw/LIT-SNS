@@ -1,6 +1,7 @@
 package com.example.lit.service;
 
 import com.example.lit.domain.dao.user.UserDAO;
+import com.example.lit.domain.vo.user.FollowVO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.service.User.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -58,12 +59,15 @@ public class UserServiceTests {
     }
 
     @Test
-    public void folloListTest(){
-        userService.followList(3L);
+    public void testFollow() {
+        FollowVO followVO = new FollowVO();
+        followVO.setFollowingNumber(1L);
+        followVO.setFollowerNumber(3L);
+        userService.follow(followVO);
     }
-
     @Test
     public void getMedalTest(){
         userService.getMedal(2L).forEach(log::info);
     }
+
 }

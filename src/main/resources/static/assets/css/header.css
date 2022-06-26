@@ -440,14 +440,14 @@ svg:not(:root) {
     width: 100%;
 }
 
-._dropdown_logout{
+._dropdown_loginout{
     height: 37px;
 }
 
-._dropdown_logout div{
+._dropdown_loginout div{
     padding-top: 6px;
     padding-left: 19px;
-    font-size: 14px;
+    font-size: 18px;
     cursor: pointer;
 }
 

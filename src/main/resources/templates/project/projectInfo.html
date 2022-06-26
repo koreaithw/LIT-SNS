@@ -10,21 +10,23 @@
     <link rel="stylesheet" href="/assets/css/project/default.css">
     <link rel="stylesheet" href="/assets/css/project/project.css">
     <link rel="stylesheet" href="/assets/css/default.css">
-
-
+    <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
+    <link rel="stylesheet" href="/assets/css/certification/certificationWrite.css">
+    <link rel="stylesheet" href="/assets/css/certification/fileLoad.css">
 </head>
 
 <body>
 
-    <header></header>
+<header th:insert="~{/header :: header}"></header>
     <main>
         <div class="mainWrap">
-            <section class="sec1">
-                <div>
+            <section class="sec1" th:object="${projectDTO}">
+<!--                <div th:object="${projectVO}">-->
                     <div class="projectImg">
                         <a>
                             <!-- 이미지 링크 추가 -->
-                            <img src="/images/project/domImg/indi01.webp" alt="">
+                            <img th:src="'/lit/display?fileName='+ *{projectFile.uploadPath} +'/'+ *{projectFile.uuid} + '_' + *{projectFile.name}" alt="">
                         </a>
                     </div>
                     <div class="projectInfoWrap">
@@ -35,37 +37,43 @@
 
                             <p>
                                 <span>참가인원</span>
-                                <span>102</span>
+                                <span th:text="*{participationCount}"></span>
                                 <span>게시물</span>
-                                <span>201</span>
+                                <span th:text="*{reviewCount}"></span>
                             </p>
                         </div>
-                        <div>
+                        <!--===================================================-->
+                        <div class="challengeBtn" th:if="${projectDTO.participationStatus} == 0 or ${projectDTO.participationStatus} == null">
+                            <input type="hidden" id="btn1" th:value="${projectNumber}" name="projectNumber">
                             <label for="btn1" class="btn">참여하기</label>
-                            <input type="hidden" id="btn1">
                         </div>
+                        <div class="challengeBtn" th:if="${projectDTO.participationStatus} == 1">
+                            <label class="btn">참여중</label>
+                        </div>
+                        <div class="challengeBtn" th:if="${projectDTO.participationStatus} == 2">
+                            <label class="btn end">종료</label>
+                        </div>
+                        <!--===================================================-->
                         <div>
                             <p class="infoKey">
                                 챌린지 기간
                             </p>
                             <p>
-                                <span>2022-06-01~06.22</span>
+                            <span th:text="*{startDate} + ' ~ ' + *{endDate}"></span>
                             </p>
                         </div>
                         <div>
                             <p class="infoKey">
                                 챌린지 소개
                             </p>
-                            <p>
-                                누구나 운동을 열심히 해서 몸짱이 되어보자
+                            <p th:text="*{content}">
                             </p>
                         </div>
                         <div>
                             <p class="infoKey">
                                 인증방법
                             </p>
-                            <p>
-                                헬스장[운동기구 3개 이상]이 나오게 사진찍기
+                            <p th:text="*{authentication}">
                             </p>
                         </div>
                     </div>
@@ -73,124 +81,28 @@
             </section>
             <section class="sec2">
                 <div>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi01.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi02.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi03.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi04.jpg" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi05.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi06.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi01.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi02.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi03.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi04.jpg" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi05.webp" alt="">
-                        </a>
-                    </figure>
-                    <figure>
-                        <a>
-                            <img src="/images/project/domImg/indi06.webp" alt="">
-                        </a>
-                    </figure>
+<!--                    반복문 -->
+<!--                    <figure>-->
+<!--                        <a href="">-->
+<!--                            <img src="/images/project/domImg/indi01.webp" alt="">-->
+<!--                        </a>-->
+<!--                    </figure>-->
 
                 </div>
             </section>
         </div>
     </main>
-    <aside class="modalWindow">
-        <div class="modalWrap">
-            <div>윈도우</div>
-        </div>
-    </aside>
-    <footer></footer>
+
+    <footer th:insert="~{/footer :: footer}"></footer>
+
 </body>
 
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
 <script th:inline="javascript">
-    let pageNum = 1;
-    const contBox = $('.sec2 > div'); // 이미지 리스트 뿌릴 위치
-    // 최신순으로
-    litUpList("newproject");
-
-    function litUpList(category) {
-        $.ajax({
-            url: "/list/litsups/" + newproject + "/" + pageNum,
-            type: "get",
-            dataType: 'json',
-            success: function (result) {
-                pageNum++; // 다음 페이지 번호 지정
-                // alert('성공');
-                listadd(result);
-            }, error: function (xhr, textStatus, errorThrown) {
-                console.log('통신 실패');
-                console.log(xhr);
-                console.log(textStatus);
-                console.log(errorThrown);
-            }
-        });
-    }
-
-    // 리스트에 추가하기
-    function listadd(result) {
-
-        let str = "";
-        // console.log(result);
-        $.each(result, function (i, ReviewDTO) {
-            let src = "";
-            //이미지 경로 첫번째 이미지만
-            src += ReviewDTO.reviewFileList.get(0).uploadPath;
-            src += ReviewDTO.reviewFileList.get(0).uuid + "_";
-            src += ReviewDTO.reviewFileList.get(0).name;
-
-
-            str += " <figure><a href='"+ReviewDTO.reviewNumber+"'>";
-            str += " <img src='"+"1"+"'> ";
-            str += "</a></figure>";
-
-        });
-        contBox.append(str);
-    }
+    // 페이지 이동시 프로젝트 넘버 가져오기
+    const projectNumber = [[${ projectDTO.projectNumber }]];
+    const userNumber = [[${ projectDTO.userNumber }]];
 </script>
+<script src="/assets/js/project/projectInfo.js"></script>
 
 </html>

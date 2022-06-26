@@ -1,6 +1,5 @@
 package com.example.lit.domain.dao.user;
 
-import com.example.lit.domain.vo.user.FollowDTO;
 import com.example.lit.domain.vo.user.FollowVO;
 import com.example.lit.mapper.user.FollowMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +20,4 @@ public class FollowDAO {
     public int followingCount(FollowVO followVO){ return followMapper.followingCount(followVO); }
     // 팔로워 카운트 (다른 사람)
     public int followerCount(FollowVO followVO){ return followMapper.followerCount(followVO); }
-    // 팔로우 알림
-    public List<FollowDTO> followList(Long userNumber) { return  followMapper.followList(userNumber); }
 }
