@@ -45,9 +45,8 @@ public class LitController {
     public String info(Long projectNumber, ProjectDTO projectDTO, HttpSession session, Model model){
 //        Long userNumber = (Long)session.getAttribute("userNumber");
 
-        projectNumber = 4L; // 테스트용
+        projectNumber = 8L; // 테스트용
         Long userNumber = 1L; // 테스트용
-
         projectDTO.setProjectNumber(projectNumber);
         projectDTO.setUserNumber(userNumber);
 

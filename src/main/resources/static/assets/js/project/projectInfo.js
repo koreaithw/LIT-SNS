@@ -65,6 +65,14 @@ $(window).scroll(function () {
 });
 
 
+// 리뷰 클릭 이벤트 
+$("#reviewList").on("click", "figure > a", function (e) {
+    e.preventDefault();
+    let href = $(this).attr("href");
+    console.log(href);
+})
+
+
 
 $("label[for='btn1']").on("click", function () {
     let datas = {
