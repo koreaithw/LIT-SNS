@@ -233,7 +233,7 @@
     let $reviewNumber;
     // session에서 받아야함
 
-    $(".a").on("click","figure",function () {
+    $(".a").on("click","figure.reviewView",function () {
         $reviewNumber=$(this).attr("id")
         $fileWriter = $(this).children("input").attr("id")
         projectDetailModalShow($reviewNumber, userNumber)

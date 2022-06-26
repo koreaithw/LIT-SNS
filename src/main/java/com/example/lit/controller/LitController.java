@@ -43,11 +43,12 @@ public class LitController {
     }
 
     // ======= 페이지 상세보기 ========
-    @GetMapping("/info/{proNum}")
-    public String info(@PathVariable("proNum") Long projectNumber, ProjectDTO projectDTO, HttpSession session, Model model){
+    @GetMapping("/info")
+    public String info(Long projectNumber, ProjectDTO projectDTO, HttpSession session, Model model){
 //        Long userNumber = (Long)session.getAttribute("userNumber");
-
-        Long userNumber = 1L; // 테스트용
+        log.info(projectNumber+"###########################");
+//        Long userNumber = 1L; // 테스트용
+        Long userNumber = (Long)session.getAttribute("userNumber");
 
         projectDTO.setProjectNumber(projectNumber);
         projectDTO.setUserNumber(userNumber);
@@ -56,6 +57,11 @@ public class LitController {
         projectDTO.setProjectFile( litService.getImg( projectNumber ) ); // 파일 이미지
         projectDTO.setProjectNumber(projectNumber);
 
+        session.getAttribute("userNumber");
+        if(userNumber == null){
+            return "/login/login";
+        }
+        model.addAttribute("projectNumber",projectNumber);
         model.addAttribute("projectDTO", projectDTO);
         return "/project/projectInfo";
     }
