@@ -79,11 +79,7 @@ public class MessageRestController {
     @GetMapping("/getRoomId/{sendUserNumber}/{receiveUserNumber}")
     public String getRoomId(@PathVariable("sendUserNumber") Long sendUserNumber, @PathVariable("receiveUserNumber") Long receiveUserNumber){
 
-
-
         String roomId = messageService.getRoom(sendUserNumber, receiveUserNumber).getRoomId();
-        log.info("가져갑니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
-        log.info(roomId);
 
         return messageService.getRoom(sendUserNumber, receiveUserNumber).getRoomId();
     }
