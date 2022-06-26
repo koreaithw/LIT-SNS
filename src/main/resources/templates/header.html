@@ -205,11 +205,13 @@
                                                 </div>
                                             </a>
                                             <hr class="_dropdown_line">
-                                            <a href="/user/logout">
-                                                <div class="_dropdown_logout">
-                                                    <div class="_dropdown_logout_content">로그아웃</div>
-                                                </div>
-                                            </a>
+                                            <div class="login_inOrOut">
+<!--                                            <a href="/user/logout">-->
+<!--                                                <div class="_dropdown_loginout">-->
+<!--                                                    <div class="_dropdown_loginout_content">로그아웃</div>-->
+<!--                                                </div>-->
+<!--                                            </a>-->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -248,7 +250,7 @@
 
 
     let filesList
-    let arFile = Array.from($("input[type='file']")[0].files);
+    let arFileReview = Array.from($("input[type='file']")[0].files);
     let $uploadResult = $(".ceritficationContentProfileImageWrapper")
     // 벨류 또는 아이디 값
     let $userNumber = $("#userNumber").val();
@@ -263,9 +265,9 @@
         for(let i=0; i<files.length; i++){
             formData.append("uploadFiles", files[i]);
         }
-        Array.from($(this)[0].files).forEach(file => arFile.push(file));
+        Array.from($(this)[0].files).forEach(file => arFileReview.push(file));
         const dataTransfer = new DataTransfer();
-        arFile.forEach(file => dataTransfer.items.add(file));
+        arFileReview.forEach(file => dataTransfer.items.add(file));
         $(this)[0].files = dataTransfer.files;
 
         $.ajax({
@@ -360,6 +362,8 @@
 
         $uploadResult.html(str);
     }
+
+    checkLoginLogout(userNumber);
 
 </script>
 </body>

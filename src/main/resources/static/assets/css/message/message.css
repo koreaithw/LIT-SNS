@@ -371,16 +371,16 @@ aside.modal1 > div > div:nth-child(3){
     font-size: 1.1rem;
     margin-bottom: 5px;
 }
-.userList>div>.dmBtn{
+.userList>div>.dmBtn2{
     padding: 0 10px;
 }
-.userList .dmBtn > a{
+.userList .dmBtn2 > a{
     padding: 5px 10px;
     border-radius: 10px;
     background: rgb(250, 100, 98);
     color: #ffffff;
 }
-.userList .dmBtn > a:hover{
+.userList .dmBtn2 > a:hover{
     background: rgb(255, 69, 67);
 }
 
