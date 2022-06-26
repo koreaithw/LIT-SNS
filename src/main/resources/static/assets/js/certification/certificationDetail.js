@@ -23,7 +23,7 @@ function projectDetailModalShow(reviewNumber,userNumber) {
     // projectDetailButton.style.display = 'none';
     pageNum = 1;
     showList(pageNum);
-    $reviewNumber = reviewNumber
+    $reviewNumber = reviewNumber;
     // 리뷰 디테일 조회, 리뷰넘버 받아와서 넣어줘야 함
     reviewDetailService.readDetail($reviewNumber,function (nickname, content, registerDate) {
         $(".detailContentProfileName").html(nickname);
