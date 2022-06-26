@@ -57,17 +57,17 @@ let messageService = (function () {
         });
     }
 
-    function getRoomId(param, callback, error){
+    function getRoomId(param, error){
+        let roomId
         $.ajax({
             url: "/message/getRoomId/ " + param.sendUserNumber + "/" + param.receiveUserNumber,
             type: "get",
+            async: false,
             success: function(result){
-                if(callback){
-                    console.log(result)
-                    callback(result);
-                }
+                roomId = result;
             }
-        })
+        });
+        return roomId;
     }
 
 
