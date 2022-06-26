@@ -60,7 +60,7 @@ function imgEvent(files) {
   let imageUrl = "";
   $(files).each(function(i, file) {
     str += "<div data-name='" + file.name + "' data-uuid='" + file.uuid + "' data-uploadpath='" + file.uploadPath + "' data-image='" + file.image + "'></div>";
-    imageUrl += "/lit/display?fileName=" + file.uploadPath + "/" + file.uuid + "_"  + file.name;
+    imageUrl += "/lit/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name;
   });
 
   $(".imgView").append(str);
