@@ -190,8 +190,9 @@ ul {
   justify-content: center;
   text-transform: uppercase;
   display: flex;
-  border-top: 1px solid rgb(255,87,87);
+  border-top: 2px solid rgb(255,87,87);
   margin-top: -1px;
+  font-weight: bolder;
 }
 
 .lits1Off {
@@ -228,8 +229,9 @@ ul {
   justify-content: center;
   text-transform: uppercase;
   display: flex;
-  border-top: 1px solid rgb(255,87,87);
+  border-top: 2px solid rgb(255,87,87);
   margin-top: -1px;
+  font-weight: bolder;
 }
 
 .litSpan {

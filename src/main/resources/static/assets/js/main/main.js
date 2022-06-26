@@ -87,6 +87,8 @@ $("._category_wrapper a").on("click", function (e) {
     // 선택 태그 클래스 추가
     $("._category_wrapper a").removeClass("on");
     $(this).addClass("on");
+    $("div._category_write").removeClass("change_color");
+    $(this).find("._category_write").addClass("change_color");
 
     category = $(this).attr("href");
     console.log(category);
@@ -115,6 +117,7 @@ $(".a__selector").on("click", function(e){
 
     if(!order){
         $("._category_wrapper a").removeClass("on");
+        $("div._category_write").removeClass("change_color");
         category = "";
     }
 
@@ -204,7 +207,9 @@ let getLitUpList = function (page) {
             if (file[0]) {
                 str +=
                     "<figure id='"+data.reviewNumber+"'>" +
+                    "<a href='javascript:void(0)'>" +
                     "<img alt=\"\" src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">" +
+                    "</a>" +
                     "<input type='hidden' id='" + fileWriter + "' />" +
                     "</figure>";
             }
@@ -226,7 +231,9 @@ let getLitList = function (page) {
             if (file) {
                 str +=
                     "<figure id='"+data.projectNumber+"'>" +
+                    "<a href='javascript:void(0)'>" +
                     "<img alt=\"\" src=\"/lit/display?fileName=" + file.uploadPath + "/" + file.uuid + "_" + file.name + "\">" +
+                    "</a>" +
                     "</figure>";
             }
         })

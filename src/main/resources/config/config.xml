@@ -17,11 +17,11 @@
         <typeAlias type="com.example.lit.domain.vo.user.achievement.AchievementVO" alias="achievementVO"/>
         <typeAlias type="com.example.lit.domain.vo.user.achievement.MedalDTO" alias="medalDTO"/>
         <typeAlias type="com.example.lit.domain.vo.messsage.MessageDTO" alias="messageDTO"/>
-        <typeAlias type="com.example.lit.domain.vo.user.UserDTO" alias="userDTO"></typeAlias>
-        <typeAlias type="com.example.lit.domain.vo.review.ReviewDTO" alias="reviewDTO"></typeAlias>
-        <typeAlias type="com.example.lit.domain.vo.review.ReportDTO" alias="reportDTO"></typeAlias>
-        <typeAlias type="com.example.lit.domain.vo.user.AlertDTO" alias="alertDTO"></typeAlias>
-        <typeAlias type="com.example.lit.domain.vo.project.ProjectDTO" alias="projectDTO"></typeAlias>
+        <typeAlias type="com.example.lit.domain.vo.user.UserDTO" alias="userDTO"/>
+        <typeAlias type="com.example.lit.domain.vo.review.ReviewDTO" alias="reviewDTO"/>
+        <typeAlias type="com.example.lit.domain.vo.review.ReportDTO" alias="reportDTO"/>
+        <typeAlias type="com.example.lit.domain.vo.user.AlertDTO" alias="alertDTO"/>
+        <typeAlias type="com.example.lit.domain.vo.project.ProjectDTO" alias="projectDTO"/>
         <typeAlias type="com.example.lit.domain.vo.messsage.MessageRoom" alias="messageRoom"/>
 
     </typeAliases>
