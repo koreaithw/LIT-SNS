@@ -1,6 +1,5 @@
 function checkLoginLogout(userNumber) {
     let str =""
-    console.log(userNumber)
     if(userNumber){
         str += " <a href=\"/user/logout\">" +
             "<div class=\"_dropdown_loginout\">" +
@@ -84,43 +83,44 @@ function BtnAct() {
         url: "/alert/get/" + userNumber,
         type: "get",
         contentType: "application/json; charset=utf-8;",
-        success: function (alters) {
-            alterLike(alters);
+        success: function (alerts) {
+            alterLike(alerts);
         }
     });
 }
 
-// 알림 작업중 미완성
-let ckLikes = "";
-function alterLike(alters) {
-    console.log(alters);
+// 알림
+function alterLike(alerts) {
+    console.log(alerts);
 
     let str = "";
-    $(alters).each(function (i, alter) {
-        let userSrc = "";
-        let reSrc = "";
-        console.log(alter)
-        console.log(userSrc)
+    $(alerts).each(function (i, alert) {
+        let userNum = alert.userNumber;
 
-        str += "<div class='alterCss'>"
-        str += "<a href=''><img width='30px' class='userFile' src='/lit/display?fileName=" + alter.userFileVO.uploadPath + "/" + alter.userFileVO.uuid + "_" + alter.userFileVO.name + "'></a>"
-        str += "<div style='margin-bottom: -5px; margin-right: 30px;'><span class='alterspan'>" + alter.nickName
-        if(alter.typeAlert == "like") {
-            str += "</span>님이 회원님의 사진을 좋아합니다.</div>"
-            reSrc += "/lit/display?fileName=" + alter.reviewFileVO.uploadPath + "/" + alter.reviewFileVO.uuid + "_" + alter.reviewFileVO.name
-            str += "<div><a src=''><img class='alterRR' src=" + reSrc + "></a></div></div>"
-            str += "<div><span class='alterTime'>" + alter.registerDate + "</span></div>"
-        } else {
-            str += "</span>님이 회원님을 팔로우 했습니다.</div></div>"
-            str += "<div><span class='alterTime'>" + alter.registerDate + "</span></div>"
-        }
+        if(userNum != userNumber) {
+            console.log('aaa');
+            str += "<div class='alterCss'>"
+            if (alert.userFileVO != null) {
+                str += "<a href=''><img width='30px' class='userFile' src='/lit/display?fileName=" + alert.userFileVO.uploadPath + "/" + alert.userFileVO.uuid + "_" + alert.userFileVO.name + "'></a>"
+            } else {
+                str += "<a href=''><img width='30px' class='userFile' src='/images/main/profile_ex.png'></a>"
+            }
+
+            str += "<div style='margin-bottom: -5px; margin-right: 30px;'><span class='alterspan'>" + alert.nickName
+            if (alert.typeAlert == "like") {
+                let reSrc = "";
+                str += "</span>님이 회원님의 사진을 좋아합니다.</div>"
+                reSrc += "/lit/display?fileName=" + alert.reviewFileVO.uploadPath + "/" + alert.reviewFileVO.uuid + "_" + alert.reviewFileVO.name
+                str += "<div><a src=''><img class='alterRR' src=" + reSrc + "></a></div></div>"
+                str += "<div><span class='alterTime'>" + alert.registerDate + "</span></div>"
+            } else {
+                str += "</span>님이 회원님을 팔로우 했습니다.</div></div>"
+                str += "<div><span class='alterTime'>" + alert.registerDate + "</span></div>"
+            }
+        };
     });
-    $("#alterList").append(str);
 
-    if(str != ckLikes) {
-        $("#alterLike").append(str);
-        ckLikes += str
-    }
+    $("#alertList").html(str);
 }
 
 //     <div class="alterCss">

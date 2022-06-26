@@ -8,15 +8,18 @@
     </insert>
 
     <select id="alertList" resultType="alertDTO">
-        SELECT ta.ALERT_USER, ta.USER_NUMBER, ta.TYPE_ALERT, ta.REGISTER_DATE, tu.NICKNAME
+        SELECT ta.ALERT_USER, ta.USER_NUMBER, ta.TYPE_ALERT, ta.REVIEW_NUMBER, ta.REGISTER_DATE, tu.NICKNAME
         FROM TBL_ALERT ta, TBL_USER tu
         WHERE ta.ALERT_USER = #{userNumber} AND tu.USER_NUMBER = ta.USER_NUMBER ORDER BY ta.REGISTER_DATE DESC
     </select>
 
-    <select id="getAlertNumber">
-        SELECT ALERT_NNUMBER
+    <select id="getAlertNumber" resultType="_int">
+        SELECT ALERT_NUMBER
         FROM TBL_ALERT
-        WHERE ALERT_USER = #{alertNumber} AND USER_NUMBER = #{userNumber} AND TYPE_ALERT = #{typeAlert}
+        WHERE ALERT_USER = #{alertUser} AND USER_NUMBER = #{userNumber} AND TYPE_ALERT = #{typeAlert}
+                <if test="typeAlert == 'like'">
+                            AND REVIEW_NUMBER = #{reviewNumber}
+                </if>
     </select>
 
     <delete id="remove">

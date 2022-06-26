@@ -128,9 +128,16 @@ public class UserController {
 
     //마이페이지 데이터 가져와서 들어가기
     @GetMapping("/mypage")
-    public String mypage(Long userNumber, Model model){
+    public String mypage(Model model, HttpSession session){
         log.info("마이페이지 컨트롤러 =============================");
 
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        if(userNumber == null){
+            return goLoginPage();
+        }
+        System.out.println("==============================================");
+        System.out.println(userNumber);
+        System.out.println("==============================================");
         UserVO userVO = userService.read(userNumber);
         List<UserVO> followerVO = userService.ModalFollower(userNumber);
         List<UserVO> followingVO = userService.ModalFollowing(userNumber);

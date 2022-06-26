@@ -10,9 +10,9 @@ public class AlertDTO {
     private Long alertUser;
     private Long userNumber;
     private String typeAlert;
+    private Long reviewNumber;
     private String registerDate;
     private String nickName;
-    private Long reviewNumber;
     private UserFileVO userFileVO;
     private ReviewFileVO reviewFileVO;
 }

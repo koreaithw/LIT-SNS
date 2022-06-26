@@ -160,8 +160,9 @@ a:visited {
     justify-content: center;
     text-transform: uppercase;
     display: flex;
-    border-top: 1.5px solid rgb(250, 100, 98);
-    margin-top: -3px
+    border-top: 2px solid rgb(250, 100, 98);
+    margin-top: -3px;
+    font-weight: bolder;
 }
 
 .lits1Off {
@@ -198,8 +199,9 @@ a:visited {
     justify-content: center;
     text-transform: uppercase;
     display: flex;
-    border-top: 1.5px solid rgb(250, 100, 98);
-    margin-top: -3px
+    border-top: 2px solid rgb(250, 100, 98);
+    margin-top: -3px;
+    font-weight: bolder;
 }
 
 .litChange > div > a > div{
