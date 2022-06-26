@@ -140,8 +140,7 @@
                                     <div></div>
                                     <span class="_icon_profile_span" role="link" tabindex="0"
                                           style="width: 24px; height: 24px;">
-                                            <img class="_aa8j" src="/images/main/profile_ex.png"
-                                                 alt="img\profile_ex.png">
+                                            <img class="_aa8j" src="/" onerror="this.src='/images/main/profile_ex.png'">
                                         <!-- <img alt="img\profile_ex.png"
                                             class="_aa8j" crossorigin="anonymous" draggable="false" src="img\profile_ex.png"> -->
                                         <!-- 백엔드 src에 타임리프 이용해서 사용자 프로필 이미지 작성 필요-->
@@ -230,8 +229,6 @@
 <script defer src="/assets/js/certification/fileLoad.js"></script>
 <script th:inline="javascript">
     let userNumber = [[${session.userNumber}]];
-    console.log("---------------------------------")
-    console.log(userNumber)
     $(".mypage__link").on("click", function(e){
         e.preventDefault();
         location.href = "/user/mypage";
@@ -253,7 +250,6 @@
     let arFileReview = Array.from($("input[type='file']")[0].files);
     let $uploadResult = $(".ceritficationContentProfileImageWrapper")
     // 벨류 또는 아이디 값
-    let $userNumber = $("#userNumber").val();
     let $projectNumber
 
     // 사진 업로드 패스에 저장
@@ -290,7 +286,7 @@
                 userNumber:userNumber, projectNumber:$projectNumber, content:reviewContent, reviewFileList:filesList
             },function (result) {
                 certificationWriteBackground.style.display = 'none';
-                certificationWriteButton.style.display = 'block';
+                // certificationWriteButton.style.display = 'block';
 
                 $('.certificationImages ul li:first-child').addClass('active');
                 $('.certificationImages ul li:first-child').siblings('.active').removeClass('active');
@@ -328,17 +324,18 @@
                 $deleteBackground.css("display", "none");
             },
             function (a,b,c) {console.log("error")})
+
     })
 
-    // 출력할 사진 리스트 받아오기기
-    $(".nextNextButton").on("click",function () {
-        $.getJSON("/litUp/profilePic", {userNumber: userNumber}, function(pic){showUserPic(pic);})
-    })
+    // 프로필 사진 출력
+    function showWriterUserPic(file){
+        let str ="";
+        str += "<div class=\"certificationContentProfileImage\">"
+        str += "<img style='width: 100%' onerror=\"this.src='/images/main/profile_ex.png' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+        str += "</div>"
 
-    $(".nextButton").on("click",function () {
-        $.getJSON("/litUp/getMyProjectList", {userNumber: userNumber}, function(pic){showMyProject(pic);})
-    })
-
+        $("div.ceritficationContentProfileImageWrapper").html(str);
+    }
 
     // 프로젝트 리스트 출력
     function showMyProject(pic) {
@@ -349,19 +346,19 @@
             str += "<img src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
             str += "</div>"
         });
-
         $(".detailProjectContentList").html(str);
     }
 
-    // 프로필 사진 출력
-    function showUserPic(file){
-        let str ="";
-        str += "<div class=\"certificationContentProfileImage\">"
-        str += "<img style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
-        str += "</div>"
 
-        $uploadResult.html(str);
-    }
+    // 출력할 사진 리스트 받아오기기
+    $(".nextNextButton").on("click",function () {
+        $.getJSON("/litUp/profilePic", {userNumber: userNumber}, function(pic){showWriterUserPic(pic);})
+    })
+
+    $(".nextButton").on("click",function () {
+        $.getJSON("/litUp/getMyProjectList", {userNumber: userNumber}, function(pic){showMyProject(pic);})
+    })
+
 
     checkLoginLogout(userNumber);
 

@@ -20,7 +20,7 @@
         SELECT REPLY_NUMBER, REVIEW_NUMBER, USER_NUMBER, NICKNAME, CONTENT, REGISTER_DATE
         FROM
             (
-                SELECT /*+ INDEX_DESC(TBL_REPLY SYS_C007599) */
+                SELECT /*+ INDEX_DESC(TBL_REPLY SYS_C007740) */
                 ROWNUM RN, REPLY_NUMBER, REVIEW_NUMBER, USER_NUMBER, NICKNAME, CONTENT, REGISTER_DATE
                 FROM TBL_REPLY
                 WHERE REVIEW_NUMBER = #{reviewNumber} AND ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
