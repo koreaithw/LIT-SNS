@@ -146,7 +146,7 @@ $(".dmBtn").on("click", "a", function (e) {
                 '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
                 '</div>' +
                 '<div class="iconBox">' +
-                '<a class="icon_heart_white"></a>' +
+                '<a class="icon_heart_white" onclick="enterHeart(this)"></a>' +
                 '</div>' +
                 '</div>' +
                 '</div>'
@@ -328,7 +328,7 @@ function startChat(receiveUserNumber, nick) {
                     '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
                     '</div>' +
                     '<div class="iconBox">' +
-                    '<a class="icon_heart_white"></a>' +
+                    '<a class="icon_heart_white"  onclick="enterHeart(this)"></a>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
@@ -399,7 +399,7 @@ function startChat(receiveUserNumber, nick) {
                 '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
                 '</div>' +
                 '<div class="iconBox">' +
-                '<a class="icon_heart_white"></a>' +
+                '<a class="icon_heart_white"  onclick="enterHeart(this)"></a>' +
                 '</div>' +
                 '</div>' +
                 '</div>'
@@ -463,7 +463,7 @@ function goMessage(e) {
         '<input class="messageWrite" type="text" placeholder="메세지를 입력하세요..." onkeyup="keyEnter(this)">' +
         '</div>' +
         '<div class="iconBox">' +
-        '<a class="icon_heart_white"></a>' +
+        '<a class="icon_heart_white"  onclick="enterHeart(this)"></a>' +
         '</div>' +
         '</div>' +
         '</div>'
@@ -473,4 +473,20 @@ function goMessage(e) {
     if (!webSocket) {
         connect(roomId, nickname);
     }
+}
+
+function enterHeart(key){
+    let receiveNickname = $(key).closest('.textInput').siblings('.contentTop').find('span').html();
+    let receiveUserNumber = $(key).closest('.textInput').siblings('.contentTop').find('input[type="hidden"]').attr('id'); // 채팅방 들어올 때 받아오기
+    let roomId = $('.dmWrap').find("#" + receiveNickname).find('.contentTop').find('input[type="hidden"]').attr('class');
+    let content = "❤️";
+
+    messageService.send({
+        sendUserNumber: userNumber,
+        receiveUserNumber: receiveUserNumber,
+        roomId: roomId,
+        content: content
+    });
+
+    send(roomId, nickname, content);
 }
