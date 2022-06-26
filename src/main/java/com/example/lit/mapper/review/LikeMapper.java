@@ -13,7 +13,5 @@ public interface LikeMapper {
     public Long getTotal(Long reviewNumber);
     // 좋아요 확인
     public int checkLike(Long userNumber, Long reviewNumber);
-    // 알림 좋아요 게시물 검색
-    public Long alertSearch(Long alertNumber, Long userNumber);
 
 }
