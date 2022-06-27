@@ -77,7 +77,6 @@ $fidOn.on("click", function() {
 });
 
 function BtnAct() {
-    let userNumber = 1;
 
     $.ajax({
         url: "/alert/get/" + userNumber,
@@ -101,9 +100,9 @@ function alterLike(alerts) {
             console.log('aaa');
             str += "<div class='alterCss'>"
             if (alert.userFileVO != null) {
-                str += "<a href=''><img width='30px' class='userFile' src='/lit/display?fileName=" + alert.userFileVO.uploadPath + "/" + alert.userFileVO.uuid + "_" + alert.userFileVO.name + "'></a>"
+                str += "<a href='/user/userPage/" + alert.userNumber + "'><img width='30px' class='userFile' src='/lit/display?fileName=" + alert.userFileVO.uploadPath + "/" + alert.userFileVO.uuid + "_" + alert.userFileVO.name + "'></a>"
             } else {
-                str += "<a href=''><img width='30px' class='userFile' src='/images/main/profile_ex.png'></a>"
+                str += "<a href='/user/userPage/" + alert.userNumber + "'><img width='30px' class='userFile' src='/images/main/profile_ex.png'></a>"
             }
 
             str += "<div style='margin-bottom: -5px; margin-right: 30px;'><span class='alterspan'>" + alert.nickName
@@ -111,7 +110,7 @@ function alterLike(alerts) {
                 let reSrc = "";
                 str += "</span>님이 회원님의 사진을 좋아합니다.</div>"
                 reSrc += "/lit/display?fileName=" + alert.reviewFileVO.uploadPath + "/" + alert.reviewFileVO.uuid + "_" + alert.reviewFileVO.name
-                str += "<div><a src=''><img class='alterRR' src=" + reSrc + "></a></div></div>"
+                str += "<div><a href=''><img class='alterRR' src=" + reSrc + "></a></div></div>"
                 str += "<div><span class='alterTime'>" + alert.registerDate + "</span></div>"
             } else {
                 str += "</span>님이 회원님을 팔로우 했습니다.</div></div>"
@@ -120,7 +119,7 @@ function alterLike(alerts) {
         };
     });
 
-    $("#alertList").html(str);
+    $("#alertList").append(str);
 }
 
 //     <div class="alterCss">
