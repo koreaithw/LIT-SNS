@@ -1,6 +1,5 @@
 function checkLoginLogout(userNumber) {
     let str =""
-    console.log(userNumber)
     if(userNumber){
         str += " <a href=\"/user/logout\">" +
             "<div class=\"_dropdown_loginout\">" +
