@@ -45,8 +45,16 @@ public class LitUpServiceTests {
     public void likeAlertTest() {
         LikeVO likeVO = new LikeVO();
         likeVO.setReviewNumber(1L);
-        likeVO.setUserNumber(3L);
+        likeVO.setUserNumber(2L);
         litUpService.registerLike(likeVO);
+    }
+
+    @Test
+    public void likeRemove() {
+        LikeVO likeVO = new LikeVO();
+        likeVO.setReviewNumber(1L);
+        likeVO.setUserNumber(2L);
+        litUpService.removeLike(likeVO);
     }
     
 }

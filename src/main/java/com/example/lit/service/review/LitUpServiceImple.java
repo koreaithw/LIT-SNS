@@ -46,6 +46,8 @@ public class LitUpServiceImple implements LitUpService{
         alertVO.setUserNumber(likeVO.getUserNumber());
         alertVO.setTypeAlert("like");
         alertVO.setReviewNumber(likeVO.getReviewNumber());
+
+        log.info(alertVO.toString());
         alertDAO.insert(alertVO);
     }
 
