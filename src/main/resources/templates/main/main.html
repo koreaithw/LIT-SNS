@@ -235,7 +235,7 @@
     $(".a").on("click","figure.reviewView",function () {
         $reviewNumber=$(this).attr("id")
         $fileWriter = $(this).children("input").attr("id")
-        
+
         projectDetailModalShow($reviewNumber, userNumber)
         $.getJSON("/litUp/profilePic", {userNumber: $fileWriter}, function(pic){showMainUserPic(pic);})
         $.getJSON("/litUp/reviewPic", {reviewNumber: $reviewNumber}, function(pic){showReviewPic(pic);})
