@@ -16,6 +16,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -250,5 +251,15 @@ public class LitUpRestController {
 
         return litUpService.getList(listDTO);
     }
-    
+
+
+    @GetMapping("/getMyList")
+    public List<ReviewVO> getMyList(HttpSession session){
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        log.info("*************************************************************");
+        log.info("LitUpRestController : getMyList");
+        log.info("*************************************************************");
+        log.info(userNumber + " <---------------session userNumber");
+        return litUpService.getMyList(userNumber);
+    }
 }

@@ -133,7 +133,7 @@ public class UserServiceImple implements UserService{
         alertVO.setUserNumber(followVO.getFollowerNumber());
         alertVO.setTypeAlert("follow");
 
-        alertDAO.insert(alertVO);
+        alertDAO.alertFollow(alertVO);
     }
 
     @Override
