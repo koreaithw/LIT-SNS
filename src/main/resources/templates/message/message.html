@@ -44,7 +44,7 @@
                                 </a>
                             </figure>
 
-                            <figure th:if="${recentReceiveMessage.size()!=0}" th:each="item:${recentReceiveMessage}" class="dmBtn">
+                            <figure th:if="${(recentReceiveMessage.size()!=0 and recentSendMessage.size() == 0) or (recentReceiveMessage.size()==0 and recentSendMessage.size() != 0)}" th:each="item:${recentReceiveMessage}" class="dmBtn">
                                 <a th:id="${item.get('SEND_USER_NUMBER')}" class="userDMList">
                                     <div class="dmImg">
                                         <img class="_aa8j" src="/images/main/profile_ex.png" onerror="this.src='/images/main/profile_ex.png'">
@@ -82,7 +82,7 @@
                 </div>
 
                 <div th:if="${recentSendMessage.size()!=0}" th:each="item:${recentSendMessage}" class="colBox dmBox" th:id="${item.get('NICKNAME')}"></div>
-                <div th:if="${recentReceiveMessage.size()!=0}" th:each="item:${recentReceiveMessage}" class="colBox dmBox" th:id="${item.get('NICKNAME')}"></div>
+                <div th:if="${(recentReceiveMessage.size()!=0 and recentSendMessage.size() == 0) or (recentReceiveMessage.size()==0 and recentSendMessage.size() != 0)}" th:each="item:${recentReceiveMessage}" class="colBox dmBox" th:id="${item.get('NICKNAME')}"></div>
 
             </div>
         </section>
