@@ -1,6 +1,7 @@
 package com.example.lit.mapper.project;
 
 import com.example.lit.domain.vo.project.ParticipationVO;
+import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.review.LikeVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,6 +18,6 @@ public interface ParticipationMapper {
     public Long challengeTotal(Long projectNumber);
     
     // 나의 프로젝트 상태값
-    public Long select(ParticipationVO participationVO);
+    public ParticipationVO select(ParticipationVO participationVO);
 
 }
