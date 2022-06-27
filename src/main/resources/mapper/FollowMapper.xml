@@ -21,4 +21,10 @@
         SELECT COUNT(FOLLOWER_NUMBER) FROM TBL_FOLLOW
         WHERE FOLLOWER_NUMBER = #{followerNumber}
     </select>
+
+    <select id="followingCheck" resultType="_int">
+       SELECT COUNT(*) CONT FROM HR.TBL_FOLLOW
+       WHERE FOLLOWING_NUMBER = #{followingNumber}
+       AND FOLLOWER_NUMBER = #{followerNumber}
+    </select>
 </mapper>

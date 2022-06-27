@@ -1,5 +1,6 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.vo.user.FollowVO;
 import com.example.lit.domain.vo.user.UserFileVO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.service.User.UserService;
@@ -94,6 +95,16 @@ public class UserRestController {
         userVO.setUserFileList(userService.getImg(userVO.getUserNumber()));
 
         return userVO;
+    }
+
+    @PostMapping("/follow")
+    public void follow(@RequestBody FollowVO followVO ){
+        log.info( "====================================================" );
+        log.info( "followingNumber : " + followVO.getFollowingNumber() );
+        log.info( "followerNumber : " + followVO.getFollowerNumber() );
+        log.info( "====================================================" );
+
+        userService.follow(followVO);
     }
 
     // 메달 4번 조건 달성 했을 때
@@ -367,9 +378,5 @@ public class UserRestController {
         return follwerCnt;
     }
 
-
-
-
-
-
+    
 }
