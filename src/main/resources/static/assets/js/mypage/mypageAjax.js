@@ -57,6 +57,15 @@ let myPageAjaxService = (function () {
         })
     }
 
-    return {removeFollower: removeFollower, getMedal: getMedal, litUpList:litUpList, litList:litList}
+    function getMyProfileImg(userNumber,callback){
+        $.getJSON("/litUp/profilePic" , {userNumber: userNumber}, function(pic){
+            if(callback){callback(pic);
+            }
+        });
+
+    }
+
+
+    return {removeFollower: removeFollower, getMedal: getMedal, litUpList:litUpList, litList:litList, getMyProfileImg:getMyProfileImg}
 
 })();
