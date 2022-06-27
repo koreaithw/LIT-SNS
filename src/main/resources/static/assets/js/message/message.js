@@ -259,9 +259,6 @@ function startChat(receiveUserNumber, nick) {
     }
     $("#modal1").removeClass("on");
 
-    console.log($('.dmList > figure').find('#' + receiveUserNumber).length);
-    console.log($('.dmWrap').find("#" + receiveNickname).length)
-
     messageService.getMessageList({
         sendUserNumber: userNumber,
         receiveUserNumber: receiveUserNumber,
