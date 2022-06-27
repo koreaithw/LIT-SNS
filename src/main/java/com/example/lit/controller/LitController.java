@@ -45,7 +45,7 @@ public class LitController {
     // ======= 페이지 상세보기 ========
     @GetMapping("/info")
     public String info(Long projectNumber, ProjectDTO projectDTO, HttpSession session, Model model){
-//        Long userNumber = (Long)session.getAttribute("userNumber");
+
         log.info(projectNumber+"###########################");
 //        Long userNumber = 1L; // 테스트용
         Long userNumber = (Long)session.getAttribute("userNumber");
