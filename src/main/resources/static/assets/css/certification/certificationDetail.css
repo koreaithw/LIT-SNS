@@ -82,6 +82,7 @@ body{
     left: 32.5%;
     width: 55%;
     min-height: 99.7%;
+    height: 100%;
 }
 
 .innerImageSlides {
@@ -297,17 +298,31 @@ body{
     min-height: 635px;
 }
 
-.detailContentFeed{
+/*.detailContentFeed{*/
+/*    box-sizing: content-box;*/
+/*    flex-grow: 1;*/
+/*    min-height: 370px;*/
+/*    height: calc(100% - 15px);*/
+/*    left: 0;*/
+/*    overflow-y: scroll;*/
+/*    padding: 16px;*/
+/*    position: absolute;*/
+/*    scrollbar-width: none;*/
+/*    width: calc(100% - 32px);*/
+/*}*/
+
+.detailContentFeed {
     box-sizing: content-box;
     flex-grow: 1;
-    min-height: 370px;
-    height: calc(100% - 15px);
+    height: calc(100% - -150px);
     left: 0;
     overflow-y: scroll;
     padding: 16px;
     position: absolute;
     scrollbar-width: none;
     width: calc(100% - 32px);
+    height: 650px;
+    overflow: auto;
 }
 
 .detailContentFeed::-webkit-scrollbar {
