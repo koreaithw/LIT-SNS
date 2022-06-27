@@ -36,11 +36,14 @@
                     <div class="info1ArticleDiv2">
                         <div class="info1ArticleDiv3">
                             <button class="info1ArticleBtn " title="프로필 사진 바꾸기">
-                                <img alt="프로필 사진 바꾸기" class="info1ArticleImg" src="/images/changeinfo/jenny2.jpg"
-                                    id="proFileImg"></button>
+                                <img alt="프로필 사진 바꾸기" class="info1ArticleImg" id="proFileImg"
+                                     th:src="'/user/display?fileName='+ *{userFileList.uploadPath} + '/' + *{userFileList.uuid} + '_' + *{userFileList.name}"
+                                />
+                            </button>
                             <div class="info1ArticleDiv4">
-                                <form enctype="multipart/form-data" method="POST" role="presentation"><input
-                                        accept="image/jpeg,image/png" class="info1ArticleInput1" type="file"></form>
+                                <form enctype="multipart/form-data" method="POST" role="presentation">
+                                    <input accept="image/jpeg,image/png" class="info1ArticleInput1" type="file">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -48,12 +51,14 @@
                         <h1 class="infoDiv2H1 " th:text="*{nickname}"></h1>
                         <button class="infoDiv2_2" type="button" onclick="changeProfileModal()">프로필 사진 바꾸기</button>
                         <div class="infoDiv2_3">
-                            <form enctype="multipart/form-data" method="POST" role="presentation"><input
-                                    accept="image/jpeg,image/png" class="infoDivInput2" type="file"></form>
+                            <form enctype="multipart/form-data" method="POST" role="presentation">
+                                <input
+                                    accept="image/jpeg,image/png" class="infoDivInput2" type="file">
+                            </form>
                         </div>
                     </div>
                 </div>
-                <form class="infoDiv3_0" method="post" id="editForm" action="/user/updateEditInfo">
+                <form class="infoDiv3_0" method="post" id="editForm" action="/user/changeInfo">
                     <div class="infoDiv3" style="display: flex; ">
                         <aside class="infoAside"><label for="pepName" class="nameLabel">이름</label></aside>
                         <div class="infoDiv3_2">
@@ -165,20 +170,16 @@
 <script th:inline="javascript">
     let $editForm = $("#editForm");
     let $subBtn = $("#subBtn");
-    let userNumber = 2; // 임시
-
-    $subBtn.on("click", function () {
-        $editForm.submit();
-    });
 
     // 닉네임 유효성 검사 (db조회)
     $("#pepUsername").on("keyup", function () {
         let $nickname = $('#pepUsername').val();
         changeInfoAjax.profileEditNicknameCheck($nickname, function (result) {
-            console.log(result);
-
-            if(result){
-                checkNick(result);
+            checkNick(result);
+            if(result && userName.val().length > 0 && nickNameCk.val().length > 0){
+                $('#subBtn').attr("class", "submitBtnOn");
+            } else{
+                $('#subBtn').attr("class", "submitBtn");
             }
         });
     });

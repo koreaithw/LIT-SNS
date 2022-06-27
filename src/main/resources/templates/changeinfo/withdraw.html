@@ -37,7 +37,7 @@
                 <div class="_withdrawl_profile flexclass">
                     <div class="_profile_icon">
                         <div class="_profile_wrapper">
-                            <img src="/images/changeinfo/jenny2.jpg" width="38px" height="38px">
+                            <img width="38px" height="38px" th:src="'/user/display?fileName='+ ${userFileList.uploadPath} + '/' + ${userFileList.uuid} + '_' + ${userFileList.name}">
                         </div>
                     </div>
                     <div class="_profile_nickname">
@@ -75,14 +75,13 @@
 <script src="/assets/js/changeinfo/changeInfoAjax.js"></script>
 <script th:inline="javascript">
     let pw = $('#_withdrawlPassword');
-    let userNumber = 2; // 임시
     let pwBtn = $('#btnNoOff');
 
     // 비밀번호 확인
     $('#_withdrawlPassword').on("keyup", function () {
         let $password = $(this).val();
-        console.log($password);
-        console.log($('#_withdrawlPassword'));
+        // console.log($password);
+        // console.log($('#_withdrawlPassword'));
 
         if($password.length == 0) {
             $('._checkArea1').html('');
