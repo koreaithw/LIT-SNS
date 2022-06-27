@@ -44,7 +44,7 @@
                                 </a>
                             </figure>
 
-                            <figure th:if="${recentSendMessage.size()==0}" th:each="item:${recentReceiveMessage}" class="dmBtn">
+                            <figure th:if="${recentReceiveMessage.size()!=0} and ${recentReceiveMessage[0].get('ROOM_ID')} != ${recentSendMessage[0].get('ROOM_ID')}" th:each="item:${recentReceiveMessage}" class="dmBtn">
                                 <a th:id="${item.get('SEND_USER_NUMBER')}" class="userDMList">
                                     <div class="dmImg">
                                         <img src="/images/project/domImg/indi01.webp" alt="">
@@ -82,7 +82,7 @@
                 </div>
 
                 <div th:if="${recentSendMessage.size()!=0}" th:each="item:${recentSendMessage}" class="colBox dmBox" th:id="${item.get('NICKNAME')}"></div>
-                <div th:if="${recentSendMessage.size()==0}" th:each="item:${recentReceiveMessage}" class="colBox dmBox" th:id="${item.get('NICKNAME')}"></div>
+                <div th:if="${recentReceiveMessage.size()!=0} and ${recentReceiveMessage[0].get('ROOM_ID')} != ${recentSendMessage[0].get('ROOM_ID')}" class="colBox dmBox" th:id="${item.get('NICKNAME')}"></div>
 
             </div>
         </section>

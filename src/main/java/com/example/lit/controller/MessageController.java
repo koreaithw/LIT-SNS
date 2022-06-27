@@ -37,13 +37,12 @@ public class MessageController {
         List<Long> sendNumbers = messageService.getSendUserNumber(userNumber);
 
         for (Long receiveUser : receiveNumbers) {
-            log.info("******************************");
-            log.info(receiveUser.toString());
-            log.info("******************************");
+            //유저 번호로 프로필 사진 정보 넣어주기//
             sendList.add(messageService.getRecentMessage(receiveUser));
         }
 
         for (Long sendUser : sendNumbers){
+            //유저 번호로 프로필 사진 정보 넣어주기//
             receiveList.add(messageService.getRecentReceiveMessage(sendUser));
         }
 
