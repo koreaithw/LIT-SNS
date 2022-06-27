@@ -27,7 +27,7 @@ public class UserController {
 
     //이동
     @GetMapping("/changePw")
-    public String goChangePwPage(Long userNumber, Model model){
+    public String goChangePwPage(Long userNumber, Model model) {
         log.info("******************************");
         log.info("changeInfoController : changePw");
         log.info("******************************");
@@ -40,9 +40,10 @@ public class UserController {
         log.info(userVO.getNickname() + "########################");
         return "/changeinfo/changePw";
     }
+
     //이동
     @GetMapping("/editInfo")
-    public String goEditInfoPage(Long userNumber, Model model){
+    public String goEditInfoPage(Long userNumber, Model model) {
         log.info("******************************");
         log.info("changeInfoController : editInfo");
         log.info("******************************");
@@ -53,9 +54,10 @@ public class UserController {
 
         return "/changeinfo/editInfo";
     }
+
     //이동
     @GetMapping("/withdraw")
-    public String goWithdrawPage(Long userNumber, Model model){
+    public String goWithdrawPage(Long userNumber, Model model) {
         log.info("******************************");
         log.info("changeInfoController : withdraw");
         log.info("******************************");
@@ -66,17 +68,19 @@ public class UserController {
         model.addAttribute("nickName", userVO.getNickname());
         return "/changeinfo/withdraw";
     }
+
     //이동
     @GetMapping("/login")
-    public String goLoginPage(){
+    public String goLoginPage() {
         log.info("******************************");
         log.info("LoginController : login");
         log.info("******************************");
         return "/login/login";
     }
+
     //이동
     @GetMapping("/join")
-    public String goJoinPage(){
+    public String goJoinPage() {
         log.info("******************************");
         log.info("LoginController : join");
         log.info("******************************");
@@ -85,14 +89,14 @@ public class UserController {
 
     //정보 수정
     @PatchMapping("/changeInfo")
-    public String changeInfo(){
+    public String changeInfo() {
         return null;
     }
 
 
     //가입
     @PostMapping("/join")
-    public RedirectView register(UserVO userVO, RedirectAttributes rttr){
+    public RedirectView register(UserVO userVO, RedirectAttributes rttr) {
         userService.register(userVO);
 
         return new RedirectView("/user/login");
@@ -100,15 +104,15 @@ public class UserController {
 
     //로그인
     @PostMapping("/loginOk")
-    public RedirectView login(String email, String password, Model model, HttpServletRequest req, RedirectAttributes rttr){
-        try{
+    public RedirectView login(String email, String password, Model model, HttpServletRequest req, RedirectAttributes rttr) {
+        try {
             HttpSession session = req.getSession();
-            UserVO userVO = userService.login(email,password);
+            UserVO userVO = userService.login(email, password);
             /* ##### 유저 프로필 사진으로 수정 필요 #####*/
             model.addAttribute("info", userVO.getNickname() + "님 환영합니다.");
             session.setAttribute("userNumber", userVO.getUserNumber());
 
-        }catch (Exception e){
+        } catch (Exception e) {
             rttr.addFlashAttribute("loginStatus", false);
             return new RedirectView("/user/login");
         }
@@ -128,11 +132,76 @@ public class UserController {
 
     //마이페이지 데이터 가져와서 들어가기
     @GetMapping("/mypage")
-    public String mypage(Model model, HttpSession session){
+    public String mypage( Long userPageNumber, Model model, HttpSession session) {
+        log.info( "마이페이지 컨트롤러 =============================");
+        Long userNumber = (Long) session.getAttribute("userNumber");
+        if (userNumber == null) {
+            return goLoginPage();
+        }
+
+        if(userPageNumber == null){
+            userPageNumber = userNumber;
+        }
+
+        FollowVO followVO = new FollowVO();
+        followVO.setFollowingNumber(userNumber);
+        followVO.setFollowerNumber(userPageNumber);
+
+        System.out.println("22222222222222==============================================");
+        System.out.println("userNumber : " + userNumber);
+        System.out.println("pageUserNumber : " + userPageNumber);
+        System.out.println("==============================================");
+
+
+        UserVO userVO = userService.read(userPageNumber);
+        List<UserVO> followerVO = userService.ModalFollower(userPageNumber);
+        List<UserVO> followingVO = userService.ModalFollowing(userPageNumber);
+
+        model.addAttribute("followerCnt", userService.MyFollowerCnt(userPageNumber));
+        model.addAttribute("followingCnt", userService.MyFollowingCnt(userPageNumber));
+        model.addAttribute("reviewCnt", userService.MyReviewCnt(userPageNumber));
+
+        model.addAttribute("followingCheck", userService.followingCheck(followVO));
+
+        model.addAttribute("nickname", userVO.getNickname());
+        model.addAttribute("content", userVO.getContent());
+        model.addAttribute("userNumber", userNumber);
+        model.addAttribute("pageUserNumber", userPageNumber); // 이동된 페이지 변호
+
+        model.addAttribute("modalFollower", followerVO);
+        log.info("###################  follower모달정보     " + followerVO);
+        model.addAttribute("modalFollowing", followingVO);
+        log.info("###################  following모달정보     " + followingVO);
+
+        return "/mypage/mypage";
+    }
+
+    @PostMapping("/updateEditInfo")
+    public String updateEditInfo(UserVO userVO, Model model) {
+        userVO.setUserNumber(2L);
+        userService.modify(userVO);
+        return goEditInfoPage(2L, model);
+    }
+
+    //    *************************************
+//    MEDAL 메달
+//    *************************************
+    @GetMapping("/getMedal/{userNumber}")
+    @ResponseBody
+    public List<String> getMedal(@PathVariable("userNumber") Long userNumber) {
+        log.info("getMedal................ : " + userNumber);
+        return userService.getMedal(userNumber);
+    }
+
+
+    /////////////////////////////////////////////////////////
+//마이페이지 변경본
+    @GetMapping("/mypage2")
+    public String mypage2(Long pageUserNumber, Model model, HttpSession session) {
         log.info("마이페이지 컨트롤러 =============================");
 
-        Long userNumber = (Long)session.getAttribute("userNumber");
-        if(userNumber == null){
+        Long userNumber = (Long) session.getAttribute("userNumber");
+        if (userNumber == null) {
             return goLoginPage();
         }
         System.out.println("==============================================");
@@ -149,28 +218,14 @@ public class UserController {
         model.addAttribute("content", userVO.getContent());
         model.addAttribute("userNumber", userNumber);
 
-        model.addAttribute("modalFollower",followerVO);
+        model.addAttribute("pageUserNumber", pageUserNumber);
+
+        model.addAttribute("modalFollower", followerVO);
         log.info("###################  follower모달정보     " + followerVO);
-        model.addAttribute("modalFollowing",followingVO);
+        model.addAttribute("modalFollowing", followingVO);
         log.info("###################  following모달정보     " + followingVO);
 
         return "/mypage/mypage";
     }
 
-    @PostMapping("/updateEditInfo")
-    public String updateEditInfo(UserVO userVO, Model model){
-        userVO.setUserNumber(2L);
-        userService.modify(userVO);
-        return goEditInfoPage(2L,model);
-    }
-
-//    *************************************
-//    MEDAL 메달
-//    *************************************
-    @GetMapping("/getMedal/{userNumber}")
-    @ResponseBody
-    public List<String> getMedal(@PathVariable("userNumber") Long userNumber){
-        log.info("getMedal................ : " + userNumber);
-        return userService.getMedal(userNumber);
-    }
 }

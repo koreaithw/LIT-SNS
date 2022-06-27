@@ -1,5 +1,6 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.vo.user.FollowVO;
 import com.example.lit.domain.vo.user.UserFileVO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.service.User.UserService;
@@ -94,5 +95,25 @@ public class UserRestController {
 
         return userVO;
     }
+
+
+    @PostMapping("/follow")
+    public void follow(@RequestBody FollowVO followVO ){
+        log.info( "====================================================" );
+        log.info( "followingNumber : " + followVO.getFollowingNumber() );
+        log.info( "followerNumber : " + followVO.getFollowerNumber() );
+        log.info( "====================================================" );
+
+        userService.follow(followVO);
+    }
+//    @PostMapping("/follow")
+//    public void follow(@RequestBody FollowVO followVO){
+//        log.info( "====================================================" );
+//        log.info( "followingNumber : " + followVO.getFollowingNumber() );
+//        log.info( "followerNumber : " + followVO.getFollowerNumber() );
+//        log.info( "====================================================" );
+//
+//        userService.follow(followVO);
+//    }
 
 }
