@@ -115,10 +115,6 @@ public class UserRestController {
         int medalCnt = userService.medalInsertBlock(userNumber,"5");
         log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         log.info(medalCnt + "#######################$$$$$$$$$$$$$$$$$$$#########");
         if(medalCnt == 0) {
             log.info(medalCnt + "################################");
@@ -132,11 +128,63 @@ public class UserRestController {
         return reviewCnt;
     }
 
+    // 메달 6번 달성
+    @GetMapping("/get6Medal/{userNumber}")
+    public int get6Medal(@PathVariable("userNumber") Long userNumber){
+        log.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        int projectCnt = userService.medal6Condition(userNumber);
+        int medalCnt = userService.medalInsertBlock(userNumber,"6");
+        log.info(projectCnt + "    lits 10회 생성성공ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ");
+
+        if(medalCnt == 0){
+            if(projectCnt >= 10){
+                userService.insertMedal(userNumber,"6");
+            }
+        } else{
+            projectCnt = 10;
+        }
+
+        return projectCnt;
+    }
+
+    // 메달 7번 달성
+    @GetMapping("/get7Medal/{userNumber}/{categoryName}")
+    public int get7Medal(@PathVariable("userNumber") Long userNumber, @PathVariable("categoryName") String category){
+
+        int lifeCategoryCnt = 0;
+
+        try {
+            lifeCategoryCnt = userService.medal7Condition(userNumber, category);
+        } catch (Exception e){
+            lifeCategoryCnt = 0;
+        }
+        int medalCnt = userService.medalInsertBlock(userNumber,"7");
+
+        log.info(lifeCategoryCnt + "    생활####################################");
+
+        if(medalCnt == 0) {
+            if (lifeCategoryCnt >= 5) {
+                userService.insertMedal(userNumber, "7");
+                lifeCategoryCnt = 5;
+            }
+        } else {
+            lifeCategoryCnt = 5; // 달성률 게이지 넘어가는 것 방지
+        }
+        return lifeCategoryCnt;
+    }
+
     // 메달 8번 달성
     @GetMapping("/get8Medal/{userNumber}/{categoryName}")
     public int get8Medal(@PathVariable("userNumber") Long userNumber, @PathVariable("categoryName") String category){
-        int exerciseCategoryCnt = userService.medal8Condition(userNumber, category);
+        int exerciseCategoryCnt = 0;
+
+        try {
+            exerciseCategoryCnt = userService.medal7Condition(userNumber, category);
+        } catch (Exception e){
+            exerciseCategoryCnt = 0;
+        }
         int medalCnt = userService.medalInsertBlock(userNumber,"8");
+        log.info(exerciseCategoryCnt + "    운동####################################");
 
         if(medalCnt == 0) {
             if (exerciseCategoryCnt >= 5) {
@@ -145,11 +193,183 @@ public class UserRestController {
                 log.info("왜 안돼");
                 exerciseCategoryCnt = 5;
             }
-        } else{
+        } else {
             exerciseCategoryCnt = 5; // 달성률 게이지 넘어가는 것 방지
         }
-
-
         return exerciseCategoryCnt;
     }
+
+    // 메달 9번 달성
+    @GetMapping("/get9Medal/{userNumber}/{categoryName}")
+    public int get9Medal(@PathVariable("userNumber") Long userNumber, @PathVariable("categoryName") String category){
+        int heartCategoryCnt = 0;
+
+        try {
+            heartCategoryCnt = userService.medal7Condition(userNumber, category);
+        } catch (Exception e){
+            heartCategoryCnt = 0;
+        }
+        int medalCnt = userService.medalInsertBlock(userNumber,"9");
+        log.info(heartCategoryCnt + "    정서####################################");
+
+        if(medalCnt == 0) {
+            if (heartCategoryCnt >= 5) {
+                userService.insertMedal(userNumber, "9");
+                heartCategoryCnt = 5;
+            }
+        } else {
+            heartCategoryCnt = 5; // 달성률 게이지 넘어가는 것 방지
+        }
+        return heartCategoryCnt;
+    }
+
+    // 메달 10번 달성
+    @GetMapping("/get10Medal/{userNumber}/{categoryName}")
+    public int get10Medal(@PathVariable("userNumber") Long userNumber, @PathVariable("categoryName") String category){
+        int hobbyCategoryCnt = 0;
+
+        try {
+            hobbyCategoryCnt = userService.medal7Condition(userNumber, category);
+        } catch (Exception e){
+            hobbyCategoryCnt = 0;
+        }
+        int medalCnt = userService.medalInsertBlock(userNumber,"10");
+        log.info(hobbyCategoryCnt + "    취미####################################");
+
+        if(medalCnt == 0) {
+            if (hobbyCategoryCnt >= 5) {
+                userService.insertMedal(userNumber, "10");
+                hobbyCategoryCnt = 5;
+            }
+        } else {
+            hobbyCategoryCnt = 5; // 달성률 게이지 넘어가는 것 방지
+        }
+        return hobbyCategoryCnt;
+    }
+
+    // 메달 11번 달성
+    @GetMapping("/get11Medal/{userNumber}/{categoryName}")
+    public int get11Medal(@PathVariable("userNumber") Long userNumber, @PathVariable("categoryName") String category){
+        int artCategoryCnt = 0;
+
+        try {
+            artCategoryCnt = userService.medal7Condition(userNumber, category);
+        } catch (Exception e){
+            artCategoryCnt = 0;
+        }
+        int medalCnt = userService.medalInsertBlock(userNumber,"11");
+        log.info(artCategoryCnt + "    예술####################################");
+
+        if(medalCnt == 0) {
+            if (artCategoryCnt >= 5) {
+                userService.insertMedal(userNumber, "11");
+                artCategoryCnt = 5;
+            }
+        } else {
+            artCategoryCnt = 5; // 달성률 게이지 넘어가는 것 방지
+        }
+        return artCategoryCnt;
+    }
+
+    // 메달 12번 달성
+    @GetMapping("/get12Medal/{userNumber}")
+    public int get12Medal(@PathVariable("userNumber") Long userNumber){
+        int replyCnt = 0;
+
+        try {
+            replyCnt = userService.medal12Condition(userNumber);
+        } catch (Exception e){
+            replyCnt = 0;
+        }
+        int medalCnt = userService.medalInsertBlock(userNumber,"12");
+        log.info(replyCnt + "    댓글 1000번 달성하기####################################");
+        log.info("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+        if(medalCnt == 0) {
+            if (replyCnt >= 1000) {
+                userService.insertMedal(userNumber, "12");
+                replyCnt = 1000;
+            }
+        } else {
+            replyCnt = 1000; // 달성률 게이지 넘어가는 것 방지
+        }
+        return replyCnt;
+    }
+
+    // 메달 13번 달성
+    @GetMapping("/get13Medal/{userNumber}")
+    public int get13Medal(@PathVariable("userNumber") Long userNumber){
+        int likeCnt = 0;
+
+        try {
+            likeCnt = userService.medal13Condition(userNumber);
+        } catch (Exception e){
+            likeCnt = 0;
+        }
+        int medalCnt = userService.medalInsertBlock(userNumber,"13");
+        log.info(likeCnt + "    좋아요 1000번 달성하기####################################");
+        log.info("ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ");
+        if(medalCnt == 0) {
+            if (likeCnt >= 1000) {
+                userService.insertMedal(userNumber, "13");
+                likeCnt = 1000;
+            }
+        } else {
+            likeCnt = 1000; // 달성률 게이지 넘어가는 것 방지
+        }
+        return likeCnt;
+    }
+
+    // 메달 14번 달성
+    @GetMapping("/get14Medal/{userNumber}")
+    public int get14Medal(@PathVariable("userNumber") Long userNumber){
+        int followingCnt = 0;
+
+        try {
+            followingCnt = userService.medal14Condition(userNumber);
+        } catch (Exception e){
+            followingCnt = 0;
+        }
+        int medalCnt = userService.medalInsertBlock(userNumber,"14");
+        log.info(followingCnt + "    팔로잉 100명이상 만들기####################################");
+        log.info("ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ");
+        if(medalCnt == 0) {
+            if (followingCnt >= 100) {
+                userService.insertMedal(userNumber, "14");
+                followingCnt = 100;
+            }
+        } else {
+            followingCnt = 100; // 달성률 게이지 넘어가는 것 방지
+        }
+        return followingCnt;
+    }
+
+    // 메달 15번 달성
+    @GetMapping("/get15Medal/{userNumber}")
+    public int get15Medal(@PathVariable("userNumber") Long userNumber){
+        int follwerCnt = 0;
+
+        try {
+            follwerCnt = userService.medal15Condition(userNumber);
+        } catch (Exception e){
+            follwerCnt = 0;
+        }
+        int medalCnt = userService.medalInsertBlock(userNumber,"15");
+        log.info(follwerCnt + "    팔로워 100만명이상 만들기####################################");
+        log.info("ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ");
+        if(medalCnt == 0) {
+            if (follwerCnt >= 1000000) {
+                userService.insertMedal(userNumber, "15");
+                follwerCnt = 1000000;
+            }
+        } else {
+            follwerCnt = 1000000; // 달성률 게이지 넘어가는 것 방지
+        }
+        return follwerCnt;
+    }
+
+
+
+
+
+
 }

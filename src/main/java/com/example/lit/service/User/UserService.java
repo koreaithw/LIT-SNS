@@ -111,10 +111,37 @@ public interface UserService {
     // 5번째 메달 조건 - 전체 카테고리 litUp 100회 성공
     public int medal5Condition(Long userNumber);
 
-    // 8번째 메달 조건 - 운동 카테고리 10회 성공하기
+    // 6번째 메달 조건 - lits 10번 생성하기 성공
+    public int medal6Condition(Long userNumber);
+
+    // 7번째 메달 조건 - 생활 카테고리 5회 성공하기
+    public int medal7Condition(Long userNumber, String category);
+
+    // 8번째 메달 조건 - 운동 카테고리 5회 성공하기
     public int medal8Condition(Long userNumber, String category);
+
+    // 9번째 메달 조건 - 정서 카테고리 5회 성공하기
+    public int medal9Condition(Long userNumber, String category);
+
+    // 10번째 메달 조건 - 취미 카테고리 5회 성공하기
+    public int medal10Condition(Long userNumber, String category);
+
+    // 11번째 메달 조건 - 예술 카테고리 5회 성공하기
+    public int medal11Condition(Long userNumber, String category);
 
     // 메달 1번이상 인서트 되는 것 막아주기
     public int medalInsertBlock(Long userNumber, String medal);
+
+    // 12번째 메달 조건 - 댓글 1000번 달성하기
+    public int medal12Condition(Long userNumber);
+
+    // 13번째 메달 조건 - 좋아요 1000번 달성하기
+    public int medal13Condition(Long userNumber);
+
+    // 14번째 메달 조건 - 팔로잉 100명이상 만들기
+    public int medal14Condition(Long userNumber);
+
+    // 15번째 메달 조건 - 팔로워 100만명이상 만들기
+    public int medal15Condition(Long userNumber);
 
 }

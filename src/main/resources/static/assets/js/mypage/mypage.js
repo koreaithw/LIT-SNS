@@ -160,6 +160,19 @@ $(document).ready(function () {
       $($imgAr[4]).data("bar", result + "/100");
     });
 
+    /*########################메달 6번##########################*/
+    myPageAjaxService.get6Medal(mypageUser, function (result) {
+      $($imgAr[5]).data("bar", result + "/10");
+    });
+
+    /*########################메달 7번##########################*/
+    myPageAjaxService.get7Medal({
+      userNumber: mypageUser,
+      category: "life"
+    },function (result) {
+      $($imgAr[6]).data("bar", result + "/5");
+    });
+
     /*########################메달 8번##########################*/
     myPageAjaxService.get8Medal({
       userNumber: mypageUser,
@@ -167,6 +180,50 @@ $(document).ready(function () {
     },function (result) {
       console.log("마이페이지자바스크립트 들어옴");
       $($imgAr[7]).data("bar", result + "/5");
+    });
+
+    /*########################메달 9번##########################*/
+    myPageAjaxService.get9Medal({
+      userNumber: mypageUser,
+      category: "heart"
+    },function (result) {
+      $($imgAr[8]).data("bar", result + "/5");
+    });
+
+    /*########################메달 10번##########################*/
+    myPageAjaxService.get10Medal({
+      userNumber: mypageUser,
+      category: "hobby"
+    },function (result) {
+      $($imgAr[9]).data("bar", result + "/5");
+    });
+
+    /*########################메달 11번##########################*/
+    myPageAjaxService.get11Medal({
+      userNumber: mypageUser,
+      category: "art"
+    },function (result) {
+      $($imgAr[10]).data("bar", result + "/5");
+    });
+
+    /*########################메달 12번##########################*/
+    myPageAjaxService.get12Medal(mypageUser,function (result) {
+      $($imgAr[11]).data("bar", result + "/1000");
+    });
+
+    /*########################메달 13번##########################*/
+    myPageAjaxService.get13Medal(mypageUser,function (result) {
+      $($imgAr[12]).data("bar", result + "/1000");
+    });
+
+    /*########################메달 14번##########################*/
+    myPageAjaxService.get14Medal(mypageUser,function (result) {
+      $($imgAr[13]).data("bar", result + "/1000");
+    });
+
+    /*########################메달 15번##########################*/
+    myPageAjaxService.get15Medal(mypageUser,function (result) {
+      $($imgAr[14]).data("bar", result + "/1000000");
     });
 
 

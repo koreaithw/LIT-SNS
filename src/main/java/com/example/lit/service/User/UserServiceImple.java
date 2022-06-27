@@ -221,10 +221,37 @@ public class UserServiceImple implements UserService{
     public int medal5Condition(Long userNumber) { return achievementDAO.medal5Condition(userNumber); }
 
     @Override
+    public int medal6Condition(Long userNumber) { return achievementDAO.medal6Condition(userNumber); }
+
+    @Override
+    public int medal7Condition(Long userNumber, String category) { return achievementDAO.medal7Condition(userNumber, category); }
+
+    @Override
     public int medal8Condition(Long userNumber, String category) { return achievementDAO.medal8Condition(userNumber, category); }
 
     @Override
+    public int medal9Condition(Long userNumber, String category) { return achievementDAO.medal9Condition(userNumber, category); }
+
+    @Override
+    public int medal10Condition(Long userNumber, String category) { return achievementDAO.medal10Condition(userNumber, category); }
+
+    @Override
+    public int medal11Condition(Long userNumber, String category) { return achievementDAO.medal11Condition(userNumber, category); }
+
+    @Override
     public int medalInsertBlock(Long userNumber, String medal) { return achievementDAO.medalInsertBlock(userNumber, medal); }
+
+    @Override
+    public int medal12Condition(Long userNumber) { return achievementDAO.medal12Condition(userNumber); }
+
+    @Override
+    public int medal13Condition(Long userNumber) { return achievementDAO.medal13Condition(userNumber); }
+
+    @Override
+    public int medal14Condition(Long userNumber) { return achievementDAO.medal14Condition(userNumber); }
+
+    @Override
+    public int medal15Condition(Long userNumber) { return achievementDAO.medal15Condition(userNumber); }
 
 
 }
