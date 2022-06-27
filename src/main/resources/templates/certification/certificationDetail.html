@@ -53,7 +53,7 @@
                             <div class="detailContentProfileWrapper">
                                 <div class="detailContentProfile">
                                     <div class="detailContentProfileImageWrapper">
-                                        <div class="detailContentProfileImage top">
+                                        <div class="detailContentProfileImage top" id="userFileTop">
 <!--                                            <div class="detailContentProfileImageInner">-->
 <!--                                                <img class="detailProfileImage" src="monkey.jpg" style="width:100%">-->
 <!--                                            </div>-->
@@ -88,7 +88,7 @@
                                 <div class="content_area">
                                     <div class="detailContentWriteContainer">
                                         <div class="detailContentWriteWrapper">
-                                            <div class="detailContentProfileImage bottom">
+                                            <div class="detailContentProfileImage bottom" id="userFileBottom">
 <!--                                                <div class="detailContentProfileImageInner">-->
 <!--                                                    <img class="detailProfileImage" src="monkey.jpg" style="width:100%">-->
 <!--                                                </div>-->
@@ -465,8 +465,8 @@
         let str ="";
         let str2 ="";
         str += "<div class=\"detailContentProfileImageInner\">"
-        str += "<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
-        str += "</div>"
+        str += "<a href='" + file.userNumber + "'><img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+        str += "</a></div>"
 
         str2 +="<div class=\"detailContentProfileImageInner\">"
         str2 +="<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"

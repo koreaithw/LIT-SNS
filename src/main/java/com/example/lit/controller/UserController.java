@@ -157,9 +157,9 @@ public class UserController {
         return "/mypage/mypage";
     }
 
+    // 유저 페이지
     @GetMapping("/userPage/{userNumber}")
-    public String mypage(Model model, HttpSession session, @PathVariable("userNumber") Long userNumber){
-        log.info("마이페이지 컨트롤러 =============================");
+    public String userPage(Model model, HttpSession session, @PathVariable("userNumber") Long userNumber){
 
         Long sessionNumber = (Long)session.getAttribute("userNumber");
         if(sessionNumber == null){
