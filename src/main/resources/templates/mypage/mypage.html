@@ -59,9 +59,14 @@
             transform: scale(1.1);
             transform-origin: center center;
         }
+        div.editProfileInner.on a{
+            list-style: none;
+            color: #ffffff;
+        }
         div.editProfileInner.on{
+            padding: 5px 25px;
+            border-radius: 5px;
             background: rgb(250, 100, 98);
-            cursor: none;
         }
 
 
@@ -79,7 +84,8 @@
                     <div class="profile3">
                         <button class="profileButton">
                             <img class="profileImg"
-                                 th:src="'/user/display?fileName='+ ${userFileList.uploadPath} + '/' + ${userFileList.uuid} + '_' + ${userFileList.name}">
+                                 th:src="'/user/display?fileName='+ ${userFileList.uploadPath} + '/' + ${userFileList.uuid} + '_' + ${userFileList.name}"
+                                 onerror="this.src='/images/main/sprofile_ex.jpg'">
                         </button>
                     </div>
                 </div>
@@ -102,7 +108,7 @@
                             <a th:href="${pageUserNumber}" >팔로잉</a>
                         </div>
                         <div class="editProfileInner on" th:if="${followingCheck} == 1">
-                            <a href="javascript:void(0)" class="profileA">팔로잉</a>
+                            <a href="javascript:void(0)">팔로잉</a>
                         </div>
                         <!--========================================================-->
                     </div>
@@ -427,7 +433,10 @@
 <!--<footer th:insert="~{/footer :: footer}"></footer>-->
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script th:inline="javascript">let mypageUser = [[${userNumber}]]; // 팔로워 모달에서 삭제할때 사용 (팔로잉 넘버)</script>
+<script th:inline="javascript">
+    let mypageUser = [[${userNumber}]]; // 팔로워 모달에서 삭제할때 사용 (팔로잉 넘버)
+    let userPageNumber = [[${userPageNumber}]]; // 팔로워 모달에서 삭제할때 사용 (팔로잉 넘버)
+</script>
 <script src="/assets/js/mypage/mypage.js"></script>
 <script src="/assets/js/mypage/mypageAjax.js"></script>
 <script defer src="/assets/js/certification/certificationDetail.js"></script>
@@ -724,7 +733,7 @@
     //
     // })
 
-    myPageAjaxService.getMyProfileImg(userNumber, function (pic) {
+    myPageAjaxService.getMyProfileImg(userPageNumber, function (pic) {
         showMyProfileImg(pic);
     })
 

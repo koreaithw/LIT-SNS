@@ -232,7 +232,7 @@ public class UserController {
         model.addAttribute("nickname", userVO.getNickname());
         model.addAttribute("content", userVO.getContent());
         model.addAttribute("userNumber", userNumber);
-        model.addAttribute("pageUserNumber", userPageNumber); // 이동된 페이지 변호
+        model.addAttribute("userPageNumber", userPageNumber); // 이동된 페이지 변호
 
         model.addAttribute("modalFollower", followerVO);
         log.info("###################  follower모달정보     " + followerVO);
