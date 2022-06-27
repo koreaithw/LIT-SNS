@@ -26,6 +26,24 @@ let myPageAjaxService = (function () {
         });
     }
 
+
+
+    function insertFollowing(param, callback) {
+        $.ajax({
+            url:"/user/follow",
+            type:"post" ,
+            data: JSON.stringify(param),
+            contentType:"application/json",
+            success:function (result) {
+                if(callback){
+                    callback()
+                }
+            }
+        })
+
+    }
+
+
     function get4Medal(userNumber) {
         console.log("get4Medal..........");
         $.ajax({
@@ -222,7 +240,7 @@ let myPageAjaxService = (function () {
         get5Medal: get5Medal, get8Medal: get8Medal, get9Medal: get9Medal, get10Medal: get10Medal,
         get11Medal: get11Medal, get7Medal: get7Medal, get6Medal: get6Medal, get12Medal: get12Medal,
         get13Medal: get13Medal, get14Medal: get14Medal, get15Medal: get15Medal, litUpList:litUpList,
-        litList:litList, getMyProfileImg:getMyProfileImg
+        litList:litList, getMyProfileImg:getMyProfileImg, insertFollowing:insertFollowing
     }
 
 })();
