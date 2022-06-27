@@ -1,7 +1,7 @@
 const amount = 20;
 
 //세션에서 받아올 유저넘버
-userNumber = 1;
+// userNumber = 1;
 
 function keyEnter(key) {
     let receiveNickname = $(key).closest('.textInput').siblings('.contentTop').find('span').html();
@@ -585,7 +585,7 @@ function enterHeart(key) {
     send(roomId, nickname, receiveNickname, content);
 }
 
-function enterSmile(key){
+function enterSmile(key) {
     let receiveNickname = $(key).closest('.textInput').siblings('.contentTop').find('span').html();
     let receiveUserNumber = $(key).closest('.textInput').siblings('.contentTop').find('input[type="hidden"]').attr('id'); // 채팅방 들어올 때 받아오기
     let roomId = $('.dmWrap').find("#" + receiveNickname).find('.contentTop').find('input[type="hidden"]').attr('class');

@@ -49,7 +49,7 @@ public class MessageMapperTests {
 
     @Test
     public void getReceiveUserNumberTest() {
-        messageMapper.getReceiveUserNumber(1L);
+        messageMapper.getSendUserNumber(2L);
     }
 
     @Test
@@ -63,8 +63,8 @@ public class MessageMapperTests {
     @Test
     public void getMessageListTest(){
         MessageDTO messageDTO = new MessageDTO();
-        messageDTO.setSendUserNumber(1L);
-        messageDTO.setReceiveUserNumber(10L);
+        messageDTO.setSendUserNumber(2L);
+        messageDTO.setReceiveUserNumber(1L);
 
         messageMapper.getMessageList(messageDTO);
     }

@@ -31,8 +31,21 @@
                         </div>
                     </div>
                     <div class="dmList">
-                            <figure th:each="item:${nicknameAndMessage}" class="dmBtn">
+                            <figure th:if="${recentSendMessage.size()!=0}" th:each="item:${recentSendMessage}" class="dmBtn">
                                 <a th:id="${item.get('RECEIVE_USER_NUMBER')}" class="userDMList">
+                                    <div class="dmImg">
+                                        <img src="/images/project/domImg/indi01.webp" alt="">
+                                    </div>
+                                    <div class="dmData">
+                                        <p th:text="${item.get('NICKNAME')}"></p>
+                                        <p class="recentMessage" th:text="${item.get('CONTENT')}"></p>
+                                        <input type="hidden" th:id="${item.get('ROOM_ID')}">
+                                    </div>
+                                </a>
+                            </figure>
+
+                            <figure th:if="${recentSendMessage.size()==0}" th:each="item:${recentReceiveMessage}" class="dmBtn">
+                                <a th:id="${item.get('SEND_USER_NUMBER')}" class="userDMList">
                                     <div class="dmImg">
                                         <img src="/images/project/domImg/indi01.webp" alt="">
                                     </div>
@@ -68,7 +81,8 @@
                     </div>
                 </div>
 
-                <div th:each="item:${nicknameAndMessage}" class="colBox dmBox" th:id="${item.get('NICKNAME')}"></div>
+                <div th:if="${recentSendMessage.size()!=0}" th:each="item:${recentSendMessage}" class="colBox dmBox" th:id="${item.get('NICKNAME')}"></div>
+                <div th:if="${recentSendMessage.size()==0}" th:each="item:${recentReceiveMessage}" class="colBox dmBox" th:id="${item.get('NICKNAME')}"></div>
 
             </div>
         </section>
@@ -125,10 +139,19 @@
 <script defer src="/assets/js/message/messageAjax.js"></script>
 <script defer src="/assets/js/message/message.js"></script>
 <script th:inline = "javascript">
+    // 세션에서 유저 넘버 받아오기
+    userNumber = [[${session.userNumber}]];
+
+    if(!userNumber){
+        location.href = '/user/login';
+    }
+
     let webSocket;
     // 헤더에서 뽑아 오기
-    let nickname = "전송자";
+    let nickname = [[${session.userNumber}]] + "님";
     let roomId;
+
+
 
     function connect(){
         webSocket = new WebSocket("ws://localhost:12000/ws/message/message");
@@ -158,7 +181,8 @@
         if(data.message){
 
             //메세지 두개 비교해줄 조건
-            if(true) {
+
+            if(data.writer == nickname) {
                 let str = "<div class=\"dmStyle1\">" +
                     "<div class=\"dmImg\">" +
                     "<img src=\"\" alt=\"\">" +
