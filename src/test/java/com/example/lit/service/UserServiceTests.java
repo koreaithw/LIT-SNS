@@ -62,12 +62,20 @@ public class UserServiceTests {
     public void testFollow() {
         FollowVO followVO = new FollowVO();
         followVO.setFollowingNumber(1L);
-        followVO.setFollowerNumber(3L);
+        followVO.setFollowerNumber(2L);
         userService.follow(followVO);
     }
     @Test
     public void getMedalTest(){
         userService.getMedal(2L).forEach(log::info);
+    }
+
+    @Test
+    public void removeFollowTest() {
+        FollowVO followVO = new FollowVO();
+        followVO.setFollowingNumber(1L);
+        followVO.setFollowerNumber(2L);
+        userService.removeFollow(followVO);
     }
 
 }
