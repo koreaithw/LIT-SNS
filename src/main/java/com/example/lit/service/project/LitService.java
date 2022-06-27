@@ -53,4 +53,6 @@ public interface LitService {
     // 2번째 메달 - 첫 lit 생성하기
     public int getTotalByUserNumber(Long userNumber);
 
+    // 마이페이지 프로젝트 리스트
+    public List<ProjectVO> getMyList(Long userNumber);
 }

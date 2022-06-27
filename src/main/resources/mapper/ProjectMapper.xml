@@ -176,7 +176,7 @@
                             ORDER BY APPLY_COUNT DESC
                         </when>
                          <when test="order == 'new'">
-                             ORDER BY START_DATE DESC
+                             ORDER BY REGISTER_DATE DESC
                          </when>
                     </choose>
                 </if>
@@ -194,6 +194,13 @@
     <select id="getTotalByUserNumber" resultType="_int">
         SELECT COUNT(PROJECT_NUMBER) FROM TBL_PROJECT
         WHERE USER_NUMBER = #{userNumber}
+    </select>
+
+    <select id="getMyList" resultType="projectVO">
+        SELECT PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, APPLY_COUNT, USER_NUMBER, START_DATE, END_DATE, REGISTER_DATE, STATUS
+        FROM TBL_PROJECT
+        WHERE USER_NUMBER = #{userNumber}
+        ORDER BY REGISTER_DATE DESC
     </select>
 
 

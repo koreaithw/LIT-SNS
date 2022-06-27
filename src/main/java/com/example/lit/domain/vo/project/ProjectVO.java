@@ -17,6 +17,7 @@ public class ProjectVO {
     private String startDate;
     private String endDate;
     private Long status;
+    private String registerDate;
 
 
     private ProjectFileVO projectFile;
