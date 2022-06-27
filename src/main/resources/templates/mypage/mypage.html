@@ -14,6 +14,51 @@
     <link rel="stylesheet" href="/assets/css/footer.css" />
     <link rel="stylesheet" href="/assets/css/certification/certificationWrite.css">
     <link rel="stylesheet" href="/assets/css/certification/fileLoad.css">
+    <style>
+        a{
+            color: black;
+        }
+        a:link{
+            color: black;
+        }
+        a:visited{
+            color: black;
+        }
+        div.photoContents {
+            height: 100%;
+        }
+
+        div.photoContents > div {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        div.photoContents figure {
+
+            width: 31%;
+            height: 250px;
+            padding: 10px;
+            margin: 0;
+        }
+
+        div.photoContents figure a {
+            display: block;
+            height: 100%;
+            overflow: hidden;
+        }
+        div.photoContents figure img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 1s ease;
+            transform-origin: center center;
+        }
+        div.photoContents img:hover {
+            transform: scale(1.1);
+            transform-origin: center center;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -81,52 +126,11 @@
                 </a>
             </div>
         </div>
-        <div class="photoContent" style="display: flex">
-            <article class="articleClass">
-                <div style="flex-wrap:wrap">
-                    <div class="content1">
-                        <div class="content2">
-
-                            <div class="content3">
-                                <span></span>
-                                <a class="aContent" href="">
-                                    <div class="content4">
-                                        <div class="content5">
-                                            <img alt="" class="contentImage" src="/images/mypage/jennie3.jpg">
-                                        </div>
-                                        <div class="content6"></div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="content2_1">
-                                <span></span>
-                                <a class="content2_a" href="">
-                                    <div class="content2_2">
-                                        <div class="content2_3">
-                                            <img alt="" class="contentImage2" src="/images/mypage/jennie3.jpg">
-                                        </div>
-                                        <div class="content2_4"></div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="content3_1">
-                                <span></span>
-                                <a class="content3_a" href="">
-                                    <div class="content3_2">
-                                        <div class="content3_3">
-                                            <img alt="" class="contentImage3" src="/images/mypage/jennie3.jpg">
-                                        </div>
-                                        <div class="content3_4"></div>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </article>
+        <!-- 프로젝트 시작 -->
+        <div class="photoContents">
+            <div class ="a">
+                <!-- 사진 리스트 -->
+            </div>
         </div>
     </div>
 </main>

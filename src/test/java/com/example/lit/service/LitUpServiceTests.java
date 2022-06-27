@@ -5,6 +5,7 @@ import com.example.lit.domain.vo.SearchDTO;
 import com.example.lit.domain.vo.review.LikeVO;
 import com.example.lit.domain.vo.review.ReviewDTO;
 import com.example.lit.domain.vo.review.ReviewFileVO;
+import com.example.lit.domain.vo.review.ReviewVO;
 import com.example.lit.service.review.LitUpService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -47,5 +48,13 @@ public class LitUpServiceTests {
         likeVO.setReviewNumber(1L);
         likeVO.setUserNumber(3L);
         litUpService.registerLike(likeVO);
+    }
+
+    @Test
+    public void getMyListTest(){
+//        litUpService.getMyList(1L).stream().map(ReviewVO::toString).forEach(log::info);
+        litUpService.getMyList(1L).stream().forEach( r -> {
+            r.getReviewFileList().stream().map(ReviewFileVO::toString).forEach(log::info);
+        });
     }
 }

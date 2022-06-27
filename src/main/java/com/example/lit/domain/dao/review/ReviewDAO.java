@@ -45,4 +45,6 @@ public class ReviewDAO {
     // 리뷰 작성자 번호 가져오기 알림
     public Long getReviewNumberForAlert(Long reviewNumber) { return reviewMapper.getForAlert(reviewNumber); }
 
+    //마이페이지 리뷰 리스트
+    public List<ReviewVO> getMyList(Long userNumber){ return reviewMapper.getMyList(userNumber); }
 }
