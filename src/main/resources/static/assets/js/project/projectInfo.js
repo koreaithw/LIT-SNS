@@ -29,6 +29,7 @@ function litupadd(result) {
         if(file[0]){
             str += "<figure><a href=\"" + data.reviewNumber + "\">";
             str += "<img src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">";
+            str += "<input type='hidden' id='"+ data.userNumber +"'>";
             str += "</a></figure>";
         }
     })
@@ -66,17 +67,17 @@ $(window).scroll(function () {
 
 
 // 리뷰 클릭 이벤트 
-$("#reviewList").on("click", "figure > a", function (e) {
-    e.preventDefault();
-    let href = $(this).attr("href");
-    console.log(href);
-})
+// $("#reviewList").on("click", "figure > a", function (e) {
+//     e.preventDefault();
+//     let href = $(this).attr("href");
+//     console.log(href);
+// })
 
 
 
 $("label[for='btn1']").on("click", function () {
     let datas = {
-        projectNumber: projectNumber,
+        projectNumber: projectNumber1,
         userNumber: userNumber1,
         status : 1
     }

@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,19 +46,23 @@ public class LitUpServiceImple implements LitUpService{
         alertVO.setAlertUser(reviewDAO.getReviewNumberForAlert(likeVO.getReviewNumber()));
         alertVO.setUserNumber(likeVO.getUserNumber());
         alertVO.setTypeAlert("like");
+        alertVO.setReviewNumber(likeVO.getReviewNumber());
+
+        log.info(alertVO.toString());
         alertDAO.insert(alertVO);
     }
 
     @Override
     public void removeLike(LikeVO likeVO) {
-        likeDAO.remove(likeVO);
-
         // 좋아요 취소시 알림 삭제
         AlertVO alertVO = new AlertVO();
         alertVO.setAlertUser(reviewDAO.getReviewNumberForAlert(likeVO.getReviewNumber()));
         alertVO.setUserNumber(likeVO.getUserNumber());
         alertVO.setTypeAlert("like");
+        alertVO.setReviewNumber(likeVO.getReviewNumber());
         alertDAO.remove(alertDAO.getAlertNumber(alertVO));
+
+        likeDAO.remove(likeVO);
     }
 
     @Override
@@ -69,9 +74,6 @@ public class LitUpServiceImple implements LitUpService{
     public int getCheckLike(Long userNumber, Long reviewNumber) {
         return likeDAO.checkLike(userNumber, reviewNumber);
     }
-
-    @Override
-    public Long searchLike(Long alertNumber, Long userNumber) { return likeDAO.searchLike(alertNumber, userNumber); }
 
     @Override
     public void registerReply(ReplyVO replyVO) {
@@ -245,5 +247,20 @@ public class LitUpServiceImple implements LitUpService{
     @Override
     public List<AlertDTO> getAlertList(Long userNumber){
         return alertDAO.getList(userNumber);
+    }
+
+    @Override
+    public List<ReviewVO> getMyList(Long userNumber) {
+        log.info("*********************************************");
+        log.info("LitUpService : getMyList");
+        log.info("*********************************************");
+        List<ReviewVO> result = new ArrayList<>();
+        for(ReviewVO review : reviewDAO.getMyList(userNumber)){
+            review.setReviewFileList(reviewFileDAO.getImgs(review.getReviewNumber()));
+            result.add(review);
+        }
+        result.stream().map(ReviewVO::toString).forEach(log::info);
+
+        return result;
     }
 }

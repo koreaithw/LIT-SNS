@@ -9,9 +9,9 @@ let $previewButton = $('.previewButton');
 let $deleteBackground = $('.deleteBackground');
 let $deleteImageBackground = $('.deleteImageBackground');
 
-let fileType = /(.*?)\.(jpg|jpeg|png)$/;
+let fileType1 = /(.*?)\.(jpg|jpeg|png)$/;
 
-let uploadFiles = [];
+let uploadFiles1 = [];
 
 //파일 직접 올릴 때 실행되는 함수
 $('.fileClickInput').on('change', function (e) {
@@ -20,20 +20,20 @@ $('.fileClickInput').on('change', function (e) {
     let check = $('#fileClickInput').val();
 
     //유효성검사
-    if (!check.match(fileType)) {
+    if (!check.match(fileType1)) {
         $('.uploadLoge').css("display", "none");
         $('.uploadError').css("display", "block");
         $certificationHeaderLabel.text('파일 업로드 실패');
         $fileClickInput.text('다른 파일 선택');
         $('.fileUploadLabel').text('지원되지 않는 파일입니다');
         $('#fileClickInput').val("");
-        uploadFiles = [];
+        uploadFiles1 = [];
         return;
     }
 
     for (let i = 0; i < files.length; i++) {
         let file = files[i];
-        let size = uploadFiles.push(file);  //업로드 목록에 추가
+        let size = uploadFiles1.push(file);  //업로드 목록에 추가
         preview(file, size - 1);  //미리보기 만들기
     }
 
@@ -72,17 +72,17 @@ $fileUploadArea.on("dragenter", function (e) {  //드래그 요소가 들어왔�
     //유효성 검사 및 파일 추가
     for (let i = 0; i < files.length; i++) {
         let file = files[i];
-        if (!file.name.match(fileType)) {
+        if (!file.name.match(fileType1)) {
             $('.uploadLoge').css("display", "none");
             $('.uploadError').css("display", "block");
             $certificationHeaderLabel.text('파일 업로드 실패');
             $fileClickInput.text('다른 파일 선택');
             $('.fileUploadLabel').text('지원되지 않는 파일입니다');
             $('#fileClickInput').val("");
-            uploadFiles = [];
+            uploadFiles1 = [];
             return;
         }
-        let size = uploadFiles.push(file);  //업로드 목록에 추가
+        let size = uploadFiles1.push(file);  //업로드 목록에 추가
         preview(file, size - 1);  //미리보기 만들기
     }
 
@@ -163,7 +163,7 @@ $fileUploadPreview.on("click", ".close", function (e) {
                 $('.innerImagePageButtons').empty();
                 $fileUploadPreview.empty();
                 $('#fileClickInput').val("");
-                uploadFiles = [];
+                uploadFiles1 = [];
                 $deleteImageBackground.css("display", "none");
             } else {
                 $deleteImageBackground.css("display", "none");
@@ -174,7 +174,7 @@ $fileUploadPreview.on("click", ".close", function (e) {
         let $target = $(e.target);
         let idx = $target.attr('data-idx');
 
-        uploadFiles[idx].upload = 'disable';  //삭제된 항목은 업로드하지 않기 위해 플래그 생성
+        uploadFiles1[idx].upload = 'disable';  //삭제된 항목은 업로드하지 않기 위해 플래그 생성
         $target.parent().remove();  //프리뷰 삭제
         $certificationImageInner.children('#' + idx).remove();
         $certificationImageInner.children().eq(0).addClass("active");
@@ -202,7 +202,7 @@ $(".fileUploadPreview").on('mousewheel', function (e) {
 // 제출 시에 사용
 // $("#btnSubmit").on("click", function () {
 //     var formData = new FormData();
-//     $.each(uploadFiles, function (i, file) {
+//     $.each(uploadFiles1, function (i, file) {
 //         if (file.upload != 'disable')  //삭제하지 않은 이미지만 업로드 항목으로 추가
 //             formData.append('upload-file', file, file.name);  //모든 첨부파일은 upload-file 이름으로 전달함
 //     });

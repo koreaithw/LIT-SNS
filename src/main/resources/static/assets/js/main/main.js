@@ -27,11 +27,11 @@ function start() {
 start();
 
 
-window.onload = function () {
-    $("._icon_profile").on("click", function () {
-        headerAction();
-    });
-};
+// window.onload = function () {
+//     $("._icon_profile").on("click", function () {
+//         headerAction();
+//     });
+// };
 $(document).ready(function () {
 
     $("#header").load("/src/main/resources/templates/header.html")
@@ -87,6 +87,8 @@ $("._category_wrapper a").on("click", function (e) {
     // 선택 태그 클래스 추가
     $("._category_wrapper a").removeClass("on");
     $(this).addClass("on");
+    $("div._category_write").removeClass("change_color");
+    $(this).find("._category_write").addClass("change_color");
 
     category = $(this).attr("href");
     console.log(category);
@@ -115,6 +117,7 @@ $(".a__selector").on("click", function(e){
 
     if(!order){
         $("._category_wrapper a").removeClass("on");
+        $("div._category_write").removeClass("change_color");
         category = "";
     }
 
@@ -203,8 +206,10 @@ let getLitUpList = function (page) {
             let file = data.reviewFileList;
             if (file[0]) {
                 str +=
-                    "<figure id='"+data.reviewNumber+"'>" +
+                    "<figure class='reviewView' id='"+data.reviewNumber+"'>" +
+                    "<a href='javascript:void(0)'>" +
                     "<img alt=\"\" src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">" +
+                    "</a>" +
                     "<input type='hidden' id='" + fileWriter + "' />" +
                     "</figure>";
             }
@@ -225,8 +230,10 @@ let getLitList = function (page) {
             let file = data.projectFile;
             if (file) {
                 str +=
-                    "<figure id='"+data.projectNumber+"'>" +
+                    "<figure class='projectView' id='"+data.projectNumber+"'>" +
+                    "<a href='javascript:void(0)'>" +
                     "<img alt=\"\" src=\"/lit/display?fileName=" + file.uploadPath + "/" + file.uuid + "_" + file.name + "\">" +
+                    "</a>" +
                     "</figure>";
             }
         })
@@ -234,6 +241,12 @@ let getLitList = function (page) {
 
     })
 }
+
+$(".a").on("click","figure.projectView", function(){
+    let getProjectNum = $(this).attr("id")
+    location.href = "/lit/info?projectNumber=" + getProjectNum;
+
+})
 
 
 

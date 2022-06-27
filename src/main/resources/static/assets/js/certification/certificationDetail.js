@@ -23,7 +23,7 @@ function projectDetailModalShow(reviewNumber,userNumber) {
     // projectDetailButton.style.display = 'none';
     pageNum = 1;
     showList(pageNum);
-    $reviewNumber = reviewNumber
+    $reviewNumber = reviewNumber;
     // 리뷰 디테일 조회, 리뷰넘버 받아와서 넣어줘야 함
     reviewDetailService.readDetail($reviewNumber,function (nickname, content, registerDate) {
         $(".detailContentProfileName").html(nickname);
@@ -39,7 +39,7 @@ function projectDetailModalShow(reviewNumber,userNumber) {
     })
 
     // 좋아요 여부 확인
-    reviewDetailService.getCheckLike({userNumber:1, reviewNumber:$reviewNumber},function (result) {
+    reviewDetailService.getCheckLike({userNumber:userNumber, reviewNumber:$reviewNumber},function (result) {
         if(result){
             detailContentLikeButton.style.display = 'none';
             detailContentLikeCancel.style.display = 'block';

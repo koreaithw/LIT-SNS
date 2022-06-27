@@ -128,9 +128,46 @@ public class UserController {
 
     //마이페이지 데이터 가져와서 들어가기
     @GetMapping("/mypage")
-    public String mypage(Long userNumber, Model model){
+    public String mypage(Model model, HttpSession session){
         log.info("마이페이지 컨트롤러 =============================");
 
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        if(userNumber == null){
+            return goLoginPage();
+        }
+        System.out.println("==============================================");
+        System.out.println(userNumber);
+        System.out.println("==============================================");
+        UserVO userVO = userService.read(userNumber);
+        List<UserVO> followerVO = userService.ModalFollower(userNumber);
+        List<UserVO> followingVO = userService.ModalFollowing(userNumber);
+
+        model.addAttribute("followerCnt", userService.MyFollowerCnt(userNumber));
+        model.addAttribute("followingCnt", userService.MyFollowingCnt(userNumber));
+        model.addAttribute("reviewCnt", userService.MyReviewCnt(userNumber));
+        model.addAttribute("nickname", userVO.getNickname());
+        model.addAttribute("content", userVO.getContent());
+        model.addAttribute("userNumber", userNumber);
+
+        model.addAttribute("modalFollower",followerVO);
+        log.info("###################  follower모달정보     " + followerVO);
+        model.addAttribute("modalFollowing",followingVO);
+        log.info("###################  following모달정보     " + followingVO);
+
+        return "/mypage/mypage";
+    }
+
+    @GetMapping("/userPage/{userNumber}")
+    public String mypage(Model model, HttpSession session, @PathVariable("userNumber") Long userNumber){
+        log.info("마이페이지 컨트롤러 =============================");
+
+        Long sessionNumber = (Long)session.getAttribute("userNumber");
+        if(sessionNumber == null){
+            return goLoginPage();
+        }
+        System.out.println("==============================================");
+        System.out.println(userNumber);
+        System.out.println("==============================================");
         UserVO userVO = userService.read(userNumber);
         List<UserVO> followerVO = userService.ModalFollower(userNumber);
         List<UserVO> followingVO = userService.ModalFollowing(userNumber);

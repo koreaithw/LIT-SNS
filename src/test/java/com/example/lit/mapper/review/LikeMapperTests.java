@@ -20,9 +20,4 @@ public class LikeMapperTests {
         likeMapper.insert(likeVO);
     }
 
-    @Test
-    public void getLikeTest(){
-        log.info(likeMapper.alertSearch(1L, 2L) + "");
-    }
-
 }

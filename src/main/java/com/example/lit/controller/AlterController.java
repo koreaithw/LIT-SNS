@@ -35,7 +35,6 @@ public class AlterController {
             alertDTO.setUserFileVO(userService.getImg(alertDTO.getUserNumber()));
             if(alertDTO.getTypeAlert().equals("like")){
                 log.info("============================================================");
-                alertDTO.setReviewNumber(litUpService.searchLike(alertDTO.getAlertUser(), alertDTO.getUserNumber()));
                 List<ReviewFileVO> reviewFileVOS = litUpService.getImgs(alertDTO.getReviewNumber());
                 alertDTO.setReviewFileVO(reviewFileVOS.get(0));
             }

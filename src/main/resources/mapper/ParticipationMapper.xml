@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lit.mapper.project.ParticipationMapper">
     <insert id="insert">
-        INSERT INTO HR.TBL_PARTICIPATION
+        INSERT INTO TBL_PARTICIPATION
         (PROJECT_NUMBER, USER_NUMBER, STATUS, REGISTER_DATE)
         VALUES(#{projectNumber}, #{userNumber}, #{status}, SYSDATE)
     </insert>
