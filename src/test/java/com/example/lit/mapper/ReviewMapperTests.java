@@ -40,4 +40,10 @@ public class ReviewMapperTests {
         listDTO.setOrder("new");
         reviewMapper.getMainList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
     }
+
+    @Test
+    public void getMyListTest(){
+
+        reviewMapper.getMyList(1L).stream().map(ReviewVO::toString).forEach(log::info);
+    }
 }
