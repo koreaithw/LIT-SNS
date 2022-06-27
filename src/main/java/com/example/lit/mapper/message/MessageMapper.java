@@ -43,4 +43,10 @@ public interface MessageMapper {
 
     //방 하나 정보
     public MessageRoom getRoom(Long sendUserNumber, Long receiveUserNumber);
+
+    //나에게 보낸 유저 번호
+    public List<Long> getSendUserNumber(Long receiveUserNumber);
+
+    //받은 메세지 중 가장 최근 메세지
+    public Map<String, Object> getRecentReceiveMessage(Long sendUserNumber);
 }

@@ -81,7 +81,7 @@ function searchReport(page) {
                 report.reportRegisterDate +
                 "</td>" +
                 "<td class=\"review-number\">" + report.reviewNumber + "</td>" +
-                "<td class=\"review-user-email\">" + report.reviewEmail + "</td>" +
+                "<td id='" + report.reviewUserNumber + "' class=\"review-user-email\">" + report.reviewEmail + "</td>" +
                 "<td class=\"review-register-date\">" +
                 report.reviewRegisterDate +
                 "</td>" +
@@ -90,7 +90,7 @@ function searchReport(page) {
                 "</td>" +
                 "<td class=\"project-view\">" +
                 "<div>" +
-                "<a class=\"a-btn not-selected\" href=\"\">보기</a>" +
+                "<a class=\"a-btn not-selected\" href='javascript:void(0)'>보기</a>" +
                 "</div>" +
                 "</td>" +
                 "</tr>"

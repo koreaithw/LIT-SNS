@@ -85,7 +85,7 @@ function searchProject(page) {
                 "<td class=\"project-preview\">" +
                 "<!-- 미리보기 경로 -->" +
                 "<div>" +
-                "<a class=\"a-btn not-selected\" href=\"\">미리보기</a>" +
+                "<a class=\"a-btn not-selected\" id="+ project.projectNumber +" href='javascript:void(0)'>미리보기</a>" +
                 "</div>" +
                 "</td>" +
                 "<td class=\"project-start-date\">" + project.startDate + "</td>" +
@@ -97,6 +97,12 @@ function searchProject(page) {
         })
     });
 }
+
+$(".list-tbody").on("click",".a-btn",function () {
+    let getProjectNum =$(this).attr("id")
+    window.open("/lit/info?projectNumber=" + getProjectNum);
+})
+
 
 $(".paging-block").on("click", "a.changePage", function (e) {
     e.preventDefault();
