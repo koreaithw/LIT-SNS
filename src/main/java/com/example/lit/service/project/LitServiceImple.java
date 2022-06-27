@@ -61,7 +61,7 @@ public class LitServiceImple implements LitService{
 
     @Override
     public ProjectDTO read(ProjectDTO projectDTO) {
-        Long projectNumber = projectDTO.getUserNumber();
+        Long projectNumber = projectDTO.getProjectNumber();
         Long userNumber = projectDTO.getUserNumber();
 
         ParticipationVO participationVO = new ParticipationVO();
@@ -71,8 +71,9 @@ public class LitServiceImple implements LitService{
        projectDTO = projectDAO.read(projectNumber);                                     // 기본 데이터 겟
             projectDTO.setReviewCount( projectDAO.reviewTotal(projectNumber) );         // 게시물 토탈
             projectDTO.setParticipationCount( projectDAO.challengeTotal(projectNumber));// 참가자 토탈
-            projectDTO.setParticipationStatus( participationDAO.select( participationVO ) );
+            projectDTO.setParticipationStatus( participationDAO.select( participationVO ).getStatus() );
             projectDTO.setUserNumber( userNumber );
+
         return projectDTO;
     }
 

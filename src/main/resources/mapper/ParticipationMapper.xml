@@ -17,7 +17,10 @@
         SELECT COUNT(*) FROM TBL_PARTICIPATION WHERE PROJECT_NUMBER = #{projectNumber}
     </select>
 
-    <select id="select" resultType="long">
-        SELECT STATUS FROM TBL_PARTICIPATION WHERE PROJECT_NUMBER = #{projectNumber} AND USER_NUMBER = #{userNumber}
+    <select id="select" resultType="participationVO">
+        SELECT NVL(STATUS, 0) AS STATUS
+        FROM TBL_PARTICIPATION RIGHT OUTER JOIN DUAL
+        ON PROJECT_NUMBER = #{projectNumber}
+        AND USER_NUMBER = #{userNumber}
     </select>
 </mapper>
