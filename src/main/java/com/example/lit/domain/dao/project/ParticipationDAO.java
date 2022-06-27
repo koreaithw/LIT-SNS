@@ -1,6 +1,7 @@
 package com.example.lit.domain.dao.project;
 
 import com.example.lit.domain.vo.project.ParticipationVO;
+import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.mapper.project.ParticipationMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ public class ParticipationDAO {
     public void modify(ParticipationVO participationVO, Long result){ participationMapper.update(participationVO, result); }
 
     // 상태 값 가져오기
-    public Long select(ParticipationVO participationVO){
+    public ParticipationVO select(ParticipationVO participationVO){
         return participationMapper.select(participationVO);
     }
 

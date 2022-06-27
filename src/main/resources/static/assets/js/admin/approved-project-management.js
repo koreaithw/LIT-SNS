@@ -82,7 +82,7 @@ function searchProject(page) {
           "<td class=\"project-title\">" + project.title + "</td>" +
           "<td class=\"project-view\">" +
           "<div>" +
-          "<a class=\"a-btn not-selected\" href=\"\">보기</a>" +
+          "<a class=\"a-btn not-selected\" id="+ project.projectNumber +" href='javascript:void(0)'>보기</a>" +
           "</div>" +
           "</td>" +
           "<td class=\"user-email\">" + project.email + "</td>" +
@@ -98,6 +98,11 @@ function searchProject(page) {
     pageBlock(result[0].total); //admin-common.js에 정의되어 있음
   });
 }
+
+$(".list-tbody").on("click",".a-btn",function () {
+  let getProjectNum =$(this).attr("id")
+  window.open("/lit/info?projectNumber=" + getProjectNum);
+})
 
 $(".paging-block").on("click", "a.changePage", function (e) {
   e.preventDefault();

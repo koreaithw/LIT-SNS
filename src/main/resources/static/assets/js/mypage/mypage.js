@@ -263,3 +263,9 @@ function litList() {
         $(".photoContents > div").append(str);
     });
 }
+
+$(".a").on("click","figure.projectView", function(){
+    let getProjectNum = $(this).attr("id")
+    location.href = "/lit/info?projectNumber=" + getProjectNum;
+
+})
