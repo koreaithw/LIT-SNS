@@ -47,7 +47,6 @@
                             </p>
                         </div>
                         <!--===================================================-->
-
                         <div class="challengeBtn" th:if="${projectDTO.participationStatus} == 0 or ${projectDTO.participationStatus} == null">
                             <input type="hidden" id="btn1" th:value="*{projectNumber}" name="projectNumber">
                             <label for="btn1" class="btn">참여하기</label>
@@ -58,7 +57,6 @@
                         <div class="challengeBtn" th:if="${projectDTO.participationStatus} == 2">
                             <label class="btn end">종료</label>
                         </div>
-
                         <!--===================================================-->
                         <div>
                             <p class="infoKey">

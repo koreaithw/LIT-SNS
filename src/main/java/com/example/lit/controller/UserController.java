@@ -227,5 +227,4 @@ public class UserController {
 
         return "/mypage/mypage";
     }
-
 }
