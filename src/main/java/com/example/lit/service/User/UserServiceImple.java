@@ -112,7 +112,11 @@ public class UserServiceImple implements UserService{
 
     @Override
     public void modifyImg(UserFileVO userFileVO) {
-
+        if(userFileDAO.getImg(userFileVO.getUserNumber()) == null){
+            userFileDAO.register(userFileVO);
+        }else {
+            userFileDAO.modify(userFileVO);
+        }
     }
 
     @Override

@@ -70,7 +70,8 @@
                 <div class="profile2">
                     <div class="profile3">
                         <button class="profileButton">
-                            <img class="profileImg" src="/images/mypage/jennie.jpg" onerror="this.src='/images/main/sprofile_ex.jpg'">
+                            <img class="profileImg" src="/images/mypage/jennie.jpg"
+                                 th:src="'/user/display?fileName='+ ${userFileList.uploadPath} + '/' + ${userFileList.uuid} + '_' + ${userFileList.name}">
                         </button>
                     </div>
                 </div>
