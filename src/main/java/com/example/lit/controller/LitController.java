@@ -52,6 +52,8 @@ public class LitController {
 
         projectDTO.setProjectNumber(projectNumber);
         projectDTO.setUserNumber(userNumber);
+        log.info(projectNumber+"###########################");
+        log.info("v프로젝트넘버 : " + projectNumber );
 
         projectDTO = litService.read(projectDTO);
         projectDTO.setProjectFile( litService.getImg( projectNumber ) ); // 파일 이미지
@@ -63,6 +65,10 @@ public class LitController {
         }
         model.addAttribute("projectNumber",projectNumber);
         model.addAttribute("projectDTO", projectDTO);
+
+        log.info(projectNumber+"###########################");
+        log.info("번호확닝 : " + projectDTO.getParticipationStatus());
+
         return "/project/projectInfo";
     }
 }

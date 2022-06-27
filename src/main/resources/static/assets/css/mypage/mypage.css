@@ -10,6 +10,7 @@ footer{
 }
 
 .mypageMain {
+  height: 100%;
   align-items: stretch;
   border: 0 solid black;
   box-sizing: border-box;

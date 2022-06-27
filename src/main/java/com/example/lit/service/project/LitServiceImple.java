@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,7 +63,7 @@ public class LitServiceImple implements LitService{
 
     @Override
     public ProjectDTO read(ProjectDTO projectDTO) {
-        Long projectNumber = projectDTO.getUserNumber();
+        Long projectNumber = projectDTO.getProjectNumber();
         Long userNumber = projectDTO.getUserNumber();
 
         ParticipationVO participationVO = new ParticipationVO();
@@ -72,8 +73,9 @@ public class LitServiceImple implements LitService{
        projectDTO = projectDAO.read(projectNumber);                                     // 기본 데이터 겟
             projectDTO.setReviewCount( projectDAO.reviewTotal(projectNumber) );         // 게시물 토탈
             projectDTO.setParticipationCount( projectDAO.challengeTotal(projectNumber));// 참가자 토탈
-            projectDTO.setParticipationStatus( participationDAO.select( participationVO ) );
+            projectDTO.setParticipationStatus( participationDAO.select( participationVO ).getStatus() );
             projectDTO.setUserNumber( userNumber );
+
         return projectDTO;
     }
 
@@ -141,4 +143,13 @@ public class LitServiceImple implements LitService{
     @Override
     public int getTotalByUserNumber(Long userNumber) { return projectDAO.getTotalByUserNumber(userNumber); }
 
+    @Override
+    public List<ProjectVO> getMyList(Long userNumber) {
+        List<ProjectVO> result = new ArrayList<>();
+        for(ProjectVO project : projectDAO.getMyList(userNumber)){
+            project.setProjectFile(projectFileDAO.getImg(project.getProjectNumber()));
+            result.add(project);
+        }
+        return result;
+    }
 }

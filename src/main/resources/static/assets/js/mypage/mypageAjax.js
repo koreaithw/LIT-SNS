@@ -178,10 +178,51 @@ let myPageAjaxService = (function () {
         });
     }
 
+    //litUp(리뷰) 리스트
+    function litUpList(callback, error){
+
+        $.ajax({
+            url : "/litUp/getMyList",
+            type : "get",
+            dataType : "json",
+            success : function(result){
+                if(callback){ callback(result); }
+            },
+            error : function(xhr, status, er){
+                if(error) { error(er); }
+            }
+        })
+    }
+
+    //lit(프로젝트) 리스트
+    function litList(callback, error){
+        $.ajax({
+            url : "/lit/getMyList",
+            type : "get",
+            dataType: "json",
+            success : function(result){
+                if(callback){ callback(result); }
+            },
+            error : function(xhr, status, er){
+                if(error) { error(er); }
+            }
+        })
+    }
+
+    function getMyProfileImg(userNumber,callback){
+        $.getJSON("/litUp/profilePic" , {userNumber: userNumber}, function(pic){
+            if(callback){callback(pic);
+            }
+        });
+
+    }
+
+
     return {removeFollower: removeFollower, getMedal: getMedal, get4Medal: get4Medal,
         get5Medal: get5Medal, get8Medal: get8Medal, get9Medal: get9Medal, get10Medal: get10Medal,
         get11Medal: get11Medal, get7Medal: get7Medal, get6Medal: get6Medal, get12Medal: get12Medal,
-        get13Medal: get13Medal, get14Medal: get14Medal, get15Medal: get15Medal
+        get13Medal: get13Medal, get14Medal: get14Medal, get15Medal: get15Medal, litUpList:litUpList,
+        litList:litList, getMyProfileImg:getMyProfileImg
     }
 
 })();

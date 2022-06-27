@@ -78,7 +78,7 @@ function searchReview(page) {
                 "<td class=\"user-email\">" + review.email + "</td>" +
                 "<td class=\"project-view\">" +
                 "<div>" +
-                "<a class=\"a-btn not-selected\" href=\"\">보기</a>" +
+                "<a class=\"a-btn not-selected\" href='javascript:void(0)'>보기</a>" +
                 "</div>" +
                 "</td>" +
                 "<td class=\"project-number\">" + review.projectNumber + "</td>" +
@@ -93,6 +93,8 @@ function searchReview(page) {
         pageBlock(result[0].total);//admin-common.js에 정의되어 있음
     })
 }
+
+
 
 $(".paging-block").on("click", "a.changePage", function (e) {
     e.preventDefault();
