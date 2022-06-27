@@ -7,6 +7,7 @@ import com.example.lit.domain.vo.messsage.MessageVO;
 import com.example.lit.domain.vo.user.UserFileVO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.domain.vo.user.achievement.AchievementVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -73,6 +74,8 @@ public interface UserService {
     public int followingCount(FollowVO followVO);
     // 팔로워 카운트 (다른 사람)
     public int followerCount(FollowVO followVO);
+    // 팔로잉 체크
+    public int followingCheck(FollowVO followVO);
 
 
     //메세지 룸 생성
@@ -101,9 +104,46 @@ public interface UserService {
 //    *************************************
     public List<String> getMedal(Long userNumber);
 
+    //메달 획득
+    public void insertMedal(@Param("userNumber") Long userNumber, @Param("medal") String medal);
+
     //4번째 메달 조건 - 메달 10개 모으기
     public int medal4Condition(Long userNumber);
 
+    // 5번째 메달 조건 - 전체 카테고리 litUp 100회 성공
+    public int medal5Condition(Long userNumber);
 
+    // 6번째 메달 조건 - lits 10번 생성하기 성공
+    public int medal6Condition(Long userNumber);
+
+    // 7번째 메달 조건 - 생활 카테고리 5회 성공하기
+    public int medal7Condition(Long userNumber, String category);
+
+    // 8번째 메달 조건 - 운동 카테고리 5회 성공하기
+    public int medal8Condition(Long userNumber, String category);
+
+    // 9번째 메달 조건 - 정서 카테고리 5회 성공하기
+    public int medal9Condition(Long userNumber, String category);
+
+    // 10번째 메달 조건 - 취미 카테고리 5회 성공하기
+    public int medal10Condition(Long userNumber, String category);
+
+    // 11번째 메달 조건 - 예술 카테고리 5회 성공하기
+    public int medal11Condition(Long userNumber, String category);
+
+    // 메달 1번이상 인서트 되는 것 막아주기
+    public int medalInsertBlock(Long userNumber, String medal);
+
+    // 12번째 메달 조건 - 댓글 1000번 달성하기
+    public int medal12Condition(Long userNumber);
+
+    // 13번째 메달 조건 - 좋아요 1000번 달성하기
+    public int medal13Condition(Long userNumber);
+
+    // 14번째 메달 조건 - 팔로잉 100명이상 만들기
+    public int medal14Condition(Long userNumber);
+
+    // 15번째 메달 조건 - 팔로워 100만명이상 만들기
+    public int medal15Condition(Long userNumber);
 
 }

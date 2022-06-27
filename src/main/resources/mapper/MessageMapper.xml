@@ -88,13 +88,32 @@
         SELECT COUNT(ROOM_ID)
         FROM TBL_MESSAGE_ROOM
         WHERE SEND_USER_NUMBER = #{sendUserNumber} AND RECEIVE_USER_NUMBER = #{receiveUserNumber}
+        OR SEND_USER_NUMBER = #{receiveUserNumber} AND RECEIVE_USER_NUMBER = #{sendUserNumber}
     </select>
 
     <select id="getRoom" resultType="messageRoom">
         SELECT ROOM_ID, SEND_USER_NUMBER, RECEIVE_USER_NUMBER
         FROM TBL_MESSAGE_ROOM
         WHERE SEND_USER_NUMBER = #{sendUserNumber} and RECEIVE_USER_NUMBER = #{receiveUserNumber}
+        OR SEND_USER_NUMBER = #{receiveUserNumber} AND RECEIVE_USER_NUMBER = #{sendUserNumber}
     </select>
 
+    <select id="getSendUserNumber" resultType="long">
+        SELECT DISTINCT SEND_USER_NUMBER
+        FROM TBL_MESSAGE
+        WHERE RECEIVE_USER_NUMBER = #{userNumber}
+    </select>
 
+    <select id="getRecentReceiveMessage" resultType="map">
+        SELECT NICKNAME, CONTENT, SEND_USER_NUMBER, ROOM_ID
+        FROM
+            (
+            SELECT u.NICKNAME, m.CONTENT, m.SEND_USER_NUMBER, m.ROOM_ID
+            FROM TBL_USER u LEFT OUTER JOIN TBL_MESSAGE m
+            ON u.USER_NUMBER  = m.SEND_USER_NUMBER
+            WHERE m.SEND_USER_NUMBER = #{sendUserNumber}
+            ORDER BY m.MESSAGE_DATE DESC
+            )
+        WHERE ROWNUM = 1
+    </select>
 </mapper>

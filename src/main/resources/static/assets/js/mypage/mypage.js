@@ -98,13 +98,23 @@ $(".btn__x").on("click", function () {
 
 $(document).ready(function () {
     litUpList();
+  let $imgAr = $(".medal-icon-col > img");
+
+  // 메달 목록 띄워주는 ajax
+  myPageAjaxService.getMedal(mypageUser, function(medals){
     let $imgAr = $(".medal-icon-col > img");
-    myPageAjaxService.getMedal(mypageUser, function (medals) {
-        let $imgAr = $(".medal-icon-col > img");
-        for (let i = 0; i < medals.length; i++) {
-            $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal" + medals[i] + ".png");
-            // $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal.png");
-        }
+
+    /*########################메달 4번##########################*/
+    if(medals.length >= 10){
+      console.log("메달 10개 모으기 성공");
+      myPageAjaxService.get4Medal(mypageUser)
+    }
+
+    for(let i=0; i<medals.length; i++){
+      $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal" + medals[i] + ".png");
+      // $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal.png");
+    }
+    $($imgAr[3]).data("bar", medals.length + "/10");
 
         // 해제된 메달에 medal__unlock 클래스 부여(마우스 오버 이벤트 등등에 사용)
         $imgAr
@@ -123,6 +133,87 @@ $(document).ready(function () {
     //프론트 작업에서는 아이디 옆 메달을 가져왔지만 DB에서 가져오는게 좋을거 같음
     $(".medal-selected_medal > img").attr("src", $("#medalImg").attr("src"));
     setMedalMedal();
+
+  // 대표 메달 사용하기 버튼
+  $(".medal-selected_button").on("click", function () {
+    let src = $(".medal-selected_medal > img").attr("src");
+    if (src.substring(src.lastIndexOf("/") + 1) == "padlock.png") {
+      return;
+    }
+    $("#medalImg").attr("src", src);
+    $(".btn__x").trigger("click");
+  });
+
+    /*########################메달 5번##########################*/
+    myPageAjaxService.get5Medal(mypageUser, function (result) {
+      $($imgAr[4]).data("bar", result + "/100");
+    });
+
+    /*########################메달 6번##########################*/
+    myPageAjaxService.get6Medal(mypageUser, function (result) {
+      $($imgAr[5]).data("bar", result + "/10");
+    });
+
+    /*########################메달 7번##########################*/
+    myPageAjaxService.get7Medal({
+      userNumber: mypageUser,
+      category: "life"
+    },function (result) {
+      $($imgAr[6]).data("bar", result + "/5");
+    });
+
+    /*########################메달 8번##########################*/
+    myPageAjaxService.get8Medal({
+      userNumber: mypageUser,
+      category: "exercise"
+    },function (result) {
+      console.log("마이페이지자바스크립트 들어옴");
+      $($imgAr[7]).data("bar", result + "/5");
+    });
+
+    /*########################메달 9번##########################*/
+    myPageAjaxService.get9Medal({
+      userNumber: mypageUser,
+      category: "heart"
+    },function (result) {
+      $($imgAr[8]).data("bar", result + "/5");
+    });
+
+    /*########################메달 10번##########################*/
+    myPageAjaxService.get10Medal({
+      userNumber: mypageUser,
+      category: "hobby"
+    },function (result) {
+      $($imgAr[9]).data("bar", result + "/5");
+    });
+
+    /*########################메달 11번##########################*/
+    myPageAjaxService.get11Medal({
+      userNumber: mypageUser,
+      category: "art"
+    },function (result) {
+      $($imgAr[10]).data("bar", result + "/5");
+    });
+
+    /*########################메달 12번##########################*/
+    myPageAjaxService.get12Medal(mypageUser,function (result) {
+      $($imgAr[11]).data("bar", result + "/1000");
+    });
+
+    /*########################메달 13번##########################*/
+    myPageAjaxService.get13Medal(mypageUser,function (result) {
+      $($imgAr[12]).data("bar", result + "/1000");
+    });
+
+    /*########################메달 14번##########################*/
+    myPageAjaxService.get14Medal(mypageUser,function (result) {
+      $($imgAr[13]).data("bar", result + "/1000");
+    });
+
+    /*########################메달 15번##########################*/
+    myPageAjaxService.get15Medal(mypageUser,function (result) {
+      $($imgAr[14]).data("bar", result + "/1000000");
+    });
 
     //클릭하면 내 대표메달로 변경하기
     $(".medal__unlock").on("click", function () {
@@ -263,3 +354,9 @@ function litList() {
         $(".photoContents > div").append(str);
     });
 }
+
+$(".a").on("click","figure.projectView", function(){
+    let getProjectNum = $(this).attr("id")
+    location.href = "/lit/info?projectNumber=" + getProjectNum;
+
+})

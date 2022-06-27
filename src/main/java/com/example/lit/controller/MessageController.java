@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,26 +22,32 @@ public class MessageController {
     private final MessageService messageService;
 
     @GetMapping("/message")
-    public String message(Long userNumber, Model model){
+    public String message(HttpSession session, Model model){
         log.info("******************************");
         log.info("ProjectController : message");
         log.info("******************************");
 
-        //로그인 시 세션에서 받아옴
-        userNumber = 1L;
+        Long userNumber = Long.parseLong(session.getAttribute("userNumber").toString());
+//        userNumber = 1L;
 
         //메세지 페이지 이동할 때 메시지 한 유저 닉네임과 최근 메시지를 담아준다.
-        List<Map<String, Object>> mapList = new ArrayList<>();
+        List<Map<String, Object>> sendList = new ArrayList<>();
+        List<Map<String, Object>> receiveList = new ArrayList<>();
         List<Long> receiveNumbers = messageService.getReceiveUserNumber(userNumber);
+        List<Long> sendNumbers = messageService.getSendUserNumber(userNumber);
 
         for (Long receiveUser : receiveNumbers) {
-            log.info("******************************");
-            log.info(receiveUser.toString());
-            log.info("******************************");
-            mapList.add(messageService.getRecentMessage(receiveUser));
+            //유저 번호로 프로필 사진 정보 넣어주기//
+            sendList.add(messageService.getRecentMessage(receiveUser));
         }
 
-        model.addAttribute("nicknameAndMessage", mapList);
+        for (Long sendUser : sendNumbers){
+            //유저 번호로 프로필 사진 정보 넣어주기//
+            receiveList.add(messageService.getRecentReceiveMessage(sendUser));
+        }
+
+        model.addAttribute("recentSendMessage", sendList);
+        model.addAttribute("recentReceiveMessage", receiveList);
 
         return "/message/message";
     }
