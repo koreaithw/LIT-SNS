@@ -62,4 +62,14 @@ public class MessageDAO {
     public MessageRoom getRoom(Long sendUserNumber, Long receiveUserNumber){
         return messageMapper.getRoom(sendUserNumber, receiveUserNumber);
     }
+
+    //나에게 보낸 유저 번호
+    public List<Long> getSendUserNumber(Long receiveUserNumber){
+        return messageMapper.getSendUserNumber(receiveUserNumber);
+    }
+
+    //받은 메세지 중 가장 최근 메세지
+    public Map<String, Object> getRecentReceiveMessage(Long sendUserNumber){
+        return messageMapper.getRecentReceiveMessage(sendUserNumber);
+    }
 }
