@@ -26,6 +26,37 @@ let myPageAjaxService = (function () {
         });
     }
 
-    return {removeFollower: removeFollower, getMedal: getMedal}
+    //litUp(리뷰) 리스트
+    function litUpList(callback, error){
+
+        $.ajax({
+            url : "/litUp/getMyList",
+            type : "get",
+            dataType : "json",
+            success : function(result){
+                if(callback){ callback(result); }
+            },
+            error : function(xhr, status, er){
+                if(error) { error(er); }
+            }
+        })
+    }
+
+    //lit(프로젝트) 리스트
+    function litList(callback, error){
+        $.ajax({
+            url : "/lit/getMyList",
+            type : "get",
+            dataType: "json",
+            success : function(result){
+                if(callback){ callback(result); }
+            },
+            error : function(xhr, status, er){
+                if(error) { error(er); }
+            }
+        })
+    }
+
+    return {removeFollower: removeFollower, getMedal: getMedal, litUpList:litUpList, litList:litList}
 
 })();
