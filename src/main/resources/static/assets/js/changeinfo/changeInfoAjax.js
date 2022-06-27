@@ -61,8 +61,11 @@ let changeInfoAjax = (function () {
         $.ajax({
             url:"/user/profileEditNicknameCheck/" + nickname,
             type: "get",
-            dataType: "json",
+            async : false,
             success: function (result) {
+                console.log("+++++++++++++++++++++++++++++++++++");
+                console.log(result)
+                console.log("+++++++++++++++++++++++++++++++++++");
                 if(callback){
                     callback(result);
                 }
@@ -70,6 +73,29 @@ let changeInfoAjax = (function () {
         });
     }
 
-    return {checkOldPw: checkOldPw, checkWithdrawPw: checkWithdrawPw, withdrawUser: withdrawUser, modifyPw: modifyPw, profileEditNicknameCheck: profileEditNicknameCheck}
+    function changeImg(formData, callback, error){
+        $.ajax({
+            url : "/user/changeImg",
+            type : "post",
+            data : formData,
+            contentType : false,
+            processData : false,
+            success : function(){
+                if(callback) { callback(); }
+            },
+            error : function(xhr, status, er){
+                if(error){ error(er); }
+            }
+        })
+    }
+
+    return {
+        checkOldPw: checkOldPw,
+        checkWithdrawPw: checkWithdrawPw,
+        withdrawUser: withdrawUser,
+        modifyPw: modifyPw,
+        profileEditNicknameCheck: profileEditNicknameCheck,
+        changeImg : changeImg
+    }
 
 })();

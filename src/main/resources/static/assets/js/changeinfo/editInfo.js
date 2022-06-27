@@ -34,27 +34,25 @@ function uploadProfile(){
 
 // 변경된 사진으로 프로필 사진 변경
 $('#ModalFileInput').on("change", function(e){
-    console.log($('#ModalFileInput'));
+    // console.log($('#ModalFileInput'));
     let reader = new FileReader();
 
     let fileList = e.target.files;
     let file = fileList[0];
-    console.log(fileList);
-    console.log(file);
+    // console.log(fileList);
+    // console.log(file);
     reader.onload = function(e){
-        console.log("bbb");
+        // console.log("bbb");
 
-        console.log(e.target.result);
+        // console.log(e.target.result);
         proFileImg.src = e.target.result;
     }
     reader.readAsDataURL(file);
 
 })
 
-
 function checkNick(result) {
-    console.log(nickNameCk.val() + "++++++++++++");
-
+    // console.log(nickNameCk.val() + "++++++++++++");
     if (!result) {
 
         $('._checkArea1').html('사용이 불가능한 사용자 이름입니다.');
@@ -64,28 +62,31 @@ function checkNick(result) {
 
         $('._checkArea1').html('사용 가능한 사용자 이름입니다.');
         $('._checkArea1').css('color', 'black');
-
     }
 }
 
 
 //버튼 활성화/비활성화
-function buttonOn(){
-    
-    var chNick = checkNick();
-    
-    if(chNick && userName.val().length > 0 && nickNameCk.val().length > 0){
+function buttonOn2(){
+    if(userName.val().length > 0 && nickNameCk.val().length > 0){
         $('#subBtn').attr("class", "submitBtnOn");
     } else{
         $('#subBtn').attr("class", "submitBtn");
     }
 }
 
-$('#subBtn').on("click", function(){
-    alert("프로필이 저장되었습니다.")
+$('#subBtn').on("click", function(e){
+    e.preventDefault();
+    let formData = new FormData();
+    let inputFile = $("#ModalFileInput");
+    let file = inputFile[0].files;
+    formData.append("uploadFiles", file[0]);
+    changeInfoAjax.changeImg(formData, function(){
+        $("#editForm").submit();
+    })
 });
 
-userName.keyup(buttonOn);
-nickNameCk.keyup(buttonOn);
-userContent.keyup(buttonOn);
-eamil.keyup(buttonOn);
+userName.keyup(buttonOn2);
+// nickNameCk.keyup(buttonOn);
+userContent.keyup(buttonOn2);
+eamil.keyup(buttonOn2);

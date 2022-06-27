@@ -1,6 +1,8 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.dao.user.UserFileDAO;
 import com.example.lit.domain.vo.user.FollowVO;
+import com.example.lit.domain.vo.user.UserFileVO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.domain.vo.user.achievement.AchievementVO;
 import com.example.lit.service.User.UserService;
@@ -27,13 +29,28 @@ public class UserController {
 
     //이동
     @GetMapping("/changePw")
-    public String goChangePwPage(Long userNumber, Model model) {
+    public String goChangePwPage(HttpSession session, Model model){
         log.info("******************************");
         log.info("changeInfoController : changePw");
         log.info("******************************");
-        userNumber = 2L; // 임시
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        if(userNumber == null){
+            return goLoginPage();
+        }
 
         UserVO userVO = userService.getChangePwInfo(userNumber);
+        UserFileVO userFileVO = null;
+        if(userService.getImg(userNumber) == null){
+            userFileVO = new UserFileVO();
+            userFileVO.setUserNumber(userNumber);
+            userFileVO.setName("");
+            userFileVO.setUploadPath("");
+            userFileVO.setUuid("");
+            userVO.setUserFileList(userFileVO);
+        }else{
+            userVO.setUserFileList(userService.getImg(userNumber));
+        }
+        model.addAttribute("userFileList", userVO.getUserFileList());
         model.addAttribute("userNumber", userNumber);
         model.addAttribute("nickName", userVO.getNickname());
         log.info(userVO.getUserNumber() + "########################");
@@ -43,13 +60,27 @@ public class UserController {
 
     //이동
     @GetMapping("/editInfo")
-    public String goEditInfoPage(Long userNumber, Model model) {
+    public String goEditInfoPage(HttpSession session, Model model){
         log.info("******************************");
         log.info("changeInfoController : editInfo");
         log.info("******************************");
-        userNumber = 2L;
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        if(userNumber == null){
+            return goLoginPage();
+        }
 
         UserVO userVO = userService.read(userNumber);
+
+        if(userService.getImg(userNumber) == null){
+            UserFileVO userFileVO = new UserFileVO();
+            userFileVO.setUserNumber(userNumber);
+            userFileVO.setName("");
+            userFileVO.setUploadPath("");
+            userFileVO.setUuid("");
+            userVO.setUserFileList(userFileVO);
+        }else{
+            userVO.setUserFileList(userService.getImg(userNumber));
+        }
         model.addAttribute("userVO", userVO);
 
         return "/changeinfo/editInfo";
@@ -57,13 +88,28 @@ public class UserController {
 
     //이동
     @GetMapping("/withdraw")
-    public String goWithdrawPage(Long userNumber, Model model) {
+    public String goWithdrawPage(HttpSession session, Model model){
         log.info("******************************");
         log.info("changeInfoController : withdraw");
         log.info("******************************");
-        userNumber = 2L; // 임시
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        if(userNumber == null){
+            return goLoginPage();
+        }
 
         UserVO userVO = userService.getChangePwInfo(userNumber);
+        UserFileVO userFileVO = null;
+        if(userService.getImg(userNumber) == null){
+            userFileVO = new UserFileVO();
+            userFileVO.setUserNumber(userNumber);
+            userFileVO.setName("");
+            userFileVO.setUploadPath("");
+            userFileVO.setUuid("");
+            userVO.setUserFileList(userFileVO);
+        }else{
+            userVO.setUserFileList(userService.getImg(userNumber));
+        }
+        model.addAttribute("userFileList", userVO.getUserFileList());
         model.addAttribute("userNumber", userNumber);
         model.addAttribute("nickName", userVO.getNickname());
         return "/changeinfo/withdraw";
@@ -88,9 +134,16 @@ public class UserController {
     }
 
     //정보 수정
-    @PatchMapping("/changeInfo")
-    public String changeInfo() {
-        return null;
+    @PostMapping("/changeInfo")
+    public String changeInfo(UserVO userVO, HttpSession session, Model model){
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        if(userNumber == null){
+            return goLoginPage();
+        }
+        userVO.setUserNumber((Long)session.getAttribute("userNumber"));
+        userService.modify(userVO);
+
+        return mypage(null ,model, session);
     }
 
 
@@ -157,6 +210,19 @@ public class UserController {
         List<UserVO> followerVO = userService.ModalFollower(userPageNumber);
         List<UserVO> followingVO = userService.ModalFollowing(userPageNumber);
 
+        UserFileVO userFileVO = null;
+        if(userService.getImg(userNumber) == null){
+            userFileVO = new UserFileVO();
+            userFileVO.setUserNumber(userNumber);
+            userFileVO.setName("");
+            userFileVO.setUploadPath("");
+            userFileVO.setUuid("");
+            userVO.setUserFileList(userFileVO);
+        }else{
+            userVO.setUserFileList(userService.getImg(userNumber));
+        }
+
+        model.addAttribute("userFileList", userVO.getUserFileList());
         model.addAttribute("followerCnt", userService.MyFollowerCnt(userPageNumber));
         model.addAttribute("followingCnt", userService.MyFollowingCnt(userPageNumber));
         model.addAttribute("reviewCnt", userService.MyReviewCnt(userPageNumber));
@@ -177,10 +243,10 @@ public class UserController {
     }
 
     @PostMapping("/updateEditInfo")
-    public String updateEditInfo(UserVO userVO, Model model) {
+    public String updateEditInfo(UserVO userVO, Model model, HttpSession session) {
         userVO.setUserNumber(2L);
         userService.modify(userVO);
-        return goEditInfoPage(2L, model);
+        return goEditInfoPage(session, model);
     }
 
     //    *************************************
@@ -204,10 +270,20 @@ public class UserController {
         if (userNumber == null) {
             return goLoginPage();
         }
-        System.out.println("==============================================");
-        System.out.println(userNumber);
-        System.out.println("==============================================");
+
         UserVO userVO = userService.read(userNumber);
+        UserFileVO userFileVO = null;
+        if(userService.getImg(userNumber) == null){
+            userFileVO = new UserFileVO();
+            userFileVO.setUserNumber(userNumber);
+            userFileVO.setName("");
+            userFileVO.setUploadPath("");
+            userFileVO.setUuid("");
+            userVO.setUserFileList(userFileVO);
+        }else{
+            userVO.setUserFileList(userService.getImg(userNumber));
+        }
+
         List<UserVO> followerVO = userService.ModalFollower(userNumber);
         List<UserVO> followingVO = userService.ModalFollowing(userNumber);
 
@@ -217,6 +293,7 @@ public class UserController {
         model.addAttribute("nickname", userVO.getNickname());
         model.addAttribute("content", userVO.getContent());
         model.addAttribute("userNumber", userNumber);
+        model.addAttribute("userFileList", userFileVO);
 
         model.addAttribute("pageUserNumber", pageUserNumber);
 
@@ -227,4 +304,13 @@ public class UserController {
 
         return "/mypage/mypage";
     }
+
+//    @PostMapping("/updateEditInfo")
+//    public String updateEditInfo(UserVO userVO, Model model){
+//        userVO.setUserNumber(2L);
+//        userService.modify(userVO);
+//        HttpSession session;
+//        return goEditInfoPage();
+//    }
+
 }
