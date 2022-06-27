@@ -36,7 +36,7 @@ function dmSubmit() {
         $.each(result, function (i, item) {
             res += '<div>' +
                 '<div class="dmImg">' +
-                '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
                 '</div>' +
                 '<div class="userData">' +
                 '<p>' +
@@ -89,7 +89,7 @@ $(".dmBtn").on("click", "a", function (e) {
             message +=
                 '<div class="contentTop">' +
                 '<div>' +
-                '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
                 '</div>' +
                 '<div>' +
                 '<span>' + receiveNickname + '</span>' +
@@ -125,7 +125,7 @@ $(".dmBtn").on("click", "a", function (e) {
                 } else {
                     message += "<div class=\"dmStyle2\">" +
                         "<div class=\"dmImg\">" +
-                        "<img src='/images/project/domImg/indi01.webp' alt=''>" +
+                        "<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src='/images/main/profile_ex.png'\">" +
                         "</div>" +
                         "<div class=\"text\">" +
                         result[i].content +
@@ -196,7 +196,7 @@ function getMoreMessage(scrolling) {
                 } else {
                     message += "<div class=\"dmStyle2\">" +
                         "<div class=\"dmImg\">" +
-                        "<img src='/images/project/domImg/indi01.webp' alt=''>" +
+                        "<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src='/images/main/profile_ex.png'\">" +
                         "</div>" +
                         "<div class=\"text\">" +
                         result[i].content +
@@ -224,7 +224,7 @@ $(".modalSearch > input").keyup(function () {
         $.each(result, function (i, item) {
             res += '<div>' +
                 '<div class="dmImg">' +
-                '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
                 '</div>' +
                 '<div class="userData">' +
                 '<p>' +
@@ -273,7 +273,7 @@ function startChat(receiveUserNumber, nick) {
                 let str = '<figure class="dmBtn">' +
                     '<a id="' + receiveUserNumber + '" class="userDMList" onclick="goMessage(this)">' +
                     '<div class="dmImg">' +
-                    '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                    '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
                     '</div>' +
                     '<div class="dmData">' +
                     '<p>' + receiveNickname + '</p>' +
@@ -294,7 +294,7 @@ function startChat(receiveUserNumber, nick) {
                 let msg = '<div class="colBox dmBox on" id="' + receiveNickname + '">' +
                     '<div class="contentTop">' +
                     '<div>' +
-                    '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                    '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
                     '</div>' +
                     '<div>' +
                     '<span>' + receiveNickname + '</span>' +
@@ -339,7 +339,7 @@ function startChat(receiveUserNumber, nick) {
                 let str = '<figure class="dmBtn">' +
                     '<a id="' + receiveUserNumber + '" class="userDMList" onclick="goMessage(this)">' +
                     '<div class="dmImg">' +
-                    '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                    '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
                     '</div>' +
                     '<div class="dmData">' +
                     '<p>' + receiveNickname + '</p>' +
@@ -360,7 +360,7 @@ function startChat(receiveUserNumber, nick) {
                 let msg = '<div class="colBox dmBox on" id="' + receiveNickname + '">' +
                     '<div class="contentTop">' +
                     '<div>' +
-                    '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                    '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
                     '</div>' +
                     '<div>' +
                     '<span>' + receiveNickname + '</span>' +
@@ -403,7 +403,7 @@ function startChat(receiveUserNumber, nick) {
             message +=
                 '<div class="contentTop">' +
                 '<div>' +
-                '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
                 '</div>' +
                 '<div>' +
                 '<span>' + receiveNickname + '</span>' +
@@ -439,7 +439,7 @@ function startChat(receiveUserNumber, nick) {
                 } else {
                     message += "<div class=\"dmStyle2\">" +
                         "<div class=\"dmImg\">" +
-                        "<img src='/images/project/domImg/indi01.webp' alt=''>" +
+                        "<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src='/images/main/profile_ex.png'\">" +
                         "</div>" +
                         "<div class=\"text\">" +
                         result[i].content +
@@ -499,7 +499,7 @@ function goMessage(e) {
             message +=
                 '<div class="contentTop">' +
                 '<div>' +
-                '<img src="/images/project/domImg/indi01.webp" alt="">' +
+                '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
                 '</div>' +
                 '<div>' +
                 '<span>' + receiveNickname + '</span>' +
@@ -535,7 +535,7 @@ function goMessage(e) {
                 } else {
                     message += "<div class=\"dmStyle2\">" +
                         "<div class=\"dmImg\">" +
-                        "<img src='/images/project/domImg/indi01.webp' alt=''>" +
+                        "<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src='/images/main/profile_ex.png'\">" +
                         "</div>" +
                         "<div class=\"text\">" +
                         result[i].content +
