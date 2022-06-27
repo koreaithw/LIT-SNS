@@ -29,11 +29,14 @@
       href="/assets/css/admin/date-picker.css"
     />
     <link rel="stylesheet" href="/assets/css/default.css" />
+    <link rel="stylesheet" href="/assets/css/certification/certificationDetail.css">
+    <link rel="stylesheet" href="/assets/css/certification/report.css">
     <!-- date picker css -->
   </head>
   <body>
     <!--<header></header>-->
     <div class="main">
+      <div th:insert="~{/certification/certificationDetail :: certificationDetail}"></div>
       <input type="text" class="order" hidden>
       <input type="text" class="desc" hidden>
       <div class="wrapper">
@@ -281,4 +284,268 @@
   ></script>
   <!-- chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+  <script defer src="/assets/js/certification/certificationDetail.js"></script>
+  <script defer src="/assets/js/certification/report.js"></script>
+  <script defer src="/assets/js/certification/certificationDetailAjax.js"></script>
+  <script th:inline="javascript">
+    let file;
+    const replyDiv = $(".reply_area");
+    let pageNum_modal = 1;
+    // cretificationDetail에서 모달 버튼 매개변수로 넘어옴
+    let $reviewNumber;
+    // session에서 받아야함
+
+    $(".list-tbody").on("click",".a-btn",function (e) {
+      $reviewNumber = $(this).closest(".project-view").siblings(".review-number").text()
+      $fileWriter = $(this).closest(".project-view").siblings(".review-user-email").attr("id")
+
+      projectDetailModalShow($reviewNumber, 0)
+      $.getJSON("/litUp/profilePic", {userNumber: $fileWriter}, function(pic){showMainUserPic(pic);})
+      $.getJSON("/litUp/reviewPic", {reviewNumber: $reviewNumber}, function(pic){showReviewPic(pic);})
+    })
+
+    // 댓글 목록 불러오기
+    function showList(page){
+      reviewDetailService.getList({reviewNum: $reviewNumber, page: page}, function(total, list){
+                let str = "";
+
+                if(list == null || list.length == 0){
+                  replyDiv.html("");
+                  return;
+                }
+
+                $.each(list, function(i, reply){
+                  ////////// getJSON -> AJAX 동기식으로 변경해서 file에 pic 담을 것
+                  $.ajax({
+                    url:"/litUp/profilePic",
+                    type: "get",
+                    data:{userNumber:reply.userNumber},
+                    async:false,
+                    success:function (pic) {
+                      file = pic;
+                    }
+                  })
+                  str += '<div class="detailContentWriteContainer">';
+                  str += '<div class="detailContentWriteWrapper">';
+                  str += '<div class="detailContentProfileImage">';
+                  str += '<div class="detailContentProfileImageInne">';
+                  str += "<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>";
+                  str += '</div>';
+                  str += '</div>';
+                  str += '</div>';
+                  str += '<div class="detailContentWriteFeed">';
+                  str += '<div class="detailContentWrite">';
+                  str += '<div class="detailContentWriteName">'
+                  str +=  reply.nickname;
+                  str += '</div>';
+                  str += '<div class="detailContentWriteComment">';
+                  str +=  reply.content;
+                  str += '</div>';
+                  str += '</div>';
+                  str += '<div class="detailContentWriteFeedBottom">';
+                  str += '<div class="detailContentRegisterDate">';
+                  str +=  reviewDetailService.getReplyDate(reply.registerDate);
+                  str += '</div>';
+                  str += '<div class="detailContentCommentDelete">';
+                  str += '<a class="remove ' + reply.replyNumber + '" style="cursor: pointer;">삭제</a>';
+                  str += '</div>';
+                  str += '</div>';
+                  str += '</div>';
+                  str += '</div>';
+
+                });
+                replyDiv.html(str.trim());
+                showReplyPage(total);
+              },function (a,b,c){console.log("error");}
+      );
+
+    };
+
+    //댓글 추가 보기
+    function showAppendList(page) {
+
+      reviewDetailService.getList({reviewNum: $reviewNumber, page: page}, function (total, list) {
+
+                $(".appendReply div").html("");
+                let str = "";
+
+                $.each(list, function (i, reply) {
+                  $.ajax({
+                    url:"/litUp/profilePic",
+                    type: "get",
+                    data:{userNumber:reply.userNumber},
+                    async:false,
+                    success:function (pic) {
+                      file = pic;
+                    }
+                  })
+                  str += '<div class="detailContentWriteContainer">';
+                  str += '<div class="detailContentWriteWrapper">';
+                  str += '<div class="detailContentProfileImage">';
+                  str += '<div class="detailContentProfileImageInne">';
+                  str += "<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>";
+                  str += '</div>';
+                  str += '</div>';
+                  str += '</div>';
+                  str += '<div class="detailContentWriteFeed">';
+                  str += '<div class="detailContentWrite">';
+                  str += '<div class="detailContentWriteName">'
+                  str += reply.nickname;
+                  str += '</div>';
+                  str += '<div class="detailContentWriteComment">';
+                  str += reply.content;
+                  str += '</div>';
+                  str += '</div>';
+                  str += '<div class="detailContentWriteFeedBottom">';
+                  str += '<div class="detailContentRegisterDate">';
+                  str += reviewDetailService.getReplyDate(reply.registerDate);
+                  str += '</div>';
+                  str += '<div class="detailContentCommentDelete">';
+                  str += '<a class="remove ' + reply.replyNumber + '" style="cursor: pointer;">삭제</a>';
+                  str += '</div>';
+                  str += '</div>';
+                  str += '</div>';
+                  str += '</div>';
+
+                });
+
+                replyDiv.append(str.trim());
+                showReplyPage(total);
+              }, function (a, b, c) {
+                console.log("error");
+              }
+      )};
+
+
+    // 신고하기
+    $(".reportButton").on("click", function () {
+      let $reason = $(this).attr("value");
+
+      reviewDetailService.addReport({
+                userNumber: userNumber, reviewNumber: $reviewNumber, reason: $reason
+              },
+              function (result) {
+                reportModalClose();
+                alert("신고 되었습니다.");
+              },
+              function (a, b, c) {
+                console.log(a, b, c)
+              }
+      );
+    })
+
+    // 댓글쓰기
+    $(".commentButton").on("click", function () {
+      let $commentValue = $(".detailContentFooterCommentInputArea").val();
+      reviewDetailService.addReply({
+                reviewNumber: $reviewNumber, userNumber: userNumber, content: $commentValue
+              },
+              function (result) {
+                $(".detailContentFooterCommentInputArea").val("");
+                pageNum_modal = 1;
+                showList(1);
+                $(".detailContentFeed").scrollTop(0);
+              },
+              function (a, b, c) {
+                console.log(a, b, c)
+              }
+      );
+    })
+
+    // 좋아요
+    $(".detailContentLikeButton").on("click", function () {
+      reviewDetailService.addLike({reviewNumber: $reviewNumber, userNumber: userNumber},
+              function (result) {
+                $("#likeCount").html(result);
+              },
+              function (a, b, c) {
+                console.log(a, b, c)
+              })
+    })
+
+
+    // 좋아요 해제
+    $(".detailContentLikeCancel").on("click", function () {
+      reviewDetailService.removeLike({userNumber: userNumber, reviewNumber: $reviewNumber},
+              function (result) {
+                $("#likeCount").html(result);
+              },
+              function (a, b, c) {
+                console.log(a, b, c)
+              })
+    })
+
+    //댓글 append
+    $(".appendReply div").on("click", function (e) {
+      e.preventDefault();
+      pageNum_modal = pageNum_modal + 1;
+      showAppendList(pageNum_modal);
+
+    })
+
+    //댓글 삭제
+    $(".reply_area").on("click", "div.detailContentCommentDelete a.remove", function (e) {
+      e.preventDefault();
+      let $replyNumber = $(this).attr("class").split(/\s+/);
+      // 유저넘버임
+      reviewDetailService.removeReply($replyNumber[1], userNumber, function (result) {
+        if(result) {
+          pageNum_modal = 1;
+          showList(pageNum_modal);
+        }else{
+          alert("본인 게시물만 삭제 가능합니다.");
+        }
+      })
+    })
+
+    // 클릭시 노출페이지 조절
+    function showReplyPage(total) {
+      let realEnd = Math.ceil(total / 10.0);
+      const $paging = $(".appendReply div");
+
+
+      let next = pageNum_modal < realEnd;
+      let str = "<svg aria-label=\"댓글 더 읽어들이기\" class=\"_ab6-\" color=\"#262626\" fill=\"#262626\" height=\"24\" role=\"img\" viewBox=\"0 0 24 24\" " +
+              "width=\"24\"><circle cx=\"12.001\" cy=\"12.005\" fill=\"none\" r=\"10.5\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></circle>" +
+              "<line fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" x1=\"7.001\" x2=\"17.001\" y1=\"12.005\" y2=\"12.005\"></line>" +
+              "<line fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" x1=\"12.001\" x2=\"12.001\" y1=\"7.005\" y2=\"17.005\"></line></svg>";
+
+      if (next) {
+        $paging.html(str);
+      }
+    }
+
+
+    // 프로필 사진 출력
+    function showMainUserPic(file){
+      let str ="";
+      let str2 ="";
+
+      str += "<div class=\"detailContentProfileImageInner\">"
+      str += "<img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+      str += "</div>"
+
+      str2 +="<div class=\"detailContentProfileImageInner\">"
+      str2 +="<img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+      str2 +="</div>"
+
+      $("div.bottom").html(str);
+      $("div.top").html(str2);
+    }
+
+    function showReviewPic(pic) {
+      let str ="";
+      let strBtn ="";
+      $.each(pic,function (i, file) {
+        str += "<li id=a" + i + "><img class=\"innerImage\" src='/litUp/display?fileName=" + file.uploadPath  + "/" + file.uuid + "_"  + file.name + "' /></li>"
+        strBtn +="<div id=b"+ i +"></div>"
+      })
+      $(".innerImageSlides").html(str);
+      $(".innerImagePageButtons").html(strBtn);
+      $("li#a0").addClass("active");
+      $("div#b0").addClass("active");
+    }
+
+
+  </script>
 </html>

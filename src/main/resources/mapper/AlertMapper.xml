@@ -3,6 +3,12 @@
 <mapper namespace="com.example.lit.mapper.user.AlertMapper">
     <insert id="insert">
         INSERT INTO TBL_ALERT
+        (ALERT_NUMBER, ALERT_USER, USER_NUMBER, TYPE_ALERT, REVIEW_NUMBER)
+        VALUES(SEQ_ALERT.NEXTVAL, #{alertUser}, #{userNumber}, #{typeAlert}, #{reviewNumber})
+    </insert>
+
+    <insert id="alertFollow">
+        INSERT INTO TBL_ALERT
         (ALERT_NUMBER, ALERT_USER, USER_NUMBER, TYPE_ALERT)
         VALUES(SEQ_ALERT.NEXTVAL, #{alertUser}, #{userNumber}, #{typeAlert})
     </insert>

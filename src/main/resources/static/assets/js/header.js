@@ -131,7 +131,7 @@ function alterLike(alerts) {
 //     <a href=""><img src="/images/login/checkIcon.png" width="30px" class="userFile"></a>
 //     <div style=" margin-bottom: 4px; margin-right: 30px;"><span class="alterspan">홍길동</span>님이 회원님의 사진을 좋아합니다.</div></div>
 
-        
+
 
 
   

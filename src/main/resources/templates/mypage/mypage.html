@@ -14,11 +14,59 @@
     <link rel="stylesheet" href="/assets/css/footer.css" />
     <link rel="stylesheet" href="/assets/css/certification/certificationWrite.css">
     <link rel="stylesheet" href="/assets/css/certification/fileLoad.css">
+    <link rel="stylesheet" href="/assets/css/certification/certificationDetail.css">
+    <link rel="stylesheet" href="/assets/css/certification/report.css">
+    <style>
+        a{
+            color: black;
+        }
+        a:link{
+            color: black;
+        }
+        a:visited{
+            color: black;
+        }
+        div.photoContents {
+            height: 100%;
+        }
+
+        div.photoContents > div {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        div.photoContents figure {
+
+            width: 31%;
+            height: 250px;
+            padding: 10px;
+            margin: 0;
+        }
+
+        div.photoContents figure a {
+            display: block;
+            height: 100%;
+            overflow: hidden;
+        }
+        div.photoContents figure img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 1s ease;
+            transform-origin: center center;
+        }
+        div.photoContents img:hover {
+            transform: scale(1.1);
+            transform-origin: center center;
+        }
+
+    </style>
 </head>
 
 <body>
 <header th:insert="~{/header :: header}"></header>
 <main class="mypageMain">
+    <div th:insert="~{/certification/certificationDetail :: certificationDetail}"></div>
     <div class="mainInner">
         <div class="mypageHeader">
             <div class="profile1">
@@ -81,52 +129,11 @@
                 </a>
             </div>
         </div>
-        <div class="photoContent" style="display: flex">
-            <article class="articleClass">
-                <div style="flex-wrap:wrap">
-                    <div class="content1">
-                        <div class="content2">
-
-                            <div class="content3">
-                                <span></span>
-                                <a class="aContent" href="">
-                                    <div class="content4">
-                                        <div class="content5">
-                                            <img alt="" class="contentImage" src="/images/mypage/jennie3.jpg">
-                                        </div>
-                                        <div class="content6"></div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="content2_1">
-                                <span></span>
-                                <a class="content2_a" href="">
-                                    <div class="content2_2">
-                                        <div class="content2_3">
-                                            <img alt="" class="contentImage2" src="/images/mypage/jennie3.jpg">
-                                        </div>
-                                        <div class="content2_4"></div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="content3_1">
-                                <span></span>
-                                <a class="content3_a" href="">
-                                    <div class="content3_2">
-                                        <div class="content3_3">
-                                            <img alt="" class="contentImage3" src="/images/mypage/jennie3.jpg">
-                                        </div>
-                                        <div class="content3_4"></div>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </article>
+        <!-- 프로젝트 시작 -->
+        <div class="photoContents">
+            <div class ="a">
+                <!-- 사진 리스트 -->
+            </div>
         </div>
     </div>
 </main>
@@ -324,47 +331,49 @@
                     <img src="/images/mypage/padlock.png" data-detail="메달 10개 모으기" data-bar="10/10">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" data-detail="전체 카테고리 lit 100회 성공" data-bar="100/100">
+                    <img src="/images/mypage/padlock.png" data-detail="전체 카테고리 litUp 100회 성공!" data-bar="100/100">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" data-detail="생활 카테고리 5회 인증하기" data-bar="5/5">
+                    <img src="/images/mypage/padlock.png" data-detail="lits 10회 생성하기 성공!" data-bar="5/5">
                 </div>
             </div>
 
             <div class="medal-icon-row">
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" data-detail="생활 카테고리 10회 성공하기" data-bar="10/10">
+                    <img src="/images/mypage/padlock.png" data-detail="생활 카테고리 5회 인증하기" data-bar="10/10">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" data-detail="운동 카테고리 5회 인증하기!" data-bar="5/5">
+                    <img src="/images/mypage/padlock.png" data-detail="운동 카테고리 5회 인증하기" data-bar="5/5">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" data-detail="운동 카테고리 10회 성공하기" data-bar="10/10">
+                    <img src="/images/mypage/padlock.png" data-detail="정서 카테고리 5회 인증하기" data-bar="10/10">
                 </div>
             </div>
 
             <div class="medal-icon-row">
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" data-detail="취미 카테고리 lit 5회 생성하여 완료하기" data-bar="5/5">
+                    <img src="/images/mypage/padlock.png" data-detail="취미 카테고리 5회 인증하기" data-bar="5/5">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" data-detail="예술 카테고리 lit up 10회 돌파!" data-bar="10/10">
+                    <img src="/images/mypage/padlock.png" data-detail="예술 카테고리 5회 인증하기" data-bar="10/10">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" data-detail="예술 카테고리 10회 성공하기" data-bar="10/10">
+                    <img src="/images/mypage/padlock.png" data-detail="댓글 1000번 달성하기" data-bar="10/10">
                 </div>
             </div>
             <div class="medal-icon-row">
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" data-detail="정서 카테고리 lit 달성률 100%로 완료하기" data-bar="100/100">
+                    <img src="/images/mypage/padlock.png" data-detail="좋아요 1000번 달성하기" data-bar="100/100">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" data-detail="식습관 카테고리 lit 달성률 100%로 완료하기" data-bar="100/100">
+                    <img src="/images/mypage/padlock.png" data-detail="팔로잉 100명이상 만들기" data-bar="100/100">
                 </div>
                 <div class="medal-icon-col">
-                    <img src="/images/mypage/padlock.png" data-detail="공부 카테고리 lit 달성률 100%로 완료하기" data-bar="100/100">
+                    <img src="/images/mypage/padlock.png" data-detail="팔로워 100만명이상 만들기" data-bar="100/100">
                 </div>
             </div>
+
+
             <!-- 예시 종료 -->
         </div>
     </div>
@@ -394,18 +403,27 @@
         </div>
     </div>
 </div> -->
-<footer th:insert="~{/footer :: footer}"></footer>
+<!--<footer th:insert="~{/footer :: footer}"></footer>-->
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script th:inline="javascript">let mypageUser = [[${userNumber}]]; // 팔로워 모달에서 삭제할때 사용 (팔로잉 넘버)</script>
 <script src="/assets/js/mypage/mypage.js"></script>
 <script src="/assets/js/mypage/mypageAjax.js"></script>
+<script defer src="/assets/js/certification/certificationDetail.js"></script>
+<script defer src="/assets/js/certification/report.js"></script>
+<script defer src="/assets/js/certification/certificationDetailAjax.js"></script>
 <script th:inline="javascript">
     let $followerRemoveBtn = $('.followerBtnn');
-    let $pageNum = 1;
 
     let $followerUser = $('#removeFollower').eq(0).val(); // 팔로워 모달에서 삭제할때 사용 (팔로워 넘버)
     let $test = 3;
+
+    let file;
+    const replyDiv = $(".reply_area");
+    let pageNum = 1;
+    // cretificationDetail에서 모달 버튼 매개변수로 넘어옴
+    let $reviewNumber;
+    // session에서 받아야함
 
     console.log($followerUser);
 
@@ -418,6 +436,276 @@
             if(result){}
         });
     });
+
+
+
+
+    $(".a").on("click","figure.reviewView",function () {
+        $reviewNumber=$(this).attr("id")
+        $fileWriter = $(this).children("input").attr("id")
+        projectDetailModalShow($reviewNumber, userNumber)
+        $.getJSON("/litUp/profilePic", {userNumber: $fileWriter}, function(pic){showMainUserPic(pic);})
+        $.getJSON("/litUp/reviewPic", {reviewNumber: $reviewNumber}, function(pic){showReviewPic(pic);})
+    })
+
+    // 댓글 목록 불러오기
+    function showList(page){
+        reviewDetailService.getList({reviewNum: $reviewNumber, page: page}, function(total, list){
+                let str = "";
+
+                if(list == null || list.length == 0){
+                    replyDiv.html("");
+                    return;
+                }
+
+                $.each(list, function(i, reply){
+                    ////////// getJSON -> AJAX 동기식으로 변경해서 file에 pic 담을 것
+                    $.ajax({
+                        url:"/litUp/profilePic",
+                        type: "get",
+                        data:{userNumber:reply.userNumber},
+                        async:false,
+                        success:function (pic) {
+                            file = pic;
+                        }
+                    })
+                    str += '<div class="detailContentWriteContainer">';
+                    str += '<div class="detailContentWriteWrapper">';
+                    str += '<div class="detailContentProfileImage">';
+                    str += '<div class="detailContentProfileImageInne">';
+                    str += "<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>";
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</div>';
+                    str += '<div class="detailContentWriteFeed">';
+                    str += '<div class="detailContentWrite">';
+                    str += '<div class="detailContentWriteName">'
+                    str +=  reply.nickname;
+                    str += '</div>';
+                    str += '<div class="detailContentWriteComment">';
+                    str +=  reply.content;
+                    str += '</div>';
+                    str += '</div>';
+                    str += '<div class="detailContentWriteFeedBottom">';
+                    str += '<div class="detailContentRegisterDate">';
+                    str +=  reviewDetailService.getReplyDate(reply.registerDate);
+                    str += '</div>';
+                    str += '<div class="detailContentCommentDelete">';
+                    str += '<a class="remove ' + reply.replyNumber + '" style="cursor: pointer;">삭제</a>';
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</div>';
+
+                });
+                replyDiv.html(str.trim());
+                showReplyPage(total);
+            },function (a,b,c){console.log("error");}
+        );
+
+    };
+
+    //댓글 추가 보기
+    function showAppendList(page) {
+
+        reviewDetailService.getList({reviewNum: $reviewNumber, page: page}, function (total, list) {
+
+                $(".appendReply div").html("");
+                let str = "";
+
+                $.each(list, function (i, reply) {
+                    $.ajax({
+                        url:"/litUp/profilePic",
+                        type: "get",
+                        data:{userNumber:reply.userNumber},
+                        async:false,
+                        success:function (pic) {
+                            file = pic;
+                        }
+                    })
+                    str += '<div class="detailContentWriteContainer">';
+                    str += '<div class="detailContentWriteWrapper">';
+                    str += '<div class="detailContentProfileImage">';
+                    str += '<div class="detailContentProfileImageInne">';
+                    str += "<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>";
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</div>';
+                    str += '<div class="detailContentWriteFeed">';
+                    str += '<div class="detailContentWrite">';
+                    str += '<div class="detailContentWriteName">'
+                    str += reply.nickname;
+                    str += '</div>';
+                    str += '<div class="detailContentWriteComment">';
+                    str += reply.content;
+                    str += '</div>';
+                    str += '</div>';
+                    str += '<div class="detailContentWriteFeedBottom">';
+                    str += '<div class="detailContentRegisterDate">';
+                    str += reviewDetailService.getReplyDate(reply.registerDate);
+                    str += '</div>';
+                    str += '<div class="detailContentCommentDelete">';
+                    str += '<a class="remove ' + reply.replyNumber + '" style="cursor: pointer;">삭제</a>';
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</div>';
+
+                });
+
+                replyDiv.append(str.trim());
+                showReplyPage(total);
+            }, function (a, b, c) {
+                console.log("error");
+            }
+        )};
+
+
+    // 신고하기
+    $(".reportButton").on("click", function () {
+        let $reason = $(this).attr("value");
+
+        reviewDetailService.addReport({
+                userNumber: userNumber, reviewNumber: $reviewNumber, reason: $reason
+            },
+            function (result) {
+                reportModalClose();
+                alert("신고 되었습니다.");
+            },
+            function (a, b, c) {
+                console.log(a, b, c)
+            }
+        );
+    })
+
+    // 댓글쓰기
+    $(".commentButton").on("click", function () {
+        let $commentValue = $(".detailContentFooterCommentInputArea").val();
+        reviewDetailService.addReply({
+                reviewNumber: $reviewNumber, userNumber: userNumber, content: $commentValue
+            },
+            function (result) {
+                $(".detailContentFooterCommentInputArea").val("");
+                pageNum = 1;
+                showList(1);
+                $(".detailContentFeed").scrollTop(0);
+            },
+            function (a, b, c) {
+                console.log(a, b, c)
+            }
+        );
+    })
+
+    // 좋아요
+    $(".detailContentLikeButton").on("click", function () {
+        reviewDetailService.addLike({reviewNumber: $reviewNumber, userNumber: userNumber},
+            function (result) {
+                $("#likeCount").html(result);
+            },
+            function (a, b, c) {
+                console.log(a, b, c)
+            })
+    })
+
+
+    // 좋아요 해제
+    $(".detailContentLikeCancel").on("click", function () {
+        reviewDetailService.removeLike({userNumber: userNumber, reviewNumber: $reviewNumber},
+            function (result) {
+                $("#likeCount").html(result);
+            },
+            function (a, b, c) {
+                console.log(a, b, c)
+            })
+    })
+
+    //댓글 append
+    $(".appendReply div").on("click", function (e) {
+        e.preventDefault();
+        pageNum = pageNum + 1;
+        showAppendList(pageNum);
+
+    })
+
+    //댓글 삭제
+    $(".reply_area").on("click", "div.detailContentCommentDelete a.remove", function (e) {
+        e.preventDefault();
+        let $replyNumber = $(this).attr("class").split(/\s+/);
+        // 유저넘버임
+        reviewDetailService.removeReply($replyNumber[1], userNumber, function (result) {
+            if(result) {
+                pageNum = 1;
+                showList(pageNum);
+            }else{
+                alert("본인 게시물만 삭제 가능합니다.");
+            }
+        })
+    })
+
+    // 클릭시 노출페이지 조절
+    function showReplyPage(total) {
+        let realEnd = Math.ceil(total / 10.0);
+        const $paging = $(".appendReply div");
+
+
+        let next = pageNum < realEnd;
+        let str = "<svg aria-label=\"댓글 더 읽어들이기\" class=\"_ab6-\" color=\"#262626\" fill=\"#262626\" height=\"24\" role=\"img\" viewBox=\"0 0 24 24\" " +
+            "width=\"24\"><circle cx=\"12.001\" cy=\"12.005\" fill=\"none\" r=\"10.5\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></circle>" +
+            "<line fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" x1=\"7.001\" x2=\"17.001\" y1=\"12.005\" y2=\"12.005\"></line>" +
+            "<line fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" x1=\"12.001\" x2=\"12.001\" y1=\"7.005\" y2=\"17.005\"></line></svg>";
+
+        if (next) {
+            $paging.html(str);
+        }
+    }
+
+    // // 출력할 프로필 사진, 리뷰 사진 받아오기기  숫자 받아오기  여기 프로젝트 작성자 유저넘버 받아올 방법 찾기
+    // $(".projectDetailButton").on("click",function () {
+    //     $.getJSON("/litUp/profilePic", {userNumber: 1}, function(pic){showUserPic(pic);})
+    //     $.getJSON("/litUp/reviewPic", {reviewNumber: $reviewNumber}, function(pic){showReviewPic(pic);})
+    //
+    // })
+
+    myPageAjaxService.getMyProfileImg(userNumber, function (pic) {
+        showMyProfileImg(pic);
+    })
+
+
+    function showMyProfileImg(file) {
+        let str ="";
+        str += "<img class=\"profileImg\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/" + file.uuid + "_"  + file.name + "'>"
+        $("button.profileButton").html(str);
+    }
+
+    // 프로필 사진 출력
+    function showMainUserPic(file){
+        let str ="";
+        let str2 ="";
+
+        str += "<div class=\"detailContentProfileImageInner\">"
+        str += "<img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+        str += "</div>"
+
+        str2 +="<div class=\"detailContentProfileImageInner\">"
+        str2 +="<img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+        str2 +="</div>"
+
+        $("div.bottom").html(str);
+        $("div.top").html(str2);
+    }
+
+    function showReviewPic(pic) {
+        let str ="";
+        let strBtn ="";
+        $.each(pic,function (i, file) {
+            str += "<li id=a" + i + "><img class=\"innerImage\" src='/litUp/display?fileName=" + file.uploadPath  + "/" + file.uuid + "_"  + file.name + "' /></li>"
+            strBtn +="<div id=b"+ i +"></div>"
+        })
+        $(".innerImageSlides").html(str);
+        $(".innerImagePageButtons").html(strBtn);
+        $("li#a0").addClass("active");
+        $("div#b0").addClass("active");
+    }
 
 </script>
 </html>

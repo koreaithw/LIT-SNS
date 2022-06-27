@@ -4,6 +4,7 @@ import com.example.lit.domain.vo.ListDTO;
 import com.example.lit.domain.vo.project.ParticipationVO;
 import com.example.lit.domain.vo.project.ProjectDTO;
 import com.example.lit.domain.vo.project.ProjectFileVO;
+import com.example.lit.domain.vo.project.ProjectVO;
 import com.example.lit.domain.vo.review.ReviewFileVO;
 import com.example.lit.service.project.LitService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -102,6 +104,12 @@ public class LitRestController {
         log.info("challenge  : " + participationVO.getUserNumber());
         log.info("***************************");
         litService.join( participationVO );
+    }
+
+    @GetMapping("/getMyList")
+    public List<ProjectVO> getMyList(HttpSession session){
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        return litService.getMyList(userNumber);
     }
 
 }

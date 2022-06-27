@@ -15,6 +15,8 @@ public class AlertDAO {
 
     public void insert(AlertVO alertVO){ alertMapper.insert(alertVO);}
 
+    public void alertFollow(AlertVO alertVO){ alertMapper.alertFollow(alertVO);}
+
     public List<AlertDTO> getList(Long userNumber){ return alertMapper.alertList(userNumber); }
 
     public int getAlertNumber(AlertVO alertVO) {return alertMapper.getAlertNumber(alertVO); }
