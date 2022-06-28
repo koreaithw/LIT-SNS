@@ -74,15 +74,15 @@ function representMedal(e) {
 
 
 // 팔로우 모달에서 팔로잉-팔로우 변경
-function changeFollow() {
-    if (followingBtnn.style.display == "block") {
-        followingBtnn.style.display = "none";
-        followBtnn.style.display = "block";
-    } else {
-        followingBtnn.style.display = "block";
-        followBtnn.style.display = "none";
-    }
-}
+// function changeFollow() {
+//     if (followingBtnn.style.display == "block") {
+//         followingBtnn.style.display = "none";
+//         followBtnn.style.display = "block";
+//     } else {
+//         followingBtnn.style.display = "block";
+//         followBtnn.style.display = "none";
+//     }
+// }
 
 // =================================================
 //모달창
