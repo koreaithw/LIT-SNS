@@ -454,7 +454,7 @@
 
     // 출력할 프로필 사진, 리뷰 사진 받아오기기  숫자 받아오기
     $(".projectDetailButton").on("click",function () {
-        $.getJSON("/litUp/profilePic", {userNumber: 1}, function(pic){showUserPic(pic);})
+        $.getJSON("/litUp/profilePic", {userNumber: userNumber}, function(pic){showUserPic(pic);})
         $.getJSON("/litUp/reviewPic", {reviewNumber: $reviewNumber}, function(pic){showReviewPic(pic);})
 
     })
@@ -464,13 +464,15 @@
     function showUserPic(file){
         let str ="";
         let str2 ="";
-        str += "<div class=\"detailContentProfileImageInner\">"
-        str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
-        str += "</a></div>"
 
-        str2 +="<div class=\"detailContentProfileImageInner\">"
-        str2 +="<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
-        str2 +="</div>"
+        str += "<div class=\"detailContentProfileImageInner\">";
+        str += "<a href=\"/user/mypage?userPageNumber=" + file.userNumber + "\">";
+        str += "<img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>";
+        str += "</a></div>";
+
+        str2 +="<div class=\"detailContentProfileImageInner\">";
+        str2 +="<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>";
+        str2 +="</div>";
 
         $(".bottom").html(str);
         $(".top").html(str2);

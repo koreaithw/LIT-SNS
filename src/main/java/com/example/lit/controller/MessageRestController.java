@@ -4,7 +4,9 @@ import com.example.lit.domain.dao.message.ChatRoomRepository;
 import com.example.lit.domain.vo.messsage.MessageDTO;
 import com.example.lit.domain.vo.messsage.MessageRoom;
 import com.example.lit.domain.vo.messsage.MessageVO;
+import com.example.lit.domain.vo.user.UserFileVO;
 import com.example.lit.domain.vo.user.UserVO;
+import com.example.lit.service.User.UserService;
 import com.example.lit.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,7 @@ import java.util.List;
 public class MessageRestController {
     private final MessageService messageService;
     private final ChatRoomRepository chatRoomRepository;
+    private final UserService userService;
 
 //    public static List<MessageVO> messageList = new ArrayList<MessageVO>();
 
@@ -75,6 +78,12 @@ public class MessageRestController {
 
         return messageService.getMessageList(messageDTO);
     }
+
+    @GetMapping("/getUserProfileImage/{userNumber}")
+    public UserFileVO getUserProfileImage(@PathVariable("userNumber") Long userNumber){
+        return userService.getImg(userNumber);
+    }
+    ////////////////////////////////////////////////////////////
 
     @GetMapping("/getRoomId/{sendUserNumber}/{receiveUserNumber}")
     public String getRoomId(@PathVariable("sendUserNumber") Long sendUserNumber, @PathVariable("receiveUserNumber") Long receiveUserNumber){
