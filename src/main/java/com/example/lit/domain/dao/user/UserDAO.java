@@ -17,8 +17,9 @@ public class UserDAO {
     //회원 가입
     public void register(UserVO userVO){ userMapper.insert(userVO); }
     //로그인
-
     public UserVO login(String email, String pw){ return userMapper.login(email, pw); }
+    //카카오 회원 가입
+    public UserVO kakaoInsert(UserVO userVO){ return userMapper.kakaoInsert(userVO); }
 
     public boolean adminLogin(String email, String pw){ return userMapper.adminLogin(email, pw) != 0; }
 
@@ -39,9 +40,6 @@ public class UserDAO {
     public int getTotal() {return userMapper.getTotal(); }
     // 차트 정보
     public Long getUserChart(String date) { return userMapper.getUserChart(date); }
-
-    //카카오 로그인/회원가입
-    public void kakaoRegister(UserVO userVO){userMapper.kakaoInsert(userVO);}
     //이메일 중복체크
     public int dbEmailCheck(String email){ return userMapper.emailCheck(email);}
     //닉네임 중복체크

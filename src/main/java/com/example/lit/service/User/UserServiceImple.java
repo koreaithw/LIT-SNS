@@ -29,7 +29,7 @@ public class UserServiceImple implements UserService{
     private final AlertDAO alertDAO;
 
     @Override
-    public void kakaoRegister(UserVO userVO) {;}
+    public UserVO kakaoInsert(UserVO userVO) { return userDAO.kakaoInsert(userVO); }
 
     @Override
     public boolean dbEmailCheck(String email) {
