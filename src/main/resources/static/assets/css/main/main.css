@@ -471,7 +471,7 @@ a:visited {
         padding: 10px 20px;
     }
     a.a__selector{
-        flex-basis: 20%;
+        flex-basis: 100%;
         font-size: 1rem;
     }
     div._category_wrapper > a{
@@ -481,6 +481,16 @@ a:visited {
     div._category_wrapper{
         justify-content: center;
         flex-wrap: wrap;
+    }
+
+    div.litChange{
+        justify-content: space-around;
+    }
+    a.lits1Off,
+    a.lits2Off,
+    a.lits1On,
+    a.lits2On{
+        margin: 0;
     }
 }
 /*
