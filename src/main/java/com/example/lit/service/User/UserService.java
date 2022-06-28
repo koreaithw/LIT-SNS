@@ -16,8 +16,13 @@ public interface UserService {
     //회원 가입
     public void register(UserVO userVO);
     //로그인
-
     public UserVO login(String email, String pw);
+    //카카오 회원 가입
+    public UserVO kakaoLogin(UserVO userVO);
+    //카카오 이메일로 유저넘버 읽어오기
+    public Long kakaoRead(String email);
+    //카카오 닉네임/비번 입력 (수정)
+    public boolean kakaoUpdate(UserVO userVO);
 
     public boolean adminLogin(String email, String password);
 
@@ -31,8 +36,6 @@ public interface UserService {
     public void modifyPw(Long userNumber, String newPassword);
     // 대표 메달 설정
     public void modifyMedal(UserVO userVO);
-    //카카오 로그인/회원가입
-    public void kakaoRegister(UserVO userVO);
     //이메일 중복체크
     public boolean dbEmailCheck(String email);
     //닉네임 중복체크
