@@ -114,16 +114,16 @@ function alterLike(alerts) {
                 str += "<div style=' margin-bottom: -20px;; margin-right: 30px; display: inline-block;'><span class='alterspan'>" + alert.nickName
                 str += "</span>님이 회원님의 사진을 좋아합니다.<span class='alterTime' style=' padding-left: 13px;'>" + alert.registerDate + "</span></div>"
                 reSrc += "/lit/display?fileName=" + alert.reviewFileVO.uploadPath + "/" + alert.reviewFileVO.uuid + "_" + alert.reviewFileVO.name
-                str += "<div style='display: inline-block;'><a href=''><img class='alterRR' src=" + reSrc + "></a></div></div></div>"
+                str += "<div style='display: inline-block;'><a onclick='projectDetailModalShow(" + alert.reviewNumber + "," +  userNumber  + ")'><img class='alterRR' src=" + reSrc + "></a></div></div></div>"
                 str += ""
             } else {
                 str += "<div style=' margin-bottom: -7px; margin-right: 30px; display: inline-block; margin-top: 17px;'><span class='alterspan'>" + alert.nickName
                 str += "</span>님이 회원님을 팔로우 했습니다."
                 str += "<span class='alterTime' style='padding-left: 13px;'>" + alert.registerDate + "</span></div>"
-                if(followCheck(alert.userNumber) != 1){
-                    str += "<a id='headFollowBtn' onclick='headFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowBtn'>팔로우</button></a></div>"
-                }else {
+                if(followCheck(alert.userNumber) == 1){
                     str += "<a id='headFollowBtn' onclick='headDeleteFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowingBtn'>팔로잉</button></a></div>"
+                }else {
+                    str += "<a id='headFollowBtn' onclick='headFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowBtn'>팔로우</button></a></div>"
                 }
 
             }
@@ -135,7 +135,7 @@ function alterLike(alerts) {
 
 function headFollow(following) {
 
-    let followVO = {"followingNumber" : following, "followerNumber" : userNumber};
+    let followVO = {"followingNumber" : userNumber, "followerNumber" : following};
 
     $.ajax({
         url: "/user/follow",
@@ -150,7 +150,7 @@ function headFollow(following) {
 
 function headDeleteFollow(following) {
 
-    let followVO = {"followingNumber" : following, "followerNumber" : userNumber};
+    let followVO = {"followingNumber" : userNumber, "followerNumber" : following};
 
     $.ajax({
         url: "/user/deleteFollow",
@@ -170,7 +170,7 @@ function followCheck(following) {
     // let followVO = {"followingNumber" : following, "followerNumber" : userNumber};
     let result;
     $.ajax({
-        url: "/user/followCheck/" + following + "/" + userNumber,
+        url: "/user/followCheck/" + userNumber + "/" + following,
         type: "get",
         async:false,
         success: function (success) {
