@@ -254,7 +254,7 @@ public class UserController {
 
     //    *************************************
 //    MEDAL 메달
-//    *************************************
+//    ************************************* 
     @GetMapping("/getMedal/{userNumber}")
     @ResponseBody
     public List<String> getMedal(@PathVariable("userNumber") Long userNumber) {
