@@ -206,6 +206,18 @@ public class UserRestController {
         userService.removeFollow(followVO);
     }
 
+    // 메달 2번 조건 달성 했을 때
+    @GetMapping("/get2Medal/{userNumber}")
+    public void get2Medal(@PathVariable("userNumber") Long userNumber){
+        int medalCnt = userService.medalInsertBlock(userNumber,"2");
+    }
+
+    // 메달 3번 조건 달성 했을 때
+    @GetMapping("/ge34Medal/{userNumber}")
+    public void get3Medal(@PathVariable("userNumber") Long userNumber){
+        int medalCnt = userService.medalInsertBlock(userNumber,"3");
+    }
+
     // 메달 4번 조건 달성 했을 때
     @GetMapping("/get4Medal/{userNumber}")
     public void get4Medal(@PathVariable("userNumber") Long userNumber){

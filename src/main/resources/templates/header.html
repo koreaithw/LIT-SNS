@@ -228,6 +228,8 @@
 <script defer src="/assets/js/certification/fileLoad.js"></script>
 <script th:inline="javascript">
     let userNumber = [[${session.userNumber}]];
+    let token = [[${session.token}]];
+
     $(".mypage__link").on("click", function(e){
         e.preventDefault();
         location.href = "/user/mypage";
@@ -359,7 +361,7 @@
     })
 
 
-    checkLoginLogout(userNumber);
+    checkLoginLogout(userNumber, token);
 
     function getMyProfileImg_header(userNumber,callback){
         $.getJSON("/litUp/profilePic" , {userNumber: userNumber}, function(pic){

@@ -43,12 +43,37 @@ let myPageAjaxService = (function () {
 
     }
 
+    function get2Medal(userNumber, callback) {
+        console.log("get2Medal..........");
+        $.ajax({
+            url:"/user/get2Medal/" + userNumber,
+            type: "get",
+            success: function (result) {
+                if(callback){
+                    callback(result);
+                }
+            }
+        });
+    }
+
+    function get3Medal(userNumber, callback) {
+        console.log("get3Medal..........");
+        $.ajax({
+            url:"/user/get3Medal/" + userNumber,
+            type: "get",
+            success: function (result) {
+                if(callback){
+                    callback(result);
+                }
+            }
+        });
+    }
 
     function get4Medal(userNumber) {
         console.log("get4Medal..........");
         $.ajax({
             url:"/user/get4Medal/" + userNumber,
-            type: "get"
+            type: "get",
         });
     }
 
@@ -240,7 +265,8 @@ let myPageAjaxService = (function () {
         get5Medal: get5Medal, get8Medal: get8Medal, get9Medal: get9Medal, get10Medal: get10Medal,
         get11Medal: get11Medal, get7Medal: get7Medal, get6Medal: get6Medal, get12Medal: get12Medal,
         get13Medal: get13Medal, get14Medal: get14Medal, get15Medal: get15Medal, litUpList:litUpList,
-        litList:litList, getMyProfileImg:getMyProfileImg, insertFollowing:insertFollowing
+        litList:litList, getMyProfileImg:getMyProfileImg, insertFollowing:insertFollowing,
+        get2Medal: get2Medal, get3Medal: get3Medal
     }
 
 })();
