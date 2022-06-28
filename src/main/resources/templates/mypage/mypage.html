@@ -267,10 +267,10 @@
                                     </div>
                                     <div class="follower9">
                                         <button class="followingBtnn on" type="button" style="display: block;"
-                                               >팔로잉
+                                                onclick="changeFollow()"  >팔로잉
                                         </button>
                                         <button class="followBtnn" type="button" style="display: none;"
-                                               >팔로우
+                                             onclick="changeFollow()"  >팔로우
                                         </button>
                                     </div>
                                 </div>
@@ -488,8 +488,6 @@
 
         $(this).parent().parent().parent().parent().parent().parent().remove();
         myPageAjaxService.removeFollower(deleteNumber, mypageUser, function (result) {
-            alert(result);
-            if(result){}
         });
 
     });

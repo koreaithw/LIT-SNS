@@ -260,57 +260,5 @@ public class UserController {
     }
 
 
-    /////////////////////////////////////////////////////////
-//마이페이지 변경본
-    @GetMapping("/mypage2")
-    public String mypage2(Long pageUserNumber, Model model, HttpSession session) {
-        log.info("마이페이지 컨트롤러 =============================");
-
-        Long userNumber = (Long) session.getAttribute("userNumber");
-        if (userNumber == null) {
-            return goLoginPage();
-        }
-
-        UserVO userVO = userService.read(userNumber);
-        UserFileVO userFileVO = null;
-        if(userService.getImg(userNumber) == null){
-            userFileVO = new UserFileVO();
-            userFileVO.setUserNumber(userNumber);
-            userFileVO.setName("");
-            userFileVO.setUploadPath("");
-            userFileVO.setUuid("");
-            userVO.setUserFileList(userFileVO);
-        }else{
-            userVO.setUserFileList(userService.getImg(userNumber));
-        }
-
-        List<UserVO> followerVO = userService.ModalFollower(userNumber);
-        List<UserVO> followingVO = userService.ModalFollowing(userNumber);
-
-        model.addAttribute("followerCnt", userService.MyFollowerCnt(userNumber));
-        model.addAttribute("followingCnt", userService.MyFollowingCnt(userNumber));
-        model.addAttribute("reviewCnt", userService.MyReviewCnt(userNumber));
-        model.addAttribute("nickname", userVO.getNickname());
-        model.addAttribute("content", userVO.getContent());
-        model.addAttribute("userNumber", userNumber);
-        model.addAttribute("userFileList", userFileVO);
-
-        model.addAttribute("pageUserNumber", pageUserNumber);
-
-        model.addAttribute("modalFollower", followerVO);
-        log.info("###################  follower모달정보     " + followerVO);
-        model.addAttribute("modalFollowing", followingVO);
-        log.info("###################  following모달정보     " + followingVO);
-
-        return "/mypage/mypage";
-    }
-
-//    @PostMapping("/updateEditInfo")
-//    public String updateEditInfo(UserVO userVO, Model model){
-//        userVO.setUserNumber(2L);
-//        userService.modify(userVO);
-//        HttpSession session;
-//        return goEditInfoPage();
-//    }
 
 }
