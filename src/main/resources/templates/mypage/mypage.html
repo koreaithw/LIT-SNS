@@ -218,13 +218,15 @@
                                 <div class="follower2">
                                     <div class="follower3">
                                         <div class="follower4" aria-disabled="true" role="button" tabindex="-1">
-                                            <canvas class="followerCanvass" height="50" width="50"
-                                                    style="position: absolute; top: -5px; left: -5px; width: 40px; height: 40px;"></canvas>
                                             <a class="followerAa" href="" role="link" tabindex="0"
-                                               style="width: 30px; height: 30px;">
-                                                <img alt="" class="followerImgg"
-                                                     crossorigin="anonymous" draggable="false"
-                                                     src="/images/mypage/jennie2.jpg">
+                                               style="width: 30px; height: 30px;" th:if="${follower.userFileList} != null">
+                                                <img class="followerImgg" crossorigin="anonymous" draggable="false"
+                                                     th:src="'/lit/display?fileName='+ ${follower.userFileList.uploadPath} +'/'+ ${follower.userFileList.uuid} + '_' + ${follower.userFileList.name}"
+                                                >
+                                            </a>
+                                            <a class="followerAa" href="" role="link" tabindex="0"
+                                                   style="width: 30px; height: 30px;" th:if="${follower.userFileList} == null">
+                                                <img class="followerImgg" crossorigin="anonymous" draggable="false" src="/images/main/profile_ex.png" >
                                             </a>
                                         </div>
                                     </div>
@@ -278,13 +280,17 @@
                                 <div class="follower2">
                                     <div class="follower3">
                                         <div class="follower4" aria-disabled="true" role="button" tabindex="-1">
-                                            <canvas class="followerCanvass" height="50" width="50"
-                                                    style="position: absolute; top: -5px; left: -5px; width: 40px; height: 40px;"></canvas>
                                             <a class="followerAa" href="" role="link" tabindex="0"
-                                               style="width: 30px; height: 30px;">
-                                                <img alt="" class="followerImgg"
-                                                     crossorigin="anonymous" draggable="false"
-                                                     src="/images/mypage/jennie2.jpg">
+                                               style="width: 30px; height: 30px;"
+                                               th:if="${following.userFileList} != null">
+                                                <img class="followerImgg" crossorigin="anonymous" draggable="false"
+                                                     th:src="'/lit/display?fileName='+ ${following.userFileList.uploadPath} +'/'+ ${following.userFileList.uuid} + '_' + ${following.userFileList.name}"
+                                                >
+                                            </a>
+                                            <a class="followerAa" href="" role="link" tabindex="0"
+                                               style="width: 30px; height: 30px;"
+                                               th:if="${following.userFileList} == null">
+                                                <img class="followerImgg" crossorigin="anonymous" draggable="false" src="/images/main/profile_ex.png">
                                             </a>
                                         </div>
                                     </div>
