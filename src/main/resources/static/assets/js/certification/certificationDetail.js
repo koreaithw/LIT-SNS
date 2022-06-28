@@ -21,6 +21,7 @@ function projectDetailModalShow(reviewNumber,userNumber) {
     if(userNumber !=null){
     modal.style.display = 'block';
     // projectDetailButton.style.display = 'none';
+    $('body').css("overflow", "hidden");
     pageNum = 1;
     showList(pageNum);
     $reviewNumber = reviewNumber;

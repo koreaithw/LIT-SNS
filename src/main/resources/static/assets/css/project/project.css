@@ -26,6 +26,7 @@ figure{
 
 .sec1{
   display: flex;
+  gap: 50px;
 }
 .sec1 div{
   /* border: 1px solid #e5e5e5; */
@@ -45,28 +46,29 @@ figure{
 
 .sec1 .projectImg > a{
   /*margin: auto;*/
+  margin: 20px auto;
   border-radius: 100%;
   overflow: hidden;
   display: block;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
 }
 
 .projectInfoWrap > div{
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .infoKey{
   width: 100%;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: 10px;
 }
 .infoKey.infoTitel{
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 label.btn{
@@ -78,6 +80,7 @@ label.btn{
   background: rgb(250, 100, 98);
   color: #EFEFEF;
   letter-spacing: 1px;
+  font-weight: 600;
 }
 label.btn.end{
   background: #e5e5e5;
@@ -88,6 +91,25 @@ label[for='btn1']:hover{
   color: #FFFFFF;
   letter-spacing: 1px;
 }
+
+.projectInfoWrap > div:first-child > p{
+  display: flex;
+  gap: 30px;
+}
+
+.projectInfoWrap > div:first-child > p:nth-child(2){
+  font-size: 0.9rem;
+}
+
+.projectInfoWrap span{
+  font-size: 0.95rem;
+}
+
+.projectInfoWrap > div:first-child > p > span:nth-child(2),
+.projectInfoWrap > div:first-child > p > span:nth-child(4){
+  font-weight: bold;
+}
+
 
 
 /* 이미지 리스트==================================== */
@@ -151,7 +173,7 @@ aside.modalWindow{
 section {
   /*border-left: 1px solid #e5e5e5;*/
   /*border-right: 1px solid #e5e5e5;*/
-  padding: 10px 40px;
+  padding-top: 15px;
 }
 
 .sec1>div {
@@ -273,6 +295,7 @@ section {
   }
 
 }
+
 /*
 ##Device = Most of the Smartphones Mobiles (Portrait)
 ##Screen = B/w 320px to 479px
