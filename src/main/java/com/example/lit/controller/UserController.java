@@ -261,5 +261,5 @@ public class UserController {
         log.info("getMedal................ : " + userNumber);
         return userService.getMedal(userNumber);
     }
-
+    
 }

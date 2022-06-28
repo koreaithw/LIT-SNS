@@ -465,11 +465,11 @@
         let str ="";
         let str2 ="";
         str += "<div class=\"detailContentProfileImageInner\">"
-        str += "<a href='" + file.userNumber + "'><img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+        str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
         str += "</a></div>"
 
         str2 +="<div class=\"detailContentProfileImageInner\">"
-        str2 +="<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+        str2 +="<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
         str2 +="</div>"
 
         $(".bottom").html(str);
