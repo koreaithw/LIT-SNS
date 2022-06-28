@@ -21,6 +21,7 @@ function projectDetailModalShow(reviewNumber,userNumber) {
     if(userNumber !=null){
     modal.style.display = 'block';
     // projectDetailButton.style.display = 'none';
+    $('body').css("overflow", "hidden");
     pageNum = 1;
     showList(pageNum);
     $reviewNumber = reviewNumber;
@@ -63,6 +64,8 @@ function projectDetailModalHide() {
     $('.innerImageWrapper ul li:first-child').siblings('.active').removeClass('active');
     $('.innerImageWrapper div div:first-child').addClass("active");
     $('.innerImageWrapper div div:first-child').siblings('.active').removeClass('active');
+    $('body').css("overflow", "auto");
+
 }
 
 //좋아요 버튼 누를 시의 이벤트

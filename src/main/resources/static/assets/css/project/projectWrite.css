@@ -457,6 +457,7 @@ label.rotate::before{
 
 #nickName{
   font-size: 0.95rem;
-  font-weight: 500;
-  margin-left: 10px;
+  font-weight: 600;
+  margin-left: 5px;
+  padding: 2px 0px;
 }
