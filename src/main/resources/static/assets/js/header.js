@@ -98,15 +98,15 @@ function alterLike(alerts) {
 
         if(userNum != userNumber) {
             console.log('aaa');
-            str += "<div class='alterCss'><div style='border-bottom: 2px solid rgb(219, 219, 219);'>"
+            str += "<div class='alterCss'><div style='border-bottom: 2px solid rgb(219, 219, 219); display: flex; flex-direction: row; align-items: center;'>"
             if (alert.userFileVO != null) {
-                str += "<a href='/user/userPage/" + alert.userNumber + "'><img width='30px' class='userFile' src='/lit/display?fileName=" + alert.userFileVO.uploadPath + "/" + alert.userFileVO.uuid + "_" + alert.userFileVO.name + "'></a>"
+                str += "<a href='/user/mypage?userPageNumber=" + alert.userNumber + "'><img width='30px' class='userFile' src='/lit/display?fileName=" + alert.userFileVO.uploadPath + "/" + alert.userFileVO.uuid + "_" + alert.userFileVO.name + "'></a>"
             } else {
                 str += "<a href='/user/userPage/" + alert.userNumber + "'><img width='30px' class='userFile' src='/images/main/profile_ex.png'></a>"
             }
             if (alert.typeAlert == "like") {
                 let reSrc = "";
-                str += "<div style=' margin-bottom: 1px; margin-right: 30px; display: inline-block;'><span class='alterspan'>" + alert.nickName
+                str += "<div style=' margin-bottom: -20px;; margin-right: 30px; display: inline-block;'><span class='alterspan'>" + alert.nickName
                 str += "</span>님이 회원님의 사진을 좋아합니다.<span class='alterTime' style=' padding-left: 13px;'>" + alert.registerDate + "</span></div>"
                 reSrc += "/lit/display?fileName=" + alert.reviewFileVO.uploadPath + "/" + alert.reviewFileVO.uuid + "_" + alert.reviewFileVO.name
                 str += "<div style='display: inline-block;'><a href=''><img class='alterRR' src=" + reSrc + "></a></div></div></div>"
@@ -115,12 +115,27 @@ function alterLike(alerts) {
                 str += "<div style=' margin-bottom: -7px; margin-right: 30px; display: inline-block; margin-top: 17px;'><span class='alterspan'>" + alert.nickName
                 str += "</span>님이 회원님을 팔로우 했습니다."
                 str += "<span class='alterTime' style='padding-left: 13px;'>" + alert.registerDate + "</span></div>"
-                str += "<div><button> </button></div></div></div>"
+                str += "<a id='headFollowBtn' onclick='headFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowBtn'>팔로우</button></a></div>"
             }
         };
     });
 
-    $("#alertList").append(str);
+    $("#alertList").html(str);
+}
+
+function headFollow(following) {
+
+    let followVO = {"followingNumber" : following, "followerNumber" : userNumber};
+
+    $.ajax({
+        url: "/user/follow",
+        type: "post",
+        data: JSON.stringify(followVO),
+        contentType:"application/json",
+        success: function(e) {
+            console.log("1111111111111111111111");
+        }
+    })
 }
 
 //     <div class="alterCss">
