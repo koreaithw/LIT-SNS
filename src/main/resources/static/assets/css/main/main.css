@@ -398,3 +398,115 @@ a:visited {
     right: 0;
     top: 0;
 }
+
+
+/*=========================================*/
+/* 크기별 조정*/
+/*=====================================================*/
+/*
+##Device = Desktops
+##Screen = 1281px to higher resolution desktops
+##Device = 데스크탑
+##Screen = 1281px 이상 해상도 데스크탑
+*/
+
+@media (min-width: 1281px) {
+}
+
+/*
+##Device = Laptops, Desktops
+##Screen = B/w 1025px to 1280px
+##Device = 랩탑, 데스크탑
+##Screen = 1025px에서 1280px 사이
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+}
+
+/*
+##Device = Tablets, Ipads (portrait),
+##Screen = B/w 768px to 1024px
+##Device = 태블릿, 아이패드(세로),
+##Screen = 768px에서 1024px 사이
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+@media (max-width: 975px) {
+    ._main_wrapper{
+        width: 100%;
+        padding: 0;
+    }
+    div.photoContents > div > figure{
+        width:50%;
+        height: 325px;
+    }
+
+    .litSpan{
+        font-weight: 900;
+        font-size: 1.3rem;
+    }
+    .litSvg{
+        height: 18px;
+        width: 18px;
+    }
+
+    ._category_img_box{
+        width: 85px;
+        height: 85px;
+    }
+    ._category_img {
+        width: 48px;
+        height: 48px;
+    }
+    ._category_wrapper div {
+        font-size: 1rem;
+        margin: auto;
+    }
+
+    div._selector_wrapper{
+        height: auto;
+    }
+    div._selector{
+        margin: 0 20px;
+        padding: 10px 20px;
+    }
+    a.a__selector{
+        flex-basis: 20%;
+        font-size: 1rem;
+    }
+    div._category_wrapper > a{
+        width: 25%;
+        margin: 20px 0;
+    }
+    div._category_wrapper{
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+/*
+##Device = Tablets, Ipads (landscape)
+##Screen = B/w 768px to 1024px
+##Device = 태블릿, 아이패드(가로)
+##Screen = 768px에서 1024px 사이
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+}
+/*
+##Device = Low Resolution Tablets, Mobiles (Landscape)
+##Screen = B/w 481px to 767px
+##Device = 저해상도 태블릿, 모바일(가로)
+##Screen = 481px에서 767px 사이
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+}
+/*
+##Device = Most of the Smartphones Mobiles (Portrait)
+##Screen = B/w 320px to 479px
+##Device = 대부분의 스마트폰 모바일 기기(세로)
+##Screen = 320px에서 479px 사이
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+
+}
+
