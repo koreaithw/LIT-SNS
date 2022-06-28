@@ -36,4 +36,6 @@ public interface ProjectMapper {
     public int getTotalByUserNumber(Long userNumber);
     // 마이페이지 프로젝트 리스트
     public List<ProjectVO> getMyList(Long userNumber);
+    // apply count 증가 시키기
+    public void increaseApplyCnt(Long projectNumber);
 }

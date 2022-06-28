@@ -19,7 +19,7 @@ public class UserFileDAO {
     //유저 파일 수정
     public void modify(UserFileVO userFileVO){ userFileMapper.update(userFileVO); }
     // 사진
-    public UserFileVO getImg(Long userNumber){return userFileMapper.getImg(userNumber); }
+    public UserFileVO getImg(Long userNumber){ return userFileMapper.getImg(userNumber); }
     // DB에 없는 이미지 삭제
     public List<UserFileVO> getOldFiles(){ return userFileMapper.getOldFiles(); }
 }
