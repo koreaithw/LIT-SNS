@@ -24,7 +24,7 @@
     display: flex;
     justify-content: center;
     position: relative;
-    bottom: 66%;
+    bottom: 62%;
     width: 370px;
     left: 50%;
     font-size: 20px;
@@ -86,7 +86,7 @@
     vertical-align: middle;
     background-color: rgb(250, 100, 98);
     cursor: pointer;
-    height: 25px;
+    height: 35px;
     margin: 0;
     font-size: 16px;
     font-weight: bold;
@@ -116,7 +116,7 @@
     overflow-y: hidden;
     gap: 16px;
     width: 270px;
-    height: 80px;
+    height: 110px;
     padding: 16px;
     margin-bottom: 16px;
     border-radius: 8px;
