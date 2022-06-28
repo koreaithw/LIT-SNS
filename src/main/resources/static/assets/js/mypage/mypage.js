@@ -322,7 +322,7 @@ lit2.on("click", function () {
 });
 
 function litUpList() {
-    myPageAjaxService.litUpList(function (result) {
+    myPageAjaxService.litUpList(userPageNumber, function (result) {
         let str = "";
         $(".photoContents > div").html("");
         result.forEach((data, i) => {
@@ -343,7 +343,7 @@ function litUpList() {
 }
 
 function litList() {
-    myPageAjaxService.litList(function(result){
+    myPageAjaxService.litList(userPageNumber,function(result){
         let str = "";
         $(".photoContents > div").html("");
         result.forEach((data, i) => {

@@ -252,9 +252,10 @@ public class LitUpRestController {
     }
 
 
-    @GetMapping("/getMyList")
-    public List<ReviewVO> getMyList(HttpSession session){
-        Long userNumber = (Long)session.getAttribute("userNumber");
+    @GetMapping("/getMyList/{userPageNumber}")
+    public List<ReviewVO> getMyList(@PathVariable("userPageNumber")Long userPageNumber, HttpSession session){
+//        Long userNumber = (Long)session.getAttribute("userNumber");
+        Long userNumber = userPageNumber != null ? userPageNumber : (Long)session.getAttribute("userNumber");
         log.info("*************************************************************");
         log.info("LitUpRestController : getMyList");
         log.info("*************************************************************");
