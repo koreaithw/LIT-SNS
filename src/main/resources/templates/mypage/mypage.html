@@ -444,6 +444,7 @@
 <script defer src="/assets/js/certification/report.js"></script>
 <script defer src="/assets/js/certification/certificationDetailAjax.js"></script>
 <script th:inline="javascript">
+
     $("#followingBtn").on("click", "div > a", function(e){
         e.preventDefault();
         let followingNumber = mypageUser;  // 팔로윙 나의 번호
@@ -746,6 +747,7 @@
     myPageAjaxService.getMyProfileImg(userPageNumber, function (pic) {
         showMyProfileImg(pic);
     })
+
 
 
     function showMyProfileImg(file) {
