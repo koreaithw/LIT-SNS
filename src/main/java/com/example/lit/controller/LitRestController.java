@@ -106,9 +106,9 @@ public class LitRestController {
         litService.join( participationVO );
     }
 
-    @GetMapping("/getMyList")
-    public List<ProjectVO> getMyList(HttpSession session){
-        Long userNumber = (Long)session.getAttribute("userNumber");
+    @GetMapping("/getMyList/{userNo}")
+    public List<ProjectVO> getMyList(@PathVariable("userNo") Long userNumber, HttpSession session){
+//        Long userNumber = (Long)session.getAttribute("userNumber");
         return litService.getMyList(userNumber);
     }
 

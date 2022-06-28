@@ -236,6 +236,9 @@ section {
   .sec2 > div{
     column-count: 2;
   }
+  .sec2 > div > figure {
+    width: 50%;
+  }
 
   .sec1 > div{
     flex-wrap: wrap;

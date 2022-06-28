@@ -200,7 +200,7 @@ let myPageAjaxService = (function () {
     function litUpList(callback, error){
 
         $.ajax({
-            url : "/litUp/getMyList",
+            url : "/litUp/getMyList/"+userPageNumber,
             type : "get",
             dataType : "json",
             success : function(result){
@@ -215,7 +215,7 @@ let myPageAjaxService = (function () {
     //lit(프로젝트) 리스트
     function litList(callback, error){
         $.ajax({
-            url : "/lit/getMyList",
+            url : "/lit/getMyList/"+userPageNumber,
             type : "get",
             dataType: "json",
             success : function(result){
