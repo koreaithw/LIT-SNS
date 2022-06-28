@@ -78,4 +78,12 @@ public class UserServiceTests {
         userService.removeFollow(followVO);
     }
 
+    @Test
+    public void checkFollowTest() {
+        FollowVO followVO = new FollowVO();
+        followVO.setFollowerNumber(1L);
+        followVO.setFollowerNumber(2L);
+        userService.followingCheck(followVO);
+    }
+
 }

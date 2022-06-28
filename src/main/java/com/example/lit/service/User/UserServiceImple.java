@@ -190,8 +190,8 @@ public class UserServiceImple implements UserService{
 
         // 알람
         AlertVO alertVO = new AlertVO();
-        alertVO.setAlertUser(followVO.getFollowingNumber());
-        alertVO.setUserNumber(followVO.getFollowerNumber());
+        alertVO.setAlertUser(followVO.getFollowerNumber());
+        alertVO.setUserNumber(followVO.getFollowingNumber());
         alertVO.setTypeAlert("follow");
         alertDAO.alertFollow(alertVO);
     }
@@ -201,8 +201,8 @@ public class UserServiceImple implements UserService{
         followDAO.remove(followVO);
 
         AlertVO alertVO = new AlertVO();
-        alertVO.setAlertUser(followVO.getFollowingNumber());
-        alertVO.setUserNumber(followVO.getFollowerNumber());
+        alertVO.setAlertUser(followVO.getFollowerNumber());
+        alertVO.setUserNumber(followVO.getFollowingNumber());
         alertVO.setTypeAlert("follow");
 
         alertDAO.remove(alertDAO.getAlertNumber(alertVO));
