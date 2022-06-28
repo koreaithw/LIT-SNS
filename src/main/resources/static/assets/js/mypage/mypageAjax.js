@@ -179,10 +179,10 @@ let myPageAjaxService = (function () {
     }
 
     //litUp(리뷰) 리스트
-    function litUpList(callback, error){
+    function litUpList(userPageNumber, callback, error){
 
         $.ajax({
-            url : "/litUp/getMyList",
+            url : "/litUp/getMyList/"+userPageNumber,
             type : "get",
             dataType : "json",
             success : function(result){
@@ -195,9 +195,9 @@ let myPageAjaxService = (function () {
     }
 
     //lit(프로젝트) 리스트
-    function litList(callback, error){
+    function litList(userPageNumber, callback, error){
         $.ajax({
-            url : "/lit/getMyList",
+            url : "/lit/getMyList/"+userPageNumber,
             type : "get",
             dataType: "json",
             success : function(result){

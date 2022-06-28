@@ -211,15 +211,18 @@ public class UserController {
         List<UserVO> followingVO = userService.ModalFollowing(userPageNumber);
 
         UserFileVO userFileVO = null;
-        if(userService.getImg(userNumber) == null){
+        if(userService.getImg(userPageNumber) == null){
             userFileVO = new UserFileVO();
-            userFileVO.setUserNumber(userNumber);
+            userFileVO.setUserNumber(userPageNumber);
             userFileVO.setName("");
             userFileVO.setUploadPath("");
             userFileVO.setUuid("");
             userVO.setUserFileList(userFileVO);
         }else{
-            userVO.setUserFileList(userService.getImg(userNumber));
+            userVO.setUserFileList(userService.getImg(userPageNumber));
+            log.info("***********************************************************");
+            log.info("In");
+            log.info("***********************************************************");
         }
 
         model.addAttribute("userFileList", userVO.getUserFileList());
