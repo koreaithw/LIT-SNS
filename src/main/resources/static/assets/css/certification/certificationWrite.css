@@ -25,7 +25,7 @@ body{
     overflow: hidden;
     background-size : cover;
     position: absolute;
-    z-index: 10;
+    z-index: 4;
 }
 
 .modalCloseButton{
@@ -496,7 +496,7 @@ body{
     gap: 10px;
 }
 
-.innerImagePageButtons > div {
+.innerImagePageButtons1 > div {
     width:18px;
     height:18px;
     gap: 5px;
@@ -506,6 +506,6 @@ body{
     border: 1px solid rgb(219,219,219);
 }
 
-.innerImagePageButtons > div.active{
+.innerImagePageButtons1 > div.active{
     background-color:rgba(0,0,0,0.5);
 }
