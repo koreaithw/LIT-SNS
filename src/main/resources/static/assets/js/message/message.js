@@ -600,3 +600,8 @@ function enterSmile(key) {
 
     send(roomId, nickname, receiveNickname, content);
 }
+
+////////////////프로필 이미지 추가하기////////////////////////
+messageService.getProfileImage(5,function(result){
+    console.log(result);
+});

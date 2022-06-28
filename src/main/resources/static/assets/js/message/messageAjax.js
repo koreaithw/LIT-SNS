@@ -70,6 +70,18 @@ let messageService = (function () {
         return roomId;
     }
 
+    function getProfileImage(userNumber, callback, error){
+        $.ajax({
+            url: "/user/userImg/" + userNumber,
+            type: "get",
+            success: function(result){
+                if(callback){
+                    callback(result);
+                }
+            }
+        });
+    }
 
-    return {send: send, getFollowerList: getFollowerList, searchFollowerList:searchFollowerList, getMessageList:getMessageList, getRoomId:getRoomId};
+
+    return {send: send, getFollowerList: getFollowerList, searchFollowerList:searchFollowerList, getMessageList:getMessageList, getRoomId:getRoomId, getProfileImage:getProfileImage};
 })();
