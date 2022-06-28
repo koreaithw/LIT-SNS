@@ -104,6 +104,7 @@ public class LitRestController {
         log.info("challenge  : " + participationVO.getUserNumber());
         log.info("***************************");
         litService.join( participationVO );
+
     }
 
     @GetMapping("/getMyList/{userPageNumber}")

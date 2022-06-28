@@ -57,5 +57,8 @@ public class ProjectDAO {
     // 마이페이지 프로젝트 리스트
     public List<ProjectVO> getMyList(Long userNumber){ return projectMapper.getMyList(userNumber); }
 
+    // apply count 증가 시키기
+    public void increaseApplyCnt(Long projectNumber){ projectMapper.increaseApplyCnt(projectNumber); }
+
 
 }
