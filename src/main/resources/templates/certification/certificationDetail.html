@@ -464,6 +464,7 @@
     function showUserPic(file){
         let str ="";
         let str2 ="";
+
         str += "<div class=\"detailContentProfileImageInner\">";
         str += "<a href=\"/user/mypage?userPageNumber=" + file.userNumber + "\">";
         str += "<img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>";

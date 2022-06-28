@@ -49,6 +49,8 @@ $('#ModalFileInput').on("change", function(e){
     }
     reader.readAsDataURL(file);
 
+    $('#subBtn').attr("class", "submitBtnOn");
+    $('#subBtn').attr("disabled", false);
 })
 
 function checkNick(result) {
@@ -70,8 +72,10 @@ function checkNick(result) {
 function buttonOn2(){
     if(userName.val().length > 0 && nickNameCk.val().length > 0){
         $('#subBtn').attr("class", "submitBtnOn");
+        $('#subBtn').attr("disabled", false);
     } else{
         $('#subBtn').attr("class", "submitBtn");
+        $('#subBtn').attr("disabled", true);
     }
 }
 

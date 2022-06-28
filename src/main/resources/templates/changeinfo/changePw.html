@@ -36,7 +36,12 @@
                 <div class="_changepw_profile flexclass">
                     <div class="_profile_icon">
                         <div class="_profile_wrapper">
-                            <img width="38px" height="38px" class="info1ArticleImg" th:src="'/user/display?fileName='+ ${userFileList.uploadPath} + '/' + ${userFileList.uuid} + '_' + ${userFileList.name}">
+                            <img width="38px" height="38px" class="info1ArticleImg"
+                                 th:src="'/user/display?fileName='+ ${userFileList.uploadPath} + '/' + ${userFileList.uuid} + '_' + ${userFileList.name}"
+                                 th:if="*{userFileList.fileNumber != null}"
+                            />
+                            <img class="info1ArticleImg" th:unless="*{userFileList.fileNumber != null}" th:src="'/images/main/profile_ex.png'"/>
+
                         </div>
                     </div>
                     <div class="_profile_nickname">
