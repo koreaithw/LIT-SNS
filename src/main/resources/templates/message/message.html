@@ -31,10 +31,11 @@
                         </div>
                     </div>
                     <div class="dmList">
-                            <figure th:if="${recentSendMessage.size()!=0}" th:each="item:${recentSendMessage}" class="dmBtn">
+                            <figure th:if="${recentSendMessage.size()!=0}" th:each="item,i :${recentSendMessage}" class="dmBtn">
                                 <a th:id="${item.get('RECEIVE_USER_NUMBER')}" class="userDMList">
                                     <div class="dmImg">
-                                        <img class="_aa8j" src="/images/main/profile_ex.png" onerror="this.src='/images/main/profile_ex.png'">
+                                        <img class="_aa8j" th:src="'/user/display?fileName='+ ${sendImageList[i.index].uploadPath} + '/' + ${sendImageList[i.index].uuid} + '_' + ${sendImageList[i.index].name}" th:if="${sendImageList[i.index] != null}">
+                                        <img class="_aa8j" th:unless="${sendImageList[i.index] != null}" th:src="'/images/main/profile_ex.png'">
                                     </div>
                                     <div class="dmData">
                                         <p th:text="${item.get('NICKNAME')}"></p>
@@ -44,10 +45,11 @@
                                 </a>
                             </figure>
 
-                            <figure th:if="${(recentReceiveMessage.size()!=0 and recentSendMessage.size() == 0) or (recentReceiveMessage.size()==0 and recentSendMessage.size() != 0)}" th:each="item:${recentReceiveMessage}" class="dmBtn">
+                            <figure th:if="${(recentReceiveMessage.size()!=0 and recentSendMessage.size() == 0) or (recentReceiveMessage.size()==0 and recentSendMessage.size() != 0)}" th:each="item, i:${recentReceiveMessage}" class="dmBtn">
                                 <a th:id="${item.get('SEND_USER_NUMBER')}" class="userDMList">
                                     <div class="dmImg">
-                                        <img class="_aa8j" src="/images/main/profile_ex.png" onerror="this.src='/images/main/profile_ex.png'">
+                                        <img class="_aa8j" th:src="'/user/display?fileName='+ ${receiveImageList[i.index].uploadPath} + '/' + ${receiveImageList[i.index].uuid} + '_' + ${receiveImageList[i.index].name}" th:if="${receiveImageList[i.index] != null}">
+                                        <img class="_aa8j" th:unless="${receiveImageList[i.index] != null}" th:src="'/images/main/profile_ex.png'">
                                     </div>
                                     <div class="dmData">
                                         <p th:text="${item.get('NICKNAME')}"></p>
@@ -56,6 +58,7 @@
                                     </div>
                                 </a>
                             </figure>
+
                     </div>
                 </div>
                 <!-- 첫 페이지시 보여지는 창-->
@@ -142,6 +145,12 @@
     // 세션에서 유저 넘버 받아오기
     userNumber = [[${session.userNumber}]];
 
+    let sendImageList = [[${sendImageList}]];
+    let receiveImageList = [[${receiveImageList}]];
+
+    console.log(sendImageList);
+    console.log(receiveImageList);
+
     if(!userNumber){
         location.href = '/user/login';
     }
@@ -165,8 +174,8 @@
         webSocket.close();
     }
 
-    function send(roomId, nickname, receiveNickname, content){
-        webSocket.send(JSON.stringify({chatRoomId : roomId, type:'CHAT', writer:nickname, receiver: receiveNickname, message : content}));
+    function send(roomId, nickname, receiveNickname, content, sendUserNumber){
+        webSocket.send(JSON.stringify({chatRoomId : roomId, type:'CHAT', writer:nickname, receiver: receiveNickname, message : content, sendUserNumber:sendUserNumber}));
     }
 
     function onOpen(){
@@ -179,6 +188,7 @@
         console.log(data)
 
         if(data.message){
+            let img = messageService.getProfileImage(data.sendUserNumber)
 
             //메세지 두개 비교해줄 조건
 
@@ -195,7 +205,9 @@
             }else{
                 let str = "<div class=\"dmStyle2\">" +
                     "<div class=\"dmImg\">" +
-                    "<img src='/images/project/domImg/indi01.webp' alt=''>" +
+                    '<img class="_aa8j" src="/user/display?fileName=' +
+                    img.uploadPath + "/" + img.uuid + "_" + img.name +
+                    '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                     "</div>" +
                     "<div class=\"text\">" +
                     data.message +
@@ -211,9 +223,6 @@
     function onClose(){
         disconnect();
     }
-
-
-
 
 
 </script>
