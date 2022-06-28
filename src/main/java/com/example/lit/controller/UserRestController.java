@@ -187,6 +187,25 @@ public class UserRestController {
         userService.follow(followVO);
     }
 
+    @GetMapping("/followCheck/{following}/{follower}")
+    public int followCheck(@PathVariable("following")Long following, @PathVariable("follower")Long follower){
+        FollowVO followVO = new FollowVO();
+        followVO.setFollowingNumber(following);
+        followVO.setFollowerNumber(follower);
+
+        return userService.followingCheck(followVO);
+    }
+
+    @PostMapping("/deleteFollow")
+    public void followDelete(@RequestBody FollowVO followVO){
+        log.info( "====================================================" );
+        log.info( "followingNumber : " + followVO.getFollowingNumber() );
+        log.info( "followerNumber : " + followVO.getFollowerNumber() );
+        log.info( "====================================================" );
+
+        userService.removeFollow(followVO);
+    }
+
     // 메달 4번 조건 달성 했을 때
     @GetMapping("/get4Medal/{userNumber}")
     public void get4Medal(@PathVariable("userNumber") Long userNumber){

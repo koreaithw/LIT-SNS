@@ -97,29 +97,84 @@ function alterLike(alerts) {
         let userNum = alert.userNumber;
 
         if(userNum != userNumber) {
-            console.log('aaa');
-            str += "<div class='alterCss'>"
+            str += "<div class='alterCss'><div style='border-bottom: 2px solid rgb(219, 219, 219); display: flex; flex-direction: row; align-items: center;'>"
             if (alert.userFileVO != null) {
-                str += "<a href='/user/userPage/" + alert.userNumber + "'><img width='30px' class='userFile' src='/lit/display?fileName=" + alert.userFileVO.uploadPath + "/" + alert.userFileVO.uuid + "_" + alert.userFileVO.name + "'></a>"
+                str += "<a href='/user/mypage?userPageNumber=" + alert.userNumber + "'><img width='30px' class='userFile' src='/lit/display?fileName=" + alert.userFileVO.uploadPath + "/" + alert.userFileVO.uuid + "_" + alert.userFileVO.name + "'></a>"
             } else {
                 str += "<a href='/user/userPage/" + alert.userNumber + "'><img width='30px' class='userFile' src='/images/main/profile_ex.png'></a>"
             }
-
-            str += "<div style='margin-bottom: -5px; margin-right: 30px;'><span class='alterspan'>" + alert.nickName
             if (alert.typeAlert == "like") {
                 let reSrc = "";
-                str += "</span>님이 회원님의 사진을 좋아합니다.</div>"
+                str += "<div style=' margin-bottom: -20px;; margin-right: 30px; display: inline-block;'><span class='alterspan'>" + alert.nickName
+                str += "</span>님이 회원님의 사진을 좋아합니다.<span class='alterTime' style=' padding-left: 13px;'>" + alert.registerDate + "</span></div>"
                 reSrc += "/lit/display?fileName=" + alert.reviewFileVO.uploadPath + "/" + alert.reviewFileVO.uuid + "_" + alert.reviewFileVO.name
-                str += "<div><a href=''><img class='alterRR' src=" + reSrc + "></a></div></div>"
-                str += "<div><span class='alterTime'>" + alert.registerDate + "</span></div>"
+                str += "<div style='display: inline-block;'><a href=''><img class='alterRR' src=" + reSrc + "></a></div></div></div>"
+                str += ""
             } else {
-                str += "</span>님이 회원님을 팔로우 했습니다.</div></div>"
-                str += "<div><span class='alterTime'>" + alert.registerDate + "</span></div>"
+                str += "<div style=' margin-bottom: -7px; margin-right: 30px; display: inline-block; margin-top: 17px;'><span class='alterspan'>" + alert.nickName
+                str += "</span>님이 회원님을 팔로우 했습니다."
+                str += "<span class='alterTime' style='padding-left: 13px;'>" + alert.registerDate + "</span></div>"
+                if(followCheck(alert.userNumber) != 1){
+                    str += "<a id='headFollowBtn' onclick='headFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowBtn'>팔로우</button></a></div>"
+                }else {
+                    str += "<a id='headFollowBtn' onclick='headDeleteFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowingBtn'>팔로잉</button></a></div>"
+                }
+
             }
         };
     });
 
-    $("#alertList").append(str);
+    $("#alertList").html(str);
+}
+
+function headFollow(following) {
+
+    let followVO = {"followingNumber" : following, "followerNumber" : userNumber};
+
+    $.ajax({
+        url: "/user/follow",
+        type: "post",
+        data: JSON.stringify(followVO),
+        contentType:"application/json",
+        success: function(e) {
+            BtnAct();
+        }
+    });
+}
+
+function headDeleteFollow(following) {
+
+    let followVO = {"followingNumber" : following, "followerNumber" : userNumber};
+
+    $.ajax({
+        url: "/user/deleteFollow",
+        type: "post",
+        data: JSON.stringify(followVO),
+        contentType:"application/json",
+        success: function(e) {
+            BtnAct();
+        }, error(a,b,c){
+            console.log(a,b,c);
+        }
+    });
+
+}
+
+function followCheck(following) {
+    // let followVO = {"followingNumber" : following, "followerNumber" : userNumber};
+    let result;
+    $.ajax({
+        url: "/user/followCheck/" + following + "/" + userNumber,
+        type: "get",
+        async:false,
+        success: function (success) {
+            result = success;
+            console.log("ajax" + success);
+        }
+    });
+
+
+    return result;
 }
 
 //     <div class="alterCss">
