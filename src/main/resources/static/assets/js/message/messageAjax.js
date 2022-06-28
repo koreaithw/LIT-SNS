@@ -58,7 +58,7 @@ let messageService = (function () {
     }
 
     function getRoomId(param, error){
-        let roomId
+        let roomId;
         $.ajax({
             url: "/message/getRoomId/ " + param.sendUserNumber + "/" + param.receiveUserNumber,
             type: "get",
@@ -71,15 +71,16 @@ let messageService = (function () {
     }
 
     function getProfileImage(userNumber, callback, error){
+        let img;
         $.ajax({
-            url: "/user/userImg/" + userNumber,
+            url: "/message/getUserProfileImage/" + userNumber,
             type: "get",
+            async: false,
             success: function(result){
-                if(callback){
-                    callback(result);
-                }
+                img = result;
             }
         });
+        return img;
     }
 
 

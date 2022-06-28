@@ -24,7 +24,7 @@ function keyEnter(key) {
     $('.dmWrap').find("#" + receiveNickname).find('.content').scrollTop($('.dmWrap').find("#" + receiveNickname).find('.content').height() + $(window).height());
     console.log("전송")
     //웹소켓 쪽 전송
-    send(roomId, nickname, receiveNickname, content);
+    send(roomId, nickname, receiveNickname, content, userNumber);
 }
 
 
@@ -34,9 +34,13 @@ function dmSubmit() {
     messageService.getFollowerList(userNumber, function (result) {
         let res = "";
         $.each(result, function (i, item) {
+            let img = messageService.getProfileImage(item.userNumber)
+
             res += '<div>' +
                 '<div class="dmImg">' +
-                '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
+                '<img class="_aa8j" src="/user/display?fileName=' +
+                img.uploadPath + "/" + img.uuid + "_" + img.name +
+                '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                 '</div>' +
                 '<div class="userData">' +
                 '<p>' +
@@ -85,11 +89,15 @@ $(".dmBtn").on("click", "a", function (e) {
         pageNum: 1
     }, function (result) {
         if (result.length != 0) {
+            let img = messageService.getProfileImage(receiveUserNumber)
+
             let message = "";
             message +=
                 '<div class="contentTop">' +
                 '<div>' +
-                '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
+                '<img class="_aa8j" src="/user/display?fileName=' +
+                img.uploadPath + "/" + img.uuid + "_" + img.name +
+                '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                 '</div>' +
                 '<div>' +
                 '<span>' + receiveNickname + '</span>' +
@@ -125,7 +133,9 @@ $(".dmBtn").on("click", "a", function (e) {
                 } else {
                     message += "<div class=\"dmStyle2\">" +
                         "<div class=\"dmImg\">" +
-                        "<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src='/images/main/profile_ex.png'\">" +
+                        '<img class="_aa8j" src="/user/display?fileName=' +
+                        img.uploadPath + "/" + img.uuid + "_" + img.name +
+                        '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                         "</div>" +
                         "<div class=\"text\">" +
                         result[i].content +
@@ -171,14 +181,17 @@ function getMoreMessage(scrolling) {
             return;
         }
         let receiveNickname = $(scrolling).siblings('.contentTop').find('span').html();
-        let pageNum = Math.ceil($('.dmWrap').find("#" + receiveNickname).find('.content').children(0).children(0).length / amount) + 1 || 1;
+        let pageNum = Math.ceil($('.dmWrap').find("#" + receiveNickname).find('.content').children(0).children().length / amount) + 1 || 1;
         let receiveUserNumber = $('.contentTop').find('input[type="hidden"]').attr('id')
+        console.log(pageNum)
 
         messageService.getMessageList({
             sendUserNumber: userNumber,
             receiveUserNumber: receiveUserNumber,
             pageNum: pageNum,
         }, function (result) {
+
+            let img = messageService.getProfileImage(receiveUserNumber)
             let message = "";
 
             //채팅에 맞게 순서 반대로 뿌려줌, 기본 20개
@@ -196,7 +209,9 @@ function getMoreMessage(scrolling) {
                 } else {
                     message += "<div class=\"dmStyle2\">" +
                         "<div class=\"dmImg\">" +
-                        "<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src='/images/main/profile_ex.png'\">" +
+                        "<img class=\"_aa8j\" src=\"/user/display?fileName=" +
+                        img.uploadPath + "/" + img.uuid + "_" + img.name +
+                        "\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">" +
                         "</div>" +
                         "<div class=\"text\">" +
                         result[i].content +
@@ -222,9 +237,12 @@ $(".modalSearch > input").keyup(function () {
     }, function (result) {
         let res = "";
         $.each(result, function (i, item) {
+            let img = messageService.getProfileImage(item.userNumber);
             res += '<div>' +
                 '<div class="dmImg">' +
-                '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
+                '<img class="_aa8j" src="/user/display?fileName=' +
+                img.uploadPath + "/" + img.uuid + "_" + img.name +
+                '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                 '</div>' +
                 '<div class="userData">' +
                 '<p>' +
@@ -264,7 +282,7 @@ function startChat(receiveUserNumber, nick) {
         receiveUserNumber: receiveUserNumber,
         pageNum: 1
     }, function (result) {
-
+        let img = messageService.getProfileImage(receiveUserNumber);
         let roomId = messageService.getRoomId({sendUserNumber: userNumber, receiveUserNumber: receiveUserNumber})
 
         if (result.length == 0) {
@@ -273,7 +291,9 @@ function startChat(receiveUserNumber, nick) {
                 let str = '<figure class="dmBtn">' +
                     '<a id="' + receiveUserNumber + '" class="userDMList" onclick="goMessage(this)">' +
                     '<div class="dmImg">' +
-                    '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
+                    '<img class="_aa8j" src="/user/display?fileName=' +
+                    img.uploadPath + "/" + img.uuid + "_" + img.name +
+                    '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                     '</div>' +
                     '<div class="dmData">' +
                     '<p>' + receiveNickname + '</p>' +
@@ -294,7 +314,9 @@ function startChat(receiveUserNumber, nick) {
                 let msg = '<div class="colBox dmBox on" id="' + receiveNickname + '">' +
                     '<div class="contentTop">' +
                     '<div>' +
-                    '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
+                    '<img class="_aa8j" src="/user/display?fileName=' +
+                    img.uploadPath + "/" + img.uuid + "_" + img.name +
+                    '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                     '</div>' +
                     '<div>' +
                     '<span>' + receiveNickname + '</span>' +
@@ -339,7 +361,9 @@ function startChat(receiveUserNumber, nick) {
                 let str = '<figure class="dmBtn">' +
                     '<a id="' + receiveUserNumber + '" class="userDMList" onclick="goMessage(this)">' +
                     '<div class="dmImg">' +
-                    '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
+                    '<img class="_aa8j" src="/user/display?fileName=' +
+                    img.uploadPath + "/" + img.uuid + "_" + img.name +
+                    '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                     '</div>' +
                     '<div class="dmData">' +
                     '<p>' + receiveNickname + '</p>' +
@@ -360,7 +384,9 @@ function startChat(receiveUserNumber, nick) {
                 let msg = '<div class="colBox dmBox on" id="' + receiveNickname + '">' +
                     '<div class="contentTop">' +
                     '<div>' +
-                    '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
+                    '<img class="_aa8j" src="/user/display?fileName=' +
+                    img.uploadPath + "/" + img.uuid + "_" + img.name +
+                    '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                     '</div>' +
                     '<div>' +
                     '<span>' + receiveNickname + '</span>' +
@@ -403,7 +429,9 @@ function startChat(receiveUserNumber, nick) {
             message +=
                 '<div class="contentTop">' +
                 '<div>' +
-                '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
+                '<img class="_aa8j" src="/user/display?fileName=' +
+                img.uploadPath + "/" + img.uuid + "_" + img.name +
+                '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                 '</div>' +
                 '<div>' +
                 '<span>' + receiveNickname + '</span>' +
@@ -439,7 +467,9 @@ function startChat(receiveUserNumber, nick) {
                 } else {
                     message += "<div class=\"dmStyle2\">" +
                         "<div class=\"dmImg\">" +
-                        "<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src='/images/main/profile_ex.png'\">" +
+                        '<img class="_aa8j" src="/user/display?fileName=' +
+                        img.uploadPath + "/" + img.uuid + "_" + img.name +
+                        '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                         "</div>" +
                         "<div class=\"text\">" +
                         result[i].content +
@@ -494,12 +524,16 @@ function goMessage(e) {
         receiveUserNumber: receiveUserNumber,
         pageNum: 1
     }, function (result) {
+        let img = messageService.getProfileImage(receiveUserNumber);
+
         if (result.length != 0) {
             let message = "";
             message +=
                 '<div class="contentTop">' +
                 '<div>' +
-                '<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src=\'/images/main/profile_ex.png\'\">' +
+                '<img class="_aa8j" src="/user/display?fileName=' +
+                img.uploadPath + "/" + img.uuid + "_" + img.name +
+                '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                 '</div>' +
                 '<div>' +
                 '<span>' + receiveNickname + '</span>' +
@@ -535,7 +569,9 @@ function goMessage(e) {
                 } else {
                     message += "<div class=\"dmStyle2\">" +
                         "<div class=\"dmImg\">" +
-                        "<img class=\"_aa8j\" src=\"/images/main/profile_ex.png\" onerror=\"this.src='/images/main/profile_ex.png'\">" +
+                        '<img class="_aa8j" src="/user/display?fileName=' +
+                        img.uploadPath + "/" + img.uuid + "_" + img.name +
+                        '" onerror="this.src=\'/images/main/profile_ex.png\'">' +
                         "</div>" +
                         "<div class=\"text\">" +
                         result[i].content +
@@ -582,7 +618,7 @@ function enterHeart(key) {
         content: content
     });
 
-    send(roomId, nickname, receiveNickname, content);
+    send(roomId, nickname, receiveNickname, content, userNumber);
 }
 
 function enterSmile(key) {
@@ -598,10 +634,5 @@ function enterSmile(key) {
         content: content
     });
 
-    send(roomId, nickname, receiveNickname, content);
+    send(roomId, nickname, receiveNickname, content, userNumber);
 }
-
-////////////////프로필 이미지 추가하기////////////////////////
-messageService.getProfileImage(5,function(result){
-    console.log(result);
-});
