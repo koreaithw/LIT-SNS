@@ -187,6 +187,8 @@ a:visited {
     justify-content: center;
     text-transform: uppercase;
     display: flex;
+    /*border-top의 길이를 늘리기 위해 padding사용 */
+    padding: 0 8px;
 }
 
 .lits2On {
@@ -202,6 +204,8 @@ a:visited {
     border-top: 2px solid rgb(250, 100, 98);
     margin-top: -3px;
     font-weight: bolder;
+    /*border-top의 길이를 늘리기 위해 padding사용 */
+    padding: 0 8px;
 }
 
 .litChange > div > a > div{
