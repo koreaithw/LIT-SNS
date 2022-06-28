@@ -7,6 +7,8 @@ import com.example.lit.domain.dao.user.UserDAO;
 import com.example.lit.domain.dao.user.UserFileDAO;
 import com.example.lit.domain.dao.user.achievement.AchievementDAO;
 import com.example.lit.domain.vo.SearchDTO;
+import com.example.lit.domain.vo.review.ReviewDTO;
+import com.example.lit.domain.vo.review.ReviewFileVO;
 import com.example.lit.domain.vo.user.*;
 import com.example.lit.domain.vo.user.FollowVO;
 import com.example.lit.domain.vo.messsage.MessageVO;
@@ -17,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,10 +54,22 @@ public class UserServiceImple implements UserService{
     public int MyFollowingCnt(Long userNumber) { return userDAO.MyFollowingCnt(userNumber); }
 
     @Override
-    public List<UserVO> ModalFollower(Long userNumber) { return userDAO.ModalFollower(userNumber); }
+    public List<UserVO> ModalFollower(Long userNumber) {
+        List<UserVO> userVOS = userDAO.ModalFollower(userNumber);
+        for(UserVO userVO : userVOS){
+            userVO.setUserFileList(userFileDAO.getImg(userVO.getUserNumber()));
+        }
+        return userVOS;
+    }
 
     @Override
-    public List<UserVO> ModalFollowing(Long userNumber) { return userDAO.ModalFollowing(userNumber); }
+    public List<UserVO> ModalFollowing(Long userNumber) {
+        List<UserVO> userVOS = userDAO.ModalFollowing(userNumber);
+        for(UserVO userVO : userVOS){
+            userVO.setUserFileList(userFileDAO.getImg(userVO.getUserNumber()));
+        }
+        return userVOS;
+    }
 
     @Override
     public void removeFollower(Long followerNumber, Long followingNumber) { userDAO.removeFollower(followerNumber, followingNumber); }

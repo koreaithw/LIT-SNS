@@ -129,9 +129,9 @@ label{
 }
 
 ._profile_icon{
-    margin: 2px 32px 0 124px;
-    height: 38px;
-    width: 38px;
+    margin: 15px 20px 0 124px;
+    height: 50px;
+    width: 50px;
 }
 
 ._profile_wrapper{
@@ -139,10 +139,10 @@ label{
     border-radius: 50%;
     box-sizing: border-box;
     height: 100%;
-    margin: 0 auto;
     overflow: hidden;
     position: relative;
     width: 100%;
+    border: 1px solid rgb(214,214,214);
 }
 
 ._profile_wrapper ::after{
@@ -168,6 +168,7 @@ label{
     border: 0;
     font: inherit;
     vertical-align: baseline;
+    cursor: auto;
 }
 
 ._profile_nickname{

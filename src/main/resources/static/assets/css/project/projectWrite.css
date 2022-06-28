@@ -179,12 +179,13 @@ input[type="radio"] {
 
 input[type="radio"]+label {
   display: flex;
+  font-size: 0.8rem;
 }
 
 input[type="radio"]+label::before {
   border: 1px solid #e5e5e5;
-  height: 24px;
-  width: 24px;
+  height: 18px;
+  width: 18px;
   text-align: center;
   content: "";
   margin-right: 10px;
@@ -192,7 +193,7 @@ input[type="radio"]+label::before {
 
 input[type="radio"]:checked+label::before {
   content: "\2714";
-  font-size: 16px;
+  font-size: 13px;
   background: rgb(255, 69, 67);
   color: #ffffff;
 
@@ -258,6 +259,7 @@ form[name="projectForm"]>div {
   align-items: center;
   border-bottom: 1px solid #e5e5e5;
   padding: 10px 24px;
+  font-size: 0.9rem;
 }
 
 .topmenu>div {
@@ -300,12 +302,12 @@ form[name="projectForm"]>div {
 }
 
 .imgData>div:nth-child(2) {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .imgData label[for="btnImage"] {
   display: block;
-  width: 135px;
+  width: 150px;
   padding: 5px;
   background: #fa6462;
   color: #ffffff;
@@ -313,6 +315,7 @@ form[name="projectForm"]>div {
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
+  font-size: 0.9rem;
 }
 
 input[id="btnImage"] {
@@ -349,6 +352,10 @@ div.imgView {
   /* display: block; */
 }
 
+.topmenu>div>a{
+  font-color: rgb(250,87,87);
+}
+
 /* ===================================== */
 .projectData>div,
 .projectData>label {
@@ -361,8 +368,8 @@ div.imgView {
 }
 
 div.miniPoto {
-  width: 32px;
-  height: 32px;
+  width: 35px;
+  height: 35px;
   border-radius: 100%;
   overflow: hidden;
   margin-right: 10px;
@@ -386,7 +393,6 @@ label.togle {
   display: block;
   width: 100%;
   border-top: 1px solid #e5e5e5;
-  margin-top: 10px;
 }
 
 label.togle+div {
@@ -409,7 +415,7 @@ label.togle+div>textarea {
   width: 100%;
   border-style: none;
   outline: none;
-  min-height: 200px;
+  min-height: 180px;
 }
 
 .textareaBox>p {
@@ -430,6 +436,7 @@ a{
 label.togle{
   position: relative;
   padding-left: 30px;
+  font-size: 0.8rem;
 }
 label.togle::before{
   content: "";
@@ -448,3 +455,8 @@ label.rotate::before{
   transform: rotate(180deg);
 }
 
+#nickName{
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-left: 10px;
+}

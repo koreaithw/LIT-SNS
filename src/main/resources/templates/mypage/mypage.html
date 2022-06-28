@@ -152,12 +152,12 @@
                     </li>
                     <li class="mypageLi">
                         <div class="divInfo" style="cursor:pointer" onclick="followerModal()">팔로워
-                            <div class="spanInfo" th:text="${followerCnt}"></div>
+                            <div id="followerCount" class="spanInfo" th:text="${followerCnt}"></div>
                         </div>
                     </li>
                     <li class="mypageLi">
                         <div class="divInfo" onclick="followeringModal()">팔로우
-                            <div id="followerCont" class="spanInfo" th:text="${followingCnt}"></div>
+                            <div id="followCount" class="spanInfo" th:text="${followingCnt}"></div>
                         </div>
                     </li>
                 </ul>
@@ -218,13 +218,15 @@
                                 <div class="follower2">
                                     <div class="follower3">
                                         <div class="follower4" aria-disabled="true" role="button" tabindex="-1">
-                                            <canvas class="followerCanvass" height="50" width="50"
-                                                    style="position: absolute; top: -5px; left: -5px; width: 40px; height: 40px;"></canvas>
                                             <a class="followerAa" href="" role="link" tabindex="0"
-                                               style="width: 30px; height: 30px;">
-                                                <img alt="" class="followerImgg"
-                                                     crossorigin="anonymous" draggable="false"
-                                                     src="/images/mypage/jennie2.jpg">
+                                               style="width: 30px; height: 30px;" th:if="${follower.userFileList} != null">
+                                                <img class="followerImgg" crossorigin="anonymous" draggable="false"
+                                                     th:src="'/lit/display?fileName='+ ${follower.userFileList.uploadPath} +'/'+ ${follower.userFileList.uuid} + '_' + ${follower.userFileList.name}"
+                                                >
+                                            </a>
+                                            <a class="followerAa" href="" role="link" tabindex="0"
+                                                   style="width: 30px; height: 30px;" th:if="${follower.userFileList} == null">
+                                                <img class="followerImgg" crossorigin="anonymous" draggable="false" src="/images/main/profile_ex.png" >
                                             </a>
                                         </div>
                                     </div>
@@ -278,13 +280,17 @@
                                 <div class="follower2">
                                     <div class="follower3">
                                         <div class="follower4" aria-disabled="true" role="button" tabindex="-1">
-                                            <canvas class="followerCanvass" height="50" width="50"
-                                                    style="position: absolute; top: -5px; left: -5px; width: 40px; height: 40px;"></canvas>
                                             <a class="followerAa" href="" role="link" tabindex="0"
-                                               style="width: 30px; height: 30px;">
-                                                <img alt="" class="followerImgg"
-                                                     crossorigin="anonymous" draggable="false"
-                                                     src="/images/mypage/jennie2.jpg">
+                                               style="width: 30px; height: 30px;"
+                                               th:if="${following.userFileList} != null">
+                                                <img class="followerImgg" crossorigin="anonymous" draggable="false"
+                                                     th:src="'/lit/display?fileName='+ ${following.userFileList.uploadPath} +'/'+ ${following.userFileList.uuid} + '_' + ${following.userFileList.name}"
+                                                >
+                                            </a>
+                                            <a class="followerAa" href="" role="link" tabindex="0"
+                                               style="width: 30px; height: 30px;"
+                                               th:if="${following.userFileList} == null">
+                                                <img class="followerImgg" crossorigin="anonymous" draggable="false" src="/images/main/profile_ex.png">
                                             </a>
                                         </div>
                                     </div>
@@ -301,11 +307,12 @@
                                         </div>
                                     </div>
                                     <div class="follower9">
-                                        <button class="followingBtnn on" type="button" style="display: block;" onclick="changeFollow()">
-                                            팔로잉
+
+                                        <button class="followingBtnn" type="button" style="display: block;"
+                                                 >팔로잉
                                         </button>
-                                        <button class="followBtnn" type="button" style="display: none;">
-                                            팔로우
+                                        <button class="followBtnn" type="button" style="display: none;"
+                                             >팔로우
                                         </button>
                                     </div>
 
@@ -498,8 +505,8 @@
             success: function (result) {
                 // 전송완료시
                 alert(" 팔로잉");
-                let num = Number( $("#followerCont").text() ) + 1;
-                $("#followerCont").text(num);
+                let num = Number( $("#followerCount").text() ) + 1;
+                $("#followerCount").text(num);
                 $(".editProfileInner").addClass("on");
 
 
@@ -533,21 +540,28 @@
 
         $(this).parent().parent().parent().parent().parent().parent().remove();
         myPageAjaxService.removeFollower(deleteNumber, mypageUser, function (result) {
-            alert(result);
-            if(result){}
+            let num = Number( $("#followerCount").text() ) - 1;
+            $("#followerCount").text(num);
         });
-
     });
 
     $(".followingBtnn").on("click",function () {
         let deleteNumber = $(this).closest(".follower2").find("input.changeFollowing").val()
+        $(this).css("display","none")
+        $(this).siblings("button").css("display","block")
         myPageAjaxService.removeFollower(mypageUser, deleteNumber, function (result) {
+            let num = Number( $("#followCount").text() ) - 1;
+            $("#followCount").text(num);
         })
     })
 
     $(".followBtnn").on("click",function () {
         let insertNumber = $(this).closest(".follower2").find("input.changeFollowing").val()
+        $(this).css("display","none")
+        $(this).siblings("button").css("display","block")
         myPageAjaxService.insertFollowing({followingNumber:insertNumber, followerNumber:mypageUser },function (result) {
+            let num = Number( $("#followCount").text() ) + 1;
+            $("#followCount").text(num);
         })
     })
 
