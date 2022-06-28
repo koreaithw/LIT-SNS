@@ -64,6 +64,8 @@ function projectDetailModalHide() {
     $('.innerImageWrapper ul li:first-child').siblings('.active').removeClass('active');
     $('.innerImageWrapper div div:first-child').addClass("active");
     $('.innerImageWrapper div div:first-child').siblings('.active').removeClass('active');
+    $('body').css("overflow", "auto");
+
 }
 
 //좋아요 버튼 누를 시의 이벤트
