@@ -56,6 +56,10 @@ public class UserServiceImple implements UserService{
             log.info(userDAO.read(userVO.getUserNumber()) + "회원가입후 유저 정보 기본키 가져오는지 확인!!!");
             log.info("==========================================");
             log.info("==========================================");
+
+            // 회원가입시 얻는 메달
+            achievementDAO.insertMedal(userVO.getUserNumber(), "1");
+
             return userDAO.read(userVO.getUserNumber());
         }else { // 이미 가입되어 있어서 로그인이 되어야하는 경우
 
@@ -70,9 +74,6 @@ public class UserServiceImple implements UserService{
                     +userDAO.read(userNumber).getUserNumber());
             log.info("---------------------------------");
             log.info("---------------------------------");
-
-            // 회원가입시 얻는 메달
-            achievementDAO.insertMedal(userVO.getUserNumber(), "1");
 
             return userDAO.read(userNumber);
         }
