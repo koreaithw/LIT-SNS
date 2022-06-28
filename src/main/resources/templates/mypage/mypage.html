@@ -59,13 +59,16 @@
             transform: scale(1.1);
             transform-origin: center center;
         }
+
         div.editProfileInner.on a{
             list-style: none;
             color: #ffffff;
         }
-        div.editProfileInner.on{
+        div.editProfileInner a{
             padding: 5px 25px;
             border-radius: 5px;
+        }
+        div.editProfileInner.on{
             background: rgb(250, 100, 98);
         }
 
@@ -91,30 +94,56 @@
                 </div>
             </div>
             <section class="mypageSection">
-                <div class="sectionH2">
+<!--                <div class="sectionH2">-->
+<!--                    <h2 th:text="${nickname}"></h2>-->
+<!--                    &lt;!&ndash; <div class="medalImg" onclick="medalModal()" id="medalImg"></div> &ndash;&gt;-->
+<!--                    &lt;!&ndash; <img class="medalImg" src="/src/main/resources/static/images/mypage/medal1.png" onclick="medalModal()" id="medalImg"> &ndash;&gt;-->
+<!--                    <img class="medalImg" src="/images/mypage/medal1.png" id="medalImg">-->
+<!--                    &lt;!&ndash;========================================================&ndash;&gt;-->
+<!--                    <div class="editProfile" th:if="${userPageNumber} == ${userNumber}">-->
+<!--                        <div class="editProfileInner">-->
+<!--                            <a href="/user/editInfo" class="profileA">프로필 편집</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div id="followingBtn" class="editProfile" th:if="${userPageNumber} != ${userNumber}">-->
+<!--                        &lt;!&ndash;========================================================&ndash;&gt;-->
+<!--                        <div class="editProfileInner" th:if="${followingCheck} == 0">-->
+<!--                            <a th:href="${userPageNumber}">팔로잉</a>-->
+<!--                        </div>-->
+<!--                        <div class="editProfileInner on" th:if="${followingCheck} == 1">-->
+<!--                            <a href="javascript:void(0)">팔로잉</a>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash;========================================================&ndash;&gt;-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;========================================================&ndash;&gt;-->
+
+<!--                </div>-->
+                <!--========================================================================================-->
+                <div class="sectionH2" th:if="${userPageNumber} == ${userNumber}">
                     <h2 th:text="${nickname}"></h2>
-                    <!-- <div class="medalImg" onclick="medalModal()" id="medalImg"></div> -->
-                    <!-- <img class="medalImg" src="/src/main/resources/static/images/mypage/medal1.png" onclick="medalModal()" id="medalImg"> -->
                     <img class="medalImg" src="/images/mypage/medal1.png" id="medalImg">
-                    <!--========================================================-->
-                    <div class="editProfile" th:if="${pageUserNumber} == ${userNumber}">
+                    <div class="editProfile">
                         <div class="editProfileInner">
                             <a href="/user/editInfo" class="profileA">프로필 편집</a>
                         </div>
                     </div>
-                    <div id="followingBtn" class="editProfile" th:if="${pageUserNumber} != ${userNumber}">
-                        <!--========================================================-->
+                </div>
+                <div class="sectionH2" th:if="${userPageNumber} != ${userNumber}">
+                    <h2 th:text="${nickname}"></h2>
+                    <img class="medalImg" src="/images/mypage/medal1.png">
+
+                    <div id="followingBtn" class="editProfile" >
+                        <!-------------------------------------------------------------->
                         <div class="editProfileInner" th:if="${followingCheck} == 0">
-                            <a th:href="${pageUserNumber}" >팔로잉</a>
+                            <a th:href="${userPageNumber}">팔로잉</a>
                         </div>
                         <div class="editProfileInner on" th:if="${followingCheck} == 1">
                             <a href="javascript:void(0)">팔로잉</a>
                         </div>
-                        <!--========================================================-->
+                        <!-------------------------------------------------------------->
                     </div>
-                    <!--========================================================-->
-
                 </div>
+                <!--========================================================================================-->
                 <ul class="mypageUl">
                     <li class="mypageLi">
                         <div class="divInfo">게시물
@@ -272,13 +301,15 @@
                                         </div>
                                     </div>
                                     <div class="follower9">
-                                        <button class="followingBtnn on" type="button" style="display: block;"
-                                               >팔로잉
+                                        <button class="followingBtnn on" type="button" style="display: block;" onclick="changeFollow()">
+                                            팔로잉
                                         </button>
-                                        <button class="followBtnn" type="button" style="display: none;"
-                                               >팔로우
+                                        <button class="followBtnn" type="button" style="display: none;">
+                                            팔로우
                                         </button>
                                     </div>
+
+
                                 </div>
                             </div>
                         </li>
@@ -431,12 +462,16 @@
         </div>
     </div>
 </div> -->
+
+
+
+
 <!--<footer th:insert="~{/footer :: footer}"></footer>-->
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script th:inline="javascript">
     let mypageUser = [[${userNumber}]]; // 팔로워 모달에서 삭제할때 사용 (팔로잉 넘버)
-    let userPageNumber = [[${userPageNumber}]]; // 팔로워 모달에서 삭제할때 사용 (팔로잉 넘버)
+    let userPageNumber = [[${userPageNumber}]]; // 다른 마이페이지 접속시 사용
 </script>
 <script src="/assets/js/mypage/mypage.js"></script>
 <script src="/assets/js/mypage/mypageAjax.js"></script>
@@ -788,3 +823,5 @@
 
 </script>
 </html>
+
+
