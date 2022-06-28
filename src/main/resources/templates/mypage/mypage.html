@@ -540,15 +540,17 @@
 
     $(".followingBtnn").on("click",function () {
         let deleteNumber = $(this).closest(".follower2").find("input.changeFollowing").val()
+        $(this).css("display","none")
+        $(this).siblings("button").css("display","block")
         myPageAjaxService.removeFollower(mypageUser, deleteNumber, function (result) {
-            console.log($(this).siblings().attr("class"))
         })
     })
 
     $(".followBtnn").on("click",function () {
         let insertNumber = $(this).closest(".follower2").find("input.changeFollowing").val()
+        $(this).css("display","none")
+        $(this).siblings("button").css("display","block")
         myPageAjaxService.insertFollowing({followingNumber:insertNumber, followerNumber:mypageUser },function (result) {
-            console.log($(this).siblings().attr("class"))
         })
     })
 
