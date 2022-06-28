@@ -16,6 +16,12 @@ public interface UserMapper {
     //카카오 회원 가입
     public UserVO kakaoInsert(UserVO userVO);
 
+    //카카오 이메일로 유저넘버 읽어오기
+    public Long kakaoRead(String email);
+
+    //카카오 닉네임/비번 입력 (수정)
+    public void kakaoUpdate(UserVO userVO);
+
     //로그인
     public UserVO login(String email, String password);
 

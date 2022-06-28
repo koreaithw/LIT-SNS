@@ -19,7 +19,11 @@ public class UserDAO {
     //로그인
     public UserVO login(String email, String pw){ return userMapper.login(email, pw); }
     //카카오 회원 가입
-    public UserVO kakaoInsert(UserVO userVO){ return userMapper.kakaoInsert(userVO); }
+    public UserVO kakaoLogin(UserVO userVO){ return userMapper.kakaoInsert(userVO); }
+    //카카오 이메일로 유저넘버 읽어오기
+    public Long kakaoRead(String email){ return userMapper.kakaoRead(email); }
+    //카카오 닉네임/비번 입력 (수정)
+    public void kakaoUpdate(UserVO userVO){ userMapper.kakaoUpdate(userVO); }
 
     public boolean adminLogin(String email, String pw){ return userMapper.adminLogin(email, pw) != 0; }
 

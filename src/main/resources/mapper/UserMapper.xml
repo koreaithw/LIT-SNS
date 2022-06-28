@@ -15,9 +15,21 @@
             SELECT SEQ_USER.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO TBL_USER
-        (USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD )
-        VALUES(#{userNumber}, #{email}, #{name}, #{nickname})
+        (USER_NUMBER, EMAIL, NAME)
+        VALUES(#{userNumber}, #{email}, #{name})
     </insert>
+
+    <select id="kakaoRead" resultType="long">
+        SELECT USER_NUMBER
+        FROM TBL_USER
+        WHERE EMAIL = #{email}
+    </select>
+
+    <update id="kakaoUpdate">
+        UPDATE TBL_USER
+        SET NICKNAME = #{nickname}, PASSWORD = #{password}
+        WHERE USER_NUMBER = #{userNumber}
+    </update>
 
     <select id="emailCheck" resultType="_int">
         SELECT COUNT(EMAIL) FROM TBL_USER
