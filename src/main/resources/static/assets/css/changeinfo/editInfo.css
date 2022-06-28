@@ -743,7 +743,7 @@ footer{
     text-overflow: ellipsis;
     text-transform: inherit;
     user-select: none;
-    width: auto;
+    width: 100px;
     line-height: 20px;
 }
 

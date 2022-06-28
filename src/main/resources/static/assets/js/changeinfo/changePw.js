@@ -9,8 +9,9 @@ function buttonOn(oldCk){
 
     if(oldCk && newCk){
         $('#subBtn').attr("class", "buttonOn");
+        $('#subBtn').attr("disabled", false);
     } else{
-        $('#subBtn').attr("class", "buttonStyle");
+        $('#subBtn').attr("disabled", true);
     }
 }
 
