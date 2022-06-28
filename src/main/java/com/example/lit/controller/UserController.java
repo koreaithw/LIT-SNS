@@ -210,9 +210,9 @@ public class UserController {
         List<UserVO> followerVO = userService.ModalFollower(userPageNumber);
         List<UserVO> followingVO = userService.ModalFollowing(userPageNumber);
         log.info("==Runarell======================================================");
-        log.info("uuit : " + followerVO.get(0).getUserFileList().getUuid() );
-        log.info("name : " + followerVO.get(0).getUserFileList().getName() );
-        log.info("uploadPath : " + followerVO.get(0).getUserFileList().getUploadPath() );
+//        log.info("uuit : " + followerVO.get(0).getUserFileList().getUuid() );
+//        log.info("name : " + followerVO.get(0).getUserFileList().getName() );
+//        log.info("uploadPath : " + followerVO.get(0).getUserFileList().getUploadPath() );
         log.info("========================================================");
 
         UserFileVO userFileVO = null;
