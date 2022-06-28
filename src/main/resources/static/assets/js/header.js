@@ -97,7 +97,6 @@ function alterLike(alerts) {
         let userNum = alert.userNumber;
 
         if(userNum != userNumber) {
-            console.log('aaa');
             str += "<div class='alterCss'><div style='border-bottom: 2px solid rgb(219, 219, 219); display: flex; flex-direction: row; align-items: center;'>"
             if (alert.userFileVO != null) {
                 str += "<a href='/user/mypage?userPageNumber=" + alert.userNumber + "'><img width='30px' class='userFile' src='/lit/display?fileName=" + alert.userFileVO.uploadPath + "/" + alert.userFileVO.uuid + "_" + alert.userFileVO.name + "'></a>"
@@ -115,7 +114,12 @@ function alterLike(alerts) {
                 str += "<div style=' margin-bottom: -7px; margin-right: 30px; display: inline-block; margin-top: 17px;'><span class='alterspan'>" + alert.nickName
                 str += "</span>님이 회원님을 팔로우 했습니다."
                 str += "<span class='alterTime' style='padding-left: 13px;'>" + alert.registerDate + "</span></div>"
-                str += "<a id='headFollowBtn' onclick='headFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowBtn'>팔로우</button></a></div>"
+                if(followCheck(alert.userNumber) != 1){
+                    str += "<a id='headFollowBtn' onclick='headFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowBtn'>팔로우</button></a></div>"
+                }else {
+                    str += "<a id='headFollowBtn' onclick='headDeleteFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowingBtn'>팔로잉</button></a></div>"
+                }
+
             }
         };
     });
@@ -133,9 +137,44 @@ function headFollow(following) {
         data: JSON.stringify(followVO),
         contentType:"application/json",
         success: function(e) {
-            console.log("1111111111111111111111");
+            BtnAct();
         }
-    })
+    });
+}
+
+function headDeleteFollow(following) {
+
+    let followVO = {"followingNumber" : following, "followerNumber" : userNumber};
+
+    $.ajax({
+        url: "/user/deleteFollow",
+        type: "post",
+        data: JSON.stringify(followVO),
+        contentType:"application/json",
+        success: function(e) {
+            BtnAct();
+        }, error(a,b,c){
+            console.log(a,b,c);
+        }
+    });
+
+}
+
+function followCheck(following) {
+    // let followVO = {"followingNumber" : following, "followerNumber" : userNumber};
+    let result;
+    $.ajax({
+        url: "/user/followCheck/" + following + "/" + userNumber,
+        type: "get",
+        async:false,
+        success: function (success) {
+            result = success;
+            console.log("ajax" + success);
+        }
+    });
+
+
+    return result;
 }
 
 //     <div class="alterCss">

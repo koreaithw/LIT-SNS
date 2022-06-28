@@ -545,4 +545,14 @@ svg:not(:root) {
     margin-left: 23px;
 }
 
+.alertFollowingBtn {
+    background-color: rgba(255, 69, 67, 0.3);
+    border-radius: 4px;
+    border: 0;
+    color: #fff;
+    width: 50px;
+    height: 22px;
+    margin-left: 23px;
+}
+
 

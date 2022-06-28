@@ -51,6 +51,14 @@ public class FollowMapperTest {
         log.info("---------------------");
     }
 
+    @Test
+    public void folloCheck(){
+        FollowVO followVO = new FollowVO();
+        followVO.setFollowingNumber(1L);
+        followVO.setFollowerNumber(3L);
+        log.info(followMapper.followingCheck(followVO) + "");
+    }
+
 //    @Test
 //    public void insert(){
 //        log.info("---------------------");
