@@ -100,11 +100,13 @@
                 if(result){ // 비번 유효성 검사
                     $ ('._checkArea1').html('비밀번호가 일치합니다.');
                     pwBtn.attr('class', 'buttonOn');
+                    pwBtn.attr('disabled', false);
                     $('._checkArea1').css('color', 'black');
                 } else if($password.length != 0 && !result){
                     $ ('._checkArea1').html('비밀번호가 일치하지 않습니다.');
                     $('._checkArea1').css('color', 'red');
                     pwBtn.attr('class', 'buttonStyle');
+                    pwBtn.attr('disabled', true);
                 }
             });
         });

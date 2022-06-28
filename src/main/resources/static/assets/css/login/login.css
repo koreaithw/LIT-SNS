@@ -154,6 +154,7 @@ footer{
     padding: 9px 0 7px 8px;
     text-overflow: ellipsis;
     -webkit-appearance: none;
+    width: 100%;
 }
 
 .divFornot {

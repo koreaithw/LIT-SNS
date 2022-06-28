@@ -101,8 +101,10 @@ function loginBtnF() {
    var ckP = onPwBtnFun();
    if (ckE && ckU && ckN && ckP) {
       loginBtn.attr("class", "buttonforjoin formEvent");
+      loginBtn.attr("disabled", false)
    } else {
       loginBtn.attr("class", "buttonforjoin jonbuttoncolor");
+      loginBtn.attr("disabled", true)
    }
 }
 
