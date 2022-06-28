@@ -260,6 +260,7 @@
                         async:false,
                         success:function (pic) {
                             file = pic;
+                            console.log(file);
                         }
                     });
 
@@ -268,9 +269,9 @@
                     str += '<div class="detailContentProfileImage">';
                     str += '<div class="detailContentProfileImageInne">';
                     if (file != null && file != "") {
-                        str += "<a href='/user/userPage/" + reply.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'></a>";
+                        str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'></a>";
                     } else {
-                        str += "<a href='/user/userPage/" + reply.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/images/main/profile_ex.png'></a>";
+                        str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/images/main/profile_ex.png'></a>";
                     }
                     str += '</div>';
                     str += '</div>';
@@ -326,7 +327,7 @@
                     str += '<div class="detailContentWriteWrapper">';
                     str += '<div class="detailContentProfileImage">';
                     str += '<div class="detailContentProfileImageInne">';
-                    str += "<a href='/user/userPage/" + reply.userNumber + "'>";
+                    str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'>";
                     if (file != null && file != "") {
                         str +="<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'></a>";
                     } else {
@@ -479,7 +480,7 @@
         console.log("===========================" + file);
 
         str += "<div class=\"detailContentProfileImageInner\">"
-        str += "<a href='" + file.userNumber + "'><img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+        str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
         str += "</a></div>"
 
         str2 +="<div class=\"detailContentProfileImageInner\">"
