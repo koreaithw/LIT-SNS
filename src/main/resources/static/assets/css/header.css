@@ -40,7 +40,7 @@ a {
     flex-shrink: 0;
     height: 60px;
     justify-content: space-between;
-    max-width: calc(935px + 40px);
+    max-width: calc(910px + 40px);
     padding: 0 20px;
     transition: height .2s ease-in-out;
     width: 100%;
@@ -555,4 +555,9 @@ svg:not(:root) {
     margin-left: 23px;
 }
 
+.dropdown_profile_write_content,
+._dropdown_setting_write_content,
+._dropdown_loginout_content{
+    font-size: 0.9rem !important;
+}
 

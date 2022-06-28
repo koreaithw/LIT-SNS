@@ -38,13 +38,13 @@ a:visited {
 
 ._selector_wrapper {
     display: flex;
-    justify-content: left;
+    justify-content: space-evenly;
     border-bottom: 1px solid rgb(219, 219, 219);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     font-weight: bold;
     text-align: center;
     height: 40px;
-    font-size: 14px;
+    font-size: 15px;
 
 }
 
