@@ -152,12 +152,12 @@
                     </li>
                     <li class="mypageLi">
                         <div class="divInfo" style="cursor:pointer" onclick="followerModal()">팔로워
-                            <div class="spanInfo" th:text="${followerCnt}"></div>
+                            <div id="followerCount" class="spanInfo" th:text="${followerCnt}"></div>
                         </div>
                     </li>
                     <li class="mypageLi">
                         <div class="divInfo" onclick="followeringModal()">팔로우
-                            <div id="followerCont" class="spanInfo" th:text="${followingCnt}"></div>
+                            <div id="followCount" class="spanInfo" th:text="${followingCnt}"></div>
                         </div>
                     </li>
                 </ul>
@@ -499,8 +499,8 @@
             success: function (result) {
                 // 전송완료시
                 alert(" 팔로잉");
-                let num = Number( $("#followerCont").text() ) + 1;
-                $("#followerCont").text(num);
+                let num = Number( $("#followerCount").text() ) + 1;
+                $("#followerCount").text(num);
                 $(".editProfileInner").addClass("on");
 
 
@@ -534,8 +534,9 @@
 
         $(this).parent().parent().parent().parent().parent().parent().remove();
         myPageAjaxService.removeFollower(deleteNumber, mypageUser, function (result) {
+            let num = Number( $("#followerCount").text() ) - 1;
+            $("#followerCount").text(num);
         });
-
     });
 
     $(".followingBtnn").on("click",function () {
@@ -543,6 +544,8 @@
         $(this).css("display","none")
         $(this).siblings("button").css("display","block")
         myPageAjaxService.removeFollower(mypageUser, deleteNumber, function (result) {
+            let num = Number( $("#followCount").text() ) - 1;
+            $("#followCount").text(num);
         })
     })
 
@@ -551,6 +554,8 @@
         $(this).css("display","none")
         $(this).siblings("button").css("display","block")
         myPageAjaxService.insertFollowing({followingNumber:insertNumber, followerNumber:mypageUser },function (result) {
+            let num = Number( $("#followCount").text() ) + 1;
+            $("#followCount").text(num);
         })
     })
 
