@@ -16,6 +16,7 @@ import com.example.lit.domain.vo.user.UserFileVO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.domain.vo.user.achievement.AchievementVO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImple implements UserService{
     private final AchievementDAO achievementDAO;
     private final FollowDAO followDAO;
@@ -32,7 +34,51 @@ public class UserServiceImple implements UserService{
     private final AlertDAO alertDAO;
 
     @Override
-    public void kakaoRegister(UserVO userVO) {;}
+    public UserVO kakaoLogin(UserVO userVO) {
+
+        // 회원가입을 해야하는 경우
+        if(userDAO.dbEmailCheck(userVO.getEmail()) ==0){
+            log.info(" UserService.java 이메일 중복 없어서 회원 가입 시켜야함 앞에서 기본키 줌?");
+            log.info("---------------------------------");
+            log.info(userDAO.kakaoLogin(userVO).getName());
+            log.info("userVO, UserService.java"+userDAO.kakaoLogin(userVO));
+            log.info("userVO, UserService.java"+userDAO.kakaoLogin(userVO).getUserNumber());
+            log.info("---------------------------------");
+            log.info("---------------------------------");
+            return userDAO.kakaoLogin(userVO);
+        }else { // 이미 가입되어 있어서 로그인이 되어야하는 경우
+
+            // 카카오 회원가입은 userNumber를 받을 수 없어서 email을 통해서 찾아준다.
+            Long userNumber = userDAO.kakaoRead(userVO.getEmail());
+
+            log.info(" UserService.java 이미 가입된 애 로그인 시킬거임");
+            log.info("---------------------------------");
+            log.info("이지은이야? "+ userDAO.read(userNumber).getName());
+            log.info("userVO,"+userDAO.read(userNumber));
+            log.info("userVO, UserService.java 기본키 값"
+                    +userDAO.read(userNumber).getUserNumber());
+            log.info("---------------------------------");
+            log.info("---------------------------------");
+
+            return userDAO.read(userNumber);
+        }
+    }
+
+    @Override
+    public Long kakaoRead(String email) {
+        return userDAO.kakaoRead(email);
+    }
+
+    @Override
+    public boolean kakaoUpdate(UserVO userVO) {
+        userDAO.kakaoUpdate(userVO);
+        log.info("=================================================");
+        log.info("=================================================");
+        log.info(userVO.getUserNumber() + "서비스 : 카카오회원가입 수정!!!!!!!!!!");
+        log.info("=================================================");
+        log.info("=================================================");
+        return true;
+    }
 
     @Override
     public boolean dbEmailCheck(String email) {
