@@ -142,6 +142,16 @@ $(document).ready(function () {
     $(".btn__x").trigger("click");
   });
 
+    /*########################메달 2번##########################*/
+    myPageAjaxService.get2Medal(mypageUser, function (result) {
+        $($imgAr[1]).data("bar", result + "/1");
+    });
+
+    /*########################메달 3번##########################*/
+    myPageAjaxService.get3Medal(mypageUser, function (result) {
+        $($imgAr[2]).data("bar", result + "/1");
+    });
+
     /*########################메달 5번##########################*/
     myPageAjaxService.get5Medal(mypageUser, function (result) {
       $($imgAr[4]).data("bar", result + "/100");
