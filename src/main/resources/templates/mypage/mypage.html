@@ -59,13 +59,16 @@
             transform: scale(1.1);
             transform-origin: center center;
         }
+
         div.editProfileInner.on a{
             list-style: none;
             color: #ffffff;
         }
-        div.editProfileInner.on{
+        div.editProfileInner{
             padding: 5px 25px;
             border-radius: 5px;
+        }
+        div.editProfileInner.on{
             background: rgb(250, 100, 98);
         }
 
@@ -271,13 +274,33 @@
                                         </div>
                                     </div>
                                     <div class="follower9">
-                                        <button class="followingBtnn" type="button" style="display: block;"
+                                        <button class="followingBtnn on" type="button" style="display: block;"
                                                 onclick="changeFollow()">팔로잉
                                         </button>
                                         <button class="followBtnn" type="button" style="display: none;"
                                                 onclick="changeFollow()">팔로우
                                         </button>
                                     </div>
+
+                                    <style>
+                                        .follower9 > button{
+                                            display: none;
+                                        }
+                                        .follower9 > button.on{
+                                            display: block;
+                                        }
+                                    </style>
+                                    <script>
+                                        $(".follower9").on("click", "button", function (e) {
+                                            if( $(this).hasClass("on")){
+                                                $(this).removeClass("on");
+                                                $(".follower9 > button").not(this).addClass("on");
+                                            }else {
+                                                $(this).addClass("on");
+                                                $(".follower9 > button").not(this).removeClass("on");
+                                            }
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </li>
