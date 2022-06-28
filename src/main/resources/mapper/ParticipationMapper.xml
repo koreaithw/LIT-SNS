@@ -4,7 +4,7 @@
     <insert id="insert">
         INSERT INTO TBL_PARTICIPATION
         (PROJECT_NUMBER, USER_NUMBER, STATUS, REGISTER_DATE)
-        VALUES(#{projectNumber}, #{userNumber}, #{status}, SYSDATE)
+        VALUES(#{projectNumber}, #{userNumber}, 1, SYSDATE)
     </insert>
 
     <update id="update">

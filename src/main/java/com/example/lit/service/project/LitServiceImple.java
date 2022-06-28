@@ -90,8 +90,11 @@ public class LitServiceImple implements LitService{
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void join(ParticipationVO participationVO) {
         participationDAO.register(participationVO);
+        Long projectNumber = participationVO.getProjectNumber();
+        projectDAO.increaseApplyCnt(projectNumber);
     }
 
     @Override
