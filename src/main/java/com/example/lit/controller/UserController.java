@@ -209,6 +209,11 @@ public class UserController {
         UserVO userVO = userService.read(userPageNumber);
         List<UserVO> followerVO = userService.ModalFollower(userPageNumber);
         List<UserVO> followingVO = userService.ModalFollowing(userPageNumber);
+        log.info("==Runarell======================================================");
+        log.info("uuit : " + followerVO.get(0).getUserFileList().getUuid() );
+        log.info("name : " + followerVO.get(0).getUserFileList().getName() );
+        log.info("uploadPath : " + followerVO.get(0).getUserFileList().getUploadPath() );
+        log.info("========================================================");
 
         UserFileVO userFileVO = null;
         if(userService.getImg(userPageNumber) == null){
@@ -238,9 +243,9 @@ public class UserController {
         model.addAttribute("userPageNumber", userPageNumber); // 이동된 페이지 변호
 
         model.addAttribute("modalFollower", followerVO);
-        log.info("###################  follower모달정보     " + followerVO);
+        log.info("###################  follower모달정보     " + followerVO.toString());
         model.addAttribute("modalFollowing", followingVO);
-        log.info("###################  following모달정보     " + followingVO);
+        log.info("###################  following모달정보     " + followingVO.toString());
 
         return "/mypage/mypage";
     }
