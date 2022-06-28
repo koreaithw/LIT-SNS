@@ -133,6 +133,22 @@ public class UserController {
         return "/login/join";
     }
 
+    //이동
+    @GetMapping("/kakaoJoin")
+    public String goJoinkakaoPage(HttpSession session, Model model) {
+        log.info("******************************");
+        log.info("LoginController : kakaoJoin");
+        log.info("******************************");
+
+        // kakaoCallback 컨트롤러에서 저장해준 세션을 가져와서 userNumber를 읽음
+        Long userNumber = Long.parseLong(session.getAttribute("userNumber").toString());
+
+        // 유저번호로 해당 유저의 정보를 모델에 저장함
+        model.addAttribute("userVO", userService.read(userNumber));
+
+        return "/login/kakaoJoin";
+    }
+
     //정보 수정
     @PostMapping("/changeInfo")
     public String changeInfo(UserVO userVO, HttpSession session, Model model){
@@ -153,6 +169,17 @@ public class UserController {
         userService.register(userVO);
 
         return new RedirectView("/user/login");
+    }
+
+    //카카오 가입
+    @PostMapping("/kakaoJoin")
+    public RedirectView kakaoLogin(HttpSession session, UserVO userVO, RedirectAttributes rttr) {
+        Long number = Long.parseLong(session.getAttribute("userNumber").toString());
+        log.info(number.toString());
+
+        // insert같지만 update 되야함
+        userService.kakaoUpdate(userVO);
+        return new RedirectView("/main");
     }
 
     //로그인
@@ -210,9 +237,9 @@ public class UserController {
         List<UserVO> followerVO = userService.ModalFollower(userPageNumber);
         List<UserVO> followingVO = userService.ModalFollowing(userPageNumber);
         log.info("==Runarell======================================================");
-        log.info("uuit : " + followerVO.get(0).getUserFileList().getUuid() );
-        log.info("name : " + followerVO.get(0).getUserFileList().getName() );
-        log.info("uploadPath : " + followerVO.get(0).getUserFileList().getUploadPath() );
+//        log.info("uuit : " + followerVO.get(0).getUserFileList().getUuid() );
+//        log.info("name : " + followerVO.get(0).getUserFileList().getName() );
+//        log.info("uploadPath : " + followerVO.get(0).getUserFileList().getUploadPath() );
         log.info("========================================================");
 
         UserFileVO userFileVO = null;

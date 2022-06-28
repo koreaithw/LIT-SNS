@@ -12,8 +12,17 @@ import java.util.List;
 public interface UserMapper {
     //회원 가입
     public void insert(UserVO userVO);
-    //로그인
 
+    //카카오 회원 가입
+    public UserVO kakaoInsert(UserVO userVO);
+
+    //카카오 이메일로 유저넘버 읽어오기
+    public Long kakaoRead(String email);
+
+    //카카오 닉네임/비번 입력 (수정)
+    public void kakaoUpdate(UserVO userVO);
+
+    //로그인
     public UserVO login(String email, String password);
 
     public int adminLogin(String email, String password);
@@ -36,8 +45,6 @@ public interface UserMapper {
     // 차트 정보
     public Long getUserChart(String date);
 
-    //카카오 로그인/회원가입
-    public void kakaoInsert(UserVO userVO);
     //이메일 중복체크
     public int emailCheck(String email);
     //닉네임 중복체크
