@@ -506,15 +506,15 @@ svg:not(:root) {
 }
 
 .alterCss{
-    display: flex;
-    align-items: flex-end;
-    flex-direction: row;
 }
 
 .userFile {
-    margin-left: 25px;
-    margin-bottom: -5px;
-    margin-top: 6px;
+    margin-left: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 70%;
+    overflow: hidden;
+    display: inline-block;
 }
 
 .alterspan {
@@ -523,19 +523,16 @@ svg:not(:root) {
 
 .alterRR {
     width: 60px;
-    margin-top: 10px;
+    margin-top: 5px;
     height: 60px;
-    margin-bottom: -15px;
+    margin-bottom: -13px;
 }
 
 .alterTime {
-    padding-top: 2px;
+    margin-top: -5px;
     display: -webkit-box;
-    padding-left: 69px;
     font-size: 13px;
-    padding-right: 302px;
-    padding-bottom: 1px;
-    border-bottom: 2px solid rgb(219, 219, 219);
+    padding-bottom: 17px;
 }
 
 
