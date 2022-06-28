@@ -1,13 +1,19 @@
-function checkLoginLogout(userNumber) {
+function checkLoginLogout(userNumber, token) {
     let str =""
-    if(userNumber){
-        str += " <a href=\"/user/logout\">" +
+    if(userNumber && token){ // 카카오 로그아웃
+        str += " <a href=\"https://kauth.kakao.com/oauth/logout?client_id=897e8c9a1ba87330015c613fa2fad246&logout_redirect_uri=http://localhost:12000/logout\">" +
             "<div class=\"_dropdown_loginout\">" +
             "<div class=\"_dropdown_loginout_content\">로그아웃</div>" +
             "</div>" +
             "</a>"
 
-    }else{
+    }else if(userNumber && !token){ // 일반 로그아웃
+        str += " <a href=\"/user/logout\">" +
+            "<div class=\"_dropdown_loginout\">" +
+            "<div class=\"_dropdown_loginout_content\">로그아웃</div>" +
+            "</div>" +
+            "</a>"
+    } else{
         str += " <a href=\"/user/login\">" +
             "<div class=\"_dropdown_loginout\">" +
             "<div class=\"_dropdown_loginout_content\">로그인</div>" +
