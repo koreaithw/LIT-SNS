@@ -18,6 +18,7 @@ import com.example.lit.domain.vo.user.achievement.AchievementVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,18 +35,28 @@ public class UserServiceImple implements UserService{
     private final AlertDAO alertDAO;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public UserVO kakaoLogin(UserVO userVO) {
 
         // 회원가입을 해야하는 경우
         if(userDAO.dbEmailCheck(userVO.getEmail()) ==0){
-            log.info(" UserService.java 이메일 중복 없어서 회원 가입 시켜야함 앞에서 기본키 줌?");
-            log.info("---------------------------------");
-            log.info(userDAO.kakaoLogin(userVO).getName());
-            log.info("userVO, UserService.java"+userDAO.kakaoLogin(userVO));
-            log.info("userVO, UserService.java"+userDAO.kakaoLogin(userVO).getUserNumber());
-            log.info("---------------------------------");
-            log.info("---------------------------------");
-            return userDAO.kakaoLogin(userVO);
+           log.info(" UserService.java 이메일 중복 없어서 회원 가입 시켜야함 앞에서 기본키 줌?");
+//            log.info("---------------------------------");
+////            log.info(userDAO.kakaoLogin(userVO).getName());
+////            log.info("userVO, UserService.java"+userDAO.kakaoLogin(userVO));
+////            log.info("userVO, UserService.java"+userDAO.kakaoLogin(userVO).getUserNumber());
+//            log.info("---------------------------------");
+//            log.info("---------------------------------");
+
+            // 셀렉트키로 userNumber 생성
+            userDAO.kakaoLogin(userVO);
+
+            log.info("==========================================");
+            log.info("==========================================");
+            log.info(userDAO.read(userVO.getUserNumber()) + "회원가입후 유저 정보 기본키 가져오는지 확인!!!");
+            log.info("==========================================");
+            log.info("==========================================");
+            return userDAO.read(userVO.getUserNumber());
         }else { // 이미 가입되어 있어서 로그인이 되어야하는 경우
 
             // 카카오 회원가입은 userNumber를 받을 수 없어서 email을 통해서 찾아준다.
@@ -59,6 +70,9 @@ public class UserServiceImple implements UserService{
                     +userDAO.read(userNumber).getUserNumber());
             log.info("---------------------------------");
             log.info("---------------------------------");
+
+            // 회원가입시 얻는 메달
+            achievementDAO.insertMedal(userVO.getUserNumber(), "1");
 
             return userDAO.read(userNumber);
         }
@@ -272,6 +286,7 @@ public class UserServiceImple implements UserService{
     @Override
     public void register(UserVO userVO) {
         userDAO.register(userVO);
+        // 회원가입시 얻는 메달
         achievementDAO.insertMedal(userVO.getUserNumber(), "1");
     }
 

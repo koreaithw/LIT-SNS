@@ -14,7 +14,7 @@ public interface UserMapper {
     public void insert(UserVO userVO);
 
     //카카오 회원 가입
-    public UserVO kakaoInsert(UserVO userVO);
+    public void kakaoInsert(UserVO userVO);
 
     //카카오 이메일로 유저넘버 읽어오기
     public Long kakaoRead(String email);
