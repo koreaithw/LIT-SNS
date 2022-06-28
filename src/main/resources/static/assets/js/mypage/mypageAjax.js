@@ -69,11 +69,29 @@ let myPageAjaxService = (function () {
         });
     }
 
-    function get4Medal(userNumber) {
+    function get4Medal(userNumber, callback) {
         console.log("get4Medal..........");
         $.ajax({
             url:"/user/get4Medal/" + userNumber,
             type: "get",
+            success: function (result) {
+                if(callback){
+                    callback(result);
+                }
+            }
+        });
+    }
+
+    function get4MedalPercent(userNumber, callback) {
+        console.log("get4Medal..........");
+        $.ajax({
+            url:"/user/get4MedalPercent/" + userNumber,
+            type: "get",
+            success: function (result) {
+                if(callback){
+                    callback(result);
+                }
+            }
         });
     }
 
@@ -266,7 +284,7 @@ let myPageAjaxService = (function () {
         get11Medal: get11Medal, get7Medal: get7Medal, get6Medal: get6Medal, get12Medal: get12Medal,
         get13Medal: get13Medal, get14Medal: get14Medal, get15Medal: get15Medal, litUpList:litUpList,
         litList:litList, getMyProfileImg:getMyProfileImg, insertFollowing:insertFollowing,
-        get2Medal: get2Medal, get3Medal: get3Medal
+        get2Medal: get2Medal, get3Medal: get3Medal, get4MedalPercent: get4MedalPercent
     }
 
 })();
