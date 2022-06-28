@@ -58,7 +58,7 @@ function certificationWriteModalHide() {
             $('.certificationImages div div:first-child').siblings('.active').removeClass('active');
             $('.certificationContentArea > textarea').val('');
             $('.certificationImageInner').empty();
-            $('.innerImagePageButtons').empty();
+            $('.innerImagePageButtons1').empty();
             $fileUploadPreview.empty();
             $('#fileClickInput').val("");
             $('body').css("overflow", "auto");
@@ -148,7 +148,7 @@ $certificationFirstButton.on("click", function () {
             $certificationImageWrapper.css("display", "none");
             $previewButton.css("display", "none");
             $('.certificationImageInner').empty();
-            $('.innerImagePageButtons').empty();
+            $('.innerImagePageButtons1').empty();
             $fileUploadPreview.empty();
             $('#fileClickInput').val("");
             uploadFiles = [];
@@ -289,7 +289,7 @@ $('.certificationContentArea > textarea').on('input', function () {
 
 //버튼형 슬라이더
 //이미지 아래 버튼 클릭했을 때 해당하는 이미지로 넘겨주는 기능
-$('.certificationImages > .innerImagePageButtons').on('click', 'div', function () {
+$('.certificationImages > .innerImagePageButtons1').on('click', 'div', function () {
     let $this = $(this);
     let index = $this.index();
     $this.addClass('active');

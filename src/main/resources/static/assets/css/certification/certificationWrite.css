@@ -25,7 +25,7 @@ body{
     overflow: hidden;
     background-size : cover;
     position: absolute;
-    z-index: 10;
+    z-index: 4;
 }
 
 .modalCloseButton{
@@ -280,7 +280,7 @@ body{
 }
 
 .certificationContentFooterButtons:first-child{
-    width: 94%;
+    width: 100%;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 14px;
@@ -334,7 +334,7 @@ body{
 .certificationWriteWarningInner > div > ul > li{
     list-style: none;
     font-size: 12px;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
     border-bottom: 1px solid rgb(219,219,219);
     margin-left: 10px;
     margin-right: 10px;
@@ -352,7 +352,7 @@ body{
     font-size: 12px;
     color: rgb(250, 100, 98);
     opacity: 0.8;
-    margin: 15px 0px 15px 10px;
+    margin: 14px 0px 14px 10px;
     font-weight:700;
     width: 94%;
 }
@@ -496,7 +496,7 @@ body{
     gap: 10px;
 }
 
-.innerImagePageButtons > div {
+.innerImagePageButtons1 > div {
     width:18px;
     height:18px;
     gap: 5px;
@@ -506,6 +506,6 @@ body{
     border: 1px solid rgb(219,219,219);
 }
 
-.innerImagePageButtons > div.active{
+.innerImagePageButtons1 > div.active{
     background-color:rgba(0,0,0,0.5);
 }

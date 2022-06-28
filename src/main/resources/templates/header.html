@@ -26,34 +26,33 @@
                         </div>
                     </a></div>
                     <!-- #########검색########## -->
-                    <div class="_search_wrapper" style="padding-right: 84px;">
-                        <input class="_search_input" aria-label="입력 검색" autocapitalize="none" type="text" value="">
-                        <div class="_search_cancle" aria-disabled="false" aria-label="검색란 지우기" tabindex="0"
-                             style="cursor: pointer;">x
-                        </div>
-                        <div class="_search_box" role="button" tabindex="0"
-                             style="padding-top: 1px; border-radius: 8px;">
-                            <div class="_search_small_box">
-                                <div class="_search_icon" style="padding-top: 1.5px; ">
-                                    <svg aria-label="검색" class="_ab6-" color="#8e8e8e" fill="#8e8e8e" height="16"
-                                         role="img" viewBox="0 0 24 24" width="16">
-                                        <path d="M19 10.5A8.5 8.5 0 1110.5 2a8.5 8.5 0 018.5 8.5z" fill="none"
-                                              stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2"></path>
-                                        <line fill="none" stroke="currentColor" stroke-linecap="round"
-                                              stroke-linejoin="round" stroke-width="2" x1="16.511" x2="22" y1="16.511"
-                                              y2="22"></line>
-                                    </svg>
-                                </div>
-                                <span class="_search_span" style="padding-left: 13px;">검색</span>
-                            </div>
-                        </div>
-
-                        <div class="_search_line"></div>
-                    </div>
+<!--                    <div class="_search_wrapper" style="padding-right: 84px;">-->
+<!--                        <input class="_search_input" aria-label="입력 검색" autocapitalize="none" type="text" value="">-->
+<!--                        <div class="_search_cancle" aria-disabled="false" aria-label="검색란 지우기" tabindex="0"-->
+<!--                             style="cursor: pointer;">x-->
+<!--                        </div>-->
+<!--                        <div class="_search_box" role="button" tabindex="0"-->
+<!--                             style="padding-top: 1px; border-radius: 8px;">-->
+<!--                            <div class="_search_small_box">-->
+<!--                                <div class="_search_icon" style="padding-top: 1.5px; ">-->
+<!--                                    <svg aria-label="검색" class="_ab6-" color="#8e8e8e" fill="#8e8e8e" height="16"-->
+<!--                                         role="img" viewBox="0 0 24 24" width="16">-->
+<!--                                        <path d="M19 10.5A8.5 8.5 0 1110.5 2a8.5 8.5 0 018.5 8.5z" fill="none"-->
+<!--                                              stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"-->
+<!--                                              stroke-width="2"></path>-->
+<!--                                        <line fill="none" stroke="currentColor" stroke-linecap="round"-->
+<!--                                              stroke-linejoin="round" stroke-width="2" x1="16.511" x2="22" y1="16.511"-->
+<!--                                              y2="22"></line>-->
+<!--                                    </svg>-->
+<!--                                </div>-->
+<!--                                <span class="_search_span" style="padding-left: 13px;">검색</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="_search_line"></div>-->
+<!--                    </div>-->
                     <!-- #########아이콘########## -->
-                    <div class="_icon_wrapper">
-                        <div class="_icon_box" style="padding-right: 43px;">
+                    <div class="_icon_wrapper" style="padding-right: 10px;">
+                        <div class="_icon_box">
                             <!-- #########홈버튼########## -->
                             <div class="_icon_each">
                                 <div class="_icon_home"><a href="/main" role="link" tabindex="0">
@@ -99,7 +98,7 @@
                             </div>
                             <!-- #########첼린지 생성########## -->
                             <div class="_icon_each"><a href="/lit/write" role="link" tabindex="0" class="lit-write__link">
-                                <img src="/images/main/write.png" alt="img\write.png">
+                                <img src="/images/main/write.png" alt="img\write.png" style="height:80%; width:100%">
                             </a></div>
                             <!-- #########활동 피드########## -->
                             <div class="_icon_each">
@@ -151,7 +150,7 @@
                                         <div class="_rbtri" style="left: 184px;"></div>
                                         <div class="_dropdown_manu">
                                             <a class="_dropdown_a mypage__link" href="/">
-                                                <div class="_dropdown_profile" style="padding:20px;">
+                                                <div class="_dropdown_profile" style="padding:0px 20px;">
                                                     <div class="_dropdown_profile_img">
                                                         <svg aria-label="프로필" class="_ab6-" color="#262626"
                                                              fill="#262626" height="16" role="img"
@@ -172,7 +171,7 @@
                                                         </svg>
                                                     </div>
                                                     <div class="dropdown_profile_write"
-                                                         style="padding-left: 10px; padding-top: 5px;">
+                                                         style="padding-left: 10px; padding-top: 2px;">
                                                         <div class="dropdown_profile_write_content"
                                                              style="height:28px; width: 170px;">프로필
                                                         </div>
@@ -180,7 +179,7 @@
                                                 </div>
                                             </a>
                                             <a class="_dropdown_a _setting profile-setting__link" href="/">
-                                                <div class="_dropdown_setting" style="padding:20px; ">
+                                                <div class="_dropdown_setting" style="padding: 0px 20px; ">
                                                     <div class="_dropdown_setting_img">
                                                         <svg aria-label="설정" class="_ab6-" color="#262626"
                                                              fill="#262626" height="16" role="img"
@@ -196,7 +195,7 @@
                                                         </svg>
                                                     </div>
                                                     <div class="_dropdown_setting_write"
-                                                         style="padding-left: 10px; padding-top: 5px;">
+                                                         style="padding-left: 10px;">
                                                         <div class="_dropdown_setting_write_content"
                                                              style="height:28px; width: 170px;">설정
                                                         </div>
@@ -371,7 +370,7 @@
 
     function showMyProfileImg_header(file) {
         let str ="";
-        str += "<img class=\"profileImg\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/" + file.uuid + "_"  + file.name + "'>"
+        str += "<img class=\"profileImg\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%; height:100%' src='/litUp/display?fileName=" + file.uploadPath + "/" + file.uuid + "_"  + file.name + "'>"
         $("span._icon_profile_span").html(str);
     }
 

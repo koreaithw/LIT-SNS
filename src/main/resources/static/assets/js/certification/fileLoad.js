@@ -160,7 +160,7 @@ $fileUploadPreview.on("click", ".close", function (e) {
                 $certificationImageWrapper.css("display", "none");
                 $previewButton.css("display", "none");
                 $('.certificationImageInner').empty();
-                $('.innerImagePageButtons').empty();
+                $('.innerImagePageButtons1').empty();
                 $fileUploadPreview.empty();
                 $('#fileClickInput').val("");
                 uploadFiles1 = [];

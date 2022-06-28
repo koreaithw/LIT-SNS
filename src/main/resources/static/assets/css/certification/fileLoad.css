@@ -81,12 +81,11 @@
 
 .fileClickInput label {
     display: inline-block;
-    padding: 5px 9px;
+    padding: 8px 10px;
     color: #fff;
     vertical-align: middle;
     background-color: rgb(250, 100, 98);
     cursor: pointer;
-    height: 35px;
     margin: 0;
     font-size: 16px;
     font-weight: bold;
@@ -116,7 +115,6 @@
     overflow-y: hidden;
     gap: 16px;
     width: 270px;
-    height: 110px;
     padding: 16px;
     margin-bottom: 16px;
     border-radius: 8px;
