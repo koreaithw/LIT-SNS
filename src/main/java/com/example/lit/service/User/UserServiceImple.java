@@ -106,7 +106,11 @@ public class UserServiceImple implements UserService{
 
     @Override
     public void modifyImg(UserFileVO userFileVO) {
-
+        if(userFileDAO.getImg(userFileVO.getUserNumber()) == null){
+            userFileDAO.register(userFileVO);
+        }else {
+            userFileDAO.modify(userFileVO);
+        }
     }
 
     @Override
@@ -122,11 +126,12 @@ public class UserServiceImple implements UserService{
     @Override
     public void follow(FollowVO followVO) {
         followDAO.register(followVO);
+
+        // 알람
         AlertVO alertVO = new AlertVO();
         alertVO.setAlertUser(followVO.getFollowingNumber());
         alertVO.setUserNumber(followVO.getFollowerNumber());
         alertVO.setTypeAlert("follow");
-
         alertDAO.alertFollow(alertVO);
     }
 
@@ -150,6 +155,11 @@ public class UserServiceImple implements UserService{
     @Override
     public int followerCount(FollowVO followVO) {
         return 0;
+    }
+
+    @Override
+    public int followingCheck(FollowVO followVO) {
+        return followDAO.followingCheck(followVO);
     }
 
     @Override

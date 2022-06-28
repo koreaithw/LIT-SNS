@@ -96,12 +96,16 @@ label[for='btn1']:hover{
 .sec2 > div{
   padding: 20px 0;
   width: 100%;
-  column-count: 3;
-  column-gap: 5px;
+  /*column-count: 3;*/
+  /*column-gap: 5px;*/
   /* transition: 1s ease; */
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .sec2 > div > figure {
+  width: 33.33%;
+  height: 230px;
   padding: 5px;
   margin-bottom: 3px;
   /*box-shadow: 2px 2px 5px rgb(0 0 0 / 10%);*/

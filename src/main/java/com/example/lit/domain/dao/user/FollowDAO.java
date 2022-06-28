@@ -20,4 +20,6 @@ public class FollowDAO {
     public int followingCount(FollowVO followVO){ return followMapper.followingCount(followVO); }
     // 팔로워 카운트 (다른 사람)
     public int followerCount(FollowVO followVO){ return followMapper.followerCount(followVO); }
+    // 팔로잉 체크
+    public int followingCheck(FollowVO followVO){ return followMapper.followingCheck(followVO); }
 }

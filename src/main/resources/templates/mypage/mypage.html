@@ -59,6 +59,11 @@
             transform: scale(1.1);
             transform-origin: center center;
         }
+        div.editProfileInner.on{
+            background: rgb(250, 100, 98);
+            cursor: none;
+        }
+
 
     </style>
 </head>
@@ -73,7 +78,8 @@
                 <div class="profile2">
                     <div class="profile3">
                         <button class="profileButton">
-                            <img class="profileImg" src="/images/mypage/jennie.jpg" onerror="this.src='/images/main/sprofile_ex.jpg'">
+                            <img class="profileImg"
+                                 th:src="'/user/display?fileName='+ ${userFileList.uploadPath} + '/' + ${userFileList.uuid} + '_' + ${userFileList.name}">
                         </button>
                     </div>
                 </div>
@@ -84,9 +90,24 @@
                     <!-- <div class="medalImg" onclick="medalModal()" id="medalImg"></div> -->
                     <!-- <img class="medalImg" src="/src/main/resources/static/images/mypage/medal1.png" onclick="medalModal()" id="medalImg"> -->
                     <img class="medalImg" src="/images/mypage/medal1.png" id="medalImg">
-                    <div class="editProfile">
-                        <div class="editProfileInner"><a href="/user/editInfo" class="profileA">프로필 편집</a></div>
+                    <!--========================================================-->
+                    <div class="editProfile" th:if="${pageUserNumber} == ${userNumber}">
+                        <div class="editProfileInner">
+                            <a href="/user/editInfo" class="profileA">프로필 편집</a>
+                        </div>
                     </div>
+                    <div id="followingBtn" class="editProfile" th:if="${pageUserNumber} != ${userNumber}">
+                        <!--========================================================-->
+                        <div class="editProfileInner" th:if="${followingCheck} == 0">
+                            <a th:href="${pageUserNumber}" >팔로잉</a>
+                        </div>
+                        <div class="editProfileInner on" th:if="${followingCheck} == 1">
+                            <a href="javascript:void(0)" class="profileA">팔로잉</a>
+                        </div>
+                        <!--========================================================-->
+                    </div>
+                    <!--========================================================-->
+
                 </div>
                 <ul class="mypageUl">
                     <li class="mypageLi">
@@ -101,7 +122,7 @@
                     </li>
                     <li class="mypageLi">
                         <div class="divInfo" onclick="followeringModal()">팔로우
-                            <div class="spanInfo" th:text="${followingCnt}"></div>
+                            <div id="followerCont" class="spanInfo" th:text="${followingCnt}"></div>
                         </div>
                     </li>
                 </ul>
@@ -238,17 +259,18 @@
                                                     <a style=" text-decoration-line: none;"
                                                        href="" role="link" tabindex="0">
                                                         <span class="follower7" th:text="*{nickname}"></span>
+                                                        <input type="hidden" th:value="*{userNumber}" class="changeFollowing"/>
                                                     </a>
                                                 </span>
                                             <div class="follower8" th:text="*{content}"></div>
                                         </div>
                                     </div>
                                     <div class="follower9">
-                                        <button class="followingBtnn" type="button" style="display: block;"
-                                                onclick="changeFollow()">팔로잉
+                                        <button class="followingBtnn on" type="button" style="display: block;"
+                                               >팔로잉
                                         </button>
                                         <button class="followBtnn" type="button" style="display: none;"
-                                                onclick="changeFollow()">팔로우
+                                               >팔로우
                                         </button>
                                     </div>
                                 </div>
@@ -413,10 +435,44 @@
 <script defer src="/assets/js/certification/report.js"></script>
 <script defer src="/assets/js/certification/certificationDetailAjax.js"></script>
 <script th:inline="javascript">
+    $("#followingBtn").on("click", "div > a", function(e){
+        e.preventDefault();
+        let followingNumber = mypageUser;  // 팔로윙 나의 번호
+        let followerNumber = $(this).attr("href");  // 팔로워 상대 번호
+
+        let followingDatas = {
+            followingNumber:followingNumber,
+            followerNumber:followerNumber
+        }
+
+        $.ajax({
+            url: "/user/follow",
+            type: "post",
+            data: JSON.stringify(followingDatas),
+            contentType: "application/json",
+            success: function (result) {
+                // 전송완료시
+                alert(" 팔로잉");
+                let num = Number( $("#followerCont").text() ) + 1;
+                $("#followerCont").text(num);
+                $(".editProfileInner").addClass("on");
+
+
+            }, error: function (xhr, textStatus, errorThrown) {
+                console.log('통신 실패');
+                console.log(xhr);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+
+
+    });
+</script>
+<script th:inline="javascript">
     let $followerRemoveBtn = $('.followerBtnn');
 
     let $followerUser = $('#removeFollower').eq(0).val(); // 팔로워 모달에서 삭제할때 사용 (팔로워 넘버)
-    let $test = 3;
 
     let file;
     const replyDiv = $(".reply_area");
@@ -425,18 +481,30 @@
     let $reviewNumber;
     // session에서 받아야함
 
-    console.log($followerUser);
 
     //모달 - 팔로워 삭제
     $followerRemoveBtn.on("click", function () {
-        // console.log($followerNumber);
+        let deleteNumber = $(this).closest(".follower2").find("input.removeFollower").val()
+
         $(this).parent().parent().parent().parent().parent().parent().remove();
-        myPageAjaxService.removeFollower($test, mypageUser, function (result) {
+        myPageAjaxService.removeFollower(deleteNumber, mypageUser, function (result) {
             alert(result);
             if(result){}
         });
+
     });
 
+    $(".followingBtnn").on("click",function () {
+        let deleteNumber = $(this).closest(".follower2").find("input.changeFollowing").val()
+        myPageAjaxService.removeFollower(mypageUser, deleteNumber, function (result) {
+        })
+    })
+
+    $(".followBtnn").on("click",function () {
+        let insertNumber = $(this).closest(".follower2").find("input.changeFollowing").val()
+        myPageAjaxService.insertFollowing({followingNumber:insertNumber, followerNumber:mypageUser },function (result) {
+        })
+    })
 
 
 

@@ -74,6 +74,8 @@ public interface UserService {
     public int followingCount(FollowVO followVO);
     // 팔로워 카운트 (다른 사람)
     public int followerCount(FollowVO followVO);
+    // 팔로잉 체크
+    public int followingCheck(FollowVO followVO);
 
 
     //메세지 룸 생성

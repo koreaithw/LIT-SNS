@@ -1,6 +1,8 @@
 package com.example.lit.controller;
 
+import com.example.lit.domain.dao.user.UserFileDAO;
 import com.example.lit.domain.vo.user.FollowVO;
+import com.example.lit.domain.vo.user.UserFileVO;
 import com.example.lit.domain.vo.user.UserVO;
 import com.example.lit.domain.vo.user.achievement.AchievementVO;
 import com.example.lit.service.User.UserService;
@@ -27,56 +29,104 @@ public class UserController {
 
     //이동
     @GetMapping("/changePw")
-    public String goChangePwPage(Long userNumber, Model model){
+    public String goChangePwPage(HttpSession session, Model model){
         log.info("******************************");
         log.info("changeInfoController : changePw");
         log.info("******************************");
-        userNumber = 2L; // 임시
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        if(userNumber == null){
+            return goLoginPage();
+        }
 
         UserVO userVO = userService.getChangePwInfo(userNumber);
+        UserFileVO userFileVO = null;
+        if(userService.getImg(userNumber) == null){
+            userFileVO = new UserFileVO();
+            userFileVO.setUserNumber(userNumber);
+            userFileVO.setName("");
+            userFileVO.setUploadPath("");
+            userFileVO.setUuid("");
+            userVO.setUserFileList(userFileVO);
+        }else{
+            userVO.setUserFileList(userService.getImg(userNumber));
+        }
+        model.addAttribute("userFileList", userVO.getUserFileList());
         model.addAttribute("userNumber", userNumber);
         model.addAttribute("nickName", userVO.getNickname());
         log.info(userVO.getUserNumber() + "########################");
         log.info(userVO.getNickname() + "########################");
         return "/changeinfo/changePw";
     }
+
     //이동
     @GetMapping("/editInfo")
-    public String goEditInfoPage(Long userNumber, Model model){
+    public String goEditInfoPage(HttpSession session, Model model){
         log.info("******************************");
         log.info("changeInfoController : editInfo");
         log.info("******************************");
-        userNumber = 2L;
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        if(userNumber == null){
+            return goLoginPage();
+        }
 
         UserVO userVO = userService.read(userNumber);
+
+        if(userService.getImg(userNumber) == null){
+            UserFileVO userFileVO = new UserFileVO();
+            userFileVO.setUserNumber(userNumber);
+            userFileVO.setName("");
+            userFileVO.setUploadPath("");
+            userFileVO.setUuid("");
+            userVO.setUserFileList(userFileVO);
+        }else{
+            userVO.setUserFileList(userService.getImg(userNumber));
+        }
         model.addAttribute("userVO", userVO);
 
         return "/changeinfo/editInfo";
     }
+
     //이동
     @GetMapping("/withdraw")
-    public String goWithdrawPage(Long userNumber, Model model){
+    public String goWithdrawPage(HttpSession session, Model model){
         log.info("******************************");
         log.info("changeInfoController : withdraw");
         log.info("******************************");
-        userNumber = 2L; // 임시
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        if(userNumber == null){
+            return goLoginPage();
+        }
 
         UserVO userVO = userService.getChangePwInfo(userNumber);
+        UserFileVO userFileVO = null;
+        if(userService.getImg(userNumber) == null){
+            userFileVO = new UserFileVO();
+            userFileVO.setUserNumber(userNumber);
+            userFileVO.setName("");
+            userFileVO.setUploadPath("");
+            userFileVO.setUuid("");
+            userVO.setUserFileList(userFileVO);
+        }else{
+            userVO.setUserFileList(userService.getImg(userNumber));
+        }
+        model.addAttribute("userFileList", userVO.getUserFileList());
         model.addAttribute("userNumber", userNumber);
         model.addAttribute("nickName", userVO.getNickname());
         return "/changeinfo/withdraw";
     }
+
     //이동
     @GetMapping("/login")
-    public String goLoginPage(){
+    public String goLoginPage() {
         log.info("******************************");
         log.info("LoginController : login");
         log.info("******************************");
         return "/login/login";
     }
+
     //이동
     @GetMapping("/join")
-    public String goJoinPage(){
+    public String goJoinPage() {
         log.info("******************************");
         log.info("LoginController : join");
         log.info("******************************");
@@ -84,15 +134,22 @@ public class UserController {
     }
 
     //정보 수정
-    @PatchMapping("/changeInfo")
-    public String changeInfo(){
-        return null;
+    @PostMapping("/changeInfo")
+    public String changeInfo(UserVO userVO, HttpSession session, Model model){
+        Long userNumber = (Long)session.getAttribute("userNumber");
+        if(userNumber == null){
+            return goLoginPage();
+        }
+        userVO.setUserNumber((Long)session.getAttribute("userNumber"));
+        userService.modify(userVO);
+
+        return mypage(null ,model, session);
     }
 
 
     //가입
     @PostMapping("/join")
-    public RedirectView register(UserVO userVO, RedirectAttributes rttr){
+    public RedirectView register(UserVO userVO, RedirectAttributes rttr) {
         userService.register(userVO);
 
         return new RedirectView("/user/login");
@@ -100,15 +157,15 @@ public class UserController {
 
     //로그인
     @PostMapping("/loginOk")
-    public RedirectView login(String email, String password, Model model, HttpServletRequest req, RedirectAttributes rttr){
-        try{
+    public RedirectView login(String email, String password, Model model, HttpServletRequest req, RedirectAttributes rttr) {
+        try {
             HttpSession session = req.getSession();
-            UserVO userVO = userService.login(email,password);
+            UserVO userVO = userService.login(email, password);
             /* ##### 유저 프로필 사진으로 수정 필요 #####*/
             model.addAttribute("info", userVO.getNickname() + "님 환영합니다.");
             session.setAttribute("userNumber", userVO.getUserNumber());
 
-        }catch (Exception e){
+        } catch (Exception e) {
             rttr.addFlashAttribute("loginStatus", false);
             return new RedirectView("/user/login");
         }
@@ -128,17 +185,105 @@ public class UserController {
 
     //마이페이지 데이터 가져와서 들어가기
     @GetMapping("/mypage")
-    public String mypage(Model model, HttpSession session){
-        log.info("마이페이지 컨트롤러 =============================");
-
-        Long userNumber = (Long)session.getAttribute("userNumber");
-        if(userNumber == null){
+    public String mypage( Long userPageNumber, Model model, HttpSession session) {
+        log.info( "마이페이지 컨트롤러 =============================");
+        Long userNumber = (Long) session.getAttribute("userNumber");
+        if (userNumber == null) {
             return goLoginPage();
         }
+
+        if(userPageNumber == null){
+            userPageNumber = userNumber;
+        }
+
+        FollowVO followVO = new FollowVO();
+        followVO.setFollowingNumber(userNumber);
+        followVO.setFollowerNumber(userPageNumber);
+
+        System.out.println("22222222222222==============================================");
+        System.out.println("userNumber : " + userNumber);
+        System.out.println("pageUserNumber : " + userPageNumber);
         System.out.println("==============================================");
-        System.out.println(userNumber);
-        System.out.println("==============================================");
+
+
+        UserVO userVO = userService.read(userPageNumber);
+        List<UserVO> followerVO = userService.ModalFollower(userPageNumber);
+        List<UserVO> followingVO = userService.ModalFollowing(userPageNumber);
+
+        UserFileVO userFileVO = null;
+        if(userService.getImg(userNumber) == null){
+            userFileVO = new UserFileVO();
+            userFileVO.setUserNumber(userNumber);
+            userFileVO.setName("");
+            userFileVO.setUploadPath("");
+            userFileVO.setUuid("");
+            userVO.setUserFileList(userFileVO);
+        }else{
+            userVO.setUserFileList(userService.getImg(userNumber));
+        }
+
+        model.addAttribute("userFileList", userVO.getUserFileList());
+        model.addAttribute("followerCnt", userService.MyFollowerCnt(userPageNumber));
+        model.addAttribute("followingCnt", userService.MyFollowingCnt(userPageNumber));
+        model.addAttribute("reviewCnt", userService.MyReviewCnt(userPageNumber));
+
+        model.addAttribute("followingCheck", userService.followingCheck(followVO));
+
+        model.addAttribute("nickname", userVO.getNickname());
+        model.addAttribute("content", userVO.getContent());
+        model.addAttribute("userNumber", userNumber);
+        model.addAttribute("pageUserNumber", userPageNumber); // 이동된 페이지 변호
+
+        model.addAttribute("modalFollower", followerVO);
+        log.info("###################  follower모달정보     " + followerVO);
+        model.addAttribute("modalFollowing", followingVO);
+        log.info("###################  following모달정보     " + followingVO);
+
+        return "/mypage/mypage";
+    }
+
+    @PostMapping("/updateEditInfo")
+    public String updateEditInfo(UserVO userVO, Model model, HttpSession session) {
+        userVO.setUserNumber(2L);
+        userService.modify(userVO);
+        return goEditInfoPage(session, model);
+    }
+
+    //    *************************************
+//    MEDAL 메달
+//    *************************************
+    @GetMapping("/getMedal/{userNumber}")
+    @ResponseBody
+    public List<String> getMedal(@PathVariable("userNumber") Long userNumber) {
+        log.info("getMedal................ : " + userNumber);
+        return userService.getMedal(userNumber);
+    }
+
+
+    /////////////////////////////////////////////////////////
+//마이페이지 변경본
+    @GetMapping("/mypage2")
+    public String mypage2(Long pageUserNumber, Model model, HttpSession session) {
+        log.info("마이페이지 컨트롤러 =============================");
+
+        Long userNumber = (Long) session.getAttribute("userNumber");
+        if (userNumber == null) {
+            return goLoginPage();
+        }
+
         UserVO userVO = userService.read(userNumber);
+        UserFileVO userFileVO = null;
+        if(userService.getImg(userNumber) == null){
+            userFileVO = new UserFileVO();
+            userFileVO.setUserNumber(userNumber);
+            userFileVO.setName("");
+            userFileVO.setUploadPath("");
+            userFileVO.setUuid("");
+            userVO.setUserFileList(userFileVO);
+        }else{
+            userVO.setUserFileList(userService.getImg(userNumber));
+        }
+
         List<UserVO> followerVO = userService.ModalFollower(userNumber);
         List<UserVO> followingVO = userService.ModalFollowing(userNumber);
 
@@ -148,29 +293,24 @@ public class UserController {
         model.addAttribute("nickname", userVO.getNickname());
         model.addAttribute("content", userVO.getContent());
         model.addAttribute("userNumber", userNumber);
+        model.addAttribute("userFileList", userFileVO);
 
-        model.addAttribute("modalFollower",followerVO);
+        model.addAttribute("pageUserNumber", pageUserNumber);
+
+        model.addAttribute("modalFollower", followerVO);
         log.info("###################  follower모달정보     " + followerVO);
-        model.addAttribute("modalFollowing",followingVO);
+        model.addAttribute("modalFollowing", followingVO);
         log.info("###################  following모달정보     " + followingVO);
 
         return "/mypage/mypage";
     }
 
-    @PostMapping("/updateEditInfo")
-    public String updateEditInfo(UserVO userVO, Model model){
-        userVO.setUserNumber(2L);
-        userService.modify(userVO);
-        return goEditInfoPage(2L,model);
-    }
+//    @PostMapping("/updateEditInfo")
+//    public String updateEditInfo(UserVO userVO, Model model){
+//        userVO.setUserNumber(2L);
+//        userService.modify(userVO);
+//        HttpSession session;
+//        return goEditInfoPage();
+//    }
 
-//    *************************************
-//    MEDAL 메달
-//    *************************************
-    @GetMapping("/getMedal/{userNumber}")
-    @ResponseBody
-    public List<String> getMedal(@PathVariable("userNumber") Long userNumber){
-        log.info("getMedal................ : " + userNumber);
-        return userService.getMedal(userNumber);
-    }
 }
