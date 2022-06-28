@@ -192,6 +192,14 @@ $(window).scroll(function () {
 // }
 
 
+//마우스 오버
+$(".photoContents > div").on("mouseenter","figure>a",function(){
+    // console.log("aaaaaaaaaaaa mouseOver");
+    $(this).find(".over-box_div").css("display", "flex");
+})
+    .on("mouseleave","figure>a", function(){
+        $(this).find(".over-box_div").css("display", "none");
+    })
 
 let getLitUpList = function (page) {
     mainService.mainLitUp({
@@ -202,13 +210,24 @@ let getLitUpList = function (page) {
         let str = "";
         // $(".photoContents > div").html("");
         result.forEach((data, i) => {
+            // console.log(data);
            let fileWriter = data.userNumber;
             let file = data.reviewFileList;
             if (file[0]) {
                 str +=
                     "<figure class='reviewView' id='"+data.reviewNumber+"'>" +
-                    "<a href='javascript:void(0)'>" +
+                    "<a class='over-box_a' href='javascript:void(0)'>" +
                     "<img alt=\"\" src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">" +
+                    "<div class='over-box_div'>" +
+                    "<div class='over-box_content1'>" +
+                    "<img src='/images/main/heart__white.png' class='over-box_img'/>" +
+                    "<div>&nbsp&nbsp"+ data.likeCount + "</div>" +
+                    "</div>" +
+                    "<div class='over-box_content1'>" +
+                    "<img src='/images/main/reply__white.png' class='over-box_img'/>" +
+                    "<div>&nbsp&nbsp"+ data.replyCount + "</div>" +
+                    "</div>" +
+                    "</div>"+
                     "</a>" +
                     "<input type='hidden' id='" + fileWriter + "' />" +
                     "</figure>";
@@ -227,12 +246,23 @@ let getLitList = function (page) {
         let str = "";
         // $(".photoContents > div").html("");
         result.forEach((data, i) => {
+            console.log(data);
             let file = data.projectFile;
             if (file) {
                 str +=
                     "<figure class='projectView' id='"+data.projectNumber+"'>" +
-                    "<a href='javascript:void(0)'>" +
+                    "<a class='over-box_a' href='javascript:void(0)'>" +
                     "<img alt=\"\" src=\"/lit/display?fileName=" + file.uploadPath + "/" + file.uuid + "_" + file.name + "\">" +
+                    "<div class='over-box_div'>" +
+                    "<div class='over-box_content1'>" +
+                    "<img src='/images/main/group__white.png' class='over-box_img'/>" +
+                    "<div>&nbsp&nbsp"+ data.applyCount + "</div>" +
+                    "</div>" +
+                    "<div class='over-box_content1'>" +
+                    "<img src='/images/main/litup__white.png' class='over-box_img'/>" +
+                    "<div>&nbsp&nbsp"+ data.reviewCount + "</div>" +
+                    "</div>" +
+                    "</div>"+
                     "</a>" +
                     "</figure>";
             }
