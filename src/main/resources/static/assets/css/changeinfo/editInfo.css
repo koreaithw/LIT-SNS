@@ -90,9 +90,9 @@ footer{
 }
 
 .info1ArticleDiv2{
-    margin: 2px 32px 0 124px;
-    height: 38px;
-    width: 38px;
+    margin: 15px 20px 0 124px;
+    height: 50px;
+    width: 50px;
 }
 
 .info1ArticleDiv3{
@@ -100,7 +100,6 @@ footer{
     border-radius: 50%;
     box-sizing: border-box;
     height: 100%;
-    margin: 0 auto;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -113,8 +112,6 @@ footer{
     padding: 0;
     width: 100%;
     color: rgb(38,38,38);
-    font-size: 14px;
-    line-height: 18px;
     margin: 0;
 }
 
@@ -129,6 +126,7 @@ footer{
     border: 0;
     font: inherit;
     vertical-align: baseline;
+    cursor: auto;
 }
 
 .info1ArticleDiv4{
@@ -216,9 +214,9 @@ footer{
     box-sizing: border-box;
     cursor: pointer;
     display: block;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
-    padding: 5px 9px;
+    padding: 8px 0px;
     text-align: center;
     text-overflow: ellipsis;
     text-transform: inherit;
@@ -356,7 +354,7 @@ footer{
     color: rgb(38,38,38);
     -webkit-box-flex: 0;
     flex: 0 1 355px;
-    font-size: 16px;
+    font-size: 15px;
     height: 32px;
     padding: 0 10px;
     width: 100%;
@@ -373,7 +371,7 @@ footer{
 }
 
 .infoDiv3_5{
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .infoDiv3_6, .infoDiv3_7{
@@ -385,9 +383,6 @@ footer{
 }
 
 .infoDiv4{
-    padding-left: 32px;
-    padding-right: 32px;
-    text-align: right;
     box-sizing: border-box;
     color: #262626;
     color: rgb(38,38,38);
@@ -405,13 +400,13 @@ footer{
     border: 0;
     font: inherit;
     vertical-align: baseline;
-    padding-left: 45px;
-    padding-right: 45px;
     text-align: right;
     font-size: 16px;
     font-weight: 600;
     line-height: 18px;
     margin-top: 6px;
+    width: 120px;
+    padding: 0px 37px;
 }
 
 .infoDiv4_3{
@@ -443,7 +438,7 @@ footer{
     -webkit-flex: 0 1 355px;
     -ms-flex: 0 1 355px;
     flex: 0 1 355px;
-    font-size: 16px;
+    font-size: 15px;
     height: 32px;
     padding: 0 10px;
     width: 100%;
@@ -547,8 +542,6 @@ footer{
 }
 
 .infoDiv6_2{
-    padding-left: 32px;
-    padding-right: 32px;
     text-align: right;
     box-sizing: border-box;
     color: #262626;
@@ -560,6 +553,7 @@ footer{
     font-weight: 600;
     line-height: 18px;
     margin-top: 6px;
+    padding: 0px 38px;
 }
 
 .infoDiv6_3{
@@ -592,10 +586,11 @@ footer{
     color: rgb(38,38,38);
     -webkit-box-flex: 0;
     flex: 0 1 355px;
-    font-size: 16px;
+    font-size: 15px;
     width: 355px;
-    height: 77px;
+    height: 78px;
     resize: none;
+    padding: 5px 10px;
 }
 
 .infoDiv7{
@@ -727,6 +722,29 @@ footer{
     -ms-flex-direction: row;
     flex-direction: row;
     margin-bottom: 20px;
+    margin-top: 20px;
+    width: 100px;
+}
+
+.submitBtnOn{
+    border-radius: 4px;
+    background-color: rgb(250, 100, 98);
+    color: rgba(255,255,255,1);
+    position: relative;
+    appearance: none;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 5px 9px;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: inherit;
+    user-select: none;
+    width: auto;
+    line-height: 20px;
 }
 
 .submitBtn{
@@ -747,28 +765,7 @@ footer{
     text-overflow: ellipsis;
     text-transform: inherit;
     user-select: none;
-    width: auto;
-    line-height: 20px;
-}
-    
-.submitBtnOn{
-    border-radius: 4px;
-    background-color: rgb(250, 100, 98);
-    color: rgba(255,255,255,1);
-    position: relative;
-    appearance: none;
-    border: 0;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: block;
-    font-size: 15px;
-    font-weight: 600;
-    padding: 5px 9px;
-    text-align: center;
-    text-overflow: ellipsis;
-    text-transform: inherit;
-    user-select: none;
-    width: auto;
+    width: 100px;
     line-height: 20px;
 }
 

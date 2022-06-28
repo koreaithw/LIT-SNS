@@ -38,7 +38,9 @@
                             <button class="info1ArticleBtn " title="프로필 사진 바꾸기">
                                 <img alt="프로필 사진 바꾸기" class="info1ArticleImg" id="proFileImg"
                                      th:src="'/user/display?fileName='+ *{userFileList.uploadPath} + '/' + *{userFileList.uuid} + '_' + *{userFileList.name}"
+                                     th:if="*{userFileList.fileNumber != null}"
                                 />
+                                <img class="info1ArticleImg" th:unless="*{userFileList.fileNumber != null}" th:src="'/images/main/profile_ex.png'"/>
                             </button>
                             <div class="info1ArticleDiv4">
                                 <form enctype="multipart/form-data" method="POST" role="presentation">
@@ -170,6 +172,9 @@
 <script th:inline="javascript">
     let $editForm = $("#editForm");
     let $subBtn = $("#subBtn");
+
+    let p = [[${userVO.userFileList.fileNumber}]]
+    console.log(p)
 
     // 닉네임 유효성 검사 (db조회)
     $("#pepUsername").on("keyup", function () {
