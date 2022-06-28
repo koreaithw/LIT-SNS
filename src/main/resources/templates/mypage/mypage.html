@@ -301,11 +301,12 @@
                                         </div>
                                     </div>
                                     <div class="follower9">
-                                        <button class="followingBtnn on" type="button" style="display: block;" onclick="changeFollow()">
-                                            팔로잉
+
+                                        <button class="followingBtnn" type="button" style="display: block;"
+                                                 >팔로잉
                                         </button>
-                                        <button class="followBtnn" type="button" style="display: none;">
-                                            팔로우
+                                        <button class="followBtnn" type="button" style="display: none;"
+                                             >팔로우
                                         </button>
                                     </div>
 
@@ -533,20 +534,22 @@
 
         $(this).parent().parent().parent().parent().parent().parent().remove();
         myPageAjaxService.removeFollower(deleteNumber, mypageUser, function (result) {
-            alert(result);
-            if(result){}
         });
 
     });
 
     $(".followingBtnn").on("click",function () {
         let deleteNumber = $(this).closest(".follower2").find("input.changeFollowing").val()
+        $(this).css("display","none")
+        $(this).siblings("button").css("display","block")
         myPageAjaxService.removeFollower(mypageUser, deleteNumber, function (result) {
         })
     })
 
     $(".followBtnn").on("click",function () {
         let insertNumber = $(this).closest(".follower2").find("input.changeFollowing").val()
+        $(this).css("display","none")
+        $(this).siblings("button").css("display","block")
         myPageAjaxService.insertFollowing({followingNumber:insertNumber, followerNumber:mypageUser },function (result) {
         })
     })
