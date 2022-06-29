@@ -46,5 +46,6 @@ public class ReviewDAO {
     public Long getReviewNumberForAlert(Long reviewNumber) { return reviewMapper.getForAlert(reviewNumber); }
 
     //마이페이지 리뷰 리스트
-    public List<ReviewVO> getMyList(Long userNumber){ return reviewMapper.getMyList(userNumber); }
+//    public List<ReviewVO> getMyList(Long userNumber){ return reviewMapper.getMyList(userNumber); }
+    public List<ReviewDTO> getMyList(ListDTO listDTO){ return reviewMapper.getMyList(listDTO); }
 }

@@ -46,5 +46,6 @@ public interface ReviewMapper {
     public Long getForAlert(Long reviewNumber);
 
     //마이페이지 리뷰 리스트
-    public List<ReviewVO> getMyList(Long userNumber);
+//    public List<ReviewVO> getMyList(Long userNumber);
+    public List<ReviewDTO> getMyList(ListDTO listDTO);
 }

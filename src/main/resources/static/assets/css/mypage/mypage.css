@@ -1119,3 +1119,33 @@ div.mypageLi{
 @media (min-width: 320px) and (max-width: 480px) {
 
 }
+
+/*마우스 오버*/
+.over-box_a{
+  position: relative;
+}
+
+.over-box_div{
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.4);
+  width: 100%;
+  height: 100%;
+  color: white;
+  align-items: center;
+  justify-content: center;
+}
+
+.over-box_content1{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 15px 15px;
+}
+
+.over-box_img{
+  width: 20px !important;
+  height: 20px !important;
+}
