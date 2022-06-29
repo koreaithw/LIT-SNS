@@ -554,18 +554,29 @@ svg:not(:root) {
 }
 
 .alertFollowingBtn {
-    background-color: rgba(255, 69, 67, 0.3);
     border-radius: 4px;
+    background-color: rgba(250, 100, 98,.9);
     border: 0;
     color: #fff;
-    width: 50px;
-    height: 22px;
     margin-left: 23px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.alertFollowingBtn:hover{
+    background-color: rgb(250,87,87);
+    transition: background-color 0.2s;
+    font-weight:bold;
 }
 
 .dropdown_profile_write_content,
 ._dropdown_setting_write_content,
 ._dropdown_loginout_content{
     font-size: 0.9rem !important;
+}
+
+.alertList > div {
+    padding: 0px 5px;
 }
 
