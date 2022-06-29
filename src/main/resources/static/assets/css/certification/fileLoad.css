@@ -173,7 +173,7 @@
     height: 100%;
     overflow: hidden;
     background-size: cover;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 2;

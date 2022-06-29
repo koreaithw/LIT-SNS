@@ -331,7 +331,7 @@ footer{
 .forJoin {
     display: inline!important;
     margin: 0!important;
-    color: #0095f6;
+    color: rgb(250, 100, 98);
     font-weight: 600;
     font-size: 14px;
     line-height: 18px;
