@@ -352,8 +352,10 @@ div.imgView {
   /* display: block; */
 }
 
-.topmenu>div>a{
+
+.topmenu>div>a:link{
   font-color: rgb(250,87,87);
+  font-weight: 900;
 }
 
 /* ===================================== */
