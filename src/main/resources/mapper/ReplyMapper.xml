@@ -36,6 +36,11 @@
         SELECT COUNT(REPLY_NUMBER) FROM TBL_REPLY WHERE REVIEW_NUMBER = #{reviewNumber}
     </select>
 
+    <update id="updateNickname">
+        UPDATE TBL_REPLY
+        SET NICKNAME = #{nickname}
+        WHERE USER_NUMBER = #{userNumber}
+    </update>
 
 
 </mapper>
