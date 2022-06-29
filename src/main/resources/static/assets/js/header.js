@@ -106,14 +106,14 @@ function alterLike(alerts) {
             if (alert.typeAlert == "like") {
                 let reSrc = "";
                 str += "<div style=' margin-bottom: -20px;; margin-right: 30px; display: inline-block;'><span class='alterspan'>" + alert.nickName
-                str += "</span>님이 회원님의 사진을 좋아합니다.<span class='alterTime' style=' padding-left: 13px;'>" + alert.registerDate + "</span></div>"
+                str += "</span>님이 회원님의 사진을 좋아합니다.<span class='alterTime' style=' padding-left: 13px;'>" + getReplyDate(alert.registerDate) + "</span></div>"
                 reSrc += "/lit/display?fileName=" + alert.reviewFileVO.uploadPath + "/" + alert.reviewFileVO.uuid + "_" + alert.reviewFileVO.name
                 str += "<div style='display: inline-block;'><a onclick='projectDetailModalShow(" + alert.reviewNumber + "," +  userNumber  + ")'><img class='alterRR' src=" + reSrc + "></a></div></div></div>"
                 str += ""
             } else {
                 str += "<div style=' margin-bottom: -7px; margin-right: 30px; display: inline-block; margin-top: 17px;'><span class='alterspan'>" + alert.nickName
                 str += "</span>님이 회원님을 팔로우 했습니다."
-                str += "<span class='alterTime' style='padding-left: 13px;'>" + alert.registerDate + "</span></div>"
+                str += "<span class='alterTime' style='padding-left: 13px;'>" + getReplyDate(alert.registerDate) + "</span></div>"
                 if(followCheck(alert.userNumber) == 1){
                     str += "<a id='headFollowBtn' onclick='headDeleteFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowingBtn'>팔로잉</button></a></div>"
                 }else {
@@ -175,6 +175,25 @@ function followCheck(following) {
 
 
     return result;
+}
+
+function getReplyDate(replyDate){
+    let today = new Date();
+    let rDate = new Date(replyDate);
+    let gap = today.getTime() - rDate.getTime();
+
+    if(gap < 1000 * 60 * 60 * 24){
+        let h = rDate.getHours();
+        let m = rDate.getMinutes();
+
+        return [(h < 10 ? '0' : '') + h, (m < 10 ? '0' : '') + m].join(":");
+    }else{
+        let y = rDate.getFullYear();
+        let m = rDate.getMonth() + 1;
+        let d = rDate.getDate();
+
+        return [y, (m < 10 ? '0' : '') + m, (d < 10 ? '0' : '') + d].join("-")
+    }
 }
 
 //     <div class="alterCss">
