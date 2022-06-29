@@ -6,6 +6,7 @@ let followBtnn = document.querySelector(".followBtnn");
 const lit1 = $('#lits1');
 const lit2 = $('#lits2');
 let $contents = $(".content2 > div");
+let pagingNum = 1;
 
 // 게시글 마우스 오버 이벤트
 $.each($contents, function (i, item) {
@@ -95,7 +96,7 @@ $(".btn__x").on("click", function () {
 });
 
 $(document).ready(function () {
-    litUpList();
+    litUpList(pagingNum);
   let $imgAr = $(".medal-icon-col > img");
 
   // 메달 목록 띄워주는 ajax
@@ -316,6 +317,8 @@ lit1.on("click", function () {
     $('#lit1Img').attr('src', '/images/mypage/menu.png');
     lit2.attr('class', 'lits2Off');
     $('#lit2Img').attr('src', '/images/mypage/fire.png');
+    $(".photoContents > div").html("");
+    pagingNum = 1;
     litUpList();
 });
 
@@ -325,6 +328,8 @@ lit2.on("click", function () {
     $('#lit2Img').attr('src', '/images/mypage/lists.png');
     lit1.attr('class', 'lits1Off');
     $('#lit1Img').attr('src', '/images/mypage/menu2.png');
+    $(".photoContents > div").html("");
+    pagingNum = 1;
     litList();
 });
 
@@ -341,11 +346,11 @@ $(".photoContents > div").on("mouseenter","figure>a",function(){
 
 function litUpList() {
     myPageAjaxService.litUpList(userPageNumber,{
-        pageNum : 1,
+        pageNum : pagingNum,
         amount : 9,
     }, function (result) {
         let str = "";
-        $(".photoContents > div").html("");
+        // $(".photoContents > div").html("");
         result.forEach((data, i) => {
             let fileWriter = data.userNumber;
             let file = data.reviewFileList;
@@ -371,12 +376,13 @@ function litUpList() {
         })
         $(".photoContents > div").append(str);
     })
+    pagingNum++;
 }
 
 function litList() {
     myPageAjaxService.litList(userPageNumber,function(result){
         let str = "";
-        $(".photoContents > div").html("");
+        // $(".photoContents > div").html("");
         result.forEach((data, i) => {
             console.log(data)
             let status;
@@ -408,6 +414,7 @@ function litList() {
         });
         $(".photoContents > div").append(str);
     });
+    pagingNum++;
 }
 
 $(".a").on("click","figure.projectView", function(){
@@ -415,3 +422,32 @@ $(".a").on("click","figure.projectView", function(){
     location.href = "/lit/info?projectNumber=" + getProjectNum;
 
 })
+
+
+
+
+//스크롤 이벤트
+let timer;
+$(window).scroll(function () {
+    // 현 스크롤 탑의 위치
+    let windowTop = $(window).scrollTop();
+    // 결과 리스트를 감싸는 요소 높이
+    let contentHeight = $(".photoContents").height();
+    // 창의 전체 높이
+    let windowHeight = $(window).height();
+    console.log("***************************************************")
+    console.log("***************************************************")
+
+
+    // 스크롤이 마지막 이면 데이터 가져오기
+    if (windowTop > (contentHeight - windowHeight)) {
+        if (timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+            // if(pagingNum > realEnd){ return; }
+            litUpList(pagingNum);
+        }, 500);
+    } else {
+    }
+});
