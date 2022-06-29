@@ -111,13 +111,13 @@ function alterLike(alerts) {
             }
             if (alert.typeAlert == "like") {
                 let reSrc = "";
-                str += "<div style=' margin-top: 10px; margin-right: 70px; display: inline-block; font-size:0.8rem;'><span class='alterspan'>" + alert.nickName
+                str += "<div style=' margin-top: 10px; width:370px; display: inline-block; font-size:0.8rem;'><span class='alterspan'>" + alert.nickName
                 str += "</span>님이 회원님의 사진을 좋아합니다.<span class='alterTime' style=' padding-left: 13px;'>" + alert.registerDate + "</span></div>"
                 reSrc += "/lit/display?fileName=" + alert.reviewFileVO.uploadPath + "/" + alert.reviewFileVO.uuid + "_" + alert.reviewFileVO.name
                 str += "<div style='display: inline-block;'><a onclick='projectDetailModalShow(" + alert.reviewNumber + "," +  userNumber  + ")'><img class='alterRR' src=" + reSrc + "></a></div></div></div>"
                 str += ""
             } else {
-                str += "<div style=' margin-right: 60px; display: inline-block; margin-top: 17px; font-size: 0.8rem;'><span class='alterspan'>" + alert.nickName
+                str += "<div style=' width:345px; display: inline-block; margin-top: 17px; font-size: 0.8rem;'><span class='alterspan'>" + alert.nickName
                 str += "</span>님이 회원님을 팔로우 했습니다."
                 str += "<span class='alterTime' style='padding-left: 13px;'>" + alert.registerDate + "</span></div>"
                 if(followCheck(alert.userNumber) == 1){
