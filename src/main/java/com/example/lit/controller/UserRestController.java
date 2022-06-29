@@ -234,6 +234,16 @@ public class UserRestController {
 
     }
 
+    // 메달 4번 조건 달성 했을 때
+    @GetMapping("/get4MedalPercent/{userNumber}")
+    public int get4MedalPercent(@PathVariable("userNumber") Long userNumber){
+
+        int medal4Cnt = userService.medal4Condition(userNumber);
+
+        return medal4Cnt;
+
+    }
+
     // 메달 5번 달성
     @GetMapping("/get5Medal/{userNumber}")
     public int get5Medal(@PathVariable("userNumber") Long userNumber){
