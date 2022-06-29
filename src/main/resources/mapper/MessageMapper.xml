@@ -16,8 +16,8 @@
     <select id="getFollowerList" resultType="userVO">
         SELECT USER_NUMBER, EMAIL, NAME, NICKNAME, PASSWORD, CONTENT
         FROM TBL_FOLLOW f LEFT OUTER JOIN TBL_USER u
-        ON f.FOLLOWER_NUMBER = u.USER_NUMBER
-        WHERE f.FOLLOWING_NUMBER = #{userNumber}
+        ON f.FOLLOWING_NUMBER = u.USER_NUMBER
+        WHERE f.FOLLOWER_NUMBER = #{userNumber}
     </select>
 
     <select id="getReceiveUserNumber" resultType="long">
