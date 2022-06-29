@@ -55,7 +55,7 @@ public class ProjectDAO {
     public Long challengeTotal(Long projectNumber){ return participationMapper.challengeTotal( projectNumber ); }
 
     // 마이페이지 프로젝트 리스트
-    public List<ProjectVO> getMyList(Long userNumber){ return projectMapper.getMyList(userNumber); }
+    public List<ProjectVO> getMyList(ListDTO listDTO){ return projectMapper.getMyList(listDTO); }
 
     // apply count 증가 시키기
     public void increaseApplyCnt(Long projectNumber){ projectMapper.increaseApplyCnt(projectNumber); }

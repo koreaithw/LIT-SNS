@@ -147,9 +147,9 @@ public class LitServiceImple implements LitService{
     public int getTotalByUserNumber(Long userNumber) { return projectDAO.getTotalByUserNumber(userNumber); }
 
     @Override
-    public List<ProjectVO> getMyList(Long userNumber) {
+    public List<ProjectVO> getMyList(ListDTO listDTO) {
         List<ProjectVO> result = new ArrayList<>();
-        for(ProjectVO project : projectDAO.getMyList(userNumber)){
+        for(ProjectVO project : projectDAO.getMyList(listDTO)){
             project.setProjectFile(projectFileDAO.getImg(project.getProjectNumber()));
             result.add(project);
         }

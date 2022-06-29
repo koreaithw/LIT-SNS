@@ -54,5 +54,5 @@ public interface LitService {
     public int getTotalByUserNumber(Long userNumber);
 
     // 마이페이지 프로젝트 리스트
-    public List<ProjectVO> getMyList(Long userNumber);
+    public List<ProjectVO> getMyList(ListDTO listDTO);
 }

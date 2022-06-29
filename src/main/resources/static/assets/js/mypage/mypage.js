@@ -6,6 +6,7 @@ let followBtnn = document.querySelector(".followBtnn");
 const lit1 = $('#lits1');
 const lit2 = $('#lits2');
 let $contents = $(".content2 > div");
+let pagingNum = 1;
 
 // 게시글 마우스 오버 이벤트
 $.each($contents, function (i, item) {
@@ -95,24 +96,24 @@ $(".btn__x").on("click", function () {
 });
 
 $(document).ready(function () {
-    litUpList();
-  let $imgAr = $(".medal-icon-col > img");
-
-  // 메달 목록 띄워주는 ajax
-  myPageAjaxService.getMedal(mypageUser, function(medals){
+    litUpList(pagingNum);
     let $imgAr = $(".medal-icon-col > img");
 
-    for(let i=0; i<medals.length; i++){
-      $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal" + medals[i] + ".png");
-      // $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal.png");
-    }
-    // $($imgAr[3]).data("bar", medals.length + "/10");
+    // 메달 목록 띄워주는 ajax
+    myPageAjaxService.getMedal(mypageUser, function (medals) {
+        let $imgAr = $(".medal-icon-col > img");
 
-      /*########################메달 4번##########################*/
-      if(medals.length >= 10){
-          console.log("메달 10개 모으기 성공");
-          myPageAjaxService.get4Medal(mypageUser)
-      }
+        for (let i = 0; i < medals.length; i++) {
+            $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal" + medals[i] + ".png");
+            // $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal.png");
+        }
+        // $($imgAr[3]).data("bar", medals.length + "/10");
+
+        /*########################메달 4번##########################*/
+        if (medals.length >= 10) {
+            console.log("메달 10개 모으기 성공");
+            myPageAjaxService.get4Medal(mypageUser)
+        }
 
         // 해제된 메달에 medal__unlock 클래스 부여(마우스 오버 이벤트 등등에 사용)
         $imgAr
@@ -132,15 +133,15 @@ $(document).ready(function () {
     $(".medal-selected_medal > img").attr("src", $("#medalImg").attr("src"));
     setMedalMedal();
 
-  // 대표 메달 사용하기 버튼
-  $(".medal-selected_button").on("click", function () {
-    let src = $(".medal-selected_medal > img").attr("src");
-    if (src.substring(src.lastIndexOf("/") + 1) == "padlock.png") {
-      return;
-    }
-    $("#medalImg").attr("src", src);
-    $(".btn__x").trigger("click");
-  });
+    // 대표 메달 사용하기 버튼
+    $(".medal-selected_button").on("click", function () {
+        let src = $(".medal-selected_medal > img").attr("src");
+        if (src.substring(src.lastIndexOf("/") + 1) == "padlock.png") {
+            return;
+        }
+        $("#medalImg").attr("src", src);
+        $(".btn__x").trigger("click");
+    });
 
     /*########################메달 4번##########################*/
     myPageAjaxService.get4MedalPercent(mypageUser, function (result) {
@@ -159,73 +160,73 @@ $(document).ready(function () {
 
     /*########################메달 5번##########################*/
     myPageAjaxService.get5Medal(mypageUser, function (result) {
-      $($imgAr[4]).data("bar", result + "/100");
+        $($imgAr[4]).data("bar", result + "/100");
     });
 
     /*########################메달 6번##########################*/
     myPageAjaxService.get6Medal(mypageUser, function (result) {
-      $($imgAr[5]).data("bar", result + "/10");
+        $($imgAr[5]).data("bar", result + "/10");
     });
 
     /*########################메달 7번##########################*/
     myPageAjaxService.get7Medal({
-      userNumber: mypageUser,
-      category: "life"
-    },function (result) {
-      $($imgAr[6]).data("bar", result + "/5");
+        userNumber: mypageUser,
+        category: "life"
+    }, function (result) {
+        $($imgAr[6]).data("bar", result + "/5");
     });
 
     /*########################메달 8번##########################*/
     myPageAjaxService.get8Medal({
-      userNumber: mypageUser,
-      category: "exercise"
-    },function (result) {
-      console.log("마이페이지자바스크립트 들어옴");
-      $($imgAr[7]).data("bar", result + "/5");
+        userNumber: mypageUser,
+        category: "exercise"
+    }, function (result) {
+        console.log("마이페이지자바스크립트 들어옴");
+        $($imgAr[7]).data("bar", result + "/5");
     });
 
     /*########################메달 9번##########################*/
     myPageAjaxService.get9Medal({
-      userNumber: mypageUser,
-      category: "heart"
-    },function (result) {
-      $($imgAr[8]).data("bar", result + "/5");
+        userNumber: mypageUser,
+        category: "heart"
+    }, function (result) {
+        $($imgAr[8]).data("bar", result + "/5");
     });
 
     /*########################메달 10번##########################*/
     myPageAjaxService.get10Medal({
-      userNumber: mypageUser,
-      category: "hobby"
-    },function (result) {
-      $($imgAr[9]).data("bar", result + "/5");
+        userNumber: mypageUser,
+        category: "hobby"
+    }, function (result) {
+        $($imgAr[9]).data("bar", result + "/5");
     });
 
     /*########################메달 11번##########################*/
     myPageAjaxService.get11Medal({
-      userNumber: mypageUser,
-      category: "art"
-    },function (result) {
-      $($imgAr[10]).data("bar", result + "/5");
+        userNumber: mypageUser,
+        category: "art"
+    }, function (result) {
+        $($imgAr[10]).data("bar", result + "/5");
     });
 
     /*########################메달 12번##########################*/
-    myPageAjaxService.get12Medal(mypageUser,function (result) {
-      $($imgAr[11]).data("bar", result + "/1000");
+    myPageAjaxService.get12Medal(mypageUser, function (result) {
+        $($imgAr[11]).data("bar", result + "/1000");
     });
 
     /*########################메달 13번##########################*/
-    myPageAjaxService.get13Medal(mypageUser,function (result) {
-      $($imgAr[12]).data("bar", result + "/1000");
+    myPageAjaxService.get13Medal(mypageUser, function (result) {
+        $($imgAr[12]).data("bar", result + "/1000");
     });
 
     /*########################메달 14번##########################*/
-    myPageAjaxService.get14Medal(mypageUser,function (result) {
-      $($imgAr[13]).data("bar", result + "/1000");
+    myPageAjaxService.get14Medal(mypageUser, function (result) {
+        $($imgAr[13]).data("bar", result + "/1000");
     });
 
     /*########################메달 15번##########################*/
-    myPageAjaxService.get15Medal(mypageUser,function (result) {
-      $($imgAr[14]).data("bar", result + "/1000000");
+    myPageAjaxService.get15Medal(mypageUser, function (result) {
+        $($imgAr[14]).data("bar", result + "/1000000");
     });
 
     //클릭하면 내 대표메달로 변경하기
@@ -316,6 +317,8 @@ lit1.on("click", function () {
     $('#lit1Img').attr('src', '/images/mypage/menu.png');
     lit2.attr('class', 'lits2Off');
     $('#lit2Img').attr('src', '/images/mypage/fire.png');
+    $(".photoContents > div").html("");
+    pagingNum = 1;
     litUpList();
 });
 
@@ -325,45 +328,46 @@ lit2.on("click", function () {
     $('#lit2Img').attr('src', '/images/mypage/lists.png');
     lit1.attr('class', 'lits1Off');
     $('#lit1Img').attr('src', '/images/mypage/menu2.png');
+    $(".photoContents > div").html("");
+    pagingNum = 1;
     litList();
 });
 
 
-
 //마우스 오버
-$(".photoContents > div").on("mouseenter","figure>a",function(){
+$(".photoContents > div").on("mouseenter", "figure>a", function () {
     // console.log("aaaaaaaaaaaa mouseOver");
     $(this).find(".over-box_div").css("display", "flex");
 })
-    .on("mouseleave","figure>a", function(){
+    .on("mouseleave", "figure>a", function () {
         $(this).find(".over-box_div").css("display", "none");
     })
 
 function litUpList() {
-    myPageAjaxService.litUpList(userPageNumber,{
-        pageNum : 1,
-        amount : 9,
+    myPageAjaxService.litUpList(userPageNumber, {
+        pageNum: pagingNum,
+        amount: 9,
     }, function (result) {
         let str = "";
-        $(".photoContents > div").html("");
+        // $(".photoContents > div").html("");
         result.forEach((data, i) => {
             let fileWriter = data.userNumber;
             let file = data.reviewFileList;
             if (file[0]) {
                 str +=
-                    "<figure class='reviewView' id='"+data.reviewNumber+"'>" +
+                    "<figure class='reviewView' id='" + data.reviewNumber + "'>" +
                     "<a class='over-box_a' href='javascript:void(0)'>" +
                     "<img alt=\"\" src=\"/litUp/display?fileName=" + file[0].uploadPath + "/" + file[0].uuid + "_" + file[0].name + "\">" +
                     "<div class='over-box_div'>" +
                     "<div class='over-box_content1'>" +
                     "<img src='/images/main/heart__white.png' class='over-box_img'/>" +
-                    "<div>&nbsp&nbsp"+ data.likeCount + "</div>" +
+                    "<div>&nbsp&nbsp" + data.likeCount + "</div>" +
                     "</div>" +
                     "<div class='over-box_content1'>" +
                     "<img src='/images/main/reply__white.png' class='over-box_img'/>" +
-                    "<div>&nbsp&nbsp"+ data.replyCount + "</div>" +
+                    "<div>&nbsp&nbsp" + data.replyCount + "</div>" +
                     "</div>" +
-                    "</div>"+
+                    "</div>" +
                     "</a>" +
                     "<input type='hidden' id='" + fileWriter + "' />" +
                     "</figure>";
@@ -371,47 +375,85 @@ function litUpList() {
         })
         $(".photoContents > div").append(str);
     })
+    pagingNum++;
 }
 
 function litList() {
-    myPageAjaxService.litList(userPageNumber,function(result){
-        let str = "";
-        $(".photoContents > div").html("");
-        result.forEach((data, i) => {
-            console.log(data)
-            let status;
-            let file = data.projectFile;
-            switch (data.status) {
-                case 0 :
-                    status = "대기중";
-                    break;
-                case 1 :
-                    status = "진행중";
-                    break;
-                case 2 :
-                    status = "완료됨";
-                    break;
-            }
-            if (file) {
-                str +=
-                    "<figure class='projectView' id='"+data.projectNumber+"'>" +
-                    "<a class='over-box_a' href='javascript:void(0)'>" +
-                    "<img alt=\"\" src=\"/lit/display?fileName=" + file.uploadPath + "/" + file.uuid + "_" + file.name + "\">" +
-                    "<div class='over-box_div'>" +
-                    "<div class='over-box_content1'>" +
-                    "<div>" + status +"</div>" +
-                    "</div>" +
-                    "</div>"+
-                    "</a>" +
-                    "</figure>";
-            }
+    myPageAjaxService.litList(userPageNumber, {
+            pageNum: pagingNum,
+            amount: 9,
+        },
+        function (result) {
+            let str = "";
+            // $(".photoContents > div").html("");
+            result.forEach((data, i) => {
+                console.log(data)
+                let status;
+                let file = data.projectFile;
+                switch (data.status) {
+                    case 0 :
+                        status = "대기중";
+                        break;
+                    case 1 :
+                        status = "진행중";
+                        break;
+                    case 2 :
+                        status = "완료됨";
+                        break;
+                }
+                if (file) {
+                    str +=
+                        "<figure class='projectView' id='" + data.projectNumber + "'>" +
+                        "<a class='over-box_a' href='javascript:void(0)'>" +
+                        "<img alt=\"\" src=\"/lit/display?fileName=" + file.uploadPath + "/" + file.uuid + "_" + file.name + "\">" +
+                        "<div class='over-box_div'>" +
+                        "<div class='over-box_content1'>" +
+                        "<div>" + status + "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</a>" +
+                        "</figure>";
+                }
+            });
+            $(".photoContents > div").append(str);
         });
-        $(".photoContents > div").append(str);
-    });
+    pagingNum++;
 }
 
-$(".a").on("click","figure.projectView", function(){
+$(".a").on("click", "figure.projectView", function () {
     let getProjectNum = $(this).attr("id")
     location.href = "/lit/info?projectNumber=" + getProjectNum;
 
 })
+
+
+//스크롤 이벤트
+let timer;
+$(window).scroll(function () {
+    // 현 스크롤 탑의 위치
+    let windowTop = $(window).scrollTop();
+    // 결과 리스트를 감싸는 요소 높이
+    let contentHeight = $(".photoContents").height();
+    // 창의 전체 높이
+    let windowHeight = $(window).height();
+    console.log("***************************************************")
+    console.log("***************************************************")
+
+
+    // 스크롤이 마지막 이면 데이터 가져오기
+    if (windowTop > (contentHeight - windowHeight)) {
+        if (timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+            // if(pagingNum > realEnd){ return; }
+            if(lit1.hasClass("lits1On")){
+                litUpList();
+            } else if(lit2.hasClass("lits2On")){
+                litList();
+            }
+
+        }, 500);
+    } else {
+    }
+});

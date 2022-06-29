@@ -107,11 +107,15 @@ public class LitRestController {
 
     }
 
-    @GetMapping("/getMyList/{userPageNumber}")
-    public List<ProjectVO> getMyList(@PathVariable("userPageNumber")Long userPageNumber, HttpSession session){
+    @PostMapping("/getMyList/{userPageNumber}")
+    public List<ProjectVO> getMyList(@PathVariable("userPageNumber")Long userPageNumber, HttpSession session, @RequestBody ListDTO listDTO){
 //        Long userNumber = (Long)session.getAttribute("userNumber");
         Long userNumber = userPageNumber != null ? userPageNumber : (Long)session.getAttribute("userNumber");
-        return litService.getMyList(userNumber);
+        if(listDTO == null){
+            listDTO = new ListDTO();
+        }
+        listDTO.setUserNumber(userNumber);
+        return litService.getMyList(listDTO);
     }
 
 }
