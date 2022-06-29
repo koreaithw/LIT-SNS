@@ -165,33 +165,6 @@ $(window).scroll(function () {
 });
 
 
-// function pageBlock(total) {
-//     let endPage = Math.ceil(page / 6.0) * 6;
-//     let startPage = endPage - 9;
-//     let realEnd = Math.ceil(total / 6.0);
-//     const $paging = $(".paging-block");
-//
-//     if (endPage > realEnd) {
-//         endPage = realEnd;
-//     }
-//
-//     let prev = startPage > 1;
-//     let next = endPage * 10 < total;
-//     let str = "";
-//
-//     if (prev) {
-//         str += "<a class='changePage' href='" + (startPage - 1) + "'><li>&lt;</li></a>"
-//     }
-//     for (let i = startPage; i <= endPage; i++) {
-//         str += page == i ? "<li>" + i + "</li>" : "<a class='changePage' href='" + i + "'><li>" + i + "</li></a>";
-//     }
-//     if (next) {
-//         str += "<a class='changePage' href='" + (endPage + 1) + "'><li>&gt;</li></a>"
-//     }
-//     $paging.html(str);
-// }
-
-
 //마우스 오버
 $(".photoContents > div").on("mouseenter","figure>a",function(){
     // console.log("aaaaaaaaaaaa mouseOver");
