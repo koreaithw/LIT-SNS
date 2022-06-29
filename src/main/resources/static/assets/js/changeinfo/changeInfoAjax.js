@@ -89,13 +89,20 @@ let changeInfoAjax = (function () {
         })
     }
 
+    function deleteImg(userNumber){
+        $.ajax({
+            url: "/user/profileImageDelete/" + userNumber,
+            type: "get"
+        })
+    }
+
     return {
         checkOldPw: checkOldPw,
         checkWithdrawPw: checkWithdrawPw,
         withdrawUser: withdrawUser,
         modifyPw: modifyPw,
         profileEditNicknameCheck: profileEditNicknameCheck,
-        changeImg : changeImg
+        changeImg : changeImg, deleteImg: deleteImg
     }
 
 })();
