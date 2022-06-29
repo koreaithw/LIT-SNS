@@ -245,8 +245,6 @@
         location.href = "/lit/write?userNumber=" + userNumber;
     })
 
-
-
     let filesList
     let arFileReview = Array.from($("input[type='file']")[0].files);
     let $uploadResult = $(".ceritficationContentProfileImageWrapper")
@@ -332,15 +330,9 @@
         let str ="";
 
         str += "<div class=\"certificationContentProfileImage\">"
-        str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
-        str += "</a></div>"
+        str += "<img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+        str += "</div>"
 
-        if(file == null){
-            str += "<div class=\"certificationContentProfileImage\">"
-            str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='/images/main/profile_ex.png'>"
-            str += "</a></div>"
-        }
-        
         $("#writerImage").html(str);
     }
 
@@ -356,11 +348,18 @@
         $(".detailProjectContentList").html(str);
     }
 
-
     // 출력할 사진 리스트 받아오기기
     $("button.nextNextButton").on("click",function () {
         $.getJSON("/litUp/profilePic", {userNumber: userNumber}, function(pic){
-            showWriterUserPic(pic);})
+            showWriterUserPic(pic);}).fail(
+            function () {
+                let str ="";
+                    str += "<div class=\"certificationContentProfileImage\">"
+                    str += "<img class=\"detailProfileImage\" src='/images/main/sprofile_ex.jpg'>"
+                    str += "</div>"
+                $("#writerImage").html(str);
+            }
+        );
     })
 
     $(".nextButton").on("click",function () {
