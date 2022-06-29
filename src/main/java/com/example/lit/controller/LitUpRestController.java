@@ -252,14 +252,32 @@ public class LitUpRestController {
     }
 
 
-    @GetMapping("/getMyList/{userPageNumber}")
-    public List<ReviewVO> getMyList(@PathVariable("userPageNumber")Long userPageNumber, HttpSession session){
+//    @GetMapping("/getMyList/{userPageNumber}")
+//    public List<ReviewVO> getMyList(@PathVariable("userPageNumber")Long userPageNumber, HttpSession session){
+////        Long userNumber = (Long)session.getAttribute("userNumber");
+//        Long userNumber = (userPageNumber != null) ? userPageNumber : (Long)session.getAttribute("userNumber");
+//        log.info("*************************************************************");
+//        log.info("LitUpRestController : getMyList");
+//        log.info("*************************************************************");
+//        log.info(userNumber + " <---------------session userNumber");
+//        return litUpService.getMyList(userNumber);
+//    }
+
+    @PostMapping("/getMyList/{userPageNumber}")
+    public List<ReviewDTO> getMyList(@PathVariable("userPageNumber")Long userPageNumber, HttpSession session, @RequestBody ListDTO listDTO){
 //        Long userNumber = (Long)session.getAttribute("userNumber");
-        Long userNumber = userPageNumber != null ? userPageNumber : (Long)session.getAttribute("userNumber");
+        Long userNumber = (userPageNumber != null) ? userPageNumber : (Long)session.getAttribute("userNumber");
         log.info("*************************************************************");
         log.info("LitUpRestController : getMyList");
         log.info("*************************************************************");
         log.info(userNumber + " <---------------session userNumber");
-        return litUpService.getMyList(userNumber);
+        if(listDTO == null){
+            listDTO = new ListDTO();
+        }
+        listDTO.setUserNumber(userNumber);
+        log.info(listDTO.toString());
+        log.info(litUpService.getMainList(listDTO).toString());
+        log.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        return litUpService.getMyList(listDTO);
     }
 }
