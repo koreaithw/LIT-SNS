@@ -209,13 +209,23 @@
 
     <select id="getMyList" resultType="projectVO">
         SELECT PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, APPLY_COUNT, USER_NUMBER, START_DATE, END_DATE, REGISTER_DATE, STATUS
-        FROM TBL_PROJECT
-        WHERE USER_NUMBER = #{userNumber}
-        ORDER BY REGISTER_DATE DESC
+        FROM(
+            SELECT ROWNUM RN, PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, APPLY_COUNT, USER_NUMBER, START_DATE, END_DATE, REGISTER_DATE, STATUS
+            FROM(
+                SELECT PROJECT_NUMBER, TITLE, CATEGORY, CONTENT, AUTHENTICATION, APPLY_COUNT, USER_NUMBER, START_DATE, END_DATE, REGISTER_DATE, STATUS
+                FROM TBL_PROJECT
+                WHERE USER_NUMBER = #{userNumber}
+                ORDER BY REGISTER_DATE DESC
+            )
+            <![CDATA[
+            WHERE ROWNUM <= #{pageNum}*#{amount}
+        )
+        WHERE RN > (#{pageNum}-1)*#{amount}
+        ]]>
     </select>
 
     <update id="increaseApplyCnt">
-         UPDATE TBL_PROJECT
+        UPDATE TBL_PROJECT
         SET APPLY_COUNT = APPLY_COUNT + 1
         WHERE PROJECT_NUMBER = #{projectNumber}
     </update>
