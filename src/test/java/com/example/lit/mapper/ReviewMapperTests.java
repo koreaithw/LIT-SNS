@@ -43,7 +43,10 @@ public class ReviewMapperTests {
 
     @Test
     public void getMyListTest(){
-
-        reviewMapper.getMyList(1L).stream().map(ReviewVO::toString).forEach(log::info);
+        ListDTO listDTO = new ListDTO();
+        listDTO.setUserNumber(3L);
+        listDTO.setPageNum(1);
+        listDTO.setAmount(10);
+        reviewMapper.getMyList(listDTO).stream().map(ReviewDTO::toString).forEach(log::info);
     }
 }

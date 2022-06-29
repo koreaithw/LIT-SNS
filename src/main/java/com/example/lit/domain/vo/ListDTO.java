@@ -11,6 +11,7 @@ public class ListDTO {
     private int pageNum;
     private int amount;
     private Long projectNumber;
+    private Long userNumber;
 
 
     public ListDTO() {
