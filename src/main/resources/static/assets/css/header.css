@@ -555,17 +555,18 @@ svg:not(:root) {
 
 .alertFollowingBtn {
     border-radius: 4px;
-    background-color: rgba(250, 100, 98,.9);
+    background-color: #fff;
     border: 0;
-    color: #fff;
+    color: #000000;
     margin-left: 23px;
     padding: 5px 10px;
     font-size: 0.8rem;
     cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 
 .alertFollowingBtn:hover{
-    background-color: rgb(250,87,87);
+    background-color: rgba(0,0,0,.1);
     transition: background-color 0.2s;
     font-weight:bold;
 }
