@@ -34,6 +34,7 @@ function certificationWriteModalShow() {
     if(userNumber != null) {
         certificationWriteBackground.style.display = 'block';
         // certificationWriteButton.style.display = 'none';
+        uploadFiles1 = [];
         $('body').css("overflow", "hidden");
     }else{
         alert("로그인 후 이용해 주세요")
