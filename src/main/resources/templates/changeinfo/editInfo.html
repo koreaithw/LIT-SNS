@@ -40,7 +40,7 @@
                                  th:src="'/user/display?fileName='+ *{userFileList.uploadPath} + '/' + *{userFileList.uuid} + '_' + *{userFileList.name}"
                                  th:if="*{userFileList.fileNumber != null}"
                             />
-                            <img class="info1ArticleImg" th:unless="*{userFileList.fileNumber != null}"
+                            <img class="info1ArticleImg" id="proFileImg" th:unless="*{userFileList.fileNumber != null}"
                                  th:src="'/images/main/profile_ex.png'"/>
                         </button>
                         <div class="info1ArticleDiv4">

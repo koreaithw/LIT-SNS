@@ -503,5 +503,9 @@ public class UserRestController {
         return follwerCnt;
     }
 
-    
+    @GetMapping("/profileImageDelete/{userNumber}")
+    public void profileImageDelete(@PathVariable("userNumber") Long userNumber){
+        log.info(userNumber + "");
+        userService.removeImg(userNumber);
+    }
 }

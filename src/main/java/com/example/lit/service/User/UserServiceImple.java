@@ -179,7 +179,7 @@ public class UserServiceImple implements UserService{
 
     @Override
     public void removeImg(Long userNumber) {
-
+        userFileDAO.remove(userNumber);
     }
 
     @Override
