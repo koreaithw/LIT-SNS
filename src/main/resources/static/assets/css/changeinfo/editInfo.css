@@ -912,15 +912,27 @@ footer{
 @media (min-width: 768px) and (max-width: 1024px) {
 }
 @media (max-width: 933px) {
+    header{
+        height: auto;
+    }
+    body{
+        height: 100% !important;
+    }
     main.main{
         margin-top: 0;
-        margin-bottom: 60px;
+    }
+    main{
+        margin: 0;
     }
     div.mainWrapper{
         max-width: 100%;
         width: 100%;
         flex-direction:column;
     }
+div.info1ArticleDiv3{
+    height: 50px;
+    width: 50px;
+}
 
     ul.mainUl{
         flex-direction: row;
@@ -937,6 +949,7 @@ footer{
     }
     form.infoDiv3_0 > div > div{
         width: 70%;
+        max-width: 355px;
     }
     textarea.infoDiv6_5{
         width: 100%;
@@ -945,7 +958,13 @@ footer{
         margin: 0;
     }
     div.info1ArticleDiv2{
-        margin: 10px 36px;
+        width: 30%;
+        padding: 10px 0;
+        margin: 0;
+    }
+    div.infoDiv2_1{
+        width: 70%;
+        max-width: 355px;
     }
 
     form.infoDiv3_0{
@@ -955,6 +974,10 @@ footer{
         margin: 20px 0;
         width: 100%;
     }
+
+
+
+
 }
 /*
 ##Device = Tablets, Ipads (landscape)

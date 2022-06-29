@@ -142,6 +142,7 @@ figure >a {
 }
 figure img:hover{
   transform: scale(1.1);
+  transform-origin: center center;
   transition: 0.5s ease;
 }
 /* 모달창==================================== */

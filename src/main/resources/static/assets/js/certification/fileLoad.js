@@ -125,8 +125,6 @@ function preview(file, idx) {
             str += '<img src="' + e.target.result + '"/></div>';
             $fileUploadPreview.append(str);
 
-
-
             if ($certificationImageInner.children().length == 0) {
                 res = '<li class="active" id="' + idx + '"><img src= "' + e.target.result + '"/></li>';
                 div = '<div class="active" id="' + idx + '"></div>';
