@@ -103,7 +103,7 @@ function alterLike(alerts) {
         let userNum = alert.userNumber;
 
         if(userNum != userNumber) {
-            str += "<div class='alterCss'><div style='border-bottom: 2px solid rgb(219, 219, 219); display: flex; flex-direction: row; align-items: center;'>"
+            str += "<div class='alterCss'><div style='border-bottom: 1px solid rgb(219, 219, 219); display: flex; flex-direction: row; align-items: center;'>"
             if (alert.userFileVO != null) {
                 str += "<a href='/user/mypage?userPageNumber=" + alert.userNumber + "'><img width='30px' class='userFile' src='/lit/display?fileName=" + alert.userFileVO.uploadPath + "/" + alert.userFileVO.uuid + "_" + alert.userFileVO.name + "'></a>"
             } else {
@@ -111,13 +111,13 @@ function alterLike(alerts) {
             }
             if (alert.typeAlert == "like") {
                 let reSrc = "";
-                str += "<div style=' margin-bottom: -25px; margin-right: 30px; display: inline-block;'><span class='alterspan'>" + alert.nickName
+                str += "<div style=' margin-top: 10px; width: 370px; display: inline-block; font-size:0.8rem;'><span class='alterspan'>" + alert.nickName
                 str += "</span>님이 회원님의 사진을 좋아합니다.<span class='alterTime' style=' padding-left: 13px;'>" + getReplyDate(alert.registerDate) + "</span></div>"
                 reSrc += "/lit/display?fileName=" + alert.reviewFileVO.uploadPath + "/" + alert.reviewFileVO.uuid + "_" + alert.reviewFileVO.name
                 str += "<div style='display: inline-block;'><a onclick='projectDetailModalShow(" + alert.reviewNumber + "," +  userNumber  + ")'><img class='alterRR' src=" + reSrc + "></a></div></div></div>"
                 str += ""
             } else {
-                str += "<div style=' margin-bottom: -7px; margin-right: 30px; display: inline-block; margin-top: 17px;'><span class='alterspan'>" + alert.nickName
+                str += "<div style=' width:345px; display: inline-block; margin-top: 17px; font-size:0.8rem;'><span class='alterspan'>" + alert.nickName
                 str += "</span>님이 회원님을 팔로우 했습니다."
                 str += "<span class='alterTime' style='padding-left: 13px;'>" + getReplyDate(alert.registerDate) + "</span></div>"
                 if(followCheck(alert.userNumber) == 1){
