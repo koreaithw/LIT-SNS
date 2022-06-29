@@ -208,14 +208,18 @@ public class UserRestController {
 
     // 메달 2번 조건 달성 했을 때
     @GetMapping("/get2Medal/{userNumber}")
-    public void get2Medal(@PathVariable("userNumber") Long userNumber){
+    public int get2Medal(@PathVariable("userNumber") Long userNumber){
         int medalCnt = userService.medalInsertBlock(userNumber,"2");
+
+        return medalCnt;
     }
 
     // 메달 3번 조건 달성 했을 때
-    @GetMapping("/ge34Medal/{userNumber}")
-    public void get3Medal(@PathVariable("userNumber") Long userNumber){
+    @GetMapping("/get3Medal/{userNumber}")
+    public int get3Medal(@PathVariable("userNumber") Long userNumber){
         int medalCnt = userService.medalInsertBlock(userNumber,"3");
+
+        return medalCnt;
     }
 
     // 메달 4번 조건 달성 했을 때
@@ -227,6 +231,16 @@ public class UserRestController {
         if(medalCnt == 0) {
             userService.insertMedal(userNumber, "4");
         }
+
+    }
+
+    // 메달 4번 조건 달성 했을 때
+    @GetMapping("/get4MedalPercent/{userNumber}")
+    public int get4MedalPercent(@PathVariable("userNumber") Long userNumber){
+
+        int medal4Cnt = userService.medal4Condition(userNumber);
+
+        return medal4Cnt;
 
     }
 
