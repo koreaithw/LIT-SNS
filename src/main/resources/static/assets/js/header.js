@@ -1,13 +1,19 @@
-function checkLoginLogout(userNumber) {
+function checkLoginLogout(userNumber, token) {
     let str =""
-    if(userNumber){
-        str += " <a href=\"/user/logout\">" +
+    if(userNumber && token){ // 카카오 로그아웃
+        str += " <a href=\"https://kauth.kakao.com/oauth/logout?client_id=897e8c9a1ba87330015c613fa2fad246&logout_redirect_uri=http://localhost:12000/logout\">" +
             "<div class=\"_dropdown_loginout\">" +
             "<div class=\"_dropdown_loginout_content\">로그아웃</div>" +
             "</div>" +
             "</a>"
 
-    }else{
+    }else if(userNumber && !token){ // 일반 로그아웃
+        str += " <a href=\"/user/logout\">" +
+            "<div class=\"_dropdown_loginout\">" +
+            "<div class=\"_dropdown_loginout_content\">로그아웃</div>" +
+            "</div>" +
+            "</a>"
+    } else{
         str += " <a href=\"/user/login\">" +
             "<div class=\"_dropdown_loginout\">" +
             "<div class=\"_dropdown_loginout_content\">로그인</div>" +
@@ -97,7 +103,7 @@ function alterLike(alerts) {
         let userNum = alert.userNumber;
 
         if(userNum != userNumber) {
-            str += "<div class='alterCss'><div style='border-bottom: 2px solid rgb(219, 219, 219); display: flex; flex-direction: row; align-items: center;'>"
+            str += "<div class='alterCss'><div style='border-bottom: 1px solid rgb(219, 219, 219); display: flex; flex-direction: row; align-items: center;'>"
             if (alert.userFileVO != null) {
                 str += "<a href='/user/mypage?userPageNumber=" + alert.userNumber + "'><img width='30px' class='userFile' src='/lit/display?fileName=" + alert.userFileVO.uploadPath + "/" + alert.userFileVO.uuid + "_" + alert.userFileVO.name + "'></a>"
             } else {
@@ -105,19 +111,19 @@ function alterLike(alerts) {
             }
             if (alert.typeAlert == "like") {
                 let reSrc = "";
-                str += "<div style=' margin-bottom: -20px;; margin-right: 30px; display: inline-block;'><span class='alterspan'>" + alert.nickName
+                str += "<div style=' margin-bottom: -20px;; margin-right: 30px; display: inline-block; font-size: 16px;'><span class='alterspan'>" + alert.nickName
                 str += "</span>님이 회원님의 사진을 좋아합니다.<span class='alterTime' style=' padding-left: 13px;'>" + getReplyDate(alert.registerDate) + "</span></div>"
                 reSrc += "/lit/display?fileName=" + alert.reviewFileVO.uploadPath + "/" + alert.reviewFileVO.uuid + "_" + alert.reviewFileVO.name
                 str += "<div style='display: inline-block;'><a onclick='projectDetailModalShow(" + alert.reviewNumber + "," +  userNumber  + ")'><img class='alterRR' src=" + reSrc + "></a></div></div></div>"
                 str += ""
             } else {
-                str += "<div style=' margin-bottom: -7px; margin-right: 30px; display: inline-block; margin-top: 17px;'><span class='alterspan'>" + alert.nickName
+                str += "<div style=' margin-right: 60px; display: inline-block; margin-top: 17px; font-size: 16px;'><span class='alterspan'>" + alert.nickName
                 str += "</span>님이 회원님을 팔로우 했습니다."
                 str += "<span class='alterTime' style='padding-left: 13px;'>" + getReplyDate(alert.registerDate) + "</span></div>"
                 if(followCheck(alert.userNumber) == 1){
                     str += "<a id='headFollowBtn' onclick='headDeleteFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowingBtn'>팔로잉</button></a></div>"
                 }else {
-                    str += "<a id='headFollowBtn' onclick='headFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowBtn'>팔로우</button></a></div>"
+                    str += "<a id='headFollowBtn' onclick='headFollow(" + alert.userNumber + ")'><button type='button' class='alertFollowBtn'>팔로우</button></a></div></div>"
                 }
 
             }

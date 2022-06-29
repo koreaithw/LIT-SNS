@@ -102,17 +102,17 @@ $(document).ready(function () {
   myPageAjaxService.getMedal(mypageUser, function(medals){
     let $imgAr = $(".medal-icon-col > img");
 
-    /*########################메달 4번##########################*/
-    if(medals.length >= 10){
-      console.log("메달 10개 모으기 성공");
-      myPageAjaxService.get4Medal(mypageUser)
-    }
-
     for(let i=0; i<medals.length; i++){
       $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal" + medals[i] + ".png");
       // $($imgAr[medals[i] - 1]).attr("src", "/images/mypage/medal.png");
     }
-    $($imgAr[3]).data("bar", medals.length + "/10");
+    // $($imgAr[3]).data("bar", medals.length + "/10");
+
+      /*########################메달 4번##########################*/
+      if(medals.length >= 10){
+          console.log("메달 10개 모으기 성공");
+          myPageAjaxService.get4Medal(mypageUser)
+      }
 
         // 해제된 메달에 medal__unlock 클래스 부여(마우스 오버 이벤트 등등에 사용)
         $imgAr
@@ -141,6 +141,21 @@ $(document).ready(function () {
     $("#medalImg").attr("src", src);
     $(".btn__x").trigger("click");
   });
+
+    /*########################메달 4번##########################*/
+    myPageAjaxService.get4MedalPercent(mypageUser, function (result) {
+        $($imgAr[3]).data("bar", result + "/10");
+    });
+
+    /*########################메달 2번##########################*/
+    myPageAjaxService.get2Medal(mypageUser, function (result) {
+        $($imgAr[1]).data("bar", result + "/1");
+    });
+
+    /*########################메달 3번##########################*/
+    myPageAjaxService.get3Medal(mypageUser, function (result) {
+        $($imgAr[2]).data("bar", result + "/1");
+    });
 
     /*########################메달 5번##########################*/
     myPageAjaxService.get5Medal(mypageUser, function (result) {
