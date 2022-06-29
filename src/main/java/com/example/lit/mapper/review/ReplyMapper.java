@@ -17,4 +17,6 @@ public interface ReplyMapper {
     public List<ReplyVO> getList(@Param("criteria") Criteria criteria, @Param("reviewNumber") Long reviewNumber);
     //댓글 개수
     public int getTotal(Long reviewNumber);
+    //댓글 닉네임 변경
+    public int updateNickname(Long userNumber, String nickname);
 }

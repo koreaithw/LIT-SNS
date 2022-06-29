@@ -570,8 +570,14 @@
     $(".a").on("click","figure.reviewView",function () {
         $reviewNumber=$(this).attr("id")
         $fileWriter = $(this).children("input").attr("id")
+
         projectDetailModalShow($reviewNumber, userNumber)
-        $.getJSON("/litUp/profilePic", {userNumber: $fileWriter}, function(pic){showMainUserPic(pic);})
+        $.getJSON("/litUp/profilePic", {userNumber: $fileWriter}, function(pic){showMainUserPic(pic);}).fail(
+            function () {
+                let pic = {userNumber:$fileWriter, uploadPath:"noPic" }
+                showMainUserPic(pic);
+            }
+        );
         $.getJSON("/litUp/reviewPic", {reviewNumber: $reviewNumber}, function(pic){showReviewPic(pic);})
     })
 
@@ -580,7 +586,7 @@
         reviewDetailService.getList({reviewNum: $reviewNumber, page: page}, function(total, list){
                 let str = "";
 
-                if(list == null || list.length == 0){
+                if(list == null || list.length == 0) {
                     replyDiv.html("");
                     return;
                 }
@@ -595,11 +601,16 @@
                         success:function (pic) {
                             file = pic;
                         }
-                    })
+                    });
+
                     str += '<div class="detailContentWriteContainer">';
                     str += '<div class="detailContentWriteWrapper">';
                     str += '<div class="detailContentProfileImage">';
+<<<<<<< HEAD
                     str += '<div class="detailContentProfileImageInne">';
+=======
+                    str += '<div class="detailContentProfileImageInner">';
+>>>>>>> final5
                     if (file != null && file != "") {
                         str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'></a>";
                     } else {
@@ -652,17 +663,21 @@
                         async:false,
                         success:function (pic) {
                             file = pic;
+                            console.log(file);
                         }
                     })
                     str += '<div class="detailContentWriteContainer">';
                     str += '<div class="detailContentWriteWrapper">';
                     str += '<div class="detailContentProfileImage">';
-                    str += '<div class="detailContentProfileImageInne">';
+
+                    str += '<div class="detailContentProfileImageInner">';
+                    str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'>";
                     if (file != null && file != "") {
-                        str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'></a>";
+                        str +="<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>";
                     } else {
-                        str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/images/main/profile_ex.png'></a>";
+                        str += "<img class=\"detailProfileImage\" style='width: 100%' src='/images/main/profile_ex.png'></a>";
                     }
+                    str += '</a>';
                     str += '</div>';
                     str += '</div>';
                     str += '</div>';
@@ -794,17 +809,10 @@
         }
     }
 
-    // // 출력할 프로필 사진, 리뷰 사진 받아오기기  숫자 받아오기  여기 프로젝트 작성자 유저넘버 받아올 방법 찾기
-    // $(".projectDetailButton").on("click",function () {
-    //     $.getJSON("/litUp/profilePic", {userNumber: 1}, function(pic){showUserPic(pic);})
-    //     $.getJSON("/litUp/reviewPic", {reviewNumber: $reviewNumber}, function(pic){showReviewPic(pic);})
-    //
-    // })
 
     myPageAjaxService.getMyProfileImg(userPageNumber, function (pic) {
         showMyProfileImg(pic);
     })
-
 
 
     function showMyProfileImg(file) {
@@ -818,15 +826,28 @@
         let str ="";
         let str2 ="";
 
-        str += "<div class=\"detailContentProfileImageInner\">"
-        str += "<img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
-        str += "</div>"
+        console.log("===========================" + file);
+        if(file.uploadPath != "noPic" ){
+            str += "<div class=\"detailContentProfileImageInner\">"
+            str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+            str += "</a></div>"
 
-        str2 +="<div class=\"detailContentProfileImageInner\">"
-        str2 +="<img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
-        str2 +="</div>"
+            str2 +="<div class=\"detailContentProfileImageInner\">"
+            str2 +="<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" onerror=this.src='/images/main/profile_ex.png' style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>"
+            str2 +="</a></div>"
+        }else{
+            str += "<div class=\"detailContentProfileImageInner\">"
+            str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" src='/images/main/profile_ex.png' style='width: 100%'>"
+            str += "</a></div>"
 
-        $("div.bottom").html(str);
+            str2 +="<div class=\"detailContentProfileImageInner\">"
+            str2 +="<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" src='/images/main/profile_ex.png' style='width: 100%'>"
+            str2 +="</a></div>"
+        }
+
+
+
+        $("#userFileBottom").html(str);
         $("div.top").html(str2);
     }
 

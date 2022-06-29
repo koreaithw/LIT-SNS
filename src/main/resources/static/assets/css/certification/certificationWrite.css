@@ -24,7 +24,7 @@ body{
     height: 100%;
     overflow: hidden;
     background-size : cover;
-    position: absolute;
+    position: fixed;
     z-index: 4;
 }
 

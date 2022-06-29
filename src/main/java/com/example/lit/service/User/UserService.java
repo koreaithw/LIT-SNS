@@ -104,6 +104,7 @@ public interface UserService {
 
     // 내정보 변경시 닉네임 바꾸기
     public int updateNicknameForReview(Long userNumber, String nickname);
+    public int updateNicknameForReply(Long userNumber, String nickname);
 
 //    *************************************
 //    MEDAL 메달
