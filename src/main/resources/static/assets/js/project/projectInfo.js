@@ -84,8 +84,9 @@ $("label[for='btn1']").on("click", function () {
     replyService.challenge(datas, function () {
         alert("참여되었습니다.");
         let str = "<label class=\"btn\">참여중</label>";
+        let num = Number( $("#pCount").text() ) + 1;
         $(".challengeBtn").html(str);
-
+        $("#pCount").html(num);
     });
 });
 

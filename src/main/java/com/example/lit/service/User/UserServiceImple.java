@@ -1,5 +1,6 @@
 package com.example.lit.service.User;
 
+import com.example.lit.domain.dao.review.ReviewDAO;
 import com.example.lit.domain.dao.user.AlertDAO;
 import com.example.lit.domain.dao.user.FollowDAO;
 import com.example.lit.domain.dao.message.MessageDAO;
@@ -33,6 +34,7 @@ public class UserServiceImple implements UserService{
     private final UserDAO userDAO;
     private final UserFileDAO userFileDAO;
     private final AlertDAO alertDAO;
+    private final ReviewDAO reviewDAO;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -277,6 +279,11 @@ public class UserServiceImple implements UserService{
     @Override
     public Long getUserChart(String date) {
         return userDAO.getUserChart(date);
+    }
+
+    @Override
+    public int updateNicknameForReview(Long userNumber, String nickname) {
+        return reviewDAO.updateNicknameForReview(userNumber, nickname);
     }
 
 //    *************************************

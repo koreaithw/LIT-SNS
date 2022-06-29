@@ -249,17 +249,33 @@ public class LitUpServiceImple implements LitUpService{
         return alertDAO.getList(userNumber);
     }
 
+//    @Override
+//    public List<ReviewVO> getMyList(Long userNumber) {
+//        log.info("*********************************************");
+//        log.info("LitUpService : getMyList");
+//        log.info("*********************************************");
+//        List<ReviewVO> result = new ArrayList<>();
+//        for(ReviewVO review : reviewDAO.getMyList(userNumber)){
+//            review.setReviewFileList(reviewFileDAO.getImgs(review.getReviewNumber()));
+//            result.add(review);
+//        }
+//        result.stream().map(ReviewVO::toString).forEach(log::info);
+//
+//        return result;
+//    }
+
     @Override
-    public List<ReviewVO> getMyList(Long userNumber) {
-        log.info("*********************************************");
+    public List<ReviewDTO> getMyList(ListDTO listDTO) {
+        log.info("************************************e*********");
         log.info("LitUpService : getMyList");
         log.info("*********************************************");
-        List<ReviewVO> result = new ArrayList<>();
-        for(ReviewVO review : reviewDAO.getMyList(userNumber)){
+        List<ReviewDTO> result = new ArrayList<>();
+        for(ReviewDTO review : reviewDAO.getMyList(listDTO)){
             review.setReviewFileList(reviewFileDAO.getImgs(review.getReviewNumber()));
+            review.setReplyCount((long)replyDAO.getTotal(review.getReviewNumber()));
             result.add(review);
         }
-        result.stream().map(ReviewVO::toString).forEach(log::info);
+        result.stream().map(ReviewDTO::toString).forEach(log::info);
 
         return result;
     }

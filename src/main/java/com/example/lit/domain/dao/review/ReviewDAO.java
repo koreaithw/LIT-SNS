@@ -45,6 +45,9 @@ public class ReviewDAO {
     // 리뷰 작성자 번호 가져오기 알림
     public Long getReviewNumberForAlert(Long reviewNumber) { return reviewMapper.getForAlert(reviewNumber); }
 
+    // 내정보 변경시 닉네임 바꾸기
+    public int updateNicknameForReview(Long userNumber, String nickname){ return reviewMapper.updateNickname(userNumber, nickname);}
+
     //마이페이지 리뷰 리스트
-    public List<ReviewVO> getMyList(Long userNumber){ return reviewMapper.getMyList(userNumber); }
+    public List<ReviewDTO> getMyList(ListDTO listDTO){ return reviewMapper.getMyList(listDTO); }
 }

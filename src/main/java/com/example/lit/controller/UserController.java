@@ -157,8 +157,10 @@ public class UserController {
             return goLoginPage();
         }
         userVO.setUserNumber((Long)session.getAttribute("userNumber"));
-        userService.modify(userVO);
 
+        userService.modify(userVO);
+        userService.updateNicknameForReview(userVO.getUserNumber(),userVO.getNickname());
+        
         return mypage(null ,model, session);
     }
 

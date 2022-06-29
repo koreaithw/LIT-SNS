@@ -79,6 +79,12 @@
         WHERE REVIEW_NUMBER = #{reviewNumber}
     </update>
 
+    <update id="updateNickname">
+        UPDATE TBL_REVIEW
+        SET NICKNAME = #{nickname}
+        WHERE USER_NUMBER = #{userNumber}
+    </update>
+
     <select id="getTotal" resultType="_int">
         SELECT COUNT(REVIEW_NUMBER) FROM TBL_REVIEW
     </select>
@@ -252,10 +258,29 @@
         WHERE REVIEW_NUMBER = #{reviewNumber}
     </select>
 
-    <select id="getMyList" resultType="reviewVO">
-        SELECT REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, NICKNAME, CONTENT, REGISTER_DATE
-        FROM TBL_REVIEW
-        WHERE USER_NUMBER = #{userNumber}
-        ORDER BY REGISTER_DATE DESC
+    <select id="getMyList" resultType="reviewDTO">
+        SELECT REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, NICKNAME, CONTENT, REGISTER_DATE,
+        LIKE_COUNT
+        FROM(
+            SELECT ROWNUM RN, REVIEW_NUMBER, USER_NUMBER, PROJECT_NUMBER, NICKNAME, CONTENT, REGISTER_DATE,
+            LIKE_COUNT
+            FROM(
+                SELECT r.REVIEW_NUMBER, r.USER_NUMBER, r.PROJECT_NUMBER, r.NICKNAME, r.CONTENT, r.REGISTER_DATE,
+                NVL(LIKE_COUNT, 0) AS LIKE_COUNT
+                FROM TBL_REVIEW r
+                LEFT OUTER JOIN (
+                    SELECT REVIEW_NUMBER, COUNT(USER_NUMBER) AS LIKE_COUNT
+                    FROM TBL_LIKE
+                    GROUP BY REVIEW_NUMBER
+                ) l
+                ON r.REVIEW_NUMBER = l.REVIEW_NUMBER
+                WHERE USER_NUMBER = #{userNumber}
+                ORDER BY REGISTER_DATE DESC
+            )
+            <![CDATA[
+            WHERE ROWNUM <= #{pageNum} * #{amount}
+        )
+        WHERE RN > (#{pageNum}-1) * #{amount}
+        ]]>
     </select>
 </mapper>

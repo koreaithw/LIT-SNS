@@ -89,6 +89,6 @@ public interface LitUpService {
     // 알림 목록 가져오기
     public List<AlertDTO> getAlertList(Long userNumber);
     //마이페이지 리뷰 리스트
-    public List<ReviewVO> getMyList(Long userNumber);
+    public List<ReviewDTO> getMyList(ListDTO listDTO);
 
 }

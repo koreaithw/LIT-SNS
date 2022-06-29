@@ -102,6 +102,9 @@ public interface UserService {
     // 차트 정보
     public Long getUserChart(String date);
 
+    // 내정보 변경시 닉네임 바꾸기
+    public int updateNicknameForReview(Long userNumber, String nickname);
+
 //    *************************************
 //    MEDAL 메달
 //    *************************************

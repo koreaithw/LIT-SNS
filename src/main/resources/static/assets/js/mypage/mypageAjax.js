@@ -240,11 +240,13 @@ let myPageAjaxService = (function () {
     }
 
     //litUp(리뷰) 리스트
-    function litUpList(userPageNumber, callback, error){
+    function litUpList(userPageNumber, listInfo, callback, error){
 
         $.ajax({
             url : "/litUp/getMyList/"+userPageNumber,
-            type : "get",
+            type : "post",
+            data: JSON.stringify(listInfo),
+            contentType: "application/json",
             dataType : "json",
             success : function(result){
                 if(callback){ callback(result); }
