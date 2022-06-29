@@ -472,18 +472,16 @@ svg:not(:root) {
     transform: translateY(-10px);
     background-color: white;
     border-radius: 6px;
-    box-shadow: 0 0 5px 1px rgba(0,0,0, .0975);
+    box-shadow: 0 0 5px 1px rgba(var(--web-always-black), .0975);
     position: absolute;
     z-index: 3;
-    margin-left: 8px !important;
-    margin-top: 5px !important;
 }
 
 ._aa60 {
     top: -6px;
     background-color: white;
     bottom: -6px;
-    box-shadow: 0 0 5px 1px rgba(0,0,0, .0975);
+    box-shadow: 0 0 5px 1px rgba(var(--web-always-black), .0975);
     height: 14px;
     position: absolute;
     transform: rotate(45deg);
@@ -531,53 +529,35 @@ svg:not(:root) {
 }
 
 .alterTime {
+    margin-top: -5px;
     display: -webkit-box;
     font-size: 13px;
-    padding-bottom: 16px;
+    padding-bottom: 17px;
 }
 
 .alertFollowBtn {
     border-radius: 4px;
-    background-color: rgba(250, 100, 98,.9);
+    background-color: rgb(250, 100, 98);
     border: 0;
     color: #fff;
+    width: 50px;
+    height: 22px;
     margin-left: 23px;
-    padding: 5px 10px;
-    font-size: 0.8rem;
-    cursor: pointer;
-}
-
-.alertFollowBtn:hover{
-    background-color: rgb(250,87,87);
-    transition: background-color 0.2s;
-    font-weight:bold;
 }
 
 .alertFollowingBtn {
+    background-color: rgba(255, 69, 67, 0.3);
     border-radius: 4px;
-    background-color: #fff;
     border: 0;
-    color: #000000;
+    color: #fff;
+    width: 50px;
+    height: 22px;
     margin-left: 23px;
-    padding: 5px 10px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    border: 1px solid rgba(0,0,0,0.2);
-}
-
-.alertFollowingBtn:hover{
-    background-color: rgba(0,0,0,.1);
-    transition: background-color 0.2s;
-    font-weight:bold;
 }
 
 .dropdown_profile_write_content,
 ._dropdown_setting_write_content,
 ._dropdown_loginout_content{
     font-size: 0.9rem !important;
-}
-
-.alertList > div {
-    padding: 0px 5px;
 }
 
