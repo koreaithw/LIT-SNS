@@ -68,7 +68,7 @@ function certificationWriteModalHide() {
                 $(this).removeClass("on");
             });
 
-            uploadFiles = [];
+            uploadFiles1 = [];
 
             $detailProjectContent.css("width", "0");
             $certificationWriteModal.css("width", "35%");

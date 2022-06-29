@@ -47,4 +47,6 @@ public interface ReviewMapper {
 
     //마이페이지 리뷰 리스트
     public List<ReviewVO> getMyList(Long userNumber);
+
+    public int updateNickname(Long userNumber, String nickname);
 }

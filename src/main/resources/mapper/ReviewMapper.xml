@@ -79,6 +79,12 @@
         WHERE REVIEW_NUMBER = #{reviewNumber}
     </update>
 
+    <update id="updateNickname">
+        UPDATE TBL_REVIEW
+        SET NICKNAME = #{nickname}
+        WHERE USER_NUMBER = #{userNumber}
+    </update>
+
     <select id="getTotal" resultType="_int">
         SELECT COUNT(REVIEW_NUMBER) FROM TBL_REVIEW
     </select>
