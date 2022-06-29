@@ -6,6 +6,8 @@ const userName = $('#pepName');
 const userContent = $('#pepBio');
 const eamil = $('#email');
 
+let deleteImgChk = false;
+
 // 프로필 사진 바꾸기 모달 띄우기
 function changeProfileModal(){
     changeProfile.style.display='block';
@@ -19,9 +21,12 @@ function changeProfileModalClose(){
 
 // 현재 사진 삭제 버튼 클릭시
 function changeProfileDelete(){
-    document.getElementById('proFileImg').src = "/src/main/resources/static/images/changeinfo/basicProfile.png";
+    document.getElementById('proFileImg').src = "/images/main/profile_ex.png";
     changeProfile.style.display='none';
-    alert("프로필 사진이 삭제되었습니다.");
+
+    deleteImgChk = true;
+    $('#subBtn').attr("class", "submitBtnOn");
+    $('#subBtn').attr("disabled", false);
 }
 
 // 사진 업로드 버튼 클릭시
@@ -44,7 +49,7 @@ $('#ModalFileInput').on("change", function(e){
     reader.onload = function(e){
         // console.log("bbb");
 
-        // console.log(e.target.result);
+        console.log(e.target.result);
         proFileImg.src = e.target.result;
     }
     reader.readAsDataURL(file);
@@ -81,13 +86,20 @@ function buttonOn2(){
 
 $('#subBtn').on("click", function(e){
     e.preventDefault();
+
+    if(deleteImgChk){
+        changeInfoAjax.deleteImg(userNumber)
+        alert("프로필 사진이 삭제되었습니다.");
+    }
+
     let formData = new FormData();
     let inputFile = $("#ModalFileInput");
     let file = inputFile[0].files;
     formData.append("uploadFiles", file[0]);
     changeInfoAjax.changeImg(formData, function(){
         $("#editForm").submit();
-    })
+    });
+
 });
 
 userName.keyup(buttonOn2);
