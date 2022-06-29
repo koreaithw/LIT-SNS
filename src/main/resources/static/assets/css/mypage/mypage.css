@@ -30,6 +30,7 @@ footer{
   flex-grow: 1;
   margin: 0px auto 0px;
   min-width: 950px;
+  max-width: 950px;
   background-color: rgba(255,255,255,1);
 }
 
@@ -1119,6 +1120,7 @@ div.mypageLi{
 @media (min-width: 320px) and (max-width: 480px) {
 
 }
+
 
 /*마우스 오버*/
 .over-box_a{

@@ -35,7 +35,7 @@ public interface ProjectMapper {
     // 2번째 메달 - 첫 lit 생성하기
     public int getTotalByUserNumber(Long userNumber);
     // 마이페이지 프로젝트 리스트
-    public List<ProjectVO> getMyList(Long userNumber);
+    public List<ProjectVO> getMyList(ListDTO listDTO);
     // apply count 증가 시키기
     public void increaseApplyCnt(Long projectNumber);
 }

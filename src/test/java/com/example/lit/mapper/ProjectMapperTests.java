@@ -78,8 +78,8 @@ public class ProjectMapperTests {
         projectMapper.getMainList(listDTO).stream().map(ProjectDTO::toString).forEach(log::info);
     }
 
-    @Test
-    public void getMyListTest(){
-        projectMapper.getMyList(1L).stream().map(ProjectVO::toString).forEach(log::info);
-    }
+//    @Test
+//    public void getMyListTest(){
+//        projectMapper.getMyList(1L).stream().map(ProjectVO::toString).forEach(log::info);
+//    }
 }

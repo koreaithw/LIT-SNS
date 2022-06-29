@@ -275,9 +275,6 @@ public class LitUpRestController {
             listDTO = new ListDTO();
         }
         listDTO.setUserNumber(userNumber);
-        log.info(listDTO.toString());
-        log.info(litUpService.getMainList(listDTO).toString());
-        log.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
         return litUpService.getMyList(listDTO);
     }
 }
