@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/assets/css/default.css"/>
     <link rel="stylesheet" href="/assets/css/header.css" />
     <link rel="stylesheet" href="/assets/css/footer.css" />
-<!--    여기 충돌 날수도 있는데 모달 헤더에 넣느라 추가 한거에여!! 필요함!!!-->
+    <!--    여기 충돌 날수도 있는데 모달 헤더에 넣느라 추가 한거에여!! 필요함!!!-->
     <link rel="stylesheet" href="/assets/css/certification/certificationWrite.css">
     <link rel="stylesheet" href="/assets/css/certification/fileLoad.css">
     <link rel="stylesheet" href="/assets/css/certification/certificationDetail.css">
@@ -72,8 +72,8 @@
 
 <body>
 <header th:insert="~{/header :: header}"></header>
+<div th:insert="~{/certification/certificationDetail :: certificationDetail}"></div>
 <main>
-    <div th:insert="~{/certification/certificationDetail :: certificationDetail}"></div>
 
     <div class="_main_wrapper">
         <div class="_main_top_wrapper">
