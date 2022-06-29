@@ -28,6 +28,8 @@ body{
     z-index: 4;
 }
 
+
+
 .modalCloseButton{
     position: absolute;
     right: 10px;
@@ -166,10 +168,11 @@ body{
 }
 
 .certificationContentProfileImage{
-    border-radius: 50%;
+    border-radius: 100%;
     width: 100%;
     height: 100%;
-    justify-content: center;
+    overflow: hidden;
+    border: 1px solid rgb(219, 219, 219);
 }
 
 .certificationContentProfileImage > img{
