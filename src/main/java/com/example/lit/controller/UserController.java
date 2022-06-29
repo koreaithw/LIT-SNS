@@ -160,7 +160,8 @@ public class UserController {
 
         userService.modify(userVO);
         userService.updateNicknameForReview(userVO.getUserNumber(),userVO.getNickname());
-        
+        userService.updateNicknameForReply(userVO.getUserNumber(),userVO.getNickname());
+
         return mypage(null ,model, session);
     }
 
