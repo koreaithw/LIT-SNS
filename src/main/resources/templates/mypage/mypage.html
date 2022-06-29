@@ -78,8 +78,8 @@
 
 <body>
 <header th:insert="~{/header :: header}"></header>
+<div th:insert="~{/certification/certificationDetail :: certificationDetail}"></div>
 <main class="mypageMain">
-    <div th:insert="~{/certification/certificationDetail :: certificationDetail}"></div>
     <div class="mainInner">
         <div class="mypageHeader">
             <div class="profile1">
@@ -600,7 +600,11 @@
                     str += '<div class="detailContentWriteWrapper">';
                     str += '<div class="detailContentProfileImage">';
                     str += '<div class="detailContentProfileImageInne">';
-                    str += "<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>";
+                    if (file != null && file != "") {
+                        str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'></a>";
+                    } else {
+                        str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/images/main/profile_ex.png'></a>";
+                    }
                     str += '</div>';
                     str += '</div>';
                     str += '</div>';
@@ -654,7 +658,11 @@
                     str += '<div class="detailContentWriteWrapper">';
                     str += '<div class="detailContentProfileImage">';
                     str += '<div class="detailContentProfileImageInne">';
-                    str += "<img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'>";
+                    if (file != null && file != "") {
+                        str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/litUp/display?fileName=" + file.uploadPath + "/s_" + file.uuid + "_"  + file.name + "'></a>";
+                    } else {
+                        str += "<a href='/user/mypage?userPageNumber=" + file.userNumber + "'><img class=\"detailProfileImage\" style='width: 100%' src='/images/main/profile_ex.png'></a>";
+                    }
                     str += '</div>';
                     str += '</div>';
                     str += '</div>';
