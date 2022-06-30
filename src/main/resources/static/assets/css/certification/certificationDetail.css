@@ -364,9 +364,10 @@ body{
 
 .detailContentWrite{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     font-size: 14px;
+    flex-direction: column;
 }
 
 .detailContentWriteName{
@@ -376,7 +377,9 @@ body{
 }
 
 .detailContentWriteComment{
-    height: 30px;
+    /*height: 30px;*/
+    word-break: break-word;
+    min-width: 130px;
 }
 
 .detailContentWriteFeedBottom{
